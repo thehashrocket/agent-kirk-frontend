@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
+import { prisma } from '@/lib/prisma';
+import { auth } from '@/lib/auth';
 
 // Define the request schema
 const LLMRequestSchema = z.array(
@@ -14,38 +14,32 @@ const LLMRequestSchema = z.array(
   })
 );
 
-// Initialize rate limiter
-const ratelimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(20, '10 s'), // 20 requests per 10 seconds
-  analytics: true,
-});
-
 export async function POST(request: Request) {
   try {
-    // Get the IP address for rate limiting
-    const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
-    
-    // Check rate limit
-    const { success, limit, reset, remaining } = await ratelimit.limit(ip);
-    
-    if (!success) {
+    // Get the authenticated user
+    const session = await auth();
+    if (!session?.user?.id) {
       return NextResponse.json(
-        { error: 'Too many requests' },
-        { 
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': limit.toString(),
-            'X-RateLimit-Remaining': remaining.toString(),
-            'X-RateLimit-Reset': reset.toString(),
-          }
-        }
+        { error: 'Unauthorized' },
+        { status: 401 }
       );
     }
 
     // Parse and validate the request body
     const body = await request.json();
     const validatedData = LLMRequestSchema.parse(body);
+
+    // Create a database record for the request
+    const llmRequest = await prisma.lLMRequest.create({
+      data: {
+        query: validatedData[0].query,
+        accountGA4: validatedData[0].accountGA4,
+        propertyGA4: validatedData[0].propertyGA4,
+        conversationID: validatedData[0].conversationID,
+        dateToday: new Date(validatedData[0].dateToday),
+        userId: session.user.id,
+      },
+    });
 
     // Forward the request to the LLM service
     const llmResponse = await fetch(process.env.LLM_SERVICE_URL!, {
@@ -62,11 +56,14 @@ export async function POST(request: Request) {
 
     const responseData = await llmResponse.json();
 
-    // TODO: Store the query and response in your database
-    // This would typically be done using your database client (e.g., Prisma)
+    // Update the database record with the response
+    await prisma.lLMRequest.update({
+      where: { id: llmRequest.id },
+      data: { response: JSON.stringify(responseData) },
+    });
     
     return NextResponse.json(responseData);
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid request data', details: error.errors },

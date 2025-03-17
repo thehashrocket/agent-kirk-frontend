@@ -40,19 +40,34 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model LLMRequest {
+  id              String   @id @default(cuid())
+  query           String
+  response        String?
+  accountGA4      String
+  propertyGA4     String
+  conversationID  String
+  dateToday       DateTime
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
-  password      String?   @default("")
-  role          Role      @relation(fields: [roleId], references: [id])
+  password      String?      @default("")
+  role          Role         @relation(fields: [roleId], references: [id])
   roleId        String
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  llmRequests   LLMRequest[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model VerificationToken {
