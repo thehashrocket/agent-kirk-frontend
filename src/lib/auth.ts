@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { Role } from "@prisma/client";
-import type { DefaultSession, Session, User, Account } from "next-auth";
+import type { DefaultSession, Session, User } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import { prisma } from "./prisma";
 
@@ -35,7 +35,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }: { user: User; account: Account | null }) {
+    async signIn({ user, account }: { user: User; account: { provider: string } | null }) {
       if (account?.provider === "google") {
         try {
           // Check if user exists
