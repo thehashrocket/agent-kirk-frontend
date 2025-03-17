@@ -54,6 +54,42 @@ model LLMRequest {
   updatedAt       DateTime @updatedAt
 }
 
+model Message {
+  id          String       @id @default(cuid())
+  content     String
+  senderId    String
+  sender      User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  recipientId String
+  recipient   User         @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+  isRead      Boolean      @default(false)
+  attachments Attachment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  parentId    String?      // ID of the parent message (if this is a reply)
+  parent      Message?     @relation("MessageThread", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Message[]    @relation("MessageThread")
+  threadId    String?      // ID to group messages in the same thread
+  isThreadStart Boolean    @default(false) // Indicates if this is the first message in a thread
+
+  @@index([senderId])
+  @@index([recipientId])
+  @@index([parentId])
+  @@index([threadId])
+}
+
+model Attachment {
+  id        String   @id @default(cuid())
+  filename  String
+  fileSize  Int      // Size in bytes
+  mimeType  String
+  url       String   // URL to the stored file
+  messageId String
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([messageId])
+}
+
 model User {
   id            String       @id @default(cuid())
   name          String?
@@ -66,6 +102,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   llmRequests   LLMRequest[]
+  sentMessages     Message[]  @relation("SentMessages")
+  receivedMessages Message[]  @relation("ReceivedMessages")
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 }
