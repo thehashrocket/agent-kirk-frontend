@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { MobileNav } from "./MobileNav";
 
 export function Header() {
   const { data: session } = useSession();
@@ -25,21 +25,17 @@ export function Header() {
   };
 
   return (
-    <header className="border-b">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="font-semibold text-lg">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container h-16 flex items-center">
+        <MobileNav />
+        <div className="flex items-center gap-4 flex-1">
+          <Link href={getDashboardLink()} className="font-semibold text-lg">
             Kirk
           </Link>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-muted-foreground hidden sm:inline-block">
             {session.user.email} ({session.user.role || 'No Role'})
           </span>
         </div>
-        <nav>
-          <Button variant="ghost" asChild>
-            <Link href={getDashboardLink()}>Dashboard</Link>
-          </Button>
-        </nav>
       </div>
     </header>
   );

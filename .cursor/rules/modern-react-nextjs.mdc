@@ -334,3 +334,4 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 - [TypeScript Documentation](mdc:https:/www.typescriptlang.org/docs)
 - [Tailwind CSS](mdc:https:/tailwindcss.com/docs)
 - [WCAG Guidelines](mdc:https:/www.w3.org/WAI/standards-guidelines/wcag)
+- Lucide-React for icons
