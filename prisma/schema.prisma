@@ -40,20 +40,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model LLMRequest {
-  id              String   @id @default(cuid())
-  query           String
-  response        String?
-  accountGA4      String
-  propertyGA4     String
-  conversationID  String
-  dateToday       DateTime
-  userId          String
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
 model Message {
   id          String       @id @default(cuid())
   content     String
@@ -101,7 +87,7 @@ model User {
   roleId        String
   accounts      Account[]
   sessions      Session[]
-  llmRequests   LLMRequest[]
+  queries       Query[]
   sentMessages     Message[]  @relation("SentMessages")
   receivedMessages Message[]  @relation("ReceivedMessages")
   createdAt     DateTime     @default(now())
@@ -120,4 +106,21 @@ model Role {
   id    String @id @default(cuid())
   name  String @unique
   users User[]
+}
+
+model Query {
+  id              String   @id @default(cuid())
+  userId          String
+  prompt          String   @db.Text
+  response        String   @db.Text
+  accountGA4      String?
+  propertyGA4     String?
+  conversationID  String?
+  dateToday       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([conversationID])
 }

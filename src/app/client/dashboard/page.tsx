@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import LLMForm from "@/components/LLMForm";
+import QueryHistory from "@/components/QueryHistory";
 
 export default async function ClientDashboard() {
   const session = await getServerSession(authOptions);
@@ -16,7 +18,12 @@ export default async function ClientDashboard() {
         Hello, {session.user.name || session.user.email}! This is the CLIENT dashboard.
       </h1>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {/* Add client-specific dashboard content here */}
+        <div className="col-span-2">
+          <LLMForm />
+        </div>
+        <div className="col-span-1">
+          <QueryHistory />
+        </div>
       </div>
     </div>
   );

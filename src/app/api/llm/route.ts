@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
 // Define the request schema
-const LLMRequestSchema = z.array(
+const QueryRequestSchema = z.array(
   z.object({
     query: z.string().min(1),
     accountGA4: z.string(),
@@ -27,17 +27,18 @@ export async function POST(request: Request) {
 
     // Parse and validate the request body
     const body = await request.json();
-    const validatedData = LLMRequestSchema.parse(body);
+    const validatedData = QueryRequestSchema.parse(body);
 
     // Create a database record for the request
-    const llmRequest = await prisma.lLMRequest.create({
+    const query = await prisma.query.create({
       data: {
-        query: validatedData[0].query,
+        prompt: validatedData[0].query,
         accountGA4: validatedData[0].accountGA4,
         propertyGA4: validatedData[0].propertyGA4,
         conversationID: validatedData[0].conversationID,
         dateToday: new Date(validatedData[0].dateToday),
         userId: session.user.id,
+        response: '', // Will be updated after LLM response
       },
     });
 
@@ -57,8 +58,8 @@ export async function POST(request: Request) {
     const responseData = await llmResponse.json();
 
     // Update the database record with the response
-    await prisma.lLMRequest.update({
-      where: { id: llmRequest.id },
+    await prisma.query.update({
+      where: { id: query.id },
       data: { response: JSON.stringify(responseData) },
     });
     

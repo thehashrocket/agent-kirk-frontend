@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       });
 
       if (parentMessage) {
-        threadId = parentMessage.threadId;
+        threadId = parentMessage.threadId ?? undefined;
       }
     } else {
       // This is a new thread
@@ -102,16 +102,76 @@ export async function GET(req: Request) {
     const limit = parseInt(searchParams.get('limit') || '20');
     const skip = (page - 1) * limit;
     const threadId = searchParams.get('threadId');
+    const view = searchParams.get('view') || 'inbox';
+    const showArchived = searchParams.get('archived') === 'true';
+    const showUnread = searchParams.get('unread') === 'true';
 
-    const where = threadId
-      ? { threadId } // Get messages in a specific thread
+    type WhereClause = {
+      threadId?: string;
+      senderId?: string;
+      recipientId?: string;
+      isThreadStart?: boolean;
+      archived?: boolean;
+      isRead?: boolean;
+      AND?: Array<{
+        OR?: Array<{
+          senderId?: string;
+          recipientId?: string;
+        }>;
+      }>;
+      OR?: Array<{
+        senderId?: string;
+        recipientId?: string;
+      }>;
+    };
+
+    let where: WhereClause = threadId
+      ? { threadId }
       : {
           OR: [
             { senderId: session.user.id },
             { recipientId: session.user.id }
           ],
-          isThreadStart: true // Only get thread start messages in the main list
+          isThreadStart: true
         };
+
+    // Add view filter
+    if (view === 'inbox') {
+      where = {
+        ...where,
+        recipientId: session.user.id,
+      };
+    } else if (view === 'outbox') {
+      where = {
+        ...where,
+        senderId: session.user.id,
+      };
+    }
+
+    // Add archived filter
+    if (showArchived !== undefined) {
+      where.archived = showArchived;
+    }
+
+    // Add unread filter
+    if (showUnread) {
+      where.isRead = false;
+    }
+
+    // Allow admin to see all messages
+    if (session.user.role !== 'ADMIN') {
+      where = {
+        AND: [
+          where,
+          {
+            OR: [
+              { senderId: session.user.id },
+              { recipientId: session.user.id }
+            ]
+          }
+        ]
+      };
+    }
 
     const [messages, total] = await Promise.all([
       prisma.message.findMany({
@@ -164,6 +224,7 @@ export async function GET(req: Request) {
       }
     });
   } catch (error) {
+    console.error('Error fetching messages:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 } 
