@@ -1,3 +1,9 @@
+/**
+ * @file src/app/admin/users/page.tsx
+ * Admin user management page that provides CRUD operations for user accounts.
+ * Features user listing, role management, and account status monitoring.
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -28,6 +34,17 @@ import {
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 
+/**
+ * Interface representing a user in the system.
+ * @property {string} id - Unique identifier for the user
+ * @property {string|null} name - User's display name
+ * @property {string|null} email - User's email address
+ * @property {Object} role - User's role information
+ * @property {string} role.id - Role identifier
+ * @property {string} role.name - Role display name
+ * @property {boolean} isActive - User's active status
+ * @property {string|null} accountRepId - Associated account representative ID
+ */
 interface User {
   id: string;
   name: string | null;
@@ -40,11 +57,30 @@ interface User {
   accountRepId: string | null;
 }
 
+/**
+ * Interface representing a role in the system.
+ * @property {string} id - Unique identifier for the role
+ * @property {string} name - Display name of the role
+ */
 interface Role {
   id: string;
   name: string;
 }
 
+/**
+ * @component UsersPage
+ * @path src/app/admin/users/page.tsx
+ * Main user management interface for administrators.
+ * Features:
+ * - User listing with role and status information
+ * - User creation dialog with form validation
+ * - Role management with inline editing
+ * - User deletion with confirmation
+ * - Real-time updates using SWR
+ * - Toast notifications for action feedback
+ * 
+ * Uses shadcn/ui components for the interface.
+ */
 export default function UsersPage() {
   const { users, roles, isLoading, mutate } = useUsers();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -55,6 +91,11 @@ export default function UsersPage() {
     roleId: '',
   });
 
+  /**
+   * Handles user creation.
+   * Sends a POST request to create a new user with the provided details.
+   * Shows success/error toast notifications and updates the user list.
+   */
   const handleCreateUser = async () => {
     try {
       const response = await fetch('/api/users', {
@@ -78,6 +119,12 @@ export default function UsersPage() {
     }
   };
 
+  /**
+   * Handles user deletion.
+   * Sends a DELETE request to remove the specified user.
+   * Shows success/error toast notifications and updates the user list.
+   * @param {string} userId - ID of the user to delete
+   */
   const handleDeleteUser = async (userId: string) => {
     try {
       const response = await fetch(`/api/users/${userId}`, {
@@ -95,6 +142,13 @@ export default function UsersPage() {
     }
   };
 
+  /**
+   * Handles user role updates.
+   * Sends a PATCH request to update the user's role.
+   * Shows success/error toast notifications and updates the user list.
+   * @param {string} userId - ID of the user to update
+   * @param {string} roleId - ID of the new role to assign
+   */
   const handleUpdateRole = async (userId: string, roleId: string) => {
     try {
       const response = await fetch(`/api/users/${userId}`, {

@@ -1,9 +1,19 @@
+/**
+ * @file src/components/messages/MessagesPage.tsx
+ * Messages page component that provides a complete messaging interface.
+ * Handles message display, pagination, and message status management.
+ */
+
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+/**
+ * Interface representing a message in the system.
+ * Includes message content, metadata, sender information, and attachments.
+ */
 interface Message {
   id: string;
   content: string;
@@ -25,10 +35,27 @@ interface Message {
   }>;
 }
 
+/**
+ * Props for the MessagesPage component.
+ * @property {('inbox'|'outbox')} [initialView='inbox'] - Initial view mode for the messages list
+ */
 interface MessagesPageProps {
   initialView?: 'inbox' | 'outbox';
 }
 
+/**
+ * @component MessagesPage
+ * @path src/components/messages/MessagesPage.tsx
+ * Main component for displaying and managing messages.
+ * Features:
+ * - Toggle between inbox and outbox views
+ * - Infinite scroll pagination
+ * - Mark messages as read
+ * - Display message attachments
+ * - Error handling and loading states
+ * 
+ * @param {MessagesPageProps} props - Component props
+ */
 export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProps) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -39,6 +66,11 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  /**
+   * Fetches messages from the API based on current page and view.
+   * Handles pagination by appending new messages to existing ones.
+   * Updates hasMore flag based on pagination information.
+   */
   const fetchMessages = useCallback(async () => {
     try {
       const res = await fetch(`/api/messages?page=${page}&view=${view}`);
@@ -64,6 +96,10 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
     fetchMessages();
   }, [fetchMessages]);
 
+  /**
+   * Marks a message as read and updates the UI accordingly.
+   * @param {string} messageId - ID of the message to mark as read
+   */
   const markAsRead = async (messageId: string) => {
     try {
       await fetch(`/api/messages/${messageId}`, {
@@ -82,6 +118,10 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
     }
   };
 
+  /**
+   * Loads the next page of messages when user reaches the end of the list.
+   * Only triggers if there are more messages to load and not currently loading.
+   */
   const loadMore = () => {
     if (!loading && hasMore) {
       setPage(prev => prev + 1);

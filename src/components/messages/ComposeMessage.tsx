@@ -1,12 +1,35 @@
+/**
+ * @file src/components/messages/ComposeMessage.tsx
+ * Message composition component that provides a form for creating and sending messages.
+ * Supports text content and file attachments with validation and error handling.
+ */
+
 'use client';
 
 import { useState, useRef } from 'react';
 
+/**
+ * Props for the ComposeMessage component.
+ * @property {Function} [onMessageSent] - Callback function triggered after successful message send
+ * @property {string} [recipientId] - ID of the message recipient
+ */
 interface ComposeMessageProps {
   onMessageSent?: () => void;
   recipientId?: string;
 }
 
+/**
+ * @component ComposeMessage
+ * @path src/components/messages/ComposeMessage.tsx
+ * Form component for composing and sending messages.
+ * Features:
+ * - Text message composition
+ * - File attachments with size validation
+ * - Loading and error states
+ * - Success callback
+ * 
+ * @param {ComposeMessageProps} props - Component props
+ */
 export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMessageProps) {
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<File[]>([]);
@@ -14,6 +37,11 @@ export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMe
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  /**
+   * Handles file selection and validation.
+   * Validates file size (max 10MB) and adds valid files to the state.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - File input change event
+   */
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
     const validFiles = selectedFiles.filter(file => {
@@ -30,10 +58,20 @@ export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMe
     }
   };
 
+  /**
+   * Removes a file from the attachments list.
+   * @param {number} index - Index of the file to remove
+   */
   const removeFile = (index: number) => {
     setFiles(prev => prev.filter((_, i) => i !== index));
   };
 
+  /**
+   * Handles message submission.
+   * Converts files to base64, sends message with attachments to the API,
+   * and handles success/error states.
+   * @param {React.FormEvent} e - Form submission event
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');

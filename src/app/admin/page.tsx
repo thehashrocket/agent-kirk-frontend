@@ -1,3 +1,9 @@
+/**
+ * @file src/app/admin/page.tsx
+ * Admin dashboard page component that serves as the main interface for administrative functions.
+ * Provides access to user management, system settings, and analytics features.
+ */
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,6 +11,13 @@ export const metadata: Metadata = {
   description: "Admin dashboard for managing the application",
 };
 
+/**
+ * @component AdminDashboard
+ * @path src/app/admin/page.tsx
+ * Root component for the admin dashboard page.
+ * Displays a grid of administrative features including user management,
+ * system settings, and analytics in a responsive layout.
+ */
 export default function AdminDashboard() {
   return (
     <div className="container mx-auto px-4 py-8">

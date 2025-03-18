@@ -1,13 +1,54 @@
+/**
+ * @file src/components/LLMForm.tsx
+ * AI Assistant interaction form component that provides a user interface for asking questions
+ * and receiving responses from an LLM (Language Learning Model).
+ * Built as a Client Component using Next.js App Router.
+ * 
+ * Features:
+ * - Question submission interface
+ * - Real-time response display
+ * - Loading states
+ * - Error handling
+ * - Responsive design
+ */
+
 'use client';
 
 import { useState } from 'react';
 
+/**
+ * @component LLMForm
+ * Client Component that provides an interface for interacting with an AI assistant.
+ * 
+ * Features:
+ * - Text area for question input
+ * - Form validation
+ * - Loading state indication
+ * - Error message display
+ * - Response formatting with whitespace preservation
+ * 
+ * API Integration:
+ * - POST requests to /api/llm/ask
+ * - JSON payload with prompt
+ * - Error handling for failed requests
+ * 
+ * States:
+ * - prompt: Current question text
+ * - response: AI assistant's response
+ * - isLoading: Form submission status
+ * - error: Error message if request fails
+ */
 export default function LLMForm() {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  /**
+   * Handles form submission by sending the prompt to the LLM API
+   * and managing the response/error states.
+   * @param {React.FormEvent} e - Form submission event
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);

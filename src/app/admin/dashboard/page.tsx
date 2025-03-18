@@ -1,3 +1,9 @@
+/**
+ * @file src/app/admin/dashboard/page.tsx
+ * Admin dashboard page that provides an overview of system statistics and health metrics.
+ * Includes real-time stats, quick actions, and system health monitoring.
+ */
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -6,6 +12,17 @@ import { Suspense } from "react";
 import { useUsers } from "@/hooks/use-users";
 import Link from "next/link";
 
+/**
+ * @component AdminStats
+ * Server component that fetches and displays key system statistics.
+ * Displays metrics for:
+ * - Total user count
+ * - Active user count
+ * - System uptime
+ * - API request rate
+ * 
+ * Uses suspense for loading state management.
+ */
 async function AdminStats() {
   // In a real application, these would be fetched from your API
   const stats = [
@@ -40,6 +57,20 @@ async function AdminStats() {
   );
 }
 
+/**
+ * @component StatsCard
+ * Displays a single statistic in a card format.
+ * Features:
+ * - Metric title
+ * - Current value
+ * - Percentage change indicator (green for positive, red for negative)
+ * 
+ * @param {Object} props
+ * @param {Object} props.data - The statistic data to display
+ * @param {string} props.data.title - Title of the statistic
+ * @param {string|number} props.data.value - Current value of the statistic
+ * @param {number} props.data.change - Percentage change from previous period
+ */
 function StatsCard({ data }: { data: { title: string; value: string | number; change: number } }) {
   return (
     <Card className="p-6">
@@ -54,21 +85,50 @@ function StatsCard({ data }: { data: { title: string; value: string | number; ch
   );
 }
 
+/**
+ * Fetches the total number of users in the system.
+ * @returns {Promise<string>} Total user count formatted as a string
+ * @todo Implement actual API call to fetch user count
+ */
 async function getTotalUsers() {
   // Implement actual API call
   return "1,234";
 }
 
+/**
+ * Fetches the number of active users in the system.
+ * @returns {Promise<string>} Active user count formatted as a string
+ * @todo Implement actual API call to fetch active user count
+ */
 async function getActiveUsers() {
   // Implement actual API call
   return "892";
 }
 
+/**
+ * Fetches the current API request rate.
+ * @returns {Promise<string>} API requests per hour formatted as a string
+ * @todo Implement actual API call to fetch API request rate
+ */
 async function getApiRequestsPerHour() {
   // Implement actual API call
   return "45.2K";
 }
 
+/**
+ * @component AdminDashboard
+ * @path src/app/admin/dashboard/page.tsx
+ * Main admin dashboard page component.
+ * Features:
+ * - Authentication and role-based access control
+ * - Real-time system statistics
+ * - Quick action links
+ * - System health monitoring
+ * - Resource usage metrics
+ * 
+ * Requires ADMIN role for access.
+ * Redirects to sign-in page if not authenticated or unauthorized.
+ */
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
 

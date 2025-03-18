@@ -1,7 +1,27 @@
+/**
+ * @file src/components/QueryHistory.tsx
+ * Query history component that displays a list of past AI interactions.
+ * Built as a Client Component using Next.js App Router.
+ * 
+ * Features:
+ * - Chronological display of past queries
+ * - Loading states
+ * - Error handling
+ * - Empty state handling
+ * - Responsive design
+ */
+
 'use client';
 
 import { useEffect, useState } from 'react';
 
+/**
+ * Interface representing a single query interaction.
+ * @property {string} id - Unique identifier for the query
+ * @property {string} prompt - User's original question
+ * @property {string} response - AI assistant's response
+ * @property {string} createdAt - Timestamp of when the query was made
+ */
 interface Query {
   id: string;
   prompt: string;
@@ -9,12 +29,38 @@ interface Query {
   createdAt: string;
 }
 
+/**
+ * @component QueryHistory
+ * Client Component that displays a chronological list of past AI interactions.
+ * 
+ * Features:
+ * - Automatic data fetching on mount
+ * - Loading state display
+ * - Error state handling
+ * - Empty state messaging
+ * - Formatted timestamps
+ * - Preserved whitespace in responses
+ * 
+ * API Integration:
+ * - GET requests to /api/llm/history
+ * - Error handling for failed requests
+ * - JSON response parsing
+ * 
+ * States:
+ * - queries: Array of past Query objects
+ * - error: Error message if fetch fails
+ * - isLoading: Data loading status
+ */
 export default function QueryHistory() {
   const [queries, setQueries] = useState<Query[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    /**
+     * Fetches query history from the API.
+     * Updates component state based on the response.
+     */
     const fetchQueries = async () => {
       try {
         const res = await fetch('/api/llm/history');

@@ -1,6 +1,6 @@
 /**
- * @file src/app/client/messages/page.tsx
- * Client messages page that provides a messaging interface for client users.
+ * @file src/app/account-rep/messages/page.tsx
+ * Account Representative messages page that provides a comprehensive messaging interface.
  * Built using Next.js App Router and Server Components for optimal performance.
  * 
  * Features:
@@ -18,16 +18,16 @@ import MessagesPage from "@/components/messages/MessagesPage";
 import ComposeMessage from "@/components/messages/ComposeMessage";
 
 /**
- * @component ClientMessages
- * @path src/app/client/messages/page.tsx
- * Server Component that renders the main messaging interface for client users.
+ * @component RepMessages
+ * @path src/app/account-rep/messages/page.tsx
+ * Server Component that renders the main messaging interface for account representatives.
  * 
  * Features:
  * - Message inbox with conversation threads and real-time updates
  * - Message composition panel with file attachment support
  * - Responsive grid layout (2:1 split on desktop, stacked on mobile)
  * - Server-side authentication check
- * - Role-based access control (CLIENT role required)
+ * - Role-based access control (REP role required)
  * 
  * Layout:
  * - Desktop: 2/3 width for messages list, 1/3 width for compose panel
@@ -36,15 +36,15 @@ import ComposeMessage from "@/components/messages/ComposeMessage";
  * 
  * Authentication:
  * - Requires valid session with user ID
- * - Requires CLIENT role
+ * - Requires REP role
  * - Redirects to sign-in page if not authenticated or unauthorized
  * 
- * @throws {Redirect} Redirects to /auth/signin if user is not authenticated or not a CLIENT
+ * @throws {Redirect} Redirects to /auth/signin if user is not authenticated or not a REP
  */
-export default async function ClientMessages() {
+export default async function RepMessages() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.id || session.user.role !== "CLIENT") {
+  if (!session?.user?.id || session.user.role !== "REP") {
     redirect("/auth/signin");
   }
 
@@ -55,8 +55,8 @@ export default async function ClientMessages() {
         {/* Messages list panel - takes up 2/3 of the grid on medium+ screens */}
         <div className="md:col-span-2">
           <MessagesPage 
-            initialView="inbox"
-            // Set initial view to inbox for client users
+            initialView="inbox" 
+            // Set initial view to inbox for account representatives
           />
         </div>
         {/* Compose message panel - takes up 1/3 of the grid on medium+ screens */}

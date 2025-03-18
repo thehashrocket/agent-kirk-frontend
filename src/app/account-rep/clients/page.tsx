@@ -1,3 +1,10 @@
+/**
+ * @file src/app/account-rep/clients/page.tsx
+ * Client management page for account representatives.
+ * Provides functionality to view, create, delete, and manage client accounts
+ * including password resets and status monitoring.
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -21,6 +28,10 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 
+/**
+ * Interface representing a user in the system.
+ * Used for client management and display in the table.
+ */
 interface User {
   id: string;
   name: string | null;
@@ -32,6 +43,17 @@ interface User {
   isActive: boolean;
 }
 
+/**
+ * @component ClientsPage
+ * @path src/app/account-rep/clients/page.tsx
+ * Main component for managing client accounts.
+ * Features:
+ * - Display list of clients in a table
+ * - Create new client accounts
+ * - Reset client passwords
+ * - Delete/deactivate client accounts
+ * - Monitor client status (active/inactive)
+ */
 export default function ClientsPage() {
   const { users, roles, isLoading, mutate } = useUsers();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -41,6 +63,11 @@ export default function ClientsPage() {
     password: '',
   });
 
+  /**
+   * Handles the creation of a new client account.
+   * Validates role, creates user with client role, and updates the UI.
+   * Shows success/error notifications using toast.
+   */
   const handleCreateClient = async () => {
     try {
       const clientRole = roles?.find((role) => role.name === 'CLIENT');
@@ -72,6 +99,11 @@ export default function ClientsPage() {
     }
   };
 
+  /**
+   * Handles the deletion (deactivation) of a client account.
+   * Implements soft delete by marking the account as inactive.
+   * @param {string} userId - The ID of the client to delete
+   */
   const handleDeleteClient = async (userId: string) => {
     try {
       const response = await fetch(`/api/users/${userId}`, {
@@ -89,6 +121,12 @@ export default function ClientsPage() {
     }
   };
 
+  /**
+   * Handles password reset for a client account.
+   * Generates a random password and updates the client's credentials.
+   * Displays the new password in a success notification.
+   * @param {string} userId - The ID of the client for password reset
+   */
   const handleResetPassword = async (userId: string) => {
     try {
       const newPassword = Math.random().toString(36).slice(-8);

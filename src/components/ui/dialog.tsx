@@ -1,3 +1,10 @@
+/**
+ * @file src/components/ui/dialog.tsx
+ * A collection of accessible dialog components built on top of Radix UI's Dialog primitive.
+ * These components provide a modal dialog that can be triggered, with overlay, content management,
+ * and proper accessibility features built-in.
+ */
+
 "use client"
 
 import * as React from "react"
@@ -6,30 +13,60 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * @component Dialog
+ * @path src/components/ui/dialog.tsx
+ * Root dialog component that manages the open/closed state of the dialog.
+ * Wraps Radix UI's Dialog.Root with additional data attributes for styling.
+ */
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
+/**
+ * @component DialogTrigger
+ * @path src/components/ui/dialog.tsx
+ * Button component that triggers the dialog to open when clicked.
+ * Should be wrapped inside a Dialog component.
+ */
 function DialogTrigger({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
+/**
+ * @component DialogPortal
+ * @path src/components/ui/dialog.tsx
+ * Portals the dialog content to the end of the document body.
+ * Ensures proper stacking context and accessibility.
+ */
 function DialogPortal({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
+/**
+ * @component DialogClose
+ * @path src/components/ui/dialog.tsx
+ * Button component that closes the dialog when clicked.
+ * Should be placed inside DialogContent.
+ */
 function DialogClose({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Close>) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
+/**
+ * @component DialogOverlay
+ * @path src/components/ui/dialog.tsx
+ * Semi-transparent overlay that covers the page behind the dialog.
+ * Provides visual focus and prevents interaction with the page while dialog is open.
+ */
 function DialogOverlay({
   className,
   ...props
@@ -46,6 +83,13 @@ function DialogOverlay({
   )
 }
 
+/**
+ * @component DialogContent
+ * @path src/components/ui/dialog.tsx
+ * Main container for dialog content with built-in animations and positioning.
+ * Includes a close button and proper focus management.
+ * Should contain DialogHeader and optionally DialogFooter.
+ */
 function DialogContent({
   className,
   children,
@@ -72,6 +116,12 @@ function DialogContent({
   )
 }
 
+/**
+ * @component DialogHeader
+ * @path src/components/ui/dialog.tsx
+ * Container for dialog header content with responsive text alignment.
+ * Typically contains DialogTitle and optionally DialogDescription.
+ */
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -82,6 +132,12 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * @component DialogFooter
+ * @path src/components/ui/dialog.tsx
+ * Container for dialog footer content with responsive button layout.
+ * Typically contains action buttons like "Cancel" and "Submit".
+ */
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -95,6 +151,12 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * @component DialogTitle
+ * @path src/components/ui/dialog.tsx
+ * Accessible heading component for the dialog title.
+ * Should be placed inside DialogHeader.
+ */
 function DialogTitle({
   className,
   ...props
@@ -108,6 +170,12 @@ function DialogTitle({
   )
 }
 
+/**
+ * @component DialogDescription
+ * @path src/components/ui/dialog.tsx
+ * Accessible description component for the dialog.
+ * Should be placed inside DialogHeader after DialogTitle.
+ */
 function DialogDescription({
   className,
   ...props

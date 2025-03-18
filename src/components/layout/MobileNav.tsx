@@ -1,3 +1,16 @@
+/**
+ * @file src/components/layout/MobileNav.tsx
+ * Mobile navigation component that provides a responsive slide-out menu.
+ * Built as a Client Component using Next.js App Router and shadcn/ui components.
+ * 
+ * Features:
+ * - Role-based navigation items
+ * - Slide-out sheet interface
+ * - Active route highlighting
+ * - Session management
+ * - Responsive design (hidden on desktop)
+ */
+
 'use client'
 
 import * as React from "react"
@@ -21,12 +34,22 @@ import {
   FileText,
 } from "lucide-react"
 
+/**
+ * Interface for navigation items.
+ * @property {string} title - Display text for the navigation item
+ * @property {string} href - URL path for the navigation item
+ * @property {React.ReactNode} icon - Icon component to display
+ */
 interface NavItem {
   title: string
   href: string
   icon: React.ReactNode
 }
 
+/**
+ * Navigation items for admin users.
+ * Includes system management and analytics links.
+ */
 const adminNavItems: NavItem[] = [
   { title: "Dashboard", href: "/admin/dashboard", icon: <LayoutDashboard /> },
   { title: "User Management", href: "/admin/users", icon: <Users /> },
@@ -35,6 +58,10 @@ const adminNavItems: NavItem[] = [
   { title: "Reports", href: "/admin/reports", icon: <FileText /> },
 ]
 
+/**
+ * Navigation items for account representatives.
+ * Includes client management and support features.
+ */
 const accountRepNavItems: NavItem[] = [
   { title: "Dashboard", href: "/account-rep/dashboard", icon: <LayoutDashboard /> },
   { title: "Client Management", href: "/account-rep/clients", icon: <Users /> },
@@ -43,6 +70,10 @@ const accountRepNavItems: NavItem[] = [
   { title: "Reports", href: "/account-rep/reports", icon: <FileText /> },
 ]
 
+/**
+ * Navigation items for client users.
+ * Includes basic account management and support access.
+ */
 const clientNavItems: NavItem[] = [
   { title: "Dashboard", href: "/client/dashboard", icon: <LayoutDashboard /> },
   { title: "Query History", href: "/client/history", icon: <History /> },
@@ -50,6 +81,33 @@ const clientNavItems: NavItem[] = [
   { title: "Support", href: "/client/support", icon: <HelpCircle /> },
 ]
 
+/**
+ * @component MobileNav
+ * Client Component that renders a mobile-friendly navigation menu.
+ * 
+ * Features:
+ * - Slide-out sheet interface using shadcn/ui
+ * - Role-based navigation items
+ * - Active route highlighting
+ * - Session information display
+ * - Scrollable navigation area
+ * 
+ * Layout:
+ * - Hidden on desktop (lg:hidden)
+ * - Full-height sheet with scroll area
+ * - Consistent spacing and typography
+ * - Icon + text navigation items
+ * 
+ * Authentication:
+ * - Requires active session
+ * - Displays user email and role
+ * - Returns null if no session
+ * 
+ * Accessibility:
+ * - Proper ARIA labels
+ * - Keyboard navigation support
+ * - Clear visual hierarchy
+ */
 export function MobileNav() {
   const [open, setOpen] = React.useState(false)
   const { data: session } = useSession()
@@ -57,6 +115,10 @@ export function MobileNav() {
 
   if (!session?.user) return null
 
+  /**
+   * Determines the appropriate navigation items based on user role.
+   * @returns {NavItem[]} Array of navigation items for the user's role
+   */
   const getNavItems = () => {
     switch (session.user.role) {
       case "ADMIN":

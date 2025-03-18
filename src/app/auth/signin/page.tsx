@@ -1,14 +1,32 @@
+/**
+ * @file src/app/auth/signin/page.tsx
+ * Sign-in page component that provides multiple authentication methods.
+ * Supports Google OAuth and Magic Link (passwordless) authentication.
+ */
+
 "use client";
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+/**
+ * @component SignIn
+ * @path src/app/auth/signin/page.tsx
+ * Root component for the sign-in page.
+ * Provides a user interface for authentication with multiple sign-in options:
+ * - Google OAuth authentication
+ * - Magic Link (passwordless) authentication via email
+ */
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  /**
+   * Handles Google OAuth sign-in process.
+   * Initiates the Google OAuth flow and redirects to home page on success.
+   */
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     try {
@@ -20,6 +38,11 @@ export default function SignIn() {
     }
   };
 
+  /**
+   * Handles Magic Link sign-in process.
+   * Sends a magic link to the provided email address for passwordless authentication.
+   * @param {React.FormEvent} e - The form submission event
+   */
   const handleMagicLinkSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);

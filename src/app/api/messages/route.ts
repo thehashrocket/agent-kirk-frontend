@@ -1,3 +1,10 @@
+/**
+ * @file src/app/api/messages/route.ts
+ * Messages API route handler for managing message operations.
+ * Provides endpoints for creating and retrieving messages with support for
+ * threading, attachments, and pagination.
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
@@ -5,6 +12,10 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
+/**
+ * Zod schema for validating message creation requests.
+ * Ensures messages have required content and valid attachments.
+ */
 const messageSchema = z.object({
   content: z.string().min(1).max(5000),
   recipientId: z.string(),
@@ -17,6 +28,14 @@ const messageSchema = z.object({
   })).optional()
 });
 
+/**
+ * POST handler for creating new messages.
+ * Supports creating both new threads and replies with attachments.
+ * Requires authentication and validates message content.
+ * 
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} Response containing the created message or error
+ */
 export async function POST(
   request: NextRequest
 ) {
@@ -93,6 +112,15 @@ export async function POST(
   }
 }
 
+/**
+ * GET handler for retrieving messages.
+ * Supports pagination, filtering by thread, view type (inbox/outbox),
+ * archived status, and unread status.
+ * Includes special handling for admin users.
+ * 
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} Response containing messages and pagination info
+ */
 export async function GET(
   request: NextRequest
 ) {
@@ -111,6 +139,10 @@ export async function GET(
     const showArchived = searchParams.get('archived') === 'true';
     const showUnread = searchParams.get('unread') === 'true';
 
+    /**
+     * Type definition for the Prisma where clause used in message queries.
+     * Supports complex filtering based on thread, sender, recipient, and message status.
+     */
     type WhereClause = {
       threadId?: string;
       senderId?: string;

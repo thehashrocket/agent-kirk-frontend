@@ -1,3 +1,16 @@
+/**
+ * @file src/app/client/dashboard/page.tsx
+ * Client dashboard page that provides a comprehensive overview of client activity and services.
+ * Built using Next.js App Router and Server Components for optimal performance.
+ * 
+ * Features:
+ * - Real-time usage statistics
+ * - LLM query interface
+ * - Recent query history
+ * - Quick action links
+ * - Usage monitoring
+ */
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -7,6 +20,19 @@ import Link from "next/link";
 import LLMForm from "@/components/LLMForm";
 import QueryHistory from "@/components/QueryHistory";
 
+/**
+ * @component ClientStats
+ * Server component that fetches and displays key client statistics.
+ * Uses Suspense for loading state management.
+ * 
+ * Displays metrics for:
+ * - Monthly query count
+ * - Average response time
+ * - Success rate
+ * - Remaining API credits
+ * 
+ * @returns {Promise<JSX.Element>} Grid of statistics cards
+ */
 async function ClientStats() {
   // In a real application, these would be fetched from your API
   const stats = [
@@ -41,6 +67,21 @@ async function ClientStats() {
   );
 }
 
+/**
+ * @component StatsCard
+ * Displays a single statistic in a card format with change indicator.
+ * 
+ * Features:
+ * - Metric title and current value
+ * - Change percentage with color coding
+ * - Responsive layout using Tailwind CSS
+ * 
+ * @param {Object} props
+ * @param {Object} props.data - The statistic data to display
+ * @param {string} props.data.title - Title of the statistic
+ * @param {string|number} props.data.value - Current value of the statistic
+ * @param {number} props.data.change - Percentage change from previous period
+ */
 function StatsCard({ data }: { data: { title: string; value: string | number; change: number } }) {
   return (
     <Card className="p-6">
@@ -55,16 +96,30 @@ function StatsCard({ data }: { data: { title: string; value: string | number; ch
   );
 }
 
+/**
+ * Fetches the total number of queries made this month.
+ * @returns {Promise<string>} Monthly query count formatted as a string
+ * @todo Implement actual API call to fetch query count
+ */
 async function getMonthlyQueries() {
   // Implement actual API call
   return "1,543";
 }
 
+/**
+ * Fetches the remaining API credits for the client.
+ * @returns {Promise<string>} Remaining API credits formatted as a string
+ * @todo Implement actual API call to fetch API credits
+ */
 async function getApiCredits() {
   // Implement actual API call
   return "8,750";
 }
 
+/**
+ * Mock data for recent queries.
+ * @todo Replace with actual API data
+ */
 const recentQueries = [
   {
     id: 1,
@@ -86,6 +141,32 @@ const recentQueries = [
   },
 ];
 
+/**
+ * @component ClientDashboard
+ * @path src/app/client/dashboard/page.tsx
+ * Main dashboard page for client users.
+ * 
+ * Features:
+ * - Authentication and role-based access control
+ * - Real-time usage statistics with Suspense
+ * - LLM query interface for making new queries
+ * - Recent query history with status indicators
+ * - Quick action links for common tasks
+ * - Usage summary with plan details and API usage
+ * 
+ * Layout:
+ * - Responsive grid layout using Tailwind CSS
+ * - Main content area (2/3 width) with query interface
+ * - Sidebar (1/3 width) with quick actions and usage summary
+ * - Mobile-first design with proper stacking
+ * 
+ * Authentication:
+ * - Requires valid session with user ID
+ * - Requires CLIENT role
+ * - Redirects to sign-in page if not authenticated or unauthorized
+ * 
+ * @throws {Redirect} Redirects to /auth/signin if user is not authenticated or not a CLIENT
+ */
 export default async function ClientDashboard() {
   const session = await getServerSession(authOptions);
 

@@ -1,3 +1,10 @@
+/**
+ * @file src/app/api/users/route.ts
+ * Users API route handler for managing user operations.
+ * Provides endpoints for creating, reading, updating, and soft-deleting users
+ * with role-based access control and permission management.
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
@@ -5,6 +12,10 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import bcryptjs from 'bcryptjs';
 
+/**
+ * Zod schema for validating user creation requests.
+ * Ensures new users have required fields and proper data types.
+ */
 const createUserSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
@@ -13,6 +24,10 @@ const createUserSchema = z.object({
   accountRepId: z.string().optional(),
 });
 
+/**
+ * Zod schema for validating user update requests.
+ * All fields are optional as updates can be partial.
+ */
 const updateUserSchema = z.object({
   name: z.string().min(2).optional(),
   email: z.string().email().optional(),
@@ -21,7 +36,15 @@ const updateUserSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
-// GET /api/users - Get all users (Admin) or assigned clients (Account Rep)
+/**
+ * GET handler for retrieving users based on role permissions:
+ * - Admins can see all users
+ * - Account Reps can see their assigned clients
+ * - Clients can only see themselves
+ * 
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} Response containing users or error
+ */
 export async function GET(
   request: NextRequest
 ) {
@@ -75,7 +98,14 @@ export async function GET(
   }
 }
 
-// POST /api/users - Create a new user
+/**
+ * POST handler for creating new users.
+ * Only Admin and Account Rep roles can create users.
+ * Account Reps can only create client users assigned to them.
+ * 
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} Response containing created user or error
+ */
 export async function POST(
   request: NextRequest
 ) {
@@ -141,7 +171,17 @@ export async function POST(
   }
 }
 
-// PATCH /api/users/[id] - Update a user
+/**
+ * PATCH handler for updating users.
+ * Role-based permissions:
+ * - Clients can only update their own password
+ * - Account Reps can update their assigned clients (except role)
+ * - Admins can update any user
+ * 
+ * @param {NextRequest} request - The incoming request object
+ * @param {Object} params - Route parameters containing user ID
+ * @returns {Promise<NextResponse>} Response containing updated user or error
+ */
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -216,7 +256,15 @@ export async function PATCH(
   }
 }
 
-// DELETE /api/users/[id] - Soft delete a user
+/**
+ * DELETE handler for soft-deleting users.
+ * Only admins can delete users.
+ * Implements soft delete by deactivating the user rather than removing from database.
+ * 
+ * @param {NextRequest} request - The incoming request object
+ * @param {Object} params - Route parameters containing user ID
+ * @returns {Promise<NextResponse>} Response indicating success or error
+ */
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

@@ -1,3 +1,10 @@
+/**
+ * @file src/app/account-rep/dashboard/page.tsx
+ * Account Representative dashboard overview page.
+ * Provides a comprehensive view of client portfolio, recent activities,
+ * and quick access to key account management features.
+ */
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -5,6 +12,13 @@ import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import Link from "next/link";
 
+/**
+ * @component AccountRepStats
+ * @path src/app/account-rep/dashboard/page.tsx
+ * Server component that displays key performance metrics for the account representative.
+ * Shows statistics for active clients, open tickets, response rate, and client satisfaction.
+ * Uses Suspense for loading state management.
+ */
 async function AccountRepStats() {
   // In a real application, these would be fetched from your API
   const stats = [
@@ -39,6 +53,18 @@ async function AccountRepStats() {
   );
 }
 
+/**
+ * @component StatsCard
+ * @path src/app/account-rep/dashboard/page.tsx
+ * Displays a single statistic card with title, value, and change indicator.
+ * Shows positive changes in green and negative changes in red.
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.data - Statistics data
+ * @param {string} props.data.title - Title of the statistic
+ * @param {string|number} props.data.value - Current value
+ * @param {number} props.data.change - Percentage change
+ */
 function StatsCard({ data }: { data: { title: string; value: string | number; change: number } }) {
   return (
     <Card className="p-6">
@@ -53,16 +79,30 @@ function StatsCard({ data }: { data: { title: string; value: string | number; ch
   );
 }
 
+/**
+ * Fetches the count of active clients for the account representative.
+ * @returns {Promise<string>} Number of active clients
+ * @todo Implement actual API integration
+ */
 async function getActiveClients() {
   // Implement actual API call
   return "48";
 }
 
+/**
+ * Fetches the count of open support tickets assigned to the account representative.
+ * @returns {Promise<string>} Number of open tickets
+ * @todo Implement actual API integration
+ */
 async function getOpenTickets() {
   // Implement actual API call
   return "23";
 }
 
+/**
+ * Mock data for recent client activities.
+ * Will be replaced with actual API data in production.
+ */
 const recentActivities = [
   {
     id: 1,
@@ -87,6 +127,19 @@ const recentActivities = [
   },
 ];
 
+/**
+ * @component AccountRepDashboard
+ * @path src/app/account-rep/dashboard/page.tsx
+ * Main dashboard component for account representatives.
+ * Features:
+ * - Personal welcome message
+ * - Key performance metrics
+ * - Recent client activities feed
+ * - Quick access links to main features
+ * 
+ * Requires authentication and account representative role.
+ * Redirects to sign-in page if not authenticated or unauthorized.
+ */
 export default async function AccountRepDashboard() {
   const session = await getServerSession(authOptions);
 

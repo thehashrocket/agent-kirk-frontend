@@ -1,3 +1,9 @@
+/**
+ * @file src/components/messages/MessageList.tsx
+ * Message list component that provides a threaded conversation view with infinite scrolling,
+ * file attachments, and reply functionality. Uses shadcn/ui components for the UI.
+ */
+
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +20,10 @@ import { Badge } from "@/components/ui/badge";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 
+/**
+ * Zod schema for message form validation.
+ * Validates message content, recipient, optional parent message, and attachments.
+ */
 const messageSchema = z.object({
   content: z.string().min(1).max(5000),
   recipientId: z.string(),
@@ -26,8 +36,16 @@ const messageSchema = z.object({
   })).optional()
 });
 
+/**
+ * Type definition for message form data derived from the Zod schema.
+ */
 type MessageFormData = z.infer<typeof messageSchema>;
 
+/**
+ * Interface representing a message in the system.
+ * Includes message content, metadata, sender/recipient info, attachments,
+ * and thread-related data.
+ */
 interface Message {
   id: string;
   content: string;
@@ -73,11 +91,30 @@ interface Message {
   }>;
 }
 
+/**
+ * Props for the MessageList component.
+ * @property {string} recipientId - ID of the message recipient
+ * @property {string} [threadId] - Optional thread ID for viewing specific conversation threads
+ */
 interface MessageListProps {
   recipientId: string;
   threadId?: string;
 }
 
+/**
+ * @component MessageList
+ * @path src/components/messages/MessageList.tsx
+ * Displays a list of messages in a threaded conversation view.
+ * Features:
+ * - Infinite scrolling message list
+ * - File attachments support
+ * - Message threading with replies
+ * - Real-time message status (read/unread)
+ * - Message composition with form validation
+ * - Responsive layout with proper message alignment
+ * 
+ * @param {MessageListProps} props - Component props
+ */
 export function MessageList({ recipientId, threadId }: MessageListProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
@@ -87,6 +124,10 @@ export function MessageList({ recipientId, threadId }: MessageListProps) {
     resolver: zodResolver(messageSchema)
   });
 
+  /**
+   * Infinite query hook for fetching paginated messages.
+   * Handles loading states, pagination, and data fetching.
+   */
   const {
     data,
     fetchNextPage,
@@ -111,12 +152,21 @@ export function MessageList({ recipientId, threadId }: MessageListProps) {
     initialPageParam: 1
   });
 
+  /**
+   * Effect hook to handle infinite scrolling.
+   * Triggers next page fetch when the last message is in view.
+   */
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  /**
+   * Handles message form submission.
+   * Processes message content and attachments, sends to API.
+   * @param {MessageFormData} data - Form data including message content and metadata
+   */
   const onSubmit = async (data: MessageFormData) => {
     try {
       const formData = new FormData();
@@ -149,6 +199,12 @@ export function MessageList({ recipientId, threadId }: MessageListProps) {
 
   if (isLoading) return <div>Loading...</div>;
 
+  /**
+   * Renders a single message with its replies.
+   * Handles message styling, attachments, and reply actions.
+   * @param {Message} message - Message object to render
+   * @param {number} depth - Nesting depth for reply indentation
+   */
   const renderMessage = (message: Message, depth: number = 0) => (
     <div key={message.id} className="space-y-4">
       <Card

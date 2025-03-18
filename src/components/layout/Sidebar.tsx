@@ -1,3 +1,16 @@
+/**
+ * @file src/components/layout/Sidebar.tsx
+ * Desktop sidebar navigation component that provides role-based navigation.
+ * Built as a Client Component using Next.js App Router and shadcn/ui components.
+ * 
+ * Features:
+ * - Role-based navigation items
+ * - Active route highlighting
+ * - Session management
+ * - Scrollable navigation area
+ * - Desktop-only display (hidden on mobile)
+ */
+
 'use client'
 
 import { useSession } from "next-auth/react";
@@ -17,12 +30,22 @@ import {
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+/**
+ * Interface for navigation items.
+ * @property {string} title - Display text for the navigation item
+ * @property {string} href - URL path for the navigation item
+ * @property {React.ReactNode} icon - Icon component to display
+ */
 interface NavItem {
   title: string;
   href: string;
   icon: React.ReactNode;
 }
 
+/**
+ * Navigation items for admin users.
+ * Includes system management and analytics links.
+ */
 const adminNavItems: NavItem[] = [
   { title: "Dashboard", href: "/admin/dashboard", icon: <LayoutDashboard /> },
   { title: "User Management", href: "/admin/users", icon: <Users /> },
@@ -31,6 +54,10 @@ const adminNavItems: NavItem[] = [
   { title: "Reports", href: "/admin/reports", icon: <FileText /> },
 ];
 
+/**
+ * Navigation items for account representatives.
+ * Includes client management and support features.
+ */
 const accountRepNavItems: NavItem[] = [
   { title: "Dashboard", href: "/account-rep/dashboard", icon: <LayoutDashboard /> },
   { title: "Client Management", href: "/account-rep/clients", icon: <Users /> },
@@ -39,6 +66,10 @@ const accountRepNavItems: NavItem[] = [
   { title: "Reports", href: "/account-rep/reports", icon: <FileText /> },
 ];
 
+/**
+ * Navigation items for client users.
+ * Includes basic account management and support access.
+ */
 const clientNavItems: NavItem[] = [
   { title: "Dashboard", href: "/client/dashboard", icon: <LayoutDashboard /> },
   { title: "Query History", href: "/client/history", icon: <History /> },
@@ -46,12 +77,42 @@ const clientNavItems: NavItem[] = [
   { title: "Support", href: "/client/support", icon: <HelpCircle /> },
 ];
 
+/**
+ * @component Sidebar
+ * Client Component that renders the desktop navigation sidebar.
+ * 
+ * Features:
+ * - Fixed position sidebar with scroll area
+ * - Role-based navigation items
+ * - Active route highlighting
+ * - Icon + text navigation items
+ * - Desktop-only display (hidden on mobile)
+ * 
+ * Layout:
+ * - Fixed position on left side
+ * - Full height with top offset for header
+ * - Consistent width (16rem/64px)
+ * - Scrollable navigation area
+ * 
+ * Authentication:
+ * - Requires active session
+ * - Returns null if no session
+ * 
+ * Accessibility:
+ * - Semantic navigation structure
+ * - Clear visual hierarchy
+ * - Consistent interactive states
+ */
 export function Sidebar() {
   const { data: session } = useSession();
   const pathname = usePathname();
 
   if (!session?.user) return null;
 
+  /**
+   * Determines the appropriate navigation items based on user role.
+   * @returns {NavItem[]} Array of navigation items for the user's role
+   */
   const getNavItems = () => {
     switch (session.user.role) {
       case "ADMIN":

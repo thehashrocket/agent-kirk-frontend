@@ -1,3 +1,16 @@
+/**
+ * @file src/components/layout/Header.tsx
+ * Main header component that provides navigation and user session management.
+ * Built as a Client Component using Next.js App Router and shadcn/ui components.
+ * 
+ * Features:
+ * - Role-based navigation links
+ * - Session management with NextAuth
+ * - Mobile-responsive design
+ * - User session display
+ * - Logout functionality
+ */
+
 'use client'
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -6,11 +19,38 @@ import { Home, MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 
+/**
+ * @component Header
+ * Client Component that renders the main navigation header.
+ * 
+ * Features:
+ * - Responsive navigation with mobile menu
+ * - Role-based dashboard links
+ * - Session status display
+ * - Logout functionality
+ * - Sticky positioning with backdrop blur
+ * 
+ * Layout:
+ * - Fixed position at top of viewport
+ * - Full width with container constraints
+ * - Flexible spacing for navigation items
+ * - Right-aligned user session info
+ * 
+ * Authentication:
+ * - Requires active session
+ * - Displays user email and role
+ * - Provides logout button
+ * - Returns null if no session
+ */
 export function Header() {
   const { data: session } = useSession();
 
   if (!session?.user) return null;
 
+  /**
+   * Determines the appropriate dashboard link based on user role.
+   * @returns {string} URL path to role-specific dashboard
+   */
   const getDashboardLink = () => {
     const role = session.user.role;
     if (!role) return "/";
