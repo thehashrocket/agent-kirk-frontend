@@ -55,7 +55,7 @@ export const authOptions: AuthOptions = {
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         try {
-          // Check if user exists
+          // Check if user exists in the database with any email
           const existingUser = await prisma.user.findUnique({
             where: { email: user.email! },
             include: { role: true },
@@ -64,37 +64,89 @@ export const authOptions: AuthOptions = {
           console.log("Found existing user:", existingUser);
 
           if (!existingUser) {
-            // Create new user with CLIENT role
-            const clientRole = await prisma.role.findUnique({
-              where: { name: "CLIENT" },
+            // Check if there's a manually created user with this email
+            const manualUser = await prisma.user.findFirst({
+              where: { email: user.email },
+              include: { role: true },
             });
 
-            if (!clientRole) {
-              console.error("Client role not found");
-              return false;
+            // If there's a manually created user, use their role
+            const roleToUse = manualUser?.roleId;
+
+            if (roleToUse) {
+              // Create the user with the same role as the manual user
+              const newUser = await prisma.user.create({
+                data: {
+                  email: user.email!,
+                  name: user.name || null,
+                  image: user.image || null,
+                  roleId: roleToUse,
+                  password: "", // Required by schema
+                },
+                include: {
+                  role: true,
+                },
+              });
+
+              // Update the user object to be used by NextAuth
+              Object.assign(user, {
+                id: newUser.id,
+                roleId: newUser.roleId,
+                role: newUser.role,
+              });
+            } else {
+              // If no manual user exists, create with CLIENT role (default behavior)
+              const clientRole = await prisma.role.findUnique({
+                where: { name: "CLIENT" },
+              });
+
+              if (!clientRole) {
+                console.error("Client role not found");
+                return false;
+              }
+
+              // Create the user with the CLIENT role
+              const newUser = await prisma.user.create({
+                data: {
+                  email: user.email!,
+                  name: user.name || null,
+                  image: user.image || null,
+                  roleId: clientRole.id,
+                  password: "", // Required by schema
+                },
+                include: {
+                  role: true,
+                },
+              });
+
+              // Update the user object to be used by NextAuth
+              Object.assign(user, {
+                id: newUser.id,
+                roleId: newUser.roleId,
+                role: newUser.role,
+              });
             }
-
-            // Create the user with the CLIENT role
-            const newUser = await prisma.user.create({
-              data: {
-                email: user.email!,
-                name: user.name || null,
-                image: user.image || null,
-                roleId: clientRole.id,
-                password: "", // Required by schema
-              },
-              include: {
-                role: true,
-              },
-            });
-
-            // Update the user object to be used by NextAuth
-            Object.assign(user, {
-              id: newUser.id,
-              roleId: newUser.roleId,
-              role: newUser.role,
-            });
           } else {
+            // Update existing user with OAuth info and link accounts
+            await prisma.user.update({
+              where: { id: existingUser.id },
+              data: {
+                name: user.name || existingUser.name,
+                image: user.image || existingUser.image,
+                accounts: {
+                  create: {
+                    type: account.type,
+                    provider: account.provider,
+                    providerAccountId: account.providerAccountId,
+                    access_token: account.access_token,
+                    token_type: account.token_type,
+                    scope: account.scope,
+                    id_token: account.id_token,
+                  }
+                }
+              }
+            });
+
             // Update the user object with existing user's role
             Object.assign(user, {
               id: existingUser.id,
