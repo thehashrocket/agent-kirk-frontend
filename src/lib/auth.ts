@@ -58,7 +58,10 @@ export const authOptions: AuthOptions = {
           // Check if user exists in the database with any email
           const existingUser = await prisma.user.findUnique({
             where: { email: user.email! },
-            include: { role: true },
+            include: { 
+              role: true,
+              accounts: true 
+            },
           });
 
           console.log("Found existing user:", existingUser);
@@ -82,6 +85,17 @@ export const authOptions: AuthOptions = {
                   image: user.image || null,
                   roleId: roleToUse,
                   password: "", // Required by schema
+                  accounts: {
+                    create: {
+                      type: account.type,
+                      provider: account.provider,
+                      providerAccountId: account.providerAccountId,
+                      access_token: account.access_token,
+                      token_type: account.token_type,
+                      scope: account.scope,
+                      id_token: account.id_token,
+                    }
+                  }
                 },
                 include: {
                   role: true,
@@ -113,6 +127,17 @@ export const authOptions: AuthOptions = {
                   image: user.image || null,
                   roleId: clientRole.id,
                   password: "", // Required by schema
+                  accounts: {
+                    create: {
+                      type: account.type,
+                      provider: account.provider,
+                      providerAccountId: account.providerAccountId,
+                      access_token: account.access_token,
+                      token_type: account.token_type,
+                      scope: account.scope,
+                      id_token: account.id_token,
+                    }
+                  }
                 },
                 include: {
                   role: true,
@@ -127,25 +152,38 @@ export const authOptions: AuthOptions = {
               });
             }
           } else {
-            // Update existing user with OAuth info and link accounts
-            await prisma.user.update({
-              where: { id: existingUser.id },
-              data: {
-                name: user.name || existingUser.name,
-                image: user.image || existingUser.image,
-                accounts: {
-                  create: {
-                    type: account.type,
-                    provider: account.provider,
-                    providerAccountId: account.providerAccountId,
-                    access_token: account.access_token,
-                    token_type: account.token_type,
-                    scope: account.scope,
-                    id_token: account.id_token,
-                  }
+            // Check if this OAuth account is already linked
+            const existingAccount = existingUser.accounts.find(
+              acc => acc.provider === account.provider && 
+                    acc.providerAccountId === account.providerAccountId
+            );
+
+            if (!existingAccount) {
+              // Link the new OAuth account
+              await prisma.account.create({
+                data: {
+                  userId: existingUser.id,
+                  type: account.type,
+                  provider: account.provider,
+                  providerAccountId: account.providerAccountId,
+                  access_token: account.access_token,
+                  token_type: account.token_type,
+                  scope: account.scope,
+                  id_token: account.id_token,
                 }
-              }
-            });
+              });
+            }
+
+            // Update user profile if needed
+            if (user.name !== existingUser.name || user.image !== existingUser.image) {
+              await prisma.user.update({
+                where: { id: existingUser.id },
+                data: {
+                  name: user.name || existingUser.name,
+                  image: user.image || existingUser.image,
+                }
+              });
+            }
 
             // Update the user object with existing user's role
             Object.assign(user, {
