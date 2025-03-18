@@ -33,11 +33,11 @@ declare module "next-auth/jwt" {
   }
 }
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   debug: true,
   session: {
-    strategy: "jwt" as const,
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   providers: [
@@ -52,7 +52,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }: { user: User; account: Account }) {
+    async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         try {
           // Check if user exists
@@ -111,7 +111,7 @@ export const authOptions = {
       }
       return true;
     },
-    async jwt({ token, user }: { token: JWT; user: User }) {
+    async jwt({ token, user }) {
       console.log("JWT Callback - Input:", { token, user });
       
       if (user?.roleId) {
@@ -143,7 +143,7 @@ export const authOptions = {
       console.log("JWT Callback - Output token:", token);
       return token;
     },
-    async session({ session, token }: { session: Session; token: JWT }) {
+    async session({ session, token }) {
       console.log("Session Callback - Input:", { session, token });
       
       if (session.user) {
@@ -170,7 +170,7 @@ export const authOptions = {
     },
   },
   events: {
-    async createUser({ user }: { user: User & { id: string } }) {
+    async createUser({ user }) {
       // Ensure new users have the CLIENT role if no role is set
       if (!user.role) {
         const clientRole = await prisma.role.findUnique({
@@ -193,6 +193,6 @@ export const authOptions = {
   pages: {
     signIn: "/auth/signin",
   }
-};
+} as const;
 
-export const { auth, signIn, signOut } = NextAuth(authOptions as AuthOptions);
+export const { auth, signIn, signOut } = NextAuth(authOptions);

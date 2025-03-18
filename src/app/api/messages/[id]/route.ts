@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -10,21 +11,22 @@ const updateSchema = z.object({
 });
 
 export async function PATCH(
-  req: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const body = await req.json();
+    const body = await request.json();
     const validatedData = updateSchema.parse(body);
 
     // Check if user has permission to update this message
     const message = await prisma.message.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: {
         recipientId: true,
         senderId: true,
@@ -45,7 +47,7 @@ export async function PATCH(
     }
 
     const updatedMessage = await prisma.message.update({
-      where: { id: params.id },
+      where: { id },
       data: validatedData,
       include: {
         sender: {

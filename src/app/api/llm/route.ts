@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
@@ -14,7 +15,9 @@ const QueryRequestSchema = z.array(
   })
 );
 
-export async function POST(request: Request) {
+export async function POST(
+  request: NextRequest
+) {
   try {
     // Get the authenticated user
     const session = await auth();

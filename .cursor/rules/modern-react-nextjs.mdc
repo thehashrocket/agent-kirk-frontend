@@ -12,34 +12,33 @@ alwaysApply: false
 ## Project Structure
 ```
 src/
+  app/
+    (auth)/
+      login/
+        page.tsx
+      register/
+        page.tsx
+    (dashboard)/
+      layout.tsx
+      page.tsx
+    api/
+      route.ts
   components/
     ui/
-      button/
-        button.tsx
-        types.ts
-      card/
-        card.tsx
-        types.ts
-    features/
-      product-card/
-        product-card.tsx
-        types.ts
-        use-product.ts
-    layout/
-      header/
-        header.tsx
-        nav-menu.tsx
-  hooks/
-    use-keyboard.ts
-    use-intersection.ts
+      button.tsx
+      card.tsx
+    auth-wizard/
+      auth-form.tsx
+      password-input.tsx
+    dashboard/
+      stats-card.tsx
   lib/
-    utils/
-      cn.ts
-      format.ts
-    constants/
-      routes.ts
+    utils.ts
+    constants.ts
   types/
     index.ts
+  styles/
+    globals.css
 ```
 
 ## Component Structure

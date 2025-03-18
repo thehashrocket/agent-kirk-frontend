@@ -12,35 +12,33 @@ alwaysApply: false
 ## Project Structure
 ```
 src/
+  app/
+    (auth)/
+      login/
+        page.tsx
+      register/
+        page.tsx
+    (dashboard)/
+      layout.tsx
+      page.tsx
+    api/
+      route.ts
   components/
-    common/
-      Button.tsx
-      Card.tsx
-      Modal.tsx
-    features/
-      medications/
-        MedicationCard.tsx
-        MedicationList.tsx
-        AdherenceReport.tsx
-    layout/
-      Header.tsx
-      Navigation.tsx
-  hooks/
-    useMedications.ts
-    useAuth.ts
-    useFirestore.ts
-  pages/
+    ui/
+      button.tsx
+      card.tsx
+    auth-wizard/
+      auth-form.tsx
+      password-input.tsx
     dashboard/
-    medications/
-    reports/
-  services/
-    firebase/
-    analytics/
+      stats-card.tsx
+  lib/
+    utils.ts
+    constants.ts
+  types/
+    index.ts
   styles/
-    tailwind.css
-  utils/
-    dates.ts
-    statistics.ts
+    globals.css
 ```
 
 ## Design System Configuration

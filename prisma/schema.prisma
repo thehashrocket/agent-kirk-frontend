@@ -85,6 +85,10 @@ model User {
   password      String?      @default("")
   role          Role         @relation(fields: [roleId], references: [id])
   roleId        String
+  isActive      Boolean      @default(true)
+  accountRepId  String?
+  accountRep    User?        @relation("AccountRepToClient", fields: [accountRepId], references: [id])
+  clients       User[]       @relation("AccountRepToClient")
   accounts      Account[]
   sessions      Session[]
   queries       Query[]

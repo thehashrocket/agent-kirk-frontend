@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -39,11 +39,7 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  useEffect(() => {
-    fetchMessages();
-  }, [view, page]);
-
-  const fetchMessages = async () => {
+  const fetchMessages = useCallback(async () => {
     try {
       const res = await fetch(`/api/messages?page=${page}&view=${view}`);
       if (!res.ok) throw new Error('Failed to fetch messages');
@@ -62,7 +58,11 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, view]);
+
+  useEffect(() => {
+    fetchMessages();
+  }, [fetchMessages]);
 
   const markAsRead = async (messageId: string) => {
     try {
