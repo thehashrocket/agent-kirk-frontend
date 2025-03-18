@@ -2,27 +2,44 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { Role } from "@prisma/client";
-import type { DefaultSession, Session, User } from "next-auth";
+import type { Account, DefaultSession, Session, User, AuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import { prisma } from "./prisma";
+import { JWT } from "next-auth/jwt";
 
 // Define custom types for the session
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      role: Role;
+      role: string;
     } & DefaultSession["user"];
   }
 
   interface User {
+    id: string;
     role: Role;
+    roleId?: string;
+    email: string;
+    name?: string | null;
+    image?: string | null;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    role?: string;
+    sub: string;
   }
 }
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   debug: true,
+  session: {
+    strategy: "jwt" as const,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -35,7 +52,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }: { user: User; account: { provider: string } | null }) {
+    async signIn({ user, account }: { user: User; account: Account }) {
       if (account?.provider === "google") {
         try {
           // Check if user exists
@@ -43,6 +60,8 @@ export const authOptions = {
             where: { email: user.email! },
             include: { role: true },
           });
+
+          console.log("Found existing user:", existingUser);
 
           if (!existingUser) {
             // Create new user with CLIENT role
@@ -70,13 +89,20 @@ export const authOptions = {
             });
 
             // Update the user object to be used by NextAuth
-            user.id = newUser.id;
-            user.role = newUser.role;
+            Object.assign(user, {
+              id: newUser.id,
+              roleId: newUser.roleId,
+              role: newUser.role,
+            });
           } else {
             // Update the user object with existing user's role
-            user.id = existingUser.id;
-            user.role = existingUser.role;
+            Object.assign(user, {
+              id: existingUser.id,
+              roleId: existingUser.roleId,
+              role: existingUser.role,
+            });
           }
+          console.log("Updated user:", user);
           return true;
         } catch (error) {
           console.error("Error in signIn callback:", error);
@@ -85,17 +111,61 @@ export const authOptions = {
       }
       return true;
     },
-    async session({ 
-      session, 
-      user 
-    }: { 
-      session: Session; 
-      user: User & { role: Role; id: string; }
-    }) {
-      if (session.user && user) {
-        session.user.id = user.id;
-        session.user.role = user.role;
+    async jwt({ token, user }: { token: JWT; user: User }) {
+      console.log("JWT Callback - Input:", { token, user });
+      
+      if (user?.roleId) {
+        // Fetch role if not present in user object
+        if (!user.role) {
+          const userWithRole = await prisma.user.findUnique({
+            where: { id: user.id },
+            include: { role: true },
+          });
+          if (userWithRole?.role) {
+            token.role = userWithRole.role.name;
+          }
+        } else {
+          token.role = user.role.name;
+        }
       }
+
+      // Ensure role persists in token
+      if (!token.role && user?.id) {
+        const userWithRole = await prisma.user.findUnique({
+          where: { id: user.id },
+          include: { role: true },
+        });
+        if (userWithRole?.role) {
+          token.role = userWithRole.role.name;
+        }
+      }
+      
+      console.log("JWT Callback - Output token:", token);
+      return token;
+    },
+    async session({ session, token }: { session: Session; token: JWT }) {
+      console.log("Session Callback - Input:", { session, token });
+      
+      if (session.user) {
+        session.user.id = token.sub;
+        if (token.role) {
+          session.user.role = token.role;
+          console.log("Setting role in session:", token.role);
+        } else {
+          console.log("No role found in token");
+          // Attempt to fetch role from database
+          const user = await prisma.user.findUnique({
+            where: { id: token.sub },
+            include: { role: true },
+          });
+          if (user?.role) {
+            session.user.role = user.role.name;
+            console.log("Retrieved role from database:", user.role.name);
+          }
+        }
+      }
+      
+      console.log("Session Callback - Output session:", session);
       return session;
     },
   },
@@ -125,4 +195,4 @@ export const authOptions = {
   }
 };
 
-export const { auth, signIn, signOut } = NextAuth(authOptions); 
+export const { auth, signIn, signOut } = NextAuth(authOptions as AuthOptions);
