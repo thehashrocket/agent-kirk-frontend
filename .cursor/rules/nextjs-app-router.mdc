@@ -1,6 +1,6 @@
 ---
 description: Best practices for Next.js App Router development with TypeScript, Shadcn UI, and Tailwind
-globs: *.ts,*.tsx,**/app/*
+globs: *.ts,*.tsx,**/components/**/*,**/app/**/*,**/lib/**/*
 alwaysApply: false
 ---
 
