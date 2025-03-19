@@ -1,3 +1,16 @@
+/**
+ * @file src/lib/auth.ts
+ * Authentication configuration and type definitions for NextAuth.js.
+ * Implements role-based authentication with Google OAuth provider and Prisma adapter.
+ * 
+ * Features:
+ * - Google OAuth integration
+ * - Role-based access control
+ * - JWT session handling
+ * - Custom session and user types
+ * - Prisma database integration
+ */
+
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -7,8 +20,17 @@ import type { Adapter } from "next-auth/adapters";
 import { prisma } from "./prisma";
 import { JWT } from "next-auth/jwt";
 
-// Define custom types for the session
+/**
+ * Extended types for NextAuth.js session and user.
+ * Adds custom fields for role-based authentication.
+ */
 declare module "next-auth" {
+  /**
+   * Extends the default session type with custom user fields.
+   * @property {object} user - User information in the session
+   * @property {string} user.id - Unique identifier for the user
+   * @property {string} user.role - User's role in the system
+   */
   interface Session {
     user: {
       id: string;
@@ -16,6 +38,15 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
+  /**
+   * Extends the default user type with custom fields.
+   * @property {string} id - Unique identifier for the user
+   * @property {Role} role - User's role enum value
+   * @property {string} [roleId] - Optional reference to role record
+   * @property {string} email - User's email address
+   * @property {string} [name] - Optional user's display name
+   * @property {string} [image] - Optional user's profile image URL
+   */
   interface User {
     id: string;
     role: Role;
@@ -26,6 +57,11 @@ declare module "next-auth" {
   }
 }
 
+/**
+ * Extends the JWT type with custom fields.
+ * @property {string} [role] - User's role stored in the JWT
+ * @property {string} sub - Subject identifier (user ID)
+ */
 declare module "next-auth/jwt" {
   interface JWT {
     role?: string;
@@ -33,6 +69,10 @@ declare module "next-auth/jwt" {
   }
 }
 
+/**
+ * NextAuth.js configuration options.
+ * Sets up authentication with Google provider and custom callbacks.
+ */
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   debug: true,
@@ -52,6 +92,16 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
+    /**
+     * Handles the sign-in process and user creation/validation.
+     * Verifies user existence and role assignment.
+     * 
+     * @param {object} params - Sign in callback parameters
+     * @param {User} params.user - User attempting to sign in
+     * @param {Account} params.account - OAuth account information
+     * @param {any} params.profile - OAuth profile data
+     * @returns {Promise<boolean>} Whether to allow sign in
+     */
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         try {
@@ -201,6 +251,15 @@ export const authOptions: AuthOptions = {
       }
       return true;
     },
+    /**
+     * Customizes the JWT token creation.
+     * Adds user role and other custom claims to the token.
+     * 
+     * @param {object} params - JWT callback parameters
+     * @param {JWT} params.token - Current JWT token
+     * @param {User} params.user - User object (only on sign in)
+     * @returns {Promise<JWT>} Modified JWT token
+     */
     async jwt({ token, user }) {
       console.log("JWT Callback - Input:", { token, user });
       
@@ -233,6 +292,15 @@ export const authOptions: AuthOptions = {
       console.log("JWT Callback - Output token:", token);
       return token;
     },
+    /**
+     * Customizes the session object available to the client.
+     * Adds user role and ID from the JWT token.
+     * 
+     * @param {object} params - Session callback parameters
+     * @param {Session} params.session - Current session
+     * @param {JWT} params.token - Current JWT token
+     * @returns {Promise<Session>} Modified session object
+     */
     async session({ session, token }) {
       console.log("Session Callback - Input:", { session, token });
       
@@ -257,28 +325,7 @@ export const authOptions: AuthOptions = {
       
       console.log("Session Callback - Output session:", session);
       return session;
-    },
-  },
-  events: {
-    async createUser({ user }) {
-      // Ensure new users have the CLIENT role if no role is set
-      if (!user.role) {
-        const clientRole = await prisma.role.findUnique({
-          where: { name: "CLIENT" },
-        });
-
-        if (clientRole) {
-          try {
-            await prisma.user.update({
-              where: { id: user.id },
-              data: { roleId: clientRole.id },
-            });
-          } catch (error) {
-            console.error("Error setting user role:", error);
-          }
-        }
-      }
-    },
+    }
   },
   pages: {
     signIn: "/auth/signin",

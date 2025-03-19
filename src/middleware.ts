@@ -1,6 +1,33 @@
+/**
+ * @file src/middleware.ts
+ * Next.js middleware for role-based route protection and authentication.
+ * Implements route-specific access control based on user roles.
+ * 
+ * Features:
+ * - Role-based access control (RBAC)
+ * - Protected route handling
+ * - Authentication verification
+ * - Automatic redirection
+ * - Route-specific middleware
+ */
+
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
+/**
+ * Authentication and authorization middleware.
+ * Protects routes based on user roles and authentication status.
+ * 
+ * Route Protection:
+ * - /admin/* routes require ADMIN role
+ * - /account-rep/* routes require ACCOUNT_REP role
+ * - /client/* routes require CLIENT role
+ * 
+ * Behavior:
+ * - Unauthenticated users are redirected to sign-in
+ * - Authenticated users without proper role are redirected to sign-in
+ * - Successful auth with proper role allows access
+ */
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
@@ -37,6 +64,12 @@ export default withAuth(
   },
   {
     callbacks: {
+      /**
+       * Authorization callback to verify token existence.
+       * @param {object} params - Callback parameters
+       * @param {any} params.token - JWT token from session
+       * @returns {boolean} Whether the request is authorized
+       */
       authorized: ({ token }) => {
         console.log("Middleware authorized callback - Token:", token);
         return !!token;
@@ -45,6 +78,16 @@ export default withAuth(
   }
 );
 
+/**
+ * Middleware configuration for route matching.
+ * Specifies which routes should be protected by the middleware.
+ * 
+ * Protected Routes:
+ * - All admin routes (/admin/*)
+ * - All account rep routes (/account-rep/*)
+ * - All client routes (/client/*)
+ * - Specific dashboard routes for each role
+ */
 export const config = {
   matcher: [
     "/admin/:path*",
