@@ -1,13 +1,13 @@
 ---
-description: Best practices for modern React and Next.js development with TypeScript, Tailwind CSS, and accessibility
-globs: **/*.{ts,tsx}, **/components/**/*, **/hooks/**/*, **/lib/**/*
+description: 
+globs: *.tsx,*.ts,**/app/**,**/components/**
 alwaysApply: false
 ---
 
 # Modern React Next.js
 
-// Description: Best practices for modern React and Next.js development with TypeScript, Tailwind CSS, and accessibility
-// Recommended Globs: **/*.{ts,tsx}, **/components/**/*, **/hooks/**/*, **/lib/**/*
+// Description: Best practices for modern NextJS/React web development using Tailwind, React, and Firebase
+// Recommended Globs: **/*.{ts,tsx}, **/app/**/*, **/components/**/*, **/lib/**/*
 
 ## Project Structure
 ```
@@ -329,9 +329,10 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 - Maintain consistent structure
 
 ## Resources
-- [React Documentation](mdc:https:/react.dev)
-- [Next.js Documentation](mdc:https:/nextjs.org/docs)
-- [TypeScript Documentation](mdc:https:/www.typescriptlang.org/docs)
-- [Tailwind CSS](mdc:https:/tailwindcss.com/docs)
-- [WCAG Guidelines](mdc:https:/www.w3.org/WAI/standards-guidelines/wcag)
+- [React Documentation](mdc:https:/react.dev) https://react.dev/reference/react
+- [Next.js Documentation](mdc:https:/nextjs.org/docs) https://nextjs.org/docs
+- [TypeScript Documentation](mdc:https:/www.typescriptlang.org/docs) https://www.typescriptlang.org/docs/
+- [Tailwind CSS](mdc:https:/tailwindcss.com/docs) https://tailwindcss.com/docs
 - Lucide-React for icons
+- @Shadcn UI - Use shadcn@latest instead of shadcn-ui@latest
+- @WCAG Guidelines

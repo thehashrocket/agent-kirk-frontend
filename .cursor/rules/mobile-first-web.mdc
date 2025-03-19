@@ -1,6 +1,6 @@
 ---
 description: Best practices for mobile-first web development using Tailwind, React, and Firebase
-globs: **/*.{js,jsx,ts,tsx}, **/tailwind.config.{js,ts}, **/firebase.config.{js,ts}
+globs: *.ts,*.tsx,**/app/*
 alwaysApply: false
 ---
 
@@ -298,7 +298,10 @@ export function useMedications(schedule: string) {
 - Implement proper keyboard handling
 
 ## Resources
-- [Tailwind CSS Documentation](mdc:https:/tailwindcss.com/docs)
-- [React Documentation](mdc:https:/reactjs.org/docs)
-- [Firebase Documentation](mdc:https:/firebase.google.com/docs)
-- [WCAG Guidelines](mdc:https:/www.w3.org/WAI/standards-guidelines/wcag)
+- @React Documentation https://react.dev/reference/react
+- @Next.js Documentation https://nextjs.org/docs
+- @TypeScript Documentation https://www.typescriptlang.org/docs/
+- @Tailwind CSS https://tailwindcss.com/docs
+- Lucide-React for icons
+- @Shadcn UI - Use shadcn@latest instead of shadcn-ui@latest
+- @WCAG Guidelines

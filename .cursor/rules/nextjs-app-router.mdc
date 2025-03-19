@@ -1,6 +1,6 @@
 ---
 description: Best practices for Next.js App Router development with TypeScript, Shadcn UI, and Tailwind
-globs: **/*.{ts,tsx}, **/app/**/*, **/components/**/*, **/lib/**/*
+globs: *.ts,*.tsx,**/app/*
 alwaysApply: false
 ---
 
@@ -243,7 +243,10 @@ export const fetchDashboardStats = cache(async () => {
 - Maintain proper color contrast
 
 ## Resources
-- [Next.js Documentation](mdc:https:/nextjs.org/docs)
-- [Shadcn UI](mdc:https:/ui.shadcn.com) - Use shadcn@latest instead of shadcn-ui@latest
-- [Tailwind CSS](mdc:https:/tailwindcss.com)
-- [TypeScript Documentation](mdc:https:/www.typescriptlang.org/docs)
+- @React Documentation https://react.dev/reference/react
+- @Next.js Documentation https://nextjs.org/docs
+- @TypeScript Documentation https://www.typescriptlang.org/docs/
+- @Tailwind CSS https://tailwindcss.com/docs
+- Lucide-React for icons
+- @Shadcn UI - Use shadcn@latest instead of shadcn-ui@latest
+- @WCAG Guidelines
