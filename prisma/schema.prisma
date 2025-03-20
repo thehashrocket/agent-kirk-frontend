@@ -98,6 +98,8 @@ model User {
   receivedMessages Message[]  @relation("ReceivedMessages")
   notifications    Notification[]
   settings        UserSettings?
+  givenRatings    ClientSatisfaction[] @relation("ClientRatings")
+  receivedRatings ClientSatisfaction[] @relation("RepRatings")
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 }
@@ -160,6 +162,22 @@ model UserSettings {
   updatedAt            DateTime @updatedAt
 
   @@index([userId])
+}
+
+model ClientSatisfaction {
+  id          String   @id @default(cuid())
+  rating      Decimal  @db.Decimal(2,1) // 1-5 star rating with one decimal place
+  feedback    String?  @db.Text
+  userId      String   // Client who gave the rating
+  user        User     @relation("ClientRatings", fields: [userId], references: [id], onDelete: Cascade)
+  accountRepId String  // Account Rep being rated
+  accountRep  User     @relation("RepRatings", fields: [accountRepId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([accountRepId])
+  @@index([createdAt])
 }
 
 enum NotificationType {

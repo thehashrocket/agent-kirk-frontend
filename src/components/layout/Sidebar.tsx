@@ -48,6 +48,7 @@ interface NavItem {
  */
 const adminNavItems: NavItem[] = [
   { title: "Dashboard", href: "/admin/dashboard", icon: <LayoutDashboard /> },
+  { title: "Messages", href: "/admin/messages", icon: <MessageSquare /> },
   { title: "User Management", href: "/admin/users", icon: <Users /> },
   { title: "System Settings", href: "/admin/settings", icon: <Settings /> },
   { title: "Analytics", href: "/admin/analytics", icon: <BarChart /> },
@@ -60,9 +61,9 @@ const adminNavItems: NavItem[] = [
  */
 const accountRepNavItems: NavItem[] = [
   { title: "Dashboard", href: "/account-rep/dashboard", icon: <LayoutDashboard /> },
+  { title: "Messages", href: "/account-rep/messages", icon: <MessageSquare /> },
   { title: "Client Management", href: "/account-rep/clients", icon: <Users /> },
   { title: "Support Tickets", href: "/account-rep/tickets", icon: <Ticket /> },
-  { title: "Messages", href: "/account-rep/messages", icon: <MessageSquare /> },
   { title: "Reports", href: "/account-rep/reports", icon: <FileText /> },
 ];
 
@@ -72,6 +73,7 @@ const accountRepNavItems: NavItem[] = [
  */
 const clientNavItems: NavItem[] = [
   { title: "Dashboard", href: "/client/dashboard", icon: <LayoutDashboard /> },
+  { title: "Messages", href: "/client/messages", icon: <MessageSquare /> },
   { title: "Query History", href: "/client/history", icon: <History /> },
   { title: "Settings", href: "/client/settings", icon: <Settings /> },
   { title: "Support", href: "/client/support", icon: <HelpCircle /> },

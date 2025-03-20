@@ -11,6 +11,32 @@ import { redirect } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import Link from "next/link";
+import { 
+  getActiveClientsStats, 
+  getUnreadMessagesStats, 
+  getResponseRateStats, 
+  getClientSatisfactionStats,
+  getRecentActivities,
+  type RecentActivity 
+} from "@/lib/account-rep";
+import { formatDistanceToNow } from 'date-fns';
+import { Badge } from "@/components/ui/badge";
+import { Inbox, Users, Clock, Star } from "lucide-react";
+import { SatisfactionMetrics } from "@/components/account-rep/satisfaction-metrics";
+
+/**
+ * Loading skeleton for stats cards
+ */
+function StatsCardSkeleton() {
+  return (
+    <Card className="p-6">
+      <div className="animate-pulse">
+        <div className="h-4 w-24 bg-gray-200 rounded mb-4"></div>
+        <div className="h-8 w-32 bg-gray-200 rounded"></div>
+      </div>
+    </Card>
+  );
+}
 
 /**
  * @component AccountRepStats
@@ -19,28 +45,43 @@ import Link from "next/link";
  * Shows statistics for active clients, open tickets, response rate, and client satisfaction.
  * Uses Suspense for loading state management.
  */
-async function AccountRepStats() {
-  // In a real application, these would be fetched from your API
+async function AccountRepStats({ accountRepId }: { accountRepId: string }) {
+  const [
+    activeClientsStats,
+    unreadMessagesStats,
+    responseRateStats,
+    satisfactionStats
+  ] = await Promise.all([
+    getActiveClientsStats(accountRepId),
+    getUnreadMessagesStats(accountRepId),
+    getResponseRateStats(accountRepId),
+    getClientSatisfactionStats(accountRepId),
+  ]);
+
   const stats = [
     {
       title: "Active Clients",
-      value: await getActiveClients(),
-      change: 5,
+      value: activeClientsStats.current,
+      change: activeClientsStats.percentageChange,
+      icon: <Users className="h-4 w-4 text-blue-500" />,
     },
     {
       title: "Open Tickets",
-      value: await getOpenTickets(),
-      change: -12,
+      value: unreadMessagesStats.current,
+      change: unreadMessagesStats.percentageChange,
+      icon: <Inbox className="h-4 w-4 text-yellow-500" />,
     },
     {
       title: "Response Rate",
-      value: "94.8%",
-      change: 2.3,
+      value: `${responseRateStats.current}%`,
+      change: responseRateStats.percentageChange,
+      icon: <Clock className="h-4 w-4 text-green-500" />,
     },
     {
       title: "Client Satisfaction",
-      value: "4.7/5",
-      change: 0.2,
+      value: satisfactionStats.current.toFixed(1) + "/5",
+      change: satisfactionStats.percentageChange,
+      icon: <Star className="h-4 w-4 text-purple-500" />,
     },
   ];
 
@@ -65,12 +106,24 @@ async function AccountRepStats() {
  * @param {string|number} props.data.value - Current value
  * @param {number} props.data.change - Percentage change
  */
-function StatsCard({ data }: { data: { title: string; value: string | number; change: number } }) {
+function StatsCard({ data }: { 
+  data: { 
+    title: string; 
+    value: string | number; 
+    change: number; 
+    icon: React.ReactNode;
+  } 
+}) {
   return (
     <Card className="p-6">
-      <h3 className="text-sm font-medium text-gray-500">{data.title}</h3>
+      <div className="flex items-center gap-2">
+        {data.icon}
+        <h3 className="text-sm font-medium text-gray-500">{data.title}</h3>
+      </div>
       <div className="mt-2 flex items-baseline">
-        <p className="text-2xl font-semibold text-gray-900">{data.value}</p>
+        <p className="text-2xl font-semibold text-gray-900">
+          {typeof data.value === 'number' ? data.value.toLocaleString() : data.value}
+        </p>
         <p className={`ml-2 text-sm ${data.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
           {data.change > 0 ? '+' : ''}{data.change}%
         </p>
@@ -80,52 +133,65 @@ function StatsCard({ data }: { data: { title: string; value: string | number; ch
 }
 
 /**
- * Fetches the count of active clients for the account representative.
- * @returns {Promise<string>} Number of active clients
- * @todo Implement actual API integration
+ * @component ActivityBadge
+ * Displays a badge for activity type and priority
  */
-async function getActiveClients() {
-  // Implement actual API call
-  return "48";
+function ActivityBadge({ activity }: { activity: RecentActivity }) {
+  const colors = {
+    message: 'bg-blue-100 text-blue-800',
+    ticket: 'bg-yellow-100 text-yellow-800',
+    update: 'bg-green-100 text-green-800',
+  };
+
+  const priorityColors = {
+    low: 'bg-gray-100 text-gray-800',
+    medium: 'bg-yellow-100 text-yellow-800',
+    high: 'bg-red-100 text-red-800',
+  };
+
+  return (
+    <div className="flex gap-2">
+      <Badge className={colors[activity.type]}>
+        {activity.type}
+      </Badge>
+      {activity.priority && (
+        <Badge className={priorityColors[activity.priority]}>
+          {activity.priority}
+        </Badge>
+      )}
+    </div>
+  );
 }
 
 /**
- * Fetches the count of open support tickets assigned to the account representative.
- * @returns {Promise<string>} Number of open tickets
- * @todo Implement actual API integration
+ * @component RecentActivitiesList
+ * Displays recent activities with enhanced details
  */
-async function getOpenTickets() {
-  // Implement actual API call
-  return "23";
-}
+async function RecentActivitiesList({ accountRepId }: { accountRepId: string }) {
+  const activities = await getRecentActivities(accountRepId);
 
-/**
- * Mock data for recent client activities.
- * Will be replaced with actual API data in production.
- */
-const recentActivities = [
-  {
-    id: 1,
-    client: "Acme Corp",
-    action: "Submitted new ticket",
-    time: "5 minutes ago",
-    status: "pending",
-  },
-  {
-    id: 2,
-    client: "TechStart Inc",
-    action: "Updated profile",
-    time: "2 hours ago",
-    status: "completed",
-  },
-  {
-    id: 3,
-    client: "Global Solutions",
-    action: "Requested consultation",
-    time: "1 day ago",
-    status: "pending",
-  },
-];
+  return (
+    <div className="space-y-4">
+      {activities.map((activity) => (
+        <div 
+          key={activity.id}
+          className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="font-medium">{activity.client}</h3>
+              <ActivityBadge activity={activity} />
+            </div>
+            <p className="text-sm text-gray-600">{activity.action}</p>
+            <p className="text-xs text-gray-500">
+              {formatDistanceToNow(activity.time, { addSuffix: true })}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 /**
  * @component AccountRepDashboard
@@ -157,36 +223,28 @@ export default async function AccountRepDashboard() {
         <p className="text-gray-600">Here&apos;s an overview of your client portfolio</p>
       </div>
 
-      <Suspense fallback={<div>Loading stats...</div>}>
-        <AccountRepStats />
+      <Suspense fallback={
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[...Array(4)].map((_, i) => <StatsCardSkeleton key={i} />)}
+        </div>
+      }>
+        <AccountRepStats accountRepId={session.user.id} />
       </Suspense>
 
       <div className="grid gap-6 md:grid-cols-2 mt-8">
         <Card className="p-6">
           <h2 className="text-lg font-semibold mb-4">Recent Activities</h2>
-          <div className="space-y-4">
-            {recentActivities.map((activity) => (
-              <div 
-                key={activity.id}
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
-              >
-                <div>
-                  <h3 className="font-medium">{activity.client}</h3>
-                  <p className="text-sm text-gray-600">{activity.action}</p>
-                  <p className="text-xs text-gray-500">{activity.time}</p>
+          <Suspense fallback={
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="animate-pulse">
+                  <div className="h-16 bg-gray-100 rounded-lg"></div>
                 </div>
-                <span 
-                  className={`px-2 py-1 text-xs rounded-full ${
-                    activity.status === "pending" 
-                      ? "bg-yellow-100 text-yellow-800" 
-                      : "bg-green-100 text-green-800"
-                  }`}
-                >
-                  {activity.status}
-                </span>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          }>
+            <RecentActivitiesList accountRepId={session.user.id} />
+          </Suspense>
         </Card>
 
         <Card className="p-6">
@@ -215,6 +273,12 @@ export default async function AccountRepDashboard() {
             </Link>
           </div>
         </Card>
+      </div>
+
+      <div className="mt-8">
+        <Suspense fallback={<StatsCardSkeleton />}>
+          <SatisfactionMetrics accountRepId={session.user.id} />
+        </Suspense>
       </div>
     </div>
   );
