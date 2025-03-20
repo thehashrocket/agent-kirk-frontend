@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Toaster } from '@/components/ui/sonner';
+import { Providers } from "@/app/providers";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kirk Frontend",
-  description: "Kirk Frontend Application",
+  title: "Agent Kirk - AI Analytics Assistant",
+  description: "Your AI-powered analytics assistant",
 };
 
 export default function RootLayout({

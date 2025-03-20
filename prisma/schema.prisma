@@ -94,6 +94,8 @@ model User {
   queries       Query[]
   sentMessages     Message[]  @relation("SentMessages")
   receivedMessages Message[]  @relation("ReceivedMessages")
+  notifications    Notification[]
+  settings        UserSettings?
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 }
@@ -127,4 +129,34 @@ model Query {
 
   @@index([userId])
   @@index([conversationID])
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        NotificationType
+  title       String
+  content     String
+  isRead      Boolean  @default(false)
+  link        String?  // Optional link to the related resource
+  createdAt   DateTime @default(now())
+  
+  @@index([userId])
+}
+
+model UserSettings {
+  id                    String  @id @default(cuid())
+  userId                String  @unique
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailNotifications    Boolean @default(true)
+  messageNotifications  Boolean @default(true)
+  reportNotifications   Boolean @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+enum NotificationType {
+  MESSAGE_RECEIVED
+  REPORT_GENERATED
 }
