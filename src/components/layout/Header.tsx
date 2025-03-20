@@ -18,6 +18,7 @@ import { MobileNav } from "./MobileNav";
 import { Home, MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { NotificationBell } from "@/components/NotificationBell";
 
 /**
  * @component Header
@@ -96,6 +97,7 @@ export function Header() {
           </Link>
         </nav>
         <div className="flex items-center space-x-4 ml-auto">
+          <NotificationBell />
           <span className="text-sm text-muted-foreground">
             {session.user.email} ({session.user.role || 'No Role'})
           </span>

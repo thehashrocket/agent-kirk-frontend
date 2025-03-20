@@ -20,6 +20,13 @@ import Link from "next/link";
 import LLMForm from "@/components/LLMForm";
 import QueryHistory from "@/components/QueryHistory";
 
+interface ClientStats {
+  monthlyQueries: { value: string; change: number };
+  avgResponseTime: { value: string; change: number };
+  successRate: { value: string; change: number };
+  apiCredits: { value: string; total: string; change: number };
+}
+
 /**
  * @component ClientStats
  * Server component that fetches and displays key client statistics.
@@ -34,33 +41,42 @@ import QueryHistory from "@/components/QueryHistory";
  * @returns {Promise<JSX.Element>} Grid of statistics cards
  */
 async function ClientStats() {
-  // In a real application, these would be fetched from your API
-  const stats = [
+  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/client/stats`, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch client stats');
+  }
+
+  const { stats } = await response.json() as { stats: ClientStats };
+
+  const statsData = [
     {
       title: "Queries This Month",
-      value: await getMonthlyQueries(),
-      change: 15,
+      value: stats.monthlyQueries.value,
+      change: stats.monthlyQueries.change,
     },
     {
       title: "Average Response Time",
-      value: "1.2s",
-      change: -8,
+      value: stats.avgResponseTime.value,
+      change: stats.avgResponseTime.change,
     },
     {
       title: "Success Rate",
-      value: "98.5%",
-      change: 0.5,
+      value: stats.successRate.value,
+      change: stats.successRate.change,
     },
     {
       title: "API Credits Left",
-      value: await getApiCredits(),
-      change: -22,
+      value: `${stats.apiCredits.value} / ${stats.apiCredits.total}`,
+      change: stats.apiCredits.change,
     },
   ];
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {stats.map((stat) => (
+      {statsData.map((stat) => (
         <StatsCard key={stat.title} data={stat} />
       ))}
     </div>
@@ -95,51 +111,6 @@ function StatsCard({ data }: { data: { title: string; value: string | number; ch
     </Card>
   );
 }
-
-/**
- * Fetches the total number of queries made this month.
- * @returns {Promise<string>} Monthly query count formatted as a string
- * @todo Implement actual API call to fetch query count
- */
-async function getMonthlyQueries() {
-  // Implement actual API call
-  return "1,543";
-}
-
-/**
- * Fetches the remaining API credits for the client.
- * @returns {Promise<string>} Remaining API credits formatted as a string
- * @todo Implement actual API call to fetch API credits
- */
-async function getApiCredits() {
-  // Implement actual API call
-  return "8,750";
-}
-
-/**
- * Mock data for recent queries.
- * @todo Replace with actual API data
- */
-const recentQueries = [
-  {
-    id: 1,
-    query: "How to implement authentication in Next.js?",
-    time: "10 minutes ago",
-    status: "success",
-  },
-  {
-    id: 2,
-    query: "Best practices for React performance optimization",
-    time: "1 hour ago",
-    status: "success",
-  },
-  {
-    id: 3,
-    query: "Debugging memory leaks in Node.js",
-    time: "3 hours ago",
-    status: "partial",
-  },
-];
 
 /**
  * @component ClientDashboard
@@ -197,28 +168,7 @@ export default async function ClientDashboard() {
           
           <Card className="p-6 mt-6">
             <h2 className="text-lg font-semibold mb-4">Recent Queries</h2>
-            <div className="space-y-4">
-              {recentQueries.map((query) => (
-                <div 
-                  key={query.id}
-                  className="p-4 bg-gray-50 rounded-lg"
-                >
-                  <p className="font-medium text-gray-900">{query.query}</p>
-                  <div className="flex justify-between items-center mt-2">
-                    <span className="text-sm text-gray-500">{query.time}</span>
-                    <span 
-                      className={`px-2 py-1 text-xs rounded-full ${
-                        query.status === "success" 
-                          ? "bg-green-100 text-green-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}
-                    >
-                      {query.status}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <QueryHistory />
           </Card>
         </div>
 

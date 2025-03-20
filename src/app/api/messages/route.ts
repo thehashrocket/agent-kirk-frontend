@@ -126,11 +126,15 @@ export async function GET(
 ) {
   try {
     const session = await getServerSession(authOptions);
+    console.log('Session:', session); // Debug log
+
     if (!session?.user?.id) {
+      console.log('No authenticated user found'); // Debug log
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = request.nextUrl;
+    console.log('Search params:', Object.fromEntries(searchParams.entries())); // Debug log
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '20');
     const skip = (page - 1) * limit;
@@ -148,8 +152,8 @@ export async function GET(
       senderId?: string;
       recipientId?: string;
       isThreadStart?: boolean;
-      archived?: boolean;
       isRead?: boolean;
+      archived?: boolean;
       AND?: Array<{
         OR?: Array<{
           senderId?: string;
@@ -261,7 +265,10 @@ export async function GET(
       }
     });
   } catch (error) {
-    console.error('Error fetching messages:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Error in GET /api/messages:', error); // Enhanced error logging
+    return NextResponse.json({ 
+      error: 'Internal Server Error',
+      details: error instanceof Error ? error.message : String(error)
+    }, { status: 500 });
   }
 } 

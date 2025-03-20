@@ -1,3 +1,9 @@
+/**
+ * @file src/components/NotificationBell.tsx
+ * A real-time notification system component that displays and manages user notifications.
+ * Built as a Client Component using Next.js App Router and shadcn/ui components.
+ */
+
 'use client';
 
 import { Bell } from 'lucide-react';
@@ -13,6 +19,17 @@ import { useRouter } from 'next/navigation';
 import { formatDistanceToNow } from 'date-fns';
 import { toast } from 'sonner';
 
+/**
+ * Interface representing a notification object.
+ * @interface Notification
+ * @property {string} id - Unique identifier for the notification
+ * @property {string} title - Title of the notification
+ * @property {string} content - Main content/message of the notification
+ * @property {boolean} isRead - Whether the notification has been read
+ * @property {string} [link] - Optional URL to navigate to when clicking the notification
+ * @property {Date} createdAt - Timestamp when the notification was created
+ * @property {'MESSAGE_RECEIVED' | 'REPORT_GENERATED'} type - Type of notification
+ */
 interface Notification {
   id: string;
   title: string;
@@ -23,6 +40,23 @@ interface Notification {
   type: 'MESSAGE_RECEIVED' | 'REPORT_GENERATED';
 }
 
+/**
+ * NotificationBell component that provides real-time notification functionality.
+ * 
+ * Features:
+ * - Real-time notification updates (polls every minute)
+ * - Unread count badge
+ * - Mark as read functionality
+ * - Click-through to notification links
+ * - Toast notifications for new items
+ * - Scrollable notification list
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <NotificationBell />
+ * ```
+ */
 export function NotificationBell() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);

@@ -43,6 +43,8 @@ model Session {
 model Message {
   id          String       @id @default(cuid())
   content     String
+  subject     String?
+  archived    Boolean      @default(false)
   senderId    String
   sender      User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
   recipientId String
@@ -146,14 +148,18 @@ model Notification {
 }
 
 model UserSettings {
-  id                    String  @id @default(cuid())
-  userId                String  @unique
-  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  emailNotifications    Boolean @default(true)
-  messageNotifications  Boolean @default(true)
-  reportNotifications   Boolean @default(true)
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailNotifications    Boolean  @default(true)
+  messageNotifications  Boolean  @default(true)
+  reportNotifications   Boolean  @default(true)
+  apiCredits           Int      @default(0)
+  apiCreditsLimit      Int      @default(10000)
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
+
+  @@index([userId])
 }
 
 enum NotificationType {

@@ -1,3 +1,27 @@
+/**
+ * @route PATCH /api/messages/[id]
+ * @description Updates a message's status (read/archived). Only the recipient can mark a message as read,
+ * while both sender and recipient can archive messages.
+ *
+ * @authentication Requires user authentication via NextAuth session
+ *
+ * @param {Object} request - The Next.js request object
+ * @param {Object} params - Route parameters
+ * @param {string} params.id - The ID of the message to update
+ *
+ * @requestBody {Object} body
+ * @property {boolean} [isRead] - Optional. Whether to mark the message as read
+ * @property {boolean} [archived] - Optional. Whether to archive the message
+ *
+ * @returns {Promise<NextResponse>} JSON Response
+ * @success {200} Returns the updated message object with sender and attachment details
+ *
+ * @error {400} Invalid request body
+ * @error {401} Unauthorized - User not authenticated or lacks permission
+ * @error {404} Message not found
+ * @error {500} Internal Server Error
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';

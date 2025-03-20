@@ -44,7 +44,7 @@ import ComposeMessage from "@/components/messages/ComposeMessage";
 export default async function RepMessages() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.id || session.user.role !== "REP") {
+  if (!session?.user?.id || session.user.role !== "ACCOUNT_REP") {
     redirect("/auth/signin");
   }
 

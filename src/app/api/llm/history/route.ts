@@ -1,43 +1,40 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
-import { auth } from '@/lib/auth';
 
-export async function GET(
-  request: NextRequest
-) {
+export async function GET() {
   try {
-    // Get the authenticated user
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+    const session = await getServerSession();
+    
+    if (!session?.user?.email) {
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    // Fetch queries for the authenticated user only
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user) {
+      return new NextResponse('User not found', { status: 404 });
+    }
+
     const queries = await prisma.query.findMany({
-      where: {
-        userId: session.user.id,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
+      where: { userId: user.id },
+      orderBy: { createdAt: 'desc' },
       select: {
         id: true,
         prompt: true,
         response: true,
         createdAt: true,
-      },
+        accountGA4: true,
+        propertyGA4: true,
+        conversationID: true
+      }
     });
 
     return NextResponse.json(queries);
   } catch (error) {
-    console.error('Query History API Error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    console.error('Error fetching query history:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 } 
