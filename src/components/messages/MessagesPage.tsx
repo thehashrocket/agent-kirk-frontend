@@ -124,6 +124,7 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
       <MessageList 
         recipientId={view === 'inbox' ? session.user.id : undefined}
         threadId={threadId || undefined}
+        currentUserId={session.user.id}
       />
     </div>
   );

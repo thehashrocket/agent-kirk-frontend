@@ -93,4 +93,61 @@ export async function PATCH(
     console.error('Error updating message:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
-} 
+}
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const message = await prisma.message.findUnique({
+    where: { id },
+    include: {
+      sender: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+      },
+      recipient: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+      },
+      attachments: true,
+      replies: {
+        include: {
+          sender: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
+            },
+          },
+          recipient: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
+            },
+          },
+          attachments: true,
+        },
+      },
+    },
+  });
+
+  if (!message) {
+    return NextResponse.json({ error: 'Message not found' }, { status: 404 });
+  }
+
+  return NextResponse.json(message);
+}

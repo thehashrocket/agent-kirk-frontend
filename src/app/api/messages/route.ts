@@ -234,15 +234,22 @@ export async function GET(
             }
           },
           replies: {
-            select: {
-              id: true,
-              content: true,
+            include: {
               sender: {
                 select: {
                   id: true,
-                  name: true
+                  name: true,
+                  image: true
                 }
-              }
+              },
+              recipient: {
+                select: {
+                  id: true,
+                  name: true,
+                  image: true
+                }
+              },
+              attachments: true
             }
           }
         },
@@ -255,6 +262,7 @@ export async function GET(
       prisma.message.count({ where })
     ]);
 
+    console.log('Messages:', messages); // Debug log
     return NextResponse.json({
       messages,
       pagination: {
