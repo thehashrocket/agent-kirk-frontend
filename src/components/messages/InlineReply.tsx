@@ -6,6 +6,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -24,13 +25,50 @@ export function InlineReply({
 }: InlineReplyProps) {
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<File[]>([]);
-  const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const queryClient = useQueryClient();
 
-  console.log('InlineReply mounted with props:', {
-    recipientId,
-    parentMessageId
+  const { mutate: sendReply, isPending: sending } = useMutation({
+    mutationFn: async (payload: {
+      content: string;
+      recipientId: string;
+      parentId: string;
+      attachments: Array<{
+        filename: string;
+        fileSize: number;
+        mimeType: string;
+        url: string;
+      }>;
+    }) => {
+      const response = await fetch('/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error?.[0]?.message || 'Failed to send message');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate the parent message query to show the new reply
+      queryClient.invalidateQueries({ queryKey: ['message', parentMessageId] });
+      // Invalidate the messages list query to show the new message in the list
+      queryClient.invalidateQueries({ queryKey: ['messages'] });
+      setContent('');
+      setFiles([]);
+      onReplyComplete();
+    },
+    onError: (err) => {
+      console.error('Error sending reply:', err);
+      setError(err instanceof Error ? err.message : 'Failed to send reply. Please try again.');
+    },
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +93,6 @@ export function InlineReply({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setSending(true);
 
     try {
       // Convert files to attachments
@@ -77,40 +114,15 @@ export function InlineReply({
         })
       );
 
-      // Create the payload with all required fields
-      const payload = {
+      sendReply({
         content,
         recipientId,
         parentId: parentMessageId,
         attachments,
-      };
-
-      console.log('Sending reply with payload:', JSON.stringify(payload, null, 2));
-
-      const response = await fetch('https://client-frontend.ngrok.io/api/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
       });
-
-      const responseData = await response.json();
-      console.log('Response from server:', responseData);
-
-      if (!response.ok) {
-        console.error('Server error:', responseData);
-        throw new Error(responseData.error?.[0]?.message || 'Failed to send message');
-      }
-
-      setContent('');
-      setFiles([]);
-      onReplyComplete();
     } catch (err) {
-      console.error('Error sending reply:', err);
-      setError(err instanceof Error ? err.message : 'Failed to send reply. Please try again.');
-    } finally {
-      setSending(false);
+      console.error('Error processing files:', err);
+      setError('Failed to process attachments. Please try again.');
     }
   };
 
