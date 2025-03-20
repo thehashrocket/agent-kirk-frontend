@@ -39,7 +39,6 @@ export async function SatisfactionOverview() {
               dataKey="rating"
               height={64}
               color="#10B981"
-              tooltipFormatter={(value) => value ? `${value.toFixed(1)} stars` : 'No data'}
             />
           </div>
         </div>

@@ -59,7 +59,6 @@ export async function AccountRepPerformance() {
                         dataKey="rating"
                         height={32}
                         color={rep.averageRating >= 4.0 ? '#10B981' : '#F59E0B'}
-                        tooltipFormatter={(value) => value ? `${value.toFixed(1)} stars` : 'No data'}
                       />
                     )}
                   </div>

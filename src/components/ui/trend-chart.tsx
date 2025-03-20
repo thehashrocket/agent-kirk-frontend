@@ -28,7 +28,13 @@ export function TrendChart({
   height = 100,
   color = '#0EA5E9',
   showGrid = false,
-  tooltipFormatter,
+  tooltipFormatter = (value: any) => {
+    // Default formatter that handles rating values
+    if (dataKey === 'rating') {
+      return value ? `${Number(value).toFixed(1)} stars` : 'No data';
+    }
+    return value?.toString() || 'No data';
+  },
 }: TrendChartProps) {
   return (
     <ResponsiveContainer width="100%" height={height}>
