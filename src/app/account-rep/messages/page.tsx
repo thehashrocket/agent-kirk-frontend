@@ -63,9 +63,7 @@ export default async function RepMessages() {
         <div className="md:col-span-1">
           <div className="bg-white p-4 rounded-lg shadow">
             <h2 className="text-lg font-semibold mb-4">New Message</h2>
-            <ComposeMessage 
-              // ComposeMessage component handles message creation and file attachments
-            />
+            <ComposeMessage />
           </div>
         </div>
       </div>

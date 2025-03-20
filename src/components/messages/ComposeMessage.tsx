@@ -7,15 +7,25 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useQuery } from '@tanstack/react-query';
 
 /**
  * Props for the ComposeMessage component.
  * @property {Function} [onMessageSent] - Callback function triggered after successful message send
- * @property {string} [recipientId] - ID of the message recipient
+ * @property {string} [recipientId] - ID of the message recipient (optional)
  */
 interface ComposeMessageProps {
   onMessageSent?: () => void;
   recipientId?: string;
+}
+
+/**
+ * Interface for recipient data
+ */
+interface Recipient {
+  id: string;
+  name: string;
 }
 
 /**
@@ -30,12 +40,32 @@ interface ComposeMessageProps {
  * 
  * @param {ComposeMessageProps} props - Component props
  */
-export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMessageProps) {
+export default function ComposeMessage({ onMessageSent, recipientId: initialRecipientId }: ComposeMessageProps) {
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
+  const [selectedRecipientId, setSelectedRecipientId] = useState(initialRecipientId || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Fetch available recipients if no recipientId is provided
+  const { data: recipients = [], isLoading: isLoadingRecipients } = useQuery<Recipient[]>({
+    queryKey: ['recipients'],
+    queryFn: async () => {
+      if (initialRecipientId) return []; // Don't fetch if we have a recipient
+      const response = await fetch('/api/recipients', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch recipients');
+      }
+      return response.json();
+    },
+    enabled: !initialRecipientId // Only fetch if no recipientId provided
+  });
 
   /**
    * Handles file selection and validation.
@@ -97,6 +127,11 @@ export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMe
         })
       );
 
+      const recipientId = initialRecipientId || selectedRecipientId;
+      if (!recipientId) {
+        throw new Error('Please select a recipient');
+      }
+
       const res = await fetch('/api/messages', {
         method: 'POST',
         headers: {
@@ -126,6 +161,26 @@ export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMe
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {!initialRecipientId && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            To:
+          </label>
+          <Select value={selectedRecipientId} onValueChange={setSelectedRecipientId} disabled={isLoadingRecipients}>
+            <SelectTrigger>
+              <SelectValue placeholder={isLoadingRecipients ? "Loading recipients..." : "Select recipient"} />
+            </SelectTrigger>
+            <SelectContent>
+              {recipients?.map((recipient) => (
+                <SelectItem key={recipient.id} value={recipient.id}>
+                  {recipient.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       <div>
         <label
           htmlFor="message"
@@ -200,7 +255,7 @@ export default function ComposeMessage({ onMessageSent, recipientId }: ComposeMe
       <div className="flex justify-end">
         <button
           type="submit"
-          disabled={sending || !content.trim()}
+          disabled={sending || !content.trim() || (!initialRecipientId && !selectedRecipientId)}
           className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
         >
           {sending ? 'Sending...' : 'Send message'}
