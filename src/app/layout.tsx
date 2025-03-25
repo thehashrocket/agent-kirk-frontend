@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Toaster } from '@/components/ui/sonner';
 import { Providers } from "@/app/providers";
 import QueryProvider from '@/providers/query-provider';
-
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Agent Kirk - AI Analytics Assistant",
@@ -22,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="font-bliss">
         <QueryProvider>
           <Providers>
             <div className="min-h-screen flex flex-col">

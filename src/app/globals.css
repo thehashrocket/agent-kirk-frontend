@@ -4,10 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans: "Bliss Pro", system-ui, sans-serif;
+  --font-serif: "Bliss Pro", Georgia, serif;
+  --font-bliss: "Bliss Pro", system-ui, sans-serif;
+  --font-bliss-bold: "Bliss Pro Bold", system-ui, sans-serif;
+  --font-bliss-italic: "Bliss Pro Italic", system-ui, sans-serif;
+  --font-bliss-light: "Bliss Pro Light", system-ui, sans-serif;
+  --font-bliss-light-bold: "Bliss Pro Light Bold", system-ui, sans-serif;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -114,10 +123,53 @@
 }
 
 @layer base {
+
+  @font-face {
+    font-family: 'Bliss Pro';
+    src: url('/fonts/BlissProFont/BlissProRegular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Bliss Pro Bold';
+    src: url('/fonts/BlissProFont/BlissProBold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Bliss Pro Italic';
+    src: url('/fonts/BlissProFont/BlissProItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Bliss Pro Light';
+    src: url('/fonts/BlissProFont/BlissProLight.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Bliss Pro Light Bold';
+    src: url('/fonts/BlissProFont/BlissProLightBold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
   }
+
 }

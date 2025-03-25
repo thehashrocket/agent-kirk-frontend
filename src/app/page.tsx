@@ -33,7 +33,7 @@ export default async function Home() {
     <div className="flex min-h-[calc(100vh-3.5rem)] flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-4xl space-y-8 text-center">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+          <h1 className="text-4xl font-bliss-bold tracking-tight sm:text-6xl">
             Welcome to Kirk
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
@@ -61,7 +61,7 @@ export default async function Home() {
               key={feature.title}
               className="rounded-lg border bg-card p-6 text-left shadow-sm"
             >
-              <h3 className="text-lg font-semibold">{feature.title}</h3>
+              <h3 className="text-lg font-bliss-bold">{feature.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 {feature.description}
               </p>

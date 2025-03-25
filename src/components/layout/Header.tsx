@@ -73,13 +73,13 @@ export function Header() {
       <div className="container h-14 flex items-center">
         <MobileNav />
         <nav className="flex items-center space-x-6">
-          <Link href="/" className="flex items-center space-x-2 font-medium">
+          <Link href="/" className="flex items-center space-x-2 font-medium font-bliss-bold">
             <Home className="h-5 w-5" />
             <span>Kirk</span>
           </Link>
           <Link 
             href={getDashboardLink()} 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:font-bliss-bold"
           >
             <span className="flex items-center space-x-1">
               <LayoutDashboard className="h-4 w-4" />
@@ -88,7 +88,7 @@ export function Header() {
           </Link>
           <Link 
             href="/chat" 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:font-bliss-bold"
           >
             <span className="flex items-center space-x-1">
               <MessageSquare className="h-4 w-4" />
