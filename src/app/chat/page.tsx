@@ -7,6 +7,7 @@ import { ChatWindow } from '@/components/chat/ChatWindow';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { TagSelector } from '@/components/chat/TagSelector';
 import { SourcesButton } from '@/components/chat/SourcesButton';
+import { cn } from '@/lib/utils';
 
 // Mock data for demonstration
 const mockConversations = [
@@ -69,6 +70,7 @@ const mockSources = [
 
 export default function ChatPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selectedConversation, setSelectedConversation] = useState<string | undefined>(mockConversations[0].id);
   const [selectedTags, setSelectedTags] = useState(mockTags);
 
@@ -133,13 +135,47 @@ export default function ChatPage() {
       </Sheet>
 
       {/* Desktop conversation list */}
-      <div className="hidden w-80 flex-shrink-0 border-r md:block">
-        <ConversationList
-          conversations={mockConversations}
-          selectedId={selectedConversation}
-          onSelect={setSelectedConversation}
-          onToggleStar={(id) => console.log('Toggle star for conversation:', id)}
-        />
+      <div 
+        className={cn(
+          "hidden md:flex flex-col border-r transition-all duration-300 ease-in-out",
+          isCollapsed ? "w-16" : "w-80"
+        )}
+      >
+        <button
+          type="button"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="flex h-14 items-center justify-center border-b hover:bg-muted transition-colors"
+          aria-label={isCollapsed ? "Expand conversation list" : "Collapse conversation list"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={cn(
+              "h-6 w-6 transition-transform duration-300",
+              isCollapsed ? "rotate-180" : ""
+            )}
+          >
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+        <div className={cn(
+          "flex-1 transition-opacity duration-300",
+          isCollapsed ? "opacity-0 invisible" : "opacity-100 visible"
+        )}>
+          <ConversationList
+            conversations={mockConversations}
+            selectedId={selectedConversation}
+            onSelect={setSelectedConversation}
+            onToggleStar={(id) => console.log('Toggle star for conversation:', id)}
+          />
+        </div>
       </div>
 
       {/* Main chat area */}
