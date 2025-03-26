@@ -19,6 +19,7 @@ import { Home, MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { NotificationBell } from "@/components/NotificationBell";
+import { cn } from "@/lib/utils";
 
 /**
  * @component Header
@@ -29,7 +30,7 @@ import { NotificationBell } from "@/components/NotificationBell";
  * - Role-based dashboard links
  * - Session status display
  * - Logout functionality
- * - Sticky positioning with backdrop blur
+ * - Sticky positioning with gradient background
  * 
  * Layout:
  * - Fixed position at top of viewport
@@ -69,46 +70,57 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-gradient-to-r from-primary/10 via-primary/5 to-background backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <div className="container h-14 flex items-center">
         <MobileNav />
         <nav className="flex items-center space-x-6">
-          <Link href="/" className="flex items-center space-x-2 font-medium font-bliss-bold">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-2 font-medium text-primary hover:text-primary/90 transition-colors"
+          >
             <Home className="h-5 w-5" />
-            <span>Kirk</span>
+            <span className="font-bliss-bold text-lg">Kirk</span>
           </Link>
           <Link 
             href={getDashboardLink()} 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:font-bliss-bold"
+            className={cn(
+              "text-sm transition-colors hover:text-primary",
+              "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
+            )}
           >
-            <span className="flex items-center space-x-1">
-              <LayoutDashboard className="h-4 w-4" />
-              <span>Dashboard</span>
-            </span>
+            <LayoutDashboard className="h-4 w-4" />
+            <span>Dashboard</span>
           </Link>
           <Link 
             href="/chat" 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:font-bliss-bold"
+            className={cn(
+              "text-sm transition-colors hover:text-primary",
+              "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
+            )}
           >
-            <span className="flex items-center space-x-1">
-              <MessageSquare className="h-4 w-4" />
-              <span>Chat</span>
-            </span>
+            <MessageSquare className="h-4 w-4" />
+            <span>Chat</span>
           </Link>
         </nav>
         <div className="flex items-center space-x-4 ml-auto">
           <NotificationBell />
-          <span className="text-sm text-muted-foreground">
-            {session.user.email} ({session.user.role || 'No Role'})
-          </span>
+          <div className="hidden md:flex flex-col items-end">
+            <span className="text-sm font-medium">{session.user.email}</span>
+            <span className="text-xs text-muted-foreground">
+              {session.user.role || 'No Role'}
+            </span>
+          </div>
           <Button 
             variant="ghost" 
             size="sm"
             onClick={() => signOut()}
-            className="text-sm text-muted-foreground hover:text-foreground"
+            className={cn(
+              "text-sm transition-colors",
+              "flex items-center space-x-1 hover:bg-destructive/10 hover:text-destructive"
+            )}
           >
-            <LogOut className="h-4 w-4 mr-1" />
-            Logout
+            <LogOut className="h-4 w-4" />
+            <span className="hidden sm:inline">Logout</span>
           </Button>
         </div>
       </div>

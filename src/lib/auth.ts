@@ -134,7 +134,6 @@ export const authOptions: AuthOptions = {
                   name: user.name || null,
                   image: user.image || null,
                   roleId: roleToUse,
-                  password: "", // Required by schema
                   accounts: {
                     create: {
                       type: account.type,
@@ -176,7 +175,6 @@ export const authOptions: AuthOptions = {
                   name: user.name || null,
                   image: user.image || null,
                   roleId: clientRole.id,
-                  password: "", // Required by schema
                   accounts: {
                     create: {
                       type: account.type,

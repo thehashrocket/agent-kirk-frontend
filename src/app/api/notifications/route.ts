@@ -50,10 +50,13 @@ interface Notification {
  */
 export async function GET() {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     
     if (!session?.user?.email) {
-      return new NextResponse('Unauthorized', { status: 401 });
+      return new NextResponse(
+        JSON.stringify({ error: 'Unauthorized: No valid session found' }), 
+        { status: 401 }
+      );
     }
 
     const user = await prisma.user.findUnique({
@@ -61,7 +64,10 @@ export async function GET() {
     });
 
     if (!user) {
-      return new NextResponse('User not found', { status: 404 });
+      return new NextResponse(
+        JSON.stringify({ error: 'User not found in database' }), 
+        { status: 404 }
+      );
     }
 
     const notifications = await prisma.notification.findMany({
@@ -72,7 +78,13 @@ export async function GET() {
     return NextResponse.json(notifications);
   } catch (error) {
     console.error('Error fetching notifications:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    return new NextResponse(
+      JSON.stringify({ 
+        error: 'Internal Server Error',
+        details: error instanceof Error ? error.message : String(error)
+      }), 
+      { status: 500 }
+    );
   }
 }
 
@@ -82,14 +94,12 @@ export async function GET() {
  * @property {'MESSAGE_RECEIVED' | 'REPORT_GENERATED'} type - Type of notification
  * @property {string} title - Title/heading of the notification
  * @property {string} content - Main content/body of the notification
- * @property {string} [link] - Optional URL associated with the notification
  */
 interface CreateNotificationBody {
   userId: string;
   type: 'MESSAGE_RECEIVED' | 'REPORT_GENERATED';
   title: string;
   content: string;
-  link?: string;
 }
 
 /**
@@ -122,7 +132,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { userId, type, title, content, link } = body;
+    const { userId, type, title, content } = body;
 
     // Only allow creating notifications for other users if you're an admin or account rep
     if (userId !== session.user.id) {
@@ -142,7 +152,6 @@ export async function POST(req: Request) {
         type,
         title,
         content,
-        link,
       },
     });
 

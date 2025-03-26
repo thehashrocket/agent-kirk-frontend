@@ -38,9 +38,25 @@ export function MessageList({ recipientId, threadId, currentUserId }: MessageLis
   } = useInfiniteQuery({
     queryKey: ['messages', recipientId, threadId],
     queryFn: async ({ pageParam = 1 }) => {
-      const response = await fetch(`/api/messages?page=${pageParam}&limit=20${threadId ? `&threadId=${threadId}` : ''}`);
-      if (!response.ok) throw new Error('Failed to fetch messages');
-      return response.json();
+      const params = new URLSearchParams({
+        page: pageParam.toString(),
+        limit: '20',
+        view: 'inbox'  // Add view parameter
+      });
+      
+      if (threadId) {
+        params.append('threadId', threadId);
+      }
+
+      const response = await fetch(`/api/messages?${params.toString()}`);
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('Error fetching messages:', error);
+        throw new Error('Failed to fetch messages');
+      }
+      const data = await response.json();
+      console.log('Messages response:', data);  // Debug log
+      return data;
     },
     getNextPageParam: (lastPage) => {
       if (lastPage.pagination.page < lastPage.pagination.totalPages) {

@@ -20,6 +20,7 @@
  */
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function POST(
@@ -27,10 +28,13 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     
     if (!session?.user?.email) {
-      return new NextResponse('Unauthorized', { status: 401 });
+      return new NextResponse(
+        JSON.stringify({ error: 'Unauthorized: No valid session found' }), 
+        { status: 401 }
+      );
     }
 
     const user = await prisma.user.findUnique({
@@ -38,7 +42,10 @@ export async function POST(
     });
 
     if (!user) {
-      return new NextResponse('User not found', { status: 404 });
+      return new NextResponse(
+        JSON.stringify({ error: 'User not found in database' }), 
+        { status: 404 }
+      );
     }
 
     // Verify the notification belongs to the user
@@ -50,7 +57,10 @@ export async function POST(
     });
 
     if (!notification) {
-      return new NextResponse('Notification not found', { status: 404 });
+      return new NextResponse(
+        JSON.stringify({ error: 'Notification not found or does not belong to user' }), 
+        { status: 404 }
+      );
     }
 
     // Update the notification
@@ -62,6 +72,12 @@ export async function POST(
     return NextResponse.json(updatedNotification);
   } catch (error) {
     console.error('Error marking notification as read:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    return new NextResponse(
+      JSON.stringify({ 
+        error: 'Internal Server Error',
+        details: error instanceof Error ? error.message : String(error)
+      }), 
+      { status: 500 }
+    );
   }
 } 

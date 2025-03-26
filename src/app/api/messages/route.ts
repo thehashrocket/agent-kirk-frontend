@@ -172,8 +172,7 @@ export async function GET(
           OR: [
             { senderId: session.user.id },
             { recipientId: session.user.id }
-          ],
-          isThreadStart: true
+          ]
         };
 
     // Add view filter
@@ -181,17 +180,20 @@ export async function GET(
       where = {
         ...where,
         recipientId: session.user.id,
+        archived: false // Only show unarchived messages by default
       };
     } else if (view === 'outbox') {
       where = {
         ...where,
         senderId: session.user.id,
+        archived: false // Only show unarchived messages by default
       };
     }
 
-    // Add archived filter
-    if (showArchived !== undefined) {
-      where.archived = showArchived;
+    // Add archived filter only if explicitly requested
+    if (showArchived) {
+      delete where.archived;
+      where.archived = true;
     }
 
     // Add unread filter
@@ -213,6 +215,8 @@ export async function GET(
         ]
       };
     }
+
+    console.log('Final where clause:', JSON.stringify(where, null, 2)); // Debug log
 
     const [messages, total] = await Promise.all([
       prisma.message.findMany({

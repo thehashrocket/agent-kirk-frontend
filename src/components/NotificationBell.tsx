@@ -92,7 +92,10 @@ export function NotificationBell() {
     const fetchNotifications = async () => {
       try {
         const response = await fetch('/api/notifications');
-        if (!response.ok) throw new Error('Failed to fetch notifications');
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to fetch notifications');
+        }
         
         const data = await response.json();
         setNotifications(data);
@@ -115,8 +118,12 @@ export function NotificationBell() {
         setUnreadCount(newUnreadCount);
       } catch (error) {
         console.error('Failed to fetch notifications:', error);
+        if (error instanceof Error && error.message.includes('Unauthorized')) {
+          // Don't show error toast for auth errors, as user might just need to log in
+          return;
+        }
         toast.error('Failed to load notifications', {
-          description: 'Please try again later',
+          description: error instanceof Error ? error.message : 'Please try again later',
         });
       }
     };

@@ -13,19 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  roleId        String
+  role          Role      @relation(fields: [roleId], references: [id])
+  isActive      Boolean   @default(true)
+  accountRepId  String?
+  accountRep    User?     @relation("AccountRepToClient", fields: [accountRepId], references: [id])
+  clients       User[]    @relation("AccountRepToClient")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  queries       Query[]
+  sentMessages     Message[]  @relation("SentMessages")
+  receivedMessages Message[]  @relation("ReceivedMessages")
+  notifications    Notification[]
+  settings        UserSettings?
+  givenRatings    ClientSatisfaction[] @relation("ClientRatings")
+  receivedRatings ClientSatisfaction[] @relation("RepRatings")
+  assignedTickets Ticket[] @relation("AssignedTickets")
+  clientTickets   Ticket[] @relation("ClientTickets")
+  ticketComments  TicketComment[]
+}
+
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -40,70 +82,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Message {
-  id          String       @id @default(cuid())
-  content     String
-  subject     String?
-  archived    Boolean      @default(false)
-  senderId    String
-  sender      User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
-  recipientId String
-  recipient   User         @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
-  isRead      Boolean      @default(false)
-  attachments Attachment[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  parentId    String?      // ID of the parent message (if this is a reply)
-  parent      Message?     @relation("MessageThread", fields: [parentId], references: [id], onDelete: Cascade)
-  replies     Message[]    @relation("MessageThread")
-  threadId    String?      // ID to group messages in the same thread
-  isThreadStart Boolean    @default(false) // Indicates if this is the first message in a thread
-
-  @@index([senderId])
-  @@index([recipientId])
-  @@index([parentId])
-  @@index([threadId])
-}
-
-model Attachment {
-  id        String   @id @default(cuid())
-  filename  String
-  fileSize  Int      // Size in bytes
-  mimeType  String
-  url       String   // URL to the stored file
-  messageId String
-  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-
-  @@index([messageId])
-}
-
-model User {
-  id            String       @id @default(cuid())
-  name          String?
-  email         String?      @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?      @default("")
-  role          Role         @relation(fields: [roleId], references: [id])
-  roleId        String
-  isActive      Boolean      @default(true)
-  accountRepId  String?
-  accountRep    User?        @relation("AccountRepToClient", fields: [accountRepId], references: [id])
-  clients       User[]       @relation("AccountRepToClient")
-  accounts      Account[]
-  sessions      Session[]
-  queries       Query[]
-  sentMessages     Message[]  @relation("SentMessages")
-  receivedMessages Message[]  @relation("ReceivedMessages")
-  notifications    Notification[]
-  settings        UserSettings?
-  givenRatings    ClientSatisfaction[] @relation("ClientRatings")
-  receivedRatings ClientSatisfaction[] @relation("RepRatings")
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -113,74 +91,181 @@ model VerificationToken {
 }
 
 model Role {
-  id    String @id @default(cuid())
-  name  String @unique
-  users User[]
+  id          String   @id @default(cuid())
+  name        String   @unique
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  content     String   @db.Text
+  isRead      Boolean  @default(false)
+  archived    Boolean  @default(false)
+  isThreadStart Boolean  @default(false)
+  threadId    String?
+  parentId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  senderId    String
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  recipientId String
+  recipient   User     @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+  parent      Message?  @relation("ThreadReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Message[] @relation("ThreadReplies")
+  attachments MessageAttachment[]
+
+  @@index([senderId])
+  @@index([recipientId])
+  @@index([threadId])
+  @@index([parentId])
 }
 
 model Query {
-  id              String   @id @default(cuid())
-  userId          String
-  prompt          String   @db.Text
-  response        String   @db.Text
-  accountGA4      String?
-  propertyGA4     String?
-  conversationID  String?
-  dateToday       DateTime?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  content     String   @db.Text @default("")
+  response    String?  @db.Text
+  status      QueryStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
-  @@index([conversationID])
+  @@index([status])
 }
 
 model Notification {
   id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   type        NotificationType
   title       String
   content     String
   isRead      Boolean  @default(false)
-  link        String?  // Optional link to the related resource
   createdAt   DateTime @default(now())
-  
+
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
   @@index([userId])
+  @@index([type])
 }
 
 model UserSettings {
-  id                    String   @id @default(cuid())
-  userId                String   @unique
-  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  emailNotifications    Boolean  @default(true)
-  messageNotifications  Boolean  @default(true)
-  reportNotifications   Boolean  @default(true)
-  apiCredits           Int      @default(0)
-  apiCreditsLimit      Int      @default(10000)
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  id                String   @id @default(cuid())
+  emailNotifications Boolean  @default(true)
+  theme             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  @@index([userId])
+  // Relations
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
 }
 
 model ClientSatisfaction {
   id          String   @id @default(cuid())
-  rating      Decimal  @db.Decimal(2,1) // 1-5 star rating with one decimal place
+  rating      Float
   feedback    String?  @db.Text
-  userId      String   // Client who gave the rating
-  user        User     @relation("ClientRatings", fields: [userId], references: [id], onDelete: Cascade)
-  accountRepId String  // Account Rep being rated
-  accountRep  User     @relation("RepRatings", fields: [accountRepId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId      String
+  user        User     @relation("ClientRatings", fields: [userId], references: [id])
+  accountRepId String
+  accountRep   User     @relation("RepRatings", fields: [accountRepId], references: [id])
 
   @@index([userId])
   @@index([accountRepId])
-  @@index([createdAt])
+}
+
+model Ticket {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  status      TicketStatus @default(OPEN)
+  priority    TicketPriority @default(MEDIUM)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedTickets", fields: [assignedToId], references: [id])
+  clientId     String
+  client       User    @relation("ClientTickets", fields: [clientId], references: [id])
+  attachments  TicketAttachment[]
+  comments     TicketComment[]
+  tags         TicketTag[]
+
+  @@index([status])
+  @@index([priority])
+  @@index([assignedToId])
+  @@index([clientId])
+}
+
+model TicketAttachment {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  createdAt DateTime @default(now())
+  
+  // Relations
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
+
+model TicketComment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model TicketTag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  
+  // Relations
+  tickets   Ticket[]
+}
+
+model MessageAttachment {
+  id        String   @id @default(cuid())
+  filename  String
+  fileSize  Int
+  mimeType  String
+  url       String
+  createdAt DateTime @default(now())
+  
+  // Relations
+  messageId String
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+}
+
+enum QueryStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
 }
 
 enum NotificationType {
-  MESSAGE_RECEIVED
+  SYSTEM
+  MESSAGE
+  QUERY_COMPLETE
   REPORT_GENERATED
 }

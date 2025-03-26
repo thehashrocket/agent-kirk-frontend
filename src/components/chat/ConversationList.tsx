@@ -23,6 +23,7 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
+import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus } from 'lucide-react';
 
 /**
  * Interface for conversation data.
@@ -87,6 +88,7 @@ export function ConversationList({
   onToggleStar,
 }: ConversationListProps) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const filteredConversations = conversations.filter((conv) =>
     conv.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -110,6 +112,8 @@ export function ConversationList({
             <div
               key={conversation.id}
               onClick={() => onSelect(conversation.id)}
+              onMouseEnter={() => setHoveredId(conversation.id)}
+              onMouseLeave={() => setHoveredId(null)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
@@ -135,22 +139,21 @@ export function ConversationList({
                     onToggleStar(conversation.id);
                   }}
                   className="text-muted-foreground hover:text-yellow-400"
-                  aria-label={conversation.isStarred ? 'Unstar' : 'Star'}
+                  aria-label={conversation.isStarred ? 'Remove bookmark' : 'Add bookmark'}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill={conversation.isStarred ? 'currentColor' : 'none'}
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-4 w-4"
-                  >
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
+                  {conversation.isStarred ? (
+                    hoveredId === conversation.id ? (
+                      <BookmarkMinus className="h-4 w-4" />
+                    ) : (
+                      <BookmarkCheck className="h-4 w-4" />
+                    )
+                  ) : (
+                    hoveredId === conversation.id ? (
+                      <BookmarkPlus className="h-4 w-4" />
+                    ) : (
+                      <Bookmark className="h-4 w-4" />
+                    )
+                  )}
                 </button>
               </div>
               <span className="mt-1 text-sm text-muted-foreground line-clamp-1">
