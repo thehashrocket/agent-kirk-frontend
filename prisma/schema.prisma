@@ -25,6 +25,12 @@ enum TicketPriority {
   HIGH
 }
 
+enum ActivityStatus {
+  SUCCESS
+  ERROR
+  PENDING
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -53,6 +59,7 @@ model User {
   assignedTickets Ticket[] @relation("AssignedTickets")
   clientTickets   Ticket[] @relation("ClientTickets")
   ticketComments  TicketComment[]
+  activities      ClientActivity[]
 }
 
 model Account {
@@ -254,6 +261,24 @@ model MessageAttachment {
   message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
 
   @@index([messageId])
+}
+
+model ClientActivity {
+  id          String   @id @default(cuid())
+  type        String
+  description String   @db.Text
+  status      ActivityStatus @default(SUCCESS)
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
 }
 
 enum QueryStatus {

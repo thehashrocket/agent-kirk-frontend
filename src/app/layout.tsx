@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { Toaster } from '@/components/ui/sonner';
 import { Providers } from "@/app/providers";
 import QueryProvider from '@/providers/query-provider';
 
@@ -30,7 +29,6 @@ export default function RootLayout({
                 </main>
               </div>
             </div>
-            <Toaster />
           </Providers>
         </QueryProvider>
       </body>
