@@ -29,12 +29,14 @@ import { cn } from '@/lib/utils';
  * @property {string} content - Message content text
  * @property {'user' | 'assistant'} role - Role of the message sender
  * @property {string} timestamp - Human-readable timestamp
+ * @property {string} status - Status of the message
  */
 interface Message {
   id: string;
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
+  status?: 'processing' | 'completed' | 'error';
 }
 
 /**
@@ -96,6 +98,16 @@ export function ChatWindow({ messages, isLoading }: ChatWindowProps) {
           >
             <div className="flex-1 space-y-2">
               <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              {message.status === 'processing' && (
+                <div className="flex items-center space-x-2 text-xs opacity-70">
+                  <span>Processing response</span>
+                  <div className="flex space-x-1">
+                    <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" />
+                    <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.2s]" />
+                    <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.4s]" />
+                  </div>
+                </div>
+              )}
               <p className="text-xs opacity-70">{message.timestamp}</p>
             </div>
           </div>

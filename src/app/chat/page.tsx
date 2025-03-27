@@ -23,6 +23,7 @@ interface Message {
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
+  status?: 'processing' | 'completed' | 'error';
 }
 
 const mockSuggestedResponses = [
@@ -163,25 +164,122 @@ export default function ChatPage() {
 
   const sendMessageMutation = useMutation({
     mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
-      const response = await fetch(`/api/conversations/${conversationId}/queries`, {
+      console.log('Sending message to API:', { conversationId, message });
+      
+      // Create a temporary message object with processing status
+      const tempMessage: Message = {
+        id: `temp-${Date.now()}`,
+        content: message,
+        role: 'user',
+        timestamp: new Date().toLocaleString(),
+        status: 'processing'
+      };
+
+      // Add the temporary message to the messages array
+      queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => [...oldData, tempMessage]);
+
+      // Send the message to the LLM service
+      const response = await fetch('/api/llm/chat/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: message }),
+        body: JSON.stringify({
+          query: message,
+          conversationID: conversationId,
+          dateToday: new Date().toISOString(),
+          accountGA4: 'default', // These are required by the schema but not used in processing
+          propertyGA4: 'default'
+        }),
       });
 
+      console.log('API response status:', response.status);
+      const data = await response.json();
+      console.log('API response data:', data);
+
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        const errorMessage = data.error || 'Failed to send message';
+        console.error('API error:', errorMessage);
+        throw new Error(errorMessage);
       }
 
-      return response.json();
+      // If the response is immediate, update the messages
+      if (data.status === 'COMPLETED' && data.response) {
+        return [
+          {
+            id: data.queryId,
+            content: message,
+            role: 'user',
+            timestamp: new Date().toLocaleString()
+          },
+          {
+            id: `${data.queryId}-response`,
+            content: data.response,
+            role: 'assistant',
+            timestamp: new Date().toLocaleString()
+          }
+        ];
+      }
+
+      // If the response is async (IN_PROGRESS), start polling for status
+      if (data.status === 'IN_PROGRESS') {
+        // Return the temporary message and start polling
+        startStatusPolling(data.queryId, conversationId);
+        return [tempMessage];
+      }
+
+      throw new Error('Unexpected response from server');
     },
-    onSuccess: () => {
-      // Invalidate and refetch messages for the current conversation
+    onError: (error: Error) => {
+      console.error('Message mutation error:', error);
+      alert(error.message); // Temporary solution until toast is implemented
+    },
+    onSuccess: (data) => {
+      console.log('Message sent successfully:', data);
       queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
-      // Also update the conversations list to show the latest message
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
     },
   });
+
+  // Function to poll for query status
+  const startStatusPolling = async (queryId: string, conversationId: string) => {
+    const pollInterval = setInterval(async () => {
+      try {
+        const response = await fetch(`/api/llm/chat/status?queryId=${queryId}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch status');
+        }
+
+        if (data.status === 'COMPLETED' && data.response) {
+          // Update the messages with the completed response
+          queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
+            // Remove the temporary message and add the final messages
+            const filteredMessages = oldData.filter(msg => msg.id !== `temp-${Date.now()}`);
+            return [
+              ...filteredMessages,
+              {
+                id: queryId,
+                content: data.response,
+                role: 'assistant',
+                timestamp: new Date().toLocaleString()
+              }
+            ];
+          });
+          clearInterval(pollInterval);
+        } else if (data.status === 'FAILED') {
+          throw new Error(data.error || 'Query processing failed');
+        }
+      } catch (error) {
+        console.error('Status polling error:', error);
+        clearInterval(pollInterval);
+      }
+    }, 2000); // Poll every 2 seconds
+
+    // Clear polling after 5 minutes to prevent infinite polling
+    setTimeout(() => {
+      clearInterval(pollInterval);
+    }, 5 * 60 * 1000);
+  };
 
   const handleCreateConversation = async (title: string) => {
     await createConversationMutation.mutate(title);
@@ -198,19 +296,25 @@ export default function ChatPage() {
   };
 
   const handleSendMessage = async (message: string) => {
-    if (!selectedConversation) {
-      // If no conversation is selected, create a new one first
-      const newConversation = await createConversationMutation.mutateAsync('New Conversation');
-      await sendMessageMutation.mutateAsync({
-        conversationId: newConversation.id,
-        message,
-      });
-    } else {
-      // Send message in existing conversation
-      await sendMessageMutation.mutateAsync({
-        conversationId: selectedConversation,
-        message,
-      });
+    try {
+      if (!selectedConversation) {
+        console.log('Creating new conversation...');
+        const newConversation = await createConversationMutation.mutateAsync('New Conversation');
+        console.log('New conversation created:', newConversation);
+        await sendMessageMutation.mutateAsync({
+          conversationId: newConversation.id,
+          message,
+        });
+      } else {
+        console.log('Sending message to existing conversation:', selectedConversation);
+        await sendMessageMutation.mutateAsync({
+          conversationId: selectedConversation,
+          message,
+        });
+      }
+    } catch (error) {
+      console.error('Error in handleSendMessage:', error);
+      throw error;
     }
   };
 
