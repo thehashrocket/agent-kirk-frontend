@@ -107,7 +107,7 @@ export function ConversationList({
         />
       </div>
       <ScrollArea className="flex-1">
-        <div className="space-y-2 p-4">
+        <div className="space-y-2 p-4" role="listbox" aria-label="Conversations">
           {filteredConversations.map((conversation) => (
             <div
               key={conversation.id}
@@ -120,7 +120,7 @@ export function ConversationList({
                   onSelect(conversation.id);
                 }
               }}
-              role="button"
+              role="option"
               tabIndex={0}
               className={cn(
                 'flex w-full flex-col items-start rounded-lg px-4 py-2 text-left transition-colors',

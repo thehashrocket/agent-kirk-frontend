@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { ConversationList } from '@/components/chat/ConversationList';
 import { ChatWindow } from '@/components/chat/ChatWindow';
@@ -8,39 +8,22 @@ import { ChatInput } from '@/components/chat/ChatInput';
 import { TagSelector } from '@/components/chat/TagSelector';
 import { SourcesButton } from '@/components/chat/SourcesButton';
 import { cn } from '@/lib/utils';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-// Mock data for demonstration
-const mockConversations = [
-  {
-    id: '1',
-    title: 'Getting started with Next.js',
-    lastMessage: 'How do I create a new Next.js project?',
-    timestamp: '2 hours ago',
-    isStarred: true,
-  },
-  {
-    id: '2',
-    title: 'Tailwind CSS setup',
-    lastMessage: 'What are the best practices for Tailwind CSS?',
-    timestamp: '5 hours ago',
-    isStarred: false,
-  },
-];
+interface Conversation {
+  id: string;
+  title: string;
+  lastMessage: string;
+  timestamp: string;
+  isStarred: boolean;
+}
 
-const mockMessages = [
-  {
-    id: '1',
-    content: 'How do I create a new Next.js project?',
-    role: 'user' as const,
-    timestamp: '2:30 PM',
-  },
-  {
-    id: '2',
-    content: 'To create a new Next.js project, you can use the following command:\n\n```bash\npnpm create next-app@latest\n```\n\nThis will guide you through the setup process where you can choose your preferences for TypeScript, ESLint, and other features.',
-    role: 'assistant' as const,
-    timestamp: '2:31 PM',
-  },
-];
+interface Message {
+  id: string;
+  content: string;
+  role: 'user' | 'assistant';
+  timestamp: string;
+}
 
 const mockSuggestedResponses = [
   { id: '1', text: 'What features should I enable?' },
@@ -71,12 +54,86 @@ const mockSources = [
 export default function ChatPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selectedConversation, setSelectedConversation] = useState<string | undefined>(mockConversations[0].id);
   const [selectedTags, setSelectedTags] = useState(mockTags);
+  const queryClient = useQueryClient();
+
+  // Fetch conversations
+  const { data: conversations = [], isLoading: isLoadingConversations } = useQuery<Conversation[]>({
+    queryKey: ['conversations'],
+    queryFn: async () => {
+      const response = await fetch('/api/conversations');
+      if (!response.ok) {
+        throw new Error('Failed to fetch conversations');
+      }
+      return response.json();
+    },
+  });
+
+  // Initialize selected conversation
+  const [selectedConversation, setSelectedConversation] = useState<string | undefined>(
+    conversations[0]?.id
+  );
+
+  // Update selected conversation when conversations load
+  useEffect(() => {
+    if (conversations.length > 0 && !selectedConversation) {
+      setSelectedConversation(conversations[0].id);
+    }
+  }, [conversations, selectedConversation]);
+
+  // Fetch messages for selected conversation
+  const { data: messages = [], isLoading: isLoadingMessages } = useQuery<Message[]>({
+    queryKey: ['conversation-messages', selectedConversation],
+    queryFn: async () => {
+      if (!selectedConversation) return [];
+      
+      const response = await fetch(`/api/conversations/${selectedConversation}/queries`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch messages');
+      }
+      return response.json();
+    },
+    enabled: !!selectedConversation,
+  });
+
+  // Star/unstar mutation
+  const starMutation = useMutation({
+    mutationFn: async ({ id, isStarred }: { id: string; isStarred: boolean }) => {
+      const response = await fetch('/api/conversations', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, isStarred }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update conversation');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch conversations
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    },
+  });
+
+  const handleToggleStar = async (id: string) => {
+    const conversation = conversations.find(conv => conv.id === id);
+    if (conversation) {
+      starMutation.mutate({
+        id,
+        isStarred: !conversation.isStarred,
+      });
+    }
+  };
 
   const handleSendMessage = (message: string) => {
     console.log('Sending message:', message);
   };
+
+  if (isLoadingConversations) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex h-screen flex-col md:flex-row">
@@ -121,15 +178,13 @@ export default function ChatPage() {
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
         <SheetContent side="left" className="w-80 p-0">
           <ConversationList
-            conversations={mockConversations}
+            conversations={conversations}
             selectedId={selectedConversation}
             onSelect={(id) => {
               setSelectedConversation(id);
               setIsMobileMenuOpen(false);
             }}
-            onToggleStar={(id) =>
-              console.log('Toggle star for conversation:', id)
-            }
+            onToggleStar={handleToggleStar}
           />
         </SheetContent>
       </Sheet>
@@ -170,10 +225,10 @@ export default function ChatPage() {
           isCollapsed ? "opacity-0 invisible" : "opacity-100 visible"
         )}>
           <ConversationList
-            conversations={mockConversations}
+            conversations={conversations}
             selectedId={selectedConversation}
             onSelect={setSelectedConversation}
-            onToggleStar={(id) => console.log('Toggle star for conversation:', id)}
+            onToggleStar={handleToggleStar}
           />
         </div>
       </div>
@@ -193,7 +248,7 @@ export default function ChatPage() {
           </div>
         </div>
         <div className="flex-1 overflow-hidden">
-          <ChatWindow messages={mockMessages} />
+          <ChatWindow messages={messages} isLoading={isLoadingMessages} />
         </div>
         <div className="border-t p-4">
           <ChatInput

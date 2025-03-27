@@ -55,6 +55,134 @@ async function main() {
     },
   });
 
+  // Create additional test clients
+  const testClients = [];
+  for (let i = 1; i <= 5; i++) {
+    const client = await prisma.user.upsert({
+      where: { email: `client${i}@example.com` },
+      update: {},
+      create: {
+        email: `client${i}@example.com`,
+        name: `Test Client ${i}`,
+        roleId: clientRole.id,
+        accountRepId: accountRep.id,
+      },
+    });
+    testClients.push(client);
+  }
+
+  // Create sample conversations for Jason Shultz
+  const jasonConversations = [
+    {
+      title: 'Getting Started with Next.js',
+      isStarred: true,
+      queries: [
+        {
+          content: 'How do I create a new Next.js project?',
+          response: 'To create a new Next.js project, use `pnpm create next-app@latest`. This will guide you through the setup process.',
+          status: 'COMPLETED',
+        },
+        {
+          content: 'What are the key features of Next.js 13?',
+          response: 'Next.js 13 introduces several key features including the App Router, Server Components, and improved data fetching.',
+          status: 'COMPLETED',
+        },
+      ],
+    },
+    {
+      title: 'Tailwind CSS Setup',
+      isStarred: false,
+      queries: [
+        {
+          content: 'How do I integrate Tailwind CSS with Next.js?',
+          response: 'You can integrate Tailwind CSS by installing the necessary dependencies and creating a tailwind.config.js file.',
+          status: 'COMPLETED',
+        },
+      ],
+    },
+    {
+      title: 'Database Integration',
+      isStarred: true,
+      queries: [
+        {
+          content: 'What are the best practices for using Prisma with Next.js?',
+          response: 'When using Prisma with Next.js, it\'s recommended to create a singleton instance and use it across your application.',
+          status: 'COMPLETED',
+        },
+        {
+          content: 'How do I handle database migrations?',
+          response: 'Use Prisma Migrate for database migrations. The main commands are `prisma migrate dev` and `prisma migrate deploy`.',
+          status: 'COMPLETED',
+        },
+      ],
+    },
+  ];
+
+  // Create Jason's conversations
+  for (const convData of jasonConversations) {
+    const conversation = await prisma.conversation.create({
+      data: {
+        title: convData.title,
+        isStarred: convData.isStarred,
+        userId: testClient.id,
+        queries: {
+          create: convData.queries.map(query => ({
+            content: query.content,
+            response: query.response,
+            status: query.status,
+            userId: testClient.id,
+          })),
+        },
+      },
+    });
+  }
+
+  // Create random conversations for other test clients
+  const topics = [
+    'API Integration',
+    'Authentication Setup',
+    'Performance Optimization',
+    'Testing Strategies',
+    'Deployment Configuration',
+    'State Management',
+    'UI Components',
+    'Error Handling',
+  ];
+
+  const responses = [
+    'Here\'s a detailed guide on how to implement this...',
+    'The best practice approach would be to...',
+    'You can solve this by following these steps...',
+    'Let me explain the key concepts...',
+    'Here\'s an example implementation...',
+  ];
+
+  // Generate random conversations for each test client
+  for (const client of testClients) {
+    const numConversations = Math.floor(Math.random() * 5) + 2; // 2-6 conversations per client
+    
+    for (let i = 0; i < numConversations; i++) {
+      const topic = topics[Math.floor(Math.random() * topics.length)];
+      const numQueries = Math.floor(Math.random() * 3) + 1; // 1-3 queries per conversation
+      
+      await prisma.conversation.create({
+        data: {
+          title: `${topic} Discussion`,
+          isStarred: Math.random() > 0.7, // 30% chance of being starred
+          userId: client.id,
+          queries: {
+            create: Array.from({ length: numQueries }, () => ({
+              content: `Can you help me with ${topic.toLowerCase()}?`,
+              response: responses[Math.floor(Math.random() * responses.length)],
+              status: 'COMPLETED',
+              userId: client.id,
+            })),
+          },
+        },
+      });
+    }
+  }
+
   // Create sample activities for the test client
   const activityTypes = [
     'login',

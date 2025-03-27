@@ -50,6 +50,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   queries       Query[]
+  conversations Conversation[]
   sentMessages     Message[]  @relation("SentMessages")
   receivedMessages Message[]  @relation("ReceivedMessages")
   notifications    Notification[]
@@ -142,9 +143,12 @@ model Query {
   // Relations
   userId      String
   user        User     @relation(fields: [userId], references: [id])
+  conversationId String?
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
+  @@index([conversationId])
 }
 
 model Notification {
@@ -167,6 +171,8 @@ model UserSettings {
   id                String   @id @default(cuid())
   emailNotifications Boolean  @default(true)
   theme             String?
+  apiCredits        Int     @default(0)
+  apiCreditsLimit   Int     @default(1000)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
@@ -279,6 +285,22 @@ model ClientActivity {
   @@index([userId])
   @@index([type])
   @@index([createdAt])
+}
+
+model Conversation {
+  id          String   @id @default(cuid())
+  title       String
+  isStarred   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  queries     Query[]
+
+  @@index([userId])
+  @@index([isStarred])
 }
 
 enum QueryStatus {

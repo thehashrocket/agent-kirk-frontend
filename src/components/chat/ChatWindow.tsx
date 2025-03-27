@@ -95,7 +95,7 @@ export function ChatWindow({ messages, isLoading }: ChatWindowProps) {
             aria-label={`${message.role} message`}
           >
             <div className="flex-1 space-y-2">
-              <p className="text-sm">{message.content}</p>
+              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
               <p className="text-xs opacity-70">{message.timestamp}</p>
             </div>
           </div>
@@ -104,7 +104,7 @@ export function ChatWindow({ messages, isLoading }: ChatWindowProps) {
           <div 
             className="flex w-full max-w-2xl items-center space-x-4 rounded-lg bg-muted p-4"
             role="status"
-            aria-label="Loading response"
+            aria-label="Loading messages"
           >
             <div className="space-y-2">
               <div className="flex space-x-2">
