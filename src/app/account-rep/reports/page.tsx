@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { format, subDays } from 'date-fns';
+import { format, subDays, startOfDay, endOfDay, parseISO } from 'date-fns';
 import { useSession } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
@@ -52,8 +52,8 @@ export default function AccountRepReportsPage() {
     const now = new Date();
     const thirtyDaysAgo = subDays(now, 30);
     return {
-      from: thirtyDaysAgo,
-      to: now,
+      from: startOfDay(thirtyDaysAgo),
+      to: endOfDay(now),
     };
   });
   const [reportData, setReportData] = useState<AccountRepReportData | null>(null);
@@ -64,14 +64,18 @@ export default function AccountRepReportsPage() {
     if (!session?.user?.email) return;
 
     try {
+      // Convert to UTC dates
+      const utcStartDate = new Date(startDate.toISOString().split('T')[0] + 'T00:00:00Z');
+      const utcEndDate = new Date(endDate.toISOString().split('T')[0] + 'T23:59:59.999Z');
+
       const response = await fetch('/api/reports/account-rep', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          startDate: format(startDate, 'yyyy-MM-dd'),
-          endDate: format(endDate, 'yyyy-MM-dd'),
+          startDate: format(utcStartDate, 'yyyy-MM-dd'),
+          endDate: format(utcEndDate, 'yyyy-MM-dd'),
         }),
       });
 
@@ -102,15 +106,19 @@ export default function AccountRepReportsPage() {
 
     try {
       if (effectiveRange.from && effectiveRange.to) {
+        // Ensure we're working with the correct dates by using startOfDay and endOfDay
+        const start = startOfDay(effectiveRange.from);
+        const end = endOfDay(effectiveRange.to);
+        
         // Fetch current period data
-        await fetchReportData(effectiveRange.from, effectiveRange.to);
+        await fetchReportData(start, end);
 
         // Calculate and fetch previous period data
         const daysDiff = Math.ceil(
-          (effectiveRange.to.getTime() - effectiveRange.from.getTime()) / (1000 * 60 * 60 * 24)
+          (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
         );
-        const previousPeriodEnd = subDays(effectiveRange.from, 1);
-        const previousPeriodStart = subDays(previousPeriodEnd, daysDiff);
+        const previousPeriodEnd = subDays(start, 1);
+        const previousPeriodStart = subDays(previousPeriodEnd, daysDiff - 1); // Adjust to maintain same period length
         await fetchReportData(previousPeriodStart, previousPeriodEnd, true);
       }
     } finally {
@@ -179,12 +187,12 @@ export default function AccountRepReportsPage() {
       )}
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
-        <Card>
+        <Card className="h-[600px] flex flex-col">
           <CardHeader>
             <CardTitle>Recent Activities</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="flex-1 overflow-auto">
+            <div className="space-y-4 pr-2">
               {isLoading ? (
                 <>
                   <Skeleton className="h-12 w-full" />
@@ -217,11 +225,11 @@ export default function AccountRepReportsPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="h-[600px] flex flex-col">
           <CardHeader>
             <CardTitle>Client Engagement</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1">
             {isLoading ? (
               <div className="space-y-4">
                 <Skeleton className="h-8 w-full" />

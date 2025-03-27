@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { ActivityStatus, TicketStatus } from "@prisma/client";
 import type { ReportData } from "@/lib/api/reports";
+import { subDays, startOfDay, endOfDay, parseISO, format } from "date-fns";
 
 export async function getReportData(startDate?: string, endDate?: string): Promise<ReportData> {
   const dateFilter = {
@@ -177,29 +178,59 @@ export async function getAccountRepReportData(
   startDate?: string,
   endDate?: string
 ): Promise<AccountRepReportData> {
+  // If no dates provided, default to last 30 days from the most recent activity
+  if (!startDate || !endDate) {
+    const mostRecentActivity = await prisma.clientActivity.findFirst({
+      orderBy: { createdAt: 'desc' },
+    });
+
+    if (mostRecentActivity) {
+      const endDateTime = endOfDay(mostRecentActivity.createdAt);
+      const startDateTime = startOfDay(subDays(endDateTime, 30));
+      
+      endDate = format(endDateTime, 'yyyy-MM-dd');
+      startDate = format(startDateTime, 'yyyy-MM-dd');
+    }
+  }
+
+  // Convert input dates to UTC for consistent querying
+  const utcStartDate = startDate ? new Date(`${startDate}T00:00:00Z`) : undefined;
+  const utcEndDate = endDate ? new Date(`${endDate}T23:59:59.999Z`) : undefined;
+
   const dateFilter = {
     createdAt: {
-      ...(startDate && { gte: new Date(startDate) }),
-      ...(endDate && { lte: new Date(endDate) }),
+      ...(utcStartDate && { gte: utcStartDate }),
+      ...(utcEndDate && { lte: utcEndDate }),
     },
   };
 
-  // Fetch client metrics
+  // Get the client role ID
+  const clientRole = await prisma.role.findUnique({
+    where: { name: "CLIENT" },
+  });
+
+  if (!clientRole) {
+    throw new Error("Client role not found");
+  }
+
+  // Fetch client metrics - include clients who were active during the date range
   const [totalClients, activeClients] = await Promise.all([
     prisma.user.count({
       where: {
         accountRepId,
+        roleId: clientRole.id,
       },
     }),
     prisma.user.count({
       where: {
         accountRepId,
         isActive: true,
+        roleId: clientRole.id,
       },
     }),
   ]);
 
-  // Fetch activities with client information
+  // Fetch activities with client information - remove the 10 result limit
   const activities = await prisma.clientActivity.findMany({
     where: {
       user: {
@@ -208,7 +239,6 @@ export async function getAccountRepReportData(
       ...dateFilter,
     },
     orderBy: { createdAt: "desc" },
-    take: 10,
     include: {
       user: {
         select: {
@@ -222,7 +252,10 @@ export async function getAccountRepReportData(
   const satisfactionData = await prisma.clientSatisfaction.aggregate({
     where: {
       accountRepId,
-      ...dateFilter,
+      createdAt: {
+        gte: startDate ? new Date(startDate) : undefined,
+        lte: endDate ? new Date(endDate) : undefined,
+      },
     },
     _avg: {
       rating: true,
@@ -311,7 +344,10 @@ export async function getAccountRepReportData(
         user: {
           accountRepId,
         },
-        ...dateFilter,
+        createdAt: {
+          ...(startDate && { gte: new Date(startDate) }),
+          ...(endDate && { lte: new Date(endDate) }),
+        },
       },
       _count: {
         _all: true,
@@ -319,9 +355,14 @@ export async function getAccountRepReportData(
     }),
   ]);
 
-  const averageClientInteractions =
-    clientInteractions.reduce((sum, interaction) => sum + interaction._count._all, 0) /
-    (totalClients || 1);
+  // Calculate average interactions per client for the period
+  const totalInteractions = clientInteractions.reduce(
+    (sum, interaction) => sum + interaction._count._all,
+    0
+  );
+  const clientsWithInteractions = clientInteractions.length;
+  const averageClientInteractions = 
+    clientsWithInteractions > 0 ? totalInteractions / clientsWithInteractions : 0;
 
   return {
     metrics: {

@@ -66,6 +66,7 @@ async function main() {
         name: `Test Client ${i}`,
         roleId: clientRole.id,
         accountRepId: accountRep.id,
+        isActive: Math.random() > 0.2, // 80% chance of being active
       },
     });
     testClients.push(client);
@@ -183,7 +184,7 @@ async function main() {
     }
   }
 
-  // Create sample activities for the test client
+  // Create sample activities for all clients
   const activityTypes = [
     'login',
     'query',
@@ -195,56 +196,101 @@ async function main() {
   const now = new Date();
   const activities = [];
 
-  // Generate activities for the last 30 days
-  for (let i = 0; i < 100; i++) {
-    const type = activityTypes[Math.floor(Math.random() * activityTypes.length)];
-    const date = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000);
-    const status = Math.random() > 0.1 ? 'SUCCESS' : 'ERROR';
+  // Generate activities for all clients
+  const allClients = [testClient, ...testClients];
+  
+  for (const client of allClients) {
+    // Generate 20-50 activities per client
+    const numActivities = Math.floor(Math.random() * 31) + 20;
+    
+    for (let i = 0; i < numActivities; i++) {
+      const type = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+      const date = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000);
+      const status = Math.random() > 0.1 ? 'SUCCESS' : 'ERROR';
 
-    let description = '';
-    let metadata = {};
+      let description = '';
+      let metadata = {};
 
-    switch (type) {
-      case 'login':
-        description = 'User logged in to the system';
-        metadata = { device: 'web', browser: 'Chrome' };
-        break;
-      case 'query':
-        description = 'Executed a query';
-        metadata = { queryType: 'analysis', duration: Math.random() * 5 };
-        break;
-      case 'settings_update':
-        description = 'Updated user settings';
-        metadata = { setting: 'notifications', value: 'enabled' };
-        break;
-      case 'export_data':
-        description = 'Exported report data';
-        metadata = { format: 'csv', rows: Math.floor(Math.random() * 1000) };
-        break;
-      case 'view_report':
-        description = 'Viewed activity report';
-        metadata = { reportType: 'monthly', period: 'last-30-days' };
-        break;
-      default:
-        description = 'Unknown activity';
-        metadata = {};
+      switch (type) {
+        case 'login':
+          description = 'User logged in to the system';
+          metadata = { device: 'web', browser: 'Chrome' };
+          break;
+        case 'query':
+          description = 'Executed a query';
+          metadata = { queryType: 'analysis', duration: Math.random() * 5 };
+          break;
+        case 'settings_update':
+          description = 'Updated user settings';
+          metadata = { setting: 'notifications', value: 'enabled' };
+          break;
+        case 'export_data':
+          description = 'Exported report data';
+          metadata = { format: 'csv', rows: Math.floor(Math.random() * 1000) };
+          break;
+        case 'view_report':
+          description = 'Viewed activity report';
+          metadata = { reportType: 'monthly', period: 'last-30-days' };
+          break;
+        default:
+          description = 'Unknown activity';
+          metadata = {};
+      }
+
+      activities.push({
+        type,
+        description,
+        status,
+        metadata,
+        createdAt: date,
+        updatedAt: date,
+        userId: client.id,
+      });
     }
 
-    activities.push({
-      type,
-      description,
-      status,
-      metadata,
-      createdAt: date,
-      updatedAt: date,
-      userId: testClient.id,
-    });
+    // Add some activities for today
+    const todayActivities = Math.floor(Math.random() * 3) + 1; // 1-3 activities today
+    for (let i = 0; i < todayActivities; i++) {
+      const type = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+      const status = Math.random() > 0.1 ? 'SUCCESS' : 'ERROR';
+
+      activities.push({
+        type,
+        description: `Today's ${type} activity`,
+        status,
+        metadata: {},
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        userId: client.id,
+      });
+    }
   }
 
   // Insert all activities
   await prisma.clientActivity.createMany({
     data: activities,
   });
+
+  // Create client satisfaction ratings
+  for (const client of allClients) {
+    // Generate 5-10 satisfaction ratings per client over the last 60 days
+    const numRatings = Math.floor(Math.random() * 6) + 5;
+    
+    for (let i = 0; i < numRatings; i++) {
+      const ratingDate = new Date();
+      ratingDate.setDate(ratingDate.getDate() - Math.floor(Math.random() * 60));
+      
+      await prisma.clientSatisfaction.create({
+        data: {
+          rating: Math.random() * 1 + 4, // Random rating between 4 and 5
+          feedback: Math.random() > 0.7 ? "Great service!" : undefined, // 30% chance of feedback
+          createdAt: ratingDate,
+          userId: client.id,
+          accountRepId: accountRep.id,
+        },
+      });
+    }
+  }
 
   console.log('Seed data created successfully');
 }
