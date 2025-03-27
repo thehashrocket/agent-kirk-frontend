@@ -65,8 +65,30 @@ export default function ChatPage() {
       if (!response.ok) {
         throw new Error('Failed to fetch conversations');
       }
-      return response.json();
+      const data = await response.json();
+      console.log('Raw conversation data length:', data.length);
+      console.log('Raw conversation data:', data);
+      
+      // Format the conversations and ensure no duplicates by using a Map
+      const conversationMap = new Map();
+      data.forEach((conv: any) => {
+        if (!conversationMap.has(conv.id)) {
+          conversationMap.set(conv.id, {
+            id: conv.id,
+            title: conv.title,
+            lastMessage: conv.queries[0]?.content || 'No messages yet',
+            timestamp: new Date(conv.updatedAt).toLocaleString(),
+            isStarred: conv.isStarred,
+          });
+        }
+      });
+      
+      const formattedConversations = Array.from(conversationMap.values());
+      console.log('Formatted conversations length:', formattedConversations.length);
+      console.log('Formatted conversations:', formattedConversations);
+      return formattedConversations;
     },
+    staleTime: 5000, // Add a staleTime to prevent unnecessary refetches
   });
 
   // Initialize selected conversation
@@ -96,6 +118,29 @@ export default function ChatPage() {
     enabled: !!selectedConversation,
   });
 
+  // Create conversation mutation
+  const createConversationMutation = useMutation({
+    mutationFn: async (title: string) => {
+      const response = await fetch('/api/conversations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create conversation');
+      }
+
+      const newConversation = await response.json();
+      return newConversation;
+    },
+    onSuccess: (newConversation) => {
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+      setSelectedConversation(newConversation.id);
+      setIsMobileMenuOpen(false);
+    },
+  });
+
   // Star/unstar mutation
   const starMutation = useMutation({
     mutationFn: async ({ id, isStarred }: { id: string; isStarred: boolean }) => {
@@ -112,10 +157,35 @@ export default function ChatPage() {
       return response.json();
     },
     onSuccess: () => {
-      // Invalidate and refetch conversations
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
     },
   });
+
+  const sendMessageMutation = useMutation({
+    mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
+      const response = await fetch(`/api/conversations/${conversationId}/queries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: message }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch messages for the current conversation
+      queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
+      // Also update the conversations list to show the latest message
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    },
+  });
+
+  const handleCreateConversation = async (title: string) => {
+    await createConversationMutation.mutate(title);
+  };
 
   const handleToggleStar = async (id: string) => {
     const conversation = conversations.find(conv => conv.id === id);
@@ -127,8 +197,21 @@ export default function ChatPage() {
     }
   };
 
-  const handleSendMessage = (message: string) => {
-    console.log('Sending message:', message);
+  const handleSendMessage = async (message: string) => {
+    if (!selectedConversation) {
+      // If no conversation is selected, create a new one first
+      const newConversation = await createConversationMutation.mutateAsync('New Conversation');
+      await sendMessageMutation.mutateAsync({
+        conversationId: newConversation.id,
+        message,
+      });
+    } else {
+      // Send message in existing conversation
+      await sendMessageMutation.mutateAsync({
+        conversationId: selectedConversation,
+        message,
+      });
+    }
   };
 
   if (isLoadingConversations) {
@@ -185,6 +268,8 @@ export default function ChatPage() {
               setIsMobileMenuOpen(false);
             }}
             onToggleStar={handleToggleStar}
+            onCreateConversation={handleCreateConversation}
+            isLoading={createConversationMutation.isPending}
           />
         </SheetContent>
       </Sheet>
@@ -229,6 +314,8 @@ export default function ChatPage() {
             selectedId={selectedConversation}
             onSelect={setSelectedConversation}
             onToggleStar={handleToggleStar}
+            onCreateConversation={handleCreateConversation}
+            isLoading={createConversationMutation.isPending}
           />
         </div>
       </div>

@@ -24,6 +24,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus } from 'lucide-react';
+import { NewConversationButton } from './NewConversationButton';
 
 /**
  * Interface for conversation data.
@@ -47,12 +48,16 @@ interface Conversation {
  * @property {string} selectedId - ID of the currently selected conversation
  * @property {function} onSelect - Callback when a conversation is selected
  * @property {function} onToggleStar - Callback when a conversation's star status is toggled
+ * @property {function} onCreateConversation - Callback when a new conversation is created
+ * @property {boolean} isLoading - Whether the conversation creation is in progress
  */
 interface ConversationListProps {
   conversations: Conversation[];
   selectedId?: string;
   onSelect: (id: string) => void;
   onToggleStar: (id: string) => void;
+  onCreateConversation: (title: string) => Promise<void>;
+  isLoading?: boolean;
 }
 
 /**
@@ -86,6 +91,8 @@ export function ConversationList({
   selectedId,
   onSelect,
   onToggleStar,
+  onCreateConversation,
+  isLoading,
 }: ConversationListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -96,7 +103,11 @@ export function ConversationList({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="p-4">
+      <div className="space-y-2 p-4">
+        <NewConversationButton
+          onCreateConversation={onCreateConversation}
+          isLoading={isLoading}
+        />
         <Input
           type="search"
           placeholder="Search conversations..."

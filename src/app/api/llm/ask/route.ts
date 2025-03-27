@@ -33,7 +33,7 @@ export async function POST(
     await prisma.query.create({
       data: {
         userId: session.user.id,
-        prompt,
+        content: prompt,
         response: mockResponse,
       },
     });

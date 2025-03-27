@@ -23,12 +23,10 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
       select: {
         id: true,
-        prompt: true,
+        content: true,
         response: true,
         createdAt: true,
-        accountGA4: true,
-        propertyGA4: true,
-        conversationID: true
+        conversationId: true
       }
     });
 

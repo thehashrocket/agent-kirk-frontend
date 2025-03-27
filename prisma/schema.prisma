@@ -47,35 +47,35 @@ model User {
   updatedAt     DateTime  @updatedAt
 
   // Relations
-  accounts      Account[]
-  sessions      Session[]
-  queries       Query[]
-  conversations Conversation[]
-  sentMessages     Message[]  @relation("SentMessages")
-  receivedMessages Message[]  @relation("ReceivedMessages")
+  accounts         Account[]
+  sessions         Session[]
+  queries          Query[]
+  conversations    Conversation[]
+  sentMessages     Message[]            @relation("SentMessages")
+  receivedMessages Message[]            @relation("ReceivedMessages")
   notifications    Notification[]
-  settings        UserSettings?
-  givenRatings    ClientSatisfaction[] @relation("ClientRatings")
-  receivedRatings ClientSatisfaction[] @relation("RepRatings")
-  assignedTickets Ticket[] @relation("AssignedTickets")
-  clientTickets   Ticket[] @relation("ClientTickets")
-  ticketComments  TicketComment[]
-  activities      ClientActivity[]
+  settings         UserSettings?
+  givenRatings     ClientSatisfaction[] @relation("ClientRatings")
+  receivedRatings  ClientSatisfaction[] @relation("RepRatings")
+  assignedTickets  Ticket[]             @relation("AssignedTickets")
+  clientTickets    Ticket[]             @relation("ClientTickets")
+  ticketComments   TicketComment[]
+  activities       ClientActivity[]
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -99,31 +99,31 @@ model VerificationToken {
 }
 
 model Role {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  users       User[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String   @unique
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Message {
-  id          String   @id @default(cuid())
-  content     String   @db.Text
-  isRead      Boolean  @default(false)
-  archived    Boolean  @default(false)
+  id            String   @id @default(cuid())
+  content       String   @db.Text
+  isRead        Boolean  @default(false)
+  archived      Boolean  @default(false)
   isThreadStart Boolean  @default(false)
-  threadId    String?
-  parentId    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  threadId      String?
+  parentId      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   // Relations
   senderId    String
-  sender      User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  sender      User                @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
   recipientId String
-  recipient   User     @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
-  parent      Message?  @relation("ThreadReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies     Message[] @relation("ThreadReplies")
+  recipient   User                @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+  parent      Message?            @relation("ThreadReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Message[]           @relation("ThreadReplies")
   attachments MessageAttachment[]
 
   @@index([senderId])
@@ -133,18 +133,18 @@ model Message {
 }
 
 model Query {
-  id          String   @id @default(cuid())
-  content     String   @db.Text @default("")
-  response    String?  @db.Text
-  status      QueryStatus @default(PENDING)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id        String      @id @default(cuid())
+  content   String      @default("") @db.Text
+  response  String?     @db.Text
+  status    QueryStatus @default(PENDING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now())
 
   // Relations
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
   conversationId String?
-  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -152,65 +152,65 @@ model Query {
 }
 
 model Notification {
-  id          String   @id @default(cuid())
-  type        NotificationType
-  title       String
-  content     String
-  isRead      Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  id        String           @id @default(cuid())
+  type      NotificationType
+  title     String
+  content   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
 
   // Relations
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([type])
 }
 
 model UserSettings {
-  id                String   @id @default(cuid())
+  id                 String   @id @default(cuid())
   emailNotifications Boolean  @default(true)
-  theme             String?
-  apiCredits        Int     @default(0)
-  apiCreditsLimit   Int     @default(1000)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  theme              String?
+  apiCredits         Int      @default(0)
+  apiCreditsLimit    Int      @default(1000)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   // Relations
-  userId            String   @unique
-  user              User     @relation(fields: [userId], references: [id])
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model ClientSatisfaction {
-  id          String   @id @default(cuid())
-  rating      Float
-  feedback    String?  @db.Text
-  createdAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  rating    Float
+  feedback  String?  @db.Text
+  createdAt DateTime @default(now())
 
   // Relations
-  userId      String
-  user        User     @relation("ClientRatings", fields: [userId], references: [id])
+  userId       String
+  user         User   @relation("ClientRatings", fields: [userId], references: [id])
   accountRepId String
-  accountRep   User     @relation("RepRatings", fields: [accountRepId], references: [id])
+  accountRep   User   @relation("RepRatings", fields: [accountRepId], references: [id])
 
   @@index([userId])
   @@index([accountRepId])
 }
 
 model Ticket {
-  id          String   @id @default(cuid())
+  id          String         @id @default(cuid())
   title       String
-  description String   @db.Text
-  status      TicketStatus @default(OPEN)
+  description String         @db.Text
+  status      TicketStatus   @default(OPEN)
   priority    TicketPriority @default(MEDIUM)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 
   // Relations
   assignedToId String?
-  assignedTo   User?   @relation("AssignedTickets", fields: [assignedToId], references: [id])
+  assignedTo   User?              @relation("AssignedTickets", fields: [assignedToId], references: [id])
   clientId     String
-  client       User    @relation("ClientTickets", fields: [clientId], references: [id])
+  client       User               @relation("ClientTickets", fields: [clientId], references: [id])
   attachments  TicketAttachment[]
   comments     TicketComment[]
   tags         TicketTag[]
@@ -226,10 +226,10 @@ model TicketAttachment {
   name      String
   url       String
   createdAt DateTime @default(now())
-  
+
   // Relations
-  ticketId  String
-  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 }
 
 model TicketComment {
@@ -237,21 +237,21 @@ model TicketComment {
   content   String   @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   // Relations
-  ticketId  String
-  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
 }
 
 model TicketTag {
   id        String   @id @default(cuid())
   name      String   @unique
   createdAt DateTime @default(now())
-  
+
   // Relations
-  tickets   Ticket[]
+  tickets Ticket[]
 }
 
 model MessageAttachment {
@@ -261,26 +261,26 @@ model MessageAttachment {
   mimeType  String
   url       String
   createdAt DateTime @default(now())
-  
+
   // Relations
   messageId String
-  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
 
   @@index([messageId])
 }
 
 model ClientActivity {
-  id          String   @id @default(cuid())
+  id          String         @id @default(cuid())
   type        String
-  description String   @db.Text
+  description String         @db.Text
   status      ActivityStatus @default(SUCCESS)
   metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 
   // Relations
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([type])
@@ -288,16 +288,16 @@ model ClientActivity {
 }
 
 model Conversation {
-  id          String   @id @default(cuid())
-  title       String
-  isStarred   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  title     String
+  isStarred Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  queries     Query[]
+  userId  String
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  queries Query[]
 
   @@index([userId])
   @@index([isStarred])

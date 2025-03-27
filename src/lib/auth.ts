@@ -15,7 +15,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { Role } from "@prisma/client";
-import type { Account, DefaultSession, Session, User, AuthOptions } from "next-auth";
+import type { Account, DefaultSession, Session, User } from "next-auth";
+import type { AuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import { prisma } from "./prisma";
 import { JWT } from "next-auth/jwt";
@@ -328,6 +329,6 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/auth/signin",
   }
-} as const;
+};
 
 export const { auth, signIn, signOut } = NextAuth(authOptions);

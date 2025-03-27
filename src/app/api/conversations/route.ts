@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { Prisma, PrismaClient } from '@prisma/client';
+import { authOptions } from '@/lib/auth';
 
 interface ConversationWithQueries {
   id: string;
@@ -27,105 +28,99 @@ declare global {
 // Cast prisma to our extended type
 const extendedPrisma = prisma as ExtendedPrismaClient;
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const session = await getServerSession();
-
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    const user = await extendedPrisma.user.findUnique({
-      where: { email: session.user.email },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
-
-    const conversations = await extendedPrisma.conversation.findMany({
-      where: { userId: user.id },
+    const conversations = await prisma.conversation.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      orderBy: {
+        updatedAt: 'desc',
+      },
       include: {
         queries: {
-          orderBy: { createdAt: 'desc' },
+          orderBy: {
+            createdAt: 'desc',
+          },
           take: 1,
-          select: { content: true },
+          select: {
+            content: true,
+          },
         },
       },
-      orderBy: { updatedAt: 'desc' },
     });
 
-    // Format conversations to match the expected structure
-    const formattedConversations = conversations.map((conv: ConversationWithQueries) => ({
-      id: conv.id,
-      title: conv.title,
-      lastMessage: conv.queries[0]?.content || '',
-      timestamp: conv.updatedAt.toLocaleString(),
-      isStarred: conv.isStarred,
-    }));
-
-    return NextResponse.json(formattedConversations);
+    return NextResponse.json(conversations);
   } catch (error) {
-    console.error('Error fetching conversations:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    console.error('[CONVERSATION_GET]', error);
+    return new NextResponse('Internal Error', { status: 500 });
   }
 }
 
-export async function PATCH(request: NextRequest) {
+export async function PATCH(request: Request) {
   try {
-    const session = await getServerSession();
-
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const user = await extendedPrisma.user.findUnique({
-      where: { email: session.user.email },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
     const { id, isStarred } = await request.json();
-
     if (!id) {
-      return NextResponse.json(
-        { error: 'Conversation ID is required' },
-        { status: 400 }
-      );
+      return new NextResponse('Conversation ID is required', { status: 400 });
     }
 
-    // Verify the conversation belongs to the user
-    const conversation = await extendedPrisma.conversation.findFirst({
+    const conversation = await prisma.conversation.findUnique({
       where: {
         id,
-        userId: user.id,
+        userId: session.user.id,
       },
     });
 
     if (!conversation) {
-      return NextResponse.json(
-        { error: 'Conversation not found' },
-        { status: 404 }
-      );
+      return new NextResponse('Not found', { status: 404 });
     }
 
-    // Update the conversation
-    const updatedConversation = await extendedPrisma.conversation.update({
+    const updated = await prisma.conversation.update({
       where: { id },
       data: { isStarred },
     });
 
-    return NextResponse.json(updatedConversation);
+    return NextResponse.json(updated);
   } catch (error) {
-    console.error('Error updating conversation:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    console.error('[CONVERSATION_PATCH]', error);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const { title } = await request.json();
+    if (!title) {
+      return new NextResponse('Title is required', { status: 400 });
+    }
+
+    // Create a new conversation with the given title
+    // Each conversation is unique regardless of title
+    const conversation = await prisma.conversation.create({
+      data: {
+        title,
+        userId: session.user.id,
+      },
+    });
+
+    return NextResponse.json(conversation);
+  } catch (error) {
+    console.error('[CONVERSATION_POST]', error);
+    return new NextResponse('Internal Error', { status: 500 });
   }
 } 
