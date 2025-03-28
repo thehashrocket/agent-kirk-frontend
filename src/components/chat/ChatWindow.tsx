@@ -43,10 +43,14 @@ interface Message {
  * Props for the ChatWindow component.
  * @property {Message[]} messages - Array of messages to display
  * @property {boolean} isLoading - Whether a response is currently being generated
+ * @property {string} gaAccountId - Google Analytics account ID
+ * @property {string} gaPropertyId - Google Analytics property ID
  */
 interface ChatWindowProps {
   messages: Message[];
   isLoading?: boolean;
+  gaAccountId?: string;
+  gaPropertyId?: string;
 }
 
 /**
@@ -72,7 +76,7 @@ interface ChatWindowProps {
  * - Proper contrast for readability
  * - Proper ARIA roles
  */
-export function ChatWindow({ messages, isLoading }: ChatWindowProps) {
+export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

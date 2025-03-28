@@ -43,6 +43,44 @@ interface Conversation {
 }
 
 /**
+ * Interface for conversation creation data.
+ * @property {string} title - Display title for the conversation
+ * @property {string} gaAccountId - Google Analytics account ID
+ * @property {string} gaPropertyId - Google Analytics property ID
+ */
+interface ConversationCreateData {
+  title: string;
+  gaAccountId?: string;
+  gaPropertyId?: string;
+}
+
+/**
+ * Interface for Google Analytics property data.
+ * @property {string} id - Unique identifier for the Google Analytics property
+ * @property {string} gaPropertyId - Google Analytics property ID
+ * @property {string} gaPropertyName - Display name for the Google Analytics property
+ */
+interface GaProperty {
+  id: string;
+  gaPropertyId: string;
+  gaPropertyName: string;
+}
+
+/**
+ * Interface for Google Analytics account data.
+ * @property {string} id - Unique identifier for the Google Analytics account
+ * @property {string} gaAccountId - Google Analytics account ID
+ * @property {string} gaAccountName - Display name for the Google Analytics account
+ * @property {GaProperty[]} gaProperties - Array of Google Analytics property items
+ */
+interface GaAccount {
+  id: string;
+  gaAccountId: string;
+  gaAccountName: string;
+  gaProperties: GaProperty[];
+}
+
+/**
  * Props for the ConversationList component.
  * @property {Conversation[]} conversations - Array of conversation items to display
  * @property {string} selectedId - ID of the currently selected conversation
@@ -50,14 +88,16 @@ interface Conversation {
  * @property {function} onToggleStar - Callback when a conversation's star status is toggled
  * @property {function} onCreateConversation - Callback when a new conversation is created
  * @property {boolean} isLoading - Whether the conversation creation is in progress
+ * @property {GaAccount[]} gaAccounts - Array of Google Analytics account items to display
  */
 interface ConversationListProps {
   conversations: Conversation[];
   selectedId?: string;
   onSelect: (id: string) => void;
-  onToggleStar: (id: string) => void;
-  onCreateConversation: (title: string) => Promise<void>;
+  onToggleStar: (id: string) => Promise<void>;
+  onCreateConversation: (data: ConversationCreateData) => Promise<void>;
   isLoading?: boolean;
+  gaAccounts: GaAccount[];
 }
 
 /**
@@ -93,6 +133,7 @@ export function ConversationList({
   onToggleStar,
   onCreateConversation,
   isLoading,
+  gaAccounts,
 }: ConversationListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -103,10 +144,11 @@ export function ConversationList({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="space-y-2 p-4">
+      <div className="shrink-0 space-y-2 p-4 border-b">
         <NewConversationButton
           onCreateConversation={onCreateConversation}
           isLoading={isLoading}
+          gaAccounts={gaAccounts}
         />
         <Input
           type="search"
@@ -117,7 +159,7 @@ export function ConversationList({
           aria-label="Search conversations"
         />
       </div>
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 overflow-y-auto">
         <div className="space-y-2 p-4" role="listbox" aria-label="Conversations">
           {filteredConversations.map((conversation) => (
             <div

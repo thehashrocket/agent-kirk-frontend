@@ -5,16 +5,64 @@ import { prisma } from '@/lib/prisma';
 
 // Define the webhook request schema
 const WebhookRequestSchema = z.object({
-  queryId: z.string(),
-  response: z.string(),
+  queryId: z.string().min(1, "Query ID is required"),
+  response: z.string().optional(),
   error: z.string().optional(),
+}).refine(data => data.response || data.error, {
+  message: "Either response or error must be provided"
 });
 
 export async function POST(request: NextRequest) {
   try {
     // Parse and validate the webhook payload
     const body = await request.json();
-    const validatedData = WebhookRequestSchema.parse(body);
+    console.log('Webhook received body:', body);
+
+    // Get query ID from multiple possible sources
+    let queryId = body.queryId || request.headers.get('x-query-id') || '';
+    
+    // Log all potential sources of query ID
+    console.log('Query ID sources:', {
+      bodyQueryId: body.queryId,
+      headerQueryId: request.headers.get('x-query-id'),
+      finalQueryId: queryId
+    });
+
+    if (!queryId) {
+      console.error('Invalid webhook request: No query ID found in body or headers');
+      return NextResponse.json(
+        { 
+          error: 'Invalid request: No query ID found in body or headers',
+          receivedBody: body,
+          receivedHeaders: Object.fromEntries(request.headers.entries())
+        },
+        { status: 400 }
+      );
+    }
+
+    // Construct validated data object
+    const validatedData = {
+      queryId,
+      response: body.response,
+      error: body.error || body.message // Accept error from either field
+    };
+
+    // Validate the data
+    const result = WebhookRequestSchema.safeParse(validatedData);
+    if (!result.success) {
+      console.error('Webhook validation error:', {
+        error: result.error,
+        receivedData: validatedData
+      });
+      return NextResponse.json(
+        { 
+          error: 'Invalid webhook data',
+          details: result.error.errors,
+          receivedData: validatedData
+        },
+        { status: 400 }
+      );
+    }
 
     // Get the query from database
     const query = await prisma.query.findUnique({
@@ -23,8 +71,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (!query) {
+      console.error('Query not found:', {
+        queryId: validatedData.queryId,
+        receivedData: validatedData
+      });
       return NextResponse.json(
-        { error: 'Query not found' },
+        { 
+          error: 'Query not found',
+          queryId: validatedData.queryId,
+          receivedData: validatedData
+        },
         { status: 404 }
       );
     }
@@ -48,7 +104,7 @@ export async function POST(request: NextRequest) {
           userId: query.userId,
         },
       });
-    } else {
+    } else if (validatedData.response) {
       // Update query with response
       await prisma.query.update({
         where: { id: validatedData.queryId },

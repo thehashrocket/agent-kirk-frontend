@@ -46,15 +46,30 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    // Ensure params is awaited
+    const { id } = await Promise.resolve(params);
 
-    if (!session?.user) {
-      return new NextResponse('Unauthorized', { status: 401 });
+    // Get the authenticated user's session
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
     }
 
+    // Verify the user has access to this data
+    if (session.user.id !== id) {
+      return NextResponse.json(
+        { error: 'Forbidden' },
+        { status: 403 }
+      );
+    }
+
+    // Fetch GA accounts with their properties
     const gaAccounts = await prisma.gaAccount.findMany({
       where: {
-        userId: params.id,
+        userId: id,
       },
       include: {
         gaProperties: true,
@@ -64,6 +79,9 @@ export async function GET(
     return NextResponse.json(gaAccounts);
   } catch (error) {
     console.error('Error fetching GA accounts:', error);
-    return new NextResponse('Internal error', { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 } 

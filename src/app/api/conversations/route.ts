@@ -104,17 +104,18 @@ export async function POST(request: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    const { title } = await request.json();
+    const { title, gaAccountId, gaPropertyId } = await request.json();
     if (!title) {
       return new NextResponse('Title is required', { status: 400 });
     }
 
-    // Create a new conversation with the given title
-    // Each conversation is unique regardless of title
+    // Create a new conversation with the given title and optional GA fields
     const conversation = await prisma.conversation.create({
       data: {
         title,
         userId: session.user.id,
+        ...(gaAccountId ? { gaAccountId } : {}),
+        ...(gaPropertyId ? { gaPropertyId } : {}),
       },
     });
 

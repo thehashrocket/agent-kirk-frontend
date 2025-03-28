@@ -66,6 +66,7 @@ async function main() {
         name: `Test Client ${i}`,
         roleId: clientRole.id,
         accountRepId: accountRep.id,
+        image: `https://i.pravatar.cc/150?img=${i}`,
         isActive: Math.random() > 0.2, // 80% chance of being active
       },
     });

@@ -35,7 +35,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  password      String?   // Adding password field as optional since we support both OAuth and password auth
+  password      String? // Adding password field as optional since we support both OAuth and password auth
   emailVerified DateTime?
   image         String?
   roleId        String
@@ -65,21 +65,44 @@ model User {
   gaAccounts       GaAccount[]          @relation("UserToGaAccount")
 }
 
+model Conversation {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?  @db.Text
+  isStarred    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  gaAccountId  String?
+  gaPropertyId String?
+
+  // Relations
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  queries    Query[]
+  gaAccount  GaAccount?  @relation(fields: [gaAccountId], references: [id])
+  gaProperty GaProperty? @relation(fields: [gaPropertyId], references: [id])
+
+  @@index([userId])
+  @@index([isStarred])
+}
+
 model GaAccount {
-  id            String       @id @default(cuid())
+  id            String         @id @default(cuid())
   userId        String
-  user          User         @relation("UserToGaAccount", fields: [userId], references: [id], onDelete: Cascade)
+  user          User           @relation("UserToGaAccount", fields: [userId], references: [id], onDelete: Cascade)
   gaAccountId   String
   gaAccountName String
-  gaProperties  GaProperty[] @relation("AccountToProperty")
+  gaProperties  GaProperty[]   @relation("AccountToProperty")
+  conversations Conversation[]
 }
 
 model GaProperty {
-  id             String    @id @default(cuid())
+  id             String         @id @default(cuid())
   gaPropertyId   String
   gaPropertyName String
   gaAccountId    String
-  gaAccount      GaAccount @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
+  gaAccount      GaAccount      @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
+  conversations  Conversation[]
 }
 
 model Account {
@@ -304,22 +327,6 @@ model ClientActivity {
   @@index([userId])
   @@index([type])
   @@index([createdAt])
-}
-
-model Conversation {
-  id        String   @id @default(cuid())
-  title     String
-  isStarred Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  userId  String
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  queries Query[]
-
-  @@index([userId])
-  @@index([isStarred])
 }
 
 enum QueryStatus {

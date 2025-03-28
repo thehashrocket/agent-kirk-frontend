@@ -18,6 +18,7 @@ const ChatRequestSchema = z.object({
 const IMMEDIATE_TIMEOUT = 3000;
 
 export async function POST(request: NextRequest) {
+  let query;
   try {
     // Get the authenticated user
     const session = await getServerSession(authOptions);
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     const validatedData = ChatRequestSchema.parse(body);
 
     // Create a database record for the query
-    const query = await prisma.query.create({
+    query = await prisma.query.create({
       data: {
         content: validatedData.query,
         status: 'PENDING',
@@ -42,82 +43,146 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Try to get an immediate response from LLM service with timeout
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), IMMEDIATE_TIMEOUT);
-
-      const llmResponse = await fetch(process.env.LLM_SERVICE_URL!, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Query-ID': query.id,
-        },
-        body: JSON.stringify({
-          ...validatedData,
-          queryID: query.id,
-        }),
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      if (llmResponse.ok) {
-        const responseData = await llmResponse.json();
-
-        // Update query with response
-        await prisma.query.update({
-          where: { id: query.id },
-          data: {
-            response: responseData.response,
-            status: 'COMPLETED',
-          },
-        });
-
-        return NextResponse.json({
-          queryId: query.id,
-          status: 'COMPLETED',
-          response: responseData.response,
-        });
-      }
-    } catch (error: any) {
-      if (error.name === 'AbortError') {
-        // Request timed out - update status to IN_PROGRESS
-        await prisma.query.update({
-          where: { id: query.id },
-          data: { status: 'IN_PROGRESS' },
-        });
-
-        // Create a notification for the user
-        await prisma.notification.create({
-          data: {
-            type: 'QUERY_COMPLETE',
-            title: 'Query Processing',
-            content: 'Your query is being processed. You will be notified when it\'s complete.',
-            userId: session.user.id,
-          },
-        });
-
-        return NextResponse.json({
-          queryId: query.id,
-          status: 'IN_PROGRESS',
-          estimatedTime: 300, // 5 minutes estimate
-        });
-      }
-    }
-
-    // If we reach here, something went wrong with the LLM service
-    await prisma.query.update({
-      where: { id: query.id },
-      data: { status: 'FAILED' },
+    // Send request to LLM service
+    console.log('Sending request to LLM service:', {
+      queryId: query.id,
+      query: validatedData.query,
+      userId: session.user.id,
+      conversationId: validatedData.conversationID,
+      accountGA4: validatedData.accountGA4,
+      propertyGA4: validatedData.propertyGA4,
+      dateToday: validatedData.dateToday,
     });
 
-    return NextResponse.json(
-      { error: 'Failed to process query', queryId: query.id },
-      { status: 500 }
-    );
+    const llmResponse = await fetch(process.env.LLM_SERVICE_URL!, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.LLM_SERVICE_API_KEY}`,
+        'X-Query-ID': query.id // Add query ID to headers as backup
+      },
+      body: JSON.stringify({
+        queryId: query.id,
+        query: validatedData.query,
+        userId: session.user.id,
+        conversationId: validatedData.conversationID,
+        accountGA4: validatedData.accountGA4,
+        propertyGA4: validatedData.propertyGA4,
+        dateToday: validatedData.dateToday,
+      }),
+    });
+
+    // Log the raw response for debugging
+    const responseText = await llmResponse.text();
+    console.log('LLM service response status:', llmResponse.status);
+    console.log('LLM service raw response:', responseText);
+
+    if (!llmResponse.ok) {
+      let errorMessage = 'Internal server error';
+      let errorDetails = {};
+      
+      try {
+        const errorData = JSON.parse(responseText);
+        errorMessage = errorData.message || errorData.error || errorMessage;
+        errorDetails = errorData;
+      } catch (e) {
+        console.error('Failed to parse error response:', e);
+        errorMessage = responseText || errorMessage;
+      }
+
+      console.error('LLM service error:', {
+        status: llmResponse.status,
+        message: errorMessage,
+        details: errorDetails,
+        queryId: query.id
+      });
+      
+      // Update query status to failed with detailed error
+      await prisma.query.update({
+        where: { id: query.id },
+        data: { 
+          status: 'FAILED', 
+          response: JSON.stringify({
+            error: errorMessage,
+            status: llmResponse.status,
+            details: errorDetails
+          })
+        },
+      });
+
+      return NextResponse.json(
+        { 
+          error: errorMessage,
+          queryId: query.id,
+          status: 'FAILED',
+          details: errorDetails
+        },
+        { status: llmResponse.status }
+      );
+    }
+
+    // Parse the successful response
+    let responseData;
+    try {
+      responseData = JSON.parse(responseText);
+    } catch (e) {
+      console.error('Failed to parse success response:', e);
+      throw new Error('Invalid response from LLM service');
+    }
+
+    // If we get an immediate response, update the query and return it
+    if (responseData.response) {
+      await prisma.query.update({
+        where: { id: query.id },
+        data: {
+          status: 'COMPLETED',
+          response: responseData.response,
+        },
+      });
+
+      return NextResponse.json({
+        status: 'COMPLETED',
+        queryId: query.id,
+        response: responseData.response,
+      });
+    }
+
+    // If no immediate response but we have an error, handle it
+    if (responseData.error) {
+      await prisma.query.update({
+        where: { id: query.id },
+        data: {
+          status: 'FAILED',
+          response: responseData.error,
+        },
+      });
+
+      return NextResponse.json({
+        status: 'FAILED',
+        queryId: query.id,
+        error: responseData.error,
+      });
+    }
+
+    // If no immediate response and no error, assume it's in progress
+    return NextResponse.json({
+      status: 'IN_PROGRESS',
+      queryId: query.id,
+    });
+
   } catch (error) {
     console.error('Chat API Error:', error);
+    
+    // Update query status to failed
+    if (query?.id) {
+      await prisma.query.update({
+        where: { id: query.id },
+        data: { 
+          status: 'FAILED', 
+          response: error instanceof Error ? error.message : 'Unknown error'  // Store error in response field since that's what our schema expects
+        },
+      });
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -125,9 +190,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

@@ -7,8 +7,8 @@ import { ChatWindow } from '@/components/chat/ChatWindow';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { TagSelector } from '@/components/chat/TagSelector';
 import { SourcesButton } from '@/components/chat/SourcesButton';
-import { cn } from '@/lib/utils';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
 
 interface Conversation {
   id: string;
@@ -16,6 +16,8 @@ interface Conversation {
   lastMessage: string;
   timestamp: string;
   isStarred: boolean;
+  gaAccountId?: string;
+  gaPropertyId?: string;
 }
 
 interface Message {
@@ -26,11 +28,32 @@ interface Message {
   status?: 'processing' | 'completed' | 'error';
 }
 
-const mockSuggestedResponses = [
-  { id: '1', text: 'What features should I enable?' },
-  { id: '2', text: 'How do I add Tailwind CSS?' },
-  { id: '3', text: 'Can you explain the file structure?' },
-];
+interface GaAccount {
+  id: string;
+  gaAccountId: string;
+  gaAccountName: string;
+  gaProperties: GaProperty[];
+}
+
+interface GaProperty {
+  id: string;
+  gaPropertyId: string;
+  gaPropertyName: string;
+}
+
+interface ConversationListProps {
+  conversations: Conversation[];
+  selectedId?: string;
+  onSelect: (id: string) => void;
+  onToggleStar: (id: string) => void;
+  onCreateConversation: (data: { 
+    title: string; 
+    gaAccountId?: string; 
+    gaPropertyId?: string; 
+  }) => Promise<void>;
+  isLoading?: boolean;
+  gaAccounts: GaAccount[];
+}
 
 const mockTags = [
   { id: '1', name: 'Next.js' },
@@ -53,10 +76,24 @@ const mockSources = [
 ];
 
 export default function ChatPage() {
+  const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selectedTags, setSelectedTags] = useState(mockTags);
   const queryClient = useQueryClient();
+
+  // Fetch GA accounts
+  const { data: gaAccounts = [] } = useQuery<GaAccount[]>({
+    queryKey: ['ga-accounts'],
+    queryFn: async () => {
+      if (!session?.user?.id) return [];
+      const response = await fetch(`/api/users/${session.user.id}/ga-accounts`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch GA accounts');
+      }
+      return response.json();
+    },
+    enabled: !!session?.user?.id,
+  });
 
   // Fetch conversations
   const { data: conversations = [], isLoading: isLoadingConversations } = useQuery<Conversation[]>({
@@ -119,13 +156,16 @@ export default function ChatPage() {
     enabled: !!selectedConversation,
   });
 
+  // Fetch selected conversation details
+  const selectedConversationDetails = conversations.find(conv => conv.id === selectedConversation);
+
   // Create conversation mutation
   const createConversationMutation = useMutation({
-    mutationFn: async (title: string) => {
+    mutationFn: async (data: { title: string; gaAccountId?: string; gaPropertyId?: string }) => {
       const response = await fetch('/api/conversations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
@@ -166,6 +206,11 @@ export default function ChatPage() {
     mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
       console.log('Sending message to API:', { conversationId, message });
       
+      // Get GA details from the selected conversation
+      const conversation = conversations.find(conv => conv.id === conversationId);
+      const gaAccountId = conversation?.gaAccountId;
+      const gaPropertyId = conversation?.gaPropertyId;
+      
       // Create a temporary message object with processing status
       const tempMessage: Message = {
         id: `temp-${Date.now()}`,
@@ -186,8 +231,8 @@ export default function ChatPage() {
           query: message,
           conversationID: conversationId,
           dateToday: new Date().toISOString(),
-          accountGA4: 'default', // These are required by the schema but not used in processing
-          propertyGA4: 'default'
+          accountGA4: gaAccountId || 'default',
+          propertyGA4: gaPropertyId || 'default'
         }),
       });
 
@@ -281,8 +326,12 @@ export default function ChatPage() {
     }, 5 * 60 * 1000);
   };
 
-  const handleCreateConversation = async (title: string) => {
-    await createConversationMutation.mutate(title);
+  const handleCreateConversation = async (data: { 
+    title: string; 
+    gaAccountId?: string; 
+    gaPropertyId?: string; 
+  }) => {
+    await createConversationMutation.mutate(data);
   };
 
   const handleToggleStar = async (id: string) => {
@@ -299,7 +348,9 @@ export default function ChatPage() {
     try {
       if (!selectedConversation) {
         console.log('Creating new conversation...');
-        const newConversation = await createConversationMutation.mutateAsync('New Conversation');
+        const newConversation = await createConversationMutation.mutateAsync({
+          title: 'New Conversation'
+        });
         console.log('New conversation created:', newConversation);
         await sendMessageMutation.mutateAsync({
           conversationId: newConversation.id,
@@ -323,46 +374,22 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-screen flex-col md:flex-row">
-      {/* Mobile header with menu button */}
-      <div className="flex h-14 items-center justify-between border-b px-4 md:hidden">
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="inline-flex items-center justify-center rounded-md text-sm font-medium"
-          aria-label="Toggle conversation list"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            <line x1="3" x2="21" y1="6" y2="6" />
-            <line x1="3" x2="21" y1="12" y2="12" />
-            <line x1="3" x2="21" y1="18" y2="18" />
-          </svg>
-        </button>
-        <div className="flex items-center space-x-2">
-          <TagSelector
-            selectedTags={selectedTags}
-            onAddTag={(tag) => setSelectedTags([...selectedTags, tag])}
-            onRemoveTag={(tagId) =>
-              setSelectedTags(selectedTags.filter((tag) => tag.id !== tagId))
-            }
-          />
-          <SourcesButton sources={mockSources} />
-        </div>
-      </div>
-
-      {/* Mobile menu */}
+    <div className="flex h-screen">
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <div className="hidden md:flex md:w-80 md:flex-col md:border-r">
+          <ConversationList
+            conversations={conversations}
+            selectedId={selectedConversation}
+            onSelect={(id) => {
+              setSelectedConversation(id);
+              setIsMobileMenuOpen(false);
+            }}
+            onToggleStar={handleToggleStar}
+            onCreateConversation={handleCreateConversation}
+            isLoading={createConversationMutation.isPending}
+            gaAccounts={gaAccounts}
+          />
+        </div>
         <SheetContent side="left" className="w-80 p-0">
           <ConversationList
             conversations={conversations}
@@ -374,78 +401,33 @@ export default function ChatPage() {
             onToggleStar={handleToggleStar}
             onCreateConversation={handleCreateConversation}
             isLoading={createConversationMutation.isPending}
+            gaAccounts={gaAccounts}
           />
         </SheetContent>
       </Sheet>
-
-      {/* Desktop conversation list */}
-      <div 
-        className={cn(
-          "hidden md:flex flex-col border-r transition-all duration-300 ease-in-out",
-          isCollapsed ? "w-16" : "w-80"
-        )}
-      >
-        <button
-          type="button"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="flex h-14 items-center justify-center border-b hover:bg-muted transition-colors"
-          aria-label={isCollapsed ? "Expand conversation list" : "Collapse conversation list"}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={cn(
-              "h-6 w-6 transition-transform duration-300",
-              isCollapsed ? "rotate-180" : ""
-            )}
-          >
-            <path d="m15 18-6-6 6-6"/>
-          </svg>
-        </button>
-        <div className={cn(
-          "flex-1 transition-opacity duration-300",
-          isCollapsed ? "opacity-0 invisible" : "opacity-100 visible"
-        )}>
-          <ConversationList
-            conversations={conversations}
-            selectedId={selectedConversation}
-            onSelect={setSelectedConversation}
-            onToggleStar={handleToggleStar}
-            onCreateConversation={handleCreateConversation}
-            isLoading={createConversationMutation.isPending}
-          />
-        </div>
-      </div>
-
-      {/* Main chat area */}
       <div className="flex flex-1 flex-col">
-        <div className="hidden items-center justify-end border-b p-4 md:flex">
-          <div className="flex items-center space-x-2">
-            <TagSelector
-              selectedTags={selectedTags}
-              onAddTag={(tag) => setSelectedTags([...selectedTags, tag])}
-              onRemoveTag={(tagId) =>
-                setSelectedTags(selectedTags.filter((tag) => tag.id !== tagId))
-              }
-            />
-            <SourcesButton sources={mockSources} />
-          </div>
-        </div>
-        <div className="flex-1 overflow-hidden">
-          <ChatWindow messages={messages} isLoading={isLoadingMessages} />
-        </div>
+        <ChatWindow
+          messages={messages}
+          isLoading={isLoadingMessages}
+          gaAccountId={selectedConversationDetails?.gaAccountId}
+          gaPropertyId={selectedConversationDetails?.gaPropertyId}
+        />
         <div className="border-t p-4">
-          <ChatInput
-            onSend={handleSendMessage}
-            suggestedResponses={mockSuggestedResponses}
-          />
+          <div className="flex flex-1 items-center space-x-2">
+            <div className="flex-1">
+              <ChatInput onSend={handleSendMessage} />
+            </div>
+            <div className="flex items-center space-x-2">
+              <TagSelector
+                selectedTags={selectedTags}
+                onAddTag={(tag) => setSelectedTags([...selectedTags, tag])}
+                onRemoveTag={(tagId) =>
+                  setSelectedTags(selectedTags.filter((tag) => tag.id !== tagId))
+                }
+              />
+              <SourcesButton sources={mockSources} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
