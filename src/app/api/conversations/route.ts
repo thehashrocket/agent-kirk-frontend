@@ -1,9 +1,23 @@
+/**
+ * @fileoverview Conversations API Route
+ * 
+ * This file implements the REST API endpoints for managing conversations in the application.
+ * It provides functionality for creating, retrieving, and updating conversation records.
+ * All endpoints require authentication via NextAuth session.
+ * 
+ * @see {@link https://nextjs.org/docs/app/building-your-application/routing/route-handlers}
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { authOptions } from '@/lib/auth';
 
+/**
+ * Represents a conversation with its latest query
+ * @interface ConversationWithQueries
+ */
 interface ConversationWithQueries {
   id: string;
   title: string;
@@ -14,7 +28,10 @@ interface ConversationWithQueries {
   }>;
 }
 
-// Extend PrismaClient type to include our models
+/**
+ * Extends PrismaClient type to include our specific conversation model types
+ * This ensures type safety when working with conversation-specific queries
+ */
 declare global {
   type ExtendedPrismaClient = PrismaClient & {
     conversation: {
@@ -25,9 +42,19 @@ declare global {
   };
 }
 
-// Cast prisma to our extended type
+// Cast prisma to our extended type for better type inference
 const extendedPrisma = prisma as ExtendedPrismaClient;
 
+/**
+ * GET /api/conversations
+ * 
+ * Retrieves all conversations for the authenticated user, ordered by most recently updated.
+ * Includes the most recent query for each conversation.
+ * 
+ * @returns {Promise<NextResponse>} JSON response with conversations array or error
+ * @throws {NextResponse} 401 if user is not authenticated
+ * @throws {NextResponse} 500 if server error occurs
+ */
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -62,6 +89,18 @@ export async function GET() {
   }
 }
 
+/**
+ * PATCH /api/conversations
+ * 
+ * Updates a conversation's properties. Currently supports toggling isStarred status.
+ * 
+ * @param {Request} request - Contains conversation ID and updated properties
+ * @returns {Promise<NextResponse>} JSON response with updated conversation or error
+ * @throws {NextResponse} 400 if conversation ID is missing
+ * @throws {NextResponse} 401 if user is not authenticated
+ * @throws {NextResponse} 404 if conversation is not found
+ * @throws {NextResponse} 500 if server error occurs
+ */
 export async function PATCH(request: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -97,6 +136,18 @@ export async function PATCH(request: Request) {
   }
 }
 
+/**
+ * POST /api/conversations
+ * 
+ * Creates a new conversation for the authenticated user.
+ * Optionally includes Google Analytics account and property IDs.
+ * 
+ * @param {Request} request - Contains title and optional GA properties
+ * @returns {Promise<NextResponse>} JSON response with created conversation or error
+ * @throws {NextResponse} 400 if title is missing
+ * @throws {NextResponse} 401 if user is not authenticated
+ * @throws {NextResponse} 500 if server error occurs
+ */
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);

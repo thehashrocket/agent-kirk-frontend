@@ -1,4 +1,14 @@
 /**
+ * @fileoverview API route handlers for managing individual messages in the Kirk messaging system.
+ * This file contains endpoints for retrieving and updating message details, including read status
+ * and archival state. It implements authentication checks and permission controls to ensure
+ * only authorized users can access and modify messages.
+ * 
+ * @module api/messages/[id]
+ * @see {@link /api/messages} for the messages collection endpoints
+ */
+
+/**
  * @route PATCH /api/messages/[id]
  * @description Updates a message's status (read/archived). Only the recipient can mark a message as read,
  * while both sender and recipient can archive messages.
@@ -29,10 +39,18 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
+/**
+ * Schema for validating message update requests
+ */
 const updateSchema = z.object({
   isRead: z.boolean().optional(),
   archived: z.boolean().optional(),
 });
+
+/**
+ * Type definition for message update request body
+ */
+type MessageUpdateRequest = z.infer<typeof updateSchema>;
 
 export async function PATCH(
   request: NextRequest,
@@ -95,6 +113,36 @@ export async function PATCH(
   }
 }
 
+/**
+ * Retrieves detailed information about a specific message.
+ * Includes sender details, recipient details, attachments, and any replies.
+ * 
+ * Authorization rules:
+ * - Only the sender or recipient can view the message
+ * - Requires authenticated user
+ * 
+ * @route GET /api/messages/[id]
+ * 
+ * @param {NextRequest} request - The Next.js request object
+ * @param {Object} params - Route parameters
+ * @param {string} params.id - The unique identifier of the message to retrieve
+ * 
+ * @returns {Promise<NextResponse>} JSON response containing the message details or error
+ * 
+ * @throws {401} - Unauthorized - User not authenticated
+ * @throws {404} - Message not found
+ * 
+ * @example
+ * // Retrieve message details
+ * GET /api/messages/123
+ * Response: {
+ *   id: string,
+ *   sender: { id: string, name: string, image: string },
+ *   recipient: { id: string, name: string, image: string },
+ *   attachments: Array<Attachment>,
+ *   replies: Array<Message>
+ * }
+ */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

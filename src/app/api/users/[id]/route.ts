@@ -1,8 +1,36 @@
+/**
+ * @fileoverview User Profile API Route
+ * 
+ * This route handles user profile operations with role-based access control (RBAC).
+ * It supports fetching user profiles based on the following permissions:
+ * - Users can access their own profile
+ * - Admins can access any profile
+ * - Account representatives can access their clients' profiles
+ * 
+ * @route GET /api/users/[id]
+ * @requires next-auth - For session management
+ * @requires @prisma/client - For database operations
+ */
+
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
+/**
+ * Retrieves a user's profile with role-based access control.
+ * 
+ * @param {Request} request - The incoming HTTP request
+ * @param {Object} context - The route context containing path parameters
+ * @param {string} context.params.id - The ID of the user to retrieve
+ * 
+ * @returns {Promise<NextResponse>} JSON response containing user data or error
+ * 
+ * @throws {401} - When no valid session exists
+ * @throws {403} - When user lacks permission to access the profile
+ * @throws {404} - When target user or current user is not found
+ * @throws {500} - On internal server errors
+ */
 export async function GET(
   request: Request,
   context: { params: { id: string } }

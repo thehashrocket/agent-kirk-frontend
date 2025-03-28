@@ -1,10 +1,32 @@
+/**
+ * @fileoverview LLM API Route Handler
+ * 
+ * This route handles LLM (Language Learning Model) query processing by:
+ * 1. Validating incoming requests
+ * 2. Storing queries in the database
+ * 3. Forwarding requests to an external LLM service
+ * 4. Updating the database with responses
+ * 
+ * @route POST /api/llm
+ * @security Requires authentication
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import type { QueryStatus } from '@/lib/validations/chat';
 
-// Define the request schema
+/**
+ * Schema for individual LLM query requests
+ * @typedef {Object} QueryRequest
+ * @property {string} query - The LLM query text
+ * @property {string} accountGA4 - Google Analytics 4 account identifier
+ * @property {string} propertyGA4 - Google Analytics 4 property identifier
+ * @property {string} conversationID - Unique identifier for the conversation
+ * @property {string} dateToday - Current date in ISO format
+ */
 const QueryRequestSchema = z.array(
   z.object({
     query: z.string().min(1),
@@ -15,6 +37,14 @@ const QueryRequestSchema = z.array(
   })
 );
 
+/**
+ * Handles POST requests for LLM queries
+ * 
+ * @async
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} JSON response with LLM results or error
+ * @throws {Error} When LLM service fails or database operations fail
+ */
 export async function POST(
   request: NextRequest
 ) {
@@ -35,18 +65,19 @@ export async function POST(
     // Create a database record for the request
     const query = await prisma.query.create({
       data: {
-        prompt: validatedData[0].query,
-        accountGA4: validatedData[0].accountGA4,
-        propertyGA4: validatedData[0].propertyGA4,
-        conversationID: validatedData[0].conversationID,
-        dateToday: new Date(validatedData[0].dateToday),
+        content: validatedData[0].query,
+        status: 'PENDING' as QueryStatus,
         userId: session.user.id,
         response: '', // Will be updated after LLM response
       },
     });
 
     // Forward the request to the LLM service
-    const llmResponse = await fetch(process.env.LLM_SERVICE_URL!, {
+    if (!process.env.LLM_SERVICE_URL) {
+      throw new Error('LLM_SERVICE_URL is not configured');
+    }
+
+    const llmResponse = await fetch(process.env.LLM_SERVICE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,6 +86,14 @@ export async function POST(
     });
 
     if (!llmResponse.ok) {
+      // Update query status to FAILED if LLM service fails
+      await prisma.query.update({
+        where: { id: query.id },
+        data: { 
+          status: 'FAILED' as QueryStatus,
+          response: `Error: LLM service responded with status: ${llmResponse.status}`
+        },
+      });
       throw new Error(`LLM service responded with status: ${llmResponse.status}`);
     }
 
@@ -63,7 +102,10 @@ export async function POST(
     // Update the database record with the response
     await prisma.query.update({
       where: { id: query.id },
-      data: { response: JSON.stringify(responseData) },
+      data: { 
+        status: 'COMPLETED' as QueryStatus,
+        response: JSON.stringify(responseData) 
+      },
     });
     
     return NextResponse.json(responseData);

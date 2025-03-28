@@ -1,14 +1,46 @@
+/**
+ * @fileoverview API route handler for LLM query processing
+ * 
+ * This route handles user prompts sent to the LLM service. It:
+ * - Validates user authentication
+ * - Processes the prompt through a LLM service (currently mocked)
+ * - Stores the query and response in the database
+ * 
+ * @route POST /api/llm/ask
+ * @requires Authentication
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-// Define the request schema
+/**
+ * Zod schema for validating incoming query requests
+ * @requires prompt - Non-empty string containing the user's query
+ */
 const QueryRequestSchema = z.object({
   prompt: z.string().min(1),
 });
 
+/**
+ * Handles POST requests for LLM queries
+ * 
+ * @async
+ * @param {NextRequest} request - The incoming request object
+ * @returns {Promise<NextResponse>} JSON response containing either the LLM response or error details
+ * 
+ * @throws {401} If user is not authenticated
+ * @throws {400} If request data is invalid
+ * @throws {500} If server encounters an error during processing
+ * 
+ * @example
+ * POST /api/llm/ask
+ * {
+ *   "prompt": "What is the meaning of life?"
+ * }
+ */
 export async function POST(
   request: NextRequest
 ) {

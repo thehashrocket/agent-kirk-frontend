@@ -1,14 +1,45 @@
+/**
+ * @fileoverview Account Representative Report API Route
+ * 
+ * This route handles the generation of account representative reports.
+ * It is protected and only accessible to authenticated users with the ACCOUNT_REP role.
+ * The route accepts optional date range parameters and returns report data specific
+ * to the authenticated account representative.
+ * 
+ * @route POST /api/reports/account-rep
+ * @secure Requires authentication and ACCOUNT_REP role
+ */
+
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 import { getAccountRepReportData } from '@/lib/services/reports';
 import { prisma } from '@/lib/prisma';
 
+/**
+ * Zod schema for validating report request parameters
+ * @typedef {Object} ReportRequest
+ * @property {string} [startDate] - Optional start date for the report range
+ * @property {string} [endDate] - Optional end date for the report range
+ */
 const reportRequestSchema = z.object({
   startDate: z.string().optional(),
   endDate: z.string().optional(),
 });
 
+/**
+ * Handles POST requests for generating account representative reports
+ * 
+ * @async
+ * @function POST
+ * @param {Request} request - The incoming HTTP request
+ * @returns {Promise<NextResponse>} JSON response containing either the report data or error message
+ * 
+ * @throws {NextResponse} 401 - If user is not authenticated
+ * @throws {NextResponse} 403 - If user is not an account representative
+ * @throws {NextResponse} 400 - If request body fails validation
+ * @throws {NextResponse} 500 - If server encounters an error during processing
+ */
 export async function POST(request: Request) {
   try {
     const session = await getServerSession();

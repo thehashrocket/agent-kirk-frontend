@@ -1,8 +1,21 @@
 /**
- * @file src/app/api/messages/route.ts
- * Messages API route handler for managing message operations.
- * Provides endpoints for creating and retrieving messages with support for
- * threading, attachments, and pagination.
+ * @fileoverview Messages API Route Handler
+ * 
+ * This module implements the Next.js route handlers for the /api/messages endpoint.
+ * It provides RESTful operations for managing messages in the application, including:
+ * - Creating new messages and replies (POST)
+ * - Retrieving messages with pagination and filtering (GET)
+ * 
+ * Features:
+ * - Authentication via NextAuth
+ * - Message threading support
+ * - File attachments
+ * - Pagination and filtering
+ * - Admin role support
+ * - Archive functionality
+ * - Read/unread status
+ * 
+ * @module api/messages
  */
 
 import { NextResponse } from 'next/server';
@@ -13,8 +26,19 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 /**
+ * Interface for message attachments
+ * @interface MessageAttachment
+ */
+interface MessageAttachment {
+  filename: string;
+  fileSize: number;
+  mimeType: string;
+  url: string;
+}
+
+/**
  * Zod schema for validating message creation requests.
- * Ensures messages have required content and valid attachments.
+ * Enforces content length limits and file size restrictions.
  */
 const messageSchema = z.object({
   content: z.string().min(1).max(5000),
@@ -29,12 +53,62 @@ const messageSchema = z.object({
 });
 
 /**
- * POST handler for creating new messages.
- * Supports creating both new threads and replies with attachments.
- * Requires authentication and validates message content.
+ * Response structure for a successful message creation
+ * @interface MessageResponse
+ */
+interface MessageResponse {
+  id: string;
+  content: string;
+  senderId: string;
+  recipientId: string;
+  threadId?: string;
+  parentId?: string;
+  isThreadStart: boolean;
+  isRead: boolean;
+  archived: boolean;
+  createdAt: Date;
+  attachments: MessageAttachment[];
+  sender: {
+    id: string;
+    name: string | null;
+    image: string | null;
+  };
+  parent?: {
+    id: string;
+    content: string;
+    sender: {
+      id: string;
+      name: string | null;
+    };
+  };
+}
+
+/**
+ * Response structure for paginated message retrieval
+ * @interface PaginatedMessagesResponse
+ */
+interface PaginatedMessagesResponse {
+  messages: MessageResponse[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+/**
+ * Creates a new message or reply in the system.
  * 
- * @param {NextRequest} request - The incoming request object
- * @returns {Promise<NextResponse>} Response containing the created message or error
+ * Handles:
+ * - Message validation
+ * - Thread creation and management
+ * - Attachment processing
+ * - User authentication
+ * 
+ * @param {NextRequest} request - The incoming HTTP request
+ * @returns {Promise<NextResponse>} JSON response with created message or error
+ * @throws {Error} When validation fails or database operations fail
  */
 export async function POST(
   request: NextRequest
@@ -113,13 +187,19 @@ export async function POST(
 }
 
 /**
- * GET handler for retrieving messages.
- * Supports pagination, filtering by thread, view type (inbox/outbox),
- * archived status, and unread status.
- * Includes special handling for admin users.
+ * Retrieves messages based on query parameters.
  * 
- * @param {NextRequest} request - The incoming request object
- * @returns {Promise<NextResponse>} Response containing messages and pagination info
+ * Supports:
+ * - Pagination (page, limit)
+ * - Thread filtering
+ * - View types (inbox/outbox)
+ * - Archive status
+ * - Read/unread status
+ * - Admin access
+ * 
+ * @param {NextRequest} request - The incoming HTTP request
+ * @returns {Promise<NextResponse>} JSON response with messages and pagination info
+ * @throws {Error} When authentication fails or database operations fail
  */
 export async function GET(
   request: NextRequest
@@ -144,8 +224,18 @@ export async function GET(
     const showUnread = searchParams.get('unread') === 'true';
 
     /**
-     * Type definition for the Prisma where clause used in message queries.
-     * Supports complex filtering based on thread, sender, recipient, and message status.
+     * Prisma where clause type for message queries.
+     * Supports complex filtering based on various message attributes.
+     * 
+     * @typedef {Object} WhereClause
+     * @property {string} [threadId] - Optional thread ID to filter messages by thread
+     * @property {string} [senderId] - Optional sender ID to filter messages by sender
+     * @property {string} [recipientId] - Optional recipient ID to filter messages by recipient
+     * @property {boolean} [isThreadStart] - Optional flag to filter thread start messages
+     * @property {boolean} [isRead] - Optional flag to filter read/unread messages
+     * @property {boolean} [archived] - Optional flag to filter archived messages
+     * @property {Object[]} [AND] - Optional array of AND conditions
+     * @property {Object[]} [OR] - Optional array of OR conditions for complex queries
      */
     type WhereClause = {
       threadId?: string;

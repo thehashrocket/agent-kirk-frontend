@@ -1,28 +1,45 @@
 /**
- * API Route: POST /api/notifications/[id]/read
+ * @fileoverview Notification Read Status API Route
  * 
- * Marks a specific notification as read for the authenticated user.
- * This endpoint ensures that users can only mark their own notifications as read.
+ * This route handles marking individual notifications as read in the system.
+ * It provides a single endpoint for updating the read status of notifications
+ * with proper authentication and authorization checks.
  * 
- * @route POST /api/notifications/[id]/read
+ * Features:
+ * - Authentication via NextAuth session
+ * - Authorization checks to ensure users can only mark their own notifications
+ * - Database persistence using Prisma
+ * - Comprehensive error handling with appropriate status codes
+ * 
+ * @route POST /api/notifications/[id]/read - Mark a notification as read
+ * @security Requires authentication via NextAuth session
+ * 
  * @param {string} id - The ID of the notification to mark as read (from URL parameter)
  * 
- * @security
- * - Requires authentication via NextAuth session
- * - Verifies notification ownership before updating
- * 
- * @returns {Promise<NextResponse>} JSON response containing the updated notification
- * 
- * @throws {401} Unauthorized - If user is not authenticated
- * @throws {404} Not Found - If user or notification is not found
- * @throws {404} Not Found - If notification doesn't belong to the authenticated user
- * @throws {500} Internal Server Error - If there's an error processing the request
+ * @returns {Object} The updated notification object
+ * @throws {401} Unauthorized - If no valid session exists
+ * @throws {404} Not Found - If notification doesn't exist or user is unauthorized
+ * @throws {500} Internal Server Error - If database operation fails
  */
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
+/**
+ * Marks a notification as read for the authenticated user.
+ * Ensures that users can only mark their own notifications as read.
+ * 
+ * @param {Request} request - The incoming HTTP request
+ * @param {Object} params - Route parameters
+ * @param {string} params.id - The ID of the notification to mark as read
+ * 
+ * @returns {Promise<NextResponse>} JSON response containing either:
+ *   - 200: The updated notification object
+ *   - 401: Unauthorized if no valid session exists
+ *   - 404: Not Found if notification doesn't exist or user is unauthorized
+ *   - 500: Internal Server Error if operation fails
+ */
 export async function POST(
   request: Request,
   { params }: { params: { id: string } }

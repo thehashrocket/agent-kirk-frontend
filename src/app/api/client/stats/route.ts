@@ -1,14 +1,17 @@
 /**
- * Client Statistics API Route
+ * @fileoverview Client Statistics API Route Handler
+ * This module provides the API endpoint for retrieving authenticated client statistics
+ * including monthly query usage, response times, success rates, and API credit usage.
  * 
- * This API endpoint provides statistical data for authenticated clients, including:
- * - Monthly query usage
- * - Average response times
- * - Success rates
- * - API credit usage
+ * @module api/client/stats
+ * @version 1.0.0
+ * @license MIT
+ * @since 2024-03-21
  * 
- * @route GET /api/client/stats
- * @access Private - Requires authenticated client user
+ * @requires next/server
+ * @requires next-auth
+ * @requires @/lib/auth
+ * @requires @/lib/prisma
  */
 
 import { NextResponse } from 'next/server';
@@ -17,7 +20,23 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 /**
- * Response structure for client statistics
+ * Response structure for client statistics endpoint
+ * 
+ * @typedef {Object} StatsResponse
+ * @property {Object} stats - Collection of statistical metrics
+ * @property {Object} stats.monthlyQueries - Monthly query usage statistics
+ * @property {string} stats.monthlyQueries.value - Current month's query count
+ * @property {number} stats.monthlyQueries.change - Percentage change from previous month
+ * @property {Object} stats.avgResponseTime - Query response time statistics
+ * @property {string} stats.avgResponseTime.value - Average response time in seconds
+ * @property {number} stats.avgResponseTime.change - Percentage change in response time
+ * @property {Object} stats.successRate - Query success rate statistics
+ * @property {string} stats.successRate.value - Current success rate percentage
+ * @property {number} stats.successRate.change - Change in success rate
+ * @property {Object} stats.apiCredits - API credit usage statistics
+ * @property {string} stats.apiCredits.value - Current API credits remaining
+ * @property {string} stats.apiCredits.total - Total API credits allocated
+ * @property {number} stats.apiCredits.change - Change in API credit usage
  */
 type StatsResponse = {
   stats: {
@@ -42,12 +61,34 @@ type StatsResponse = {
 };
 
 /**
- * GET handler for client statistics
+ * Handles GET requests for client statistics
  * 
- * @returns {Promise<NextResponse<StatsResponse | { error: string }>>} JSON response containing client statistics or error
+ * This endpoint provides authenticated clients with their usage statistics including:
+ * - Monthly query count and month-over-month change
+ * - Average response time for queries in the last 24 hours
+ * - Overall query success rate
+ * - Current API credit balance and limits
+ * 
+ * @async
+ * @function GET
+ * @route {GET} /api/client/stats
+ * @access Private - Requires authenticated client user
+ * 
+ * @returns {Promise<NextResponse<StatsResponse>>} JSON response containing client statistics
+ * 
+ * @example
+ * // Successful response
+ * {
+ *   stats: {
+ *     monthlyQueries: { value: "150", change: 12.5 },
+ *     avgResponseTime: { value: "0.8s", change: 0 },
+ *     successRate: { value: "98.5%", change: 0 },
+ *     apiCredits: { value: "850", total: "1000", change: 0 }
+ *   }
+ * }
  * 
  * @throws {401} If user is not authenticated or not a client
- * @throws {500} If there's an internal server error
+ * @throws {500} If there's an internal server error during data retrieval
  */
 export async function GET(): Promise<NextResponse> {
   try {

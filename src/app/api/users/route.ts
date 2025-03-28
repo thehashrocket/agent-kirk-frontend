@@ -1,8 +1,24 @@
 /**
- * @file src/app/api/users/route.ts
- * Users API route handler for managing user operations.
- * Provides endpoints for creating, reading, updating, and soft-deleting users
- * with role-based access control and permission management.
+ * @fileoverview User Management API Route Handler
+ * 
+ * This module implements a RESTful API for user management in the application.
+ * It provides endpoints for CRUD operations on users with role-based access control (RBAC).
+ * 
+ * Key features:
+ * - Role-based access control (Admin, Account Rep, Client)
+ * - Secure password hashing with bcryptjs
+ * - Input validation using Zod schemas
+ * - Soft delete functionality
+ * - Hierarchical data access patterns
+ * 
+ * Endpoints:
+ * - GET    /api/users - List users based on role permissions
+ * - POST   /api/users - Create new user (Admin/Account Rep only)
+ * - PATCH  /api/users/:id - Update user with role-based restrictions
+ * - DELETE /api/users/:id - Soft delete user (Admin/Account Rep only)
+ * 
+ * @package @kirk/api
+ * @module users
  */
 
 import { NextResponse } from 'next/server';
@@ -13,8 +29,22 @@ import { z } from 'zod';
 import bcryptjs from 'bcryptjs';
 
 /**
+ * Type representing the structure of a user in the system
+ * @typedef {Object} User
+ * @property {string} id - Unique identifier
+ * @property {string} name - User's full name
+ * @property {string} email - User's email address
+ * @property {string} password - Hashed password
+ * @property {string} roleId - Associated role ID
+ * @property {string} [accountRepId] - Optional account representative ID
+ * @property {boolean} isActive - User's active status
+ */
+
+/**
  * Zod schema for validating user creation requests.
  * Ensures new users have required fields and proper data types.
+ * 
+ * @constant {z.ZodObject}
  */
 const createUserSchema = z.object({
   name: z.string().min(2),
@@ -27,6 +57,8 @@ const createUserSchema = z.object({
 /**
  * Zod schema for validating user update requests.
  * All fields are optional as updates can be partial.
+ * 
+ * @constant {z.ZodObject}
  */
 const updateUserSchema = z.object({
   name: z.string().min(2).optional(),
@@ -37,13 +69,18 @@ const updateUserSchema = z.object({
 });
 
 /**
- * GET handler for retrieving users based on role permissions:
- * - Admins can see all users
- * - Account Reps can see their assigned clients
- * - Clients can only see themselves
+ * GET handler for retrieving users based on role permissions.
  * 
+ * Access patterns:
+ * - Admins: Can see all users
+ * - Account Reps: Can see their assigned clients
+ * - Clients: Can only see themselves
+ * 
+ * @async
+ * @function GET
  * @param {NextRequest} request - The incoming request object
- * @returns {Promise<NextResponse>} Response containing users or error
+ * @returns {Promise<NextResponse>} JSON response containing users or error
+ * @throws {Error} When database operations fail
  */
 export async function GET(
   request: NextRequest
@@ -121,11 +158,18 @@ export async function GET(
 
 /**
  * POST handler for creating new users.
- * Only Admin and Account Rep roles can create users.
- * Account Reps can only create client users assigned to them.
  * 
+ * Access patterns:
+ * - Admin: Can create any type of user
+ * - Account Rep: Can only create client users assigned to them
+ * - Client: Cannot create users
+ * 
+ * @async
+ * @function POST
  * @param {NextRequest} request - The incoming request object
- * @returns {Promise<NextResponse>} Response containing created user or error
+ * @returns {Promise<NextResponse>} JSON response containing created user or error
+ * @throws {z.ZodError} When request body validation fails
+ * @throws {Error} When database operations fail
  */
 export async function POST(
   request: NextRequest
@@ -194,14 +238,20 @@ export async function POST(
 
 /**
  * PATCH handler for updating users.
- * Role-based permissions:
- * - Clients can only update their own password
- * - Account Reps can update their assigned clients (except role)
- * - Admins can update any user
  * 
+ * Access patterns:
+ * - Admin: Can update any user
+ * - Account Rep: Can update their assigned clients (except role)
+ * - Client: Can only update their own password
+ * 
+ * @async
+ * @function PATCH
  * @param {NextRequest} request - The incoming request object
- * @param {Object} params - Route parameters containing user ID
- * @returns {Promise<NextResponse>} Response containing updated user or error
+ * @param {Object} params - Route parameters
+ * @param {string} params.id - ID of the user to update
+ * @returns {Promise<NextResponse>} JSON response containing updated user or error
+ * @throws {z.ZodError} When request body validation fails
+ * @throws {Error} When database operations fail
  */
 export async function PATCH(
   request: NextRequest,
@@ -279,12 +329,22 @@ export async function PATCH(
 
 /**
  * DELETE handler for soft-deleting users.
- * Only admins can delete users.
- * Implements soft delete by deactivating the user rather than removing from database.
  * 
+ * Access patterns:
+ * - Admin: Can delete any user
+ * - Account Rep: Can only delete their assigned clients
+ * - Client: Cannot delete users
+ * 
+ * Note: This implements soft delete by setting isActive to false
+ * rather than removing the record from the database.
+ * 
+ * @async
+ * @function DELETE
  * @param {NextRequest} request - The incoming request object
- * @param {Object} params - Route parameters containing user ID
- * @returns {Promise<NextResponse>} Response indicating success or error
+ * @param {Object} params - Route parameters
+ * @param {string} params.id - ID of the user to delete
+ * @returns {Promise<NextResponse>} JSON response containing deactivated user or error
+ * @throws {Error} When database operations fail
  */
 export async function DELETE(
   request: NextRequest,

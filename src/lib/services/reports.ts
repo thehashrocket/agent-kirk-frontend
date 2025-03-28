@@ -1,9 +1,32 @@
+/**
+ * @fileoverview Reports service module for generating system-wide and account-specific analytics.
+ * This module provides functions to generate detailed reports including metrics, activities,
+ * and performance data for both system-wide analysis and individual account representatives.
+ */
+
 import { prisma } from "@/lib/prisma";
 import { ActivityStatus, TicketStatus } from "@prisma/client";
 import type { ReportData } from "@/lib/api/reports";
 import { subDays, startOfDay, endOfDay, parseISO, format } from "date-fns";
 
+/**
+ * Generates a comprehensive system-wide report including user metrics, activities, and performance data.
+ * 
+ * @param {string} [startDate] - Optional start date for filtering data (ISO format: YYYY-MM-DD)
+ * @param {string} [endDate] - Optional end date for filtering data (ISO format: YYYY-MM-DD)
+ * @returns {Promise<ReportData>} A promise that resolves to the complete report data
+ * 
+ * @example
+ * ```typescript
+ * // Get report for a specific date range
+ * const report = await getReportData('2024-01-01', '2024-01-31');
+ * 
+ * // Get report for all time
+ * const allTimeReport = await getReportData();
+ * ```
+ */
 export async function getReportData(startDate?: string, endDate?: string): Promise<ReportData> {
+  // Create date filter for queries based on optional date range
   const dateFilter = {
     createdAt: {
       ...(startDate && { gte: new Date(startDate) }),
@@ -11,7 +34,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     },
   };
 
-  // Fetch user metrics
+  // Fetch basic user metrics in parallel for efficiency
   const [totalUsers, activeUsers] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({
@@ -19,7 +42,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     }),
   ]);
 
-  // Fetch activity metrics
+  // Fetch recent activities with user details
   const activities = await prisma.clientActivity.findMany({
     where: dateFilter,
     orderBy: { createdAt: "desc" },
@@ -33,7 +56,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     },
   });
 
-  // Calculate action breakdown
+  // Calculate action type distribution and percentages
   const actionCounts = await prisma.clientActivity.groupBy({
     by: ["type"],
     _count: {
@@ -50,7 +73,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     percentage: (action._count._all / totalActions) * 100,
   }));
 
-  // Calculate error rate
+  // Calculate system error rate from activities
   const [totalActivities, errorActivities] = await Promise.all([
     prisma.clientActivity.count({
       where: dateFilter,
@@ -65,7 +88,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
 
   const errorRate = totalActivities > 0 ? (errorActivities / totalActivities) * 100 : 0;
 
-  // Calculate average response time (from tickets)
+  // Calculate average ticket resolution time
   const tickets = await prisma.ticket.findMany({
     where: {
       ...dateFilter,
@@ -82,7 +105,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     return sum + responseTime;
   }, 0) / (tickets.length || 1);
 
-  // Calculate user engagement
+  // Calculate user engagement metrics for last 30 days
   const now = new Date();
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
@@ -107,13 +130,13 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     }).then((result) => result.length),
   ]);
 
-  // Calculate retention rate
+  // Calculate user retention rate
   const retentionRate = totalUsers > 0 ? (activeUsers / totalUsers) * 100 : 0;
 
-  // Calculate system performance metrics (mock for now, would need monitoring service integration)
+  // Compile system performance metrics
   const performanceMetrics = {
-    cpu: 45.5, // Would come from monitoring service
-    memory: 62.3, // Would come from monitoring service
+    cpu: 45.5, // Mock value - integrate with monitoring service
+    memory: 62.3, // Mock value - integrate with monitoring service
     errorRate,
     responseTime: avgResponseTime / 1000, // Convert to seconds
   };
@@ -124,7 +147,7 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
       activeUsers,
       totalActions,
       errorRate,
-      averageResponseTime: avgResponseTime / 1000, // Convert to seconds
+      averageResponseTime: avgResponseTime / 1000,
     },
     actions,
     activities: activities.map((activity) => ({
@@ -138,12 +161,16 @@ export async function getReportData(startDate?: string, endDate?: string): Promi
     performanceMetrics,
     userEngagement: {
       dailyActiveUsers,
-      averageSessionDuration: 420, // Would need session tracking
+      averageSessionDuration: 420, // Mock value - implement session tracking
       retentionRate,
     },
   };
 }
 
+/**
+ * Interface defining the structure of account representative report data.
+ * Contains detailed metrics about client interactions, performance, and engagement.
+ */
 export interface AccountRepReportData {
   metrics: {
     totalClients: number;
@@ -173,12 +200,41 @@ export interface AccountRepReportData {
   };
 }
 
+/**
+ * Generates a detailed report for a specific account representative including client metrics,
+ * activities, and performance data.
+ * 
+ * @param {string} accountRepId - The unique identifier of the account representative
+ * @param {string} [startDate] - Optional start date for filtering data (ISO format: YYYY-MM-DD)
+ * @param {string} [endDate] - Optional end date for filtering data (ISO format: YYYY-MM-DD)
+ * @returns {Promise<AccountRepReportData>} A promise that resolves to the account rep's report data
+ * @throws {Error} When the CLIENT role is not found in the system
+ * 
+ * @example
+ * ```typescript
+ * // Get report for specific date range
+ * const repReport = await getAccountRepReportData(
+ *   'rep-123',
+ *   '2024-01-01',
+ *   '2024-01-31'
+ * );
+ * 
+ * // Get last 30 days report
+ * const recentReport = await getAccountRepReportData('rep-123');
+ * ```
+ * 
+ * @remarks
+ * - If no dates are provided, defaults to the last 30 days from the most recent activity
+ * - All dates are converted to UTC for consistent querying
+ * - Performance metrics include ticket resolution rate, response time, and error rates
+ * - Client engagement metrics track daily active clients and interaction averages
+ */
 export async function getAccountRepReportData(
   accountRepId: string,
   startDate?: string,
   endDate?: string
 ): Promise<AccountRepReportData> {
-  // If no dates provided, default to last 30 days from the most recent activity
+  // Default to last 30 days if no date range provided
   if (!startDate || !endDate) {
     const mostRecentActivity = await prisma.clientActivity.findFirst({
       orderBy: { createdAt: 'desc' },
@@ -204,7 +260,7 @@ export async function getAccountRepReportData(
     },
   };
 
-  // Get the client role ID
+  // Verify and fetch client role
   const clientRole = await prisma.role.findUnique({
     where: { name: "CLIENT" },
   });
@@ -213,7 +269,7 @@ export async function getAccountRepReportData(
     throw new Error("Client role not found");
   }
 
-  // Fetch client metrics - include clients who were active during the date range
+  // Fetch client metrics for the account rep
   const [totalClients, activeClients] = await Promise.all([
     prisma.user.count({
       where: {
@@ -230,7 +286,7 @@ export async function getAccountRepReportData(
     }),
   ]);
 
-  // Fetch activities with client information - remove the 10 result limit
+  // Fetch all client activities for the period
   const activities = await prisma.clientActivity.findMany({
     where: {
       user: {
@@ -248,7 +304,7 @@ export async function getAccountRepReportData(
     },
   });
 
-  // Calculate client satisfaction score
+  // Calculate average client satisfaction rating
   const satisfactionData = await prisma.clientSatisfaction.aggregate({
     where: {
       accountRepId,
@@ -262,7 +318,7 @@ export async function getAccountRepReportData(
     },
   });
 
-  // Calculate ticket metrics
+  // Calculate ticket resolution metrics
   const [totalTickets, resolvedTickets] = await Promise.all([
     prisma.ticket.count({
       where: {
@@ -279,7 +335,7 @@ export async function getAccountRepReportData(
     }),
   ]);
 
-  // Calculate average response time from tickets
+  // Calculate average response time for resolved tickets
   const tickets = await prisma.ticket.findMany({
     where: {
       assignedToId: accountRepId,
@@ -298,7 +354,7 @@ export async function getAccountRepReportData(
       return sum + responseTime;
     }, 0) / (tickets.length || 1);
 
-  // Calculate error rate
+  // Calculate error rate from activities
   const [totalActivities, errorActivities] = await Promise.all([
     prisma.clientActivity.count({
       where: {
@@ -321,7 +377,7 @@ export async function getAccountRepReportData(
 
   const errorRate = totalActivities > 0 ? (errorActivities / totalActivities) * 100 : 0;
 
-  // Calculate client engagement metrics
+  // Calculate today's client engagement metrics
   const now = new Date();
   const today = new Date(now.setHours(0, 0, 0, 0));
 
@@ -355,7 +411,7 @@ export async function getAccountRepReportData(
     }),
   ]);
 
-  // Calculate average interactions per client for the period
+  // Calculate average interactions per client
   const totalInteractions = clientInteractions.reduce(
     (sum, interaction) => sum + interaction._count._all,
     0

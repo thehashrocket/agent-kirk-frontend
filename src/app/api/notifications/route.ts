@@ -1,6 +1,25 @@
 /**
- * @file src/app/api/notifications/route.ts
- * API routes for managing user notifications.
+ * @fileoverview Notifications API Route
+ * 
+ * This route handles user notification management operations:
+ * - Retrieving user notifications with filtering and pagination
+ * - Creating new notifications with role-based access control
+ * 
+ * Features:
+ * - Authentication via NextAuth session
+ * - Role-based access control for notification creation
+ * - Error handling with appropriate status codes
+ * - Ordered retrieval by creation date
+ * 
+ * Endpoints:
+ * - GET /api/notifications - Retrieve user notifications
+ * - POST /api/notifications - Create new notification (Admin/Account Rep only)
+ * 
+ * @module api/notifications
+ * @requires next/server
+ * @requires next-auth
+ * @requires @/lib/auth
+ * @requires @/lib/prisma
  */
 
 import { NextResponse } from 'next/server';
@@ -10,6 +29,7 @@ import { prisma } from '@/lib/prisma';
 
 /**
  * Interface representing a notification in the system.
+ * @interface Notification
  * @property {string} id - Unique identifier for the notification
  * @property {string} userId - ID of the user the notification belongs to
  * @property {'MESSAGE_RECEIVED' | 'REPORT_GENERATED'} type - Type of notification
@@ -19,15 +39,20 @@ import { prisma } from '@/lib/prisma';
  * @property {string} [link] - Optional URL associated with the notification
  * @property {Date} createdAt - When the notification was created
  */
-interface Notification {
-  id: string;
+
+/**
+ * Interface for the POST request body when creating a notification
+ * @interface CreateNotificationBody
+ * @property {string} userId - ID of the user to create the notification for
+ * @property {'MESSAGE_RECEIVED' | 'REPORT_GENERATED'} type - Type of notification
+ * @property {string} title - Title/heading of the notification
+ * @property {string} content - Main content/body of the notification
+ */
+interface CreateNotificationBody {
   userId: string;
   type: 'MESSAGE_RECEIVED' | 'REPORT_GENERATED';
   title: string;
   content: string;
-  isRead: boolean;
-  link?: string;
-  createdAt: Date;
 }
 
 /**
@@ -42,11 +67,11 @@ interface Notification {
  * - Requires authentication via NextAuth session
  * - User must exist in the database
  * 
- * @returns {Promise<NextResponse>} JSON response containing an array of notifications
- * 
- * @throws {401} Unauthorized - If user is not authenticated
- * @throws {404} Not Found - If user is not found in database
- * @throws {500} Internal Server Error - If there's an error processing the request
+ * @returns {Promise<NextResponse>} JSON response containing either:
+ *   - 200: Array of notifications
+ *   - 401: Unauthorized error if no valid session exists
+ *   - 404: Not Found if user is not found in database
+ *   - 500: Internal Server Error if database operation fails
  */
 export async function GET() {
   try {
@@ -89,20 +114,6 @@ export async function GET() {
 }
 
 /**
- * Interface for the POST request body when creating a notification
- * @property {string} userId - ID of the user to create the notification for
- * @property {'MESSAGE_RECEIVED' | 'REPORT_GENERATED'} type - Type of notification
- * @property {string} title - Title/heading of the notification
- * @property {string} content - Main content/body of the notification
- */
-interface CreateNotificationBody {
-  userId: string;
-  type: 'MESSAGE_RECEIVED' | 'REPORT_GENERATED';
-  title: string;
-  content: string;
-}
-
-/**
  * POST /api/notifications
  * 
  * Creates a new notification for a user.
@@ -118,11 +129,11 @@ interface CreateNotificationBody {
  * @param {Request} req - The request object
  * @param {CreateNotificationBody} req.body - The request body containing notification data
  * 
- * @returns {Promise<NextResponse>} JSON response containing the created notification
- * 
- * @throws {401} Unauthorized - If user is not authenticated
- * @throws {403} Forbidden - If trying to create notification for another user without proper role
- * @throws {500} Internal Server Error - If there's an error processing the request
+ * @returns {Promise<NextResponse>} JSON response containing either:
+ *   - 200: The created notification object
+ *   - 401: Unauthorized error if no valid session exists
+ *   - 403: Forbidden if trying to create notification for another user without proper role
+ *   - 500: Internal Server Error if database operation fails
  */
 export async function POST(req: Request) {
   try {

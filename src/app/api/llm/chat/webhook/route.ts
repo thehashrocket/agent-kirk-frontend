@@ -1,9 +1,29 @@
+/**
+ * @fileoverview LLM Chat Webhook Route
+ * This route handles incoming webhooks from the LLM service for chat completions.
+ * It processes responses and errors, updates the database, and sends notifications.
+ * 
+ * @route POST /api/llm/chat/webhook
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 
-// Define the webhook request schema
+/**
+ * Represents the expected webhook request payload
+ */
+interface WebhookRequest {
+  queryId: string;
+  response?: string;
+  error?: string;
+}
+
+/**
+ * Zod schema for validating webhook requests
+ * Ensures either a response or error is provided
+ */
 const WebhookRequestSchema = z.object({
   queryId: z.string().min(1, "Query ID is required"),
   response: z.string().optional(),
@@ -12,22 +32,32 @@ const WebhookRequestSchema = z.object({
   message: "Either response or error must be provided"
 });
 
+/**
+ * Handles incoming webhook POST requests from the LLM service
+ * 
+ * @param request - The incoming Next.js request object
+ * @returns NextResponse with appropriate status and message
+ * 
+ * @throws {z.ZodError} When request validation fails
+ * @throws {Error} For any other unexpected errors
+ */
 export async function POST(request: NextRequest) {
   try {
     // Parse and validate the webhook payload
     const body = await request.json();
     console.log('Webhook received body:', body);
 
-    // Get query ID from multiple possible sources
+    // Extract query ID from multiple possible sources for reliability
     let queryId = body.queryId || request.headers.get('x-query-id') || '';
     
-    // Log all potential sources of query ID
+    // Log all potential sources of query ID for debugging
     console.log('Query ID sources:', {
       bodyQueryId: body.queryId,
       headerQueryId: request.headers.get('x-query-id'),
       finalQueryId: queryId
     });
 
+    // Return 400 if no query ID is found
     if (!queryId) {
       console.error('Invalid webhook request: No query ID found in body or headers');
       return NextResponse.json(
@@ -40,14 +70,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Construct validated data object
+    // Construct and validate the webhook data
     const validatedData = {
       queryId,
       response: body.response,
-      error: body.error || body.message // Accept error from either field
+      error: body.error || body.message // Support error from either field
     };
 
-    // Validate the data
     const result = WebhookRequestSchema.safeParse(validatedData);
     if (!result.success) {
       console.error('Webhook validation error:', {
@@ -64,7 +93,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get the query from database
+    // Fetch the associated query from database
     const query = await prisma.query.findUnique({
       where: { id: validatedData.queryId },
       include: { user: true },
@@ -85,8 +114,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Handle error case: Update query status and create notification
     if (validatedData.error) {
-      // Update query status to failed
       await prisma.query.update({
         where: { id: validatedData.queryId },
         data: {
@@ -95,7 +124,6 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // Create error notification
       await prisma.notification.create({
         data: {
           type: 'QUERY_COMPLETE',
@@ -104,8 +132,9 @@ export async function POST(request: NextRequest) {
           userId: query.userId,
         },
       });
-    } else if (validatedData.response) {
-      // Update query with response
+    } 
+    // Handle success case: Update query with response and create notification
+    else if (validatedData.response) {
       await prisma.query.update({
         where: { id: validatedData.queryId },
         data: {
@@ -114,7 +143,6 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // Create success notification
       await prisma.notification.create({
         data: {
           type: 'QUERY_COMPLETE',
@@ -129,6 +157,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Webhook API Error:', error);
 
+    // Handle Zod validation errors
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid webhook data', details: error.errors },
@@ -136,6 +165,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Handle unexpected errors
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

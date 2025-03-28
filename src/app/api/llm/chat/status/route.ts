@@ -1,3 +1,14 @@
+/**
+ * @file src/app/api/llm/chat/status/route.ts
+ * LLM Chat Status API Route
+ * 
+ * This API endpoint provides status information for ongoing LLM chat queries.
+ * It allows clients to check the status, response, and time elapsed for a specific query.
+ * 
+ * @route GET /api/llm/chat/status
+ * @access Private - Requires authenticated user
+ */
+
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
@@ -5,11 +16,34 @@ import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
-// Define the request schema
+/**
+ * Zod schema for validating status request parameters
+ */
 const StatusRequestSchema = z.object({
   queryId: z.string(),
 });
 
+/**
+ * Response structure for chat status
+ */
+type StatusResponse = {
+  queryId: string;
+  status: string;
+  response: string | null;
+  timeElapsed: number;
+};
+
+/**
+ * GET handler for retrieving chat query status
+ * 
+ * @param {NextRequest} request - The incoming request object containing queryId in searchParams
+ * @returns {Promise<NextResponse<StatusResponse | { error: string }>>} JSON response containing query status or error
+ * 
+ * @throws {401} If user is not authenticated
+ * @throws {400} If queryId is missing or invalid
+ * @throws {404} If query is not found or doesn't belong to user
+ * @throws {500} If there's an internal server error
+ */
 export async function GET(request: NextRequest) {
   try {
     // Get the authenticated user

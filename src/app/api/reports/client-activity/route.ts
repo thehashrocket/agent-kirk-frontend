@@ -1,6 +1,30 @@
 /**
- * @file src/app/api/reports/client-activity/route.ts
- * API route for fetching client activity data with filtering capabilities.
+ * @fileoverview Client Activity API Route
+ * 
+ * This API route provides functionality for fetching and analyzing client activity data.
+ * It supports filtering by date range and activity type, and returns comprehensive metrics
+ * including activity counts, success rates, and action breakdowns.
+ * 
+ * @route GET /api/reports/client-activity
+ * @authentication Required - Uses NextAuth session
+ * 
+ * @queryParams
+ * - startDate {ISO string} Start date for the activity range
+ * - endDate {ISO string} End date for the activity range
+ * - type {string} Optional activity type filter
+ * 
+ * @returns {Object}
+ *   - metrics {Object} Aggregated metrics for the period
+ *     - totalActivities {Object} Total activity count and change
+ *     - successRate {Object} Success rate percentage and change
+ *     - averageTime {Object} Average activity time and change
+ *     - uniqueActions {Object} Count of unique action types and change
+ *   - activities {Array} List of individual activity records
+ *   - actionBreakdown {Array} Breakdown of activity types and their frequencies
+ * 
+ * @throws {401} If user is not authenticated
+ * @throws {400} If date parameters are invalid
+ * @throws {500} If server encounters an error
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -8,18 +32,20 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { subDays, parseISO } from "date-fns";
-import { Prisma } from "@prisma/client";
+import { Prisma, ClientActivity, ActivityStatus } from "@prisma/client";
 
-interface Activity {
-  id: string;
-  type: string;
-  description: string;
-  createdAt: Date;
-  status: 'success' | 'error' | 'pending';
-  metadata: Record<string, any> | null;
-  userId: string;
-}
+/**
+ * Type representing the selected fields from ClientActivity
+ */
+type ActivityWithoutUser = Pick<ClientActivity, 'id' | 'type' | 'description' | 'createdAt' | 'status' | 'metadata'>;
 
+/**
+ * Handles GET requests for client activity data
+ * Fetches and analyzes client activities within a specified date range
+ * 
+ * @param {NextRequest} request - The incoming HTTP request
+ * @returns {Promise<NextResponse>} JSON response with activity data and metrics
+ */
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -31,13 +57,13 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get query parameters
+    // Extract and validate query parameters
     const searchParams = request.nextUrl.searchParams;
     const startDate = parseISO(searchParams.get("startDate") || "");
     const endDate = parseISO(searchParams.get("endDate") || "");
     const type = searchParams.get("type");
 
-    // Validate dates
+    // Validate date parameters
     if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
       return new NextResponse(
         JSON.stringify({ error: "Invalid date parameters" }),
@@ -45,7 +71,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Build base query
+    // Construct base query with filters
     const baseQuery = {
       where: {
         userId: session.user.id,
@@ -57,9 +83,8 @@ export async function GET(request: NextRequest) {
       },
     };
 
-    // Get current period metrics
+    // Fetch current and previous period data for comparison
     const [currentActivities, previousActivities] = await Promise.all([
-      // Current period
       prisma.clientActivity.findMany({
         ...baseQuery,
         select: {
@@ -74,7 +99,6 @@ export async function GET(request: NextRequest) {
           createdAt: "desc",
         },
       }),
-      // Previous period (for comparison)
       prisma.clientActivity.findMany({
         where: {
           ...baseQuery.where,
@@ -83,19 +107,27 @@ export async function GET(request: NextRequest) {
             lte: subDays(endDate, 30),
           },
         },
+        select: {
+          id: true,
+          type: true,
+          description: true,
+          createdAt: true,
+          status: true,
+          metadata: true,
+        },
       }),
-    ]) as [Activity[], Activity[]];
+    ]) as [ActivityWithoutUser[], ActivityWithoutUser[]];
 
-    // Calculate metrics
+    // Calculate core metrics
     const currentTotal = currentActivities.length;
     const previousTotal = previousActivities.length;
     const currentSuccess = currentActivities.filter(
-      (activity: Activity) => activity.status === "success"
+      (activity) => activity.status === ActivityStatus.SUCCESS
     ).length;
-    const uniqueTypes = new Set(currentActivities.map((activity: Activity) => activity.type)).size;
+    const uniqueTypes = new Set(currentActivities.map((activity) => activity.type)).size;
 
-    // Calculate action breakdown
-    const actionCounts = currentActivities.reduce((acc: Record<string, number>, activity: Activity) => {
+    // Generate activity type breakdown
+    const actionCounts = currentActivities.reduce((acc: Record<string, number>, activity) => {
       acc[activity.type] = (acc[activity.type] || 0) + 1;
       return acc;
     }, {});
@@ -106,7 +138,7 @@ export async function GET(request: NextRequest) {
       percentage: (count / currentTotal) * 100,
     }));
 
-    // Format response
+    // Construct response with metrics and activities
     const response = {
       metrics: {
         totalActivities: {
@@ -117,20 +149,20 @@ export async function GET(request: NextRequest) {
         successRate: {
           label: "Success Rate",
           value: (currentSuccess / currentTotal) * 100,
-          change: 0, // Calculate this if you track historical success rates
+          change: 0, // TODO: Implement historical success rate tracking
         },
         averageTime: {
           label: "Average Time",
-          value: 2.5, // This should be calculated based on actual timing data
-          change: 0, // Calculate this if you track historical timing
+          value: 2.5, // TODO: Implement actual timing calculation
+          change: 0, // TODO: Implement historical timing tracking
         },
         uniqueActions: {
           label: "Unique Actions",
           value: uniqueTypes,
-          change: 0, // Calculate this if you track historical unique actions
+          change: 0, // TODO: Implement historical unique actions tracking
         },
       },
-      activities: currentActivities.map((activity: Activity) => ({
+      activities: currentActivities.map((activity) => ({
         id: activity.id,
         type: activity.type,
         description: activity.description,
@@ -151,6 +183,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
+/**
+ * Calculates the percentage change between two numbers
+ * 
+ * @param {number} current - Current period value
+ * @param {number} previous - Previous period value
+ * @returns {number} Percentage change, returns 0 if previous value is 0
+ */
 function calculatePercentageChange(current: number, previous: number): number {
   if (previous === 0) return 0;
   return ((current - previous) / previous) * 100;
