@@ -26,7 +26,8 @@ import {
   MessageSquare, 
   History,
   HelpCircle,
-  FileText
+  FileText,
+  User
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -121,6 +122,12 @@ const accountRepNavItems: NavItem[] = [
     href: "/account-rep/reports", 
     icon: <FileText />,
     description: "Client activity reports"
+  },
+  {
+    title: "Profile",
+    href: "/account-rep/profile",
+    icon: <User />,
+    description: "Manage your account"
   },
 ];
 

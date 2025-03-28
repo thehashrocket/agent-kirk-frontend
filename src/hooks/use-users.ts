@@ -24,6 +24,14 @@ interface Role {
  * @property {Role} role - User's assigned role
  * @property {boolean} isActive - User's active status
  * @property {string | null} accountRepId - Associated account representative ID
+ * @property {object} gaAccounts - Google Analytics accounts associated with the user
+ * @property {string} gaAccounts.id - Unique identifier for the Google Analytics account
+ * @property {string} gaAccounts.gaAccountId - Google Analytics account ID
+ * @property {string} gaAccounts.gaAccountName - Google Analytics account name
+ * @property {object[]} gaAccounts.gaProperties - Google Analytics properties associated with the account
+ * @property {string} gaAccounts.gaProperties.id - Unique identifier for the Google Analytics property
+ * @property {string} gaAccounts.gaProperties.gaPropertyId - Google Analytics property ID
+ * @property {string} gaAccounts.gaProperties.gaPropertyName - Google Analytics property name
  */
 interface User {
   id: string;
@@ -32,6 +40,16 @@ interface User {
   role: Role;
   isActive: boolean;
   accountRepId: string | null;
+  gaAccounts: {
+    id: string;
+    gaAccountId: string;
+    gaAccountName: string;
+    gaProperties: {
+      id: string;
+      gaPropertyId: string;
+      gaPropertyName: string;
+    }[];
+  }[];
 }
 
 /**
@@ -57,7 +75,18 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
  * @property {Function} mutate - Function to trigger data revalidation
  */
 export function useUsers() {
-  const { data: users, error: usersError, mutate } = useSWR<User[]>('/api/users', fetcher);
+  const { data: users, error: usersError, mutate } = useSWR<User[]>('/api/users', async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to fetch users');
+    }
+    const data = await response.json();
+    if (!Array.isArray(data)) {
+      throw new Error('Expected array of users but got: ' + typeof data);
+    }
+    return data;
+  });
   const { data: roles, error: rolesError } = useSWR<Role[]>('/api/roles', fetcher);
 
   return {

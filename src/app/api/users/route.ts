@@ -68,6 +68,11 @@ export async function GET(
       const users = await prisma.user.findMany({
         include: {
           role: true,
+          gaAccounts: {
+            include: {
+              gaProperties: true,
+            },
+          },
         },
       });
       return NextResponse.json(users);
@@ -81,6 +86,11 @@ export async function GET(
         },
         include: {
           role: true,
+          gaAccounts: {
+            include: {
+              gaProperties: true,
+            },
+          },
         },
       });
       return NextResponse.json(clients);
@@ -88,7 +98,18 @@ export async function GET(
 
     // Clients can only see themselves
     if (currentUser.role.name === 'CLIENT') {
-      return NextResponse.json([currentUser]);
+      const user = await prisma.user.findUnique({
+        where: { id: currentUser.id },
+        include: {
+          role: true,
+          gaAccounts: {
+            include: {
+              gaProperties: true,
+            },
+          },
+        },
+      });
+      return NextResponse.json(user ? [user] : []);
     }
 
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });

@@ -154,10 +154,15 @@ export default function ClientsPage() {
     return <div>Loading...</div>;
   }
 
-  const clients = users?.filter((user) => user.role.name === 'CLIENT') ?? [];
+  if (!Array.isArray(users)) {
+    console.error('Expected users to be an array but got:', users);
+    return <div>Error loading users. Please try again later.</div>;
+  }
+
+  const clients = users.filter((user) => user.role.name === 'CLIENT');
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Client Management</h1>
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
@@ -231,6 +236,12 @@ export default function ClientsPage() {
                   onClick={() => handleDeleteClient(client.id)}
                 >
                   Delete
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => window.location.href = `/account-rep/clients/${client.id}`}
+                >
+                  View Details
                 </Button>
               </TableCell>
             </TableRow>

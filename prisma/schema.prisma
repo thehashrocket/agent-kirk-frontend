@@ -35,6 +35,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
+  password      String?   // Adding password field as optional since we support both OAuth and password auth
   emailVerified DateTime?
   image         String?
   roleId        String
@@ -61,6 +62,24 @@ model User {
   clientTickets    Ticket[]             @relation("ClientTickets")
   ticketComments   TicketComment[]
   activities       ClientActivity[]
+  gaAccounts       GaAccount[]          @relation("UserToGaAccount")
+}
+
+model GaAccount {
+  id            String       @id @default(cuid())
+  userId        String
+  user          User         @relation("UserToGaAccount", fields: [userId], references: [id], onDelete: Cascade)
+  gaAccountId   String
+  gaAccountName String
+  gaProperties  GaProperty[] @relation("AccountToProperty")
+}
+
+model GaProperty {
+  id             String    @id @default(cuid())
+  gaPropertyId   String
+  gaPropertyName String
+  gaAccountId    String
+  gaAccount      GaAccount @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
 }
 
 model Account {
