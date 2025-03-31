@@ -29,3 +29,33 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ * Detects if a string contains markdown formatting.
+ * Looks for common markdown patterns like headings, lists, code blocks, etc.
+ * 
+ * @param {string} text - The text to check for markdown content
+ * @returns {boolean} True if the text contains markdown patterns
+ * 
+ * @example
+ * ```ts
+ * isMarkdown('# Heading') // true
+ * isMarkdown('Regular text') // false
+ * ```
+ */
+export function isMarkdown(text: string): boolean {
+  const markdownPatterns = [
+    /^#{1,6}\s/, // Headers
+    /(?:^|\n)(?:[*+-]|\d+\.)\s/, // Lists
+    /`{1,3}[^`]*`{1,3}/, // Code (inline or blocks)
+    /\[.*?\]\(.*?\)/, // Links
+    /(?:\*\*|__)(?:(?!\*\*|__).)+(?:\*\*|__)/, // Bold
+    /(?:\*|_)(?:(?!\*|_).)+(?:\*|_)/, // Italic
+    /(?:^|\n)>\s/, // Blockquotes
+    /(?:^|\n)(?:[-*_]){3,}(?:\n|$)/, // Horizontal rules
+    /```[\s\S]*?```/, // Code blocks
+    /\|[^\n]+\|/, // Tables
+  ];
+
+  return markdownPatterns.some(pattern => pattern.test(text));
+}

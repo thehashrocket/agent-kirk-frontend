@@ -9,6 +9,7 @@
  * - Auto-scroll to latest message
  * - Loading state indicator
  * - Responsive design
+ * - Markdown content rendering
  * 
  * Layout:
  * - Scrollable message container
@@ -22,6 +23,8 @@
 import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
+import { isMarkdown } from '@/lib/utils';
+import ReactMarkdown from 'react-markdown';
 
 /**
  * Interface for message data.
@@ -101,7 +104,39 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId }: C
             aria-label={`${message.role} message`}
           >
             <div className="flex-1 space-y-2">
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              {isMarkdown(message.content) ? (
+                <div className="text-sm leading-normal">
+                  <ReactMarkdown
+                    components={{
+                      h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+                      h2: ({ children }) => <h2 className="text-lg font-bold mb-2">{children}</h2>,
+                      h3: ({ children }) => <h3 className="text-base font-bold mb-2">{children}</h3>,
+                      p: ({ children }) => <p className="mb-2">{children}</p>,
+                      ul: ({ children }) => <ul className="list-disc pl-4 mb-2">{children}</ul>,
+                      ol: ({ children }) => <ol className="list-decimal pl-4 mb-2">{children}</ol>,
+                      li: ({ children }) => <li className="mb-1">{children}</li>,
+                      code: ({ children }) => (
+                        <code className="bg-muted/50 rounded px-1 py-0.5">{children}</code>
+                      ),
+                      pre: ({ children }) => (
+                        <pre className="bg-muted/50 rounded p-2 overflow-x-auto mb-2">{children}</pre>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="border-l-2 border-muted pl-2 italic mb-2">{children}</blockquote>
+                      ),
+                      a: ({ href, children }) => (
+                        <a href={href} className="underline hover:no-underline" target="_blank" rel="noopener noreferrer">
+                          {children}
+                        </a>
+                      ),
+                    }}
+                  >
+                    {message.content}
+                  </ReactMarkdown>
+                </div>
+              ) : (
+                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              )}
               {message.status === 'processing' && (
                 <div className="flex items-center space-x-2 text-xs opacity-70">
                   <span>Processing response</span>
