@@ -301,15 +301,15 @@ export const authOptions: AuthOptions = {
      * @returns {Promise<Session>} Modified session object
      */
     async session({ session, token }) {
-      console.log("Session Callback - Input:", { session, token });
+      // console.log("Session Callback - Input:", { session, token });
       
       if (session.user) {
         session.user.id = token.sub;
         if (token.role) {
           session.user.role = token.role;
-          console.log("Setting role in session:", token.role);
+          // console.log("Setting role in session:", token.role);
         } else {
-          console.log("No role found in token");
+          // console.log("No role found in token");
           // Attempt to fetch role from database
           const user = await prisma.user.findUnique({
             where: { id: token.sub },
@@ -317,12 +317,12 @@ export const authOptions: AuthOptions = {
           });
           if (user?.role) {
             session.user.role = user.role.name;
-            console.log("Retrieved role from database:", user.role.name);
+            // console.log("Retrieved role from database:", user.role.name);
           }
         }
       }
       
-      console.log("Session Callback - Output session:", session);
+      // console.log("Session Callback - Output session:", session);
       return session;
     }
   },

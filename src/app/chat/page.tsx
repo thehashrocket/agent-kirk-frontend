@@ -26,6 +26,7 @@ interface Message {
   role: 'user' | 'assistant';
   timestamp: string;
   status?: 'processing' | 'completed' | 'error';
+  rating?: -1 | 0 | 1;
 }
 
 interface GaAccount {
@@ -326,6 +327,33 @@ export default function ChatPage() {
     }, 5 * 60 * 1000);
   };
 
+  // Add rating mutation
+  const rateMessageMutation = useMutation({
+    mutationFn: async ({ messageId, rating }: { messageId: string; rating: -1 | 1 }) => {
+      const response = await fetch(`/api/queries/${messageId}/rate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rating }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to rate message');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate the messages query to refresh the UI
+      queryClient.invalidateQueries({ 
+        queryKey: ['conversation-messages', selectedConversation] 
+      });
+    },
+    onError: (error: Error) => {
+      console.error('Rating mutation error:', error);
+      // You might want to add toast notification here
+    },
+  });
+
   const handleCreateConversation = async (data: { 
     title: string; 
     gaAccountId?: string; 
@@ -367,6 +395,12 @@ export default function ChatPage() {
       console.error('Error in handleSendMessage:', error);
       throw error;
     }
+  };
+
+  const handleRateMessage = (messageId: string, rating: -1 | 1) => {
+    // Remove -response suffix if present before making the API call
+    const queryId = messageId.replace('-response', '');
+    rateMessageMutation.mutate({ messageId: queryId, rating });
   };
 
   if (isLoadingConversations) {
@@ -411,6 +445,7 @@ export default function ChatPage() {
           isLoading={isLoadingMessages}
           gaAccountId={selectedConversationDetails?.gaAccountId}
           gaPropertyId={selectedConversationDetails?.gaPropertyId}
+          onRateMessage={handleRateMessage}
         />
         <div className="border-t p-4">
           <div className="flex flex-1 items-center space-x-2">

@@ -25,6 +25,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { isMarkdown } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
+import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Message } from './Message';
+import { LoadingIndicator } from './LoadingIndicator';
 
 /**
  * Interface for message data.
@@ -33,6 +37,7 @@ import ReactMarkdown from 'react-markdown';
  * @property {'user' | 'assistant'} role - Role of the message sender
  * @property {string} timestamp - Human-readable timestamp
  * @property {string} status - Status of the message
+ * @property {number} rating - Rating of the message
  */
 interface Message {
   id: string;
@@ -40,6 +45,7 @@ interface Message {
   role: 'user' | 'assistant';
   timestamp: string;
   status?: 'processing' | 'completed' | 'error';
+  rating?: -1 | 0 | 1;
 }
 
 /**
@@ -48,12 +54,14 @@ interface Message {
  * @property {boolean} isLoading - Whether a response is currently being generated
  * @property {string} gaAccountId - Google Analytics account ID
  * @property {string} gaPropertyId - Google Analytics property ID
+ * @property {function} onRateMessage - Function to rate a message
  */
 interface ChatWindowProps {
   messages: Message[];
   isLoading?: boolean;
   gaAccountId?: string;
   gaPropertyId?: string;
+  onRateMessage?: (messageId: string, rating: -1 | 1) => void;
 }
 
 /**
@@ -79,7 +87,7 @@ interface ChatWindowProps {
  * - Proper contrast for readability
  * - Proper ARIA roles
  */
-export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId }: ChatWindowProps) {
+export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onRateMessage }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -92,79 +100,14 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId }: C
     <ScrollArea className="h-full">
       <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
         {messages.map((message) => (
-          <div
+          <Message
             key={message.id}
-            className={cn(
-              'flex w-full max-w-2xl items-start space-x-4 rounded-lg p-4',
-              message.role === 'user'
-                ? 'ml-auto bg-primary text-primary-foreground'
-                : 'bg-muted'
-            )}
-            role={message.role === 'assistant' ? 'article' : 'complementary'}
-            aria-label={`${message.role} message`}
-          >
-            <div className="flex-1 space-y-2">
-              {isMarkdown(message.content) ? (
-                <div className="text-sm leading-normal">
-                  <ReactMarkdown
-                    components={{
-                      h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
-                      h2: ({ children }) => <h2 className="text-lg font-bold mb-2">{children}</h2>,
-                      h3: ({ children }) => <h3 className="text-base font-bold mb-2">{children}</h3>,
-                      p: ({ children }) => <p className="mb-2">{children}</p>,
-                      ul: ({ children }) => <ul className="list-disc pl-4 mb-2">{children}</ul>,
-                      ol: ({ children }) => <ol className="list-decimal pl-4 mb-2">{children}</ol>,
-                      li: ({ children }) => <li className="mb-1">{children}</li>,
-                      code: ({ children }) => (
-                        <code className="bg-muted/50 rounded px-1 py-0.5">{children}</code>
-                      ),
-                      pre: ({ children }) => (
-                        <pre className="bg-muted/50 rounded p-2 overflow-x-auto mb-2">{children}</pre>
-                      ),
-                      blockquote: ({ children }) => (
-                        <blockquote className="border-l-2 border-muted pl-2 italic mb-2">{children}</blockquote>
-                      ),
-                      a: ({ href, children }) => (
-                        <a href={href} className="underline hover:no-underline" target="_blank" rel="noopener noreferrer">
-                          {children}
-                        </a>
-                      ),
-                    }}
-                  >
-                    {message.content}
-                  </ReactMarkdown>
-                </div>
-              ) : (
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-              )}
-              {message.status === 'processing' && (
-                <div className="flex items-center space-x-2 text-xs opacity-70">
-                  <span>Processing response</span>
-                  <div className="flex space-x-1">
-                    <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" />
-                    <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.2s]" />
-                    <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.4s]" />
-                  </div>
-                </div>
-              )}
-              <p className="text-xs opacity-70">{message.timestamp}</p>
-            </div>
-          </div>
+            {...message}
+            onRate={onRateMessage}
+          />
         ))}
         {isLoading && (
-          <div 
-            className="flex w-full max-w-2xl items-center space-x-4 rounded-lg bg-muted p-4"
-            role="status"
-            aria-label="Loading messages"
-          >
-            <div className="space-y-2">
-              <div className="flex space-x-2">
-                <div className="h-2 w-2 animate-bounce rounded-full bg-current" />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-current [animation-delay:0.2s]" />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-current [animation-delay:0.4s]" />
-              </div>
-            </div>
-          </div>
+          <LoadingIndicator message="Loading messages" />
         )}
         <div ref={scrollRef} />
       </div>

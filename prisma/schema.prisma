@@ -179,6 +179,7 @@ model Query {
   content   String      @default("") @db.Text
   response  String?     @db.Text
   status    QueryStatus @default(PENDING)
+  rating    Int         @default(0)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @default(now())
 
