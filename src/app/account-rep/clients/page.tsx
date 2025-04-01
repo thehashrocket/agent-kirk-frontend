@@ -27,10 +27,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 /**
  * Interface representing a user in the system.
  * Used for client management and display in the table.
+ * Matches the exact shape of data returned by the useUsers hook.
  */
 interface User {
   id: string;
@@ -41,6 +43,17 @@ interface User {
     name: string;
   };
   isActive: boolean;
+  accountRepId: string | null;
+  gaAccounts: Array<{
+    id: string;
+    gaAccountId: string;
+    gaAccountName: string;
+    gaProperties: Array<{
+      id: string;
+      gaPropertyId: string;
+      gaPropertyName: string;
+    }>;
+  }>;
 }
 
 /**
@@ -55,12 +68,13 @@ interface User {
  * - Monitor client status (active/inactive)
  */
 export default function ClientsPage() {
-  const { users, roles, isLoading, mutate } = useUsers();
+  const { users, roles, isLoading, isError, mutate } = useUsers();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
     password: '',
+    image: '',
   });
 
   /**
@@ -92,7 +106,7 @@ export default function ClientsPage() {
 
       toast.success('Client created successfully');
       setIsCreateDialogOpen(false);
-      setNewUser({ name: '', email: '', password: '' });
+      setNewUser({ name: '', email: '', password: '', image: '' });
       mutate();
     } catch {
       toast.error('Failed to create client');
@@ -154,12 +168,68 @@ export default function ClientsPage() {
     return <div>Loading...</div>;
   }
 
+  if (isError) {
+    return <div>Error: Failed to load users. Please check your connection and permissions.</div>;
+  }
+
+  if (!users) {
+    console.error('No users data returned from useUsers hook');
+    return <div>Error: No user data available. Please check your login status.</div>;
+  }
+
   if (!Array.isArray(users)) {
     console.error('Expected users to be an array but got:', users);
     return <div>Error loading users. Please try again later.</div>;
   }
 
   const clients = users.filter((user) => user.role.name === 'CLIENT');
+
+  if (clients.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Client Management</h1>
+          <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+            <DialogTrigger asChild>
+              <Button>Create Client</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Create New Client</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <Input
+                  placeholder="Name"
+                  value={newUser.name}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, name: e.target.value })
+                  }
+                />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={newUser.email}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, email: e.target.value })
+                  }
+                />
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  value={newUser.password}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, password: e.target.value })
+                  }
+                />
+                <Button onClick={handleCreateClient}>Create</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+        <p>No clients found. Create a new client to get started.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -206,6 +276,7 @@ export default function ClientsPage() {
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>Profile Image</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Status</TableHead>
@@ -213,8 +284,19 @@ export default function ClientsPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {clients.map((client: User) => (
+          {clients.map((client) => (
             <TableRow key={client.id}>
+              <TableCell>
+                <Avatar>
+                <AvatarImage 
+                  src={client.image ?? ''}
+                  alt={`Profile picture of ${client.name || 'user'}`} 
+                />
+                  <AvatarFallback>
+                    {client.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}
+                  </AvatarFallback>
+                </Avatar>
+              </TableCell>
               <TableCell>{client.name}</TableCell>
               <TableCell>{client.email}</TableCell>
               <TableCell>

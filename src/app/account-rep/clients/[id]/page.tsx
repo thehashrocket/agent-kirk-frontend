@@ -25,6 +25,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface User {
   id: string;
@@ -137,10 +138,16 @@ export default function ClientDetailsPage() {
             <CardTitle>Client Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              <p><strong>Name:</strong> {client.name}</p>
-              <p><strong>Email:</strong> {client.email}</p>
-              <p><strong>Status:</strong> {client.isActive ? 'Active' : 'Inactive'}</p>
+            <div className="flex flex-row items-center justify-between">
+              <div className="space-y-2">
+                <p><strong>Name:</strong> {client.name}</p>
+                <p><strong>Email:</strong> {client.email}</p>
+                <p><strong>Status:</strong> {client.isActive ? 'Active' : 'Inactive'}</p>
+              </div>
+              <Avatar className="w-40 h-40">
+                <AvatarImage className="w-40 h-40" src={client.image ?? ''} />
+                <AvatarFallback>{client.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
+              </Avatar>
             </div>
           </CardContent>
         </Card>

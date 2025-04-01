@@ -33,6 +33,7 @@ import {
 } from '@/components/ui/select';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 /**
  * Interface representing a user in the system.
@@ -49,6 +50,7 @@ interface User {
   id: string;
   name: string | null;
   email: string | null;
+  image: string | null;
   role: {
     id: string;
     name: string;
@@ -87,6 +89,7 @@ export default function UsersPage() {
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
+    image: '',
     password: '',
     roleId: '',
   });
@@ -112,7 +115,7 @@ export default function UsersPage() {
 
       toast.success('User created successfully');
       setIsCreateDialogOpen(false);
-      setNewUser({ name: '', email: '', password: '', roleId: '' });
+      setNewUser({ name: '', email: '', image: '', password: '', roleId: '' });
       mutate();
     } catch {
       toast.error('Failed to create user');
@@ -236,6 +239,7 @@ export default function UsersPage() {
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>ProfileImage</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Role</TableHead>
@@ -246,6 +250,12 @@ export default function UsersPage() {
         <TableBody>
           {users?.map((user: User) => (
             <TableRow key={user.id}>
+              <TableCell>
+                <Avatar>
+                  <AvatarImage src={user.image ?? ''} />
+                  <AvatarFallback>{user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
+                </Avatar>
+              </TableCell>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>

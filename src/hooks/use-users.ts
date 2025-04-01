@@ -39,6 +39,7 @@ interface User {
   email: string | null;
   role: Role;
   isActive: boolean;
+  image: string | null;
   accountRepId: string | null;
   gaAccounts: {
     id: string;

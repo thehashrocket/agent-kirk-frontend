@@ -20,7 +20,7 @@ import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { NotificationBell } from "@/components/NotificationBell";
 import { cn } from "@/lib/utils";
-
+import { UserProfileBadge } from "./UserProfileBadge";
 /**
  * @component Header
  * Client Component that renders the main navigation header.
@@ -104,12 +104,7 @@ export function Header() {
         </nav>
         <div className="flex items-center space-x-4 ml-auto">
           <NotificationBell />
-          <div className="hidden md:flex flex-col items-end">
-            <span className="text-sm font-medium">{session.user.email}</span>
-            <span className="text-xs text-muted-foreground">
-              {session.user.role || 'No Role'}
-            </span>
-          </div>
+          <UserProfileBadge />
           <Button 
             variant="ghost" 
             size="sm"

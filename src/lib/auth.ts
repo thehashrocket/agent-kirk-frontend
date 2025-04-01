@@ -260,7 +260,7 @@ export const authOptions: AuthOptions = {
      * @returns {Promise<JWT>} Modified JWT token
      */
     async jwt({ token, user }) {
-      console.log("JWT Callback - Input:", { token, user });
+      // console.log("JWT Callback - Input:", { token, user });
       
       if (user?.roleId) {
         // Fetch role if not present in user object
@@ -288,7 +288,7 @@ export const authOptions: AuthOptions = {
         }
       }
       
-      console.log("JWT Callback - Output token:", token);
+      // console.log("JWT Callback - Output token:", token);
       return token;
     },
     /**
