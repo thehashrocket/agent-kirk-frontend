@@ -22,20 +22,28 @@ interface UpdateTicketData {
   assignedToId?: string | null;
 }
 
-export async function getTickets(params: {
+interface GetTicketsParams {
   status?: TicketStatus;
   priority?: TicketPriority;
   assignedToId?: string;
   clientId?: string;
+  accountRepId?: string;
   search?: string;
-}) {
-  const { status, priority, assignedToId, clientId, search } = params;
+}
+
+export async function getTickets(params: GetTicketsParams) {
+  const { status, priority, assignedToId, clientId, accountRepId, search } = params;
 
   const where: Prisma.TicketWhereInput = {
     ...(status && { status }),
     ...(priority && { priority }),
     ...(assignedToId && { assignedToId }),
     ...(clientId && { clientId }),
+    ...(accountRepId && {
+      client: {
+        accountRepId,
+      },
+    }),
     ...(search && {
       OR: [
         { title: { contains: search, mode: 'insensitive' as const } },
@@ -84,6 +92,7 @@ export async function getTicketById(id: string) {
         select: {
           id: true,
           name: true,
+          accountRepId: true,
         },
       },
       attachments: true,
@@ -108,12 +117,9 @@ export async function getTicketById(id: string) {
   return ticket;
 }
 
-export async function createTicket(data: CreateTicketData) {
+export async function createTicket(data: Prisma.TicketCreateInput) {
   const ticket = await prisma.ticket.create({
-    data: {
-      ...data,
-      status: 'OPEN',
-    },
+    data,
     include: {
       assignedTo: {
         select: {
@@ -127,23 +133,16 @@ export async function createTicket(data: CreateTicketData) {
           name: true,
         },
       },
-      attachments: true,
-      tags: true,
     },
   });
 
   return ticket;
 }
 
-export async function updateTicket(id: string, data: UpdateTicketData) {
-  const { status, ...rest } = data;
-  
+export async function updateTicket(id: string, data: Prisma.TicketUpdateInput) {
   const ticket = await prisma.ticket.update({
     where: { id },
-    data: {
-      ...rest,
-      ...(status && { status }),
-    } satisfies Prisma.TicketUpdateInput,
+    data,
     include: {
       assignedTo: {
         select: {
@@ -157,47 +156,153 @@ export async function updateTicket(id: string, data: UpdateTicketData) {
           name: true,
         },
       },
-      attachments: true,
-      tags: true,
     },
   });
 
   return ticket;
 }
 
-export async function getTicketStats() {
-  const [total, open, inProgress, resolved] = await Promise.all([
-    prisma.ticket.count(),
-    prisma.ticket.count({ where: { status: 'OPEN' } }),
-    prisma.ticket.count({ where: { status: 'IN_PROGRESS' } }),
-    prisma.ticket.count({ where: { status: 'RESOLVED' } }),
+export async function getTicketStats(accountRepId?: string) {
+  const baseFilter = accountRepId ? {
+    client: {
+      accountRepId
+    }
+  } : {};
+
+  // Get current period stats
+  const now = new Date();
+  const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const fortyEightHoursAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+
+  // Current period stats - count all current tickets, not just those created in last 24h
+  const [currentTotal, currentOpen, currentInProgress, currentResolved, currentTickets] = await Promise.all([
+    prisma.ticket.count({
+      where: {
+        ...baseFilter
+      }
+    }),
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        status: 'OPEN'
+      }
+    }),
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        status: 'IN_PROGRESS'
+      }
+    }),
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        status: 'RESOLVED'
+      }
+    }),
+    prisma.ticket.findMany({
+      where: {
+        ...baseFilter,
+        status: { not: 'OPEN' },
+        updatedAt: { gte: twentyFourHoursAgo } // Look at tickets updated in last 24h for response time
+      },
+      select: {
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
   ]);
 
-  // Calculate average response time (time between ticket creation and first response)
-  const tickets = await prisma.ticket.findMany({
-    where: {
-      status: { not: 'OPEN' },
-    },
-    select: {
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
+  // Previous period stats - for percentage change calculation
+  const [previousTotal, previousOpen, previousInProgress, previousResolved, previousTickets] = await Promise.all([
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        createdAt: { 
+          lt: twentyFourHoursAgo
+        }
+      }
+    }),
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        status: 'OPEN',
+        createdAt: { 
+          lt: twentyFourHoursAgo
+        }
+      }
+    }),
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        status: 'IN_PROGRESS',
+        createdAt: { 
+          lt: twentyFourHoursAgo
+        }
+      }
+    }),
+    prisma.ticket.count({
+      where: {
+        ...baseFilter,
+        status: 'RESOLVED',
+        createdAt: { 
+          lt: twentyFourHoursAgo
+        }
+      }
+    }),
+    prisma.ticket.findMany({
+      where: {
+        ...baseFilter,
+        status: { not: 'OPEN' },
+        updatedAt: { 
+          gte: fortyEightHoursAgo,
+          lt: twentyFourHoursAgo
+        }
+      },
+      select: {
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
+  ]);
 
-  const totalResponseTime = tickets.reduce((acc: number, ticket) => {
+  // Calculate current period average response time
+  const currentResponseTime = currentTickets.reduce((acc: number, ticket) => {
     const responseTime = ticket.updatedAt.getTime() - ticket.createdAt.getTime();
     return acc + responseTime;
   }, 0);
 
-  const averageResponseTime = tickets.length > 0
-    ? (totalResponseTime / tickets.length) / (1000 * 60 * 60) // Convert to hours
+  const currentAverageResponseTime = currentTickets.length > 0
+    ? (currentResponseTime / currentTickets.length) / (1000 * 60 * 60) // Convert to hours
     : 0;
 
+  // Calculate previous period average response time
+  const previousResponseTime = previousTickets.reduce((acc: number, ticket) => {
+    const responseTime = ticket.updatedAt.getTime() - ticket.createdAt.getTime();
+    return acc + responseTime;
+  }, 0);
+
+  const previousAverageResponseTime = previousTickets.length > 0
+    ? (previousResponseTime / previousTickets.length) / (1000 * 60 * 60) // Convert to hours
+    : 0;
+
+  // Calculate percentage changes
+  const calculatePercentageChange = (current: number, previous: number): number => {
+    if (previous === 0) return current > 0 ? 100 : 0;
+    return Number(((current - previous) / previous * 100).toFixed(1));
+  };
+
   return {
-    total,
-    open,
-    inProgress,
-    resolved,
-    averageResponseTime,
+    total: currentTotal,
+    open: currentOpen,
+    inProgress: currentInProgress,
+    resolved: currentResolved,
+    averageResponseTime: currentAverageResponseTime,
+    percentageChanges: {
+      total: calculatePercentageChange(currentTotal, previousTotal),
+      open: calculatePercentageChange(currentOpen, previousOpen),
+      inProgress: calculatePercentageChange(currentInProgress, previousInProgress),
+      resolved: calculatePercentageChange(currentResolved, previousResolved),
+      averageResponseTime: calculatePercentageChange(currentAverageResponseTime, previousAverageResponseTime),
+    }
   };
 } 

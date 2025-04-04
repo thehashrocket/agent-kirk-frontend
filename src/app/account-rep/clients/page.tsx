@@ -173,12 +173,12 @@ export default function ClientsPage() {
   }
 
   if (!users) {
-    console.error('No users data returned from useUsers hook');
+    // console.error('No users data returned from useUsers hook');
     return <div>Error: No user data available. Please check your login status.</div>;
   }
 
   if (!Array.isArray(users)) {
-    console.error('Expected users to be an array but got:', users);
+    // console.error('Expected users to be an array but got:', users);
     return <div>Error loading users. Please try again later.</div>;
   }
 

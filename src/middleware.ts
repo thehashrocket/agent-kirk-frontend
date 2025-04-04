@@ -31,18 +31,18 @@ import { NextResponse } from "next/server";
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
-    console.log("Middleware - Token:", token);
+    // console.log("Middleware - Token:", token);
     
     const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
     const isAccountRepRoute = req.nextUrl.pathname.startsWith("/account-rep");
     const isClientRoute = req.nextUrl.pathname.startsWith("/client");
 
-    console.log("Middleware - Route check:", {
-      path: req.nextUrl.pathname,
-      isAdminRoute,
-      isAccountRepRoute,
-      isClientRoute
-    });
+    // console.log("Middleware - Route check:", {
+    //   path: req.nextUrl.pathname,
+    //   isAdminRoute,
+    //   isAccountRepRoute,
+    //   isClientRoute
+    // });
 
     if (isAdminRoute && token?.role !== "ADMIN") {
       console.log("Access denied to admin route. User role:", token?.role);

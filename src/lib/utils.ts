@@ -59,3 +59,28 @@ export function isMarkdown(text: string): boolean {
 
   return markdownPatterns.some(pattern => pattern.test(text));
 }
+
+/**
+ * Formats a duration in hours into a human-readable string.
+ * Handles hours and minutes, rounding to the nearest minute.
+ * 
+ * @param {number} hours - Duration in hours
+ * @returns {string} Formatted duration string (e.g., "2h 30m" or "45m")
+ * 
+ * @example
+ * ```ts
+ * formatDuration(2.5) // "2h 30m"
+ * formatDuration(0.75) // "45m"
+ * ```
+ */
+export function formatDuration(hours: number): string {
+  if (hours === 0) return "0m";
+  
+  const totalMinutes = Math.round(hours * 60);
+  const h = Math.floor(totalMinutes / 60);
+  const m = totalMinutes % 60;
+  
+  if (h === 0) return `${m}m`;
+  if (m === 0) return `${h}h`;
+  return `${h}h ${m}m`;
+}

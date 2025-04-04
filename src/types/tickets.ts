@@ -32,9 +32,10 @@ export interface Ticket {
 
 export interface TicketFilters {
   search: string;
-  priority: string;
-  assignee: string;
-  dateRange: string;
+  priority: "all" | TicketPriority;
+  assignee: "all" | "unassigned" | string;
+  dateRange: "all" | "today" | "week" | "month";
+  clientId: "all" | string;
 }
 
 export interface TicketStats {

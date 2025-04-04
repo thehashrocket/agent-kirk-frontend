@@ -25,6 +25,7 @@ interface TicketListProps {
   priority?: TicketPriority;
   assignedToId?: string;
   clientId?: string;
+  accountRepId?: string;
   search?: string;
 }
 
@@ -45,6 +46,7 @@ export default function TicketList({
   priority,
   assignedToId,
   clientId,
+  accountRepId,
   search,
 }: TicketListProps) {
   const {
@@ -58,6 +60,7 @@ export default function TicketList({
     priority,
     assignedToId,
     clientId,
+    accountRepId,
     search,
   });
 
@@ -117,7 +120,7 @@ export default function TicketList({
             <div className="space-y-1">
               <CardTitle className="text-base">
                 <Link 
-                  href={`/admin/tickets/${ticket.id}`}
+                  href={`/account-rep/tickets/${ticket.id}`}
                   className="hover:underline"
                 >
                   {ticket.title}
@@ -137,7 +140,7 @@ export default function TicketList({
                     if (!ticket.assignedTo) {
                       updateTicket({
                         id: ticket.id,
-                        data: { assignedToId: "current-user-id" }, // TODO: Get from session
+                        data: { assignedToId: accountRepId },
                       });
                     }
                   }}

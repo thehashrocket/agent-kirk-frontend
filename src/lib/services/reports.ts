@@ -448,4 +448,139 @@ export async function getAccountRepReportData(
       retentionRate: totalClients > 0 ? (activeClients / totalClients) * 100 : 0,
     },
   };
+}
+
+/**
+ * Interface for LLM query metrics
+ */
+export interface LlmQueryMetrics {
+  overall: {
+    totalQueries: number;
+    averageRating: number;
+    positiveRatings: number;
+    neutralRatings: number;
+    negativeRatings: number;
+  };
+  recentQueries: Array<{
+    content: string;
+    response: string;
+    rating: number;
+    createdAt: Date;
+    clientName: string;
+  }>;
+  ratingTrend: Array<{
+    date: string;
+    averageRating: number;
+    totalQueries: number;
+  }>;
+  clientSatisfaction: Array<{
+    clientName: string;
+    totalQueries: number;
+    averageRating: number;
+    positivePercentage: number;
+  }>;
+}
+
+/**
+ * Fetches LLM query metrics for an account representative
+ */
+export async function getLlmQueryMetrics(
+  accountRepId: string,
+  startDate?: string,
+  endDate?: string
+): Promise<LlmQueryMetrics> {
+  // Convert input dates to UTC for consistent querying
+  const utcStartDate = startDate ? new Date(`${startDate}T00:00:00Z`) : subDays(new Date(), 30);
+  const utcEndDate = endDate ? new Date(`${endDate}T23:59:59.999Z`) : new Date();
+
+  // Get all queries for the account rep's clients
+  const queries = await prisma.query.findMany({
+    where: {
+      user: {
+        accountRepId,
+      },
+      createdAt: {
+        gte: utcStartDate,
+        lte: utcEndDate,
+      },
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  // Calculate overall metrics
+  const totalQueries = queries.length;
+  const positiveRatings = queries.filter(q => q.rating === 1).length;
+  const neutralRatings = queries.filter(q => q.rating === 0).length;
+  const negativeRatings = queries.filter(q => q.rating === -1).length;
+  const averageRating = totalQueries > 0
+    ? queries.reduce((sum, q) => sum + q.rating, 0) / totalQueries
+    : 0;
+
+  // Get recent queries
+  const recentQueries = queries.slice(0, 5).map(q => ({
+    content: q.content,
+    response: q.response || '',
+    rating: q.rating,
+    createdAt: q.createdAt,
+    clientName: q.user.name || q.user.email || 'Unknown Client',
+  }));
+
+  // Calculate daily rating trends
+  const queryByDate = queries.reduce((acc, q) => {
+    const date = q.createdAt.toISOString().split('T')[0];
+    if (!acc[date]) {
+      acc[date] = { sum: 0, count: 0 };
+    }
+    acc[date].sum += q.rating;
+    acc[date].count += 1;
+    return acc;
+  }, {} as Record<string, { sum: number; count: number }>);
+
+  const ratingTrend = Object.entries(queryByDate).map(([date, data]) => ({
+    date,
+    averageRating: data.sum / data.count,
+    totalQueries: data.count,
+  })).sort((a, b) => a.date.localeCompare(b.date));
+
+  // Calculate per-client satisfaction
+  const clientQueries = queries.reduce((acc, q) => {
+    const clientName = q.user.name || q.user.email || 'Unknown Client';
+    if (!acc[clientName]) {
+      acc[clientName] = { sum: 0, total: 0, positive: 0 };
+    }
+    acc[clientName].sum += q.rating;
+    acc[clientName].total += 1;
+    if (q.rating === 1) acc[clientName].positive += 1;
+    return acc;
+  }, {} as Record<string, { sum: number; total: number; positive: number }>);
+
+  const clientSatisfaction = Object.entries(clientQueries).map(([clientName, data]) => ({
+    clientName,
+    totalQueries: data.total,
+    averageRating: data.sum / data.total,
+    positivePercentage: (data.positive / data.total) * 100,
+  })).sort((a, b) => b.averageRating - a.averageRating);
+
+  return {
+    overall: {
+      totalQueries,
+      averageRating,
+      positiveRatings,
+      neutralRatings,
+      negativeRatings,
+    },
+    recentQueries,
+    ratingTrend,
+    clientSatisfaction,
+  };
 } 

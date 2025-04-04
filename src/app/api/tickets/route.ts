@@ -63,13 +63,29 @@ export async function GET(request: Request) {
     const priority = searchParams.get("priority") as "LOW" | "MEDIUM" | "HIGH" | undefined;
     const assignedToId = searchParams.get("assignedToId") || undefined;
     const clientId = searchParams.get("clientId") || undefined;
+    const accountRepId = searchParams.get("accountRepId") || undefined;
     const search = searchParams.get("search") || undefined;
 
+    // If the user is an account rep, we need to ensure they can only see their clients' tickets
+    if (session.user.role === "ACCOUNT_REP") {
+      const tickets = await getTickets({
+        status,
+        priority,
+        assignedToId,
+        clientId,
+        accountRepId: session.user.id, // Force accountRepId to be the current user's ID
+        search,
+      });
+      return NextResponse.json(tickets);
+    }
+
+    // For other roles (like admin), allow them to see all tickets
     const tickets = await getTickets({
       status,
       priority,
       assignedToId,
       clientId,
+      accountRepId,
       search,
     });
 
@@ -83,20 +99,11 @@ export async function GET(request: Request) {
 /**
  * POST handler for creating new tickets
  * 
- * @param {Request} request - The incoming HTTP request with ticket data
+ * @param {Request} request - The incoming HTTP request
  * @returns {Promise<NextResponse>} JSON response containing the created ticket
  * 
- * @example
- * // Request body:
- * {
- *   "title": "New Feature Request",
- *   "description": "Add dark mode support",
- *   "priority": "MEDIUM",
- *   "clientId": "client_123"
- * }
- * 
- * @throws {400} If request validation fails
  * @throws {401} If user is not authenticated
+ * @throws {400} If request body is invalid
  * @throws {500} If server encounters an error
  */
 export async function POST(request: Request) {
@@ -107,11 +114,16 @@ export async function POST(request: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const json = await request.json();
-    const body = createTicketSchema.parse(json);
+    const body = await request.json();
+    const validatedData = createTicketSchema.parse(body);
 
-    const ticket = await createTicket(body);
+    // If the user is an account rep, ensure they can only create tickets for their clients
+    if (session.user.role === "ACCOUNT_REP") {
+      // TODO: Add validation to ensure the client belongs to this account rep
+      // This should be done in the ticket service
+    }
 
+    const ticket = await createTicket(validatedData);
     return NextResponse.json(ticket);
   } catch (error) {
     if (error instanceof z.ZodError) {

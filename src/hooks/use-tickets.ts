@@ -12,6 +12,7 @@ interface UseTicketsProps {
   priority?: TicketPriority;
   assignedToId?: string;
   clientId?: string;
+  accountRepId?: string;
   search?: string;
 }
 
@@ -36,6 +37,7 @@ async function fetchTickets(params: UseTicketsProps) {
   if (params.priority) searchParams.set("priority", params.priority);
   if (params.assignedToId) searchParams.set("assignedToId", params.assignedToId);
   if (params.clientId) searchParams.set("clientId", params.clientId);
+  if (params.accountRepId) searchParams.set("accountRepId", params.accountRepId);
   if (params.search) searchParams.set("search", params.search);
 
   const response = await fetch(`/api/tickets?${searchParams.toString()}`);
@@ -49,20 +51,6 @@ async function fetchTicketById(id: string) {
   const response = await fetch(`/api/tickets/${id}`);
   if (!response.ok) {
     throw new Error("Failed to fetch ticket");
-  }
-  return response.json();
-}
-
-async function createTicket(data: CreateTicketData) {
-  const response = await fetch("/api/tickets", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) {
-    throw new Error("Failed to create ticket");
   }
   return response.json();
 }
@@ -94,17 +82,6 @@ export function useTickets(props: UseTicketsProps = {}) {
     queryFn: () => fetchTickets(props),
   });
 
-  const createMutation = useMutation({
-    mutationFn: createTicket,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tickets"] });
-      setError(null);
-    },
-    onError: (error: Error) => {
-      setError(error.message);
-    },
-  });
-
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: UpdateTicketData }) =>
       updateTicket(id, data),
@@ -122,9 +99,7 @@ export function useTickets(props: UseTicketsProps = {}) {
     isLoading,
     error,
     refetch,
-    createTicket: createMutation.mutate,
     updateTicket: updateMutation.mutate,
-    isCreating: createMutation.isPending,
     isUpdating: updateMutation.isPending,
   };
 }
@@ -163,4 +138,4 @@ export function useTicket(id: string) {
     updateTicket: updateMutation.mutate,
     isUpdating: updateMutation.isPending,
   };
-} 
+}

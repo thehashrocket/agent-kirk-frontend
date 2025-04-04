@@ -15,16 +15,23 @@ import type { TicketFilters as ITicketFilters } from "@/types/tickets";
 
 interface TicketFiltersProps {
   onFilterChange?: (filters: ITicketFilters) => void;
+  showClientFilter?: boolean;
+  accountRepId?: string;
 }
 
 const initialFilters: ITicketFilters = {
   search: "",
-  priority: "",
-  assignee: "",
-  dateRange: "",
+  priority: "all",
+  assignee: "all",
+  dateRange: "all",
+  clientId: "all",
 };
 
-export default function TicketFilters({ onFilterChange }: TicketFiltersProps) {
+export default function TicketFilters({ 
+  onFilterChange, 
+  showClientFilter = false,
+  accountRepId 
+}: TicketFiltersProps) {
   const [filters, setFilters] = useState<ITicketFilters>(initialFilters);
 
   const handleFilterChange = (key: keyof ITicketFilters, value: string) => {
@@ -55,6 +62,24 @@ export default function TicketFilters({ onFilterChange }: TicketFiltersProps) {
           />
         </div>
 
+        {showClientFilter && (
+          <div className="space-y-2">
+            <Label htmlFor="client">Client</Label>
+            <Select
+              value={filters.clientId}
+              onValueChange={(value) => handleFilterChange("clientId", value)}
+            >
+              <SelectTrigger id="client">
+                <SelectValue placeholder="Select client" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Clients</SelectItem>
+                {/* We'll populate this dynamically with the account rep's clients */}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+
         <div className="space-y-2">
           <Label htmlFor="priority">Priority</Label>
           <Select
@@ -65,7 +90,7 @@ export default function TicketFilters({ onFilterChange }: TicketFiltersProps) {
               <SelectValue placeholder="Select priority" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               <SelectItem value="HIGH">High</SelectItem>
               <SelectItem value="MEDIUM">Medium</SelectItem>
               <SelectItem value="LOW">Low</SelectItem>
@@ -83,7 +108,7 @@ export default function TicketFilters({ onFilterChange }: TicketFiltersProps) {
               <SelectValue placeholder="Select assignee" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               <SelectItem value="unassigned">Unassigned</SelectItem>
               {/* We'll populate this dynamically later */}
             </SelectContent>
@@ -100,7 +125,7 @@ export default function TicketFilters({ onFilterChange }: TicketFiltersProps) {
               <SelectValue placeholder="Select date range" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All time</SelectItem>
+              <SelectItem value="all">All time</SelectItem>
               <SelectItem value="today">Today</SelectItem>
               <SelectItem value="week">This week</SelectItem>
               <SelectItem value="month">This month</SelectItem>

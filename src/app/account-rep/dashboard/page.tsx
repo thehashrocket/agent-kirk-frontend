@@ -12,13 +12,14 @@ import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import Link from "next/link";
 import { 
-  getActiveClientsStats, 
-  getUnreadMessagesStats, 
-  getResponseRateStats, 
+  getActiveClientsStats,
+  getResponseRateStats,
   getClientSatisfactionStats,
   getRecentActivities,
   type RecentActivity 
 } from "@/lib/account-rep";
+import { getTicketStats } from "@/lib/services/ticket-service";
+import { formatDuration } from "@/lib/utils";
 import { formatDistanceToNow } from 'date-fns';
 import { Badge } from "@/components/ui/badge";
 import { Inbox, Users, Clock, Star } from "lucide-react";
@@ -48,14 +49,14 @@ function StatsCardSkeleton() {
 async function AccountRepStats({ accountRepId }: { accountRepId: string }) {
   const [
     activeClientsStats,
-    unreadMessagesStats,
     responseRateStats,
-    satisfactionStats
+    satisfactionStats,
+    ticketStats
   ] = await Promise.all([
     getActiveClientsStats(accountRepId),
-    getUnreadMessagesStats(accountRepId),
     getResponseRateStats(accountRepId),
     getClientSatisfactionStats(accountRepId),
+    getTicketStats(accountRepId)
   ]);
 
   const stats = [
@@ -67,14 +68,14 @@ async function AccountRepStats({ accountRepId }: { accountRepId: string }) {
     },
     {
       title: "Open Tickets",
-      value: unreadMessagesStats.current,
-      change: unreadMessagesStats.percentageChange,
+      value: ticketStats.open,
+      change: ticketStats.percentageChanges.open,
       icon: <Inbox className="h-4 w-4 text-yellow-500" />,
     },
     {
-      title: "Response Rate",
-      value: `${responseRateStats.current}%`,
-      change: responseRateStats.percentageChange,
+      title: "Response Time",
+      value: formatDuration(ticketStats.averageResponseTime),
+      change: ticketStats.percentageChanges.averageResponseTime,
       icon: <Clock className="h-4 w-4 text-green-500" />,
     },
     {

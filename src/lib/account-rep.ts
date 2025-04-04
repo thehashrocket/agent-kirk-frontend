@@ -381,18 +381,25 @@ export const getDetailedSatisfactionMetrics = cache(async (accountRepId: string)
       }),
     ]);
 
-    // Process rating distribution
-    const distribution: { [key: number]: number } = {};
-    ratingDistribution.forEach((item: { rating: Prisma.Decimal; _count: number }) => {
-      distribution[Number(item.rating)] = item._count;
+    // Initialize rating distribution with all possible values (1-5)
+    const distribution: { [key: number]: number } = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    };
+    
+    // Update distribution with actual counts
+    ratingDistribution.forEach((item) => {
+      const rating = Math.round(Number(item.rating));
+      if (rating >= 1 && rating <= 5) {
+        distribution[rating] = item._count;
+      }
     });
 
     // Process trend data
-    const trend = trendData.map((day: { 
-      createdAt: Date; 
-      _avg: { rating: Prisma.Decimal | null }; 
-      _count: number 
-    }) => ({
+    const trend = trendData.map((day) => ({
       date: day.createdAt,
       rating: Number(day._avg.rating) || 0,
       count: day._count,
