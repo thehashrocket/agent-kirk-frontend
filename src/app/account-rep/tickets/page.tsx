@@ -38,7 +38,7 @@ export default async function AccountRepTicketsPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Client Support Tickets</h1>
+        <h1 className="text-3xl font-bold">Need Help?</h1>
         <TicketStats accountRepId={session.user.id} />
       </div>
 

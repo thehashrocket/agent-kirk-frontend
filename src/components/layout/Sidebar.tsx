@@ -112,7 +112,7 @@ const accountRepNavItems: NavItem[] = [
     description: "Manage client accounts"
   },
   { 
-    title: "Support Tickets", 
+    title: "Need Help?", 
     href: "/account-rep/tickets", 
     icon: <Ticket />,
     description: "Handle support requests"
@@ -224,7 +224,7 @@ export function Sidebar() {
       <ScrollArea className="h-full py-6">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Navigation
+            Menu
           </h2>
           <div className="space-y-1">
             {navItems.map((item) => (
