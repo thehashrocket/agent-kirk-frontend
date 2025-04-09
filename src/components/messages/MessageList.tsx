@@ -15,6 +15,7 @@ interface MessageListProps {
   recipientId?: string;
   threadId?: string;
   currentUserId?: string;
+  view?: 'inbox' | 'outbox';
 }
 
 /**
@@ -25,7 +26,7 @@ interface MessageListProps {
  * 
  * @param {MessageListProps} props - Component props
  */
-export function MessageList({ recipientId, threadId, currentUserId }: MessageListProps) {
+export function MessageList({ recipientId, threadId, currentUserId, view = 'inbox' }: MessageListProps) {
   const { ref, inView } = useInView();
 
   const {
@@ -36,12 +37,12 @@ export function MessageList({ recipientId, threadId, currentUserId }: MessageLis
     isLoading,
     refetch
   } = useInfiniteQuery({
-    queryKey: ['messages', recipientId, threadId],
+    queryKey: ['messages', recipientId, threadId, view],
     queryFn: async ({ pageParam = 1 }) => {
       const params = new URLSearchParams({
         page: pageParam.toString(),
         limit: '20',
-        view: 'inbox'  // Add view parameter
+        view: view
       });
       
       if (threadId) {

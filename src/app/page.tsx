@@ -34,7 +34,7 @@ export default async function Home() {
       <div className="w-full max-w-4xl space-y-8 text-center">
         <div className="space-y-4">
           <h1 className="text-4xl font-bliss-bold tracking-tight sm:text-6xl">
-            Welcome to Kirk
+            Welcome to Agent Kirk
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             Your intelligent business assistant that streamlines communication,

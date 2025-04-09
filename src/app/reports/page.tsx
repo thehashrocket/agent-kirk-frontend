@@ -50,7 +50,7 @@ export default async function ReportsPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Reports Dashboard</h1>
         <p className="text-gray-600">
-          Access and generate detailed reports about your system's performance and usage
+          Access and generate detailed reports about your system&apos;s performance and usage
         </p>
       </div>
 

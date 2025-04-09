@@ -66,7 +66,7 @@ const adminNavItems: NavItem[] = [
 const accountRepNavItems: NavItem[] = [
   { title: "Dashboard", href: "/account-rep/dashboard", icon: <LayoutDashboard /> },
   { title: "Client Management", href: "/account-rep/clients", icon: <Users /> },
-  { title: "Support Tickets", href: "/account-rep/tickets", icon: <Ticket /> },
+  { title: "Need Help?", href: "/account-rep/tickets", icon: <Ticket /> },
   { title: "Messages", href: "/account-rep/messages", icon: <MessageSquare /> },
   { title: "Reports", href: "/account-rep/reports", icon: <FileText /> },
   { title: "Chat", href: "/chat", icon: <MessageSquare /> },

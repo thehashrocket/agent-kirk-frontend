@@ -23,6 +23,18 @@ interface ConversationWithQueries {
   title: string;
   isStarred: boolean;
   updatedAt: Date;
+  gaAccountId?: string;
+  gaPropertyId?: string;
+  gaAccount?: {
+    id: string;
+    gaAccountId: string;
+    gaAccountName: string;
+  };
+  gaProperty?: {
+    id: string;
+    gaPropertyId: string;
+    gaPropertyName: string;
+  };
   queries: Array<{
     content: string;
   }>;
@@ -74,9 +86,24 @@ export async function GET() {
           orderBy: {
             createdAt: 'desc',
           },
+          
           take: 1,
           select: {
             content: true,
+          },
+        },
+        gaAccount: {
+          select: {
+            id: true,
+            gaAccountId: true,
+            gaAccountName: true,
+          },
+        },
+        gaProperty: {
+          select: {
+            id: true,
+            gaPropertyId: true,
+            gaPropertyName: true,
           },
         },
       },

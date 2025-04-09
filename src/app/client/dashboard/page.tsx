@@ -41,11 +41,20 @@ interface ClientStats {
  * @returns {Promise<JSX.Element>} Grid of statistics cards
  */
 async function ClientStats() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/client/stats`, {
+  const session = await getServerSession(authOptions);
+  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3005';
+  
+  const response = await fetch(`${baseUrl}/api/client/stats`, {
     cache: 'no-store',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session?.user?.id}`,
+    }
   });
 
   if (!response.ok) {
+    console.error('Stats fetch failed:', await response.text());
     throw new Error('Failed to fetch client stats');
   }
 

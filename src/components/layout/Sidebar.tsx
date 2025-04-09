@@ -166,6 +166,12 @@ const clientNavItems: NavItem[] = [
     icon: <HelpCircle />,
     description: "Get assistance"
   },
+  {
+    title: "Profile",
+    href: "/client/profile",
+    icon: <User />,
+    description: "Manage your account"
+  },
 ];
 
 /**

@@ -25,10 +25,10 @@ async function main() {
 
   // Create test users
   const adminUser = await prisma.user.upsert({
-    where: { email: 'admin@example.com' },
+    where: { email: 'admin@1905newmedia.com' },
     update: {},
     create: {
-      email: 'admin@example.com',
+      email: 'admin@1905newmedia.com',
       name: 'Admin User',
       roleId: adminRole.id,
     },
@@ -41,6 +41,19 @@ async function main() {
       email: 'jasshultz@gmail.com',
       name: 'Jason Shultz',
       roleId: accountRepRole.id,
+    },
+  });
+
+  const clientUser = await prisma.user.upsert({
+    where: { email: 'jason.shultz@1905newmedia.com' },
+    update: {},
+    create: {
+      email: 'jason.shultz@1905newmedia.com',
+      name: 'Jason Shultz',
+      roleId: clientRole.id,
+      accountRepId: accountRep.id,
+      image: `https://i.pravatar.cc/150?u=jason.shultz@1905newmedia.com`,
+      isActive: true,
     },
   });
 

@@ -60,6 +60,23 @@ type StatsResponse = {
   };
 };
 
+type UserRole = {
+  id: string;
+  name: string;
+};
+
+type DbUser = {
+  id: string;
+  role: UserRole;
+};
+
+type SessionUser = {
+  id: string;
+  role: string | UserRole;
+};
+
+const ALLOWED_ROLES = ['CLIENT', 'ADMIN', 'ACCOUNT_REP'];
+
 /**
  * Handles GET requests for client statistics
  * 
@@ -72,7 +89,7 @@ type StatsResponse = {
  * @async
  * @function GET
  * @route {GET} /api/client/stats
- * @access Private - Requires authenticated client user
+ * @access Private - Requires authenticated user with CLIENT, ADMIN, or ACCOUNT_REP role
  * 
  * @returns {Promise<NextResponse<StatsResponse>>} JSON response containing client statistics
  * 
@@ -87,15 +104,89 @@ type StatsResponse = {
  *   }
  * }
  * 
- * @throws {401} If user is not authenticated or not a client
+ * @throws {401} If user is not authenticated or has invalid role
  * @throws {500} If there's an internal server error during data retrieval
  */
-export async function GET(): Promise<NextResponse> {
+export async function GET(request: Request): Promise<NextResponse> {
   try {
     // Get the authenticated user
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id || session.user.role !== "CLIENT") {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    let sessionUser = (await getServerSession(authOptions))?.user as SessionUser | undefined;
+    console.log('Stats API - Session:', JSON.stringify({ user: sessionUser }, null, 2));
+    
+    // Check Authorization header as fallback
+    if (!sessionUser) {
+      const authHeader = request.headers.get('authorization');
+      console.log('Stats API - Auth Header:', authHeader);
+      
+      if (!authHeader?.startsWith('Bearer ')) {
+        console.log('Stats API - No valid Authorization header');
+        return NextResponse.json({ error: 'Unauthorized - No valid authorization' }, { status: 401 });
+      }
+      
+      const userId = authHeader.split(' ')[1];
+      if (!userId) {
+        console.log('Stats API - No user ID in Authorization header');
+        return NextResponse.json({ error: 'Unauthorized - No user ID' }, { status: 401 });
+      }
+      
+      // Get user from database to verify role
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { 
+          id: true, 
+          role: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }) as DbUser | null;
+      
+      const roleName = user?.role?.name;
+      if (!user || !roleName || !ALLOWED_ROLES.includes(roleName)) {
+        console.log('Stats API - Invalid user or role:', user);
+        return NextResponse.json({ error: 'Unauthorized - Invalid user or role' }, { status: 401 });
+      }
+      
+      sessionUser = { id: user.id, role: user.role.name };
+    } else {
+      const roleName = typeof sessionUser.role === 'object' ? sessionUser.role?.name : sessionUser.role;
+      if (!ALLOWED_ROLES.includes(roleName)) {
+        console.log('Stats API - Unauthorized. Session user:', sessionUser);
+        return NextResponse.json({ error: 'Unauthorized - Invalid session or role' }, { status: 401 });
+      }
+    }
+
+    // At this point sessionUser is guaranteed to be defined and have an allowed role
+    const user = { 
+      id: sessionUser.id, 
+      role: typeof sessionUser.role === 'object' ? sessionUser.role.name : sessionUser.role 
+    };
+
+    // For non-CLIENT roles, we need to get the client ID from the request
+    let clientId = user.role === 'CLIENT' ? user.id : new URL(request.url).searchParams.get('clientId');
+    
+    if (!clientId) {
+      if (user.role === 'CLIENT') {
+        clientId = user.id;
+      } else {
+        return NextResponse.json({ error: 'Missing clientId parameter' }, { status: 400 });
+      }
+    }
+
+    // If not a CLIENT, verify the user has permission to access this client's data
+    if (user.role !== 'CLIENT' && user.role !== 'ADMIN') {
+      // For ACCOUNT_REP, verify they are assigned to this client
+      const hasAccess = await prisma.clientAccountRep.findFirst({
+        where: {
+          accountRepId: user.id,
+          clientId: clientId,
+        },
+      });
+
+      if (!hasAccess) {
+        return NextResponse.json({ error: 'Unauthorized - Not assigned to this client' }, { status: 401 });
+      }
     }
 
     // Get the current date and first day of the month
@@ -105,7 +196,7 @@ export async function GET(): Promise<NextResponse> {
     // Get monthly queries count
     const monthlyQueries = await prisma.query.count({
       where: {
-        userId: session.user.id,
+        userId: clientId, // Use clientId instead of user.id
         createdAt: {
           gte: firstDayOfMonth,
           lte: now,
@@ -117,12 +208,12 @@ export async function GET(): Promise<NextResponse> {
     const [totalQueries, successfulQueries] = await Promise.all([
       prisma.query.count({
         where: {
-          userId: session.user.id,
+          userId: clientId,
         },
       }),
       prisma.query.count({
         where: {
-          userId: session.user.id,
+          userId: clientId,
           response: {
             not: '',
           },
@@ -138,7 +229,7 @@ export async function GET(): Promise<NextResponse> {
     // Get recent queries for response time calculation
     const recentQueries = await prisma.query.findMany({
       where: {
-        userId: session.user.id,
+        userId: clientId,
         createdAt: {
           gte: new Date(Date.now() - 24 * 60 * 60 * 1000), // Last 24 hours
         },
@@ -155,7 +246,7 @@ export async function GET(): Promise<NextResponse> {
 
     // Calculate average response time (in seconds)
     const avgResponseTime = recentQueries.length > 0
-      ? (recentQueries.reduce((acc, query) => {
+      ? (recentQueries.reduce((acc: number, query: { updatedAt: Date; createdAt: Date }) => {
           const responseTime = query.updatedAt.getTime() - query.createdAt.getTime();
           return acc + responseTime;
         }, 0) / recentQueries.length / 1000).toFixed(1)
@@ -164,7 +255,7 @@ export async function GET(): Promise<NextResponse> {
     // Get user settings for API credits
     const userSettings = await prisma.userSettings.findUnique({
       where: {
-        userId: session.user.id,
+        userId: clientId,
       },
       select: {
         apiCredits: true,
@@ -178,7 +269,7 @@ export async function GET(): Promise<NextResponse> {
     
     const lastMonthQueries = await prisma.query.count({
       where: {
-        userId: session.user.id,
+        userId: clientId,
         createdAt: {
           gte: lastMonth,
           lte: lastMonthEnd,

@@ -8,7 +8,7 @@
 
 import { useState } from 'react';
 import { Card } from "@/components/ui/card";
-import { DatePickerWithRange } from "@/components/ui/date-picker-with-range";
+import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import {
   Select,
   SelectContent,
@@ -77,7 +77,14 @@ export default function ClientActivityPage() {
             </label>
             <DatePickerWithRange
               date={dateRange}
-              onDateChange={setDateRange}
+              onDateChange={(date) => {
+                if (date) {
+                  setDateRange({
+                    from: date.from ?? dateRange.from,
+                    to: date.to ?? dateRange.to,
+                  });
+                }
+              }}
             />
           </div>
           <div className="w-full md:w-64">

@@ -18,6 +18,16 @@ interface Conversation {
   isStarred: boolean;
   gaAccountId?: string;
   gaPropertyId?: string;
+  gaAccount?: {
+    id: string;
+    gaAccountId: string;
+    gaAccountName: string;
+  };
+  gaProperty?: {
+    id: string;
+    gaPropertyId: string;
+    gaPropertyName: string;
+  };
 }
 
 interface Message {
@@ -118,6 +128,8 @@ export default function ChatPage() {
             lastMessage: conv.queries[0]?.content || 'No messages yet',
             timestamp: new Date(conv.updatedAt).toLocaleString(),
             isStarred: conv.isStarred,
+            gaAccountId: conv.gaAccount?.gaAccountId,
+            gaPropertyId: conv.gaProperty?.gaPropertyId,
           });
         }
       });
@@ -209,6 +221,7 @@ export default function ChatPage() {
       
       // Get GA details from the selected conversation
       const conversation = conversations.find(conv => conv.id === conversationId);
+      console.log('Conversation details:', conversation);
       const gaAccountId = conversation?.gaAccountId;
       const gaPropertyId = conversation?.gaPropertyId;
       

@@ -73,13 +73,13 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-gradient-to-r from-primary/10 via-primary/5 to-background backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <div className="container h-14 flex items-center">
         <MobileNav />
-        <nav className="flex items-center space-x-6">
+        <nav className="flex items-center space-x-6 ml-4">
           <Link 
             href="/" 
             className="flex items-center space-x-2 font-medium text-primary hover:text-primary/90 transition-colors"
           >
             <Home className="h-5 w-5" />
-            <span className="font-bliss-bold text-lg">Kirk</span>
+            <span className="font-bliss-bold text-lg">Agent Kirk</span>
           </Link>
           <Link 
             href={getDashboardLink()} 

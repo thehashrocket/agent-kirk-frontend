@@ -84,3 +84,25 @@ export function formatDuration(hours: number): string {
   if (m === 0) return `${h}h`;
   return `${h}h ${m}m`;
 }
+
+/**
+ * Generic fetch wrapper for SWR data fetching.
+ * Handles response validation and error handling.
+ * 
+ * @param {string} url - The URL to fetch data from
+ * @returns {Promise<any>} The parsed JSON response
+ * @throws {Error} If the response is not OK or fails to parse
+ * 
+ * @example
+ * ```ts
+ * const { data } = useSWR('/api/users', fetcher)
+ * ```
+ */
+export const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'An error occurred' }));
+    throw new Error(error.error || 'Failed to fetch data');
+  }
+  return response.json();
+};

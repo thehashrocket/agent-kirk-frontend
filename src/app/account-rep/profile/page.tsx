@@ -1,3 +1,17 @@
+/**
+ * @file src/app/account-rep/profile/page.tsx
+ * Account representative profile management page that allows users to view and update their profile information.
+ * Built as a Client Component using Next.js App Router and shadcn/ui components.
+ * 
+ * Features:
+ * - Profile information display
+ * - Password change functionality
+ * - Google Analytics account management
+ * - Form validation with error handling
+ * - Toast notifications for user feedback
+ * - Responsive layout using Tailwind CSS
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -20,6 +34,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import useSWR from 'swr';
+import { fetcher } from '@/lib/utils';
 
 interface GaProperty {
   id: string;
@@ -40,15 +55,6 @@ interface UserProfile {
   email: string | null;
   gaAccounts: GaAccount[];
 }
-
-const fetcher = async (url: string) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'An error occurred' }));
-    throw new Error(error.error || 'Failed to fetch data');
-  }
-  return response.json();
-};
 
 export default function AccountRepProfilePage() {
   const { data: session } = useSession();
@@ -198,7 +204,7 @@ export default function AccountRepProfilePage() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">My Profile</h1>
 
-      <div className="grid gap-6">
+      <div className="max-w-3xl space-y-6">
         {/* Profile Information */}
         <Card>
           <CardHeader>
@@ -254,10 +260,14 @@ export default function AccountRepProfilePage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
+              <Button
+                onClick={() => setIsGaDialogOpen(true)}
+                className="mb-4"
+              >
+                Add GA Account
+              </Button>
+
               <Dialog open={isGaDialogOpen} onOpenChange={setIsGaDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button>Add GA Account</Button>
-                </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Add Google Analytics Account</DialogTitle>
@@ -333,7 +343,7 @@ export default function AccountRepProfilePage() {
 
               {profile.gaAccounts?.length > 0 ? (
                 <div className="space-y-4">
-                  {profile.gaAccounts.map((account: GaAccount) => (
+                  {profile.gaAccounts.map((account) => (
                     <Card key={account.id}>
                       <CardContent className="pt-6">
                         <div className="flex justify-between items-start">
