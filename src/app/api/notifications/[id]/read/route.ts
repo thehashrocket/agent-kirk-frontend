@@ -45,6 +45,9 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Await params at the start of the function
+    const { id } = await Promise.resolve(params);
+    
     const session = await getServerSession(authOptions);
     
     if (!session?.user?.email) {
@@ -65,10 +68,10 @@ export async function POST(
       );
     }
 
-    // Verify the notification belongs to the user
+    // Use the awaited id instead of params.id
     const notification = await prisma.notification.findFirst({
       where: {
-        id: params.id,
+        id,
         userId: user.id,
       },
     });
@@ -80,9 +83,9 @@ export async function POST(
       );
     }
 
-    // Update the notification
+    // Use the awaited id instead of params.id
     const updatedNotification = await prisma.notification.update({
-      where: { id: params.id },
+      where: { id },
       data: { isRead: true },
     });
 

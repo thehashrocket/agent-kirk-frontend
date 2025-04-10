@@ -30,6 +30,23 @@ export interface ChatResponse {
   response?: string;
   error?: string;
   details?: unknown;
+  metadata?: {
+    line_graph_data?: Array<{
+      name: string;
+      body: unknown;
+    }>;
+    pie_graph_data?: Array<{
+      dimensions: unknown[];
+      metrics: unknown[];
+      prevDiff: unknown[];
+      yearDiff: unknown[];
+    }>;
+    metric_headers?: Array<{
+      name: string;
+      type: string;
+      aggregate: string;
+    }>;
+  } | null;
 }
 
 /**
@@ -41,6 +58,23 @@ export interface ErrorResponse {
   details?: unknown;
   queryId?: string;
   status?: QueryStatus;
+  metadata?: {
+    line_graph_data?: Array<{
+      name: string;
+      body: unknown;
+    }>;
+    pie_graph_data?: Array<{
+      dimensions: unknown[];
+      metrics: unknown[];
+      prevDiff: unknown[];
+      yearDiff: unknown[];
+    }>;
+    metric_headers?: Array<{
+      name: string;
+      type: string;
+      aggregate: string;
+    }>;
+  } | null;
 }
 
 /**

@@ -18,6 +18,21 @@ interface WebhookRequest {
   queryId: string;
   response?: string;
   error?: string;
+  line_graph_data?: Array<{
+    name: string;
+    body: unknown;
+  }>;
+  pie_graph_data?: Array<{
+    dimensions: unknown[];
+    metrics: unknown[];
+    prevDiff: unknown[];
+    yearDiff: unknown[];
+  }>;
+  metric_headers?: Array<{
+    name: string;
+    type: string;
+    aggregate: string;
+  }>;
 }
 
 /**
@@ -28,6 +43,21 @@ const WebhookRequestSchema = z.object({
   queryId: z.string().min(1, "Query ID is required"),
   response: z.string().optional(),
   error: z.string().optional(),
+  line_graph_data: z.array(z.object({
+    name: z.string(),
+    body: z.unknown()
+  })).optional(),
+  pie_graph_data: z.array(z.object({
+    dimensions: z.array(z.unknown()),
+    metrics: z.array(z.unknown()),
+    prevDiff: z.array(z.unknown()),
+    yearDiff: z.array(z.unknown())
+  })).optional(),
+  metric_headers: z.array(z.object({
+    name: z.string(),
+    type: z.string(),
+    aggregate: z.string()
+  })).optional()
 }).refine(data => data.response || data.error, {
   message: "Either response or error must be provided"
 });
@@ -45,13 +75,18 @@ export async function POST(request: NextRequest) {
   try {
     // Parse and validate the webhook payload
     const body = await request.json();
-    console.log('Webhook received body:', body);
+    console.log('[Webhook] Processing webhook request:', {
+      queryId: body.queryId,
+      hasResponse: !!body.response,
+      hasError: !!body.error,
+      hasMetadata: !!(body.line_graph_data || body.pie_graph_data || body.metric_headers)
+    });
 
     // Extract query ID from multiple possible sources for reliability
     let queryId = body.queryId || request.headers.get('x-query-id') || '';
     
     // Log all potential sources of query ID for debugging
-    console.log('Query ID sources:', {
+    console.log('[Webhook] Query ID sources:', {
       bodyQueryId: body.queryId,
       headerQueryId: request.headers.get('x-query-id'),
       finalQueryId: queryId
@@ -59,7 +94,7 @@ export async function POST(request: NextRequest) {
 
     // Return 400 if no query ID is found
     if (!queryId) {
-      console.error('Invalid webhook request: No query ID found in body or headers');
+      console.error('[Webhook] Invalid webhook request: No query ID found');
       return NextResponse.json(
         { 
           error: 'Invalid request: No query ID found in body or headers',
@@ -70,6 +105,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Construct metadata object
+    const metadata = {
+      line_graph_data: body.line_graph_data,
+      pie_graph_data: body.pie_graph_data,
+      metric_headers: body.metric_headers
+    };
+
+    console.log('[Webhook] Constructed metadata:', {
+      hasLineGraphData: !!metadata.line_graph_data,
+      hasPieGraphData: !!metadata.pie_graph_data,
+      hasMetricHeaders: !!metadata.metric_headers
+    });
+
     // Construct and validate the webhook data
     const validatedData = {
       queryId,
@@ -79,7 +127,7 @@ export async function POST(request: NextRequest) {
 
     const result = WebhookRequestSchema.safeParse(validatedData);
     if (!result.success) {
-      console.error('Webhook validation error:', {
+      console.error('[Webhook] Validation error:', {
         error: result.error,
         receivedData: validatedData
       });
@@ -100,7 +148,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!query) {
-      console.error('Query not found:', {
+      console.error('[Webhook] Query not found:', {
         queryId: validatedData.queryId,
         receivedData: validatedData
       });
@@ -114,13 +162,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    console.log('[Webhook] Found query in database:', {
+      queryId: query.id,
+      currentStatus: query.status
+    });
+
     // Handle error case: Update query status and create notification
     if (validatedData.error) {
+      console.log('[Webhook] Processing error response');
       await prisma.query.update({
         where: { id: validatedData.queryId },
         data: {
           status: 'FAILED',
           response: validatedData.error,
+          metadata: metadata
         },
       });
 
@@ -135,11 +190,13 @@ export async function POST(request: NextRequest) {
     } 
     // Handle success case: Update query with response and create notification
     else if (validatedData.response) {
+      console.log('[Webhook] Processing success response');
       await prisma.query.update({
         where: { id: validatedData.queryId },
         data: {
           status: 'COMPLETED',
           response: validatedData.response,
+          metadata: metadata
         },
       });
 
@@ -153,9 +210,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    console.log('[Webhook] Successfully processed webhook');
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Webhook API Error:', error);
+    console.error('[Webhook] Unexpected error:', error);
 
     // Handle Zod validation errors
     if (error instanceof z.ZodError) {
