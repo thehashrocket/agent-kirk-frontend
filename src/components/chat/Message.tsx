@@ -8,6 +8,9 @@
 import { cn } from '@/lib/utils';
 import { MessageContent } from './MessageContent';
 import { RatingButtons } from './RatingButtons';
+import { Button } from '@/components/ui/button';
+import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { LoadingDots } from './LoadingDots';
 
 interface MessageProps {
   id: string;
@@ -34,40 +37,67 @@ export function Message({
   metadata,
   onRate
 }: MessageProps) {
+  const isUser = role === 'user';
+  const containerClasses = cn(
+    'flex w-full space-x-2',
+    isUser ? 'justify-end' : 'justify-start'
+  );
+
+  const messageClasses = cn(
+    'relative rounded-lg px-4 py-2 max-w-[80%]',
+    isUser ? 'bg-primary text-primary-foreground' : 'bg-muted',
+    status === 'FAILED' && 'bg-destructive text-destructive-foreground'
+  );
+
   return (
-    <div
-      className={cn(
-        'flex w-full max-w-2xl items-start space-x-4 rounded-lg p-4',
-        role === 'user'
-          ? 'ml-auto bg-primary text-primary-foreground'
-          : 'bg-muted'
-      )}
-      role={role === 'assistant' ? 'article' : 'complementary'}
-      aria-label={`${role} message`}
-    >
-      <div className="flex-1 space-y-2">
+    <div className={containerClasses}>
+      <div className={messageClasses}>
         <MessageContent content={content} />
         
         {status === 'IN_PROGRESS' && (
           <div className="flex items-center space-x-2 text-xs opacity-70">
             <span>Processing response</span>
-            <div className="flex space-x-1">
-              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" />
-              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.2s]" />
-              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-current [animation-delay:0.4s]" />
-            </div>
+            <LoadingDots />
           </div>
         )}
 
-        <div className="flex items-center justify-between">
-          <p className="text-xs opacity-70">{timestamp}</p>
-          {role === 'assistant' && onRate && (
-            <RatingButtons
-              messageId={id}
-              initialRating={rating}
-              onRate={onRate}
-            />
-          )}
+        {status === 'FAILED' && (
+          <div className="text-xs text-destructive-foreground/70">
+            Failed to process response
+          </div>
+        )}
+
+        {!isUser && status === 'COMPLETED' && onRate && (
+          <div className="mt-2 flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onRate(id, 1)}
+              className={cn('hover:bg-primary/10', rating === 1 && 'text-primary')}
+              aria-label="Rate response positively"
+            >
+              <ThumbsUp className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onRate(id, -1)}
+              className={cn('hover:bg-primary/10', rating === -1 && 'text-primary')}
+              aria-label="Rate response negatively"
+            >
+              <ThumbsDown className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
+
+        {metadata && (
+          <div className="mt-4">
+            {/* Add visualization components here using metadata */}
+          </div>
+        )}
+
+        <div className="absolute -bottom-5 right-0 text-xs text-muted-foreground">
+          {timestamp}
         </div>
       </div>
     </div>

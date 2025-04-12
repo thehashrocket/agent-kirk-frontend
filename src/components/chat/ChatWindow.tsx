@@ -101,26 +101,17 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onR
     }
   }, [messages]);
 
-  // Filter out messages that are still in progress to prevent duplicates
-  const displayMessages = messages.filter(message => 
-    // Show all user messages
-    message.role === 'user' || 
-    // Only show assistant messages that are completed or failed
-    (message.role === 'assistant' && 
-     (message.status === 'COMPLETED' || message.status === 'FAILED'))
-  );
-
   return (
     <ScrollArea className="h-full">
       <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
-        {displayMessages.map((message) => (
+        {messages.map((message) => (
           <Message
             key={message.id}
             {...message}
             onRate={onRateMessage}
           />
         ))}
-        {(isLoading || messages.some(m => m.status === 'IN_PROGRESS')) && (
+        {isLoading && (
           <LoadingIndicator message="Loading messages" />
         )}
         <div ref={scrollRef} />
