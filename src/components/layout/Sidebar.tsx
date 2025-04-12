@@ -149,12 +149,6 @@ const clientNavItems: NavItem[] = [
     description: "Your conversations"
   },
   { 
-    title: "Query History", 
-    href: "/client/history", 
-    icon: <History />,
-    description: "Past interactions"
-  },
-  { 
     title: "Settings", 
     href: "/client/settings", 
     icon: <Settings />,

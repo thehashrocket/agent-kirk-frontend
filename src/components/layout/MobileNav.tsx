@@ -78,7 +78,6 @@ const accountRepNavItems: NavItem[] = [
  */
 const clientNavItems: NavItem[] = [
   { title: "Dashboard", href: "/client/dashboard", icon: <LayoutDashboard /> },
-  { title: "Query History", href: "/client/history", icon: <History /> },
   { title: "Settings", href: "/client/settings", icon: <Settings /> },
   { title: "Support", href: "/client/support", icon: <HelpCircle /> },
   { title: "Chat", href: "/chat", icon: <MessageSquare /> },

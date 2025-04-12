@@ -14,8 +14,13 @@ interface MessageProps {
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
-  status?: 'processing' | 'completed' | 'error';
+  status?: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'FAILED';
   rating?: -1 | 0 | 1;
+  metadata?: {
+    line_graph_data?: any[];
+    pie_graph_data?: any[];
+    metric_headers?: any[];
+  };
   onRate?: (messageId: string, rating: -1 | 1) => void;
 }
 
@@ -26,6 +31,7 @@ export function Message({
   timestamp,
   status,
   rating = 0,
+  metadata,
   onRate
 }: MessageProps) {
   return (
@@ -42,7 +48,7 @@ export function Message({
       <div className="flex-1 space-y-2">
         <MessageContent content={content} />
         
-        {status === 'processing' && (
+        {status === 'IN_PROGRESS' && (
           <div className="flex items-center space-x-2 text-xs opacity-70">
             <span>Processing response</span>
             <div className="flex space-x-1">

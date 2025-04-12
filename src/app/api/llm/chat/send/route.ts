@@ -117,6 +117,30 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // the request was accepted but will be processed asynchronously
     if (llmResponse.status === 500 && responseText.includes("No item to return got found")) {
       console.log('[Send] Request accepted for async processing');
+      
+      // Check if the webhook has already processed this query
+      const updatedQuery = await prisma.query.findUnique({
+        where: { id: query.id }
+      });
+
+      console.log('[Send] Checking query status:', {
+        queryId: query.id,
+        originalStatus: query.status,
+        currentStatus: updatedQuery?.status
+      });
+
+      // If the webhook has already processed this query, return its status
+      if (updatedQuery && (updatedQuery.status === 'COMPLETED' || updatedQuery.status === 'FAILED')) {
+        console.log('[Send] Query already processed by webhook');
+        return NextResponse.json({
+          status: updatedQuery.status,
+          queryId: query.id,
+          response: updatedQuery.response || undefined,
+          metadata: updatedQuery.metadata || undefined
+        } as ChatResponse);
+      }
+
+      // Otherwise return IN_PROGRESS status
       return NextResponse.json({
         status: 'IN_PROGRESS',
         queryId: query.id,
@@ -247,7 +271,7 @@ async function handleLLMError(responseText: string, status: number, queryId: str
         status,
         details: errorDetails
       }),
-      metadata: metadata
+      metadata: metadata || undefined
     },
   });
 

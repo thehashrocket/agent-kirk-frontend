@@ -167,6 +167,18 @@ export async function POST(request: NextRequest) {
       currentStatus: query.status
     });
 
+    // Prevent duplicate processing of completed queries
+    if (query.status === 'COMPLETED' || query.status === 'FAILED') {
+      console.log('[Webhook] Query already processed, skipping:', {
+        queryId: query.id,
+        status: query.status
+      });
+      return NextResponse.json({ 
+        success: true,
+        message: 'Query already processed'
+      });
+    }
+
     // Handle error case: Update query status and create notification
     if (validatedData.error) {
       console.log('[Webhook] Processing error response');
@@ -196,7 +208,9 @@ export async function POST(request: NextRequest) {
         data: {
           status: 'COMPLETED',
           response: validatedData.response,
-          metadata: metadata
+          metadata: metadata,
+          lineGraphData: metadata.line_graph_data,
+          pieGraphData: metadata.pie_graph_data
         },
       });
 
