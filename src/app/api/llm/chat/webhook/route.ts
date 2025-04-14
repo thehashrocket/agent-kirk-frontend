@@ -10,6 +10,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
+import { parseLineGraphData } from '@/lib/services/parseLineGraphData';
+import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
 
 /**
  * Represents the expected webhook request payload
@@ -214,6 +216,24 @@ export async function POST(request: NextRequest) {
         },
       });
 
+      const parsedData = parseLineGraphData(metadata.line_graph_data);
+
+      await prisma.parsedQueryData.createMany({
+        data: parsedData.map(data => ({
+          ...data,
+          queryId: query.id
+        }))
+      });
+
+      const parsedPieData = parsePieGraphData(metadata.pie_graph_data);
+
+      await prisma.parsedPieGraphData.createMany({
+        data: parsedPieData.map(data => ({
+          ...data,
+          queryId: query.id
+        }))
+      });
+      
       await prisma.notification.create({
         data: {
           type: 'QUERY_COMPLETE',

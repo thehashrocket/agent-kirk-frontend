@@ -174,6 +174,47 @@ model Message {
   @@index([parentId])
 }
 
+model ParsedPieGraphData {
+  id              String   @id @default(cuid())
+  queryId         String
+  query           Query    @relation(fields: [queryId], references: [id])
+
+  channel         String
+  source          String
+
+  sessions        Int
+  conversionRate  Float
+  conversions     Int
+  bounces         Int
+
+  prevSessionsDiff       Float
+  prevConversionRateDiff Float
+  prevConversionsDiff    Float
+  prevBouncesDiff        Float
+
+  yearSessionsDiff       Float
+  yearConversionRateDiff Float
+  yearConversionsDiff    Float
+  yearBouncesDiff        Float
+
+  createdAt       DateTime @default(now())
+}
+
+
+model ParsedQueryData {
+  id         String   @id @default(cuid())
+  queryId    String
+  query      Query    @relation(fields: [queryId], references: [id])
+  date       DateTime
+  channel    String
+  source     String
+  sessions   Int
+  conversionRate Float
+  conversions Int
+  bounces    Int
+  createdAt  DateTime @default(now())
+}
+
 model Query {
   id            String      @id @default(cuid())
   content       String      @default("") @db.Text
@@ -183,6 +224,8 @@ model Query {
   metadata      Json?       @db.JsonB
   lineGraphData Json?       @db.JsonB
   pieGraphData  Json?       @db.JsonB
+  parsedData    ParsedQueryData[]
+  parsedPieData ParsedPieGraphData[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @default(now())
 

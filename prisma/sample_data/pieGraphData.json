@@ -1,0 +1,1129 @@
+[
+    {
+        "metrics": [
+            92,
+            0.5378927203065135,
+            164,
+            1
+        ],
+        "prevDiff": [
+            -47.72727272727273,
+            3.228645597577695,
+            -62.97968397291196,
+            -66.66666666666666
+        ],
+        "yearDiff": [
+            1050,
+            -20.80107185670968,
+            4000,
+            0
+        ],
+        "dimensions": [
+            "Email",
+            "1905 Media Full List"
+        ]
+    },
+    {
+        "metrics": [
+            609,
+            0.4166101673319407,
+            1119,
+            19
+        ],
+        "prevDiff": [
+            -45.6735057983943,
+            3.106042818072247,
+            -68.5054883197298,
+            -47.22222222222222
+        ],
+        "yearDiff": [
+            59.4240837696335,
+            -11.68332396855632,
+            85.88039867109634,
+            46.15384615384615
+        ],
+        "dimensions": [
+            "All"
+        ]
+    },
+    {
+        "metrics": [
+            148,
+            0.7951137968932601,
+            562,
+            5
+        ],
+        "prevDiff": [
+            -51.94805194805194,
+            6.981188387537849,
+            -70.62205959226347,
+            -50
+        ],
+        "yearDiff": [
+            26.4957264957265,
+            21.75639919725471,
+            64.32748538011695,
+            -37.5
+        ],
+        "dimensions": [
+            "Direct",
+            "(direct)"
+        ]
+    },
+    {
+        "metrics": [
+            206,
+            0.370093282845854,
+            141,
+            9
+        ],
+        "prevDiff": [
+            -12.34042553191489,
+            -8.859681196763844,
+            -25.3968253968254,
+            -40
+        ],
+        "yearDiff": [
+            40.1360544217687,
+            9.120540485351533,
+            20.51282051282051,
+            800
+        ],
+        "dimensions": [
+            "Organic Search",
+            "google"
+        ]
+    },
+    {
+        "metrics": [
+            34,
+            0.2065217391304348,
+            31,
+            1
+        ],
+        "prevDiff": [
+            -19.04761904761905,
+            -51.29204265791633,
+            -24.39024390243902,
+            -50
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Search",
+            "gmb"
+        ]
+    },
+    {
+        "metrics": [
+            6,
+            0.125,
+            7,
+            0
+        ],
+        "prevDiff": [
+            -53.84615384615385,
+            -68.22033898305085,
+            -58.82352941176471,
+            0
+        ],
+        "yearDiff": [
+            -14.28571428571428,
+            -61.80555555555556,
+            -46.15384615384615,
+            0
+        ],
+        "dimensions": [
+            "Organic Social",
+            "linkedin.com"
+        ]
+    },
+    {
+        "metrics": [
+            13,
+            0.1785714285714286,
+            0,
+            1
+        ],
+        "prevDiff": [
+            116.6666666666667,
+            -59.18367346938774,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Email",
+            "Unknown List"
+        ]
+    },
+    {
+        "metrics": [
+            26,
+            0.1666666666666667,
+            29,
+            0
+        ],
+        "prevDiff": [
+            -13.33333333333333,
+            -42.78606965174129,
+            -23.68421052631579,
+            -100
+        ],
+        "yearDiff": [
+            8.333333333333332,
+            -53.65853658536586,
+            -14.70588235294118,
+            -100
+        ],
+        "dimensions": [
+            "Referral",
+            "gianthatworks.com"
+        ]
+    },
+    {
+        "metrics": [
+            3,
+            0.3333333333333333,
+            5,
+            0
+        ],
+        "prevDiff": [
+            -75,
+            19.65811965811965,
+            -68.75,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Search",
+            "m.baidu.com"
+        ]
+    },
+    {
+        "metrics": [
+            8,
+            0.3571428571428572,
+            13,
+            0
+        ],
+        "prevDiff": [
+            -38.46153846153847,
+            94.80519480519483,
+            -7.142857142857142,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Social",
+            "instagram"
+        ]
+    },
+    {
+        "metrics": [
+            9,
+            0.1666666666666667,
+            0,
+            0
+        ],
+        "prevDiff": [
+            12.5,
+            -55.55555555555556,
+            0,
+            0
+        ],
+        "yearDiff": [
+            800,
+            -66.66666666666667,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "mail.missiveapp.com"
+        ]
+    },
+    {
+        "metrics": [
+            7,
+            0.05555555555555555,
+            5,
+            1
+        ],
+        "prevDiff": [
+            40,
+            -33.33333333333333,
+            150,
+            0
+        ],
+        "yearDiff": [
+            0,
+            -87.30158730158729,
+            -37.5,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "designrush.com"
+        ]
+    },
+    {
+        "metrics": [
+            7,
+            0.4444444444444444,
+            1,
+            1
+        ],
+        "prevDiff": [
+            133.3333333333333,
+            0,
+            -66.66666666666666,
+            0
+        ],
+        "yearDiff": [
+            600,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "docs.google.com"
+        ]
+    },
+    {
+        "metrics": [
+            8,
+            0.3703703703703703,
+            11,
+            0
+        ],
+        "prevDiff": [
+            -61.90476190476191,
+            -13.36146272855135,
+            -64.51612903225806,
+            0
+        ],
+        "yearDiff": [
+            33.33333333333333,
+            -28.10457516339869,
+            -26.66666666666667,
+            0
+        ],
+        "dimensions": [
+            "Organic Search",
+            "bing"
+        ]
+    },
+    {
+        "metrics": [
+            5,
+            0.5,
+            8,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            60,
+            -100
+        ],
+        "yearDiff": [
+            -50,
+            900,
+            -20,
+            -100
+        ],
+        "dimensions": [
+            "Unassigned",
+            "clutch.co"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.5,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            -50,
+            -91.66666666666666,
+            0
+        ],
+        "dimensions": [
+            "Organic Search",
+            "baidu"
+        ]
+    },
+    {
+        "metrics": [
+            3,
+            0.25,
+            2,
+            0
+        ],
+        "prevDiff": [
+            -76.92307692307693,
+            97.3684210526316,
+            -83.33333333333334,
+            -100
+        ],
+        "yearDiff": [
+            50,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Social",
+            "facebook"
+        ]
+    },
+    {
+        "metrics": [
+            3,
+            0.4,
+            5,
+            0
+        ],
+        "prevDiff": [
+            -50,
+            140.0,
+            -28.57142857142857,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            66.66666666666666,
+            0
+        ],
+        "dimensions": [
+            "Organic Social",
+            "facebook.com"
+        ]
+    },
+    {
+        "metrics": [
+            4,
+            0,
+            4,
+            0
+        ],
+        "prevDiff": [
+            33.33333333333333,
+            -100,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "homesteadfinancial.com"
+        ]
+    },
+    {
+        "metrics": [
+            2,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "lusha.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.5,
+            2,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            100,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "thomsonprinting.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "metascroll.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            -100,
+            -50,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "themeadowsatlsl.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "app.amplemarket.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            -98.07692307692307,
+            -100,
+            -99.65753424657534,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Email",
+            "4238 Zfevb Ahyy Yvfg"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.6666666666666666,
+            0,
+            0
+        ],
+        "prevDiff": [
+            -95.23809523809523,
+            56.45712587308662,
+            -100,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Email",
+            "mailchimp"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "threebrotherslandscaping.net"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "manager.cloud.ipdgroup.com:4443"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            -100,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Social",
+            "l.facebook.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "ccochamber.com"
+        ]
+    },
+    {
+        "metrics": [
+            4,
+            0.3333333333333333,
+            0,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "onmdevelopd.wpenginepowered.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.8333333333333334,
+            2,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "thesummitchicago.com"
+        ]
+    },
+    {
+        "metrics": [
+            4,
+            0.35,
+            6,
+            0
+        ],
+        "prevDiff": [
+            -63.63636363636363,
+            -28.20512820512821,
+            20,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Social",
+            "linkedin"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "sumnerone.lightning.force.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.5,
+            2,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "depaul.joinhandshake.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.6666666666666666,
+            3,
+            0
+        ],
+        "prevDiff": [
+            0,
+            33.33333333333333,
+            50,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            200,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "themanifest.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "visualvisitor.com"
+        ]
+    },
+    {
+        "metrics": [
+            1,
+            0.5,
+            1,
+            0
+        ],
+        "prevDiff": [
+            -75,
+            350.0000000000001,
+            -66.66666666666666,
+            0
+        ],
+        "yearDiff": [
+            -75,
+            12.50000000000001,
+            -83.33333333333334,
+            0
+        ],
+        "dimensions": [
+            "Organic Search",
+            "yahoo"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            0,
+            0
+        ],
+        "prevDiff": [
+            -100,
+            100,
+            -100,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "aws-crm.lightning.force.com"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            4,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            -60,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "192.168.0.2:8088"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            0,
+            0
+        ],
+        "prevDiff": [
+            -100,
+            200.0000000000001,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "tagassistant.google.com"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            1,
+            0
+        ],
+        "prevDiff": [
+            -100,
+            100,
+            -66.66666666666666,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Organic Search",
+            "duckduckgo"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            0.8,
+            95,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            31.94444444444444,
+            0
+        ],
+        "yearDiff": [
+            0,
+            -20.0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Unassigned",
+            "(not set)"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            0,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Email",
+            "1905 media full list"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "birdeye.lightning.force.com"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "halterwildlife.com"
+        ]
+    },
+    {
+        "metrics": [
+            0,
+            1,
+            1,
+            0
+        ],
+        "prevDiff": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "yearDiff": [
+            -100,
+            0,
+            0,
+            0
+        ],
+        "dimensions": [
+            "Referral",
+            "greyeagle.com"
+        ]
+    }
+]
