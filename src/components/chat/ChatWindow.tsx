@@ -83,6 +83,7 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onR
     <ScrollArea className="h-full">
       <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
         {messages.map((message) => (
+          console.log('message', message),
           <MessageComponent
             key={message.id}
             {...message}

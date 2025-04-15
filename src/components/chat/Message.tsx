@@ -50,6 +50,7 @@ export function Message({
   console.log('status', status);
   console.log('isUser', isUser);
   console.log('shouldShowCharts', shouldShowCharts);
+  console.log('rating', rating);
 
   return (
     <div className={containerClasses}>

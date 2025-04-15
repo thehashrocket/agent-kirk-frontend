@@ -113,6 +113,7 @@ export async function GET(
         response: true,
         status: true,
         createdAt: true,
+        rating: true,
       },
     });
 
@@ -136,6 +137,7 @@ export async function GET(
           content: query.response,
           role: 'assistant' as const,
           timestamp: query.createdAt.toLocaleString(),
+          rating: query.rating,
           status: query.status === 'COMPLETED' ? MESSAGE_STATUS.COMPLETED :
                  query.status === 'FAILED' ? MESSAGE_STATUS.ERROR :
                  MESSAGE_STATUS.PROCESSING

@@ -169,6 +169,7 @@ export default function ChatPage() {
     },
     enabled: !!selectedConversation,
   });
+  console.log('messages', messages);
 
   // Fetch selected conversation details
   const selectedConversationDetails = conversations.find(conv => conv.id === selectedConversation);
