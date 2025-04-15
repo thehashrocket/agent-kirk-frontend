@@ -47,11 +47,6 @@ export function Message({
     status === MESSAGE_STATUS.ERROR && 'bg-destructive text-destructive-foreground'
   );
 
-  console.log('status', status);
-  console.log('isUser', isUser);
-  console.log('shouldShowCharts', shouldShowCharts);
-  console.log('rating', rating);
-
   return (
     <div className={containerClasses}>
       <div className={messageClasses}>

@@ -116,9 +116,6 @@ export default function ChatPage() {
         throw new Error('Failed to fetch conversations');
       }
       const data = await response.json();
-      console.log('Raw conversation data length:', data.length);
-      console.log('Raw conversation data:', data);
-      
       // Format the conversations and ensure no duplicates by using a Map
       const conversationMap = new Map();
       data.forEach((conv: any) => {
@@ -136,8 +133,6 @@ export default function ChatPage() {
       });
       
       const formattedConversations = Array.from(conversationMap.values());
-      console.log('Formatted conversations length:', formattedConversations.length);
-      console.log('Formatted conversations:', formattedConversations);
       return formattedConversations;
     },
     staleTime: 5000, // Add a staleTime to prevent unnecessary refetches
@@ -169,7 +164,6 @@ export default function ChatPage() {
     },
     enabled: !!selectedConversation,
   });
-  console.log('messages', messages);
 
   // Fetch selected conversation details
   const selectedConversationDetails = conversations.find(conv => conv.id === selectedConversation);
@@ -219,11 +213,8 @@ export default function ChatPage() {
 
   const sendMessageMutation = useMutation({
     mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
-      console.log('Sending message to API:', { conversationId, message });
-      
       // Get GA details from the selected conversation
       const conversation = conversations.find(conv => conv.id === conversationId);
-      console.log('Conversation details:', conversation);
       const gaAccountId = conversation?.gaAccountId;
       const gaPropertyId = conversation?.gaPropertyId;
       
@@ -267,7 +258,6 @@ export default function ChatPage() {
       }
 
       const data: QueryResponse = await response.json();
-      console.log('API Response:', data);
 
       // Update the messages with the actual response
       queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
@@ -305,7 +295,6 @@ export default function ChatPage() {
       alert(error.message); // Temporary solution until toast is implemented
     },
     onSuccess: (data) => {
-      console.log('Message sent successfully:', data);
       queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
     },
@@ -402,17 +391,14 @@ export default function ChatPage() {
   const handleSendMessage = async (message: string) => {
     try {
       if (!selectedConversation) {
-        console.log('Creating new conversation...');
         const newConversation = await createConversationMutation.mutateAsync({
           title: 'New Conversation'
         });
-        console.log('New conversation created:', newConversation);
         await sendMessageMutation.mutateAsync({
           conversationId: newConversation.id,
           message,
         });
       } else {
-        console.log('Sending message to existing conversation:', selectedConversation);
         await sendMessageMutation.mutateAsync({
           conversationId: selectedConversation,
           message,
