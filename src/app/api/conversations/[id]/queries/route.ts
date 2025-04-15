@@ -15,6 +15,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { authOptions } from '@/lib/auth';
+import { MESSAGE_STATUS } from '@/types/chat';
 
 /**
  * Interface for message objects returned by the GET endpoint
@@ -24,7 +25,7 @@ interface Message {
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
-  status?: 'processing';
+  status?: string;
 }
 
 /**
@@ -125,16 +126,19 @@ export async function GET(
         content: query.content,
         role: 'user' as const,
         timestamp: query.createdAt.toLocaleString(),
-        status: query.status === 'IN_PROGRESS' ? 'processing' : undefined
+        status: MESSAGE_STATUS.COMPLETED
       });
 
       // Add assistant response if it exists
-      if (query.response && query.status === 'COMPLETED') {
+      if (query.response) {
         messages.push({
           id: `${query.id}-response`,
           content: query.response,
           role: 'assistant' as const,
           timestamp: query.createdAt.toLocaleString(),
+          status: query.status === 'COMPLETED' ? MESSAGE_STATUS.COMPLETED :
+                 query.status === 'FAILED' ? MESSAGE_STATUS.ERROR :
+                 MESSAGE_STATUS.PROCESSING
         });
       }
 

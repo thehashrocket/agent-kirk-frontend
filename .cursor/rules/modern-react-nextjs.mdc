@@ -288,6 +288,8 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 
 ## Best Practices
 
+This is a Next.js 15 app and there is a requirement where we need to await dynamic route parameters.
+
 ### Component Design
 - Use early returns for conditional rendering
 - Prefer const arrow functions over function declarations

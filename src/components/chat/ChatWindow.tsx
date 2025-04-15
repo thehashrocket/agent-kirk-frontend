@@ -27,31 +27,9 @@ import { isMarkdown } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Message } from './Message';
+import { Message as MessageComponent } from './Message';
 import { LoadingIndicator } from './LoadingIndicator';
-
-/**
- * Interface for message data.
- * @property {string} id - Unique identifier for the message
- * @property {string} content - Message content text
- * @property {'user' | 'assistant'} role - Role of the message sender
- * @property {string} timestamp - Human-readable timestamp
- * @property {string} status - Status of the message
- * @property {number} rating - Rating of the message
- */
-interface Message {
-  id: string;
-  content: string;
-  role: 'user' | 'assistant';
-  timestamp: string;
-  status?: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'FAILED';
-  rating?: -1 | 0 | 1;
-  metadata?: {
-    line_graph_data?: any[];
-    pie_graph_data?: any[];
-    metric_headers?: any[];
-  };
-}
+import { Message as MessageType, MessageStatus } from '@/types/chat';
 
 /**
  * Props for the ChatWindow component.
@@ -62,7 +40,7 @@ interface Message {
  * @property {function} onRateMessage - Function to rate a message
  */
 interface ChatWindowProps {
-  messages: Message[];
+  messages: MessageType[];
   isLoading?: boolean;
   gaAccountId?: string;
   gaPropertyId?: string;
@@ -105,7 +83,7 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onR
     <ScrollArea className="h-full">
       <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
         {messages.map((message) => (
-          <Message
+          <MessageComponent
             key={message.id}
             {...message}
             onRate={onRateMessage}

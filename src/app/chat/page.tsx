@@ -9,6 +9,16 @@ import { TagSelector } from '@/components/chat/TagSelector';
 import { SourcesButton } from '@/components/chat/SourcesButton';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
+import { 
+  Message, 
+  QueryRequest, 
+  QueryResponse, 
+  apiStatusToMessageStatus, 
+  MessageStatus, 
+  APIStatus,
+  MESSAGE_STATUS,
+  API_STATUS
+} from '@/types/chat';
 
 interface Conversation {
   id: string;
@@ -28,15 +38,6 @@ interface Conversation {
     gaPropertyId: string;
     gaPropertyName: string;
   };
-}
-
-interface Message {
-  id: string;
-  content: string;
-  role: 'user' | 'assistant';
-  timestamp: string;
-  status?: 'processing' | 'completed' | 'error';
-  rating?: -1 | 0 | 1;
 }
 
 interface GaAccount {
@@ -227,65 +228,76 @@ export default function ChatPage() {
       
       // Create a temporary message object with processing status
       const tempMessage: Message = {
-        id: `temp-${Date.now()}`,
+        id: crypto.randomUUID(),
         content: message,
         role: 'user',
-        timestamp: new Date().toLocaleString(),
-        status: 'processing'
+        timestamp: new Date().toISOString(),
+        status: MESSAGE_STATUS.COMPLETED
       };
 
-      // Add the temporary message to the messages array
-      queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => [...oldData, tempMessage]);
+      // Create a temporary assistant message
+      const tempAssistantMessage: Message = {
+        id: crypto.randomUUID(),
+        content: 'Thinking...',
+        role: 'assistant',
+        timestamp: new Date().toISOString(),
+        status: MESSAGE_STATUS.PROCESSING
+      };
 
-      // Send the message to the LLM service
+      // Optimistically update the UI
+      queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
+        return [...old, tempMessage, tempAssistantMessage];
+      });
+
+      // Send the actual request
       const response = await fetch('/api/llm/chat/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          query: message,
-          conversationID: conversationId,
-          dateToday: new Date().toISOString(),
-          accountGA4: gaAccountId || 'default',
-          propertyGA4: gaPropertyId || 'default'
-        }),
+          content: message,
+          conversationId,
+          ...(gaAccountId && { gaAccountId }),
+          ...(gaPropertyId && { gaPropertyId }),
+        } as QueryRequest)
       });
 
-      console.log('API response status:', response.status);
-      const data = await response.json();
-      console.log('API response data:', data);
-
       if (!response.ok) {
-        const errorMessage = data.error || 'Failed to send message';
-        console.error('API error:', errorMessage);
-        throw new Error(errorMessage);
+        throw new Error('Failed to send message');
       }
 
-      // If the response is immediate, update the messages
-      if (data.status === 'COMPLETED' && data.response) {
-        return [
-          {
-            id: data.queryId,
-            content: message,
-            role: 'user',
-            timestamp: new Date().toLocaleString()
-          },
-          {
-            id: `${data.queryId}-response`,
-            content: data.response,
-            role: 'assistant',
-            timestamp: new Date().toLocaleString()
-          }
-        ];
+      const data: QueryResponse = await response.json();
+      console.log('API Response:', data);
+
+      // Update the messages with the actual response
+      queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
+        // Remove the temporary messages
+        const filteredMessages = old.filter(msg => 
+          msg.id !== tempMessage.id && msg.id !== tempAssistantMessage.id
+        );
+        
+        // Add the actual messages
+        return [...filteredMessages, {
+          id: data.userQuery.id,
+          content: data.userQuery.content,
+          role: 'user',
+          timestamp: data.userQuery.createdAt,
+          status: MESSAGE_STATUS.COMPLETED
+        }, {
+          id: data.assistantResponse.id,
+          content: data.assistantResponse.content || 'An error occurred',
+          role: 'assistant',
+          timestamp: data.assistantResponse.createdAt,
+          status: apiStatusToMessageStatus(data.assistantResponse.status)
+        }];
+      });
+
+      // If the response is still processing, start polling for updates
+      if (data.assistantResponse.status === API_STATUS.IN_PROGRESS || 
+          data.assistantResponse.status === API_STATUS.PENDING) {
+        startStatusPolling(data.assistantResponse.id, conversationId);
       }
 
-      // If the response is async (IN_PROGRESS), start polling for status
-      if (data.status === 'IN_PROGRESS') {
-        // Return the temporary message and start polling
-        startStatusPolling(data.queryId, conversationId);
-        return [tempMessage];
-      }
-
-      throw new Error('Unexpected response from server');
+      return data;
     },
     onError: (error: Error) => {
       console.error('Message mutation error:', error);
@@ -309,7 +321,7 @@ export default function ChatPage() {
           throw new Error(data.error || 'Failed to fetch status');
         }
 
-        if (data.status === 'COMPLETED' && data.response) {
+        if (data.status === API_STATUS.COMPLETED && data.response) {
           // Update the messages with the completed response
           queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
             // Remove the temporary message and add the final messages
@@ -320,12 +332,13 @@ export default function ChatPage() {
                 id: queryId,
                 content: data.response,
                 role: 'assistant',
-                timestamp: new Date().toLocaleString()
+                timestamp: new Date().toLocaleString(),
+                status: MESSAGE_STATUS.COMPLETED
               }
             ];
           });
           clearInterval(pollInterval);
-        } else if (data.status === 'FAILED') {
+        } else if (data.status === API_STATUS.FAILED) {
           throw new Error(data.error || 'Query processing failed');
         }
       } catch (error) {

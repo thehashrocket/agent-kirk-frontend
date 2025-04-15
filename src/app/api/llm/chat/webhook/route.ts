@@ -205,43 +205,91 @@ export async function POST(request: NextRequest) {
     // Handle success case: Update query with response and create notification
     else if (validatedData.response) {
       console.log('[Webhook] Processing success response');
-      await prisma.query.update({
-        where: { id: validatedData.queryId },
-        data: {
-          status: 'COMPLETED',
-          response: validatedData.response,
-          metadata: metadata,
-          lineGraphData: metadata.line_graph_data,
-          pieGraphData: metadata.pie_graph_data
-        },
-      });
+      try {
+        const parsedData = parseLineGraphData(metadata.line_graph_data || []);
+        const parsedPieData = parsePieGraphData(metadata.pie_graph_data || []);
 
-      const parsedData = parseLineGraphData(metadata.line_graph_data);
+        // Use a transaction to ensure data consistency
+        await prisma.$transaction(async (tx) => {
+          // Update the query first
+          const updatedQuery = await tx.query.update({
+            where: { id: validatedData.queryId },
+            data: {
+              status: 'COMPLETED',
+              response: validatedData.response,
+              metadata: {
+                metricHeaders: metadata.metric_headers
+              },
+              lineGraphData: metadata.line_graph_data,
+              pieGraphData: metadata.pie_graph_data
+            },
+          });
 
-      await prisma.parsedQueryData.createMany({
-        data: parsedData.map(data => ({
-          ...data,
-          queryId: query.id
-        }))
-      });
+          console.log('[Webhook] Query updated successfully:', {
+            queryId: updatedQuery.id,
+            status: updatedQuery.status,
+            hasLineData: parsedData.length > 0,
+            hasPieData: parsedPieData.length > 0
+          });
 
-      const parsedPieData = parsePieGraphData(metadata.pie_graph_data);
+          // Create parsed data records if available
+          if (parsedData.length > 0) {
+            await tx.parsedQueryData.createMany({
+              data: parsedData.map(data => ({
+                ...data,
+                queryId: updatedQuery.id
+              }))
+            });
+          }
 
-      await prisma.parsedPieGraphData.createMany({
-        data: parsedPieData.map(data => ({
-          ...data,
-          queryId: query.id
-        }))
-      });
-      
-      await prisma.notification.create({
-        data: {
-          type: 'QUERY_COMPLETE',
-          title: 'Query Complete',
-          content: 'Your query has been processed and is ready to view.',
-          userId: query.userId,
-        },
-      });
+          if (parsedPieData.length > 0) {
+            await tx.parsedPieGraphData.createMany({
+              data: parsedPieData.map(data => ({
+                ...data,
+                queryId: updatedQuery.id
+              }))
+            });
+          }
+
+          // Create notification
+          await tx.notification.create({
+            data: {
+              type: 'QUERY_COMPLETE',
+              title: 'Query Complete',
+              content: 'Your query has been processed and is ready to view.',
+              userId: query.userId,
+            },
+          });
+        });
+
+        console.log('[Webhook] Successfully processed webhook data');
+      } catch (error) {
+        console.error('[Webhook] Error processing webhook data:', error);
+        
+        // Update query status to failed
+        await prisma.query.update({
+          where: { id: validatedData.queryId },
+          data: {
+            status: 'FAILED',
+            response: 'Error processing analytics data: ' + (error instanceof Error ? error.message : 'Unknown error'),
+          },
+        });
+
+        // Create error notification
+        await prisma.notification.create({
+          data: {
+            type: 'QUERY_COMPLETE',
+            title: 'Query Processing Failed',
+            content: 'There was an error processing your query data.',
+            userId: query.userId,
+          },
+        });
+
+        return NextResponse.json(
+          { error: 'Failed to process analytics data' },
+          { status: 500 }
+        );
+      }
     }
 
     console.log('[Webhook] Successfully processed webhook');

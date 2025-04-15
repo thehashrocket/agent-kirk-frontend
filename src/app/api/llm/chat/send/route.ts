@@ -26,12 +26,22 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { QueryRequest } from '@/types/chat';
 import { 
-  ChatRequestSchema, 
   ChatResponse, 
   ErrorResponse, 
   CHAT_CONSTANTS 
 } from '@/lib/validations/chat';
+import { parseLineGraphData } from '@/lib/services/parseLineGraphData';
+import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
+
+// Update the schema to match the QueryRequest interface
+const ChatRequestSchema = z.object({
+  content: z.string().min(1, 'Content cannot be empty'),
+  conversationId: z.string().optional(),
+  gaAccountId: z.string().optional(),
+  gaPropertyId: z.string().optional(),
+});
 
 /**
  * POST /api/llm/chat/send
@@ -72,10 +82,10 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Create a database record for the query
     query = await prisma.query.create({
       data: {
-        content: validatedData.query,
+        content: validatedData.content,
         status: 'PENDING',
         userId: session.user.id,
-        conversationId: validatedData.conversationID,
+        conversationId: validatedData.conversationId,
       },
     });
 
@@ -87,12 +97,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Prepare request payload for LLM service
     const llmRequestPayload = {
       queryId: query.id,
-      query: validatedData.query,
+      content: validatedData.content,
       userId: session.user.id,
-      conversationId: validatedData.conversationID,
-      accountGA4: validatedData.accountGA4,
-      propertyGA4: validatedData.propertyGA4,
-      dateToday: validatedData.dateToday,
+      conversationId: validatedData.conversationId,
+      gaAccountId: validatedData.gaAccountId,
+      gaPropertyId: validatedData.gaPropertyId,
+      dateToday: new Date().toISOString(),
     };
 
     console.log('[Send] Sending request to LLM service:', llmRequestPayload);
@@ -150,6 +160,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Handle other error responses from LLM service
     if (!llmResponse.ok) {
       console.log('[Send] LLM service returned error status');
+      // Keep the query in PENDING status by not updating it
       const errorResponse = await handleLLMError(responseText, llmResponse.status, query.id);
       return NextResponse.json(errorResponse, { status: llmResponse.status });
     }
@@ -161,29 +172,80 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Handle immediate response
     if (responseData.response) {
       console.log('[Send] Processing immediate response');
-      await prisma.query.update({
-        where: { id: query.id },
-        data: {
+      try {
+        const parsedData = parseLineGraphData(responseData.line_graph_data || []);
+        const parsedPieData = parsePieGraphData(responseData.pie_graph_data || []);
+
+        const updatedQuery = await prisma.query.update({
+          where: { id: query.id },
+          data: {
+            status: 'COMPLETED',
+            response: responseData.response,
+            lineGraphData: responseData.line_graph_data,
+            pieGraphData: responseData.pie_graph_data,
+            metadata: {
+              metric_headers: responseData.metric_headers
+            }
+          },
+        });
+
+        console.log('[Send] Query updated successfully:', {
+          queryId: updatedQuery.id,
+          status: updatedQuery.status,
+          hasLineData: parsedData.length > 0,
+          hasPieData: parsedPieData.length > 0
+        });
+
+        // Create parsed data records in transaction to ensure consistency
+        if (parsedData.length > 0 || parsedPieData.length > 0) {
+          await prisma.$transaction(async (tx) => {
+            if (parsedData.length > 0) {
+              await tx.parsedQueryData.createMany({
+                data: parsedData.map(data => ({
+                  ...data,
+                  queryId: updatedQuery.id
+                }))
+              });
+            }
+
+            if (parsedPieData.length > 0) {
+              await tx.parsedPieGraphData.createMany({
+                data: parsedPieData.map(data => ({
+                  ...data,
+                  queryId: updatedQuery.id
+                }))
+              });
+            }
+          });
+        }
+
+        return NextResponse.json({
           status: 'COMPLETED',
+          queryId: query.id,
           response: responseData.response,
           metadata: {
             line_graph_data: responseData.line_graph_data,
             pie_graph_data: responseData.pie_graph_data,
             metric_headers: responseData.metric_headers
           }
-        },
-      });
+        });
+      } catch (error) {
+        console.error('[Send] Error processing response data:', error);
+        // Update query status to failed
+        await prisma.query.update({
+          where: { id: query.id },
+          data: {
+            status: 'FAILED',
+            response: 'Error processing analytics data: ' + (error instanceof Error ? error.message : 'Unknown error'),
+          },
+        });
 
-      return NextResponse.json({
-        status: 'COMPLETED',
-        queryId: query.id,
-        response: responseData.response,
-        metadata: {
-          line_graph_data: responseData.line_graph_data,
-          pie_graph_data: responseData.pie_graph_data,
-          metric_headers: responseData.metric_headers
-        }
-      });
+        return NextResponse.json({
+          status: 'FAILED',
+          queryId: query.id,
+          error: 'Failed to process analytics data',
+        }, { status: 500 });
+      }
     }
 
     // Handle error in response
@@ -260,20 +322,23 @@ async function handleLLMError(responseText: string, status: number, queryId: str
     queryId,
     hasMetadata: !!metadata
   });
-  
-  // Update query status to failed with detailed error
-  await prisma.query.update({
-    where: { id: queryId },
-    data: { 
-      status: 'FAILED', 
-      response: JSON.stringify({
-        error: errorMessage,
-        status,
-        details: errorDetails
-      }),
-      metadata: metadata || undefined
-    },
+
+  // Get the query to find the user ID
+  const query = await prisma.query.findUnique({
+    where: { id: queryId }
   });
+
+  if (query?.userId) {
+    // Create a notification for the user instead of updating the query
+    await prisma.notification.create({
+      data: {
+        type: 'QUERY_COMPLETE',
+        title: 'Query Processing Error',
+        content: `Error processing your query: ${errorMessage}`,
+        userId: query.userId,
+      },
+    });
+  }
 
   return { 
     error: errorMessage,
