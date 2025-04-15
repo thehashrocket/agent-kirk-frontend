@@ -7,7 +7,6 @@
 
 import { cn } from '@/lib/utils';
 import { MessageContent } from './MessageContent';
-import { RatingButtons } from './RatingButtons';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { LoadingDots } from './LoadingDots';

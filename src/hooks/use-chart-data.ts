@@ -29,12 +29,13 @@ interface ChartDataResponse {
  * @property {Error | undefined} error - Error state if fetch fails
  */
 export function useChartData(queryId: string | null) {
+  // remove '-response' from queryId if it exists
+  const queryIdWithoutResponse = queryId ? queryId.replace('-response', '') : null;
+
   const { data, error, isLoading } = useSWR<ChartDataResponse>(
-    queryId ? `/api/queries/${queryId}/chart-data` : null,
+    queryIdWithoutResponse ? `/api/queries/${queryIdWithoutResponse}/chart-data` : null,
     fetcher
   );
-
-  console.log('useChartData data', data);
 
   return {
     data: {

@@ -23,20 +23,42 @@ import {
   Legend,
 } from 'recharts';
 import { useChartData } from '@/hooks/use-chart-data';
+import { SessionsPieChart } from './SessionPieChart';
 
 interface ChartPreviewModalProps {
   queryId: string;
 }
 
+export function getTopSources(data: any, max = 5) {
+  const sorted = [...data].sort((a, b) => b.sessions - a.sessions);
+  const top = sorted.slice(0, max);
+  const other = sorted.slice(max);
+
+  const otherTotal = other.reduce((sum, item) => sum + item.sessions, 0);
+
+  if (otherTotal > 0) {
+    top.push({
+      channel: 'Other',
+      sessions: otherTotal,
+    });
+  }
+
+  return top;
+}
+
+
+
 export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
   const [open, setOpen] = useState(false);
   const { data, isLoading, error } = useChartData(open ? queryId : null);
 
-  const COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+  const pieData = getTopSources(data.parsedPieGraphData, 5);
 
   if (error) {
     return null;
   }
+
+  console.log('data.parsedPieGraphData', data.parsedPieGraphData);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -62,11 +84,16 @@ export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={data.parsedQueryData}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis 
-                      dataKey="timestamp" 
-                      tickFormatter={(value) => new Date(value).toLocaleDateString()}
+                    <XAxis
+                      dataKey="date"
+                      tickFormatter={(value) =>
+                        new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                      }
+                      angle={-45}
+                      textAnchor="end"
+                      interval={30}
+                      tick={{ fontSize: 10 }}
                     />
-                    <YAxis />
                     <Tooltip
                       labelFormatter={(value) => new Date(value).toLocaleString()}
                     />
@@ -85,34 +112,7 @@ export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
             </div>
 
             {/* Pie Chart - Sessions by source */}
-            <div className="space-y-2">
-              <h3 className="font-medium">Sessions by Source</h3>
-              <div className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={data.parsedPieGraphData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={5}
-                      dataKey="value"
-                      nameKey="source"
-                    >
-                      {data.parsedPieGraphData.map((entry, index) => (
-                        <Cell 
-                          key={`cell-${index}`} 
-                          fill={COLORS[index % COLORS.length]} 
-                        />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+            <SessionsPieChart data={pieData} />
           </div>
         )}
       </DialogContent>
