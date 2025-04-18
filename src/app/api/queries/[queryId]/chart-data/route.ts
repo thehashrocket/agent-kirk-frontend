@@ -4,11 +4,15 @@
  * This route handles fetching parsed query data and pie graph data for a specific query.
  * It returns both datasets in a combined response for use in chart visualizations.
  * 
+ * File Path: src/app/api/queries/[queryId]/chart-data/route.ts
+ * 
  * @route GET src/app/api/queries/[queryId]/chart-data
+ * @route POST src/app/api/queries/[queryId]/chart-data
  */
 
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { parseForStorage } from '@/lib/services/parseForStorage';
 
 /**
  * GET handler for retrieving chart data for a specific query
@@ -36,29 +40,87 @@ export async function GET(
       );
     }
 
-    // Fetch both types of data in parallel for better performance
-    const [parsedQueryData, parsedPieGraphData] = await Promise.all([
+    // Fetch all types of data in parallel for better performance
+    const [queryData, summaryData, pieGraphData] = await Promise.all([
       prisma.parsedQueryData.findMany({
         where: { queryId },
+        select: {
+          date: true,
+          engagedSessions: true,
+          newUsers: true,
+          bounceRate: true,
+          conversions: true
+        },
+        orderBy: { date: 'asc' }
+      }),
+      prisma.parsedQuerySummary.findMany({
+        where: { queryId },
+        select: {
+          date: true,
+          totalEngagedSessions: true,
+          averageBounceRate: true,
+          totalNewUsers: true,
+          totalConversions: true
+        },
         orderBy: { date: 'asc' }
       }),
       prisma.parsedPieGraphData.findMany({
-        where: { queryId }
+        where: { queryId },
+        select: {
+          channel: true,
+          source: true,
+          sessions: true,
+          conversions: true,
+          bounces: true,
+          conversionRate: true
+        }
       })
     ]);
 
-    console.log('parsedQueryData', parsedQueryData);
-    console.log('parsedPieGraphData', parsedPieGraphData);
-
     return NextResponse.json({
-      parsedQueryData,
-      parsedPieGraphData
+      parsedQueryData: queryData,
+      parsedPieGraphData: pieGraphData,
+      parsedQuerySummary: summaryData
     });
   } catch (error) {
-    console.error('Error fetching chart data:', error);
+    console.error('API Error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
     );
   }
 } 
+
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ queryId: string }> }
+) {
+  try {
+    const { queryId } = await params;
+    const { lineGraphData } = await req.json();
+
+    if (!queryId || !lineGraphData) {
+      return NextResponse.json(
+        { error: 'Missing queryId or lineGraphData' },
+        { status: 400 }
+      );
+    }
+
+    const { flat, grouped } = parseForStorage(lineGraphData, queryId);
+
+    await prisma.$transaction([
+      prisma.parsedQueryData.deleteMany({ where: { queryId } }),
+      prisma.parsedQuerySummary.deleteMany({ where: { queryId } }),
+      prisma.parsedQueryData.createMany({ data: flat }),
+      prisma.parsedQuerySummary.createMany({ data: grouped }),
+    ]);
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+
+    return NextResponse.json(
+      { error: 'Failed to parse and store line graph data' },
+      { status: 500 }
+    );
+  }
+}

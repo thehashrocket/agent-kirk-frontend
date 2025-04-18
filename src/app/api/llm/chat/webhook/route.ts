@@ -4,14 +4,16 @@
  * It processes responses and errors, updates the database, and sends notifications.
  * 
  * @route POST /api/llm/chat/webhook
+ * 
+ * File Path: src/app/api/llm/chat/webhook/route.ts
  */
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { parseLineGraphData } from '@/lib/services/parseLineGraphData';
 import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
+import { CHAT_CONSTANTS } from '@/lib/validations/chat';
 
 /**
  * Represents the expected webhook request payload
@@ -77,6 +79,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse and validate the webhook payload
     const body = await request.json();
+    // console.log('[Webhook] Received webhook request:', body);
     console.log('[Webhook] Processing webhook request:', {
       queryId: body.queryId,
       hasResponse: !!body.response,
@@ -128,6 +131,7 @@ export async function POST(request: NextRequest) {
     };
 
     const result = WebhookRequestSchema.safeParse(validatedData);
+    console.log('[Webhook] Result:', result);
     if (!result.success) {
       console.error('[Webhook] Validation error:', {
         error: result.error,
@@ -206,40 +210,46 @@ export async function POST(request: NextRequest) {
     else if (validatedData.response) {
       console.log('[Webhook] Processing success response');
       try {
-        const parsedData = parseLineGraphData(metadata.line_graph_data || []);
+        const parsedData = await parseLLMResponse({
+          queryId: validatedData.queryId,
+          response: validatedData.response,
+          error: validatedData.error,
+          line_graph_data: metadata.line_graph_data,
+          pie_graph_data: metadata.pie_graph_data,
+          metric_headers: metadata.metric_headers
+        });
         const parsedPieData = parsePieGraphData(metadata.pie_graph_data || []);
 
         // Use a transaction to ensure data consistency
         await prisma.$transaction(async (tx) => {
           // Update the query first
           const updatedQuery = await tx.query.update({
-            where: { id: validatedData.queryId },
+            where: { id: parsedData.queryId },
             data: {
               status: 'COMPLETED',
-              response: validatedData.response,
+              response: parsedData.response,
               metadata: {
-                metricHeaders: metadata.metric_headers
+                metricHeaders: parsedData.metric_headers
               },
-              lineGraphData: metadata.line_graph_data,
-              pieGraphData: metadata.pie_graph_data
+              lineGraphData: parsedData.line_graph_data,
+              pieGraphData: parsedData.pie_graph_data
             },
           });
 
-          console.log('[Webhook] Query updated successfully:', {
-            queryId: updatedQuery.id,
-            status: updatedQuery.status,
-            hasLineData: parsedData.length > 0,
-            hasPieData: parsedPieData.length > 0
-          });
-
-          // Create parsed data records if available
-          if (parsedData.length > 0) {
-            await tx.parsedQueryData.createMany({
-              data: parsedData.map(data => ({
-                ...data,
-                queryId: updatedQuery.id
-              }))
-            });
+          if (parsedData.line_graph_data) {
+            console.log('[Webhook] Parsing lineGraphData');
+            try {
+              await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/queries/${query.id}/chart-data`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ lineGraphData: parsedData.line_graph_data }),
+              });
+              console.log(`[Webhook] Parsed lineGraphData successfully`);
+            } catch (e) {
+              console.error(`[Webhook] Failed to parse lineGraphData`, e);
+            }
           }
 
           if (parsedPieData.length > 0) {
@@ -312,3 +322,26 @@ export async function POST(request: NextRequest) {
     );
   }
 } 
+
+/**
+ * Parses the LLM service response
+ */
+interface ParsedLLMResponse {
+  response?: string;
+  error?: string;
+  queryId?: string;
+  line_graph_data?: object[];
+  pie_graph_data?: object[];
+  metric_headers?: object[];
+}
+
+async function parseLLMResponse(data: WebhookRequest): Promise<ParsedLLMResponse> {
+  return {
+    response: data.response,
+    error: data.error,
+    queryId: data.queryId,
+    line_graph_data: data.line_graph_data,
+    pie_graph_data: data.pie_graph_data,
+    metric_headers: data.metric_headers
+  };
+}

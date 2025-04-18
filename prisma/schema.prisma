@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/prisma/generated/client"
 }
 
 datasource db {
@@ -175,17 +176,17 @@ model Message {
 }
 
 model ParsedPieGraphData {
-  id              String   @id @default(cuid())
-  queryId         String
-  query           Query    @relation(fields: [queryId], references: [id])
+  id      String @id @default(cuid())
+  queryId String
+  query   Query  @relation(fields: [queryId], references: [id])
 
-  channel         String
-  source          String
+  channel String
+  source  String
 
-  sessions        Int
-  conversionRate  Float
-  conversions     Int
-  bounces         Int
+  sessions       Int
+  conversionRate Float
+  conversions    Int
+  bounces        Int
 
   prevSessionsDiff       Float
   prevConversionRateDiff Float
@@ -197,37 +198,55 @@ model ParsedPieGraphData {
   yearConversionsDiff    Float
   yearBouncesDiff        Float
 
-  createdAt       DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
-
 model ParsedQueryData {
-  id         String   @id @default(cuid())
-  queryId    String
-  query      Query    @relation(fields: [queryId], references: [id])
-  date       DateTime
-  channel    String
-  source     String
-  sessions   Int
-  conversionRate Float
-  conversions Int
-  bounces    Int
-  createdAt  DateTime @default(now())
+  id              String   @id @default(cuid())
+  queryId         String
+  query           Query    @relation(fields: [queryId], references: [id])
+  date            DateTime
+  channel         String
+  source          String
+  sessions        Int
+  conversionRate  Float
+  conversions     Int
+  bounces         Int
+  createdAt       DateTime @default(now())
+  engagedSessions Int?
+  bounceRate      Float?
+  newUsers        Int?
+}
+
+model ParsedQuerySummary {
+  id                   String   @id @default(cuid())
+  queryId              String
+  date                 DateTime
+  totalEngagedSessions Int
+  averageBounceRate    Float
+  totalNewUsers        Int
+  totalConversions     Int
+  createdAt            DateTime @default(now())
+
+  query Query @relation(fields: [queryId], references: [id], onDelete: Cascade)
+
+  @@index([queryId, date])
 }
 
 model Query {
-  id            String      @id @default(cuid())
-  content       String      @default("") @db.Text
-  response      String?     @db.Text
-  status        QueryStatus @default(PENDING)
-  rating        Int         @default(0)
-  metadata      Json?       @db.JsonB
-  lineGraphData Json?       @db.JsonB
-  pieGraphData  Json?       @db.JsonB
+  id            String               @id @default(cuid())
+  content       String               @default("") @db.Text
+  response      String?              @db.Text
+  status        QueryStatus          @default(PENDING)
+  rating        Int                  @default(0)
+  metadata      Json?                @db.JsonB
+  lineGraphData Json?                @db.JsonB
+  pieGraphData  Json?                @db.JsonB
   parsedData    ParsedQueryData[]
   parsedPieData ParsedPieGraphData[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now())
+  parsedSummary ParsedQuerySummary[]
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @default(now())
 
   // Relations
   userId         String

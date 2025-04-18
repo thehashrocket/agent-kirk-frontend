@@ -8,10 +8,10 @@
  * @see {@link https://nextjs.org/docs/app/building-your-application/routing/route-handlers}
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/prisma/generated/client';
 import { authOptions } from '@/lib/auth';
 
 /**

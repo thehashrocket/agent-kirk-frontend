@@ -17,6 +17,8 @@
  * - Comprehensive error handling and logging
  * - Support for both synchronous and asynchronous LLM responses
  * 
+ * File Path: src/app/api/llm/chat/send/route.ts
+ * 
  * @route POST /api/llm/chat/send
  */
 
@@ -26,13 +28,13 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { QueryRequest } from '@/types/chat';
+
 import { 
   ChatResponse, 
   ErrorResponse, 
   CHAT_CONSTANTS 
 } from '@/lib/validations/chat';
-import { parseLineGraphData } from '@/lib/services/parseLineGraphData';
+
 import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
 
 // Update the schema to match the QueryRequest interface
@@ -140,15 +142,15 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       });
 
       // If the webhook has already processed this query, return its status
-      if (updatedQuery && (updatedQuery.status === 'COMPLETED' || updatedQuery.status === 'FAILED')) {
-        console.log('[Send] Query already processed by webhook');
-        return NextResponse.json({
-          status: updatedQuery.status,
-          queryId: query.id,
-          response: updatedQuery.response || undefined,
-          metadata: updatedQuery.metadata || undefined
-        } as ChatResponse);
-      }
+      // if (updatedQuery && (updatedQuery.status === 'COMPLETED' || updatedQuery.status === 'FAILED')) {
+      //   console.log('[Send] Query already processed by webhook');
+      //   return NextResponse.json({
+      //     status: updatedQuery.status,
+      //     queryId: query.id,
+      //     response: updatedQuery.response || undefined,
+      //     metadata: updatedQuery.metadata || undefined
+      //   } as ChatResponse);
+      // }
 
       // Otherwise return IN_PROGRESS status
       return NextResponse.json({
@@ -165,6 +167,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       return NextResponse.json(errorResponse, { status: llmResponse.status });
     }
 
+    console.log('[Send] LLM service response:', responseText);
+
     // Parse and handle successful response
     console.log('[Send] Parsing LLM service response');
     const responseData = await parseLLMResponse(responseText);
@@ -173,7 +177,22 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     if (responseData.response) {
       console.log('[Send] Processing immediate response');
       try {
-        const parsedData = parseLineGraphData(responseData.line_graph_data || []);
+        
+        if (responseData.line_graph_data) {
+          try {
+            await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/queries/${query.id}/chart-data`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ lineGraphData: responseData.line_graph_data }),
+            });
+            console.log(`[Send] Parsed lineGraphData successfully`);
+          } catch (e) {
+            console.error(`[Send] Failed to parse lineGraphData`, e);
+          }
+        }
+
         const parsedPieData = parsePieGraphData(responseData.pie_graph_data || []);
 
         const updatedQuery = await prisma.query.update({
@@ -192,32 +211,11 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
         console.log('[Send] Query updated successfully:', {
           queryId: updatedQuery.id,
           status: updatedQuery.status,
-          hasLineData: parsedData.length > 0,
-          hasPieData: parsedPieData.length > 0
+          hasLineData: responseData.line_graph_data.length > 0,
+          hasPieData: responseData.pie_graph_data.length > 0
         });
 
-        // Create parsed data records in transaction to ensure consistency
-        if (parsedData.length > 0 || parsedPieData.length > 0) {
-          await prisma.$transaction(async (tx) => {
-            if (parsedData.length > 0) {
-              await tx.parsedQueryData.createMany({
-                data: parsedData.map(data => ({
-                  ...data,
-                  queryId: updatedQuery.id
-                }))
-              });
-            }
-
-            if (parsedPieData.length > 0) {
-              await tx.parsedPieGraphData.createMany({
-                data: parsedPieData.map(data => ({
-                  ...data,
-                  queryId: updatedQuery.id
-                }))
-              });
-            }
-          });
-        }
+        
 
         return NextResponse.json({
           status: 'COMPLETED',

@@ -10,7 +10,7 @@
  * - Proper connection management
  */
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@/prisma/generated/client';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -31,5 +31,5 @@ if (process.env.NODE_ENV !== 'production') {
   globalForPrisma.prisma = prisma;
 }
 
-export type { Prisma } from '@prisma/client';
-export * from '@prisma/client'; 
+export type { Prisma } from '@/prisma/generated/client';
+export * from '@/prisma/generated/client'; 

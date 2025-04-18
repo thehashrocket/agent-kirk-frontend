@@ -213,6 +213,8 @@ export default function ChatPage() {
 
   const sendMessageMutation = useMutation({
     mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
+      console.log('[Debug] Starting message mutation for conversation:', conversationId);
+      
       // Get GA details from the selected conversation
       const conversation = conversations.find(conv => conv.id === conversationId);
       const gaAccountId = conversation?.gaAccountId;
@@ -236,8 +238,14 @@ export default function ChatPage() {
         status: MESSAGE_STATUS.PROCESSING
       };
 
+      console.log('[Debug] Created temporary messages:', {
+        userMessage: tempMessage.id,
+        assistantMessage: tempAssistantMessage.id
+      });
+
       // Optimistically update the UI
       queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
+        console.log('[Debug] Current messages before update:', old?.length);
         return [...old, tempMessage, tempAssistantMessage];
       });
 
@@ -257,14 +265,62 @@ export default function ChatPage() {
         throw new Error('Failed to send message');
       }
 
-      const data: QueryResponse = await response.json();
+      const data = await response.json();
+      console.log('[Debug] Received response from server:', {
+        status: data.status,
+        queryId: data.queryId,
+        isAsync: data.status === 'IN_PROGRESS' || data.status === 'PENDING'
+      });
 
-      // Update the messages with the actual response
+      // Handle async response case
+      if (data.status === 'IN_PROGRESS' || data.status === 'PENDING') {
+        console.log('[Debug] Handling async response for queryId:', data.queryId);
+        
+        // Update the messages with the temporary messages but keep them in processing state
+        queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
+          console.log('[Debug] Updating messages for async case. Current count:', old?.length);
+          
+          // Remove the temporary messages
+          const filteredMessages = old.filter(msg => 
+            msg.id !== tempMessage.id && msg.id !== tempAssistantMessage.id
+          );
+          
+          console.log('[Debug] Messages after filtering temps:', filteredMessages.length);
+          
+          // Add the user message and a processing message
+          return [...filteredMessages, {
+            id: data.queryId,
+            content: message,
+            role: 'user',
+            timestamp: new Date().toISOString(),
+            status: MESSAGE_STATUS.COMPLETED
+          }, {
+            id: `${data.queryId}-response`,
+            content: 'This request is taking longer than expected. You will receive a notification when it\'s complete.',
+            role: 'assistant',
+            timestamp: new Date().toISOString(),
+            status: MESSAGE_STATUS.PROCESSING
+          }];
+        });
+
+        // Start polling for updates
+        console.log('[Debug] Starting status polling for queryId:', data.queryId);
+        startStatusPolling(data.queryId, conversationId);
+        return data;
+      }
+
+      console.log('[Debug] Handling synchronous response');
+      
+      // Handle synchronous response case
       queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
+        console.log('[Debug] Updating messages for sync case. Current count:', old?.length);
+        
         // Remove the temporary messages
         const filteredMessages = old.filter(msg => 
           msg.id !== tempMessage.id && msg.id !== tempAssistantMessage.id
         );
+        
+        console.log('[Debug] Messages after filtering temps:', filteredMessages.length);
         
         // Add the actual messages
         return [...filteredMessages, {
@@ -282,19 +338,17 @@ export default function ChatPage() {
         }];
       });
 
-      // If the response is still processing, start polling for updates
-      if (data.assistantResponse.status === API_STATUS.IN_PROGRESS || 
-          data.assistantResponse.status === API_STATUS.PENDING) {
-        startStatusPolling(data.assistantResponse.id, conversationId);
-      }
-
       return data;
     },
     onError: (error: Error) => {
-      console.error('Message mutation error:', error);
+      console.error('[Debug] Message mutation error:', error);
       alert(error.message); // Temporary solution until toast is implemented
     },
     onSuccess: (data) => {
+      console.log('[Debug] Message mutation success:', {
+        status: data.status,
+        queryId: data.queryId
+      });
       queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
     },
@@ -302,43 +356,83 @@ export default function ChatPage() {
 
   // Function to poll for query status
   const startStatusPolling = async (queryId: string, conversationId: string) => {
+    console.log('[Debug] Starting polling for queryId:', queryId);
+    
     const pollInterval = setInterval(async () => {
       try {
+        console.log('[Debug] Polling status for queryId:', queryId);
         const response = await fetch(`/api/llm/chat/status?queryId=${queryId}`);
         const data = await response.json();
+
+        console.log('[Debug] Poll response:', {
+          queryId,
+          status: data.status,
+          hasResponse: !!data.response
+        });
 
         if (!response.ok) {
           throw new Error(data.error || 'Failed to fetch status');
         }
 
         if (data.status === API_STATUS.COMPLETED && data.response) {
-          // Update the messages with the completed response
+          console.log('[Debug] Query completed, updating message');
+          
+          // Update the messages by replacing the processing message with the completed one
           queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
-            // Remove the temporary message and add the final messages
-            const filteredMessages = oldData.filter(msg => msg.id !== `temp-${Date.now()}`);
-            return [
-              ...filteredMessages,
-              {
-                id: queryId,
-                content: data.response,
-                role: 'assistant',
-                timestamp: new Date().toLocaleString(),
-                status: MESSAGE_STATUS.COMPLETED
+            console.log('[Debug] Current messages before completion update:', oldData?.length);
+            
+            const updatedMessages = oldData.map(msg => {
+              // Replace the processing message with the completed response
+              if (msg.id === `${queryId}-response`) {
+                console.log('[Debug] Found and updating processing message');
+                return {
+                  id: `${queryId}-response`,
+                  content: data.response,
+                  role: 'assistant',
+                  timestamp: new Date().toLocaleString(),
+                  status: MESSAGE_STATUS.COMPLETED
+                };
               }
-            ];
+              return msg;
+            });
+            
+            console.log('[Debug] Messages after completion update:', updatedMessages.length);
+            return updatedMessages;
           });
+          
+          // Invalidate queries to ensure UI is up to date
+          queryClient.invalidateQueries({ queryKey: ['conversation-messages', conversationId] });
+          queryClient.invalidateQueries({ queryKey: ['conversations'] });
+          
+          console.log('[Debug] Clearing poll interval');
           clearInterval(pollInterval);
         } else if (data.status === API_STATUS.FAILED) {
+          console.log('[Debug] Query failed, updating error message');
+          
+          // Update the processing message to show the error
+          queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
+            return oldData.map(msg => {
+              if (msg.id === `${queryId}-response`) {
+                return {
+                  ...msg,
+                  content: data.error || 'An error occurred while processing your request.',
+                  status: MESSAGE_STATUS.ERROR
+                };
+              }
+              return msg;
+            });
+          });
           throw new Error(data.error || 'Query processing failed');
         }
       } catch (error) {
-        console.error('Status polling error:', error);
+        console.error('[Debug] Status polling error:', error);
         clearInterval(pollInterval);
       }
     }, 2000); // Poll every 2 seconds
 
     // Clear polling after 5 minutes to prevent infinite polling
     setTimeout(() => {
+      console.log('[Debug] Clearing poll interval due to timeout');
       clearInterval(pollInterval);
     }, 5 * 60 * 1000);
   };

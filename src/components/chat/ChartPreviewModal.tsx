@@ -9,21 +9,11 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import {
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from 'recharts';
 import { useChartData } from '@/hooks/use-chart-data';
-import { SessionsPieChart } from './SessionPieChart';
+import { SessionsPieChart } from './Charts/SessionPieChart';
+import { ParsedQuerySummaryChart } from './Charts/ParsedQuerySummaryChart';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ParsedQueryDataChart } from './Charts/ParsedQueryDataChart';
 
 interface ChartPreviewModalProps {
   queryId: string;
@@ -46,19 +36,22 @@ export function getTopSources(data: any, max = 5) {
   return top;
 }
 
-
-
 export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
   const [open, setOpen] = useState(false);
   const { data, isLoading, error } = useChartData(open ? queryId : null);
 
-  const pieData = getTopSources(data.parsedPieGraphData, 5);
+  // Add debugging logs
+
+  if (error) {
+    console.log('ChartPreviewModal - Error:', error);
+  }
+
+  // Only process data if it exists
+  const pieData = data?.parsedPieGraphData ? getTopSources(data.parsedPieGraphData, 5) : [];
 
   if (error) {
     return null;
   }
-
-  console.log('data.parsedPieGraphData', data.parsedPieGraphData);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -75,44 +68,28 @@ export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
           <div className="h-[400px] flex items-center justify-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
           </div>
+        ) : !data ? (
+          <div className="h-[400px] flex items-center justify-center">
+            <p>No data available</p>
+          </div>
         ) : (
           <div className="space-y-8">
-            {/* Line Chart - Sessions over time */}
-            <div className="space-y-2">
-              <h3 className="font-medium">Sessions Over Time</h3>
-              <div className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={data.parsedQueryData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis
-                      dataKey="date"
-                      tickFormatter={(value) =>
-                        new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-                      }
-                      angle={-45}
-                      textAnchor="end"
-                      interval={30}
-                      tick={{ fontSize: 10 }}
-                    />
-                    <Tooltip
-                      labelFormatter={(value) => new Date(value).toLocaleString()}
-                    />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="sessions"
-                      stroke="#4f46e5"
-                      strokeWidth={2}
-                      dot={false}
-                      name="Sessions"
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* Pie Chart - Sessions by source */}
-            <SessionsPieChart data={pieData} />
+            <Tabs defaultValue="query">
+              <TabsList>
+                <TabsTrigger value="query">Sessions Over Time</TabsTrigger>
+                <TabsTrigger value="summary">Summary</TabsTrigger>
+                <TabsTrigger value="pie">Sessions by Source</TabsTrigger>
+              </TabsList>
+              <TabsContent value="query">
+                {data.parsedQueryData && <ParsedQueryDataChart queryData={data.parsedQueryData} />}
+              </TabsContent>
+              <TabsContent value="summary">
+                {data.parsedQuerySummary && <ParsedQuerySummaryChart summaryData={data.parsedQuerySummary} />}
+              </TabsContent>
+              <TabsContent value="pie">
+                {pieData.length > 0 && <SessionsPieChart data={pieData} />}
+              </TabsContent>
+            </Tabs>
           </div>
         )}
       </DialogContent>
