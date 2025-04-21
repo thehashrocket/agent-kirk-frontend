@@ -49,7 +49,9 @@ export async function GET(
           engagedSessions: true,
           newUsers: true,
           bounceRate: true,
-          conversions: true
+          conversions: true,
+          source: true,
+          channel: true
         },
         orderBy: { date: 'asc' }
       }),

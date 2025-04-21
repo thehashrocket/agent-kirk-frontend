@@ -446,12 +446,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://postgres:e5b38d4ad2b8a321d538a5239b45@localhost:5432/kirk-frontend"
       }
     }
   },

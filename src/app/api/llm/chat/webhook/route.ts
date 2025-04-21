@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse and validate the webhook payload
     const body = await request.json();
-    // console.log('[Webhook] Received webhook request:', body);
+
     console.log('[Webhook] Processing webhook request:', {
       queryId: body.queryId,
       hasResponse: !!body.response,
@@ -117,12 +117,6 @@ export async function POST(request: NextRequest) {
       metric_headers: body.metric_headers
     };
 
-    console.log('[Webhook] Constructed metadata:', {
-      hasLineGraphData: !!metadata.line_graph_data,
-      hasPieGraphData: !!metadata.pie_graph_data,
-      hasMetricHeaders: !!metadata.metric_headers
-    });
-
     // Construct and validate the webhook data
     const validatedData = {
       queryId,
@@ -131,7 +125,6 @@ export async function POST(request: NextRequest) {
     };
 
     const result = WebhookRequestSchema.safeParse(validatedData);
-    console.log('[Webhook] Result:', result);
     if (!result.success) {
       console.error('[Webhook] Validation error:', {
         error: result.error,
