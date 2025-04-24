@@ -66,12 +66,12 @@ async function AccountRepStats({ accountRepId }: { accountRepId: string }) {
       change: activeClientsStats.percentageChange,
       icon: <Users className="h-4 w-4 text-blue-500" />,
     },
-    {
-      title: "Open Tickets",
-      value: ticketStats.open,
-      change: ticketStats.percentageChanges.open,
-      icon: <Inbox className="h-4 w-4 text-yellow-500" />,
-    },
+    // {
+    //   title: "Open Tickets",
+    //   value: ticketStats.open,
+    //   change: ticketStats.percentageChanges.open,
+    //   icon: <Inbox className="h-4 w-4 text-yellow-500" />,
+    // },
     {
       title: "Response Time",
       value: formatDuration(ticketStats.averageResponseTime),
@@ -258,13 +258,13 @@ export default async function AccountRepDashboard() {
               <h3 className="font-medium">Client Management</h3>
               <p className="text-sm text-gray-600">View and manage your client accounts</p>
             </Link>
-            <Link 
+            {/* <Link 
               href="/account-rep/tickets" 
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">Support Tickets</h3>
               <p className="text-sm text-gray-600">Handle open support requests</p>
-            </Link>
+            </Link> */}
             <Link 
               href="/account-rep/messages" 
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"

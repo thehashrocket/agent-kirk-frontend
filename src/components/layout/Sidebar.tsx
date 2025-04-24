@@ -57,12 +57,6 @@ const adminNavItems: NavItem[] = [
     description: "Overview and key metrics"
   },
   { 
-    title: "Messages", 
-    href: "/admin/messages", 
-    icon: <MessageSquare />,
-    description: "System-wide communications"
-  },
-  { 
     title: "User Management", 
     href: "/admin/users", 
     icon: <Users />,
@@ -86,6 +80,12 @@ const adminNavItems: NavItem[] = [
     icon: <FileText />,
     description: "Generate system reports"
   },
+  { 
+    title: "Messages", 
+    href: "/admin/messages", 
+    icon: <MessageSquare />,
+    description: "System-wide communications"
+  },
 ];
 
 /**
@@ -100,22 +100,22 @@ const accountRepNavItems: NavItem[] = [
     description: "Client overview"
   },
   { 
-    title: "Messages", 
-    href: "/account-rep/messages", 
-    icon: <MessageSquare />,
-    description: "Client communications"
-  },
-  { 
     title: "Client Management", 
     href: "/account-rep/clients", 
     icon: <Users />,
     description: "Manage client accounts"
   },
+  // { 
+  //   title: "Need Help?", 
+  //   href: "/account-rep/tickets", 
+  //   icon: <Ticket />,
+  //   description: "Handle support requests"
+  // },
   { 
-    title: "Need Help?", 
-    href: "/account-rep/tickets", 
-    icon: <Ticket />,
-    description: "Handle support requests"
+    title: "Messages", 
+    href: "/account-rep/messages", 
+    icon: <MessageSquare />,
+    description: "Client communications"
   },
   { 
     title: "Reports", 
@@ -148,18 +148,18 @@ const clientNavItems: NavItem[] = [
     icon: <MessageSquare />,
     description: "Your conversations"
   },
-  { 
-    title: "Settings", 
-    href: "/client/settings", 
-    icon: <Settings />,
-    description: "Account preferences"
-  },
-  { 
-    title: "Support", 
-    href: "/client/support", 
-    icon: <HelpCircle />,
-    description: "Get assistance"
-  },
+  // { 
+  //   title: "Settings", 
+  //   href: "/client/settings", 
+  //   icon: <Settings />,
+  //   description: "Account preferences"
+  // },
+  // { 
+  //   title: "Support", 
+  //   href: "/client/support", 
+  //   icon: <HelpCircle />,
+  //   description: "Get assistance"
+  // },
   {
     title: "Profile",
     href: "/client/profile",

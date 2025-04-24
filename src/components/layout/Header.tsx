@@ -56,7 +56,7 @@ export function Header() {
   const getDashboardLink = () => {
     const role = session.user.role;
     if (!role) return "/";
-    
+
     switch (role) {
       case "ADMIN":
         return "/admin/dashboard";
@@ -74,15 +74,15 @@ export function Header() {
       <div className="container h-14 flex items-center">
         <MobileNav />
         <nav className="flex items-center space-x-6 ml-4">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center space-x-2 font-medium text-primary hover:text-primary/90 transition-colors"
           >
             <Home className="h-5 w-5" />
             <span className="font-bliss-bold text-lg">Agent Kirk</span>
           </Link>
-          <Link 
-            href={getDashboardLink()} 
+          <Link
+            href={getDashboardLink()}
             className={cn(
               "text-sm transition-colors hover:text-primary",
               "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
@@ -91,22 +91,25 @@ export function Header() {
             <LayoutDashboard className="h-4 w-4" />
             <span>Dashboard</span>
           </Link>
-          <Link 
-            href="/chat" 
-            className={cn(
-              "text-sm transition-colors hover:text-primary",
-              "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
-            )}
-          >
-            <MessageSquare className="h-4 w-4" />
-            <span>Chat</span>
-          </Link>
+          {/* if role is client, show Chat link */}
+          {session.user.role === "CLIENT" && (
+            <Link
+              href="/chat"
+              className={cn(
+                "text-sm transition-colors hover:text-primary",
+                "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
+              )}
+            >
+              <MessageSquare className="h-4 w-4" />
+              <span>Chat</span>
+            </Link>
+          )}
         </nav>
         <div className="flex items-center space-x-4 ml-auto">
           <NotificationBell />
           <UserProfileBadge />
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="sm"
             onClick={() => signOut()}
             className={cn(
