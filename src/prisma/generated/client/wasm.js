@@ -117,18 +117,28 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password',
-  emailVerified: 'emailVerified',
-  image: 'image',
-  roleId: 'roleId',
-  isActive: 'isActive',
-  accountRepId: 'accountRepId',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  expires_at: 'expires_at',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+};
+
+exports.Prisma.ClientSatisfactionScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  feedback: 'feedback',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  userId: 'userId',
+  accountRepId: 'accountRepId'
 };
 
 exports.Prisma.ConversationScalarFieldEnum = {
@@ -157,19 +167,70 @@ exports.Prisma.GaPropertyScalarFieldEnum = {
   gaAccountId: 'gaAccountId'
 };
 
-exports.Prisma.AccountScalarFieldEnum = {
+exports.Prisma.GaImportRunScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
-  type: 'type',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  refresh_token: 'refresh_token',
-  access_token: 'access_token',
-  expires_at: 'expires_at',
-  token_type: 'token_type',
-  scope: 'scope',
-  id_token: 'id_token',
-  session_state: 'session_state'
+  gaPropertyId: 'gaPropertyId',
+  dateStart: 'dateStart',
+  dateEnd: 'dateEnd',
+  status: 'status',
+  errorMessage: 'errorMessage',
+  requestedByUserId: 'requestedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GaKpiDailyScalarFieldEnum = {
+  id: 'id',
+  gaPropertyId: 'gaPropertyId',
+  date: 'date',
+  sessions: 'sessions',
+  screenPageViewsPerSession: 'screenPageViewsPerSession',
+  engagementRate: 'engagementRate',
+  avgSessionDurationSec: 'avgSessionDurationSec',
+  goalCompletions: 'goalCompletions',
+  goalCompletionRate: 'goalCompletionRate',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.GaKpiMonthlyScalarFieldEnum = {
+  id: 'id',
+  gaPropertyId: 'gaPropertyId',
+  month: 'month',
+  sessions: 'sessions',
+  screenPageViewsPerSession: 'screenPageViewsPerSession',
+  engagementRate: 'engagementRate',
+  avgSessionDurationSec: 'avgSessionDurationSec',
+  goalCompletions: 'goalCompletions',
+  goalCompletionRate: 'goalCompletionRate',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.GaChannelDailyScalarFieldEnum = {
+  id: 'id',
+  gaPropertyId: 'gaPropertyId',
+  date: 'date',
+  channelGroup: 'channelGroup',
+  sessions: 'sessions',
+  screenPageViewsPerSession: 'screenPageViewsPerSession',
+  engagementRate: 'engagementRate',
+  avgSessionDurationSec: 'avgSessionDurationSec',
+  goalCompletions: 'goalCompletions',
+  goalCompletionRate: 'goalCompletionRate',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.GaSourceDailyScalarFieldEnum = {
+  id: 'id',
+  gaPropertyId: 'gaPropertyId',
+  date: 'date',
+  trafficSource: 'trafficSource',
+  sessions: 'sessions',
+  screenPageViewsPerSession: 'screenPageViewsPerSession',
+  engagementRate: 'engagementRate',
+  avgSessionDurationSec: 'avgSessionDurationSec',
+  goalCompletions: 'goalCompletions',
+  goalCompletionRate: 'goalCompletionRate',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -204,6 +265,16 @@ exports.Prisma.MessageScalarFieldEnum = {
   updatedAt: 'updatedAt',
   senderId: 'senderId',
   recipientId: 'recipientId'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  title: 'title',
+  content: 'content',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  userId: 'userId'
 };
 
 exports.Prisma.ParsedPieGraphDataScalarFieldEnum = {
@@ -268,14 +339,18 @@ exports.Prisma.QueryScalarFieldEnum = {
   conversationId: 'conversationId'
 };
 
-exports.Prisma.NotificationScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  type: 'type',
-  title: 'title',
-  content: 'content',
-  isRead: 'isRead',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  roleId: 'roleId',
+  isActive: 'isActive',
+  accountRepId: 'accountRepId',
   createdAt: 'createdAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.UserSettingsScalarFieldEnum = {
@@ -287,15 +362,6 @@ exports.Prisma.UserSettingsScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
-};
-
-exports.Prisma.ClientSatisfactionScalarFieldEnum = {
-  id: 'id',
-  rating: 'rating',
-  feedback: 'feedback',
-  createdAt: 'createdAt',
-  userId: 'userId',
-  accountRepId: 'accountRepId'
 };
 
 exports.Prisma.TicketScalarFieldEnum = {
@@ -379,11 +445,10 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
-exports.QueryStatus = exports.$Enums.QueryStatus = {
-  PENDING: 'PENDING',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED'
+exports.ImportStatus = exports.$Enums.ImportStatus = {
+  queued: 'queued',
+  ok: 'ok',
+  error: 'error'
 };
 
 exports.NotificationType = exports.$Enums.NotificationType = {
@@ -391,6 +456,13 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   MESSAGE: 'MESSAGE',
   QUERY_COMPLETE: 'QUERY_COMPLETE',
   REPORT_GENERATED: 'REPORT_GENERATED'
+};
+
+exports.QueryStatus = exports.$Enums.QueryStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
 };
 
 exports.TicketStatus = exports.$Enums.TicketStatus = {
@@ -412,22 +484,27 @@ exports.ActivityStatus = exports.$Enums.ActivityStatus = {
 };
 
 exports.Prisma.ModelName = {
-  User: 'User',
+  Account: 'Account',
+  ClientSatisfaction: 'ClientSatisfaction',
   Conversation: 'Conversation',
   GaAccount: 'GaAccount',
   GaProperty: 'GaProperty',
-  Account: 'Account',
+  GaImportRun: 'GaImportRun',
+  GaKpiDaily: 'GaKpiDaily',
+  GaKpiMonthly: 'GaKpiMonthly',
+  GaChannelDaily: 'GaChannelDaily',
+  GaSourceDaily: 'GaSourceDaily',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   Role: 'Role',
   Message: 'Message',
+  Notification: 'Notification',
   ParsedPieGraphData: 'ParsedPieGraphData',
   ParsedQueryData: 'ParsedQueryData',
   ParsedQuerySummary: 'ParsedQuerySummary',
   Query: 'Query',
-  Notification: 'Notification',
+  User: 'User',
   UserSettings: 'UserSettings',
-  ClientSatisfaction: 'ClientSatisfaction',
   Ticket: 'Ticket',
   TicketAttachment: 'TicketAttachment',
   TicketComment: 'TicketComment',

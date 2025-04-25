@@ -14,6 +14,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ImportStatus {
+  queued
+  ok
+  error
+}
+
 enum TicketStatus {
   OPEN
   IN_PROGRESS
@@ -32,38 +38,39 @@ enum ActivityStatus {
   PENDING
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  password      String? // Adding password field as optional since we support both OAuth and password auth
-  emailVerified DateTime?
-  image         String?
-  roleId        String
-  role          Role      @relation(fields: [roleId], references: [id])
-  isActive      Boolean   @default(true)
-  accountRepId  String?
-  accountRep    User?     @relation("AccountRepToClient", fields: [accountRepId], references: [id])
-  clients       User[]    @relation("AccountRepToClient")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model ClientSatisfaction {
+  id        String   @id @default(cuid())
+  rating    Float
+  feedback  String?  @db.Text
+  createdAt DateTime @default(now())
 
   // Relations
-  accounts         Account[]
-  sessions         Session[]
-  queries          Query[]
-  conversations    Conversation[]
-  sentMessages     Message[]            @relation("SentMessages")
-  receivedMessages Message[]            @relation("ReceivedMessages")
-  notifications    Notification[]
-  settings         UserSettings?
-  givenRatings     ClientSatisfaction[] @relation("ClientRatings")
-  receivedRatings  ClientSatisfaction[] @relation("RepRatings")
-  assignedTickets  Ticket[]             @relation("AssignedTickets")
-  clientTickets    Ticket[]             @relation("ClientTickets")
-  ticketComments   TicketComment[]
-  activities       ClientActivity[]
-  gaAccounts       GaAccount[]          @relation("UserToGaAccount")
+  userId       String
+  user         User   @relation("ClientRatings", fields: [userId], references: [id])
+  accountRepId String
+  accountRep   User   @relation("RepRatings", fields: [accountRepId], references: [id])
+
+  @@index([userId])
+  @@index([accountRepId])
 }
 
 model Conversation {
@@ -103,27 +110,107 @@ model GaProperty {
   gaPropertyName String
   gaAccountId    String
   gaAccount      GaAccount      @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
+
+  // relations
   conversations  Conversation[]
+  imports        GaImportRun[]
+  kpiDaily       GaKpiDaily[]
+  kpiMonthly     GaKpiMonthly[]
+  channelDaily   GaChannelDaily[]
+  sourceDaily    GaSourceDaily[]
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
+model GaImportRun {
+  id             String         @id @default(cuid())
+  gaProperty     GaProperty     @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId   String
+  dateStart      DateTime
+  dateEnd        DateTime
+  status         ImportStatus    @default(queued)
+  errorMessage   String?
+  requestedBy    User            @relation("UserToGaImportRuns", fields: [requestedByUserId], references: [id])
+  requestedByUserId String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
+
+model GaKpiDaily {
+  id             String       @id @default(cuid())
+  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId   String
+  date           DateTime     @db.Date
+  // metrics
+  sessions                     Int
+  screenPageViewsPerSession    Float
+  engagementRate               Float     // 0–1
+  avgSessionDurationSec        Int
+  goalCompletions              Int
+  goalCompletionRate           Float     // 0–1
+  createdAt      DateTime      @default(now())
+
+  @@unique([gaPropertyId, date])
+  @@index([date])
+}
+
+model GaKpiMonthly {
+  id             String       @id @default(cuid())
+  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId   String
+  month          Int          // YYYYMM, e.g. 202503
+  // metrics
+  sessions                     Int
+  screenPageViewsPerSession    Float
+  engagementRate               Float
+  avgSessionDurationSec        Int
+  goalCompletions              Int
+  goalCompletionRate           Float
+  createdAt      DateTime      @default(now())
+
+  @@unique([gaPropertyId, month])
+  @@index([month])
+}
+
+model GaChannelDaily {
+  id             String       @id @default(cuid())
+  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId   String
+  date           DateTime     @db.Date
+  channelGroup   String       @db.VarChar(64)
+  // metrics
+  sessions                     Int
+  screenPageViewsPerSession    Float
+  engagementRate               Float
+  avgSessionDurationSec        Int
+  goalCompletions              Int
+  goalCompletionRate           Float
+  createdAt      DateTime      @default(now())
+
+  @@unique([gaPropertyId, date, channelGroup])
+  @@index([date])
+  @@index([channelGroup])
+}
+
+model GaSourceDaily {
+  id             String       @id @default(cuid())
+  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId   String
+  date           DateTime     @db.Date
+  trafficSource  String       @db.VarChar(64)
+  // metrics
+  sessions                     Int
+  screenPageViewsPerSession    Float
+  engagementRate               Float
+  avgSessionDurationSec        Int
+  goalCompletions              Int
+  goalCompletionRate           Float
+  createdAt      DateTime      @default(now())
+
+  @@unique([gaPropertyId, date, trafficSource])
+  @@index([date])
+  @@index([trafficSource])
+}
+
+
 
 model Session {
   id           String   @id @default(cuid())
@@ -173,6 +260,22 @@ model Message {
   @@index([recipientId])
   @@index([threadId])
   @@index([parentId])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  type      NotificationType
+  title     String
+  content   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([type])
 }
 
 model ParsedPieGraphData {
@@ -259,20 +362,39 @@ model Query {
   @@index([conversationId])
 }
 
-model Notification {
-  id        String           @id @default(cuid())
-  type      NotificationType
-  title     String
-  content   String
-  isRead    Boolean          @default(false)
-  createdAt DateTime         @default(now())
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String? // Adding password field as optional since we support both OAuth and password auth
+  emailVerified DateTime?
+  image         String?
+  roleId        String
+  role          Role      @relation(fields: [roleId], references: [id])
+  isActive      Boolean   @default(true)
+  accountRepId  String?
+  accountRep    User?     @relation("AccountRepToClient", fields: [accountRepId], references: [id])
+  clients       User[]    @relation("AccountRepToClient")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   // Relations
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  @@index([userId])
-  @@index([type])
+  accounts         Account[]
+  sessions         Session[]
+  queries          Query[]
+  conversations    Conversation[]
+  sentMessages     Message[]            @relation("SentMessages")
+  receivedMessages Message[]            @relation("ReceivedMessages")
+  notifications    Notification[]
+  settings         UserSettings?
+  givenRatings     ClientSatisfaction[] @relation("ClientRatings")
+  receivedRatings  ClientSatisfaction[] @relation("RepRatings")
+  assignedTickets  Ticket[]             @relation("AssignedTickets")
+  clientTickets    Ticket[]             @relation("ClientTickets")
+  ticketComments   TicketComment[]
+  activities       ClientActivity[]
+  gaAccounts       GaAccount[]          @relation("UserToGaAccount")
+  gaImportRuns     GaImportRun[]        @relation("UserToGaImportRuns")
 }
 
 model UserSettings {
@@ -289,21 +411,7 @@ model UserSettings {
   user   User   @relation(fields: [userId], references: [id])
 }
 
-model ClientSatisfaction {
-  id        String   @id @default(cuid())
-  rating    Float
-  feedback  String?  @db.Text
-  createdAt DateTime @default(now())
 
-  // Relations
-  userId       String
-  user         User   @relation("ClientRatings", fields: [userId], references: [id])
-  accountRepId String
-  accountRep   User   @relation("RepRatings", fields: [accountRepId], references: [id])
-
-  @@index([userId])
-  @@index([accountRepId])
-}
 
 model Ticket {
   id          String         @id @default(cuid())
