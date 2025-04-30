@@ -74,9 +74,12 @@ export async function GET() {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    // Use impersonated user ID if available, otherwise use the actual user ID
+    const effectiveUserId = session.user.impersonatedUserId || session.user.id;
+
     const conversations = await prisma.conversation.findMany({
       where: {
-        userId: session.user.id,
+        userId: effectiveUserId,
       },
       orderBy: {
         updatedAt: 'desc',
@@ -86,7 +89,6 @@ export async function GET() {
           orderBy: {
             createdAt: 'desc',
           },
-          
           take: 1,
           select: {
             content: true,
@@ -135,6 +137,9 @@ export async function PATCH(request: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    // Use impersonated user ID if available, otherwise use the actual user ID
+    const effectiveUserId = session.user.impersonatedUserId || session.user.id;
+
     const { id, isStarred } = await request.json();
     if (!id) {
       return new NextResponse('Conversation ID is required', { status: 400 });
@@ -143,7 +148,7 @@ export async function PATCH(request: Request) {
     const conversation = await prisma.conversation.findUnique({
       where: {
         id,
-        userId: session.user.id,
+        userId: effectiveUserId,
       },
     });
 
@@ -182,6 +187,9 @@ export async function POST(request: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    // Use impersonated user ID if available, otherwise use the actual user ID
+    const effectiveUserId = session.user.impersonatedUserId || session.user.id;
+
     const { title, gaAccountId, gaPropertyId } = await request.json();
     if (!title) {
       return new NextResponse('Title is required', { status: 400 });
@@ -191,7 +199,7 @@ export async function POST(request: Request) {
     const conversation = await prisma.conversation.create({
       data: {
         title,
-        userId: session.user.id,
+        userId: effectiveUserId,
         ...(gaAccountId ? { gaAccountId } : {}),
         ...(gaPropertyId ? { gaPropertyId } : {}),
       },

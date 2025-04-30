@@ -18,8 +18,9 @@ import type { Role } from "@prisma/client";
 import type { Account, DefaultSession, Session, User } from "next-auth";
 import type { AuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
-import { prisma } from "./prisma";
+import { prisma } from "@/lib/prisma";
 import { JWT } from "next-auth/jwt";
+import { cookies } from "next/headers";
 
 /**
  * Extended types for NextAuth.js session and user.
@@ -36,6 +37,8 @@ declare module "next-auth" {
     user: {
       id: string;
       role: string;
+      impersonatedUserId?: string;
+      originalRole?: string;
     } & DefaultSession["user"];
   }
 
@@ -67,6 +70,8 @@ declare module "next-auth/jwt" {
   interface JWT {
     role?: string;
     sub: string;
+    impersonatedUserId?: string;
+    originalRole?: string;
   }
 }
 
@@ -75,7 +80,7 @@ declare module "next-auth/jwt" {
  * Sets up authentication with Google provider and custom callbacks.
  */
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: (PrismaAdapter(prisma) as any) as Adapter,
   debug: true,
   session: {
     strategy: "jwt",
@@ -260,10 +265,7 @@ export const authOptions: AuthOptions = {
      * @returns {Promise<JWT>} Modified JWT token
      */
     async jwt({ token, user }) {
-      // console.log("JWT Callback - Input:", { token, user });
-      
       if (user?.roleId) {
-        // Fetch role if not present in user object
         if (!user.role) {
           const userWithRole = await prisma.user.findUnique({
             where: { id: user.id },
@@ -277,18 +279,30 @@ export const authOptions: AuthOptions = {
         }
       }
 
-      // Ensure role persists in token
-      if (!token.role && user?.id) {
-        const userWithRole = await prisma.user.findUnique({
-          where: { id: user.id },
-          include: { role: true },
-        });
-        if (userWithRole?.role) {
-          token.role = userWithRole.role.name;
+      try {
+        const cookieStore = await cookies();
+        const impersonationCookie = cookieStore.get('impersonation');
+        
+        if (impersonationCookie?.value) {
+          const impersonation = JSON.parse(impersonationCookie.value);
+          
+          if (impersonation.userId) {
+            const targetUser = await prisma.user.findUnique({
+              where: { id: impersonation.userId },
+              include: { role: true },
+            });
+
+            if (targetUser) {
+              token.impersonatedUserId = targetUser.id;
+              token.originalRole = impersonation.originalRole;
+              token.role = targetUser.role.name;
+            }
+          }
         }
+      } catch (error) {
+        console.error("Error handling impersonation:", error);
       }
       
-      // console.log("JWT Callback - Output token:", token);
       return token;
     },
     /**
@@ -301,28 +315,28 @@ export const authOptions: AuthOptions = {
      * @returns {Promise<Session>} Modified session object
      */
     async session({ session, token }) {
-      // console.log("Session Callback - Input:", { session, token });
-      
       if (session.user) {
         session.user.id = token.sub;
+        
+        // If impersonating, use the impersonated user's role
+        if (token.impersonatedUserId) {
+          session.user.impersonatedUserId = token.impersonatedUserId;
+          session.user.originalRole = token.originalRole;
+        }
+        
         if (token.role) {
           session.user.role = token.role;
-          // console.log("Setting role in session:", token.role);
         } else {
-          // console.log("No role found in token");
-          // Attempt to fetch role from database
           const user = await prisma.user.findUnique({
             where: { id: token.sub },
             include: { role: true },
           });
           if (user?.role) {
             session.user.role = user.role.name;
-            // console.log("Retrieved role from database:", user.role.name);
           }
         }
       }
       
-      // console.log("Session Callback - Output session:", session);
       return session;
     }
   },

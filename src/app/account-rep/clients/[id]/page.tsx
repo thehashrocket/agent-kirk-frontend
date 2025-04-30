@@ -7,7 +7,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import {
   Card,
   CardContent,
@@ -26,6 +26,8 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useSession } from 'next-auth/react';
+import { LogIn } from 'lucide-react';
 
 interface User {
   id: string;
@@ -54,6 +56,8 @@ interface GaProperty {
 
 export default function ClientDetailsPage() {
   const params = useParams();
+  const router = useRouter();
+  const { data: session } = useSession();
   const { users } = useUsers();
   const [isGaAccountDialogOpen, setIsGaAccountDialogOpen] = useState(false);
   const [isGaPropertyDialogOpen, setIsGaPropertyDialogOpen] = useState(false);
@@ -66,6 +70,7 @@ export default function ClientDetailsPage() {
     gaPropertyId: '',
     gaPropertyName: '',
   });
+  const [isImpersonating, setIsImpersonating] = useState(false);
 
   const client = users?.find((user) => user.id === params.id);
   const gaAccounts = client?.gaAccounts || [];
@@ -121,6 +126,32 @@ export default function ClientDetailsPage() {
     }
   };
 
+  const handleLoginAsClient = async () => {
+    if (!client) return;
+    
+    try {
+      setIsImpersonating(true);
+      const response = await fetch('/api/impersonate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: client.id, action: 'start' }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to impersonate client');
+      }
+
+      // Force a session update by reloading the page
+      window.location.href = '/client/dashboard';
+      toast.success(`Logged in as ${client.name || 'client'}`);
+    } catch (error) {
+      toast.error('Failed to login as client');
+      setIsImpersonating(false);
+    }
+  };
+
   if (!client) {
     return <div>Loading...</div>;
   }
@@ -129,6 +160,14 @@ export default function ClientDetailsPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Client Details: {client.name}</h1>
+        <Button
+          onClick={handleLoginAsClient}
+          disabled={isImpersonating}
+          variant="outline"
+        >
+          <LogIn className="w-4 h-4 mr-2" />
+          {isImpersonating ? 'Logging in...' : 'Login as Client'}
+        </Button>
       </div>
 
       <div className="grid gap-6">
