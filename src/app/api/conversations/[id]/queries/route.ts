@@ -76,14 +76,19 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Use impersonated user ID if available, otherwise use the actual user ID
-    const effectiveUserId = session.user.impersonatedUserId || session.user.id;
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
 
     // Verify the conversation belongs to the user
     const conversation = await prisma.conversation.findFirst({
       where: {
         id,
-        userId: effectiveUserId,
+        userId: user.id,
       },
     });
 
@@ -180,14 +185,19 @@ export async function POST(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Use impersonated user ID if available, otherwise use the actual user ID
-    const effectiveUserId = session.user.impersonatedUserId || session.user.id;
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
 
     // Verify the conversation belongs to the user
     const conversation = await prisma.conversation.findFirst({
       where: {
         id,
-        userId: effectiveUserId,
+        userId: user.id,
       },
     });
 
@@ -214,7 +224,7 @@ export async function POST(
       data: {
         content,
         status: 'PENDING',
-        userId: effectiveUserId,
+        userId: user.id,
         conversationId: id,
       },
     });
@@ -280,7 +290,7 @@ export async function POST(
           type: 'QUERY_COMPLETE',
           title: 'Query Processing',
           content: 'Your query is being processed. You will be notified when it\'s complete.',
-          userId: effectiveUserId,
+          userId: user.id,
         },
       });
     }

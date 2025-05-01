@@ -12,15 +12,15 @@
  */
 
 'use client'
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { MobileNav } from "./MobileNav";
 import { Home, MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { NotificationBell } from "@/components/NotificationBell";
 import { cn } from "@/lib/utils";
 import { UserProfileBadge } from "./UserProfileBadge";
-import { toast } from "sonner";
 /**
  * @component Header
  * Client Component that renders the main navigation header.
@@ -48,36 +48,6 @@ export function Header() {
   const { data: session } = useSession();
 
   if (!session?.user) return null;
-
-  /**
-   * Handles user logout by cleaning up cookies and session data
-   * before redirecting to the home page.
-   */
-  const handleLogout = async () => {
-    try {
-      // First, end any active impersonation and wait for it to complete
-      if (session.user.impersonatedUserId) {
-        const response = await fetch('/api/impersonate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ action: 'end' }),
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || 'Failed to end impersonation');
-        }
-      }
-
-      // Then sign out and redirect to home page
-      await signOut({ callbackUrl: '/' });
-    } catch (error) {
-      console.error('Error during logout:', error);
-      toast.error('There was a problem logging out. Please try again.');
-    }
-  };
 
   /**
    * Determines the appropriate dashboard link based on user role.
@@ -141,7 +111,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={handleLogout}
+            onClick={() => signOut()}
             className={cn(
               "text-sm transition-colors",
               "flex items-center space-x-1 hover:bg-destructive/10 hover:text-destructive"

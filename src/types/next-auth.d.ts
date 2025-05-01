@@ -22,8 +22,6 @@ declare module "next-auth" {
    * @property {string} [user.name] - Optional user's display name
    * @property {string} [user.image] - Optional user's profile image URL
    * @property {string} user.role - User's role (e.g., "ADMIN", "CLIENT", "ACCOUNT_REP")
-   * @property {string} [user.impersonatedUserId] - Impersonated user ID
-   * @property {string} [user.originalRole] - Original role when impersonating
    */
   interface Session {
     user: {
@@ -32,8 +30,6 @@ declare module "next-auth" {
       name?: string;
       image?: string;
       role: string;
-      impersonatedUserId?: string;
-      originalRole?: string;
     };
   }
 
@@ -55,14 +51,5 @@ declare module "next-auth" {
     image?: string;
     role: Role;
     accounts: Account[];
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    sub: string;
-    role?: string;
-    impersonatedUserId?: string;
-    originalRole?: string;
   }
 } 

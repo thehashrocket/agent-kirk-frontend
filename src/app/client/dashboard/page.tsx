@@ -11,28 +11,114 @@
  * - Usage monitoring
  */
 
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import Link from "next/link";
 import LLMForm from "@/components/LLMForm";
 import QueryHistory from "@/components/QueryHistory";
 
-interface GaProperty {
-  id: string;
-  gaPropertyId: string;
-  gaPropertyName: string;
+interface ClientStats {
+  monthlyQueries: { value: string; change: number };
+  avgResponseTime: { value: string; change: number };
+  successRate: { value: string; change: number };
+  apiCredits: { value: string; total: string; change: number };
 }
 
-interface GaAccount {
-  id: string;
-  gaAccountId: string;
-  gaAccountName: string;
-  gaProperties: GaProperty[];
+/**
+ * @component ClientStats
+ * Server component that fetches and displays key client statistics.
+ * Uses Suspense for loading state management.
+ * 
+ * Displays metrics for:
+ * - Monthly query count
+ * - Average response time
+ * - Success rate
+ * - Remaining API credits
+ * 
+ * @returns {Promise<JSX.Element>} Grid of statistics cards
+ */
+async function ClientStats() {
+  const session = await getServerSession(authOptions);
+  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3005';
+  
+  const response = await fetch(`${baseUrl}/api/client/stats`, {
+    cache: 'no-store',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session?.user?.id}`,
+    }
+  });
+
+  if (!response.ok) {
+    console.error('Stats fetch failed:', await response.text());
+    throw new Error('Failed to fetch client stats');
+  }
+
+  const { stats } = await response.json() as { stats: ClientStats };
+
+  const statsData = [
+    {
+      title: "Queries This Month",
+      value: stats.monthlyQueries.value,
+      change: stats.monthlyQueries.change,
+    },
+    {
+      title: "Average Response Time",
+      value: stats.avgResponseTime.value,
+      change: stats.avgResponseTime.change,
+    },
+    {
+      title: "Success Rate",
+      value: stats.successRate.value,
+      change: stats.successRate.change,
+    },
+    {
+      title: "API Credits Left",
+      value: `${stats.apiCredits.value} / ${stats.apiCredits.total}`,
+      change: stats.apiCredits.change,
+    },
+  ];
+
+  return (
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {statsData.map((stat) => (
+        <StatsCard key={stat.title} data={stat} />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * @component StatsCard
+ * Displays a single statistic in a card format with change indicator.
+ * 
+ * Features:
+ * - Metric title and current value
+ * - Change percentage with color coding
+ * - Responsive layout using Tailwind CSS
+ * 
+ * @param {Object} props
+ * @param {Object} props.data - The statistic data to display
+ * @param {string} props.data.title - Title of the statistic
+ * @param {string|number} props.data.value - Current value of the statistic
+ * @param {number} props.data.change - Percentage change from previous period
+ */
+function StatsCard({ data }: { data: { title: string; value: string | number; change: number } }) {
+  return (
+    <Card className="p-6">
+      <h3 className="text-sm font-medium text-gray-500">{data.title}</h3>
+      <div className="mt-2 flex items-baseline">
+        <p className="text-2xl font-semibold text-gray-900">{data.value}</p>
+        <p className={`ml-2 text-sm ${data.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          {data.change > 0 ? '+' : ''}{data.change}%
+        </p>
+      </div>
+    </Card>
+  );
 }
 
 /**
@@ -61,82 +147,26 @@ interface GaAccount {
  * 
  * @throws {Redirect} Redirects to /auth/signin if user is not authenticated or not a CLIENT
  */
-export default function ClientDashboard() {
-  const { data: session } = useSession();
-  const [accounts, setAccounts] = useState<GaAccount[]>([]);
-  const [loading, setLoading] = useState(true);
+export default async function ClientDashboard() {
+  const session = await getServerSession(authOptions);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await fetch('/api/client/stats');
-        if (!response.ok) {
-          throw new Error('Failed to fetch stats');
-        }
-        const data = await response.json();
-        setAccounts(data.stats || []);
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStats();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <Skeleton className="h-32" />
-          <Skeleton className="h-32" />
-          <Skeleton className="h-32" />
-        </div>
-      </div>
-    );
+  if (!session?.user || session.user.role !== "CLIENT") {
+    console.log("Redirecting to signin. Session:", JSON.stringify(session, null, 2));
+    redirect("/auth/signin");
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        {session?.user?.impersonatedUserId && (
-          <div className="text-sm text-muted-foreground">
-            Viewing as client (Impersonated by {session.user.email})
-          </div>
-        )}
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold mb-2">
+          Welcome back, {session.user.name || session.user.email}
+        </h1>
+        <p className="text-gray-600">Here&apos;s an overview of your account activity</p>
       </div>
 
-      <div className="grid gap-4">
-        {accounts.map((account) => (
-          <Card key={account.id}>
-            <CardHeader>
-              <CardTitle>{account.gaAccountName}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-medium mb-2">Account ID</h3>
-                  <p className="text-sm text-muted-foreground">{account.gaAccountId}</p>
-                </div>
-                <div>
-                  <h3 className="font-medium mb-2">Properties</h3>
-                  <div className="space-y-2">
-                    {account.gaProperties.map((property) => (
-                      <div key={property.id} className="pl-4 border-l-2">
-                        <p className="font-medium">{property.gaPropertyName}</p>
-                        <p className="text-sm text-muted-foreground">ID: {property.gaPropertyId}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Suspense fallback={<div>Loading stats...</div>}>
+        <ClientStats />
+      </Suspense>
 
       <div className="grid gap-6 md:grid-cols-3 mt-8">
         <div className="md:col-span-2">

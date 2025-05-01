@@ -93,26 +93,23 @@ export default function ChatPage() {
   const [selectedTags, setSelectedTags] = useState(mockTags);
   const queryClient = useQueryClient();
 
-  // Get the effective user ID (either impersonated or actual)
-  const effectiveUserId = session?.user?.impersonatedUserId || session?.user?.id;
-
   // Fetch GA accounts
   const { data: gaAccounts = [] } = useQuery<GaAccount[]>({
-    queryKey: ['ga-accounts', effectiveUserId],
+    queryKey: ['ga-accounts'],
     queryFn: async () => {
-      if (!effectiveUserId) return [];
-      const response = await fetch(`/api/users/${effectiveUserId}/ga-accounts`);
+      if (!session?.user?.id) return [];
+      const response = await fetch(`/api/users/${session.user.id}/ga-accounts`);
       if (!response.ok) {
         throw new Error('Failed to fetch GA accounts');
       }
       return response.json();
     },
-    enabled: !!effectiveUserId,
+    enabled: !!session?.user?.id,
   });
 
   // Fetch conversations
   const { data: conversations = [], isLoading: isLoadingConversations } = useQuery<Conversation[]>({
-    queryKey: ['conversations', effectiveUserId],
+    queryKey: ['conversations'],
     queryFn: async () => {
       const response = await fetch('/api/conversations');
       if (!response.ok) {
