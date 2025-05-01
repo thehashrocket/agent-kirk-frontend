@@ -10,25 +10,7 @@ export const metadata: Metadata = {
   description: "Kirk helps businesses streamline their operations with intelligent automation and communication tools.",
 };
 
-export default async function Home() {
-  const session = await getServerSession();
-
-  // If user is authenticated, redirect to their dashboard
-  if (session?.user) {
-    const role = session.user.role;
-    switch (role) {
-      case "ADMIN":
-        redirect("/admin/dashboard");
-      case "ACCOUNT_REP":
-        redirect("/account-rep/dashboard");
-      case "CLIENT":
-        redirect("/client/dashboard");
-      default:
-        // If no role, they'll see the landing page
-        break;
-    }
-  }
-
+export default function Home() {
   return (
     <div className="flex min-h-[calc(100vh-3.5rem)] flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-4xl space-y-8 text-center">
