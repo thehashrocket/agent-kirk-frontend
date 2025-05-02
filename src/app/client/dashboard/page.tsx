@@ -5,6 +5,7 @@
  * 
  * Features:
  * - Real-time usage statistics
+ * - Google Analytics metrics
  * - LLM query interface
  * - Recent query history
  * - Quick action links
@@ -19,6 +20,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import LLMForm from "@/components/LLMForm";
 import QueryHistory from "@/components/QueryHistory";
+import { GaMetricsGrid } from "@/components/analytics/GaMetricsGrid";
 
 interface ClientStats {
   monthlyQueries: { value: string; change: number };
@@ -93,6 +95,49 @@ async function ClientStats() {
 }
 
 /**
+ * @component GaMetrics
+ * Server component that fetches and displays Google Analytics metrics.
+ * Uses Suspense for loading state management.
+ * 
+ * @returns {Promise<JSX.Element>} GA metrics grid
+ */
+async function GaMetrics() {
+  console.log('Dashboard GaMetrics - Starting');
+  const session = await getServerSession(authOptions);
+  console.log('Dashboard GaMetrics - Session:', JSON.stringify(session, null, 2));
+  
+  if (!session?.user) {
+    console.log('Dashboard GaMetrics - No user in session');
+    throw new Error('Unauthorized');
+  }
+
+  const apiUrl = `${process.env.NEXTAUTH_URL}/api/client/ga-metrics`;
+  console.log('Dashboard GaMetrics - Fetching from:', apiUrl);
+  
+  const response = await fetch(apiUrl, {
+    cache: 'no-store',
+    credentials: 'include',
+    headers: {
+      'Authorization': `Bearer ${session.user.id}`
+    }
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Dashboard GaMetrics - Fetch failed:', {
+      status: response.status,
+      statusText: response.statusText,
+      error: errorText
+    });
+    throw new Error('Failed to fetch GA metrics');
+  }
+
+  const data = await response.json();
+  console.log('Dashboard GaMetrics - Successfully fetched data');
+  return <GaMetricsGrid data={data} />;
+}
+
+/**
  * @component StatsCard
  * Displays a single statistic in a card format with change indicator.
  * 
@@ -129,6 +174,7 @@ function StatsCard({ data }: { data: { title: string; value: string | number; ch
  * Features:
  * - Authentication and role-based access control
  * - Real-time usage statistics with Suspense
+ * - Google Analytics metrics with Suspense
  * - LLM query interface for making new queries
  * - Recent query history with status indicators
  * - Quick action links for common tasks
@@ -167,6 +213,13 @@ export default async function ClientDashboard() {
       <Suspense fallback={<div>Loading stats...</div>}>
         <ClientStats />
       </Suspense>
+
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-4">Analytics Overview</h2>
+        <Suspense fallback={<div>Loading analytics...</div>}>
+          <GaMetrics />
+        </Suspense>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-3 mt-8">
         <div className="md:col-span-2">
