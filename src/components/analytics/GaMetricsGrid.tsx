@@ -5,13 +5,14 @@ import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { Info } from 'lucide-react';
 import { GaChannelSessionsTable } from './GaChannelSessionsTable';
+import { PieChart, PieChartData } from './PieChart';
 
 interface GaMetricsGridProps {
   data: GaMetricsResponse;
 }
 
 export function GaMetricsGrid({ data }: GaMetricsGridProps) {
-  const { kpiMonthly } = data;
+  const { kpiMonthly, channelDaily } = data;
 
   if (!kpiMonthly || kpiMonthly.length === 0) {
     return (
@@ -26,10 +27,10 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
   // Find the most recent month
   const sorted = [...kpiMonthly].sort((a, b) => b.month - a.month);
   const current = sorted[0];
-  
+
   // Find the same month last year (YYYYMM - 100)
   const prevYearMonth = current.month - 100;
-  
+
   const prevYear = kpiMonthly.find(m => m.month === prevYearMonth);
 
   // Helper for YoY change
@@ -40,6 +41,11 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
     return percent;
   }
 
+  // Helper to extract YYYYMM from a date string (YYYY-MM-DD)
+  function getYearMonth(date: string) {
+    return date.slice(0, 7).replace('-', '');
+  }
+
   // Metric definitions
   const metrics: Array<{
     key: keyof typeof current;
@@ -47,44 +53,122 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
     tooltip: string;
     format?: (v: number) => string;
   }> = [
-    {
-      key: 'sessions',
-      label: 'Sessions',
-      tooltip: 'Total number of sessions for the month.'
-    },
-    {
-      key: 'screenPageViewsPerSession',
-      label: 'Pages / Session',
-      tooltip: 'Average number of pages viewed per session.'
-    },
-    {
-      key: 'avgSessionDurationSec',
-      label: 'Avg. Session Duration',
-      tooltip: 'Average session duration (mm:ss).',
-      format: (v: number) => {
-        const m = Math.floor(v / 60);
-        const s = v % 60;
-        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      {
+        key: 'sessions',
+        label: 'Sessions',
+        tooltip: 'Total number of sessions for the month.'
+      },
+      {
+        key: 'screenPageViewsPerSession',
+        label: 'Pages / Session',
+        tooltip: 'Average number of pages viewed per session.'
+      },
+      {
+        key: 'avgSessionDurationSec',
+        label: 'Avg. Session Duration',
+        tooltip: 'Average session duration (mm:ss).',
+        format: (v: number) => {
+          const m = Math.floor(v / 60);
+          const s = v % 60;
+          return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+      },
+      {
+        key: 'engagementRate',
+        label: 'Engagement Rate',
+        tooltip: 'Percentage of engaged sessions.',
+        format: (v: number) => `${(v * 100).toFixed(2)}%`
+      },
+      {
+        key: 'goalCompletions',
+        label: 'Goal Completions',
+        tooltip: 'Number of goal completions.'
+      },
+      {
+        key: 'goalCompletionRate',
+        label: 'Goal Completion Rate',
+        tooltip: 'Goal completions per session.',
+        format: (v: number) => `${(v * 100).toFixed(2)}%`
       }
-    },
-    {
-      key: 'engagementRate',
-      label: 'Engagement Rate',
-      tooltip: 'Percentage of engaged sessions.',
-      format: (v: number) => `${(v * 100).toFixed(2)}%`
-    },
-    {
-      key: 'goalCompletions',
-      label: 'Goal Completions',
-      tooltip: 'Number of goal completions.'
-    },
-    {
-      key: 'goalCompletionRate',
-      label: 'Goal Completion Rate',
-      tooltip: 'Goal completions per session.',
-      format: (v: number) => `${(v * 100).toFixed(2)}%`
+    ];
+
+  // Shared aggregation for most recent month
+  let pieData: PieChartData[] = [];
+  let topRows: { channel: string; sessions: number }[] = [];
+  // Sessions by Source pie chart data
+  let sourcePieData: PieChartData[] = [];
+  if (channelDaily && channelDaily.length > 0) {
+    // Group by year-month
+    const sessionsByMonth: Record<string, Record<string, number>> = {};
+    channelDaily.forEach((row: any) => {
+      const ym = getYearMonth(row.date || '');
+      if (!ym) return;
+      if (!sessionsByMonth[ym]) sessionsByMonth[ym] = {};
+      sessionsByMonth[ym][row.channelGroup] = (sessionsByMonth[ym][row.channelGroup] || 0) + row.sessions;
+    });
+    // Find the most recent month (YYYYMM as string)
+    const months = Object.keys(sessionsByMonth).sort().reverse();
+    const currentMonth = months[0];
+    const currentData = sessionsByMonth[currentMonth] || {};
+    // Color palette (match screenshot order: Direct, Organic Search, Email, Referral, Organic Social, Unassigned)
+    const colorMap: Record<string, string> = {
+      'Direct': '#e69832',
+      'Organic Search': '#1a3766',
+      'Email': '#6b6e6e',
+      'Referral': '#a6b6c6',
+      'Organic Social': '#4a90e2',
+      'Unassigned': '#cccccc',
+    };
+    // Prepare pieData and topRows
+    pieData = Object.entries(currentData).map(([name, value]) => ({
+      name,
+      value,
+      color: colorMap[name] || '#ccc',
+    })).sort((a, b) => b.value - a.value);
+    topRows = pieData.map(({ name, value }) => ({ channel: name, sessions: value }));
+
+    // --- Sessions by Source Pie Chart ---
+    if (data.sourceDaily && data.sourceDaily.length > 0) {
+      const sourceByMonth: Record<string, Record<string, number>> = {};
+      data.sourceDaily.forEach((row: any) => {
+        const ym = getYearMonth(row.date || '');
+        if (!ym) return;
+        if (!sourceByMonth[ym]) sourceByMonth[ym] = {};
+        sourceByMonth[ym][row.trafficSource] = (sourceByMonth[ym][row.trafficSource] || 0) + row.sessions;
+      });
+      const sourceData = sourceByMonth[currentMonth] || {};
+      // Sort sources by value
+      let entries = Object.entries(sourceData).map(([name, value]) => ({ name, value }));
+      entries.sort((a, b) => b.value - a.value);
+      const total = entries.reduce((sum, e) => sum + e.value, 0);
+      // Group small sources into 'Others' (less than 5% or after top 7)
+      const mainSources = entries.filter((e, i) => i < 7 && e.value / total >= 0.05);
+      const others = entries.filter((e, i) => !(i < 7 && e.value / total >= 0.05));
+      const othersValue = others.reduce((sum, e) => sum + e.value, 0);
+      // Color palette for sources
+      const sourceColors = [
+        '#e69832', // (direct)
+        '#2176d2', // google
+        '#1a3766', // 1905 Media Full List
+        '#6b6e6e', // gmb
+        '#8bc34a', // giantthatwork...
+        '#a6b6c6', // bing
+        '#b94e8a', // Unknown List
+        '#e94e32', // instagram
+        '#bdb76b', // 4238 Zfevb Ahyy Yvfg
+        '#444444', // Others
+      ];
+      let colorIdx = 0;
+      sourcePieData = mainSources.map((e) => ({
+        name: e.name,
+        value: e.value,
+        color: sourceColors[colorIdx++] || '#ccc',
+      }));
+      if (othersValue > 0) {
+        sourcePieData.push({ name: 'Others', value: othersValue, color: '#444444' });
+      }
     }
-  ];
+  }
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
@@ -151,7 +235,32 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
           );
         })}
       </div>
-      <div className="mt-6">
+      <div className="flex flex-col md:flex-row md:items-start gap-8 mt-8">
+        {pieData.length > 0 && (
+          <div className="flex flex-col justify-center">
+            <div className="flex flex-col items-start">
+              <h2 className="text-lg font-bold mb-2">Sessions</h2>
+              <p className="text-gray-500 mb-4 text-sm">by Channel</p>
+            </div>
+            <div className="flex flex-row">
+              <PieChart data={pieData} />
+            </div>
+          </div>
+        )}
+        {sourcePieData.length > 0 && (
+          <div className="flex flex-col justify-center">
+            <div className="flex flex-col items-start">
+              <h2 className="text-lg font-bold mb-2">Sessions</h2>
+              <p className="text-gray-500 mb-4 text-sm">by Source</p>
+            </div>
+            <div className="flex flex-row">
+              <PieChart data={sourcePieData} />
+            </div>
+          </div>
+        )}
+
+      </div>
+      <div className="flex-1">
         <GaChannelSessionsTable channelDaily={data.channelDaily} />
       </div>
     </div>
