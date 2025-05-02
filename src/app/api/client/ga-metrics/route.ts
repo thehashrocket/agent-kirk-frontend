@@ -164,13 +164,13 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
 
     // Validate response structure
     if (!normalizedResponse || typeof normalizedResponse !== 'object') {
-      console.error('Transform LLM Data - Invalid response format: Response is not an object');
+      // console.error('Transform LLM Data - Invalid response format: Response is not an object');
       throw new Error('Invalid response format: Response is not an object');
     }
 
     if (!Array.isArray(normalizedResponse.datasets)) {
-      console.error('Transform LLM Data - Invalid response format: datasets is not an array');
-      console.log('Transform LLM Data - Available keys:', Object.keys(normalizedResponse));
+      // console.error('Transform LLM Data - Invalid response format: datasets is not an array');
+      // console.log('Transform LLM Data - Available keys:', Object.keys(normalizedResponse));
       throw new Error('Invalid response format: datasets is not an array');
     } else {
       // Process each dataset from the LLM response
@@ -267,7 +267,7 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         case 'channel_daily':
         case 'channel':
         case 'channeldaily':
-          console.log('Transform LLM Data - Processing channel metrics, count:', rows.length);
+          // console.log('Transform LLM Data - Processing channel metrics, count:', rows.length);
           channelDaily = rows.map(row => ({
             date: row.date,
             channelGroup: row.channel || row.channelGroup || 'direct',
@@ -284,7 +284,7 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         case 'source_daily':
         case 'source':
         case 'sourcedaily':
-          console.log('Transform LLM Data - Processing source metrics, count:', rows.length);
+          // console.log('Transform LLM Data - Processing source metrics, count:', rows.length);
           sourceDaily = rows.map(row => ({
             date: row.date,
             trafficSource: row.source || row.trafficSource || 'direct',
@@ -423,8 +423,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     }
 
     const today = new Date();
-    const fiveYearsAgo = new Date(today);
-    fiveYearsAgo.setFullYear(today.getFullYear() - 5);
+    const oneYearsAgo = new Date(today);
+    oneYearsAgo.setFullYear(today.getFullYear() - 1);
+
 
     // Get current month in YYYYMM format
     const currentMonth = parseInt(
@@ -432,30 +433,35 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       (today.getMonth() + 1).toString().padStart(2, '0')
     );
 
+    const prevYearMonth = currentMonth - 100;
+
     // Fetch all metrics in parallel
     console.log('GA Metrics API - Checking database for existing metrics');
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([
-      prisma.gaKpiDaily.findFirst({
+      prisma.gaKpiDaily.findMany({
         where: {
           gaPropertyId,
           date: {
-            gte: fiveYearsAgo,
+            gte: oneYearsAgo,
             lte: today
           }
         },
         orderBy: { date: 'desc' }
       }),
-      prisma.gaKpiMonthly.findFirst({
+      prisma.gaKpiMonthly.findMany({
         where: {
           gaPropertyId,
-          month: currentMonth
+          month: {
+            gte: prevYearMonth,
+            lte: currentMonth
+          }
         }
       }),
       prisma.gaChannelDaily.findMany({
         where: {
           gaPropertyId,
           date: {
-            gte: fiveYearsAgo,
+            gte: oneYearsAgo,
             lte: today
           }
         },
@@ -465,7 +471,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         where: {
           gaPropertyId,
           date: {
-            gte: fiveYearsAgo,
+            gte: oneYearsAgo,
             lte: today
           }
         },
@@ -473,6 +479,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       })
     ]);
 
+    console.log('kpiMonthly', kpiMonthly);
     console.log('GA Metrics API - Database check results:', {
       hasKpiDaily: !!kpiDaily,
       hasKpiMonthly: !!kpiMonthly,
@@ -497,7 +504,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       const importRun = await prisma.gaImportRun.create({
         data: {
           gaPropertyId,
-          dateStart: fiveYearsAgo,
+          dateStart: oneYearsAgo,
           dateEnd: today,
           requestedByUserId: user.id,
           status: 'ok'
@@ -512,7 +519,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       const payload = {
         accountGA4,
         propertyGA4,
-        dateStart: fiveYearsAgo.toISOString().split('T')[0],
+        dateStart: oneYearsAgo.toISOString().split('T')[0],
         dateEnd: today.toISOString().split('T')[0],
         runID: importRun.id
       };
@@ -554,7 +561,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
           const importRun = await prisma.gaImportRun.create({
             data: {
               gaPropertyId,
-              dateStart: fiveYearsAgo,
+              dateStart: oneYearsAgo,
               dateEnd: today,
               requestedByUserId: user.id,
               status: 'ok'

@@ -1,54 +1,19 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-} from 'recharts';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
+import { Info } from 'lucide-react';
+import { GaChannelSessionsTable } from './GaChannelSessionsTable';
 
 interface GaMetricsGridProps {
   data: GaMetricsResponse;
 }
 
-function formatDuration(seconds: number): string {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  return `${minutes}m ${remainingSeconds}s`;
-}
-
-function formatPercentage(value: number): string {
-  return `${(value * 100).toFixed(1)}%`;
-}
-
-function MetricCard({ title, value, description }: { title: string; value: string; description?: string }) {
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        {description && (
-          <p className="text-xs text-muted-foreground">{description}</p>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
-
 export function GaMetricsGrid({ data }: GaMetricsGridProps) {
-  const { kpiDaily, kpiMonthly, channelDaily, sourceDaily } = data;
+  const { kpiMonthly } = data;
 
-  if (!kpiDaily && !kpiMonthly && !channelDaily && !sourceDaily) {
+  if (!kpiMonthly || kpiMonthly.length === 0) {
     return (
       <Card>
         <CardContent className="py-6">
@@ -58,184 +23,137 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
     );
   }
 
+  // Find the most recent month
+  const sorted = [...kpiMonthly].sort((a, b) => b.month - a.month);
+  const current = sorted[0];
+  
+  // Find the same month last year (YYYYMM - 100)
+  const prevYearMonth = current.month - 100;
+  
+  const prevYear = kpiMonthly.find(m => m.month === prevYearMonth);
+
+  // Helper for YoY change
+  function getYoY(currentVal: number, prevVal?: number) {
+    if (prevVal === undefined || prevVal === 0) return null;
+    const diff = currentVal - prevVal;
+    const percent = (diff / Math.abs(prevVal)) * 100;
+    return percent;
+  }
+
+  // Metric definitions
+  const metrics: Array<{
+    key: keyof typeof current;
+    label: string;
+    tooltip: string;
+    format?: (v: number) => string;
+  }> = [
+    {
+      key: 'sessions',
+      label: 'Sessions',
+      tooltip: 'Total number of sessions for the month.'
+    },
+    {
+      key: 'screenPageViewsPerSession',
+      label: 'Pages / Session',
+      tooltip: 'Average number of pages viewed per session.'
+    },
+    {
+      key: 'avgSessionDurationSec',
+      label: 'Avg. Session Duration',
+      tooltip: 'Average session duration (mm:ss).',
+      format: (v: number) => {
+        const m = Math.floor(v / 60);
+        const s = v % 60;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }
+    },
+    {
+      key: 'engagementRate',
+      label: 'Engagement Rate',
+      tooltip: 'Percentage of engaged sessions.',
+      format: (v: number) => `${(v * 100).toFixed(2)}%`
+    },
+    {
+      key: 'goalCompletions',
+      label: 'Goal Completions',
+      tooltip: 'Number of goal completions.'
+    },
+    {
+      key: 'goalCompletionRate',
+      label: 'Goal Completion Rate',
+      tooltip: 'Goal completions per session.',
+      format: (v: number) => `${(v * 100).toFixed(2)}%`
+    }
+  ];
+
   return (
-    <Tabs defaultValue="daily" className="space-y-6">
-      <TabsList>
-        <TabsTrigger value="daily">Daily Metrics</TabsTrigger>
-        <TabsTrigger value="monthly">Monthly Metrics</TabsTrigger>
-        <TabsTrigger value="channels">Channel Performance</TabsTrigger>
-        <TabsTrigger value="sources">Traffic Sources</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="daily">
-        {kpiDaily && kpiDaily.length > 0 ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <MetricCard
-              title="Sessions"
-              value={kpiDaily[0]?.sessions?.toLocaleString?.() ?? '—'}
-              description="Total daily sessions"
-            />
-            <MetricCard
-              title="Page Views per Session"
-              value={kpiDaily[0]?.screenPageViewsPerSession?.toFixed?.(2) ?? '—'}
-              description="Average page views"
-            />
-            <MetricCard
-              title="Engagement Rate"
-              value={kpiDaily[0] ? formatPercentage(kpiDaily[0].engagementRate) : '—'}
-              description="User engagement"
-            />
-            <MetricCard
-              title="Avg. Session Duration"
-              value={kpiDaily[0] ? formatDuration(kpiDaily[0].avgSessionDurationSec) : '—'}
-              description="Time spent per session"
-            />
-            <MetricCard
-              title="Goal Completions"
-              value={kpiDaily[0]?.goalCompletions?.toLocaleString?.() ?? '—'}
-              description="Total conversions"
-            />
-            <MetricCard
-              title="Goal Completion Rate"
-              value={kpiDaily[0] ? formatPercentage(kpiDaily[0].goalCompletionRate) : '—'}
-              description="Conversion rate"
-            />
-          </div>
-        ) : (
-          <p className="text-center text-muted-foreground">No daily metrics available</p>
-        )}
-      </TabsContent>
-
-      <TabsContent value="monthly">
-        {kpiMonthly && kpiMonthly.length > 0 ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <MetricCard
-              title="Monthly Sessions"
-              value={kpiMonthly[0]?.sessions?.toLocaleString?.() ?? '—'}
-              description="Total monthly sessions"
-            />
-            <MetricCard
-              title="Page Views per Session"
-              value={kpiMonthly[0]?.screenPageViewsPerSession?.toFixed?.(2) ?? '—'}
-              description="Average page views"
-            />
-            <MetricCard
-              title="Engagement Rate"
-              value={kpiMonthly[0] ? formatPercentage(kpiMonthly[0].engagementRate) : '—'}
-              description="User engagement"
-            />
-            <MetricCard
-              title="Avg. Session Duration"
-              value={kpiMonthly[0] ? formatDuration(kpiMonthly[0].avgSessionDurationSec) : '—'}
-              description="Time spent per session"
-            />
-            <MetricCard
-              title="Goal Completions"
-              value={kpiMonthly[0]?.goalCompletions?.toLocaleString?.() ?? '—'}
-              description="Total conversions"
-            />
-            <MetricCard
-              title="Goal Completion Rate"
-              value={kpiMonthly[0] ? formatPercentage(kpiMonthly[0].goalCompletionRate) : '—'}
-              description="Conversion rate"
-            />
-          </div>
-        ) : (
-          <p className="text-center text-muted-foreground">No monthly metrics available</p>
-        )}
-      </TabsContent>
-
-      <TabsContent value="channels">
-        {channelDaily && channelDaily.length > 0 ? (
-          <div className="space-y-6">
-            <div className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={channelDaily}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="channelGroup" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="sessions" fill="#2563EB" name="Sessions" />
-                  <Bar dataKey="goalCompletions" fill="#10B981" name="Conversions" />
-                </BarChart>
-              </ResponsiveContainer>
+    <div className="bg-white rounded-lg shadow p-6">
+      <h2 className="text-xl font-bold mb-2">Monthly Website Traffic Overview</h2>
+      <p className="text-gray-500 mb-6">Year-Over-Year Comparison</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        {metrics.map(metric => {
+          const value = current[metric.key];
+          const prev = prevYear ? prevYear[metric.key] : undefined;
+          const percent = prev !== undefined ? getYoY(value, prev) : null;
+          const display = metric.format ? metric.format(value) : typeof value === 'number' ? value.toLocaleString() : value;
+          // Format YoY delta for time and percent
+          let deltaDisplay = '';
+          if (prev !== undefined && prev !== 0) {
+            if (metric.key === 'avgSessionDurationSec') {
+              const diff = value - prev;
+              const sign = diff > 0 ? '+' : '';
+              const m = Math.floor(Math.abs(diff) / 60);
+              const s = Math.abs(diff) % 60;
+              deltaDisplay = `${sign}${diff < 0 ? '-' : ''}${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            } else if (metric.key === 'engagementRate' || metric.key === 'goalCompletionRate') {
+              const diff = value - prev;
+              const sign = diff > 0 ? '+' : '';
+              deltaDisplay = `${sign}${(diff * 100).toFixed(2)}%`;
+            } else {
+              const diff = value - prev;
+              const sign = diff > 0 ? '+' : '';
+              deltaDisplay = `${sign}${diff.toLocaleString()}`;
+            }
+          }
+          // Color for YoY
+          let yoyColor = '';
+          if (percent !== null) {
+            yoyColor = percent > 0 ? 'text-green-600' : percent < 0 ? 'text-red-500' : 'text-gray-400';
+          }
+          let arrow = '';
+          if (percent !== null) {
+            arrow = percent > 0 ? '↑' : percent < 0 ? '↓' : '';
+          }
+          return (
+            <div key={metric.key} className="flex flex-col items-center justify-center bg-white rounded-xl border h-56 p-4 shadow-sm">
+              <div className="flex flex-col items-center w-full mb-2">
+                <div className="flex items-center gap-1 text-gray-500 text-base font-medium mt-1">
+                  <span>{metric.label}</span>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span tabIndex={0} className="ml-1 cursor-pointer outline-none">
+                        <Info size={16} className="text-orange-400" aria-label="Info" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>{metric.tooltip}</TooltipContent>
+                  </Tooltip>
+                </div>
+              </div>
+              <div className="flex flex-col items-center justify-center flex-1 w-full">
+                <span className="text-3xl font-bold text-black tracking-tight">{display}</span>
+                {percent !== null && (
+                  <span className={`mt-2 flex items-center gap-1 text-sm font-medium ${yoyColor}`}>
+                    {arrow} {deltaDisplay || '—'}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {channelDaily.map((channel) => (
-                <Card key={channel.channelGroup}>
-                  <CardHeader>
-                    <CardTitle className="text-sm">{channel.channelGroup}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <dl className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <dt>Sessions:</dt>
-                        <dd>{channel.sessions.toLocaleString()}</dd>
-                      </div>
-                      <div className="flex justify-between">
-                        <dt>Engagement Rate:</dt>
-                        <dd>{formatPercentage(channel.engagementRate)}</dd>
-                      </div>
-                      <div className="flex justify-between">
-                        <dt>Conversions:</dt>
-                        <dd>{channel.goalCompletions.toLocaleString()}</dd>
-                      </div>
-                    </dl>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <p className="text-center text-muted-foreground">No channel data available</p>
-        )}
-      </TabsContent>
-
-      <TabsContent value="sources">
-        {sourceDaily && sourceDaily.length > 0 ? (
-          <div className="space-y-6">
-            <div className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={sourceDaily}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="trafficSource" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="sessions" fill="#2563EB" name="Sessions" />
-                  <Bar dataKey="goalCompletions" fill="#10B981" name="Conversions" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {sourceDaily.map((source) => (
-                <Card key={source.trafficSource}>
-                  <CardHeader>
-                    <CardTitle className="text-sm">{source.trafficSource}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <dl className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <dt>Sessions:</dt>
-                        <dd>{source.sessions.toLocaleString()}</dd>
-                      </div>
-                      <div className="flex justify-between">
-                        <dt>Engagement Rate:</dt>
-                        <dd>{formatPercentage(source.engagementRate)}</dd>
-                      </div>
-                      <div className="flex justify-between">
-                        <dt>Conversions:</dt>
-                        <dd>{source.goalCompletions.toLocaleString()}</dd>
-                      </div>
-                    </dl>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <p className="text-center text-muted-foreground">No source data available</p>
-        )}
-      </TabsContent>
-    </Tabs>
+          );
+        })}
+      </div>
+      <div className="mt-6">
+        <GaChannelSessionsTable channelDaily={data.channelDaily} />
+      </div>
+    </div>
   );
 } 
