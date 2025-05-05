@@ -71,7 +71,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-gradient-to-r from-primary/10 via-primary/5 to-background backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
-      <div className="container h-14 flex items-center">
+      <div className="container h-14 flex items-center justify-between mx-auto">
         <MobileNav />
         <nav className="flex items-center space-x-6 ml-4">
           <Link
@@ -105,7 +105,7 @@ export function Header() {
             </Link>
           )}
         </nav>
-        <div className="flex items-center space-x-4 ml-auto">
+        <div className="flex items-center space-x-4">
           <NotificationBell />
           <UserProfileBadge />
           <Button

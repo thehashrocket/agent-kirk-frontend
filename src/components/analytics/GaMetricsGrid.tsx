@@ -6,6 +6,9 @@ import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { Info } from 'lucide-react';
 import { GaChannelSessionsTable } from './GaChannelSessionsTable';
 import { PieChart, PieChartData } from './PieChart';
+import { LineChart } from './LineChart';
+import { MonthlyComparisonChart } from './MonthlyComparisonChart';
+import CountUp from 'react-countup';
 
 interface GaMetricsGridProps {
   data: GaMetricsResponse;
@@ -224,7 +227,68 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center flex-1 w-full">
-                <span className="text-3xl font-bold text-black tracking-tight">{display}</span>
+                <span className="text-3xl font-bold text-black tracking-tight">
+                  {typeof value === 'number' ? (
+                    metric.format ? (
+                      metric.key === 'avgSessionDurationSec' ? (
+                        // Special handling for duration
+                        <>
+                          <CountUp 
+                            end={Math.floor(value / 60)} 
+                            duration={2} 
+                            separator="," 
+                            decimals={0}
+                            decimal="."
+                            preserveValue={true}
+                            suffix=":"
+                          />
+                          <CountUp 
+                            end={value % 60} 
+                            duration={2} 
+                            separator="," 
+                            decimals={0}
+                            decimal="."
+                            preserveValue={true}
+                            formattingFn={(value) => value.toString().padStart(2, '0')}
+                          />
+                        </>
+                      ) : metric.key === 'engagementRate' || metric.key === 'goalCompletionRate' ? (
+                        // Percentage format
+                        <CountUp 
+                          end={value * 100} 
+                          duration={2} 
+                          separator="," 
+                          decimals={2}
+                          decimal="."
+                          preserveValue={true}
+                          suffix="%"
+                        />
+                      ) : (
+                        // Other formatted values
+                        <CountUp 
+                          end={value} 
+                          duration={2} 
+                          separator="," 
+                          decimals={0}
+                          decimal="."
+                          preserveValue={true}
+                        />
+                      )
+                    ) : (
+                      // Regular number
+                      <CountUp 
+                        end={value} 
+                        duration={2} 
+                        separator="," 
+                        decimals={0}
+                        decimal="."
+                        preserveValue={true}
+                      />
+                    )
+                  ) : (
+                    display
+                  )}
+                </span>
                 {percent !== null && (
                   <span className={`mt-2 flex items-center gap-1 text-sm font-medium ${yoyColor}`}>
                     {arrow} {deltaDisplay || '—'}
@@ -262,6 +326,42 @@ export function GaMetricsGrid({ data }: GaMetricsGridProps) {
       </div>
       <div className="flex-1">
         <GaChannelSessionsTable channelDaily={data.channelDaily} />
+      </div>
+      <div className="flex-1 mt-8">
+        <div className="flex flex-col items-start mb-4">
+          <h2 className="text-lg font-bold mb-2">Sessions</h2>
+          <p className="text-gray-500 text-sm">Current Period</p>
+        </div>
+        {data.kpiDaily && data.kpiDaily.length > 0 && (
+          <LineChart 
+            data={data.kpiDaily.map(day => ({ 
+              date: day.date,
+              sessions: day.sessions
+            }))} 
+            height={300}
+          />
+        )}
+      </div>
+
+      <div className="flex-1 mt-10">
+        <div className="flex flex-col items-start mb-4">
+          <h2 className="text-lg font-bold mb-2">Sessions</h2>
+          <p className="text-gray-500 text-sm">Last 12 Calendar Months; Year-Over-Year Comparison</p>
+        </div>
+        {data.kpiMonthly && data.kpiMonthly.length > 0 ? (
+          <MonthlyComparisonChart 
+            data={data.kpiMonthly} 
+            height={400}
+          />
+        ) : (
+          <Card>
+            <CardContent className="py-6">
+              <p className="text-center text-muted-foreground">
+                Insufficient data for year-over-year comparison. At least 13 months of data is required.
+              </p>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
