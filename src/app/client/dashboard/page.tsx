@@ -79,63 +79,6 @@ export default async function ClientDashboard() {
             <h2 className="text-lg font-semibold mb-4">New Query</h2>
             <LLMForm />
           </Card>
-          
-          <Card className="p-6 mt-6">
-            <h2 className="text-lg font-semibold mb-4">Recent Queries</h2>
-            <QueryHistory />
-          </Card>
-        </div>
-
-        <div className="md:col-span-1">
-          <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-            <div className="space-y-4">
-              <Link 
-                href="/client/history" 
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <h3 className="font-medium">Query History</h3>
-                <p className="text-sm text-gray-600">View your past queries and results</p>
-              </Link>
-              <Link 
-                href="/client/settings" 
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <h3 className="font-medium">Account Settings</h3>
-                <p className="text-sm text-gray-600">Manage your preferences and API keys</p>
-              </Link>
-              <Link 
-                href="/client/support" 
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <h3 className="font-medium">Support</h3>
-                <p className="text-sm text-gray-600">Get help or contact your account rep</p>
-              </Link>
-            </div>
-          </Card>
-
-          <Card className="p-6 mt-6">
-            <h2 className="text-lg font-semibold mb-4">Usage Summary</h2>
-            <div className="space-y-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-medium">Plan Status</h3>
-                <p className="text-sm text-gray-600">Enterprise Plan</p>
-                <p className="text-xs text-gray-500">Renews in 18 days</p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-medium">API Usage</h3>
-                <div className="mt-2">
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>This Month</span>
-                    <span>1,543 / 10,000</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                    <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '15.43%' }}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
         </div>
       </div>
     </div>

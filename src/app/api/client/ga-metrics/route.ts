@@ -3,7 +3,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import type { GaMetricsResponse, GaMetricsError } from '@/lib/types/ga-metrics';
-import { $Enums } from '@prisma/client';
 
 interface LLMDashboardResponse {
   runID: string;
@@ -310,28 +309,39 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
   try {
     console.log('GA Metrics API - Starting request');
     
-    // Try session-based auth first
+    // Get the URL query parameters
+    const { searchParams } = new URL(request.url);
+    
+    // Parse date params (extended range)
+    const fromParam = searchParams.get('from');
+    const toParam = searchParams.get('to');
+    
+    // Parse selected date range (for display)
+    const selectedFromParam = searchParams.get('selectedFrom');
+    const selectedToParam = searchParams.get('selectedTo');
+    
+    // Use the extended date range for data fetching
+    const dateFrom = fromParam ? new Date(fromParam) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const dateTo = toParam ? new Date(toParam) : new Date();
+    
+    // Store selected range for reference (or default to same as full range)
+    const displayDateFrom = selectedFromParam ? new Date(selectedFromParam) : dateFrom;
+    const displayDateTo = selectedToParam ? new Date(selectedToParam) : dateTo;
+    
+    console.log('GA Metrics API - Date parameters:', {
+      fullRangeFrom: dateFrom.toISOString(),
+      fullRangeTo: dateTo.toISOString(),
+      displayRangeFrom: displayDateFrom.toISOString(),
+      displayRangeTo: displayDateTo.toISOString()
+    });
+
+    // Get user from session or auth header
     const session = await getServerSession(authOptions);
-    console.log('GA Metrics API - Session:', JSON.stringify(session, null, 2));
+    let userEmail = session?.user?.email;
 
     // If no session, try bearer token
     const authHeader = request.headers.get('authorization');
     console.log('GA Metrics API - Auth Header:', authHeader);
-
-    let userEmail: string | undefined;
-
-    if (session?.user?.email) {
-      userEmail = session.user.email;
-    } else if (authHeader?.startsWith('Bearer ')) {
-      const token = authHeader.split(' ')[1];
-      // Look up user by ID (token is the user ID)
-      const userFromToken = await prisma.user.findUnique({
-        where: { id: token }
-      });
-      if (userFromToken?.email) {
-        userEmail = userFromToken.email;
-      }
-    }
 
     if (!userEmail) {
       console.log('GA Metrics API - No user email found from session or token');
@@ -422,28 +432,93 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       propertyGA4 = user.gaAccounts[0].gaProperties[0].gaPropertyId;
     }
 
-    const today = new Date();
-    const oneYearsAgo = new Date(today);
-    oneYearsAgo.setFullYear(today.getFullYear() - 1);
-
-
-    // Get current month in YYYYMM format
+    // Instead of only checking if data exists, count the records to determine if we need full history
+    console.log('GA Metrics API - Checking if data exists in tables');
+    const [kpiDailyCount, kpiMonthlyCount, channelDailyCount, sourceDailyCount] = await Promise.all([
+      prisma.gaKpiDaily.count({ where: { gaPropertyId } }),
+      prisma.gaKpiMonthly.count({ where: { gaPropertyId } }),
+      prisma.gaChannelDaily.count({ where: { gaPropertyId } }),
+      prisma.gaSourceDaily.count({ where: { gaPropertyId } })
+    ]);
+    
+    // Determine if we need to fetch historical data (5 years) or just the selected range + previous year
+    const needsHistoricalData = kpiDailyCount === 0 || kpiMonthlyCount === 0 || 
+                               channelDailyCount === 0 || sourceDailyCount === 0;
+    
+    console.log('GA Metrics API - Data check results:', {
+      kpiDailyCount,
+      kpiMonthlyCount,
+      channelDailyCount,
+      sourceDailyCount,
+      needsHistoricalData
+    });
+    
+    // Set date ranges based on what we need
+    let queryDateFrom: Date;
+    let queryDateTo: Date = new Date(); // Always use today as the end date
+    
+    if (needsHistoricalData) {
+      // If we need historical data, fetch 5 years worth
+      console.log('GA Metrics API - No data found, will fetch 5 years of historical data');
+      queryDateFrom = new Date();
+      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 5);
+    } else {
+      // Otherwise, get the selected range + previous year for YoY comparison
+      console.log('GA Metrics API - Data exists, fetching selected range + previous year');
+      queryDateFrom = new Date(dateFrom);
+      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1); // Go back one year from start date
+    }
+    
+    // Ensure we have the selected period for display
+    console.log('GA Metrics API - Using display date range:', {
+      displayDateFrom: displayDateFrom.toISOString(),
+      displayDateTo: displayDateTo.toISOString()
+    });
+    
+    // Get current month in YYYYMM format for monthly data
     const currentMonth = parseInt(
-      today.getFullYear().toString() + 
-      (today.getMonth() + 1).toString().padStart(2, '0')
+      new Date().getFullYear().toString() + 
+      (new Date().getMonth() + 1).toString().padStart(2, '0')
     );
-
-    const prevYearMonth = currentMonth - 100;
-
-    // Fetch all metrics in parallel
-    console.log('GA Metrics API - Checking database for existing metrics');
+    
+    // Calculate the month from at least 2 years ago for proper comparison
+    const twoYearsAgo = new Date();
+    twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
+    const oldestMonth = parseInt(
+      twoYearsAgo.getFullYear().toString() + 
+      (twoYearsAgo.getMonth() + 1).toString().padStart(2, '0')
+    );
+    
+    // If we need historical data but don't have it yet, ensure we go back at least 2 years
+    // This guarantees proper year-over-year comparisons
+    if (needsHistoricalData) {
+      // Ensure we go back at least 5 years for historical data
+      const fiveYearsAgo = new Date();
+      fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
+      queryDateFrom = fiveYearsAgo;
+    } else {
+      // Ensure we have at least 2 years of data for comparison
+      queryDateFrom = new Date(Math.min(dateFrom.getTime(), twoYearsAgo.getTime()));
+    }
+    
+    // Fetch metrics using our determined date ranges
+    console.log('GA Metrics API - Fetching metrics with date range:', {
+      queryDateFrom: queryDateFrom.toISOString(),
+      queryDateTo: queryDateTo.toISOString(),
+      displayDateFrom: displayDateFrom.toISOString(),
+      displayDateTo: displayDateTo.toISOString(),
+      oldestMonth,
+      currentMonth
+    });
+    
+    // Fetch all metrics in parallel with new date ranges
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([
       prisma.gaKpiDaily.findMany({
         where: {
           gaPropertyId,
           date: {
-            gte: oneYearsAgo,
-            lte: today
+            gte: queryDateFrom,
+            lte: queryDateTo
           }
         },
         orderBy: { date: 'desc' }
@@ -452,7 +527,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         where: {
           gaPropertyId,
           month: {
-            gte: prevYearMonth,
+            gte: oldestMonth,
             lte: currentMonth
           }
         }
@@ -461,8 +536,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         where: {
           gaPropertyId,
           date: {
-            gte: oneYearsAgo,
-            lte: today
+            gte: queryDateFrom,
+            lte: queryDateTo
           }
         },
         orderBy: { date: 'desc' }
@@ -471,24 +546,16 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         where: {
           gaPropertyId,
           date: {
-            gte: oneYearsAgo,
-            lte: today
+            gte: queryDateFrom,
+            lte: queryDateTo
           }
         },
         orderBy: { date: 'desc' }
       })
     ]);
-
-    console.log('kpiMonthly', kpiMonthly);
-    console.log('GA Metrics API - Database check results:', {
-      hasKpiDaily: !!kpiDaily,
-      hasKpiMonthly: !!kpiMonthly,
-      channelDailyCount: channelDaily?.length || 0,
-      sourceDailyCount: sourceDaily?.length || 0
-    });
-
-    // If ANY metric type is missing, fetch from LLM_DASHBOARD_URL
-    if (!kpiDaily || !kpiMonthly || !channelDaily?.length || !sourceDaily?.length) {
+    
+    // If ANY metric type is missing AND we need historical data, fetch from LLM_DASHBOARD_URL
+    if (needsHistoricalData && (!kpiDaily?.length || !kpiMonthly?.length || !channelDaily?.length || !sourceDaily?.length)) {
       console.log('GA Metrics API - Some metrics are missing, attempting to fetch from LLM dashboard');
       
       if (!process.env.LLM_DASHBOARD_URL) {
@@ -504,8 +571,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       const importRun = await prisma.gaImportRun.create({
         data: {
           gaPropertyId,
-          dateStart: oneYearsAgo,
-          dateEnd: today,
+          dateStart: queryDateFrom,
+          dateEnd: queryDateTo,
           requestedByUserId: user.id,
           status: 'ok'
         }
@@ -513,14 +580,12 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       
       console.log('GA Metrics API - Import run created:', importRun.id);
       
-      
-
       console.log('GA Metrics API - Fetching from LLM dashboard:', process.env.LLM_DASHBOARD_URL);
       const payload = {
         accountGA4,
         propertyGA4,
-        dateStart: oneYearsAgo.toISOString().split('T')[0],
-        dateEnd: today.toISOString().split('T')[0],
+        dateStart: queryDateFrom.toISOString().split('T')[0],
+        dateEnd: queryDateTo.toISOString().split('T')[0],
         runID: importRun.id
       };
       console.log('GA Metrics API - Request payload:', payload);
@@ -561,8 +626,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
           const importRun = await prisma.gaImportRun.create({
             data: {
               gaPropertyId,
-              dateStart: oneYearsAgo,
-              dateEnd: today,
+              dateStart: queryDateFrom,
+              dateEnd: queryDateTo,
               requestedByUserId: user.id,
               status: 'ok'
             }
@@ -747,7 +812,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       console.log('GA Metrics API - Found existing metrics in database, returning those');
     }
 
-    // Return the GA metrics data from database
+    // Return the GA metrics data from database with metadata about the date ranges
     return NextResponse.json({
       kpiDaily: kpiDaily
         ? (Array.isArray(kpiDaily) ? kpiDaily : [kpiDaily]).map((entry: any) => {
@@ -785,6 +850,17 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
             };
           })
         : null,
+      // Add metadata about the date ranges for UI components
+      metadata: {
+        displayDateRange: {
+          from: displayDateFrom.toISOString(),
+          to: displayDateTo.toISOString()
+        },
+        fullDateRange: {
+          from: queryDateFrom.toISOString(),
+          to: queryDateTo.toISOString()
+        }
+      }
     });
   } catch (error) {
     console.error('Error fetching GA metrics:', error);

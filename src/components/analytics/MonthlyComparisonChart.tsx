@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import {
   LineChart as RechartsLineChart,
   Line,
@@ -20,56 +20,138 @@ interface MonthlyComparisonChartProps {
   height?: number;
 }
 
+// Create a unique key for data point tracking
+function getDataKey(item: any): string {
+  return `${item.monthNum || 'unknown'}|${item.sessions || 0}|${item.prevYearSessions || 0}`;
+}
+
 export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({ 
   data, 
   height = 400 
 }) => {
+  const instanceId = useId();
+  // Track accumulated data to handle multiple renders
+  const [accumulatedData, setAccumulatedData] = useState<MonthlySessionData[]>([]);
+  
+  // Accumulate data across renders
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+    
+    // Add new data to accumulated state
+    setAccumulatedData(prevData => {
+      // If no previous data, just use current data
+      if (prevData.length === 0) return data;
+      
+      // Create a set of existing month values to avoid duplicates
+      const existingMonths = new Set(prevData.map(item => item.month));
+      
+      // Get only new items
+      const newItems = data.filter(item => !existingMonths.has(item.month));
+      
+      // Return combined array if we have new items
+      return newItems.length > 0 ? [...prevData, ...newItems] : prevData;
+    });
+    
+    return () => {
+      // Cleanup
+    };
+  }, [data]);
+  
   // Process data to create chart-friendly format with current and previous year
   const processedData = React.useMemo(() => {
-    if (!data || data.length === 0) return [];
+    // Use accumulated data if available, otherwise use the current data
+    const dataToProcess = accumulatedData.length > 0 ? accumulatedData : data;
+    
+    if (!dataToProcess || dataToProcess.length === 0) return [];
 
-    // Get the range of months we care about (last 12 months)
-    const now = new Date();
-    const currentMonth = now.getMonth(); // 0-11
-    const currentYear = now.getFullYear();
+    // Log the raw data to understand what we're working with
+    console.log("MonthlyComparisonChart - Raw data:", dataToProcess.map(d => ({
+      month: d.month,
+      year: Math.floor(d.month / 100),
+      monthDigit: d.month % 100,
+      sessions: d.sessions
+    })));
     
-    // Calculate start month for filtering (12 months ago)
-    const startDate = new Date(currentYear, currentMonth - 11, 1);
-    const startYearMonth = startDate.getFullYear() * 100 + (startDate.getMonth() + 1);
+    // Create a lookup map for sessions by month
+    const sessionsByMonth = new Map<number, number>();
+    dataToProcess.forEach(item => {
+      sessionsByMonth.set(item.month, item.sessions);
+    });
     
-    // Filter to only include the last 12 months
-    const recentMonths = data
-      .filter(item => item.month >= startYearMonth)
-      .sort((a, b) => a.month - b.month);
+    // Get all available months sorted in descending order (most recent first)
+    const allDataMonths = [...dataToProcess.map(item => item.month)].sort((a, b) => b - a);
+    console.log("MonthlyComparisonChart - Available months in data:", allDataMonths);
     
-    // If we don't have enough data, return an empty array
-    if (recentMonths.length === 0) return [];
-    
-    // Create chart data with current year and previous year in each row
-    return recentMonths.map(item => {
-      // Extract year and month
+    // Get a list of all unique years in the data
+    const years = new Set<number>();
+    dataToProcess.forEach(item => {
       const year = Math.floor(item.month / 100);
-      const month = item.month % 100;
+      years.add(year);
+    });
+    const availableYears = Array.from(years).sort((a, b) => b - a); // Descending order
+    console.log("MonthlyComparisonChart - Available years:", availableYears);
+    
+    // Extract the most recent year that has data
+    const mostRecentYear = availableYears[0];
+    
+    // Get months from the most recent year for reference
+    const recentYearMonths = allDataMonths
+      .filter(month => Math.floor(month / 100) === mostRecentYear)
+      .sort((a, b) => a - b);
+    
+    console.log("MonthlyComparisonChart - Months for most recent year:", recentYearMonths);
+    
+    // Get the 12 most recent months regardless of year
+    // This ensures we show the last 12 calendar months
+    const last12Months = allDataMonths.slice(0, 12).sort((a, b) => a - b);
+    
+    // If we have fewer than 12 months, use what we have
+    const monthsToShow = last12Months.length > 0 ? last12Months : allDataMonths;
+    
+    console.log("MonthlyComparisonChart - Last 12 months to show:", monthsToShow);
+    
+    // Prepare chart data with proper typing
+    const result: Array<{
+      monthNum: number;
+      month: string;
+      sessions: number;
+      prevYearSessions: number;
+    }> = [];
+    
+    // Process each month that we want to show
+    monthsToShow.forEach(yearMonth => {
+      const year = Math.floor(yearMonth / 100);
+      const month = yearMonth % 100;
+      
+      // Get sessions for current year/month
+      const sessions = sessionsByMonth.get(yearMonth) || 0;
       
       // Calculate previous year's equivalent month
       const prevYearMonth = (year - 1) * 100 + month;
-      
-      // Find previous year's data for this month
-      const prevYearData = data.find(d => d.month === prevYearMonth);
+      const prevYearSessions = sessionsByMonth.get(prevYearMonth) || 0;
       
       // Format month for display
-      const date = new Date(year, month - 1);
-      const monthName = date.toLocaleString('en-US', { month: 'short' });
-      const displayDate = `${monthName} ${year}`;
+      // Need to subtract 1 from month because JavaScript months are 0-indexed
+      const date = new Date(year, month - 1, 1);
+      const displayMonth = date.toLocaleString('en-US', { month: 'long' });
       
-      return {
-        monthNum: item.month,
-        month: displayDate,
-        sessions: item.sessions || 0,
-        prevYearSessions: prevYearData ? (prevYearData.sessions || 0) : 0
-      };
+      // Add to chart data
+      result.push({
+        monthNum: yearMonth,
+        month: `${displayMonth} ${year}`,
+        sessions: sessions,
+        prevYearSessions: prevYearSessions
+      });
     });
-  }, [data]);
+    
+    // Sort result by month number to ensure chronological order
+    result.sort((a, b) => a.monthNum - b.monthNum);
+    
+    // Log the final chart data
+    console.log("MonthlyComparisonChart - Final chart data:", result);
+    
+    return result;
+  }, [accumulatedData, data]);
 
   // Format large numbers (e.g., 4000 -> 4K)
   const formatValue = (value: number) => {
@@ -78,6 +160,25 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     }
     return value.toString();
   };
+
+  // Create a label formatter that shows both values in the tooltip
+  const labelFormatter = (label: string) => {
+    return label;
+  };
+  
+  // Custom formatter for the tooltip values
+  const valueFormatter = (value: number, name: string) => {
+    const prefix = name.includes('previous') ? 'Previous: ' : 'Current: ';
+    return [value.toLocaleString(), prefix];
+  };
+
+  if (!processedData || processedData.length === 0) {
+    return (
+      <div className="w-full h-[400px] flex items-center justify-center bg-gray-50 rounded-lg">
+        <p className="text-gray-400">No data available for monthly comparison</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -111,8 +212,8 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
             domain={[0, 'auto']}
           />
           <Tooltip 
-            formatter={(value: any) => [Number(value).toLocaleString(), '']}
-            labelFormatter={(label) => label}
+            formatter={valueFormatter}
+            labelFormatter={labelFormatter}
             contentStyle={{ 
               borderRadius: '4px', 
               boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
@@ -127,18 +228,6 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
             strokeWidth={2}
             name="Sessions"
             dot={{ r: 4, fill: '#1a3766', stroke: 'white', strokeWidth: 1 }}
-            label={{
-              position: 'top',
-              fill: '#1a3766',
-              fontSize: 12,
-              formatter: (item: any) => {
-                // Safe check to prevent errors with undefined values
-                if (item === null || item === undefined || item.value === null || item.value === undefined) {
-                  return '';
-                }
-                return item.value.toLocaleString();
-              }
-            }}
             activeDot={{ r: 6, fill: '#1a3766', stroke: 'white', strokeWidth: 2 }}
             isAnimationActive={true}
             animationDuration={1500}
@@ -150,18 +239,6 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
             strokeWidth={2}
             name="Sessions (previous year)"
             dot={{ r: 4, fill: '#a6c8ff', stroke: 'white', strokeWidth: 1 }}
-            label={{
-              position: 'top',
-              fill: '#a6c8ff',
-              fontSize: 12,
-              formatter: (item: any) => {
-                // Safe check to prevent errors with undefined values
-                if (item === null || item === undefined || item.value === null || item.value === undefined) {
-                  return '';
-                }
-                return item.value.toLocaleString();
-              }
-            }}
             activeDot={{ r: 6, fill: '#a6c8ff', stroke: 'white', strokeWidth: 2 }}
             isAnimationActive={true}
             animationDuration={1500}
