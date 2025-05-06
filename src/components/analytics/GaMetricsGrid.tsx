@@ -1,17 +1,15 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { Card, CardContent } from '@/components/ui/card';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
-import { Info } from 'lucide-react';
 import { GaChannelSessionsTable } from './GaChannelSessionsTable';
 import { PieChart, PieChartData } from './PieChart';
 import { LineChart } from './LineChart';
 import { MonthlyComparisonChart } from './MonthlyComparisonChart';
-import CountUp from 'react-countup';
 import { MonthRangePicker } from './MonthRangePicker';
 import React from 'react';
 import { format } from 'date-fns';
+import { GaKpiSummaryGrid } from './GaKpiSummaryGrid';
 
 /**
  * GaMetricsGrid Component
@@ -48,6 +46,13 @@ interface GaMetricsGridProps {
   onDateRangeChange?: (range: { from: Date; to: Date }) => Promise<GaMetricsResponse>;
 }
 
+// Utility to get first and last day of a month from any date
+function getFullMonthRange(date: Date) {
+  const from = new Date(date.getFullYear(), date.getMonth(), 1);
+  const to = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  return { from, to };
+}
+
 /**
  * GaMetricsGrid
  *
@@ -74,14 +79,12 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     return date.slice(0, 7).replace('-', '');
   }, []);
   
-  // Set up default date range (most recent full month or from metadata)
+  // Update setupDefaultDateRange to always return a full month
   const setupDefaultDateRange = React.useCallback(() => {
     // If we have metadata with display date range, use it
     if (metadata?.displayDateRange) {
-      return {
-        from: new Date(metadata.displayDateRange.from),
-        to: new Date(metadata.displayDateRange.to)
-      };
+      // Snap to full month
+      return getFullMonthRange(new Date(metadata.displayDateRange.from));
     }
     // Fallback to full previous month logic
     const today = new Date();
@@ -90,12 +93,8 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     // Go back one day to get the last day of the previous month
     const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
     lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
-    // Get the first day of the previous month
-    const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
-    return { 
-      from: firstDayOfPreviousMonth,
-      to: lastDayOfPreviousMonth 
-    };
+    // Snap to full previous month
+    return getFullMonthRange(lastDayOfPreviousMonth);
   }, [metadata]);
   
   // Helper function to format date ranges consistently for display
@@ -111,13 +110,14 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     setDateRange(setupDefaultDateRange());
   }, [setupDefaultDateRange, metadata]);
   
-  // Handle date range change (fetches new data if callback provided)
+  // Update handleDateRangeChange to always snap to full month
   const handleDateRangeChange = async (range: { from: Date; to: Date }) => {
-    setDateRange(range);
+    const snapped = getFullMonthRange(range.from);
+    setDateRange(snapped);
     if (onDateRangeChange) {
       try {
         setIsLoading(true);
-        const newData = await onDateRangeChange(range);
+        const newData = await onDateRangeChange(snapped);
         setData(newData);
       } catch (error) {
         console.error('Error fetching data for date range:', error);
@@ -166,92 +166,24 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       : sourceDaily;
   }, [sourceDaily, dateRange, isDateInRange]);
   
-  // Calculate metrics based on selected date range (aggregates daily data)
-  const calculateFilteredMetrics = React.useCallback(() => {
-    if (!filteredDailyData || filteredDailyData.length === 0) {
-      return null;
-    }
-    // Start with empty metrics object that matches the structure of monthly data
-    const metrics: any = {
-      sessions: 0,
-      screenPageViewsPerSession: 0,
-      avgSessionDurationSec: 0,
-      engagementRate: 0,
-      goalCompletions: 0,
-      goalCompletionRate: 0
-    };
-    // Calculate total and average metrics based on filtered daily data
-    let totalSessions = 0;
-    let totalPageViews = 0;
-    let totalSessionDuration = 0;
-    let totalEngagements = 0;
-    let totalGoalCompletions = 0;
-    filteredDailyData.forEach(day => {
-      const sessions = day.sessions || 0;
-      totalSessions += sessions;
-      // Calculate page views from screenPageViewsPerSession * sessions
-      const pageViewsPerSession = day.screenPageViewsPerSession || 0;
-      totalPageViews += pageViewsPerSession * sessions;
-      // Calculate session duration
-      totalSessionDuration += (day.avgSessionDurationSec || 0) * sessions;
-      // Calculate engaged sessions from engagementRate * sessions
-      const engagementRate = day.engagementRate || 0;
-      totalEngagements += engagementRate * sessions;
-      totalGoalCompletions += day.goalCompletions || 0;
-    });
-    // Calculate averages and rates
-    metrics.sessions = totalSessions;
-    metrics.screenPageViewsPerSession = totalSessions > 0 ? totalPageViews / totalSessions : 0;
-    metrics.avgSessionDurationSec = totalSessions > 0 ? totalSessionDuration / totalSessions : 0;
-    metrics.engagementRate = totalSessions > 0 ? totalEngagements / totalSessions : 0;
-    metrics.goalCompletions = totalGoalCompletions;
-    metrics.goalCompletionRate = totalSessions > 0 ? totalGoalCompletions / totalSessions : 0;
-    return metrics;
-  }, [filteredDailyData]);
-  
-  // Get metrics for the selected range (memoized)
-  const calculatedMetrics = React.useMemo(() => {
-    return calculateFilteredMetrics();
-  }, [calculateFilteredMetrics]);
-  
-  // Find the most recent month from the selected range or default to original logic
-  const getMonthlySummaryData = React.useMemo(() => {
+  // Helper to get the current and previous year month objects from kpiMonthly
+  // based on the selected date range. Returns { current, prevYear }.
+  function getSelectedAndPrevYearMonth(kpiMonthly: any[], dateRange: { from: Date; to: Date } | null) {
     if (!kpiMonthly || kpiMonthly.length === 0) return { current: null, prevYear: null };
-    if (calculatedMetrics) {
-      // If we have calculated metrics from the filter, use them for current
-      // Find the year-over-year comparison data
-      // Convert the month of the selected date range to YYYYMM format
-      const selectedRange = dateRange || {
-        from: new Date(),
-        to: new Date()
-      };
-      const selectedMonth = selectedRange.from.getFullYear() * 100 + (selectedRange.from.getMonth() + 1);
-      // Find the same month last year (YYYYMM - 100)
-      const prevYearMonth = selectedMonth - 100;
-      const prevYear = kpiMonthly.find(m => m.month === prevYearMonth);
-      return { current: calculatedMetrics, prevYear };
-    }
-    // First, convert dates to ensure we're working with the right format
     const selectedRange = dateRange || {
       from: new Date(),
       to: new Date()
     };
-    // Convert the month of the selected date range to YYYYMM format
     const selectedMonth = selectedRange.from.getFullYear() * 100 + (selectedRange.from.getMonth() + 1);
-    // Find the month that matches our selected range
-    const selectedMonthData = kpiMonthly.find(m => m.month === selectedMonth);
-    // If we don't have data for the selected month, fall back to the most recent month
-    const sorted = [...kpiMonthly].sort((a, b) => b.month - a.month);
-    const current = selectedMonthData || sorted[0];
-    // Find the same month last year (YYYYMM - 100)
-    const prevYearMonth = current.month - 100;
-    const prevYear = kpiMonthly.find(m => m.month === prevYearMonth);
+    const current = kpiMonthly.find(m => m.month === selectedMonth) || null;
+    const prevYearMonth = selectedMonth - 100;
+    const prevYear = kpiMonthly.find(m => m.month === prevYearMonth) || null;
     return { current, prevYear };
-  }, [kpiMonthly, dateRange, calculatedMetrics]);
+  }
 
-  // Extract from our memo to use in the component
-  const { current, prevYear } = getMonthlySummaryData;
-  
+  // --- Calculate current and prevYear month objects ---
+  const { current, prevYear } = getSelectedAndPrevYearMonth(kpiMonthly || [], dateRange);
+
   // Check if we have valid data
   if (!current) {
     return (
@@ -262,70 +194,6 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       </Card>
     );
   }
-
-  // Helper for YoY change
-  function getYoY(currentVal: number, prevVal?: number) {
-    if (prevVal === undefined || prevVal === 0) return null;
-    const diff = currentVal - prevVal;
-    const percent = (diff / Math.abs(prevVal)) * 100;
-    return percent;
-  }
-
-  // Helper to safely handle arithmetic with potential string values
-  function ensureNumber(value: any): number {
-    if (typeof value === 'number') return value;
-    if (typeof value === 'string') {
-      const parsed = parseFloat(value);
-      return isNaN(parsed) ? 0 : parsed;
-    }
-    return 0;
-  }
-
-  // Metric definitions
-  const metrics: Array<{
-    key: string;
-    label: string;
-    tooltip: string;
-    format?: (v: number) => string;
-  }> = [
-      {
-        key: 'sessions',
-        label: 'Sessions',
-        tooltip: 'Total number of sessions for the month.'
-      },
-      {
-        key: 'screenPageViewsPerSession',
-        label: 'Pages / Session',
-        tooltip: 'Average number of pages viewed per session.'
-      },
-      {
-        key: 'avgSessionDurationSec',
-        label: 'Avg. Session Duration',
-        tooltip: 'Average session duration (mm:ss).',
-        format: (v: number) => {
-          const m = Math.floor(v / 60);
-          const s = Math.floor(v % 60);
-          return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-      },
-      {
-        key: 'engagementRate',
-        label: 'Engagement Rate',
-        tooltip: 'Percentage of engaged sessions.',
-        format: (v: number) => `${(v * 100).toFixed(2)}%`
-      },
-      {
-        key: 'goalCompletions',
-        label: 'Goal Completions',
-        tooltip: 'Number of goal completions.'
-      },
-      {
-        key: 'goalCompletionRate',
-        label: 'Goal Completion Rate',
-        tooltip: 'Goal completions per session.',
-        format: (v: number) => `${(v * 100).toFixed(2)}%`
-      }
-    ];
 
   // Use filtered data for aggregation
   // Shared aggregation for most recent month
@@ -390,10 +258,8 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     // Calculate the total for all pie data
     const pieDataTotal = pieData.reduce((sum, item) => sum + item.value, 0);
     console.log(`DEBUG: Total sessions in pie chart data: ${pieDataTotal}`);
-    console.log(`DEBUG: Total sessions in calculatedMetrics: ${calculatedMetrics?.sessions || 'Not available'}`);
-    
-    if (calculatedMetrics && Math.abs(pieDataTotal - calculatedMetrics.sessions) > 1) {
-      console.warn(`DEBUG: WARNING - Pie chart total (${pieDataTotal}) does not match metrics total (${calculatedMetrics.sessions})`);
+    if (current && Math.abs(pieDataTotal - current.sessions) > 1) {
+      console.warn(`DEBUG: WARNING - Pie chart total (${pieDataTotal}) does not match metrics total (${current.sessions})`);
     }
 
     // --- Sessions by Source Pie Chart ---
@@ -451,6 +317,10 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     ? formatDateRange(dateRange.from, dateRange.to)
     : "Year-Over-Year Comparison";
 
+    console.log('displayRange', displayRange);
+    console.log('dateRange.from', dateRange?.from);
+    console.log('dateRange.to', dateRange?.to);
+    
   return (
     <div className={`bg-white rounded-lg shadow p-6 ${isLoading ? 'opacity-70' : ''}`}>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -468,138 +338,12 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
         {displayRange}
       </p>
       <p className="text-sm text-gray-400 mb-6">
-        {calculatedMetrics ? "Showing metrics calculated from selected date range" : "Showing monthly summary data"}
+        {current ? "Showing metrics calculated from selected date range" : "Showing monthly summary data"}
       </p>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-        {metrics.map(metric => {
-          // Use current metrics directly
-          const rawValue = current ? current[metric.key as keyof typeof current] : null;
-          const rawPrev = prevYear ? prevYear[metric.key as keyof typeof prevYear] : undefined;
-          
-          // Ensure we're working with numbers
-          const value = ensureNumber(rawValue);
-          const prev = rawPrev !== undefined ? ensureNumber(rawPrev) : undefined;
-          
-          const percent = prev !== undefined ? getYoY(value, prev) : null;
-          const display = metric.format ? metric.format(value) : typeof value === 'number' ? value.toLocaleString() : String(value);
-          
-          // Format YoY delta for time and percent
-          let deltaDisplay = '';
-          if (prev !== undefined && prev !== 0) {
-            if (metric.key === 'avgSessionDurationSec') {
-              const diff = value - prev;
-              const sign = diff > 0 ? '+' : '';
-              const m = Math.floor(Math.abs(diff) / 60);
-              const s = Math.floor(Math.abs(diff) % 60);
-              deltaDisplay = `${sign}${diff < 0 ? '-' : ''}${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            } else if (metric.key === 'engagementRate' || metric.key === 'goalCompletionRate') {
-              const diff = value - prev;
-              const sign = diff > 0 ? '+' : '';
-              deltaDisplay = `${sign}${(diff * 100).toFixed(2)}%`;
-            } else {
-              const diff = value - prev;
-              const sign = diff > 0 ? '+' : '';
-              deltaDisplay = `${sign}${diff.toLocaleString()}`;
-            }
-          }
-          // Color for YoY
-          let yoyColor = '';
-          if (percent !== null) {
-            yoyColor = percent > 0 ? 'text-green-600' : percent < 0 ? 'text-red-500' : 'text-gray-400';
-          }
-          let arrow = '';
-          if (percent !== null) {
-            arrow = percent > 0 ? '↑' : percent < 0 ? '↓' : '';
-          }
-          return (
-            <div key={metric.key} className="flex flex-col items-center justify-center bg-white rounded-xl border h-56 p-4 shadow-sm">
-              <div className="flex flex-col items-center w-full mb-2">
-                <div className="flex items-center gap-1 text-gray-500 text-base font-medium mt-1">
-                  <span>{metric.label}</span>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <span tabIndex={0} className="ml-1 cursor-pointer outline-none">
-                        <Info size={16} className="text-orange-400" aria-label="Info" />
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent>{metric.tooltip}</TooltipContent>
-                  </Tooltip>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-center flex-1 w-full">
-                <span className="text-3xl font-bold text-black tracking-tight">
-                  {typeof value === 'number' ? (
-                    metric.format ? (
-                      metric.key === 'avgSessionDurationSec' ? (
-                        // Special handling for duration
-                        <>
-                          <CountUp 
-                            end={Math.floor(value / 60)} 
-                            duration={2} 
-                            separator="," 
-                            decimals={0}
-                            decimal="."
-                            preserveValue={true}
-                            suffix=":"
-                          />
-                          <CountUp 
-                            end={value % 60} 
-                            duration={2} 
-                            separator="," 
-                            decimals={0}
-                            decimal="."
-                            preserveValue={true}
-                            formattingFn={(value) => value.toString().padStart(2, '0')}
-                          />
-                        </>
-                      ) : metric.key === 'engagementRate' || metric.key === 'goalCompletionRate' ? (
-                        // Percentage format
-                        <CountUp 
-                          end={value * 100} 
-                          duration={2} 
-                          separator="," 
-                          decimals={2}
-                          decimal="."
-                          preserveValue={true}
-                          suffix="%"
-                        />
-                      ) : (
-                        // Other formatted values
-                        <CountUp 
-                          end={value} 
-                          duration={2} 
-                          separator="," 
-                          decimals={0}
-                          decimal="."
-                          preserveValue={true}
-                        />
-                      )
-                    ) : (
-                      // Regular number
-                      <CountUp 
-                        end={value} 
-                        duration={2} 
-                        separator="," 
-                        decimals={0}
-                        decimal="."
-                        preserveValue={true}
-                      />
-                    )
-                  ) : (
-                    display
-                  )}
-                </span>
-                {percent !== null && (
-                  <span className={`mt-2 flex items-center gap-1 text-sm font-medium ${yoyColor}`}>
-                    {arrow} {deltaDisplay || '—'}
-                  </span>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {/* --- Metrics summary card grid --- */}
+      <GaKpiSummaryGrid current={current} prevYear={prevYear} />
+
       <div className="flex flex-col md:flex-row md:items-start gap-8 mt-8">
         {pieData.length > 0 && (
           <div className="flex flex-col justify-center">
