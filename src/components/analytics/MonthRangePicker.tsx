@@ -68,13 +68,14 @@ export function MonthRangePicker({ onChange, defaultValue, value }: MonthRangePi
 
   const getDefaultValue = () => {
     if (defaultValue) return defaultValue;
-    return getMonthRange(currentYear, new Date().getMonth());
+    const now = new Date();
+    return getMonthRange(now.getFullYear(), now.getMonth());
   };
 
   // Internal state for uncontrolled usage
-  const [internalSelected, setInternalSelected] = React.useState<{ from: Date; to: Date }>(getDefaultValue());
+  const [internalSelected, setInternalSelected] = React.useState<{ from: Date; to: Date }>(() => getDefaultValue());
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedYear, setSelectedYear] = React.useState((value || internalSelected).from.getFullYear());
+  const [selectedYear, setSelectedYear] = React.useState(() => (value || getDefaultValue()).from.getFullYear());
 
   // Use controlled value if provided, otherwise internal state
   const selected = value || internalSelected;
@@ -91,6 +92,7 @@ export function MonthRangePicker({ onChange, defaultValue, value }: MonthRangePi
   };
 
   const selectedMonth = selected.from.getMonth();
+
   const selectedYearDisplay = selected.from.getFullYear();
 
   React.useEffect(() => {
@@ -99,6 +101,7 @@ export function MonthRangePicker({ onChange, defaultValue, value }: MonthRangePi
       setSelectedYear(value.from.getFullYear());
     }
   }, [value]);
+
 
   return (
     <div className="flex items-center">

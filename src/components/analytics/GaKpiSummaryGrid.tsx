@@ -34,22 +34,6 @@ const metrics: Array<{
     tooltip: 'Average number of pages viewed per session.'
   },
   {
-    key: 'avgSessionDurationSec',
-    label: 'Avg. Session Duration',
-    tooltip: 'Average session duration (mm:ss).',
-    format: (v: number) => {
-      const m = Math.floor(v / 60);
-      const s = Math.floor(v % 60);
-      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    }
-  },
-  {
-    key: 'engagementRate',
-    label: 'Engagement Rate',
-    tooltip: 'Percentage of engaged sessions.',
-    format: (v: number) => `${(v * 100).toFixed(2)}%`
-  },
-  {
     key: 'goalCompletions',
     label: 'Goal Completions',
     tooltip: 'Number of goal completions.'

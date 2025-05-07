@@ -47,9 +47,19 @@ interface GaMetricsGridProps {
 }
 
 // Utility to get first and last day of a month from any date
-function getFullMonthRange(date: Date) {
-  const from = new Date(date.getFullYear(), date.getMonth(), 1);
-  const to = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+function getFullMonthRange(date: Date | string) {
+  let year, month;
+  if (typeof date === 'string') {
+    // Parse as local date, not UTC, to avoid timezone issues
+    const parts = date.split('-');
+    year = parseInt(parts[0], 10);
+    month = parseInt(parts[1], 10) - 1; // JS months are 0-based
+  } else {
+    year = date.getFullYear();
+    month = date.getMonth();
+  }
+  const from = new Date(year, month, 1);
+  const to = new Date(year, month + 1, 0);
   return { from, to };
 }
 
@@ -74,25 +84,23 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   
   const { kpiMonthly, channelDaily, kpiDaily, sourceDaily, metadata } = data;
   
-  // Helper to extract YYYYMM from a date string (YYYY-MM-DD)
-  const getYearMonth = React.useCallback((date: string): string => {
-    return date.slice(0, 7).replace('-', '');
-  }, []);
-  
   // Update setupDefaultDateRange to always return a full month
   const setupDefaultDateRange = React.useCallback(() => {
     // If we have metadata with display date range, use it
     if (metadata?.displayDateRange) {
       // Snap to full month
-      return getFullMonthRange(new Date(metadata.displayDateRange.from));
+      return getFullMonthRange(metadata.displayDateRange.from);
     }
     // Fallback to full previous month logic
     const today = new Date();
     // Get the first day of the current month
     const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
     // Go back one day to get the last day of the previous month
     const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
+
     lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
+
     // Snap to full previous month
     return getFullMonthRange(lastDayOfPreviousMonth);
   }, [metadata]);
@@ -105,10 +113,13 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   // State for selected date range, default to most recent full month
   const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date } | null>(null);
   
-  // Set default date range on mount only
+  // Set default date range on mount only, and only when metadata.displayDateRange.from is available
   React.useEffect(() => {
-    setDateRange(setupDefaultDateRange());
-  }, []);
+    if (metadata?.displayDateRange?.from) {
+      console.log('Setting dateRange from metadata.displayDateRange.from:', metadata.displayDateRange.from);
+      setDateRange(setupDefaultDateRange());
+    }
+  }, [metadata?.displayDateRange?.from, setupDefaultDateRange]);
   
   // Update handleDateRangeChange to always snap to full month
   const handleDateRangeChange = async (range: { from: Date; to: Date }) => {
@@ -225,10 +236,12 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
         <div>
           <h1 className="text-2xl font-bold text-blue-800">1905 New Media Traffic and Usability</h1>
         </div>
-        <MonthRangePicker 
-          onChange={handleDateRangeChange} 
-          value={dateRange || undefined}
-        />
+        {dateRange && (
+          <MonthRangePicker 
+            onChange={handleDateRangeChange} 
+            value={dateRange}
+          />
+        )}
       </div>
       
       <h2 className="text-xl font-bold mb-2">Monthly Website Traffic Overview</h2>

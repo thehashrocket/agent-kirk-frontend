@@ -124,6 +124,8 @@ export default function GaMetrics() {
   return (
     <div>
       {data ? (
+        console.log('data', data),
+        console.log('data.metadata', data.metadata),
         <GaMetricsGrid 
           data={data} 
           onDateRangeChange={fetchGaMetrics}

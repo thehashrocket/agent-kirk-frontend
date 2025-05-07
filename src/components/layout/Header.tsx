@@ -14,6 +14,7 @@
 'use client'
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import { MobileNav } from "./MobileNav";
 import { Home, MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
 import { signOut } from "next-auth/react";
@@ -78,8 +79,7 @@ export function Header() {
             href="/"
             className="flex items-center space-x-2 font-medium text-primary hover:text-primary/90 transition-colors"
           >
-            <Home className="h-5 w-5" />
-            <span className="font-bliss-bold text-lg">Agent Kirk</span>
+            <Image src="/images/Agent-Kirk-Primary-Horizontal-Logo_Color-CMYK.svg" alt="Agent Kirk" width={125} height={125} />
           </Link>
           <Link
             href={getDashboardLink()}

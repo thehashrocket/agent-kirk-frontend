@@ -17,9 +17,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
-import Link from "next/link";
 import LLMForm from "@/components/LLMForm";
-import QueryHistory from "@/components/QueryHistory";
 import GaMetrics from "@/components/analytics/GaMetrics";
 
 /**
@@ -71,15 +69,6 @@ export default async function ClientDashboard() {
         <Suspense fallback={<div>Loading analytics...</div>}>
           <GaMetrics />
         </Suspense>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-3 mt-8">
-        <div className="md:col-span-2">
-          <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-4">New Query</h2>
-            <LLMForm />
-          </Card>
-        </div>
       </div>
     </div>
   );

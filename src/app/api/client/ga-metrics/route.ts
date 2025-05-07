@@ -95,20 +95,20 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         (k) => k.replace(/\s+/g, '').toLowerCase() === 'rows' || k.replace(/\s+/g, '').toLowerCase() === 'row'
       );
       if (!tableKey || !rowsKey) {
-        console.log('Transform LLM Data - Could not find table or rows key in dataset:', Object.keys(dataset));
+        // console.log('Transform LLM Data - Could not find table or rows key in dataset:', Object.keys(dataset));
         return;
       }
       const tableName = (dataset[tableKey] || '').trim().toLowerCase();
       let rowsRaw = dataset[rowsKey];
-      console.log('Transform LLM Data - Processing dataset:', tableName, '| rowsKey:', rowsKey);
+      // console.log('Transform LLM Data - Processing dataset:', tableName, '| rowsKey:', rowsKey);
 
       let rows: any[];
       try {
         rows = typeof rowsRaw === 'string' ? JSON.parse(rowsRaw) : rowsRaw;
-        console.log('Transform LLM Data - Parsed rows count:', Array.isArray(rows) ? rows.length : 'not an array');
+        // console.log('Transform LLM Data - Parsed rows count:', Array.isArray(rows) ? rows.length : 'not an array');
       } catch (e) {
         console.error('Transform LLM Data - Error parsing rows:', e);
-        console.log('Transform LLM Data - Raw rows:', rowsRaw);
+        // console.log('Transform LLM Data - Raw rows:', rowsRaw);
         return;
       }
 
@@ -370,13 +370,23 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         queryDateTo: queryDateTo.toISOString()
       });
 
+      const importRun = await prisma.gaImportRun.create({
+        data: {
+          gaPropertyId,
+          dateStart: queryDateFrom,
+          dateEnd: queryDateTo,
+          requestedByUserId: user.id,
+          status: 'ok'
+        }
+      });
+
       // Fetch the most recent month of data from the LLM_DASHBOARD_URL
       const payload = {
         accountGA4,
         propertyGA4,
         dateStart: queryDateFrom.toISOString().split('T')[0],
         dateEnd: queryDateTo.toISOString().split('T')[0],
-        runID: 'recent-month'
+        runID: importRun.id
       };
 
       const controller = new AbortController();
@@ -482,7 +492,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
           await Promise.all(
             transformedData.channelDaily.map(channel => {
               if (channelLogCount < 5) {
-                console.log('channelDaily row keys:', Object.keys(channel), 'value:', channel);
+                // console.log('channelDaily row keys:', Object.keys(channel), 'value:', channel);
                 channelLogCount++;
               }
               let safeDate;
@@ -536,7 +546,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
           await Promise.all(
             transformedData.sourceDaily.map(source => { 
               if (sourceLogCount < 5) {
-                console.log('sourceDaily row keys:', Object.keys(source), 'value:', source);
+                // console.log('sourceDaily row keys:', Object.keys(source), 'value:', source);
                 sourceLogCount++;
               }
               let safeDate;
@@ -811,7 +821,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
             await Promise.all(
               transformedData.channelDaily.map(channel => {
                 if (channelLogCount < 5) {
-                  console.log('channelDaily row keys:', Object.keys(channel), 'value:', channel);
+                  // console.log('channelDaily row keys:', Object.keys(channel), 'value:', channel);
                   channelLogCount++;
                 }
                 let safeDate;
@@ -865,7 +875,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
             await Promise.all(
               transformedData.sourceDaily.map(source => {
                 if (sourceLogCount < 5) {
-                  console.log('sourceDaily row keys:', Object.keys(source), 'value:', source);
+                  // console.log('sourceDaily row keys:', Object.keys(source), 'value:', source);
                   sourceLogCount++;
                 }
                 let safeDate;
