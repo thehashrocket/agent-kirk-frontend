@@ -276,7 +276,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
 
     // Calculate the total for all pie data
     const pieDataTotal = pieData.reduce((sum, item) => sum + item.value, 0);
-    console.log(`DEBUG: Total sessions in pie chart data: ${pieDataTotal}`);
+    // console.log(`DEBUG: Total sessions in pie chart data: ${pieDataTotal}`);
     if (current && Math.abs(pieDataTotal - current.sessions) > 1) {
       console.warn(`DEBUG: WARNING - Pie chart total (${pieDataTotal}) does not match metrics total (${current.sessions})`);
     }
@@ -327,7 +327,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       }
       
       // Debug log for source data
-      console.log(`DEBUG: Total sessions in source pie chart: ${sourcePieData.reduce((sum, item) => sum + item.value, 0)}`);
+      // console.log(`DEBUG: Total sessions in source pie chart: ${sourcePieData.reduce((sum, item) => sum + item.value, 0)}`);
     }
   }
 
@@ -336,9 +336,9 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     ? formatDateRange(dateRange.from, dateRange.to)
     : "Year-Over-Year Comparison";
     
-    console.log('displayRange', displayRange);
-    console.log('dateRange.from', dateRange?.from);
-    console.log('dateRange.to', dateRange?.to);
+    // console.log('displayRange', displayRange);
+    // console.log('dateRange.from', dateRange?.from);
+    // console.log('dateRange.to', dateRange?.to);
     
   return (
     <div className={`bg-white rounded-lg shadow p-6 ${isLoading ? 'opacity-70' : ''}`}>

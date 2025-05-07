@@ -1,4 +1,4 @@
-import { PieChart as RechartsPieChart, Pie, Cell, Legend, ResponsiveContainer, Tooltip } from 'recharts';
+import { PieChart as RechartsPieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import React from 'react';
 
 export interface PieChartData {
@@ -78,45 +78,47 @@ export const PieChart: React.FC<PieChartProps> = ({ data }) => {
   const total = data.reduce((sum, entry) => sum + entry.value, 0);
   return (
     <div className="flex items-center justify-center">
-      <ResponsiveContainer width={460} height={260}>
-        <RechartsPieChart>
-          {/* Main Pie chart rendering */}
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            innerRadius={70}
-            outerRadius={110}
-            paddingAngle={2}
-            isAnimationActive={true}
-          >
-            {/* Render each slice with its color */}
-            {data.map((entry, idx) => (
-              <Cell key={`cell-${idx}`} fill={entry.color} />
-            ))}
-          </Pie>
-          {/* Tooltip shows value and percent */}
-          <Tooltip
-            formatter={(value: any, name: any, props: any) => {
-              const percent = total > 0 ? ((value as number) / total) * 100 : 0;
-              return [
-                `${value.toLocaleString()} (${percent.toFixed(1)}%)`,
-                props.payload.name,
-              ];
-            }}
-          />
-          {/* Custom legend rendered at right */}
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            layout="vertical"
-            iconType="circle"
-            content={props => renderLegend({ ...props, data })}
-          />
-        </RechartsPieChart>
-      </ResponsiveContainer>
+      <div className="w-full max-w-[460px] min-h-[260px]" style={{ aspectRatio: '460/260' }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <RechartsPieChart>
+            {/* Main Pie chart rendering */}
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              innerRadius={70}
+              outerRadius={110}
+              paddingAngle={2}
+              isAnimationActive={true}
+            >
+              {/* Render each slice with its color */}
+              {data.map((entry, idx) => (
+                <Cell key={`cell-${idx}`} fill={entry.color} />
+              ))}
+            </Pie>
+            {/* Tooltip shows value and percent */}
+            <Tooltip
+              formatter={(value: any, name: any, props: any) => {
+                const percent = total > 0 ? ((value as number) / total) * 100 : 0;
+                return [
+                  `${value.toLocaleString()} (${percent.toFixed(1)}%)`,
+                  props.payload.name,
+                ];
+              }}
+            />
+            {/* Custom legend rendered at right */}
+            <Legend
+              verticalAlign="middle"
+              align="right"
+              layout="vertical"
+              iconType="circle"
+              content={props => renderLegend({ ...props, data })}
+            />
+          </RechartsPieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }; 
