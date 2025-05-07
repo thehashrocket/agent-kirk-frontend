@@ -13,118 +13,6 @@ interface LLMDashboardResponse {
   }>;
 }
 
-// Helper function to calculate monthly aggregates
-function calculateMonthlyMetrics(dailyRows: any[]) {
-  const monthlyData: { [key: string]: any } = {};
-  
-  dailyRows.forEach(row => {
-    const date = new Date(row.date);
-    const monthKey = parseInt(
-      date.getFullYear().toString() + 
-      (date.getMonth() + 1).toString().padStart(2, '0')
-    );
-    
-    if (!monthlyData[monthKey]) {
-      monthlyData[monthKey] = {
-        sessions: 0,
-        screenPageViews: 0,
-        engagedSessions: 0,
-        totalSessionDuration: 0,
-        goalCompletions: 0,
-        month: monthKey
-      };
-    }
-    
-    monthlyData[monthKey].sessions += row.sessions;
-    monthlyData[monthKey].screenPageViews += (row.sessions * row.screenPageViewsPerSession);
-    monthlyData[monthKey].engagedSessions += Math.round(row.sessions * row.engagementRate);
-    monthlyData[monthKey].totalSessionDuration += (row.sessions * row.avgSessionDurationSec);
-    monthlyData[monthKey].goalCompletions += row.goalCompletions;
-  });
-  
-  return Object.values(monthlyData).map(month => ({
-    month: month.month,
-    sessions: month.sessions,
-    screenPageViewsPerSession: month.screenPageViews / month.sessions,
-    engagementRate: month.engagedSessions / month.sessions,
-    avgSessionDurationSec: month.totalSessionDuration / month.sessions,
-    goalCompletions: month.goalCompletions,
-    goalCompletionRate: month.goalCompletions / month.sessions
-  }));
-}
-
-// Helper function to extract channel data
-function extractChannelData(dailyRows: any[]) {
-  const channelData: { [key: string]: any } = {};
-  
-  dailyRows.forEach(row => {
-    const channelGroup = row.channelGroup || 'direct';
-    if (!channelData[channelGroup]) {
-      channelData[channelGroup] = {
-        sessions: 0,
-        screenPageViews: 0,
-        engagedSessions: 0,
-        totalSessionDuration: 0,
-        goalCompletions: 0,
-        date: row.date
-      };
-    }
-    
-    channelData[channelGroup].sessions += row.sessions;
-    channelData[channelGroup].screenPageViews += (row.sessions * row.screenPageViewsPerSession);
-    channelData[channelGroup].engagedSessions += Math.round(row.sessions * row.engagementRate);
-    channelData[channelGroup].totalSessionDuration += (row.sessions * row.avgSessionDurationSec);
-    channelData[channelGroup].goalCompletions += row.goalCompletions;
-  });
-  
-  return Object.entries(channelData).map(([channelGroup, data]) => ({
-    channelGroup,
-    date: new Date(data.date),
-    sessions: data.sessions,
-    screenPageViewsPerSession: data.screenPageViews / data.sessions,
-    engagementRate: data.engagedSessions / data.sessions,
-    avgSessionDurationSec: data.totalSessionDuration / data.sessions,
-    goalCompletions: data.goalCompletions,
-    goalCompletionRate: data.goalCompletions / data.sessions
-  }));
-}
-
-// Helper function to extract source data
-function extractSourceData(dailyRows: any[]) {
-  const sourceData: { [key: string]: any } = {};
-  
-  dailyRows.forEach(row => {
-    const trafficSource = row.source || 'direct';
-    if (!sourceData[trafficSource]) {
-      sourceData[trafficSource] = {
-        sessions: 0,
-        screenPageViews: 0,
-        engagedSessions: 0,
-        totalSessionDuration: 0,
-        goalCompletions: 0,
-        date: row.date
-      };
-    }
-    
-    sourceData[trafficSource].sessions += row.sessions;
-    sourceData[trafficSource].screenPageViews += (row.sessions * row.screenPageViewsPerSession);
-    sourceData[trafficSource].engagedSessions += Math.round(row.sessions * row.engagementRate);
-    sourceData[trafficSource].totalSessionDuration += (row.sessions * row.avgSessionDurationSec);
-    sourceData[trafficSource].goalCompletions += row.goalCompletions;
-  });
-  
-  return Object.entries(sourceData).map(([trafficSource, data]) => ({
-    trafficSource,
-    date: new Date(data.date),
-    sessions: data.sessions,
-    screenPageViewsPerSession: data.screenPageViews / data.sessions,
-    engagementRate: data.engagedSessions / data.sessions,
-    avgSessionDurationSec: data.totalSessionDuration / data.sessions,
-    goalCompletions: data.goalCompletions,
-    goalCompletionRate: data.goalCompletions / data.sessions
-  }));
-}
-
 // Helper function to transform LLM dashboard data
 function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashboardResponse[]): {
   kpiDaily: any[] | null;
@@ -468,7 +356,239 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       queryDateFrom = new Date(dateFrom);
       queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1); // Go back one year from start date
     }
-    
+
+    // IF we don't need historical data, we can pull the most recent month of data from the LLM_DASHBOARD_URL
+    if (!needsHistoricalData) {
+      console.log('GA Metrics API - No historical data needed, fetching most recent month');
+      const currentMonth = new Date().getMonth() + 1;
+      const currentYear = new Date().getFullYear();
+      const queryDateFrom = new Date(currentYear, currentMonth - 1, 1);
+      const queryDateTo = new Date(currentYear, currentMonth, 0);
+
+      console.log('GA Metrics API - Fetching most recent month from LLM dashboard:', {
+        queryDateFrom: queryDateFrom.toISOString(),
+        queryDateTo: queryDateTo.toISOString()
+      });
+
+      // Fetch the most recent month of data from the LLM_DASHBOARD_URL
+      const payload = {
+        accountGA4,
+        propertyGA4,
+        dateStart: queryDateFrom.toISOString().split('T')[0],
+        dateEnd: queryDateTo.toISOString().split('T')[0],
+        runID: 'recent-month'
+      };
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 120000);
+      
+      if (!process.env.LLM_DASHBOARD_URL) {
+        throw new Error('LLM_DASHBOARD_URL is not configured');
+      }
+      
+      const llmResponse = await fetch(process.env.LLM_DASHBOARD_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!llmResponse.ok) {
+        console.error('GA Metrics API - LLM dashboard request failed:', {
+          status: llmResponse.status,
+          statusText: llmResponse.statusText,
+          error: await llmResponse.text()
+        });
+        throw new Error('Failed to fetch from LLM dashboard');
+      }
+
+      const llmData: LLMDashboardResponse = await llmResponse.json();
+      console.log('GA Metrics API - Successfully fetched LLM dashboard data');
+
+      try {
+        const transformedData = transformLLMDashboardData(llmData);
+        
+        // Create import run
+        console.log('GA Metrics API - Creating import run record');
+        const importRun = await prisma.gaImportRun.create({
+          data: {
+            gaPropertyId,
+            dateStart: queryDateFrom,
+            dateEnd: queryDateTo,
+            requestedByUserId: user.id,
+            status: 'ok'
+          }
+        });
+        console.log('GA Metrics API - Import run created:', importRun.id);
+
+        // Store the transformed data in the database
+        console.log('GA Metrics API - Storing transformed data in database');
+
+        if (transformedData.kpiDaily?.length) {
+          console.log('GA Metrics API - Storing daily KPI metrics');
+          await Promise.all(
+            transformedData.kpiDaily.map(day =>
+              prisma.gaKpiDaily.upsert({
+                where: {
+                  gaPropertyId_date: {
+                    gaPropertyId,
+                    date: new Date(day.date)
+                  }
+                },
+                create: {
+                  gaPropertyId,
+                  date: new Date(day.date),
+                  ...(() => { const { date, ...rest } = day; return rest; })()
+                },
+                update: {
+                  ...(() => { const { date, ...rest } = day; return rest; })(),
+                  date: new Date(day.date)
+                }
+              })
+            )
+          );
+        }
+
+        if (transformedData.kpiMonthly?.length) {
+          console.log('GA Metrics API - Storing monthly KPI metrics');
+          await Promise.all(
+            transformedData.kpiMonthly.map(month =>
+              prisma.gaKpiMonthly.upsert({
+                where: {
+                  gaPropertyId_month: {
+                    gaPropertyId,
+                    month: month.month
+                  }
+                },
+                create: {
+                  gaPropertyId,
+                  month: month.month,
+                  ...month
+                },
+                update: month
+              })
+            )
+          );
+        }
+
+        if (transformedData.channelDaily?.length) {
+          console.log('GA Metrics API - Storing channel metrics');
+          const invalidChannelRecords: any[] = [];
+          let channelLogCount = 0;
+          await Promise.all(
+            transformedData.channelDaily.map(channel => {
+              if (channelLogCount < 5) {
+                console.log('channelDaily row keys:', Object.keys(channel), 'value:', channel);
+                channelLogCount++;
+              }
+              let safeDate;
+              if (typeof channel.date !== 'string' || !channel.date.trim()) {
+                invalidChannelRecords.push({ channel, reason: 'Missing or invalid date field' });
+                return null;
+              }
+              if (typeof channel.date === 'string' && channel.date.length === 10) {
+                safeDate = new Date(channel.date + 'T00:00:00.000Z');
+              } else {
+                safeDate = new Date(channel.date);
+              }
+              if (isNaN(safeDate.getTime())) {
+                invalidChannelRecords.push({ channel, reason: `Invalid date: ${channel.date}` });
+                return null;
+              }
+              return prisma.gaChannelDaily.upsert({
+                where: {
+                  gaPropertyId_date_channelGroup: {
+                    gaPropertyId,
+                    date: safeDate,
+                    channelGroup: channel.channelGroup
+                  }
+                },
+                create: {
+                  gaPropertyId,
+                  date: safeDate,
+                  channelGroup: channel.channelGroup,
+                  ...(() => { const { date, channelGroup, ...rest } = channel; return rest; })()
+                },
+                update: {
+                  ...(() => { const { date, channelGroup, ...rest } = channel; return rest; })(),
+                  date: safeDate,
+                  channelGroup: channel.channelGroup
+                }
+              });
+            }).filter(Boolean)
+          );
+          if (invalidChannelRecords.length > 0) {
+            console.warn(`GA Metrics API - Skipped ${invalidChannelRecords.length} invalid channelDaily records:`);
+            invalidChannelRecords.forEach((rec, idx) => {
+              // console.warn(`  [${idx + 1}] Reason: ${rec.reason}, Value:`, rec.channel);
+            });
+          }
+        }
+
+        if (transformedData.sourceDaily?.length) {
+          console.log('GA Metrics API - Storing source metrics');
+          const invalidSourceRecords: any[] = [];
+          let sourceLogCount = 0;
+          await Promise.all(
+            transformedData.sourceDaily.map(source => { 
+              if (sourceLogCount < 5) {
+                console.log('sourceDaily row keys:', Object.keys(source), 'value:', source);
+                sourceLogCount++;
+              }
+              let safeDate;
+              if (typeof source.date !== 'string' || !source.date.trim()) {
+                invalidSourceRecords.push({ source, reason: 'Missing or invalid date field' });
+                return null;
+              }
+              if (typeof source.date === 'string' && source.date.length === 10) {
+                safeDate = new Date(source.date + 'T00:00:00.000Z');
+              } else {
+                safeDate = new Date(source.date);
+              }
+              if (isNaN(safeDate.getTime())) {
+                invalidSourceRecords.push({ source, reason: `Invalid date: ${source.date}` });
+                return null;
+              }
+              return prisma.gaSourceDaily.upsert({
+                where: {
+                  gaPropertyId_date_trafficSource: {
+                    gaPropertyId,
+                    date: safeDate,
+                    trafficSource: source.trafficSource
+                  }
+                },
+                create: {
+                  gaPropertyId,
+                  date: safeDate,
+                  trafficSource: source.trafficSource,
+                  ...(() => { const { date, trafficSource, ...rest } = source; return rest; })()
+                },
+                update: {
+                  ...(() => { const { date, trafficSource, ...rest } = source; return rest; })(),
+                  date: safeDate,
+                  trafficSource: source.trafficSource
+                }
+              });
+            }).filter(Boolean)
+          );
+          if (invalidSourceRecords.length > 0) {
+            console.warn(`GA Metrics API - Skipped ${invalidSourceRecords.length} invalid sourceDaily records:`);
+            invalidSourceRecords.forEach((rec, idx) => {
+              // console.warn(`  [${idx + 1}] Reason: ${rec.reason}, Value:`, rec.source);
+            });
+          }
+        }
+
+        console.log('GA Metrics API - All metrics stored successfully');
+      } catch (error) {
+        console.error('GA Metrics API - Error storing metrics:', error);
+      }
+    }
+
     // Ensure we have the selected period for display
     console.log('GA Metrics API - Using display date range:', {
       displayDateFrom: displayDateFrom.toISOString(),
