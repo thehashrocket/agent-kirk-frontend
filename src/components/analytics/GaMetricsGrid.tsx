@@ -203,6 +203,11 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     yoyLabel = `Data from ${format(minDate, "MMM d, yyyy")} to ${format(maxDate, "MMM d, yyyy")}`;
   }
 
+  // Display the date range being shown
+  const displayRange = dateRange 
+    ? formatDateRange(dateRange.from, dateRange.to)
+    : "Year-Over-Year Comparison";
+
   // Check if we have valid data
   if (!current) {
     return (
@@ -214,132 +219,6 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     );
   }
 
-  // Use filtered data for aggregation
-  // Shared aggregation for most recent month
-  let pieData: PieChartData[] = [];
-  let topRows: { channel: string; sessions: number }[] = [];
-  // Sessions by Source pie chart data
-  let sourcePieData: PieChartData[] = [];
-
-  if (filteredChannelData && filteredChannelData.length > 0) {
-    // Group by year-month
-    const sessionsByMonth: Record<string, Record<string, number>> = {};
-    let totalSessionsInSelectedPeriod = 0;
-    
-    // Create a map to aggregate all channel data across the entire selected period
-    const aggregatedChannelData: Record<string, number> = {};
-    
-    filteredChannelData.forEach((row: any) => {
-      // Count total sessions in the filtered data (selected date range)
-      totalSessionsInSelectedPeriod += row.sessions;
-      
-      // Add to channel aggregation
-      const channel = row.channelGroup || 'Unknown';
-      aggregatedChannelData[channel] = (aggregatedChannelData[channel] || 0) + row.sessions;
-      
-      // Also keep the monthly breakdown for reference
-      const ym = getYearMonth(row.date || '');
-      if (!ym) return;
-      if (!sessionsByMonth[ym]) sessionsByMonth[ym] = {};
-      sessionsByMonth[ym][row.channelGroup] = (sessionsByMonth[ym][row.channelGroup] || 0) + row.sessions;
-    });
-    
-    // Debug logging
-    // console.log(`DEBUG: Channel data breakdown for total ${totalSessionsInSelectedPeriod} sessions:`);
-    // Object.entries(aggregatedChannelData).forEach(([channel, sessions]) => {
-    //   console.log(`DEBUG: - ${channel}: ${sessions} sessions (${((sessions/totalSessionsInSelectedPeriod)*100).toFixed(1)}%)`);
-    // });
-    
-    // In case we need monthly data, keep finding the most recent month
-    const months = Object.keys(sessionsByMonth).sort().reverse();
-    const currentMonth = months[0];
-    const currentMonthData = sessionsByMonth[currentMonth] || {};
-    
-    // Colors as before
-    const colorMap: Record<string, string> = {
-      'Direct': '#e69832',
-      'Organic Search': '#1a3766',
-      'Email': '#6b6e6e',
-      'Referral': '#a6b6c6',
-      'Organic Social': '#4a90e2',
-      'Unassigned': '#cccccc',
-    };
-    
-    // Instead of using only the current month, use the aggregated data from the entire selected period
-    pieData = Object.entries(aggregatedChannelData).map(([name, value]) => ({
-      name,
-      value,
-      color: colorMap[name] || '#ccc',
-    })).sort((a, b) => b.value - a.value);
-    
-    topRows = pieData.map(({ name, value }) => ({ channel: name, sessions: value }));
-
-    // Calculate the total for all pie data
-    const pieDataTotal = pieData.reduce((sum, item) => sum + item.value, 0);
-    // console.log(`DEBUG: Total sessions in pie chart data: ${pieDataTotal}`);
-    if (current && Math.abs(pieDataTotal - current.sessions) > 1) {
-      console.warn(`DEBUG: WARNING - Pie chart total (${pieDataTotal}) does not match metrics total (${current.sessions})`);
-    }
-
-    // --- Sessions by Source Pie Chart ---
-    if (filteredSourceData && filteredSourceData.length > 0) {
-      // Aggregate source data across the entire selected period instead of just one month
-      const aggregatedSourceData: Record<string, number> = {};
-      
-      filteredSourceData.forEach((row: any) => {
-        const source = row.trafficSource || 'Unknown';
-        aggregatedSourceData[source] = (aggregatedSourceData[source] || 0) + row.sessions;
-      });
-      
-      // Source data preparation - sort sources by value
-      let entries = Object.entries(aggregatedSourceData).map(([name, value]) => ({ name, value }));
-      entries.sort((a, b) => b.value - a.value);
-      const total = entries.reduce((sum, e) => sum + e.value, 0);
-      
-      // Group small sources into 'Others' (less than 5% or after top 7)
-      const mainSources = entries.filter((e, i) => i < 7 && e.value / total >= 0.05);
-      const others = entries.filter((e, i) => !(i < 7 && e.value / total >= 0.05));
-      const othersValue = others.reduce((sum, e) => sum + e.value, 0);
-      
-      // Color palette for sources
-      const sourceColors = [
-        '#e69832', // (direct)
-        '#2176d2', // google
-        '#1a3766', // 1905 Media Full List
-        '#6b6e6e', // gmb
-        '#8bc34a', // giantthatwork...
-        '#a6b6c6', // bing
-        '#b94e8a', // Unknown List
-        '#e94e32', // instagram
-        '#bdb76b', // 4238 Zfevb Ahyy Yvfg
-        '#444444', // Others
-      ];
-      
-      let colorIdx = 0;
-      sourcePieData = mainSources.map((e) => ({
-        name: e.name,
-        value: e.value,
-        color: sourceColors[colorIdx++] || '#ccc',
-      }));
-      
-      if (othersValue > 0) {
-        sourcePieData.push({ name: 'Others', value: othersValue, color: '#444444' });
-      }
-      
-      // Debug log for source data
-      // console.log(`DEBUG: Total sessions in source pie chart: ${sourcePieData.reduce((sum, item) => sum + item.value, 0)}`);
-    }
-  }
-
-  // Display the date range being shown
-  const displayRange = dateRange 
-    ? formatDateRange(dateRange.from, dateRange.to)
-    : "Year-Over-Year Comparison";
-    
-    // console.log('displayRange', displayRange);
-    // console.log('dateRange.from', dateRange?.from);
-    // console.log('dateRange.to', dateRange?.to);
-    
   return (
     <div className={`bg-white rounded-lg shadow p-6 ${isLoading ? 'opacity-70' : ''}`}>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -364,7 +243,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       <GaKpiSummaryGrid current={current} prevYear={prevYear} />
 
       <div className="flex flex-col md:flex-row md:items-start gap-8 mt-8">
-        {pieData.length > 0 && (
+        {filteredChannelData && filteredChannelData.length > 0 && (
           <div className="flex flex-col justify-center">
             <div className="flex flex-col items-start">
               <h2 className="text-lg font-bold mb-2">Sessions</h2>
@@ -376,11 +255,15 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
               )}
             </div>
             <div className="flex flex-row">
-              <PieChart data={pieData} />
+              <PieChart 
+                data={filteredChannelData} 
+                dateRange={dateRange}
+                type="channel"
+              />
             </div>
           </div>
         )}
-        {sourcePieData.length > 0 && (
+        {filteredSourceData && filteredSourceData.length > 0 && (
           <div className="flex flex-col justify-center">
             <div className="flex flex-col items-start">
               <h2 className="text-lg font-bold mb-2">Sessions</h2>
@@ -392,11 +275,14 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
               )}
             </div>
             <div className="flex flex-row">
-              <PieChart data={sourcePieData} />
+              <PieChart 
+                data={filteredSourceData} 
+                dateRange={dateRange}
+                type="source"
+              />
             </div>
           </div>
         )}
-
       </div>
       <div className="flex-1">
         <GaChannelSessionsTable channelDaily={filteredChannelData} dateRange={dateRange} />
@@ -413,10 +299,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
         </div>
         {filteredDailyData && filteredDailyData.length > 0 && (
           <LineChart 
-            data={filteredDailyData.map(day => ({ 
-              date: day.date,
-              sessions: day.sessions
-            }))} 
+            data={filteredDailyData} 
             height={300}
             dateRange={dateRange}
           />

@@ -7,9 +7,43 @@ export interface PieChartData {
   color: string;
 }
 
-interface PieChartProps {
-  data: PieChartData[];
+interface RawData {
+  id: string;
+  date: string;
+  channelGroup?: string;
+  trafficSource?: string;
+  sessions: number;
 }
+
+interface PieChartProps {
+  data: RawData[];
+  dateRange: { from: Date; to: Date } | null;
+  type: 'channel' | 'source';
+}
+
+// Color maps for different chart types
+const colorMaps = {
+  channel: {
+    'Direct': '#e69832',
+    'Organic Search': '#1a3766',
+    'Email': '#6b6e6e',
+    'Referral': '#a6b6c6',
+    'Organic Social': '#4a90e2',
+    'Unassigned': '#cccccc',
+  } as const,
+  source: [
+    '#e69832', // (direct)
+    '#2176d2', // google
+    '#1a3766', // 1905 Media Full List
+    '#6b6e6e', // gmb
+    '#8bc34a', // giantthatwork...
+    '#a6b6c6', // bing
+    '#b94e8a', // Unknown List
+    '#e94e32', // instagram
+    '#bdb76b', // 4238 Zfevb Ahyy Yvfg
+    '#444444', // Others
+  ]
+} as const;
 
 /**
  * src/components/analytics/PieChart.tsx
@@ -73,9 +107,65 @@ function renderLegend({ payload, data }: any) {
   );
 }
 
-export const PieChart: React.FC<PieChartProps> = ({ data }) => {
+export const PieChart: React.FC<PieChartProps> = ({ data, type, dateRange }) => {
+  // Transform raw data into pie chart format
+  const pieData = React.useMemo(() => {
+    // Filter data by date range first
+    const filteredData = dateRange 
+      ? data.filter(row => {
+          const rowDate = new Date(row.date);
+          return rowDate >= dateRange.from && rowDate <= dateRange.to;
+        })
+      : data;
+
+    // Aggregate data by channel or source
+    const aggregatedData: Record<string, number> = {};
+    
+    filteredData.forEach((row) => {
+      const key = type === 'channel' ? row.channelGroup || 'Unknown' : row.trafficSource || 'Unknown';
+      aggregatedData[key] = (aggregatedData[key] || 0) + row.sessions;
+    });
+
+    if (type === 'channel') {
+      // For channels, use the color map directly
+      return Object.entries(aggregatedData)
+        .map(([name, value]) => ({
+          name,
+          value,
+          color: (colorMaps.channel as Record<string, string>)[name] || '#ccc',
+        }))
+        .sort((a, b) => b.value - a.value);
+    } else {
+      // For sources, handle grouping of small sources
+      let entries = Object.entries(aggregatedData)
+        .map(([name, value]) => ({ name, value }))
+        .sort((a, b) => b.value - a.value);
+      
+      const total = entries.reduce((sum, e) => sum + e.value, 0);
+      
+      // Group small sources into 'Others' (less than 5% or after top 7)
+      const mainSources = entries.filter((e, i) => i < 7 && e.value / total >= 0.05);
+      const others = entries.filter((e, i) => !(i < 7 && e.value / total >= 0.05));
+      const othersValue = others.reduce((sum, e) => sum + e.value, 0);
+      
+      let colorIdx = 0;
+      const pieData = mainSources.map((e) => ({
+        name: e.name,
+        value: e.value,
+        color: colorMaps.source[colorIdx++] || '#ccc',
+      }));
+      
+      if (othersValue > 0) {
+        pieData.push({ name: 'Others', value: othersValue, color: '#444444' });
+      }
+      
+      return pieData;
+    }
+  }, [data, type, dateRange]);
+
   // Calculate total for legend and tooltip percentage
-  const total = data.reduce((sum, entry) => sum + entry.value, 0);
+  const total = pieData.reduce((sum, entry) => sum + entry.value, 0);
+
   return (
     <div className="flex items-center justify-center">
       <div className="w-full max-w-[460px] min-h-[260px]" style={{ aspectRatio: '460/260' }}>
@@ -83,7 +173,7 @@ export const PieChart: React.FC<PieChartProps> = ({ data }) => {
           <RechartsPieChart>
             {/* Main Pie chart rendering */}
             <Pie
-              data={data}
+              data={pieData}
               dataKey="value"
               nameKey="name"
               cx="50%"
@@ -94,7 +184,7 @@ export const PieChart: React.FC<PieChartProps> = ({ data }) => {
               isAnimationActive={true}
             >
               {/* Render each slice with its color */}
-              {data.map((entry, idx) => (
+              {pieData.map((entry, idx) => (
                 <Cell key={`cell-${idx}`} fill={entry.color} />
               ))}
             </Pie>
@@ -114,7 +204,7 @@ export const PieChart: React.FC<PieChartProps> = ({ data }) => {
               align="right"
               layout="vertical"
               iconType="circle"
-              content={props => renderLegend({ ...props, data })}
+              content={props => renderLegend({ ...props, data: pieData })}
             />
           </RechartsPieChart>
         </ResponsiveContainer>

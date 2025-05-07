@@ -43,70 +43,16 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
   // Create a unique ID for this component instance for debugging
   const instanceId = useId();
   
-  // Use state to track accumulated data to ensure re-renders when it changes
-  const [accumulatedData, setAccumulatedData] = useState<ChannelDailyItem[]>([]);
-  
   // Move hooks to top-level
   const [sort, setSort] = React.useState<{ accessor: string; direction: 'asc' | 'desc' }>({ accessor: 'sessions', direction: 'desc' });
   
-  // Track component mounting and accumulate all data
-  useEffect(() => {
-    
-    if (!channelDaily || channelDaily.length === 0) return;
-    
-    // Log first and last dates for debugging
-    const firstItem = channelDaily[0] as ChannelDailyItem;
-    const lastItem = channelDaily[channelDaily.length - 1] as ChannelDailyItem;
-    
-    // Create a Set of keys for the existing data
-    const existingKeys = new Set(
-      accumulatedData.map(item => getItemKey(item))
-    );
-    
-    // Filter out only truly new items
-    const itemsToAdd = (channelDaily as ChannelDailyItem[])
-      .filter(item => !existingKeys.has(getItemKey(item)));
-    
-    
-    if (itemsToAdd.length > 0) {
-      // Log years in the new data
-      const years = new Set<number>();
-      itemsToAdd.forEach(item => {
-        if (item.date) {
-          const date = item.date.toString();
-          const yearMonth = getYearMonth(date);
-          const year = getYear(yearMonth);
-          years.add(year);
-        }
-      });
-      
-      
-      // Update the accumulated data state
-      setAccumulatedData(prevData => [...prevData, ...itemsToAdd]);
-    }
-    
-    return () => {
-      console.log(`GaChannelSessionsTable instance ${instanceId} unmounted`);
-    };
-  }, [instanceId, channelDaily]);
-  
-  // Log when accumulated data changes
-  useEffect(() => {
-    console.log(`[${instanceId}] Accumulated data updated, now has ${accumulatedData.length} items`);
-  }, [accumulatedData, instanceId]);
-
   const allRows = React.useMemo(() => {
-    // Use all available data
-    const dataToProcess = accumulatedData.length > 0 
-      ? accumulatedData 
-      : (channelDaily as ChannelDailyItem[] || []);
-    
-    if (dataToProcess.length === 0) return [];
+    if (!channelDaily || channelDaily.length === 0) return [];
 
     // --- New logic for true year-over-year comparison ---
     // 1. Group sessions by channel and yearMonth
     const sessionsByChannelMonth: Record<string, Record<string, number>> = {};
-    dataToProcess.forEach((row: ChannelDailyItem) => {
+    channelDaily.forEach((row: ChannelDailyItem) => {
       if (!row.date) return;
       const date = typeof row.date === 'string' ? row.date : row.date.toString();
       const yearMonth = getYearMonth(date);
@@ -155,7 +101,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
     });
 
     return result;
-  }, [channelDaily, instanceId, accumulatedData, dateRange]);
+  }, [channelDaily, dateRange]);
 
   // For grand total
   const totals = React.useMemo(() => {
@@ -234,16 +180,6 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
 
   return (
     <div className="mt-8">
-      <div className="flex flex-col items-start mb-4">
-        <h2 className="text-lg font-bold mb-2">Sessions</h2>
-        <p className="text-gray-500 mb-1 text-sm">by Channel</p>
-        {dateRange && (
-          <p className="text-xs text-gray-400 mb-2">
-            {format(dateRange.from, 'MMM d, yyyy')} - 
-            {format(dateRange.to, 'MMM d, yyyy')}
-          </p>
-        )}
-      </div>
       <Card>
         <CardContent className="p-6">
           <h2 className="text-lg font-bold mb-2">Sessions by Channel</h2>
