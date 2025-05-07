@@ -101,175 +101,61 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
       ? accumulatedData 
       : (channelDaily as ChannelDailyItem[] || []);
     
-    
     if (dataToProcess.length === 0) return [];
-    
-    // First, process all data to ensure we find all dates
-    const allYearMonths = new Set<string>();
-    const allChannels = new Set<string>();
-    const allYears = new Set<number>();
-    
-    // Create a flat data structure to help find the right comparisons
-    const flattenedData: Array<{
-      date: string; 
-      yearMonth: string;
-      year: number;
-      month: number;
-      channel: string;
-      sessions: number;
-    }> = [];
-    
-    // Track unique date+channel combinations to avoid duplicate counting
-    const processedCombinations = new Set<string>();
-    
-    // Filter by date range if provided
-    const isInDateRange = (dateStr: string) => {
-      if (!dateRange) return true; // If no date range is selected, include all data
-      
-      const date = new Date(dateStr);
-      return date >= dateRange.from && date <= dateRange.to;
-    };
-    
+
+    // --- New logic for true year-over-year comparison ---
+    // 1. Group sessions by channel and yearMonth
+    const sessionsByChannelMonth: Record<string, Record<string, number>> = {};
     dataToProcess.forEach((row: ChannelDailyItem) => {
       if (!row.date) return;
-      
       const date = typeof row.date === 'string' ? row.date : row.date.toString();
-      
-      // Apply date range filter if provided
-      if (!isInDateRange(date)) return;
-      
-      const channel = row.channelGroup || 'Unknown';
-      const key = `${date}|${channel}`;
-      
-      // Skip if we've already processed this date+channel combination
-      if (processedCombinations.has(key)) return;
-      processedCombinations.add(key);
-      
       const yearMonth = getYearMonth(date);
-      if (!yearMonth) return;
-      
-      const year = getYear(yearMonth);
-      const month = getMonth(yearMonth);
-      
-      allYearMonths.add(yearMonth);
-      allChannels.add(channel);
-      allYears.add(year);
-      
-      flattenedData.push({
-        date,
-        yearMonth,
-        year,
-        month,
-        channel,
-        sessions: row.sessions
-      });
+      const channel = row.channelGroup || 'Unknown';
+      if (!sessionsByChannelMonth[channel]) sessionsByChannelMonth[channel] = {};
+      sessionsByChannelMonth[channel][yearMonth] = (sessionsByChannelMonth[channel][yearMonth] || 0) + row.sessions;
     });
-    
-    
-    // Sort year-months descending to find the most recent
-    const sortedYearMonths = Array.from(allYearMonths).sort().reverse();
-    if (sortedYearMonths.length === 0) {
-      console.log(`[${instanceId}] No year-months found in selected date range`);
-      return [];
-    }
-    
-    // For date-range filtered data, create a single aggregated view instead of using "most recent month"
-    const aggregatedData: Record<string, number> = {};
-    
-    flattenedData.forEach(item => {
-      aggregatedData[item.channel] = (aggregatedData[item.channel] || 0) + item.sessions;
-    });
-    
-    // Get the most recent year-month data for comparison (maintaining existing comparisons)
-    const currentYearMonth = sortedYearMonths[0];
-    const currentYear = getYear(currentYearMonth);
-    const currentMonth = getMonth(currentYearMonth);
-    
-    // Look for comparison data
-    let comparisonData: Record<string, number> = {};
-    let comparisonSource = '';
-    const availableYears = Array.from(allYears).sort((a, b) => b - a); // Sort descending
-    
-    // If the most recent year is 2025, try to compare with 2024 data first
-    if (currentYear === 2025 && availableYears.includes(2024)) {
-      // Look specifically for data from 2024 for the same month 
-      const comparisonMonth2024 = flattenedData.filter(
-        item => item.year === 2024 && item.month === currentMonth
-      );
-      
-      if (comparisonMonth2024.length > 0) {
-        // We found comparison data for the same month in 2024
-        comparisonMonth2024.forEach(item => {
-          comparisonData[item.channel] = (comparisonData[item.channel] || 0) + item.sessions;
-        });
-        comparisonSource = `month ${currentMonth} from 2024`;
-      } else {
-        // No data for the same month, try all 2024 data
-        const allData2024 = flattenedData.filter(item => item.year === 2024);
-        if (allData2024.length > 0) {
-          allData2024.forEach(item => {
-            comparisonData[item.channel] = (comparisonData[item.channel] || 0) + item.sessions;
-          });
-          comparisonSource = 'all months from 2024';
-        }
+
+    // 2. Determine which months are in the selected range
+    let monthsInRange: string[] = [];
+    if (dateRange) {
+      // Build a list of yearMonth strings between from and to
+      const from = new Date(dateRange.from);
+      const to = new Date(dateRange.to);
+      const months: string[] = [];
+      let current = new Date(from.getFullYear(), from.getMonth(), 1);
+      while (current <= to) {
+        const ym = `${current.getFullYear()}${(current.getMonth() + 1).toString().padStart(2, '0')}`;
+        months.push(ym);
+        current.setMonth(current.getMonth() + 1);
       }
+      monthsInRange = months;
     } else {
-      // Standard comparison with previous year, same month
-      const previousYear = currentYear - 1;
-      
-      if (availableYears.includes(previousYear)) {
-        // Look for same month in previous year
-        const previousYearEntries = flattenedData.filter(
-          item => item.year === previousYear && item.month === currentMonth
-        );
-        
-        if (previousYearEntries.length > 0) {
-          previousYearEntries.forEach(item => {
-            comparisonData[item.channel] = (comparisonData[item.channel] || 0) + item.sessions;
-          });
-          comparisonSource = `month ${currentMonth} from ${previousYear}`;
-        } else {
-          // No data for the same month, try all data from previous year
-          const allPreviousYearData = flattenedData.filter(item => item.year === previousYear);
-          if (allPreviousYearData.length > 0) {
-            allPreviousYearData.forEach(item => {
-              comparisonData[item.channel] = (comparisonData[item.channel] || 0) + item.sessions;
-            });
-            comparisonSource = `all months from ${previousYear}`;
-          }
-        }
-      }
-    }
-    
-    // If no comparison data yet, use the next oldest year's data
-    if (Object.keys(comparisonData).length === 0 && availableYears.length > 1) {
-      const oldestYear = Math.min(...availableYears);
-      if (oldestYear < currentYear) {
-        const oldestYearData = flattenedData.filter(item => item.year === oldestYear);
-        oldestYearData.forEach(item => {
-          comparisonData[item.channel] = (comparisonData[item.channel] || 0) + item.sessions;
-        });
-        comparisonSource = `all available data from ${oldestYear}`;
-      }
-    }
-    
-   
-    // Map to row format with comparisons using aggregated data
-    return Object.entries(aggregatedData)
-      .map(([channel, sessions]) => {
-        const prev = comparisonData[channel] || 0;
-        const diff = sessions - prev;
-        const percent = prev > 0 ? (diff / prev) * 100 : null;
-        
-        return { 
-          channel, 
-          sessions, 
-          prev,
-          diff,
-          percent 
-        };
+      // If no range, use all months present in the data
+      const allMonths = new Set<string>();
+      Object.values(sessionsByChannelMonth).forEach(channelData => {
+        Object.keys(channelData).forEach(ym => allMonths.add(ym));
       });
-  }, [channelDaily, instanceId, accumulatedData]);
+      monthsInRange = Array.from(allMonths);
+    }
+
+    // 3. For each channel, sum sessions for months in range (current) and same months previous year (prev)
+    const result: Array<{ channel: string; sessions: number; prev: number; diff: number; percent: number | null }> = [];
+    Object.entries(sessionsByChannelMonth).forEach(([channel, monthData]) => {
+      let currentTotal = 0;
+      let prevTotal = 0;
+      monthsInRange.forEach(ym => {
+        currentTotal += monthData[ym] || 0;
+        // Previous year month string
+        const prevYm = (parseInt(ym) - 100).toString();
+        prevTotal += monthData[prevYm] || 0;
+      });
+      const diff = currentTotal - prevTotal;
+      const percent = prevTotal > 0 ? (diff / prevTotal) * 100 : null;
+      result.push({ channel, sessions: currentTotal, prev: prevTotal, diff, percent });
+    });
+
+    return result;
+  }, [channelDaily, instanceId, accumulatedData, dateRange]);
 
   // For grand total
   const totals = React.useMemo(() => {

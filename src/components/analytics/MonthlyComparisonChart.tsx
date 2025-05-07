@@ -65,12 +65,12 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     if (!dataToProcess || dataToProcess.length === 0) return [];
 
     // Log the raw data to understand what we're working with
-    console.log("MonthlyComparisonChart - Raw data:", dataToProcess.map(d => ({
-      month: d.month,
-      year: Math.floor(d.month / 100),
-      monthDigit: d.month % 100,
-      sessions: d.sessions
-    })));
+    // console.log("MonthlyComparisonChart - Raw data:", dataToProcess.map(d => ({
+    //   month: d.month,
+    //   year: Math.floor(d.month / 100),
+    //   monthDigit: d.month % 100,
+    //   sessions: d.sessions
+    // })));
     
     // Create a lookup map for sessions by month
     const sessionsByMonth = new Map<number, number>();
@@ -80,7 +80,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     
     // Get all available months sorted in descending order (most recent first)
     const allDataMonths = [...dataToProcess.map(item => item.month)].sort((a, b) => b - a);
-    console.log("MonthlyComparisonChart - Available months in data:", allDataMonths);
+    // console.log("MonthlyComparisonChart - Available months in data:", allDataMonths);
     
     // Get a list of all unique years in the data
     const years = new Set<number>();
@@ -89,7 +89,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
       years.add(year);
     });
     const availableYears = Array.from(years).sort((a, b) => b - a); // Descending order
-    console.log("MonthlyComparisonChart - Available years:", availableYears);
+    // console.log("MonthlyComparisonChart - Available years:", availableYears);
     
     // Extract the most recent year that has data
     const mostRecentYear = availableYears[0];
@@ -99,7 +99,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
       .filter(month => Math.floor(month / 100) === mostRecentYear)
       .sort((a, b) => a - b);
     
-    console.log("MonthlyComparisonChart - Months for most recent year:", recentYearMonths);
+    // console.log("MonthlyComparisonChart - Months for most recent year:", recentYearMonths);
     
     // Get the 12 most recent months regardless of year
     // This ensures we show the last 12 calendar months
@@ -108,7 +108,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     // If we have fewer than 12 months, use what we have
     const monthsToShow = last12Months.length > 0 ? last12Months : allDataMonths;
     
-    console.log("MonthlyComparisonChart - Last 12 months to show:", monthsToShow);
+    // console.log("MonthlyComparisonChart - Last 12 months to show:", monthsToShow);
     
     // Prepare chart data with proper typing
     const result: Array<{
