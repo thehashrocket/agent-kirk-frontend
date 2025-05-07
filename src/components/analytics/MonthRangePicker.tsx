@@ -27,10 +27,12 @@ import { cn } from '@/lib/utils';
  * Props for MonthRangePicker.
  * @property onChange - Callback fired when a new month is selected. Receives an object with 'from' and 'to' Date values for the selected month.
  * @property defaultValue - Optional initial value for the picker (from/to as Date objects).
+ * @property value - Optional controlled value for the picker (from/to as Date objects).
  */
 interface MonthRangePickerProps {
   onChange: (range: { from: Date; to: Date }) => void;
   defaultValue?: { from: Date; to: Date };
+  value?: { from: Date; to: Date };
 }
 
 const monthNames = [
@@ -54,7 +56,7 @@ const getYearRange = (centerYear: number, range: number = 5) => {
  * @param {MonthRangePickerProps} props - Component props
  * @returns {JSX.Element}
  */
-export function MonthRangePicker({ onChange, defaultValue }: MonthRangePickerProps) {
+export function MonthRangePicker({ onChange, defaultValue, value }: MonthRangePickerProps) {
   const currentYear = new Date().getFullYear();
   const yearRange = getYearRange(currentYear, 5);
 
@@ -69,13 +71,17 @@ export function MonthRangePicker({ onChange, defaultValue }: MonthRangePickerPro
     return getMonthRange(currentYear, new Date().getMonth());
   };
 
-  const [selected, setSelected] = React.useState<{ from: Date; to: Date }>(getDefaultValue());
+  // Internal state for uncontrolled usage
+  const [internalSelected, setInternalSelected] = React.useState<{ from: Date; to: Date }>(getDefaultValue());
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedYear, setSelectedYear] = React.useState(selected.from.getFullYear());
+  const [selectedYear, setSelectedYear] = React.useState((value || internalSelected).from.getFullYear());
+
+  // Use controlled value if provided, otherwise internal state
+  const selected = value || internalSelected;
 
   const handleSelect = (monthIdx: number) => {
     const range = getMonthRange(selectedYear, monthIdx);
-    setSelected(range);
+    if (!value) setInternalSelected(range); // Only update internal state if uncontrolled
     onChange(range);
     setIsOpen(false);
   };
@@ -86,6 +92,13 @@ export function MonthRangePicker({ onChange, defaultValue }: MonthRangePickerPro
 
   const selectedMonth = selected.from.getMonth();
   const selectedYearDisplay = selected.from.getFullYear();
+
+  React.useEffect(() => {
+    // If value changes (controlled), update selectedYear
+    if (value) {
+      setSelectedYear(value.from.getFullYear());
+    }
+  }, [value]);
 
   return (
     <div className="flex items-center">

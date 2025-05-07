@@ -445,13 +445,13 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     const needsHistoricalData = kpiDailyCount === 0 || kpiMonthlyCount === 0 || 
                                channelDailyCount === 0 || sourceDailyCount === 0;
     
-    console.log('GA Metrics API - Data check results:', {
-      kpiDailyCount,
-      kpiMonthlyCount,
-      channelDailyCount,
-      sourceDailyCount,
-      needsHistoricalData
-    });
+    // console.log('GA Metrics API - Data check results:', {
+    //   kpiDailyCount,
+    //   kpiMonthlyCount,
+    //   channelDailyCount,
+    //   sourceDailyCount,
+    //   needsHistoricalData
+    // });
     
     // Set date ranges based on what we need
     let queryDateFrom: Date;

@@ -148,7 +148,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     result.sort((a, b) => a.monthNum - b.monthNum);
     
     // Log the final chart data
-    console.log("MonthlyComparisonChart - Final chart data:", result);
+    // console.log("MonthlyComparisonChart - Final chart data:", result);
     
     return result;
   }, [accumulatedData, data]);

@@ -105,10 +105,10 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   // State for selected date range, default to most recent full month
   const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date } | null>(null);
   
-  // Set default date range on mount and when metadata changes
+  // Set default date range on mount only
   React.useEffect(() => {
     setDateRange(setupDefaultDateRange());
-  }, [setupDefaultDateRange, metadata]);
+  }, []);
   
   // Update handleDateRangeChange to always snap to full month
   const handleDateRangeChange = async (range: { from: Date; to: Date }) => {
@@ -184,6 +184,25 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   // --- Calculate current and prevYear month objects ---
   const { current, prevYear } = getSelectedAndPrevYearMonth(kpiMonthly || [], dateRange);
 
+  // Calculate the min and max months from the last 12 months in kpiMonthly for the YoY chart label
+  let yoyLabel = '';
+  if (kpiMonthly && kpiMonthly.length > 0) {
+    // Get all months, sort descending, take last 12, then sort ascending
+    const monthsDesc = kpiMonthly.map(m => m.month).sort((a, b) => b - a);
+    const last12Months = monthsDesc.slice(0, 12).sort((a, b) => a - b);
+    const minMonth = last12Months[0];
+    const maxMonth = last12Months[last12Months.length - 1];
+    // Convert YYYYMM to Date
+    const minYear = Math.floor(minMonth / 100);
+    const minMonthNum = minMonth % 100;
+    const maxYear = Math.floor(maxMonth / 100);
+    const maxMonthNum = maxMonth % 100;
+    const minDate = new Date(minYear, minMonthNum - 1, 1);
+    // For max, use last day of the month
+    const maxDate = new Date(maxYear, maxMonthNum, 0);
+    yoyLabel = `Data from ${format(minDate, "MMM d, yyyy")} to ${format(maxDate, "MMM d, yyyy")}`;
+  }
+
   // Check if we have valid data
   if (!current) {
     return (
@@ -226,10 +245,10 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     });
     
     // Debug logging
-    console.log(`DEBUG: Channel data breakdown for total ${totalSessionsInSelectedPeriod} sessions:`);
-    Object.entries(aggregatedChannelData).forEach(([channel, sessions]) => {
-      console.log(`DEBUG: - ${channel}: ${sessions} sessions (${((sessions/totalSessionsInSelectedPeriod)*100).toFixed(1)}%)`);
-    });
+    // console.log(`DEBUG: Channel data breakdown for total ${totalSessionsInSelectedPeriod} sessions:`);
+    // Object.entries(aggregatedChannelData).forEach(([channel, sessions]) => {
+    //   console.log(`DEBUG: - ${channel}: ${sessions} sessions (${((sessions/totalSessionsInSelectedPeriod)*100).toFixed(1)}%)`);
+    // });
     
     // In case we need monthly data, keep finding the most recent month
     const months = Object.keys(sessionsByMonth).sort().reverse();
@@ -316,7 +335,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   const displayRange = dateRange 
     ? formatDateRange(dateRange.from, dateRange.to)
     : "Year-Over-Year Comparison";
-
+    
     console.log('displayRange', displayRange);
     console.log('dateRange.from', dateRange?.from);
     console.log('dateRange.to', dateRange?.to);
@@ -329,7 +348,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
         </div>
         <MonthRangePicker 
           onChange={handleDateRangeChange} 
-          defaultValue={setupDefaultDateRange()} 
+          value={dateRange || undefined}
         />
       </div>
       
@@ -409,9 +428,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
           <h2 className="text-lg font-bold mb-2">Sessions</h2>
           <p className="text-gray-500 text-sm">Last 12 Calendar Months; Year-Over-Year Comparison</p>
           <p className="text-xs text-gray-400 mt-1">
-            {metadata?.fullDateRange?.from && metadata?.fullDateRange?.to && 
-              `Data from ${format(new Date(metadata.fullDateRange.from), "MMM d, yyyy")} to ${format(new Date(metadata.fullDateRange.to), "MMM d, yyyy")}`
-            }
+            {yoyLabel}
           </p>
         </div>
         {kpiMonthly && kpiMonthly.length > 0 ? (
