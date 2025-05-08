@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma';
 import { GaMetricsResponse } from '../types/ga-metrics';
 
 // Import the generated Prisma client
@@ -95,9 +95,23 @@ export async function saveGaMetrics(
             create: {
               gaPropertyId,
               date: today,
-              ...channel
+              channelGroup: channel.channelGroup,
+              sessions: channel.sessions,
+              screenPageViewsPerSession: 0,
+              engagementRate: 0,
+              avgSessionDurationSec: 0,
+              goalCompletions: 0,
+              goalCompletionRate: 0
             },
-            update: channel
+            update: {
+              channelGroup: channel.channelGroup,
+              sessions: channel.sessions,
+              screenPageViewsPerSession: 0,
+              engagementRate: 0,
+              avgSessionDurationSec: 0,
+              goalCompletions: 0,
+              goalCompletionRate: 0
+            }
           })
         )
       );
@@ -119,9 +133,23 @@ export async function saveGaMetrics(
             create: {
               gaPropertyId,
               date: today,
-              ...source
+              trafficSource: source.trafficSource,
+              sessions: source.sessions,
+              screenPageViewsPerSession: 0,
+              engagementRate: 0,
+              avgSessionDurationSec: 0,
+              goalCompletions: 0,
+              goalCompletionRate: 0
             },
-            update: source
+            update: {
+              trafficSource: source.trafficSource,
+              sessions: source.sessions,
+              screenPageViewsPerSession: 0,
+              engagementRate: 0,
+              avgSessionDurationSec: 0,
+              goalCompletions: 0,
+              goalCompletionRate: 0
+            }
           })
         )
       );

@@ -17,7 +17,7 @@
  * @requires zod
  */
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getTicketById, updateTicket } from "@/lib/services/ticket-service";
@@ -109,8 +109,8 @@ const updateTicketSchema = z.object({
  * }
  */
 export async function GET(
-  request: Request,
-  { params }: { params: { ticketId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ ticketId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -128,7 +128,9 @@ export async function GET(
       );
     }
 
-    if (!params.ticketId) {
+    const { ticketId } = await params;
+
+    if (!ticketId) {
       return new NextResponse(
         JSON.stringify({
           error: "Bad Request",
@@ -141,7 +143,7 @@ export async function GET(
       );
     }
 
-    const ticket = await getTicketById(params.ticketId);
+    const ticket = await getTicketById(ticketId);
 
     if (!ticket) {
       return new NextResponse(
@@ -223,8 +225,8 @@ export async function GET(
  * }
  */
 export async function PATCH(
-  request: Request,
-  { params }: { params: { ticketId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ ticketId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -242,23 +244,11 @@ export async function PATCH(
       );
     }
 
-    if (!params.ticketId) {
-      return new NextResponse(
-        JSON.stringify({
-          error: "Bad Request",
-          message: "Ticket ID is required"
-        }),
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
     const json = await request.json();
     const body = updateTicketSchema.parse(json);
 
-    const ticket = await updateTicket(params.ticketId, body);
+    const { ticketId } = await params;
+    const ticket = await updateTicket(ticketId, body);
 
     return NextResponse.json(ticket);
   } catch (error) {

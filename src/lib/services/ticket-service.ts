@@ -5,7 +5,7 @@
 
 import { prisma } from "@/lib/prisma";
 import type { Ticket, TicketStatus, TicketPriority } from "@/types/tickets";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/prisma/generated/client";
 
 interface CreateTicketData {
   title: string;

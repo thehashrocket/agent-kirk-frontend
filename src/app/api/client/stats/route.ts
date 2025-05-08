@@ -177,10 +177,10 @@ export async function GET(request: Request): Promise<NextResponse> {
     // If not a CLIENT, verify the user has permission to access this client's data
     if (user.role !== 'CLIENT' && user.role !== 'ADMIN') {
       // For ACCOUNT_REP, verify they are assigned to this client
-      const hasAccess = await prisma.clientAccountRep.findFirst({
+      const hasAccess = await prisma.user.findFirst({
         where: {
+          id: clientId,
           accountRepId: user.id,
-          clientId: clientId,
         },
       });
 

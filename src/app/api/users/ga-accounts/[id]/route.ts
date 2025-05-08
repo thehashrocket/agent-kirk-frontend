@@ -13,7 +13,7 @@
  * @security Requires authentication via NextAuth session
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -32,8 +32,8 @@ import { prisma } from '@/lib/prisma';
  *   - 500: Internal Server Error if deletion fails
  */
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -42,8 +42,10 @@ export async function DELETE(
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    const { id } = await params;
+
     const gaAccount = await prisma.gaAccount.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!gaAccount) {
@@ -56,7 +58,7 @@ export async function DELETE(
     }
 
     await prisma.gaAccount.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return new NextResponse(null, { status: 204 });

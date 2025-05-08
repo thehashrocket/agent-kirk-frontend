@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Next.js App Router
 
-// Description: Best practices for Next.js App Router development with TypeScript, Shadcn UI, and Tailwind
+// Description: Best practices for Next.js version 15 App Router development with TypeScript, Shadcn UI, and Tailwind
 // Recommended Globs: **/*.{ts,tsx}, **/app/**/*, **/components/**/*, **/lib/**/*
 
 ## Project Structure

@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Modern React Next.js
 
-// Description: Best practices for modern NextJS/React web development using Tailwind, React, and Firebase
+// Description: Best practices for modern NextJS/React using version 15 of NextJS and version 19 of React web development using Tailwind, React, and Firebase
 // Recommended Globs: **/*.{ts,tsx}, **/app/**/*, **/components/**/*, **/lib/**/*
 
 ## Project Structure

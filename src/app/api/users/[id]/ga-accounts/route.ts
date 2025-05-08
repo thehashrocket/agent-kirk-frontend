@@ -10,7 +10,7 @@
  * - lib/prisma.ts - Database client
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -49,8 +49,8 @@ class GaAccountError extends Error {
  * @throws {GaAccountError} If validation fails or user is unauthorized
  */
 export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -62,11 +62,13 @@ export async function POST(
     const body = await request.json();
     const validatedData = gaAccountSchema.parse(body);
 
+    const { id } = await params;
+
     const gaAccount = await prisma.gaAccount.create({
       data: {
         gaAccountId: validatedData.gaAccountId,
         gaAccountName: validatedData.gaAccountName,
-        userId: params.id,
+        userId: id,
       },
     });
 
@@ -104,8 +106,8 @@ export async function POST(
  * @throws {GaAccountError} If user is unauthorized or forbidden
  */
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await Promise.resolve(params);

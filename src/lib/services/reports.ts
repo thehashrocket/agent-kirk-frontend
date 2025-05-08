@@ -5,7 +5,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
-import { ActivityStatus, TicketStatus } from "@prisma/client";
+import { ActivityStatus, TicketStatus } from "@/prisma/generated/client";
 import type { ReportData } from "@/lib/api/reports";
 import { subDays, startOfDay, endOfDay, parseISO, format } from "date-fns";
 

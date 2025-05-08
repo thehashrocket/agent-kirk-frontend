@@ -123,7 +123,15 @@ export async function POST(request: Request) {
       // This should be done in the ticket service
     }
 
-    const ticket = await createTicket(validatedData);
+    const ticket = await createTicket({
+      ...validatedData,
+      status: "OPEN",
+      client: {
+        connect: {
+          id: validatedData.clientId
+        }
+      }
+    });
     return NextResponse.json(ticket);
   } catch (error) {
     if (error instanceof z.ZodError) {

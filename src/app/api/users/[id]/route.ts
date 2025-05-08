@@ -12,7 +12,7 @@
  * @requires @prisma/client - For database operations
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -32,11 +32,11 @@ import { prisma } from '@/lib/prisma';
  * @throws {500} - On internal server errors
  */
 export async function GET(
-  request: Request,
-  context: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = await params;
     
     const session = await getServerSession(authOptions);
     if (!session?.user) {

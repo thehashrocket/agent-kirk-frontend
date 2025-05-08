@@ -56,6 +56,7 @@ export function parseLLMResponse(response: any): GaMetricsResponse {
     // Get the latest day's metrics for kpiDaily
     const latestDay = sortedRows[0];
     const kpiDaily = latestDay ? {
+      id: `daily-${latestDay.date}`,
       date: latestDay.date,
       sessions: Number(latestDay.sessions) || 0,
       screenPageViewsPerSession: Number(latestDay.screenPageViewsPerSession) || 0,
@@ -74,6 +75,7 @@ export function parseLLMResponse(response: any): GaMetricsResponse {
     });
 
     const kpiMonthly = currentMonthRows.length > 0 ? {
+      id: `monthly-${currentYear}${(currentMonth + 1).toString().padStart(2, '0')}`,
       month: parseInt(`${currentYear}${(currentMonth + 1).toString().padStart(2, '0')}`),
       sessions: currentMonthRows.reduce((sum, row) => sum + (Number(row.sessions) || 0), 0),
       screenPageViewsPerSession: currentMonthRows.reduce((sum, row) => sum + (Number(row.screenPageViewsPerSession) || 0), 0) / currentMonthRows.length,

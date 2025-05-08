@@ -1,4 +1,4 @@
-import { ParsedPieGraphData } from "@prisma/client";
+import { ParsedPieGraphData } from "@/prisma/generated/client";
 
 export type ParsedPieDataInput = Omit<ParsedPieGraphData, "id" | "queryId" | "createdAt">;
 

@@ -16,7 +16,7 @@
  * @security Requires authentication via NextAuth session
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -37,8 +37,8 @@ import { prisma } from '@/lib/prisma';
  *   - 500: Internal Server Error if operation fails
  */
 export async function POST(
-  request: Request,
-  { params }: { params: { id: string; accountId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string; accountId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -47,11 +47,13 @@ export async function POST(
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    const { id, accountId } = await params;
+
     // Verify the GA account belongs to the user
     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
-        id: params.accountId,
-        userId: params.id,
+        id: accountId,
+        userId: id,
       },
     });
 
@@ -70,7 +72,7 @@ export async function POST(
       data: {
         gaPropertyId,
         gaPropertyName,
-        gaAccountId: params.accountId,
+        gaAccountId: accountId,
       },
     });
 
@@ -96,8 +98,8 @@ export async function POST(
  *   - 500: Internal Server Error if operation fails
  */
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string; accountId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string; accountId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -106,11 +108,13 @@ export async function GET(
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    const { id, accountId } = await params;
+
     // Verify the GA account belongs to the user
     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
-        id: params.accountId,
-        userId: params.id,
+        id: accountId,
+        userId: id,
       },
     });
 
@@ -120,7 +124,7 @@ export async function GET(
 
     const gaProperties = await prisma.gaProperty.findMany({
       where: {
-        gaAccountId: params.accountId,
+        gaAccountId: accountId,
       },
     });
 

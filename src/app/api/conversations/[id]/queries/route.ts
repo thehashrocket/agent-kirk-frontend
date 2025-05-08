@@ -18,33 +18,6 @@ import { authOptions } from '@/lib/auth';
 import { MESSAGE_STATUS } from '@/types/chat';
 
 /**
- * Interface for message objects returned by the GET endpoint
- */
-interface Message {
-  id: string;
-  content: string;
-  role: 'user' | 'assistant';
-  timestamp: string;
-  status?: string;
-}
-
-/**
- * Interface for the POST request body
- */
-interface QueryRequest {
-  content: string;
-}
-
-/**
- * Interface for successful POST response
- */
-interface QueryResponse {
-  queryId: string;
-  status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'FAILED';
-  response?: string;
-}
-
-/**
  * Maximum time to wait for immediate response from LLM service (3 seconds)
  */
 const IMMEDIATE_TIMEOUT = 3000;
@@ -53,7 +26,7 @@ const IMMEDIATE_TIMEOUT = 3000;
  * GET handler for fetching conversation queries
  * 
  * @param request - The incoming request object
- * @param context - Route context containing conversation ID
+ * @param { params }: { params: { id: string } } - Route context containing conversation ID
  * @returns {Promise<NextResponse>} JSON response containing:
  *   - On success: Array of messages with query/response pairs
  *   - On error: Error object with appropriate status code
@@ -64,11 +37,10 @@ const IMMEDIATE_TIMEOUT = 3000;
  */
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const params = await context.params;
-    const { id } = params;
+    const { id } = await params;
     
     const session = await getServerSession(authOptions);
 
@@ -173,11 +145,10 @@ export async function GET(
  */
 export async function POST(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const params = await context.params;
-    const { id } = params;
+    const { id } = await params;
     
     const session = await getServerSession(authOptions);
 

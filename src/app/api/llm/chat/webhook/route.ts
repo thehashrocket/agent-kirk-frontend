@@ -14,6 +14,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
 import { CHAT_CONSTANTS } from '@/lib/validations/chat';
+import type { Prisma } from '@prisma/client';
 
 /**
  * Represents the expected webhook request payload
@@ -248,8 +249,21 @@ export async function POST(request: NextRequest) {
           if (parsedPieData.length > 0) {
             await tx.parsedPieGraphData.createMany({
               data: parsedPieData.map(data => ({
-                ...data,
-                queryId: updatedQuery.id
+                queryId: updatedQuery.id,
+                channel: data.channel,
+                source: data.source,
+                sessions: data.sessions,
+                conversionRate: data.conversionRate,
+                conversions: data.conversions,
+                bounces: data.bounces,
+                prevSessionsDiff: data.prevSessionsDiff,
+                prevConversionRateDiff: data.prevConversionRateDiff,
+                prevConversionsDiff: data.prevConversionsDiff,
+                prevBouncesDiff: data.prevBouncesDiff,
+                yearSessionsDiff: data.yearSessionsDiff,
+                yearConversionRateDiff: data.yearConversionRateDiff,
+                yearConversionsDiff: data.yearConversionsDiff,
+                yearBouncesDiff: data.yearBouncesDiff
               }))
             });
           }
