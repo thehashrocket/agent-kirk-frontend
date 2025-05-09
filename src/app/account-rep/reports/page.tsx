@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { format, subDays, startOfDay, endOfDay } from 'date-fns';
 import { useSession } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -52,7 +52,7 @@ export default function AccountRepReportsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [metricsData, setMetricsData] = useState<any>(null);
 
-  const handleDateRangeChange = async (range: DateRange | undefined) => {
+  const handleDateRangeChange = useCallback(async (range: DateRange | undefined) => {
     setDateRange(range);
     if (!session?.user?.id) return;
 
@@ -83,14 +83,14 @@ export default function AccountRepReportsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [session?.user?.id, toast]);
 
   // Fetch initial data
   useEffect(() => {
     if (session?.user?.email) {
       handleDateRangeChange(dateRange);
     }
-  }, [session?.user?.email]);
+  }, [session?.user?.email, dateRange, handleDateRangeChange]);
 
   if (!session) {
     return (
