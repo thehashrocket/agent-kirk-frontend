@@ -8,7 +8,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActionBreakdown } from "@/components/reports/action-breakdown";
 import { ActivityTimeline } from "@/components/reports/activity-timeline";
-import { fetchReportData } from "@/lib/api/reports";
+import useSWR from 'swr';
+import { fetcher } from '@/lib/utils';
 
 interface MetricsCardProps {
   title: string;
@@ -44,8 +45,50 @@ function MetricsCard({ title, value, description, format = "number" }: MetricsCa
   );
 }
 
-export async function ReportContent() {
-  const data = await fetchReportData();
+function MetricsSkeleton() {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <div className="h-4 w-24 animate-pulse rounded bg-muted" />
+      </CardHeader>
+      <CardContent>
+        <div className="h-8 w-16 animate-pulse rounded bg-muted mb-2" />
+        <div className="h-3 w-32 animate-pulse rounded bg-muted" />
+      </CardContent>
+    </Card>
+  );
+}
+
+export function ReportContent() {
+  const { data, error, isLoading } = useSWR('/api/reports', fetcher, {
+    refreshInterval: 300000, // Refresh every 5 minutes
+  });
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
+          <p>Failed to load report data. Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading || !data) {
+    return (
+      <div className="space-y-6">
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Key Metrics</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <MetricsSkeleton />
+            <MetricsSkeleton />
+            <MetricsSkeleton />
+            <MetricsSkeleton />
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
