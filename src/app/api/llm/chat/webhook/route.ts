@@ -13,8 +13,6 @@ import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
-import { CHAT_CONSTANTS } from '@/lib/validations/chat';
-import type { Prisma } from '@prisma/client';
 
 /**
  * Represents the expected webhook request payload

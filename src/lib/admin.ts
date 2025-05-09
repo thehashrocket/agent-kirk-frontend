@@ -6,7 +6,6 @@
 import { prisma } from './prisma';
 import { cache } from 'react';
 import { subDays } from 'date-fns';
-import type { Prisma } from '@prisma/client';
 
 /**
  * Get total number of users in the system
