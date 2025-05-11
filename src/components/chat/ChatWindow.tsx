@@ -22,11 +22,6 @@
 
 import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
-import { isMarkdown } from '@/lib/utils';
-import ReactMarkdown from 'react-markdown';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Message as MessageComponent } from './Message';
 import { LoadingIndicator } from './LoadingIndicator';
 import { Message as MessageType, MessageStatus } from '@/types/chat';

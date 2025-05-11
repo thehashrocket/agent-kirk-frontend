@@ -12,10 +12,7 @@ import { useSession } from 'next-auth/react';
 import { 
   Message, 
   QueryRequest, 
-  QueryResponse, 
   apiStatusToMessageStatus, 
-  MessageStatus, 
-  APIStatus,
   MESSAGE_STATUS,
   API_STATUS
 } from '@/types/chat';
@@ -51,20 +48,6 @@ interface GaProperty {
   id: string;
   gaPropertyId: string;
   gaPropertyName: string;
-}
-
-interface ConversationListProps {
-  conversations: Conversation[];
-  selectedId?: string;
-  onSelect: (id: string) => void;
-  onToggleStar: (id: string) => void;
-  onCreateConversation: (data: { 
-    title: string; 
-    gaAccountId?: string; 
-    gaPropertyId?: string; 
-  }) => Promise<void>;
-  isLoading?: boolean;
-  gaAccounts: GaAccount[];
 }
 
 const mockTags = [

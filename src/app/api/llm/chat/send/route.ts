@@ -79,6 +79,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     const body = await request.json();
     const validatedData = ChatRequestSchema.parse(body);
 
+    console.log('[Send] Validated data:', validatedData);
+
     console.log('[Send] Request validated successfully');
 
     // Create a database record for the query
@@ -192,8 +194,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
             console.error(`[Send] Failed to parse lineGraphData`, e);
           }
         }
-
-        const parsedPieData = parsePieGraphData(responseData.pie_graph_data || []);
 
         const updatedQuery = await prisma.query.update({
           where: { id: query.id },
