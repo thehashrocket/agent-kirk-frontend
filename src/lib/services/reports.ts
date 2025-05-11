@@ -6,8 +6,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { ActivityStatus, TicketStatus } from "@/prisma/generated/client";
-import type { ReportData } from "@/lib/api/reports";
-import { subDays, startOfDay, endOfDay, parseISO, format } from "date-fns";
+import type { ReportData } from "@/hooks/use-report-data";
+import { subDays, startOfDay, endOfDay, format } from "date-fns";
 
 /**
  * Generates a comprehensive system-wide report including user metrics, activities, and performance data.

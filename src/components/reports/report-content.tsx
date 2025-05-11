@@ -8,8 +8,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActionBreakdown } from "@/components/reports/action-breakdown";
 import { ActivityTimeline } from "@/components/reports/activity-timeline";
-import useSWR from 'swr';
-import { fetcher } from '@/lib/utils';
+import { useReportData } from "@/hooks/use-report-data";
 
 interface MetricsCardProps {
   title: string;
@@ -60,11 +59,9 @@ function MetricsSkeleton() {
 }
 
 export function ReportContent() {
-  const { data, error, isLoading } = useSWR('/api/reports', fetcher, {
-    refreshInterval: 300000, // Refresh every 5 minutes
-  });
+  const { data, isLoading, isError } = useReportData();
 
-  if (error) {
+  if (isError) {
     return (
       <div className="space-y-6">
         <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
