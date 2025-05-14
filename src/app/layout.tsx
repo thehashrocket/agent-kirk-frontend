@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Providers } from "@/app/providers";
 import QueryProvider from '@/providers/query-provider';
+import { Honeybadger, HoneybadgerErrorBoundary } from '@honeybadger-io/react'
 
 export const metadata: Metadata = {
   title: "Agent Kirk - AI Analytics Assistant",
@@ -18,9 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-bliss">
-        <QueryProvider>
-          <Providers>
-            <div className="min-h-screen flex flex-col">
+        <HoneybadgerErrorBoundary honeybadger={Honeybadger}>
+          <QueryProvider>
+            <Providers>
+              <div className="min-h-screen flex flex-col">
               <Header />
               <div className="flex-1 flex">
                 <Sidebar />
@@ -29,8 +31,9 @@ export default function RootLayout({
                 </main>
               </div>
             </div>
-          </Providers>
-        </QueryProvider>
+            </Providers>
+          </QueryProvider>
+        </HoneybadgerErrorBoundary>
       </body>
     </html>
   );
