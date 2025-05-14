@@ -408,15 +408,24 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       clearTimeout(timeoutId);
 
       if (!llmResponse.ok) {
+        const errorText = await llmResponse.text();
         console.error('GA Metrics API - LLM dashboard request failed:', {
           status: llmResponse.status,
           statusText: llmResponse.statusText,
-          error: await llmResponse.text()
+          error: errorText
         });
         throw new Error('Failed to fetch from LLM dashboard');
       }
 
-      const llmData: LLMDashboardResponse = await llmResponse.json();
+      let llmData: LLMDashboardResponse;
+      try {
+        llmData = await llmResponse.json();
+      } catch (jsonError) {
+        console.error('GA Metrics API - Failed to parse LLM response as JSON:', jsonError);
+        const responseText = await llmResponse.text();
+        console.error('GA Metrics API - Raw response:', responseText);
+        throw new Error('Invalid JSON response from LLM dashboard');
+      }
       console.log('GA Metrics API - Successfully fetched LLM dashboard data');
 
       try {
@@ -745,7 +754,15 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
           throw new Error('Failed to fetch from LLM dashboard');
         }
 
-        const llmData: LLMDashboardResponse = await llmResponse.json();
+        let llmData: LLMDashboardResponse;
+        try {
+          llmData = await llmResponse.json();
+        } catch (jsonError) {
+          console.error('GA Metrics API - Failed to parse LLM response as JSON:', jsonError);
+          const responseText = await llmResponse.text();
+          console.error('GA Metrics API - Raw response:', responseText);
+          throw new Error('Invalid JSON response from LLM dashboard');
+        }
         console.log('GA Metrics API - Successfully fetched LLM dashboard data');
 
         try {

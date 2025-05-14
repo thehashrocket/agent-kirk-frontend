@@ -72,6 +72,8 @@ export default function GaMetrics() {
       url = `${url}?${params.toString()}`;
       
       const response = await fetch(url);
+
+      console.log('response', response);
       
       if (!response.ok) {
         const errorData = await response.json();
