@@ -45,7 +45,6 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // Await params at the start of the function
     const { id } = await params;
     
     const session = await getServerSession(authOptions);
@@ -68,7 +67,6 @@ export async function POST(
       );
     }
 
-    // Use the awaited id instead of params.id
     const notification = await prisma.notification.findFirst({
       where: {
         id,
@@ -83,7 +81,6 @@ export async function POST(
       );
     }
 
-    // Use the awaited id instead of params.id
     const updatedNotification = await prisma.notification.update({
       where: { id },
       data: { isRead: true },

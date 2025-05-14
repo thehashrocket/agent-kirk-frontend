@@ -12,8 +12,6 @@
   "dependencies": {
     "@auth/core": "^0.39.0",
     "@auth/prisma-adapter": "^2.9.0",
-    "@honeybadger-io/nextjs": "^5.9.12",
-    "@honeybadger-io/react": "^6.1.27",
     "@hookform/resolvers": "^5.0.1",
     "@prisma/client": "^6.7.0",
     "@radix-ui/react-avatar": "^1.1.7",

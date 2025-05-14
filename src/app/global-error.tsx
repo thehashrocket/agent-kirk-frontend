@@ -1,8 +1,6 @@
 'use client'; // Error components must be Client Components
 
-// eslint-disable-next-line import/no-unresolved
 import { useEffect } from 'react'
-import { Honeybadger } from '@honeybadger-io/react'
 
 /**
  * error.[js|tsx]: https://nextjs.org/docs/app/building-your-application/routing/error-handling
@@ -22,7 +20,7 @@ export default function Error({
     reset: () => void;
 }) {
   useEffect(() => {
-    Honeybadger.notify(error)
+    console.error(error)
   }, [error])
 
   return (
