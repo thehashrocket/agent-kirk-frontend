@@ -395,7 +395,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       if (!process.env.LLM_DASHBOARD_URL) {
         throw new Error('LLM_DASHBOARD_URL is not configured');
       }
-      
+      console.log('GA Metrics API - LLM dashboard URL:', process.env.LLM_DASHBOARD_URL);
       const llmResponse = await fetch(process.env.LLM_DASHBOARD_URL, {
         method: 'POST',
         headers: {
@@ -408,12 +408,13 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       clearTimeout(timeoutId);
 
       if (!llmResponse.ok) {
-        const errorText = await llmResponse.text();
+        console.log('GA Metrics API - llmresponse url:', llmResponse.url);
         console.error('GA Metrics API - LLM dashboard request failed:', {
           status: llmResponse.status,
-          statusText: llmResponse.statusText,
-          error: errorText
+          statusText: llmResponse.statusText
         });
+        console.log('GA Metrics API - LLM dashboard URL:', process.env.LLM_DASHBOARD_URL);
+
         throw new Error('Failed to fetch from LLM dashboard');
       }
 
@@ -747,9 +748,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         if (!llmResponse.ok) {
           const errorText = await llmResponse.text();
           console.error('GA Metrics API - LLM dashboard request failed:', {
+            url: process.env.LLM_DASHBOARD_URL,
             status: llmResponse.status,
             statusText: llmResponse.statusText,
-            error: errorText
           });
           throw new Error('Failed to fetch from LLM dashboard');
         }

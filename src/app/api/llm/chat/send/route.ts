@@ -125,8 +125,16 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Log and parse the response
     const responseText = await llmResponse.text();
     console.log('[Send] LLM service response status:', llmResponse.status);
-    console.log('[Send] LLM service raw response:', responseText);
 
+    if (llmResponse.status === 404) {
+      console.log('[SEND] LLM URL:', process.env.LLM_SERVICE_URL);
+      console.log('[Send] LLM service returned 404 status');
+      return NextResponse.json({
+        status: 'FAILED',
+        queryId: query.id,
+        error: 'LLM service returned 404 status',
+      }, { status: 404 });
+    }
     // If we get a 500 with "No item to return got found", this likely means
     // the request was accepted but will be processed asynchronously
     if (llmResponse.status === 500 && responseText.includes("No item to return got found")) {
