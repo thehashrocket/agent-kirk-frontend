@@ -17,6 +17,9 @@ import { Honeybadger } from '@honeybadger-io/react'
 export default function Error({
   error,
   reset,
+}: {
+  error: Error;
+  reset: () => void;
 }) {
   useEffect(() => {
     Honeybadger.notify(error)

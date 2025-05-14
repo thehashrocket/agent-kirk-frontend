@@ -28,7 +28,7 @@ const honeybadgerNextJsConfig = {
     // Required if you want to upload source maps to Honeybadger
     apiKey: process.env.NEXT_PUBLIC_HONEYBADGER_API_KEY,
     // Required if you want to upload source maps to Honeybadger
-    // assetsUrl: process.env.NEXT_PUBLIC_HONEYBADGER_ASSETS_URL,
+    assetsUrl: process.env.NEXT_PUBLIC_HONEYBADGER_ASSETS_URL,
     revision: process.env.NEXT_PUBLIC_HONEYBADGER_REVISION,
     endpoint: 'https://api.honeybadger.io/v1/source_maps',
     ignoreErrors: false,
