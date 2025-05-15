@@ -415,7 +415,15 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         });
         console.log('GA Metrics API - LLM dashboard URL:', process.env.LLM_DASHBOARD_URL);
 
-        throw new Error('Failed to fetch from LLM dashboard');
+        if (llmResponse.status === 404) {
+          console.log('GA Metrics API - LLM dashboard URL not found');
+          return NextResponse.json({
+            error: 'LLM dashboard URL not found',
+            code: 'LLM_DASHBOARD_URL_NOT_FOUND'
+          }, { status: 404 });
+        }
+
+        // throw new Error('Failed to fetch from LLM dashboard');
       }
 
       let llmData: LLMDashboardResponse;
@@ -752,7 +760,14 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
             status: llmResponse.status,
             statusText: llmResponse.statusText,
           });
-          throw new Error('Failed to fetch from LLM dashboard');
+
+          if (llmResponse.status === 404) {
+            console.log('GA Metrics API - LLM dashboard URL not found');
+            return NextResponse.json({
+              error: 'LLM dashboard URL not found',
+              code: 'LLM_DASHBOARD_URL_NOT_FOUND'
+            }, { status: 404 });
+          }
         }
 
         let llmData: LLMDashboardResponse;

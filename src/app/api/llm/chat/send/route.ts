@@ -116,7 +116,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.LLM_SERVICE_API_KEY}`,
         'X-Query-ID': query.id
       },
       body: JSON.stringify(llmRequestPayload),
@@ -125,6 +124,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Log and parse the response
     const responseText = await llmResponse.text();
     console.log('[Send] LLM service response status:', llmResponse.status);
+    console.log('[Send] LLM service response URL:', llmResponse.url);
+    console.log('[Send] LLM service headers:', llmResponse.headers);
 
     if (llmResponse.status === 404) {
       console.log('[SEND] LLM URL:', process.env.LLM_SERVICE_URL);
