@@ -1,5 +1,12 @@
 'use client';
 
+/**
+ * @file Chat Interface Page Component
+ * @description Main chat interface page that provides a conversation UI with async response handling,
+ * conversation management, and Google Analytics integration
+ * @module app/chat/page
+ */
+
 import { useState, useEffect } from 'react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { ConversationList } from '@/components/chat/ConversationList';
@@ -16,7 +23,13 @@ import {
   MESSAGE_STATUS,
   API_STATUS
 } from '@/types/chat';
+import { Button } from '@/components/ui/button';
+import ConversationTitle from '@/components/chat/ConversationTitle';
 
+/**
+ * @interface Conversation
+ * @description Represents a chat conversation with its metadata
+ */
 interface Conversation {
   id: string;
   title: string;
@@ -25,6 +38,7 @@ interface Conversation {
   isStarred: boolean;
   gaAccountId?: string;
   gaPropertyId?: string;
+  clientId?: string; // New: client ID for account reps
   gaAccount?: {
     id: string;
     gaAccountId: string;
@@ -35,21 +49,47 @@ interface Conversation {
     gaPropertyId: string;
     gaPropertyName: string;
   };
+  client?: {
+    id: string;
+    name: string | null;
+    email: string | null;
+  };
 }
 
+/**
+ * @interface GaAccount
+ * @description Google Analytics account information
+ */
 interface GaAccount {
   id: string;
   gaAccountId: string;
   gaAccountName: string;
   gaProperties: GaProperty[];
+  userId?: string; // The user who owns this account
 }
 
+/**
+ * @interface GaProperty
+ * @description Google Analytics property information
+ */
 interface GaProperty {
   id: string;
   gaPropertyId: string;
   gaPropertyName: string;
 }
 
+/**
+ * @interface Client
+ * @description Client user information for account representatives
+ */
+interface Client {
+  id: string;
+  name: string | null;
+  email: string | null;
+  gaAccounts: GaAccount[];
+}
+
+// Mock data for development
 const mockTags = [
   { id: '1', name: 'Next.js' },
   { id: '2', name: 'Setup' },
@@ -70,13 +110,22 @@ const mockSources = [
   },
 ];
 
+/**
+ * @function ChatPage
+ * @description Main chat interface page component with conversation management and real-time message handling
+ * @returns {JSX.Element} Chat interface with conversation list and chat window
+ */
 export default function ChatPage() {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState(mockTags);
   const queryClient = useQueryClient();
+  
+  const isAccountRep = session?.user?.role === 'ACCOUNT_REP';
 
-  // Fetch GA accounts
+  /**
+   * Fetch Google Analytics accounts for the current user
+   */
   const { data: gaAccounts = [] } = useQuery<GaAccount[]>({
     queryKey: ['ga-accounts'],
     queryFn: async () => {
@@ -87,10 +136,28 @@ export default function ChatPage() {
       }
       return response.json();
     },
-    enabled: !!session?.user?.id,
+    enabled: !!session?.user?.id && !isAccountRep, // Only enable for non-account reps
+  });
+  
+  /**
+   * Fetch clients for account representatives
+   */
+  const { data: clients = [] } = useQuery<Client[]>({
+    queryKey: ['clients'],
+    queryFn: async () => {
+      if (!session?.user?.id) return [];
+      const response = await fetch('/api/users');
+      if (!response.ok) {
+        throw new Error('Failed to fetch clients');
+      }
+      return response.json();
+    },
+    enabled: !!session?.user?.id && isAccountRep, // Only enable for account reps
   });
 
-  // Fetch conversations
+  /**
+   * Fetch all conversations for the current user
+   */
   const { data: conversations = [], isLoading: isLoadingConversations } = useQuery<Conversation[]>({
     queryKey: ['conversations'],
     queryFn: async () => {
@@ -111,6 +178,22 @@ export default function ChatPage() {
             isStarred: conv.isStarred,
             gaAccountId: conv.gaAccount?.gaAccountId,
             gaPropertyId: conv.gaProperty?.gaPropertyId,
+            clientId: conv.client?.id,
+            client: conv.client ? {
+              id: conv.client.id,
+              name: conv.client.name,
+              email: conv.client.email
+            } : undefined,
+            gaAccount: conv.gaAccount ? {
+              id: conv.gaAccount.id,
+              gaAccountId: conv.gaAccount.gaAccountId,
+              gaAccountName: conv.gaAccount.gaAccountName
+            } : undefined,
+            gaProperty: conv.gaProperty ? {
+              id: conv.gaProperty.id,
+              gaPropertyId: conv.gaProperty.gaPropertyId,
+              gaPropertyName: conv.gaProperty.gaPropertyName
+            } : undefined
           });
         }
       });
@@ -126,14 +209,18 @@ export default function ChatPage() {
     conversations[0]?.id
   );
 
-  // Update selected conversation when conversations load
+  /**
+   * Effect to update selected conversation when conversations load
+   */
   useEffect(() => {
     if (conversations.length > 0 && !selectedConversation) {
       setSelectedConversation(conversations[0].id);
     }
   }, [conversations, selectedConversation]);
 
-  // Fetch messages for selected conversation
+  /**
+   * Fetch messages for currently selected conversation
+   */
   const { data: messages = [], isLoading: isLoadingMessages } = useQuery<Message[]>({
     queryKey: ['conversation-messages', selectedConversation],
     queryFn: async () => {
@@ -151,9 +238,16 @@ export default function ChatPage() {
   // Fetch selected conversation details
   const selectedConversationDetails = conversations.find(conv => conv.id === selectedConversation);
 
-  // Create conversation mutation
+  /**
+   * Mutation to create a new conversation
+   */
   const createConversationMutation = useMutation({
-    mutationFn: async (data: { title: string; gaAccountId?: string; gaPropertyId?: string }) => {
+    mutationFn: async (data: { 
+      title: string; 
+      gaAccountId?: string; 
+      gaPropertyId?: string;
+      clientId?: string; // New: client ID for account reps
+    }) => {
       const response = await fetch('/api/conversations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -174,7 +268,9 @@ export default function ChatPage() {
     },
   });
 
-  // Star/unstar mutation
+  /**
+   * Mutation to star or unstar a conversation
+   */
   const starMutation = useMutation({
     mutationFn: async ({ id, isStarred }: { id: string; isStarred: boolean }) => {
       const response = await fetch('/api/conversations', {
@@ -194,6 +290,9 @@ export default function ChatPage() {
     },
   });
 
+  /**
+   * Mutation to send a message and handle both synchronous and asynchronous responses
+   */
   const sendMessageMutation = useMutation({
     mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
       console.log('[Debug] Starting message mutation for conversation:', conversationId);
@@ -337,7 +436,11 @@ export default function ChatPage() {
     },
   });
 
-  // Function to poll for query status
+  /**
+   * Polls the server for message status updates when handling async responses
+   * @param queryId - ID of the query to poll for
+   * @param conversationId - ID of the conversation being updated
+   */
   const startStatusPolling = async (queryId: string, conversationId: string) => {
     console.log('[Debug] Starting polling for queryId:', queryId);
     
@@ -420,7 +523,9 @@ export default function ChatPage() {
     }, 5 * 60 * 1000);
   };
 
-  // Add rating mutation
+  /**
+   * Mutation to add thumbs up/down rating to a message
+   */
   const rateMessageMutation = useMutation({
     mutationFn: async ({ messageId, rating }: { messageId: string; rating: -1 | 1 }) => {
       const response = await fetch(`/api/queries/${messageId}/rate`, {
@@ -447,14 +552,28 @@ export default function ChatPage() {
     },
   });
 
+  /**
+   * Creates a new conversation
+   * @param data - Data for the new conversation (title, GA account ID, GA property ID, client ID)
+   */
   const handleCreateConversation = async (data: { 
     title: string; 
     gaAccountId?: string; 
-    gaPropertyId?: string; 
+    gaPropertyId?: string;
+    clientId?: string; // New: client ID for account reps
   }) => {
-    await createConversationMutation.mutate(data);
+    try {
+      await createConversationMutation.mutateAsync(data);
+    } catch (error) {
+      console.error('Error creating conversation:', error);
+      // You might want to add toast notification here
+    }
   };
 
+  /**
+   * Toggles starred status for a conversation
+   * @param id - ID of the conversation to toggle
+   */
   const handleToggleStar = async (id: string) => {
     const conversation = conversations.find(conv => conv.id === id);
     if (conversation) {
@@ -465,28 +584,33 @@ export default function ChatPage() {
     }
   };
 
-  const handleSendMessage = async (message: string) => {
-    try {
-      if (!selectedConversation) {
-        const newConversation = await createConversationMutation.mutateAsync({
-          title: 'New Conversation'
-        });
-        await sendMessageMutation.mutateAsync({
-          conversationId: newConversation.id,
-          message,
-        });
-      } else {
-        await sendMessageMutation.mutateAsync({
-          conversationId: selectedConversation,
-          message,
-        });
-      }
-    } catch (error) {
-      console.error('Error in handleSendMessage:', error);
-      throw error;
-    }
+  /**
+   * Selects a conversation and closes the mobile menu
+   * @param id - ID of the conversation to select
+   */
+  const handleSelectConversation = (id: string) => {
+    setSelectedConversation(id);
+    setIsMobileMenuOpen(false);
   };
 
+  /**
+   * Handles sending a message to the selected conversation
+   * @param message - The message content to send
+   */
+  const handleSendMessage = async (message: string) => {
+    if (!selectedConversation) return;
+    
+    await sendMessageMutation.mutateAsync({
+      conversationId: selectedConversation,
+      message,
+    });
+  };
+
+  /**
+   * Adds a thumbs up/down rating to a message
+   * @param messageId - ID of the message to rate
+   * @param rating - Rating value (1 for thumbs up, -1 for thumbs down)
+   */
   const handleRateMessage = (messageId: string, rating: -1 | 1) => {
     // Remove -response suffix if present before making the API call
     const queryId = messageId.replace('-response', '');
@@ -498,62 +622,112 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-background">
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <div className="hidden md:flex md:w-80 md:flex-col md:border-r">
+        <SheetContent side="left" className="p-0 w-80">
           <ConversationList
             conversations={conversations}
             selectedId={selectedConversation}
-            onSelect={(id) => {
-              setSelectedConversation(id);
-              setIsMobileMenuOpen(false);
-            }}
+            onSelect={handleSelectConversation}
             onToggleStar={handleToggleStar}
             onCreateConversation={handleCreateConversation}
             isLoading={createConversationMutation.isPending}
             gaAccounts={gaAccounts}
-          />
-        </div>
-        <SheetContent side="left" className="w-80 p-0">
-          <ConversationList
-            conversations={conversations}
-            selectedId={selectedConversation}
-            onSelect={(id) => {
-              setSelectedConversation(id);
-              setIsMobileMenuOpen(false);
-            }}
-            onToggleStar={handleToggleStar}
-            onCreateConversation={handleCreateConversation}
-            isLoading={createConversationMutation.isPending}
-            gaAccounts={gaAccounts}
+            clients={isAccountRep ? clients : []} // Pass clients data to ConversationList
           />
         </SheetContent>
       </Sheet>
-      <div className="flex flex-1 flex-col">
-        <ChatWindow
-          messages={messages}
-          isLoading={isLoadingMessages}
-          gaAccountId={selectedConversationDetails?.gaAccountId}
-          gaPropertyId={selectedConversationDetails?.gaPropertyId}
-          onRateMessage={handleRateMessage}
+
+      <div className="hidden md:flex md:w-80 md:flex-col h-full border-r">
+        <ConversationList
+          conversations={conversations}
+          selectedId={selectedConversation}
+          onSelect={handleSelectConversation}
+          onToggleStar={handleToggleStar}
+          onCreateConversation={handleCreateConversation}
+          isLoading={createConversationMutation.isPending}
+          gaAccounts={gaAccounts}
+          clients={isAccountRep ? clients : []} // Pass clients data to ConversationList
         />
-        <div className="border-t p-4">
-          <div className="flex flex-1 items-center space-x-2">
-            <div className="flex-1">
-              <ChatInput onSend={handleSendMessage} />
-            </div>
-            <div className="flex items-center space-x-2">
-              <TagSelector
+      </div>
+
+      <div className="flex flex-1 flex-col h-full">
+        <div className="flex justify-between items-center border-b p-4 md:hidden">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open menu</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-6 w-6"
+            >
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </Button>
+          <h1 className="text-lg font-medium">Chat</h1>
+          <div className="w-10" />
+        </div>
+
+        {selectedConversation ? (
+          <div className="flex flex-col flex-1">
+            <ConversationTitle
+              title={selectedConversationDetails?.title || ''}
+              timestamp={selectedConversationDetails?.timestamp || ''}
+              isStarred={selectedConversationDetails?.isStarred || false}
+              onToggleStar={() => handleToggleStar(selectedConversation)}
+              client={selectedConversationDetails?.client}
+              gaAccount={selectedConversationDetails?.gaAccount}
+              gaProperty={selectedConversationDetails?.gaProperty}
+            />
+            <div className="flex space-x-2 p-4 border-b">
+              <TagSelector 
                 selectedTags={selectedTags}
                 onAddTag={(tag) => setSelectedTags([...selectedTags, tag])}
-                onRemoveTag={(tagId) =>
-                  setSelectedTags(selectedTags.filter((tag) => tag.id !== tagId))
-                }
+                onRemoveTag={(tagId) => setSelectedTags(selectedTags.filter(tag => tag.id !== tagId))}
               />
               <SourcesButton sources={mockSources} />
             </div>
+
+            <div className="flex-1 overflow-y-auto">
+              <ChatWindow
+                messages={messages}
+                isLoading={sendMessageMutation.isPending}
+                gaAccountId={selectedConversationDetails?.gaAccountId}
+                gaPropertyId={selectedConversationDetails?.gaPropertyId}
+                onRateMessage={handleRateMessage}
+              />
+            </div>
+
+            <div className="border-t p-4">
+              <ChatInput onSend={handleSendMessage} />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+            <h2 className="text-2xl font-bold mb-2">No Conversation Selected</h2>
+            <p className="text-muted-foreground mb-4">
+              Select an existing conversation or create a new one to get started.
+            </p>
+            <Button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden"
+            >
+              Show Conversations
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

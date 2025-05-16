@@ -25,6 +25,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus } from 'lucide-react';
 import { NewConversationButton } from './NewConversationButton';
+import ConversationTitle from './ConversationTitle';
 
 /**
  * Interface for conversation data.
@@ -33,6 +34,9 @@ import { NewConversationButton } from './NewConversationButton';
  * @property {string} lastMessage - Most recent message in the conversation
  * @property {string} timestamp - Human-readable timestamp
  * @property {boolean} isStarred - Whether the conversation is bookmarked
+ * @property {Client} client - Client information (optional)
+ * @property {GaAccount} gaAccount - Google Analytics account information (optional)
+ * @property {GaProperty} gaProperty - Google Analytics property information (optional)
  */
 interface Conversation {
   id: string;
@@ -40,6 +44,21 @@ interface Conversation {
   lastMessage: string;
   timestamp: string;
   isStarred: boolean;
+  client?: {
+    id: string;
+    name: string | null;
+    email: string | null;
+  };
+  gaAccount?: {
+    id: string;
+    gaAccountId: string;
+    gaAccountName: string;
+  };
+  gaProperty?: {
+    id: string;
+    gaPropertyId: string;
+    gaPropertyName: string;
+  };
 }
 
 /**
@@ -47,11 +66,13 @@ interface Conversation {
  * @property {string} title - Display title for the conversation
  * @property {string} gaAccountId - Google Analytics account ID
  * @property {string} gaPropertyId - Google Analytics property ID
+ * @property {string} clientId - Client ID (for account reps)
  */
 interface ConversationCreateData {
   title: string;
   gaAccountId?: string;
   gaPropertyId?: string;
+  clientId?: string;
 }
 
 /**
@@ -81,6 +102,20 @@ interface GaAccount {
 }
 
 /**
+ * Interface for client data.
+ * @property {string} id - Unique identifier for the client
+ * @property {string} name - Display name for the client
+ * @property {string} email - Email address of the client
+ * @property {GaAccount[]} gaAccounts - Google Analytics accounts owned by this client
+ */
+interface Client {
+  id: string;
+  name: string | null;
+  email: string | null;
+  gaAccounts: GaAccount[];
+}
+
+/**
  * Props for the ConversationList component.
  * @property {Conversation[]} conversations - Array of conversation items to display
  * @property {string} selectedId - ID of the currently selected conversation
@@ -89,6 +124,7 @@ interface GaAccount {
  * @property {function} onCreateConversation - Callback when a new conversation is created
  * @property {boolean} isLoading - Whether the conversation creation is in progress
  * @property {GaAccount[]} gaAccounts - Array of Google Analytics account items to display
+ * @property {Client[]} clients - Array of client users (only used for account reps)
  */
 interface ConversationListProps {
   conversations: Conversation[];
@@ -98,6 +134,7 @@ interface ConversationListProps {
   onCreateConversation: (data: ConversationCreateData) => Promise<void>;
   isLoading?: boolean;
   gaAccounts: GaAccount[];
+  clients?: Client[];
 }
 
 /**
@@ -134,6 +171,7 @@ export function ConversationList({
   onCreateConversation,
   isLoading,
   gaAccounts,
+  clients,
 }: ConversationListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -149,6 +187,7 @@ export function ConversationList({
           onCreateConversation={onCreateConversation}
           isLoading={isLoading}
           gaAccounts={gaAccounts}
+          clients={clients}
         />
         <Input
           type="search"
@@ -176,7 +215,7 @@ export function ConversationList({
               role="option"
               tabIndex={0}
               className={cn(
-                'flex w-full flex-col items-start rounded-lg px-4 py-2 text-left transition-colors',
+                'flex w-full flex-col items-start rounded-lg px-1 py-1 text-left transition-colors',
                 selectedId === conversation.id
                   ? 'bg-accent text-accent-foreground'
                   : 'hover:bg-muted'
@@ -184,37 +223,16 @@ export function ConversationList({
               aria-selected={selectedId === conversation.id}
               aria-label={`Conversation: ${conversation.title}`}
             >
-              <div className="flex w-full items-center justify-between">
-                <span className="font-medium">{conversation.title}</span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleStar(conversation.id);
-                  }}
-                  className="text-muted-foreground hover:text-yellow-400"
-                  aria-label={conversation.isStarred ? 'Remove bookmark' : 'Add bookmark'}
-                >
-                  {conversation.isStarred ? (
-                    hoveredId === conversation.id ? (
-                      <BookmarkMinus className="h-4 w-4" />
-                    ) : (
-                      <BookmarkCheck className="h-4 w-4" />
-                    )
-                  ) : (
-                    hoveredId === conversation.id ? (
-                      <BookmarkPlus className="h-4 w-4" />
-                    ) : (
-                      <Bookmark className="h-4 w-4" />
-                    )
-                  )}
-                </button>
-              </div>
-              <span className="mt-1 text-sm text-muted-foreground line-clamp-1">
-                {conversation.lastMessage}
-              </span>
-              <span className="mt-1 text-xs text-muted-foreground">
-                {conversation.timestamp}
-              </span>
+              <ConversationTitle
+                title={conversation.title}
+                timestamp={conversation.timestamp}
+                isStarred={conversation.isStarred}
+                onToggleStar={() => onToggleStar(conversation.id)}
+                client={conversation.client}
+                gaAccount={conversation.gaAccount}
+                gaProperty={conversation.gaProperty}
+                className="p-0"
+              />
             </div>
           ))}
         </div>

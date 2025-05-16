@@ -62,6 +62,7 @@ const extendedPrisma = prisma as ExtendedPrismaClient;
  * 
  * Retrieves all conversations for the authenticated user, ordered by most recently updated.
  * Includes the most recent query for each conversation.
+ * For account reps, includes client information.
  * 
  * @returns {Promise<NextResponse>} JSON response with conversations array or error
  * @throws {NextResponse} 401 if user is not authenticated
@@ -72,6 +73,16 @@ export async function GET() {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    // Get current user with role information
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: { role: true },
+    });
+
+    if (!currentUser) {
+      return new NextResponse('User not found', { status: 404 });
     }
 
     const conversations = await prisma.conversation.findMany({
@@ -86,7 +97,6 @@ export async function GET() {
           orderBy: {
             createdAt: 'desc',
           },
-          
           take: 1,
           select: {
             content: true,
@@ -104,6 +114,13 @@ export async function GET() {
             id: true,
             gaPropertyId: true,
             gaPropertyName: true,
+          },
+        },
+        client: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
           },
         },
       },
@@ -168,11 +185,13 @@ export async function PATCH(request: Request) {
  * 
  * Creates a new conversation for the authenticated user.
  * Optionally includes Google Analytics account and property IDs.
+ * For account reps, can create conversations on behalf of clients.
  * 
  * @param {Request} request - Contains title and optional GA properties
  * @returns {Promise<NextResponse>} JSON response with created conversation or error
  * @throws {NextResponse} 400 if title is missing
  * @throws {NextResponse} 401 if user is not authenticated
+ * @throws {NextResponse} 403 if user tries to create conversation for a client they don't manage
  * @throws {NextResponse} 500 if server error occurs
  */
 export async function POST(request: Request) {
@@ -182,12 +201,50 @@ export async function POST(request: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    const { title, gaAccountId, gaPropertyId } = await request.json();
+    const { title, gaAccountId, gaPropertyId, clientId } = await request.json();
     if (!title) {
       return new NextResponse('Title is required', { status: 400 });
     }
 
-    // Create a new conversation with the given title and optional GA fields
+    // Get current user with role info
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: { role: true },
+    });
+
+    if (!currentUser) {
+      return new NextResponse('User not found', { status: 404 });
+    }
+
+    // Handle account rep creating conversation for a client
+    if (clientId && currentUser.role.name === 'ACCOUNT_REP') {
+      // Verify that this client belongs to the account rep
+      const client = await prisma.user.findFirst({
+        where: {
+          id: clientId,
+          accountRepId: session.user.id,
+        },
+      });
+
+      if (!client) {
+        return new NextResponse('Client not found or not authorized', { status: 403 });
+      }
+
+      // Create conversation on behalf of the client
+      const conversation = await prisma.conversation.create({
+        data: {
+          title,
+          userId: session.user.id, // The conversation belongs to the account rep
+          clientId, // But reference the client ID
+          ...(gaAccountId ? { gaAccountId } : {}),
+          ...(gaPropertyId ? { gaPropertyId } : {}),
+        },
+      });
+
+      return NextResponse.json(conversation);
+    }
+
+    // Regular user creating their own conversation
     const conversation = await prisma.conversation.create({
       data: {
         title,

@@ -3592,6 +3592,7 @@ export namespace Prisma {
     sessions: number
     queries: number
     conversations: number
+    clientConversations: number
     sentMessages: number
     receivedMessages: number
     notifications: number
@@ -3611,6 +3612,7 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     queries?: boolean | UserCountOutputTypeCountQueriesArgs
     conversations?: boolean | UserCountOutputTypeCountConversationsArgs
+    clientConversations?: boolean | UserCountOutputTypeCountClientConversationsArgs
     sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
     receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
@@ -3667,6 +3669,13 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConversationWhereInput
   }
 
@@ -6147,6 +6156,7 @@ export namespace Prisma {
     updatedAt: Date | null
     gaAccountId: string | null
     gaPropertyId: string | null
+    clientId: string | null
     userId: string | null
   }
 
@@ -6159,6 +6169,7 @@ export namespace Prisma {
     updatedAt: Date | null
     gaAccountId: string | null
     gaPropertyId: string | null
+    clientId: string | null
     userId: string | null
   }
 
@@ -6171,6 +6182,7 @@ export namespace Prisma {
     updatedAt: number
     gaAccountId: number
     gaPropertyId: number
+    clientId: number
     userId: number
     _all: number
   }
@@ -6185,6 +6197,7 @@ export namespace Prisma {
     updatedAt?: true
     gaAccountId?: true
     gaPropertyId?: true
+    clientId?: true
     userId?: true
   }
 
@@ -6197,6 +6210,7 @@ export namespace Prisma {
     updatedAt?: true
     gaAccountId?: true
     gaPropertyId?: true
+    clientId?: true
     userId?: true
   }
 
@@ -6209,6 +6223,7 @@ export namespace Prisma {
     updatedAt?: true
     gaAccountId?: true
     gaPropertyId?: true
+    clientId?: true
     userId?: true
     _all?: true
   }
@@ -6294,6 +6309,7 @@ export namespace Prisma {
     updatedAt: Date
     gaAccountId: string | null
     gaPropertyId: string | null
+    clientId: string | null
     userId: string
     _count: ConversationCountAggregateOutputType | null
     _min: ConversationMinAggregateOutputType | null
@@ -6323,8 +6339,10 @@ export namespace Prisma {
     updatedAt?: boolean
     gaAccountId?: boolean
     gaPropertyId?: boolean
+    clientId?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    client?: boolean | Conversation$clientArgs<ExtArgs>
     queries?: boolean | Conversation$queriesArgs<ExtArgs>
     gaAccount?: boolean | Conversation$gaAccountArgs<ExtArgs>
     gaProperty?: boolean | Conversation$gaPropertyArgs<ExtArgs>
@@ -6340,8 +6358,10 @@ export namespace Prisma {
     updatedAt?: boolean
     gaAccountId?: boolean
     gaPropertyId?: boolean
+    clientId?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    client?: boolean | Conversation$clientArgs<ExtArgs>
     gaAccount?: boolean | Conversation$gaAccountArgs<ExtArgs>
     gaProperty?: boolean | Conversation$gaPropertyArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
@@ -6355,8 +6375,10 @@ export namespace Prisma {
     updatedAt?: boolean
     gaAccountId?: boolean
     gaPropertyId?: boolean
+    clientId?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    client?: boolean | Conversation$clientArgs<ExtArgs>
     gaAccount?: boolean | Conversation$gaAccountArgs<ExtArgs>
     gaProperty?: boolean | Conversation$gaPropertyArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
@@ -6370,12 +6392,14 @@ export namespace Prisma {
     updatedAt?: boolean
     gaAccountId?: boolean
     gaPropertyId?: boolean
+    clientId?: boolean
     userId?: boolean
   }
 
-  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "isStarred" | "createdAt" | "updatedAt" | "gaAccountId" | "gaPropertyId" | "userId", ExtArgs["result"]["conversation"]>
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "isStarred" | "createdAt" | "updatedAt" | "gaAccountId" | "gaPropertyId" | "clientId" | "userId", ExtArgs["result"]["conversation"]>
   export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    client?: boolean | Conversation$clientArgs<ExtArgs>
     queries?: boolean | Conversation$queriesArgs<ExtArgs>
     gaAccount?: boolean | Conversation$gaAccountArgs<ExtArgs>
     gaProperty?: boolean | Conversation$gaPropertyArgs<ExtArgs>
@@ -6383,11 +6407,13 @@ export namespace Prisma {
   }
   export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    client?: boolean | Conversation$clientArgs<ExtArgs>
     gaAccount?: boolean | Conversation$gaAccountArgs<ExtArgs>
     gaProperty?: boolean | Conversation$gaPropertyArgs<ExtArgs>
   }
   export type ConversationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    client?: boolean | Conversation$clientArgs<ExtArgs>
     gaAccount?: boolean | Conversation$gaAccountArgs<ExtArgs>
     gaProperty?: boolean | Conversation$gaPropertyArgs<ExtArgs>
   }
@@ -6396,6 +6422,7 @@ export namespace Prisma {
     name: "Conversation"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      client: Prisma.$UserPayload<ExtArgs> | null
       queries: Prisma.$QueryPayload<ExtArgs>[]
       gaAccount: Prisma.$GaAccountPayload<ExtArgs> | null
       gaProperty: Prisma.$GaPropertyPayload<ExtArgs> | null
@@ -6409,6 +6436,7 @@ export namespace Prisma {
       updatedAt: Date
       gaAccountId: string | null
       gaPropertyId: string | null
+      clientId: string | null
       userId: string
     }, ExtArgs["result"]["conversation"]>
     composites: {}
@@ -6805,6 +6833,7 @@ export namespace Prisma {
   export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    client<T extends Conversation$clientArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$clientArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     queries<T extends Conversation$queriesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$queriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QueryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gaAccount<T extends Conversation$gaAccountArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$gaAccountArgs<ExtArgs>>): Prisma__GaAccountClient<$Result.GetResult<Prisma.$GaAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     gaProperty<T extends Conversation$gaPropertyArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$gaPropertyArgs<ExtArgs>>): Prisma__GaPropertyClient<$Result.GetResult<Prisma.$GaPropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6845,6 +6874,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
     readonly gaAccountId: FieldRef<"Conversation", 'String'>
     readonly gaPropertyId: FieldRef<"Conversation", 'String'>
+    readonly clientId: FieldRef<"Conversation", 'String'>
     readonly userId: FieldRef<"Conversation", 'String'>
   }
     
@@ -7239,6 +7269,25 @@ export namespace Prisma {
      * Limit how many Conversations to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Conversation.client
+   */
+  export type Conversation$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -26038,6 +26087,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     queries?: boolean | User$queriesArgs<ExtArgs>
     conversations?: boolean | User$conversationsArgs<ExtArgs>
+    clientConversations?: boolean | User$clientConversationsArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
@@ -26108,6 +26158,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     queries?: boolean | User$queriesArgs<ExtArgs>
     conversations?: boolean | User$conversationsArgs<ExtArgs>
+    clientConversations?: boolean | User$clientConversationsArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
@@ -26141,6 +26192,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       queries: Prisma.$QueryPayload<ExtArgs>[]
       conversations: Prisma.$ConversationPayload<ExtArgs>[]
+      clientConversations: Prisma.$ConversationPayload<ExtArgs>[]
       sentMessages: Prisma.$MessagePayload<ExtArgs>[]
       receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
@@ -26567,6 +26619,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     queries<T extends User$queriesArgs<ExtArgs> = {}>(args?: Subset<T, User$queriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QueryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversations<T extends User$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientConversations<T extends User$clientConversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receivedMessages<T extends User$receivedMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -27133,6 +27186,30 @@ export namespace Prisma {
    * User.conversations
    */
   export type User$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientConversations
+   */
+  export type User$clientConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Conversation
      */
@@ -35258,6 +35335,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     gaAccountId: 'gaAccountId',
     gaPropertyId: 'gaPropertyId',
+    clientId: 'clientId',
     userId: 'userId'
   };
 
@@ -35983,8 +36061,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     gaAccountId?: StringNullableFilter<"Conversation"> | string | null
     gaPropertyId?: StringNullableFilter<"Conversation"> | string | null
+    clientId?: StringNullableFilter<"Conversation"> | string | null
     userId?: StringFilter<"Conversation"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    client?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     queries?: QueryListRelationFilter
     gaAccount?: XOR<GaAccountNullableScalarRelationFilter, GaAccountWhereInput> | null
     gaProperty?: XOR<GaPropertyNullableScalarRelationFilter, GaPropertyWhereInput> | null
@@ -35999,8 +36079,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     gaAccountId?: SortOrderInput | SortOrder
     gaPropertyId?: SortOrderInput | SortOrder
+    clientId?: SortOrderInput | SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
+    client?: UserOrderByWithRelationInput
     queries?: QueryOrderByRelationAggregateInput
     gaAccount?: GaAccountOrderByWithRelationInput
     gaProperty?: GaPropertyOrderByWithRelationInput
@@ -36018,8 +36100,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     gaAccountId?: StringNullableFilter<"Conversation"> | string | null
     gaPropertyId?: StringNullableFilter<"Conversation"> | string | null
+    clientId?: StringNullableFilter<"Conversation"> | string | null
     userId?: StringFilter<"Conversation"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    client?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     queries?: QueryListRelationFilter
     gaAccount?: XOR<GaAccountNullableScalarRelationFilter, GaAccountWhereInput> | null
     gaProperty?: XOR<GaPropertyNullableScalarRelationFilter, GaPropertyWhereInput> | null
@@ -36034,6 +36118,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     gaAccountId?: SortOrderInput | SortOrder
     gaPropertyId?: SortOrderInput | SortOrder
+    clientId?: SortOrderInput | SortOrder
     userId?: SortOrder
     _count?: ConversationCountOrderByAggregateInput
     _max?: ConversationMaxOrderByAggregateInput
@@ -36052,6 +36137,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
     gaAccountId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     gaPropertyId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    clientId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     userId?: StringWithAggregatesFilter<"Conversation"> | string
   }
 
@@ -37316,6 +37402,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     queries?: QueryListRelationFilter
     conversations?: ConversationListRelationFilter
+    clientConversations?: ConversationListRelationFilter
     sentMessages?: MessageListRelationFilter
     receivedMessages?: MessageListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -37349,6 +37436,7 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     queries?: QueryOrderByRelationAggregateInput
     conversations?: ConversationOrderByRelationAggregateInput
+    clientConversations?: ConversationOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
     receivedMessages?: MessageOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
@@ -37385,6 +37473,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     queries?: QueryListRelationFilter
     conversations?: ConversationListRelationFilter
+    clientConversations?: ConversationListRelationFilter
     sentMessages?: MessageListRelationFilter
     receivedMessages?: MessageListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -38065,6 +38154,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutConversationsInput
+    client?: UserCreateNestedOneWithoutClientConversationsInput
     queries?: QueryCreateNestedManyWithoutConversationInput
     gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
     gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
@@ -38079,6 +38169,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     gaAccountId?: string | null
     gaPropertyId?: string | null
+    clientId?: string | null
     userId: string
     queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
   }
@@ -38091,6 +38182,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    client?: UserUpdateOneWithoutClientConversationsNestedInput
     queries?: QueryUpdateManyWithoutConversationNestedInput
     gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
     gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
@@ -38105,6 +38197,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
   }
@@ -38118,6 +38211,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     gaAccountId?: string | null
     gaPropertyId?: string | null
+    clientId?: string | null
     userId: string
   }
 
@@ -38139,6 +38233,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -39499,6 +39594,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -39530,6 +39626,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -39561,6 +39658,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -39592,6 +39690,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -40376,6 +40475,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type QueryListRelationFilter = {
     every?: QueryWhereInput
     some?: QueryWhereInput
@@ -40405,6 +40509,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     gaAccountId?: SortOrder
     gaPropertyId?: SortOrder
+    clientId?: SortOrder
     userId?: SortOrder
   }
 
@@ -40417,6 +40522,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     gaAccountId?: SortOrder
     gaPropertyId?: SortOrder
+    clientId?: SortOrder
     userId?: SortOrder
   }
 
@@ -40429,6 +40535,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     gaAccountId?: SortOrder
     gaPropertyId?: SortOrder
+    clientId?: SortOrder
     userId?: SortOrder
   }
 
@@ -41490,11 +41597,6 @@ export namespace Prisma {
     isNot?: RoleWhereInput
   }
 
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -42010,6 +42112,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutClientConversationsInput = {
+    create?: XOR<UserCreateWithoutClientConversationsInput, UserUncheckedCreateWithoutClientConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientConversationsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type QueryCreateNestedManyWithoutConversationInput = {
     create?: XOR<QueryCreateWithoutConversationInput, QueryUncheckedCreateWithoutConversationInput> | QueryCreateWithoutConversationInput[] | QueryUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: QueryCreateOrConnectWithoutConversationInput | QueryCreateOrConnectWithoutConversationInput[]
@@ -42046,6 +42154,16 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutConversationsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConversationsInput, UserUpdateWithoutConversationsInput>, UserUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type UserUpdateOneWithoutClientConversationsNestedInput = {
+    create?: XOR<UserCreateWithoutClientConversationsInput, UserUncheckedCreateWithoutClientConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientConversationsInput
+    upsert?: UserUpsertWithoutClientConversationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientConversationsInput, UserUpdateWithoutClientConversationsInput>, UserUncheckedUpdateWithoutClientConversationsInput>
   }
 
   export type QueryUpdateManyWithoutConversationNestedInput = {
@@ -43015,6 +43133,13 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
+  export type ConversationCreateNestedManyWithoutClientInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
   export type MessageCreateNestedManyWithoutSenderInput = {
     create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
@@ -43130,6 +43255,13 @@ export namespace Prisma {
     create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
     createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
@@ -43305,6 +43437,20 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
     update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type ConversationUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutClientInput | ConversationUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutClientInput | ConversationUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutClientInput | ConversationUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
   }
 
@@ -43539,6 +43685,20 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
     update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutClientInput | ConversationUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutClientInput | ConversationUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutClientInput | ConversationUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
   }
 
@@ -44366,6 +44526,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -44396,6 +44557,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -44442,6 +44604,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -44472,6 +44635,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -44503,6 +44667,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -44533,6 +44698,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -44568,6 +44734,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -44598,6 +44765,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -44644,6 +44812,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -44674,6 +44843,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -44715,6 +44885,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -44745,6 +44916,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -44774,6 +44946,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -44804,6 +44977,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -44821,6 +44995,73 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutConversationsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type UserCreateWithoutClientConversationsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role: RoleCreateNestedOneWithoutUsersInput
+    accountRep?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    activities?: ClientActivityCreateNestedManyWithoutUserInput
+    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+  }
+
+  export type UserUncheckedCreateWithoutClientConversationsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    accountRepId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+  }
+
+  export type UserCreateOrConnectWithoutClientConversationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClientConversationsInput, UserUncheckedCreateWithoutClientConversationsInput>
   }
 
   export type QueryCreateWithoutConversationInput = {
@@ -44944,6 +45185,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -44974,6 +45216,80 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
+    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+  }
+
+  export type UserUpsertWithoutClientConversationsInput = {
+    update: XOR<UserUpdateWithoutClientConversationsInput, UserUncheckedUpdateWithoutClientConversationsInput>
+    create: XOR<UserCreateWithoutClientConversationsInput, UserUncheckedCreateWithoutClientConversationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClientConversationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClientConversationsInput, UserUncheckedUpdateWithoutClientConversationsInput>
+  }
+
+  export type UserUpdateWithoutClientConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    accountRep?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClientConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -45101,6 +45417,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -45131,6 +45448,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -45191,6 +45509,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutConversationsInput
+    client?: UserCreateNestedOneWithoutClientConversationsInput
     queries?: QueryCreateNestedManyWithoutConversationInput
     gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
   }
@@ -45203,6 +45522,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     gaPropertyId?: string | null
+    clientId?: string | null
     userId: string
     queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
   }
@@ -45245,6 +45565,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -45275,6 +45596,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -45342,6 +45664,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     gaAccountId?: StringNullableFilter<"Conversation"> | string | null
     gaPropertyId?: StringNullableFilter<"Conversation"> | string | null
+    clientId?: StringNullableFilter<"Conversation"> | string | null
     userId?: StringFilter<"Conversation"> | string
   }
 
@@ -45374,6 +45697,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutConversationsInput
+    client?: UserCreateNestedOneWithoutClientConversationsInput
     queries?: QueryCreateNestedManyWithoutConversationInput
     gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
   }
@@ -45386,6 +45710,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     gaAccountId?: string | null
+    clientId?: string | null
     userId: string
     queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
   }
@@ -45822,6 +46147,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -45852,6 +46178,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -45933,6 +46260,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -45963,6 +46291,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -46248,6 +46577,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -46278,6 +46608,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -46324,6 +46655,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -46354,6 +46686,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -46384,6 +46717,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -46414,6 +46748,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -46488,6 +46823,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     settings?: UserSettingsCreateNestedOneWithoutUserInput
@@ -46518,6 +46854,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
@@ -46553,6 +46890,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     settings?: UserSettingsCreateNestedOneWithoutUserInput
@@ -46583,6 +46921,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
@@ -46732,6 +47071,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     settings?: UserSettingsUpdateOneWithoutUserNestedInput
@@ -46762,6 +47102,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
@@ -46803,6 +47144,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     settings?: UserSettingsUpdateOneWithoutUserNestedInput
@@ -46833,6 +47175,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
@@ -46966,6 +47309,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     settings?: UserSettingsCreateNestedOneWithoutUserInput
@@ -46996,6 +47340,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
@@ -47042,6 +47387,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     settings?: UserSettingsUpdateOneWithoutUserNestedInput
@@ -47072,6 +47418,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
@@ -47471,6 +47818,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -47501,6 +47849,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -47528,6 +47877,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutConversationsInput
+    client?: UserCreateNestedOneWithoutClientConversationsInput
     gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
     gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
   }
@@ -47541,6 +47891,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     gaAccountId?: string | null
     gaPropertyId?: string | null
+    clientId?: string | null
     userId: string
   }
 
@@ -47680,6 +48031,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -47710,6 +48062,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -47743,6 +48096,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    client?: UserUpdateOneWithoutClientConversationsNestedInput
     gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
     gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
   }
@@ -47756,6 +48110,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -47794,6 +48149,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -47824,6 +48180,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -47859,6 +48216,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -47889,6 +48247,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -48024,6 +48383,7 @@ export namespace Prisma {
     isStarred?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    client?: UserCreateNestedOneWithoutClientConversationsInput
     queries?: QueryCreateNestedManyWithoutConversationInput
     gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
     gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
@@ -48038,6 +48398,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     gaAccountId?: string | null
     gaPropertyId?: string | null
+    clientId?: string | null
     queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
   }
 
@@ -48048,6 +48409,42 @@ export namespace Prisma {
 
   export type ConversationCreateManyUserInputEnvelope = {
     data: ConversationCreateManyUserInput | ConversationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationsInput
+    queries?: QueryCreateNestedManyWithoutConversationInput
+    gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
+    gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
+  }
+
+  export type ConversationUncheckedCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccountId?: string | null
+    gaPropertyId?: string | null
+    userId: string
+    queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutClientInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput>
+  }
+
+  export type ConversationCreateManyClientInputEnvelope = {
+    data: ConversationCreateManyClientInput | ConversationCreateManyClientInput[]
     skipDuplicates?: boolean
   }
 
@@ -48478,6 +48875,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -48508,6 +48906,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -48628,6 +49027,22 @@ export namespace Prisma {
   export type ConversationUpdateManyWithWhereWithoutUserInput = {
     where: ConversationScalarWhereInput
     data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutClientInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutClientInput, ConversationUncheckedUpdateWithoutClientInput>
+    create: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutClientInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutClientInput, ConversationUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutClientInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutClientInput>
   }
 
   export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
@@ -48930,6 +49345,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -48960,6 +49376,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -49006,6 +49423,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -49036,6 +49454,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -49066,6 +49485,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -49096,6 +49516,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -49131,6 +49552,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -49161,6 +49583,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -49274,6 +49697,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -49304,6 +49728,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -49345,6 +49770,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -49375,6 +49801,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -49578,6 +50005,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -49608,6 +50036,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -49693,6 +50122,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -49723,6 +50153,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -49878,6 +50309,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     queries?: QueryCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -49908,6 +50340,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     queries?: QueryUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -49954,6 +50387,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -49984,6 +50418,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -50073,6 +50508,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     gaPropertyId?: string | null
+    clientId?: string | null
     userId: string
   }
 
@@ -50114,6 +50550,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    client?: UserUpdateOneWithoutClientConversationsNestedInput
     queries?: QueryUpdateManyWithoutConversationNestedInput
     gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
   }
@@ -50126,6 +50563,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
   }
@@ -50138,6 +50576,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -50149,6 +50588,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     gaAccountId?: string | null
+    clientId?: string | null
     userId: string
   }
 
@@ -50221,6 +50661,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    client?: UserUpdateOneWithoutClientConversationsNestedInput
     queries?: QueryUpdateManyWithoutConversationNestedInput
     gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
   }
@@ -50233,6 +50674,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
   }
@@ -50245,6 +50687,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -50460,6 +50903,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -50490,6 +50934,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -50841,6 +51286,19 @@ export namespace Prisma {
     updatedAt?: Date | string
     gaAccountId?: string | null
     gaPropertyId?: string | null
+    clientId?: string | null
+  }
+
+  export type ConversationCreateManyClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccountId?: string | null
+    gaPropertyId?: string | null
+    userId: string
   }
 
   export type MessageCreateManySenderInput = {
@@ -50967,6 +51425,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     queries?: QueryUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -50997,6 +51456,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -51139,6 +51599,7 @@ export namespace Prisma {
     isStarred?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UserUpdateOneWithoutClientConversationsNestedInput
     queries?: QueryUpdateManyWithoutConversationNestedInput
     gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
     gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
@@ -51153,6 +51614,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
     queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
   }
 
@@ -51165,6 +51627,45 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConversationUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    queries?: QueryUpdateManyWithoutConversationNestedInput
+    gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
+    gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUpdateWithoutSenderInput = {

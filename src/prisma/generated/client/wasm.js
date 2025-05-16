@@ -153,6 +153,7 @@ exports.Prisma.ConversationScalarFieldEnum = {
   updatedAt: 'updatedAt',
   gaAccountId: 'gaAccountId',
   gaPropertyId: 'gaPropertyId',
+  clientId: 'clientId',
   userId: 'userId'
 };
 

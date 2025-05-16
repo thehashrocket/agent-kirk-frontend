@@ -91,8 +91,8 @@ export function Header() {
             <LayoutDashboard className="h-4 w-4" />
             <span>Dashboard</span>
           </Link>
-          {/* if role is client, show Chat link */}
-          {session.user.role === "CLIENT" && (
+          {/* if role is client or account rep, show Chat link */}
+          {(session.user.role === "CLIENT" || session.user.role === "ACCOUNT_REP") && (
             <Link
               href="/chat"
               className={cn(

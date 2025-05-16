@@ -83,16 +83,19 @@ model Conversation {
   updatedAt    DateTime @updatedAt
   gaAccountId  String?
   gaPropertyId String?
+  clientId     String?
 
   // Relations
   userId     String
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client     User?       @relation("ClientConversations", fields: [clientId], references: [id])
   queries    Query[]
   gaAccount  GaAccount?  @relation(fields: [gaAccountId], references: [id])
   gaProperty GaProperty? @relation(fields: [gaPropertyId], references: [id])
 
   @@index([userId])
   @@index([isStarred])
+  @@index([clientId])
 }
 
 model GaAccount {
@@ -210,8 +213,6 @@ model GaSourceDaily {
   @@index([date])
   @@index([trafficSource])
 }
-
-
 
 model Session {
   id           String   @id @default(cuid())
@@ -384,6 +385,7 @@ model User {
   sessions         Session[]
   queries          Query[]
   conversations    Conversation[]
+  clientConversations Conversation[] @relation("ClientConversations")
   sentMessages     Message[]            @relation("SentMessages")
   receivedMessages Message[]            @relation("ReceivedMessages")
   notifications    Notification[]
@@ -411,8 +413,6 @@ model UserSettings {
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
 }
-
-
 
 model Ticket {
   id          String         @id @default(cuid())
