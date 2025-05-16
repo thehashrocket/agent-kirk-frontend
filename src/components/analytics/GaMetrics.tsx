@@ -7,10 +7,12 @@
 'use client';
 
 import { GaMetricsGrid } from './GaMetricsGrid';
+import { GaAccountSelector } from './GaAccountSelector';
 import { Card, CardContent } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
+import { Loader2 } from 'lucide-react';
 
 /**
  * @component GaMetrics
@@ -23,9 +25,15 @@ export default function GaMetrics() {
   const [data, setData] = useState<GaMetricsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
+  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
+  const [selectedAccount, setSelectedAccount] = useState<any | null>(null);
+  const [selectedProperty, setSelectedProperty] = useState<any | null>(null);
 
   // Fetch GA metrics with optional date range
   const fetchGaMetrics = async (dateRange?: { from: Date; to: Date }) => {
+    if (!selectedPropertyId) return; // Don't fetch if no property is selected
+    
     setIsLoading(true);
     setError(null);
     
@@ -68,13 +76,12 @@ export default function GaMetrics() {
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
       params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd')); // Original date range for display
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
+      params.append('propertyId', selectedPropertyId);                   // Add property ID
       
       url = `${url}?${params.toString()}`;
       
       const response = await fetch(url);
 
-      console.log('response', response);
-      
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch analytics data');
@@ -92,13 +99,15 @@ export default function GaMetrics() {
     }
   };
 
-  // Fetch data on component mount
+  // Fetch data when property changes
   useEffect(() => {
-    fetchGaMetrics()
-      .catch(err => {
-        console.error('Failed to load initial GA metrics:', err);
-      });
-  }, []);
+    if (selectedPropertyId) {
+      fetchGaMetrics()
+        .catch(err => {
+          console.error('Failed to load initial GA metrics:', err);
+        });
+    }
+  }, [selectedPropertyId]);
 
   // Handle error state
   if (error) {
@@ -111,23 +120,32 @@ export default function GaMetrics() {
     );
   }
 
-  // Handle loading state
-  if (isLoading && !data) {
-    return (
-      <Card>
-        <CardContent className="py-6">
-          <p className="text-center text-muted-foreground">Loading analytics data...</p>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // Render the dashboard with data and callback for date range changes
   return (
-    <div>
-      {data ? (
-        console.log('data', data),
-        console.log('data.metadata', data.metadata),
+    <div className="space-y-6">
+      <GaAccountSelector
+        onAccountChange={setSelectedAccountId}
+        onPropertyChange={setSelectedPropertyId}
+        onAccountObjectChange={setSelectedAccount}
+        onPropertyObjectChange={setSelectedProperty}
+      />
+      
+      {/* Dynamic Title */}
+      {selectedAccount && selectedProperty && (
+        <h2 className="text-xl font-semibold text-primary-700 mb-2">
+          {selectedAccount.gaAccountName} – {selectedProperty.gaPropertyName}
+        </h2>
+      )}
+      
+      {isLoading ? (
+        <Card>
+          <CardContent className="py-6">
+            <div className="flex items-center justify-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+              <p className="text-center text-muted-foreground">Loading analytics data...</p>
+            </div>
+          </CardContent>
+        </Card>
+      ) : data ? (
         <GaMetricsGrid 
           data={data} 
           onDateRangeChange={fetchGaMetrics}
@@ -135,7 +153,9 @@ export default function GaMetrics() {
       ) : (
         <Card>
           <CardContent className="py-6">
-            <p className="text-center text-muted-foreground">No analytics data available</p>
+            <p className="text-center text-muted-foreground">
+              {selectedPropertyId ? 'No analytics data available' : 'Select a property to view analytics'}
+            </p>
           </CardContent>
         </Card>
       )}

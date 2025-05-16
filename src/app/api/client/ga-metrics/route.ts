@@ -208,6 +208,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     const selectedFromParam = searchParams.get('selectedFrom');
     const selectedToParam = searchParams.get('selectedTo');
     
+    // Get the property ID from the request
+    const requestedPropertyId = searchParams.get('propertyId');
+    
     // Use the extended date range for data fetching
     const dateFrom = fromParam ? new Date(fromParam) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const dateTo = toParam ? new Date(toParam) : new Date();
@@ -260,9 +263,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       hasProperties: Boolean(user?.gaAccounts?.[0]?.gaProperties?.length)
     }, null, 2));
 
-    let gaPropertyId: string;
-    let accountGA4: string;
-    let propertyGA4: string;
+    let gaPropertyId: string | undefined;
+    let accountGA4: string | undefined;
+    let propertyGA4: string | undefined;
 
     // Check if user has GA accounts
     if (!user?.gaAccounts?.length) {
@@ -273,51 +276,81 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       );
     }
 
-    // If no properties exist, create one
-    if (!user.gaAccounts[0].gaProperties?.length) {
-      console.log('GA Metrics API - No GA properties found, creating default property');
-      try {
-        const gaAccount = user.gaAccounts[0];
-        const newProperty = await prisma.gaProperty.create({
-          data: {
-            gaPropertyId: gaAccount.gaAccountId, // Use account ID as property ID for now
-            gaPropertyName: `Default Property for ${gaAccount.gaAccountName}`,
-            gaAccountId: gaAccount.id
-          }
-        });
-        console.log('GA Metrics API - Created new GA property:', newProperty.id);
-        gaPropertyId = newProperty.id;
-        accountGA4 = gaAccount.gaAccountId;
-        propertyGA4 = newProperty.gaPropertyId;
+    // Find the requested property if specified
+    if (requestedPropertyId) {
+      const requestedProperty = user.gaAccounts
+        .flatMap(account => account.gaProperties)
+        .find(property => property.id === requestedPropertyId);
 
-        // Clear any existing metrics for this property
-        console.log('GA Metrics API - Clearing any existing metrics for new property');
-        await Promise.all([
-          prisma.gaKpiDaily.deleteMany({
-            where: { gaPropertyId: newProperty.id }
-          }),
-          prisma.gaKpiMonthly.deleteMany({
-            where: { gaPropertyId: newProperty.id }
-          }),
-          prisma.gaChannelDaily.deleteMany({
-            where: { gaPropertyId: newProperty.id }
-          }),
-          prisma.gaSourceDaily.deleteMany({
-            where: { gaPropertyId: newProperty.id }
-          })
-        ]);
-        console.log('GA Metrics API - Cleared existing metrics');
-      } catch (error) {
-        console.error('GA Metrics API - Error creating GA property:', error);
-        return NextResponse.json(
-          { error: 'Failed to create GA property', code: 'PROPERTY_CREATE_ERROR' },
-          { status: 500 }
+      if (requestedProperty) {
+        const parentAccount = user.gaAccounts.find(account => 
+          account.gaProperties.some(prop => prop.id === requestedPropertyId)
         );
+        if (parentAccount) {
+          gaPropertyId = requestedProperty.id;
+          accountGA4 = parentAccount.gaAccountId;
+          propertyGA4 = requestedProperty.gaPropertyId;
+        }
       }
-    } else {
-      gaPropertyId = user.gaAccounts[0].gaProperties[0].id;
-      accountGA4 = user.gaAccounts[0].gaAccountId;
-      propertyGA4 = user.gaAccounts[0].gaProperties[0].gaPropertyId;
+    }
+
+    // If no property was found or no property was requested, use the first property
+    if (!gaPropertyId || !accountGA4 || !propertyGA4) {
+      // If no properties exist, create one
+      if (!user.gaAccounts[0].gaProperties?.length) {
+        console.log('GA Metrics API - No GA properties found, creating default property');
+        try {
+          const gaAccount = user.gaAccounts[0];
+          const newProperty = await prisma.gaProperty.create({
+            data: {
+              gaPropertyId: gaAccount.gaAccountId, // Use account ID as property ID for now
+              gaPropertyName: `Default Property for ${gaAccount.gaAccountName}`,
+              gaAccountId: gaAccount.id
+            }
+          });
+          console.log('GA Metrics API - Created new GA property:', newProperty.id);
+          gaPropertyId = newProperty.id;
+          accountGA4 = gaAccount.gaAccountId;
+          propertyGA4 = newProperty.gaPropertyId;
+
+          // Clear any existing metrics for this property
+          console.log('GA Metrics API - Clearing any existing metrics for new property');
+          await Promise.all([
+            prisma.gaKpiDaily.deleteMany({
+              where: { gaPropertyId: newProperty.id }
+            }),
+            prisma.gaKpiMonthly.deleteMany({
+              where: { gaPropertyId: newProperty.id }
+            }),
+            prisma.gaChannelDaily.deleteMany({
+              where: { gaPropertyId: newProperty.id }
+            }),
+            prisma.gaSourceDaily.deleteMany({
+              where: { gaPropertyId: newProperty.id }
+            })
+          ]);
+          console.log('GA Metrics API - Cleared existing metrics');
+        } catch (error) {
+          console.error('GA Metrics API - Error creating GA property:', error);
+          return NextResponse.json(
+            { error: 'Failed to create GA property', code: 'PROPERTY_CREATE_ERROR' },
+            { status: 500 }
+          );
+        }
+      } else {
+        gaPropertyId = user.gaAccounts[0].gaProperties[0].id;
+        accountGA4 = user.gaAccounts[0].gaAccountId;
+        propertyGA4 = user.gaAccounts[0].gaProperties[0].gaPropertyId;
+      }
+    }
+
+    // Ensure we have all required values
+    if (!gaPropertyId || !accountGA4 || !propertyGA4) {
+      console.error('GA Metrics API - Failed to determine property or account');
+      return NextResponse.json(
+        { error: 'Failed to determine property or account', code: 'PROPERTY_DETERMINATION_ERROR' },
+        { status: 500 }
+      );
     }
 
     // Instead of only checking if data exists, count the records to determine if we need full history
