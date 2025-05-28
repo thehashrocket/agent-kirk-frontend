@@ -638,7 +638,7 @@ export default function ChatPage() {
         </SheetContent>
       </Sheet>
 
-      <div className="hidden md:flex md:w-80 md:flex-col h-full border-r">
+      <div className="hidden md:flex md:flex-col h-full border-r">
         <ConversationList
           conversations={conversations}
           selectedId={selectedConversation}

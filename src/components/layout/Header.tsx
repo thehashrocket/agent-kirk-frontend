@@ -91,7 +91,7 @@ export function Header() {
             <LayoutDashboard className="h-4 w-4" />
             <span>Dashboard</span>
           </Link>
-          {/* if role is client or account rep, show Chat link */}
+          {/* Show GA Data chat only for clients and account reps */}
           {(session.user.role === "CLIENT" || session.user.role === "ACCOUNT_REP") && (
             <Link
               href="/chat"
@@ -101,9 +101,20 @@ export function Header() {
               )}
             >
               <MessageSquare className="h-4 w-4" />
-              <span>Chat</span>
+              <span>Chat with GA Data</span>
             </Link>
           )}
+          {/* Show internal chat for all users */}
+          <Link
+            href={session.user.role === "ACCOUNT_REP" ? "/account-rep/chat" : "/client/chat"}
+            className={cn(
+              "text-sm transition-colors hover:text-primary",
+              "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
+            )}
+          >
+            <MessageSquare className="h-4 w-4" />
+            <span>Internal Chat</span>
+          </Link>
         </nav>
         <div className="flex items-center space-x-4">
           <NotificationBell />
