@@ -9,7 +9,7 @@
 import { GaMetricsGrid } from './GaMetricsGrid';
 import { GaAccountSelector } from './GaAccountSelector';
 import { Card, CardContent } from '@/components/ui/card';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { format } from 'date-fns';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { Loader2 } from 'lucide-react';
@@ -30,9 +30,8 @@ export default function GaMetrics() {
   const [selectedAccount, setSelectedAccount] = useState<any | null>(null);
   const [selectedProperty, setSelectedProperty] = useState<any | null>(null);
 
-  // Fetch GA metrics with optional date range
-  const fetchGaMetrics = async (dateRange?: { from: Date; to: Date }) => {
-    if (!selectedPropertyId) return; // Don't fetch if no property is selected
+  const fetchGaMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
+    if (!selectedPropertyId) return;
     
     setIsLoading(true);
     setError(null);
@@ -97,9 +96,8 @@ export default function GaMetrics() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [selectedPropertyId]);
 
-  // Fetch data when property changes
   useEffect(() => {
     if (selectedPropertyId) {
       fetchGaMetrics()
@@ -107,7 +105,7 @@ export default function GaMetrics() {
           console.error('Failed to load initial GA metrics:', err);
         });
     }
-  }, [selectedPropertyId]);
+  }, [selectedPropertyId, fetchGaMetrics]);
 
   // Handle error state
   if (error) {

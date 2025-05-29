@@ -13,7 +13,7 @@
 
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
@@ -73,7 +73,7 @@ declare module "next-auth/jwt" {
  * Sets up authentication with Google provider and custom callbacks.
  */
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: PrismaAdapter(prisma as any),
   debug: true,
   session: {
     strategy: "jwt",
