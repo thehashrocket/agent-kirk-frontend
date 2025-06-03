@@ -16,7 +16,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
-import type { Adapter } from "next-auth/adapters";
 import { prisma, Role } from "./prisma";
 
 /**
