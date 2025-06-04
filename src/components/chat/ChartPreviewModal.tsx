@@ -46,12 +46,22 @@ export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
     console.log('ChartPreviewModal - Error:', error);
   }
 
+  // Check if all data arrays are empty - if so, don't render the component
+  if (data && 
+      (!data.parsedQueryData || data.parsedQueryData.length === 0) &&
+      (!data.parsedQuerySummary || data.parsedQuerySummary.length === 0) &&
+      (!data.parsedPieGraphData || data.parsedPieGraphData.length === 0)) {
+    return null;
+  }
+
   // Only process data if it exists
   const pieData = data?.parsedPieGraphData ? getTopSources(data.parsedPieGraphData, 5) : [];
 
   if (error) {
     return null;
   }
+
+  console.log('[ChartPreviewModal] Data:', data);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

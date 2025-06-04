@@ -82,6 +82,7 @@ export function ChatInput({
   }, [message]);
 
   const handleSubmit = () => {
+    console.log('[ChatInput] Submitting message:', message);
     if (message.trim() && !isLoading) {
       onSend(message.trim());
       setMessage('');

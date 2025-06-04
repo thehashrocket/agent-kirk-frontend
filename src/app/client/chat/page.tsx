@@ -37,16 +37,28 @@ export default function ClientChatPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(process.env.LLM_GENERAL_CHAT_URL!, {
+      const apiUrl = process.env.NEXT_PUBLIC_LLM_GENERAL_CHAT_URL;
+      
+      if (!apiUrl) {
+        throw new Error('API URL not configured');
+      }
+
+      console.log('apiUrl', apiUrl);
+      console.log('sessionId', sessionId);
+      console.log('message', message);
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chatInput: message,
-          sessionID: sessionId
+          prompt: message,
+          sessionId: sessionId,
         }),
       });
+
+      console.log('response', response);
 
       if (!response.ok) {
         throw new Error('Failed to get response');

@@ -35,8 +35,6 @@ import {
   CHAT_CONSTANTS 
 } from '@/lib/validations/chat';
 
-import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
-
 // Update the schema to match the QueryRequest interface
 const ChatRequestSchema = z.object({
   content: z.string().min(1, 'Content cannot be empty'),

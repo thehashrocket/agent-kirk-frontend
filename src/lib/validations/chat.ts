@@ -49,6 +49,14 @@ export interface ChatResponse {
   } | null;
 }
 
+export interface ClientChatResponse {
+  status: QueryStatus;
+  queryId: string;
+  response?: string;
+  error?: string;
+  details?: unknown;
+}
+
 /**
  * Error response structure
  */

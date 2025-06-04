@@ -40,7 +40,17 @@ export default function AccountRepChatPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(process.env.LLM_GENERAL_CHAT_URL!, {
+      const chatUrl = process.env.NEXT_PUBLIC_LLM_GENERAL_CHAT_URL;
+
+      console.log('[Send] Chat URL:', chatUrl);
+      
+      if (!chatUrl) {
+        throw new Error('Chat service URL not configured');
+      }
+
+      console.log('[Send] Sending request to:', chatUrl);
+
+      const response = await fetch(chatUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,19 +60,22 @@ export default function AccountRepChatPage() {
           sessionID: sessionId
         }),
       });
+      
+      console.log('[Send] Response:', response);
 
       if (!response.ok) {
         throw new Error('Failed to get response');
       }
 
       const data = await response.json();
+      console.log('[Send] Data:', data);
 
       // Update the assistant message with the response
       setMessages(prev => prev.map(msg => 
         msg.id === assistantMessage.id
           ? {
               ...msg,
-              content: data.output,
+              content: data[0].output,
               status: MESSAGE_STATUS.COMPLETED
             }
           : msg
