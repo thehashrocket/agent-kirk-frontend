@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ChatWindow } from '@/components/chat/ChatWindow';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { Message, MessageStatus, MESSAGE_STATUS } from '@/types/chat';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ChatMessage extends Message {
   status: MessageStatus;
@@ -53,7 +54,7 @@ export default function ClientChatPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: message,
+          chatInput: message,
           sessionId: sessionId,
         }),
       });
@@ -71,7 +72,7 @@ export default function ClientChatPage() {
         msg.id === assistantMessage.id
           ? {
               ...msg,
-              content: data.output,
+              content: data[0].output,
               status: MESSAGE_STATUS.COMPLETED
             }
           : msg
@@ -93,19 +94,35 @@ export default function ClientChatPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-background">
-      <div className="flex-1 overflow-hidden">
-        <ChatWindow
-          messages={messages}
-          isLoading={isLoading}
-        />
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold mb-2">
+          Internal Chat
+        </h1>
+        <p className="text-gray-600">Chat with Agent Kirk for internal support and questions</p>
       </div>
-      <div className="border-t p-4">
-        <ChatInput
-          onSend={handleSendMessage}
-          isLoading={isLoading}
-        />
-      </div>
+
+      <Card className="h-[calc(100vh-12rem)]">
+        <CardHeader>
+          <CardTitle>Chat Session</CardTitle>
+        </CardHeader>
+        <CardContent className="h-[calc(100%-4rem)]">
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-hidden">
+              <ChatWindow
+                messages={messages}
+                isLoading={isLoading}
+              />
+            </div>
+            <div className="border-t p-4">
+              <ChatInput
+                onSend={handleSendMessage}
+                isLoading={isLoading}
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
