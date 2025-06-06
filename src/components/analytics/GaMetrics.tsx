@@ -30,8 +30,9 @@ export default function GaMetrics() {
   const [selectedAccount, setSelectedAccount] = useState<any | null>(null);
   const [selectedProperty, setSelectedProperty] = useState<any | null>(null);
 
+  // Fetch GA metrics with optional date range
   const fetchGaMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
-    if (!selectedPropertyId) return;
+    if (!selectedPropertyId) return; // Don't fetch if no property is selected
     
     setIsLoading(true);
     setError(null);
@@ -98,6 +99,7 @@ export default function GaMetrics() {
     }
   }, [selectedPropertyId]);
 
+  // Fetch data when property changes
   useEffect(() => {
     if (selectedPropertyId) {
       fetchGaMetrics()

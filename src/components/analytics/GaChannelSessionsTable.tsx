@@ -1,9 +1,10 @@
 import { Card, CardContent } from '@/components/ui/card';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
-import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, ArrowRight } from 'lucide-react';
 import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
 interface GaChannelSessionsTableProps {
   channelDaily: GaMetricsResponse['channelDaily'];
@@ -45,6 +46,8 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
   
   // Move hooks to top-level
   const [sort, setSort] = React.useState<{ accessor: string; direction: 'asc' | 'desc' }>({ accessor: 'sessions', direction: 'desc' });
+  
+  const router = useRouter();
   
   const allRows = React.useMemo(() => {
     if (!channelDaily || channelDaily.length === 0) return [];
@@ -121,6 +124,12 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
       header: 'Channel',
       accessor: 'channel',
       sortable: true,
+      render: (value, row) => (
+        <div className="flex items-center w-full">
+          <span>{value}</span>
+          <ArrowRight className="ml-2 text-gray-400 group-hover:text-gray-600 transition-colors" size={16} />
+        </div>
+      ),
     },
     {
       header: 'Sessions',
@@ -146,6 +155,16 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
         ),
     },
   ], []);
+
+  // Handler for row click
+  const handleRowClick = (row: typeof allRows[0]) => {
+    if (!row.channel) return;
+    const encoded = encodeURIComponent(row.channel);
+    router.push(`/analytics/channel/${encoded}`);
+  };
+
+  // Styling for clickable rows
+  const rowClassName = () => 'group';
 
   const sortedRows = React.useMemo(() => {
     const col = columns.find(c => c.accessor === sort.accessor);
@@ -189,6 +208,8 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
             data={topRows}
             initialSort={sort}
             rowKey={row => row.channel}
+            onRowClick={handleRowClick}
+            rowClassName={rowClassName}
           />
           <div className="flex justify-between items-center mt-4 px-2">
             <span className="font-bold">Grand total</span>

@@ -15,9 +15,11 @@ export interface TableSortableProps<T> {
   data: T[];
   initialSort?: { accessor: keyof T | string; direction: 'asc' | 'desc' };
   rowKey: (row: T) => string;
+  onRowClick?: (row: T) => void;
+  rowClassName?: (row: T) => string;
 }
 
-export function TableSortable<T>({ columns, data, initialSort, rowKey }: TableSortableProps<T>) {
+export function TableSortable<T>({ columns, data, initialSort, rowKey, onRowClick, rowClassName }: TableSortableProps<T>) {
   const [sort, setSort] = useState<{
     accessor: keyof T | string;
     direction: 'asc' | 'desc';
@@ -96,26 +98,46 @@ export function TableSortable<T>({ columns, data, initialSort, rowKey }: TableSo
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedData.map(row => (
-            <TableRow key={rowKey(row)}>
-              {columns.map(col => (
-                <TableCell
-                  key={col.accessor as string}
-                  className={
-                    col.align === 'right'
-                      ? 'text-right'
-                      : col.align === 'center'
-                      ? 'text-center'
-                      : 'text-left'
+          {sortedData.map(row => {
+            const clickable = !!onRowClick;
+            const rowClasses = [
+              rowClassName ? rowClassName(row) : '',
+              clickable ? 'cursor-pointer hover:bg-gray-50 focus:bg-gray-100 outline-none transition-colors' : '',
+            ].join(' ');
+            return (
+              <TableRow
+                key={rowKey(row)}
+                className={rowClasses}
+                tabIndex={clickable ? 0 : undefined}
+                role={clickable ? 'button' : undefined}
+                aria-label={clickable ? 'View details' : undefined}
+                onClick={clickable ? () => onRowClick!(row) : undefined}
+                onKeyDown={clickable ? (e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onRowClick!(row);
                   }
-                >
-                  {col.render
-                    ? col.render((row as any)[col.accessor], row)
-                    : (row as any)[col.accessor]}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+                }) : undefined}
+              >
+                {columns.map(col => (
+                  <TableCell
+                    key={col.accessor as string}
+                    className={
+                      col.align === 'right'
+                        ? 'text-right'
+                        : col.align === 'center'
+                        ? 'text-center'
+                        : 'text-left'
+                    }
+                  >
+                    {col.render
+                      ? col.render((row as any)[col.accessor], row)
+                      : (row as any)[col.accessor]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>
