@@ -2,11 +2,15 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 
 interface ChannelPageProps {
-  params: { channel?: string };
+  params: Promise<{
+    channel: string;
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default function ChannelPage({ params }: ChannelPageProps) {
-  const channel = params?.channel ? decodeURIComponent(params.channel) : null;
+export default async function ChannelPage({ params, searchParams }: ChannelPageProps) {
+  const [resolvedParams, resolvedSearchParams] = await Promise.all([params, searchParams]);
+  const channel = resolvedParams?.channel ? decodeURIComponent(resolvedParams.channel) : null;
   if (!channel) return notFound();
 
   return (
