@@ -1,5 +1,15 @@
 import { notFound } from 'next/navigation';
 import React from 'react';
+import Email from '@/components/channels/email';
+import Direct from '@/components/channels/direct';
+import OrganicSearch from '@/components/channels/organic_search';
+import OrganicSocial from '@/components/channels/organic_social';
+import Referral from '@/components/channels/referral';
+import Unassigned from '@/components/channels/unassigned';
+import PaidSearch from '@/components/channels/paid_search';
+import PaidSocial from '@/components/channels/paid_social';
+import VisitorBehavior from '@/components/channels/visitor_behavior';
+import AudienceData from '@/components/channels/audience_data';
 
 interface ChannelPageProps {
   params: Promise<{
@@ -17,7 +27,16 @@ export default async function ChannelPage({ params, searchParams }: ChannelPageP
     <main className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">Channel: <span className="text-primary-600">{channel}</span></h1>
       <p className="text-gray-600 mb-8">This page will show more data and insights about the <b>{channel}</b> channel.</p>
-      {/* TODO: Add LLM-powered insights and analytics here */}
+      {channel === 'Audience Data' && <AudienceData />}
+      {channel === 'Direct' && <Direct />}
+      {channel === 'Email' && <Email />}
+      {channel === 'Organic Search' && <OrganicSearch />}
+      {channel === 'Organic Social' && <OrganicSocial />}
+      {channel === 'Paid Search' && <PaidSearch />}
+      {channel === 'Paid Social' && <PaidSocial />}
+      {channel === 'Referral' && <Referral />}
+      {channel === 'Unassigned' && <Unassigned />}
+      {channel === 'Visitor Behavior' && <VisitorBehavior />}
     </main>
   );
 } 
