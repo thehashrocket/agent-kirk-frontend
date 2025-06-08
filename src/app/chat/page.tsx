@@ -118,6 +118,7 @@ const mockSources = [
 export default function ChatPage() {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(false);
   const [selectedTags, setSelectedTags] = useState(mockTags);
   const queryClient = useQueryClient();
   
@@ -638,7 +639,10 @@ export default function ChatPage() {
         </SheetContent>
       </Sheet>
 
-      <div className="hidden md:flex md:flex-col h-full border-r">
+      {/* Desktop Sidebar - Collapsible */}
+      <div className={`hidden md:flex md:flex-col h-full border-r transition-all duration-300 ${
+        isDesktopSidebarCollapsed ? 'w-0 overflow-hidden' : 'w-110'
+      }`}>
         <ConversationList
           conversations={conversations}
           selectedId={selectedConversation}
@@ -652,6 +656,7 @@ export default function ChatPage() {
       </div>
 
       <div className="flex flex-1 flex-col h-full">
+        {/* Mobile Header */}
         <div className="flex justify-between items-center border-b p-4 md:hidden">
           <Button
             variant="outline"
@@ -677,6 +682,40 @@ export default function ChatPage() {
             </svg>
           </Button>
           <h1 className="text-lg font-medium">Chat</h1>
+          <div className="w-10" />
+        </div>
+
+        {/* Desktop Header with Sidebar Toggle */}
+        <div className="hidden md:flex justify-between items-center border-b p-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setIsDesktopSidebarCollapsed(!isDesktopSidebarCollapsed)}
+            className="transition-transform duration-200 hover:scale-105"
+          >
+            <span className="sr-only">
+              {isDesktopSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={`h-4 w-4 transition-transform duration-200 ${
+                isDesktopSidebarCollapsed ? 'rotate-180' : ''
+              }`}
+            >
+              <path d="M15 6l-6 6 6 6" />
+            </svg>
+          </Button>
+          <h1 className="text-lg font-medium">
+            {selectedConversationDetails?.title || 'Chat'}
+          </h1>
           <div className="w-10" />
         </div>
 
@@ -724,6 +763,28 @@ export default function ChatPage() {
               onClick={() => setIsMobileMenuOpen(true)}
               className="md:hidden"
             >
+              Show Conversations
+            </Button>
+            {/* Desktop: Show expand sidebar button when collapsed and no conversation */}
+            <Button
+              onClick={() => setIsDesktopSidebarCollapsed(false)}
+              className="hidden md:inline-flex"
+              variant="outline"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4 mr-2"
+              >
+                <path d="M9 6l6 6-6 6" />
+              </svg>
               Show Conversations
             </Button>
           </div>
