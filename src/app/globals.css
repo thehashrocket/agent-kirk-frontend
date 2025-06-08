@@ -173,3 +173,56 @@
   }
 
 }
+
+/* Print-specific styles */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Hide navigation elements on print */
+  header,
+  nav,
+  .sidebar,
+  .no-print {
+    display: none !important;
+  }
+  
+  h1, h2, h3 {
+    break-after: avoid;
+  }
+  
+  .chart-container {
+    break-inside: avoid;
+  }
+  
+  table {
+    break-inside: avoid;
+  }
+  
+  .page-break {
+    break-after: page;
+  }
+  
+  .avoid-break {
+    break-inside: avoid;
+  }
+}
+
+/* Print-specific layout overrides for print route */
+[data-print-page="true"] header,
+[data-print-page="true"] nav,
+[data-print-page="true"] .sidebar {
+  display: none !important;
+}
+
+@page {
+  margin: 0.75in;
+  size: letter;
+}

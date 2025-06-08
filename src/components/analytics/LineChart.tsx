@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useId } from 'react';
 import {
   LineChart as RechartsLineChart,

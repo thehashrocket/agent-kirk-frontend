@@ -17,6 +17,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import GaMetrics from "@/components/analytics/GaMetrics";
+import { PrintButton } from "@/components/dashboard/PrintButton";
 
 /**
  * @component ClientDashboard
@@ -55,11 +56,14 @@ export default async function ClientDashboard() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-2">
-          Welcome back, {session.user.name || session.user.email}
-        </h1>
-        <p className="text-gray-600">Here&apos;s an overview of your account activity</p>
+      <div className="mb-8 flex justify-between items-start">
+        <div>
+          <h1 className="text-2xl font-bold mb-2">
+            Welcome back, {session.user.name || session.user.email}
+          </h1>
+          <p className="text-gray-600">Here&apos;s an overview of your account activity</p>
+        </div>
+        <PrintButton />
       </div>
 
       <div className="mt-8">

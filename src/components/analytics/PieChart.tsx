@@ -1,3 +1,5 @@
+'use client';
+
 import { PieChart as RechartsPieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import React from 'react';
 
