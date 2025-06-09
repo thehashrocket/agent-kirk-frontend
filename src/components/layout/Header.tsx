@@ -101,20 +101,10 @@ export function Header() {
               )}
             >
               <MessageSquare className="h-4 w-4" />
-              <span>Chat with GA Data</span>
+              <span>Chat</span>
             </Link>
           )}
-          {/* Show internal chat for all users */}
-          <Link
-            href={session.user.role === "ACCOUNT_REP" ? "/account-rep/chat" : "/client/chat"}
-            className={cn(
-              "text-sm transition-colors hover:text-primary",
-              "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
-            )}
-          >
-            <MessageSquare className="h-4 w-4" />
-            <span>Internal Chat</span>
-          </Link>
+          
         </nav>
         <div className="flex items-center space-x-4">
           <NotificationBell />
