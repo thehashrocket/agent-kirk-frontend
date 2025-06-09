@@ -60,6 +60,7 @@ const ChatRequestSchema = z.object({
  */
 export async function POST(request: NextRequest): Promise<NextResponse<ChatResponse | ErrorResponse>> {
   let query;
+  let errorResponse: ErrorResponse;
   try {
     // Get the authenticated user
     const session = await getServerSession(authOptions);
@@ -129,11 +130,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     if (llmResponse.status === 404) {
       console.log('[SEND] LLM URL:', process.env.LLM_SERVICE_URL);
       console.log('[Send] LLM service returned 404 status');
-      return NextResponse.json({
+      errorResponse = {
         status: 'FAILED',
         queryId: query.id,
-        error: 'LLM service returned 404 status',
-      }, { status: 404 });
+        error: 'LLM service returned 404 status'
+      };
+      return NextResponse.json(errorResponse, { status: 404 });
     }
     // If we get a 500 with "No item to return got found", this likely means
     // the request was accepted but will be processed asynchronously

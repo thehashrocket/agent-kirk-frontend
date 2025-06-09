@@ -23,7 +23,7 @@ interface WebhookRequest {
   error?: string;
   line_graph_data?: Array<{
     name: string;
-    body: unknown;
+    body?: unknown;
   }>;
   pie_graph_data?: Array<{
     dimensions: unknown[];
@@ -61,7 +61,7 @@ const WebhookRequestSchema = z.object({
     type: z.string(),
     aggregate: z.string()
   })).optional()
-}).refine(data => data.response || data.error, {
+}).refine((data) => data.response || data.error, {
   message: "Either response or error must be provided"
 });
 
