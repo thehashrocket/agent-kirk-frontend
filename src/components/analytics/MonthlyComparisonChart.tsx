@@ -9,7 +9,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend
+  Legend,
+  LabelList
 } from 'recharts';
 
 interface MonthlySessionData {
@@ -26,6 +27,23 @@ interface MonthlyComparisonChartProps {
 function getDataKey(item: any): string {
   return `${item.monthNum || 'unknown'}|${item.sessions || 0}|${item.prevYearSessions || 0}`;
 }
+
+// Custom label component for displaying values on data points
+const CustomLabel = (props: any) => {
+  const { x, y, value } = props;
+  return (
+    <text
+      x={x}
+      y={y - 10}
+      textAnchor="middle"
+      fontSize="12"
+      fill="#374151"
+      fontWeight="500"
+    >
+      {value?.toLocaleString()}
+    </text>
+  );
+};
 
 export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({ 
   data, 
@@ -163,12 +181,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     return value.toString();
   };
 
-  // Create a label formatter that shows both values in the tooltip
-  const labelFormatter = (label: string) => {
-    return label;
-  };
-  
-  // Custom formatter for the tooltip values
+  // Custom formatter for the tooltip values - simplified to show only values
   const valueFormatter = (value: number, name: string) => {
     const prefix = name.includes('previous') ? 'Previous: ' : 'Current: ';
     return [value.toLocaleString(), prefix];
@@ -197,7 +210,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
       <ResponsiveContainer width="100%" height={height}>
         <RechartsLineChart 
           data={processedData} 
-          margin={{ top: 30, right: 30, left: 20, bottom: 10 }}
+          margin={{ top: 50, right: 30, left: 20, bottom: 10 }}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
           <XAxis 
@@ -215,7 +228,7 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
           />
           <Tooltip 
             formatter={valueFormatter}
-            labelFormatter={labelFormatter}
+            labelFormatter={() => ''}
             contentStyle={{ 
               borderRadius: '4px', 
               boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
@@ -233,7 +246,9 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
             activeDot={{ r: 6, fill: '#1a3766', stroke: 'white', strokeWidth: 2 }}
             isAnimationActive={true}
             animationDuration={1500}
-          />
+          >
+            <LabelList content={CustomLabel} />
+          </Line>
           <Line 
             type="monotone" 
             dataKey="prevYearSessions" 
@@ -245,7 +260,9 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
             isAnimationActive={true}
             animationDuration={1500}
             animationBegin={300}
-          />
+          >
+            <LabelList content={CustomLabel} />
+          </Line>
         </RechartsLineChart>
       </ResponsiveContainer>
     </div>
