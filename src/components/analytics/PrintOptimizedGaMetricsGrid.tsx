@@ -172,7 +172,7 @@ export function PrintOptimizedGaMetricsGrid({ data }: PrintOptimizedGaMetricsGri
     <div className="bg-white rounded-lg shadow p-6 print:shadow-none print:p-0">{/* Print styles are in globals.css */}
       
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-blue-800 mb-4">1905 New Media Traffic and Usability</h1>
+        <h1 className="text-2xl font-bold text-blue-800 mb-4">Traffic and Usability</h1>
         <h2 className="text-xl font-bold mb-2">Monthly Website Traffic Overview</h2>
         <p className="text-gray-500 mb-2">{displayRange}</p>
         <p className="text-sm text-gray-400 mb-6">
