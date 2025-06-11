@@ -38,6 +38,7 @@ interface User {
   id: string;
   name: string | null;
   email: string | null;
+  image: string | null;
   role: {
     id: string;
     name: string;
@@ -163,6 +164,41 @@ export default function ClientsPage() {
       toast.error('Failed to reset password');
     }
   };
+  const toggleUserStatus = async (userId: string, isActive: boolean) => {
+    // Mark as inactive if active, active if inactive
+    // Send a PATCH request to the API
+    // Show a toast notification
+    // Update the user list
+
+    try {
+      const response = await fetch(`/api/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: userId,
+          isActive: isActive
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to toggle user status');
+      }
+
+      toast.success('User status toggled successfully');
+      mutate(
+        (currentData: User[] | undefined) =>
+          currentData?.map(user => user.id === userId ? { ...user, isActive: !user.isActive } : user)
+      );
+    } catch {
+      toast.error('Failed to toggle user status');
+    }
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -288,10 +324,10 @@ export default function ClientsPage() {
             <TableRow key={client.id}>
               <TableCell>
                 <Avatar>
-                <AvatarImage 
-                  src={client.image ?? ''}
-                  alt={`Profile picture of ${client.name || 'user'}`} 
-                />
+                  <AvatarImage
+                    src={client.image ?? ''}
+                    alt={`Profile picture of ${client.name || 'user'}`}
+                  />
                   <AvatarFallback>
                     {client.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}
                   </AvatarFallback>
@@ -307,24 +343,42 @@ export default function ClientsPage() {
                 )}
               </TableCell>
               <TableCell className="space-x-2">
-                <Button
-                  variant="secondary"
-                  onClick={() => handleResetPassword(client.id)}
-                >
-                  Reset Password
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={() => handleDeleteClient(client.id)}
-                >
-                  Delete
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => window.location.href = `/account-rep/clients/${client.id}`}
-                >
-                  View Details
-                </Button>
+                <div className="flex gap-2 justify-end">
+                  {/* If User is active, show Mark as Inactive, if User is inactive, show Mark as Active */}
+                  {client.isActive ? (
+                    <Button
+                      variant="secondary"
+                      onClick={() => toggleUserStatus(client.id, false)}
+                    >
+                      Mark as Inactive
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      onClick={() => toggleUserStatus(client.id, true)}
+                    >
+                      Mark as Active
+                    </Button>
+                  )}
+                  <Button
+                    variant="secondary"
+                    onClick={() => handleResetPassword(client.id)}
+                  >
+                    Reset Password
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={() => handleDeleteClient(client.id)}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => window.location.href = `/account-rep/clients/${client.id}`}
+                  >
+                    View Details
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}
