@@ -121,6 +121,24 @@ export default function ClientDetailsPage() {
     }
   };
 
+  const handleDeleteGaAccount = async (accountId: string) => {
+    try {
+      const response = await fetch(`/api/users/${params.id}/ga-accounts/${accountId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete GA account');
+      }
+
+      toast.success('Google Analytics account deleted successfully');
+      // Refresh user data
+      window.location.reload();
+    } catch {
+      toast.error('Failed to delete Google Analytics account');
+    }
+  };
+
   if (!client) {
     return <div>Loading...</div>;
   }
@@ -193,42 +211,45 @@ export default function ClientDetailsPage() {
                       <h3 className="font-semibold">{account.gaAccountName}</h3>
                       <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
                     </div>
-                    <Dialog open={isGaPropertyDialogOpen && selectedGaAccount?.id === account.id} 
-                           onOpenChange={(open) => {
-                             setIsGaPropertyDialogOpen(open);
-                             if (!open) setSelectedGaAccount(null);
-                           }}>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          onClick={() => setSelectedGaAccount(account)}
-                        >
-                          Add Property
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Add Google Analytics Property</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <Input
-                            placeholder="Property ID"
-                            value={newGaProperty.gaPropertyId}
-                            onChange={(e) =>
-                              setNewGaProperty({ ...newGaProperty, gaPropertyId: e.target.value })
-                            }
-                          />
-                          <Input
-                            placeholder="Property Name"
-                            value={newGaProperty.gaPropertyName}
-                            onChange={(e) =>
-                              setNewGaProperty({ ...newGaProperty, gaPropertyName: e.target.value })
-                            }
-                          />
-                          <Button onClick={handleAddGaProperty}>Add Property</Button>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                    <div className="flex flex-row items-center gap-2">
+                      <Dialog open={isGaPropertyDialogOpen && selectedGaAccount?.id === account.id}
+                        onOpenChange={(open) => {
+                          setIsGaPropertyDialogOpen(open);
+                          if (!open) setSelectedGaAccount(null);
+                        }}>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            onClick={() => setSelectedGaAccount(account)}
+                          >
+                            Add Property
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Add Google Analytics Property</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            <Input
+                              placeholder="Property ID"
+                              value={newGaProperty.gaPropertyId}
+                              onChange={(e) =>
+                                setNewGaProperty({ ...newGaProperty, gaPropertyId: e.target.value })
+                              }
+                            />
+                            <Input
+                              placeholder="Property Name"
+                              value={newGaProperty.gaPropertyName}
+                              onChange={(e) =>
+                                setNewGaProperty({ ...newGaProperty, gaPropertyName: e.target.value })
+                              }
+                            />
+                            <Button onClick={handleAddGaProperty}>Add Property</Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                      <Button variant="destructive" onClick={() => handleDeleteGaAccount(account.id)}>Delete Account</Button>
+                    </div>
                   </div>
                   {/* Properties List */}
                   <div className="pl-4 border-l-2 border-gray-100">

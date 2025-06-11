@@ -47,6 +47,7 @@ export async function DELETE(
     }
 
     const { id, accountId } = await params;
+    console.log('Params:', { id, accountId });
 
     // Find the GA account and verify ownership
     const gaAccount = await prisma.gaAccount.findFirst({
@@ -62,8 +63,13 @@ export async function DELETE(
     }
 
     // Ensure the requesting user owns this GA account
-    if (gaAccount.userId !== session.user.id) {
-      return new NextResponse('Unauthorized', { status: 401 });
+    // If the user is an account rep, then they can delete any account
+    if (session.user.role === 'ACCOUNT_REP') {
+
+    } else {
+      if (gaAccount.userId !== session.user.id) {
+        return new NextResponse('Unauthorized', { status: 401 });
+      }
     }
 
     // Perform soft delete using a transaction to ensure consistency
