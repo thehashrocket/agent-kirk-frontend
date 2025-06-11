@@ -66,8 +66,15 @@ export async function GET(
       include: {
         role: true,
         gaAccounts: {
+          where: {
+            deleted: false, // Only include non-deleted accounts
+          },
           include: {
-            gaProperties: true,
+            gaProperties: {
+              where: {
+                deleted: false, // Only include non-deleted properties
+              },
+            },
           },
         },
       },

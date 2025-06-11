@@ -104,24 +104,25 @@ model GaAccount {
   user          User           @relation("UserToGaAccount", fields: [userId], references: [id], onDelete: Cascade)
   gaAccountId   String
   gaAccountName String
+  deleted       Boolean        @default(false)
   gaProperties  GaProperty[]   @relation("AccountToProperty")
   conversations Conversation[]
 }
 
 model GaProperty {
-  id             String    @id @default(cuid())
+  id             String           @id @default(cuid())
   gaPropertyId   String
   gaPropertyName String
   gaAccountId    String
-  gaAccount      GaAccount @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
-
+  gaAccount      GaAccount        @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
+  deleted        Boolean          @default(false)
   // relations
-  conversations Conversation[]
-  imports       GaImportRun[]
-  kpiDaily      GaKpiDaily[]
-  kpiMonthly    GaKpiMonthly[]
-  channelDaily  GaChannelDaily[]
-  sourceDaily   GaSourceDaily[]
+  conversations  Conversation[]
+  imports        GaImportRun[]
+  kpiDaily       GaKpiDaily[]
+  kpiMonthly     GaKpiMonthly[]
+  channelDaily   GaChannelDaily[]
+  sourceDaily    GaSourceDaily[]
 }
 
 model GaImportRun {

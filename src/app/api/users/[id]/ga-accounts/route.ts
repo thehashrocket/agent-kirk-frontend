@@ -124,9 +124,14 @@ export async function GET(
     const gaAccounts = await prisma.gaAccount.findMany({
       where: {
         userId: id,
+        deleted: false, // Only return non-deleted accounts
       },
       include: {
-        gaProperties: true,
+        gaProperties: {
+          where: {
+            deleted: false, // Only include non-deleted properties
+          },
+        },
       },
     });
 

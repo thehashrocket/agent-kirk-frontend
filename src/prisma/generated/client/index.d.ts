@@ -7386,6 +7386,7 @@ export namespace Prisma {
     userId: string | null
     gaAccountId: string | null
     gaAccountName: string | null
+    deleted: boolean | null
   }
 
   export type GaAccountMaxAggregateOutputType = {
@@ -7393,6 +7394,7 @@ export namespace Prisma {
     userId: string | null
     gaAccountId: string | null
     gaAccountName: string | null
+    deleted: boolean | null
   }
 
   export type GaAccountCountAggregateOutputType = {
@@ -7400,6 +7402,7 @@ export namespace Prisma {
     userId: number
     gaAccountId: number
     gaAccountName: number
+    deleted: number
     _all: number
   }
 
@@ -7409,6 +7412,7 @@ export namespace Prisma {
     userId?: true
     gaAccountId?: true
     gaAccountName?: true
+    deleted?: true
   }
 
   export type GaAccountMaxAggregateInputType = {
@@ -7416,6 +7420,7 @@ export namespace Prisma {
     userId?: true
     gaAccountId?: true
     gaAccountName?: true
+    deleted?: true
   }
 
   export type GaAccountCountAggregateInputType = {
@@ -7423,6 +7428,7 @@ export namespace Prisma {
     userId?: true
     gaAccountId?: true
     gaAccountName?: true
+    deleted?: true
     _all?: true
   }
 
@@ -7503,6 +7509,7 @@ export namespace Prisma {
     userId: string
     gaAccountId: string
     gaAccountName: string
+    deleted: boolean
     _count: GaAccountCountAggregateOutputType | null
     _min: GaAccountMinAggregateOutputType | null
     _max: GaAccountMaxAggregateOutputType | null
@@ -7527,6 +7534,7 @@ export namespace Prisma {
     userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
+    deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     gaProperties?: boolean | GaAccount$gaPropertiesArgs<ExtArgs>
     conversations?: boolean | GaAccount$conversationsArgs<ExtArgs>
@@ -7538,6 +7546,7 @@ export namespace Prisma {
     userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
+    deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaAccount"]>
 
@@ -7546,6 +7555,7 @@ export namespace Prisma {
     userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
+    deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaAccount"]>
 
@@ -7554,9 +7564,10 @@ export namespace Prisma {
     userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
+    deleted?: boolean
   }
 
-  export type GaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "gaAccountId" | "gaAccountName", ExtArgs["result"]["gaAccount"]>
+  export type GaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "gaAccountId" | "gaAccountName" | "deleted", ExtArgs["result"]["gaAccount"]>
   export type GaAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     gaProperties?: boolean | GaAccount$gaPropertiesArgs<ExtArgs>
@@ -7582,6 +7593,7 @@ export namespace Prisma {
       userId: string
       gaAccountId: string
       gaAccountName: string
+      deleted: boolean
     }, ExtArgs["result"]["gaAccount"]>
     composites: {}
   }
@@ -8012,6 +8024,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"GaAccount", 'String'>
     readonly gaAccountId: FieldRef<"GaAccount", 'String'>
     readonly gaAccountName: FieldRef<"GaAccount", 'String'>
+    readonly deleted: FieldRef<"GaAccount", 'Boolean'>
   }
     
 
@@ -8489,6 +8502,7 @@ export namespace Prisma {
     gaPropertyId: string | null
     gaPropertyName: string | null
     gaAccountId: string | null
+    deleted: boolean | null
   }
 
   export type GaPropertyMaxAggregateOutputType = {
@@ -8496,6 +8510,7 @@ export namespace Prisma {
     gaPropertyId: string | null
     gaPropertyName: string | null
     gaAccountId: string | null
+    deleted: boolean | null
   }
 
   export type GaPropertyCountAggregateOutputType = {
@@ -8503,6 +8518,7 @@ export namespace Prisma {
     gaPropertyId: number
     gaPropertyName: number
     gaAccountId: number
+    deleted: number
     _all: number
   }
 
@@ -8512,6 +8528,7 @@ export namespace Prisma {
     gaPropertyId?: true
     gaPropertyName?: true
     gaAccountId?: true
+    deleted?: true
   }
 
   export type GaPropertyMaxAggregateInputType = {
@@ -8519,6 +8536,7 @@ export namespace Prisma {
     gaPropertyId?: true
     gaPropertyName?: true
     gaAccountId?: true
+    deleted?: true
   }
 
   export type GaPropertyCountAggregateInputType = {
@@ -8526,6 +8544,7 @@ export namespace Prisma {
     gaPropertyId?: true
     gaPropertyName?: true
     gaAccountId?: true
+    deleted?: true
     _all?: true
   }
 
@@ -8606,6 +8625,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted: boolean
     _count: GaPropertyCountAggregateOutputType | null
     _min: GaPropertyMinAggregateOutputType | null
     _max: GaPropertyMaxAggregateOutputType | null
@@ -8630,6 +8650,7 @@ export namespace Prisma {
     gaPropertyId?: boolean
     gaPropertyName?: boolean
     gaAccountId?: boolean
+    deleted?: boolean
     gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
     conversations?: boolean | GaProperty$conversationsArgs<ExtArgs>
     imports?: boolean | GaProperty$importsArgs<ExtArgs>
@@ -8645,6 +8666,7 @@ export namespace Prisma {
     gaPropertyId?: boolean
     gaPropertyName?: boolean
     gaAccountId?: boolean
+    deleted?: boolean
     gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaProperty"]>
 
@@ -8653,6 +8675,7 @@ export namespace Prisma {
     gaPropertyId?: boolean
     gaPropertyName?: boolean
     gaAccountId?: boolean
+    deleted?: boolean
     gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaProperty"]>
 
@@ -8661,9 +8684,10 @@ export namespace Prisma {
     gaPropertyId?: boolean
     gaPropertyName?: boolean
     gaAccountId?: boolean
+    deleted?: boolean
   }
 
-  export type GaPropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "gaPropertyName" | "gaAccountId", ExtArgs["result"]["gaProperty"]>
+  export type GaPropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "gaPropertyName" | "gaAccountId" | "deleted", ExtArgs["result"]["gaProperty"]>
   export type GaPropertyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
     conversations?: boolean | GaProperty$conversationsArgs<ExtArgs>
@@ -8697,6 +8721,7 @@ export namespace Prisma {
       gaPropertyId: string
       gaPropertyName: string
       gaAccountId: string
+      deleted: boolean
     }, ExtArgs["result"]["gaProperty"]>
     composites: {}
   }
@@ -9131,6 +9156,7 @@ export namespace Prisma {
     readonly gaPropertyId: FieldRef<"GaProperty", 'String'>
     readonly gaPropertyName: FieldRef<"GaProperty", 'String'>
     readonly gaAccountId: FieldRef<"GaProperty", 'String'>
+    readonly deleted: FieldRef<"GaProperty", 'Boolean'>
   }
     
 
@@ -35346,7 +35372,8 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     gaAccountId: 'gaAccountId',
-    gaAccountName: 'gaAccountName'
+    gaAccountName: 'gaAccountName',
+    deleted: 'deleted'
   };
 
   export type GaAccountScalarFieldEnum = (typeof GaAccountScalarFieldEnum)[keyof typeof GaAccountScalarFieldEnum]
@@ -35356,7 +35383,8 @@ export namespace Prisma {
     id: 'id',
     gaPropertyId: 'gaPropertyId',
     gaPropertyName: 'gaPropertyName',
-    gaAccountId: 'gaAccountId'
+    gaAccountId: 'gaAccountId',
+    deleted: 'deleted'
   };
 
   export type GaPropertyScalarFieldEnum = (typeof GaPropertyScalarFieldEnum)[keyof typeof GaPropertyScalarFieldEnum]
@@ -36149,6 +36177,7 @@ export namespace Prisma {
     userId?: StringFilter<"GaAccount"> | string
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
+    deleted?: BoolFilter<"GaAccount"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     gaProperties?: GaPropertyListRelationFilter
     conversations?: ConversationListRelationFilter
@@ -36159,6 +36188,7 @@ export namespace Prisma {
     userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
+    deleted?: SortOrder
     user?: UserOrderByWithRelationInput
     gaProperties?: GaPropertyOrderByRelationAggregateInput
     conversations?: ConversationOrderByRelationAggregateInput
@@ -36172,6 +36202,7 @@ export namespace Prisma {
     userId?: StringFilter<"GaAccount"> | string
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
+    deleted?: BoolFilter<"GaAccount"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     gaProperties?: GaPropertyListRelationFilter
     conversations?: ConversationListRelationFilter
@@ -36182,6 +36213,7 @@ export namespace Prisma {
     userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
+    deleted?: SortOrder
     _count?: GaAccountCountOrderByAggregateInput
     _max?: GaAccountMaxOrderByAggregateInput
     _min?: GaAccountMinOrderByAggregateInput
@@ -36195,6 +36227,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"GaAccount"> | string
     gaAccountId?: StringWithAggregatesFilter<"GaAccount"> | string
     gaAccountName?: StringWithAggregatesFilter<"GaAccount"> | string
+    deleted?: BoolWithAggregatesFilter<"GaAccount"> | boolean
   }
 
   export type GaPropertyWhereInput = {
@@ -36205,6 +36238,7 @@ export namespace Prisma {
     gaPropertyId?: StringFilter<"GaProperty"> | string
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
+    deleted?: BoolFilter<"GaProperty"> | boolean
     gaAccount?: XOR<GaAccountScalarRelationFilter, GaAccountWhereInput>
     conversations?: ConversationListRelationFilter
     imports?: GaImportRunListRelationFilter
@@ -36219,6 +36253,7 @@ export namespace Prisma {
     gaPropertyId?: SortOrder
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
+    deleted?: SortOrder
     gaAccount?: GaAccountOrderByWithRelationInput
     conversations?: ConversationOrderByRelationAggregateInput
     imports?: GaImportRunOrderByRelationAggregateInput
@@ -36236,6 +36271,7 @@ export namespace Prisma {
     gaPropertyId?: StringFilter<"GaProperty"> | string
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
+    deleted?: BoolFilter<"GaProperty"> | boolean
     gaAccount?: XOR<GaAccountScalarRelationFilter, GaAccountWhereInput>
     conversations?: ConversationListRelationFilter
     imports?: GaImportRunListRelationFilter
@@ -36250,6 +36286,7 @@ export namespace Prisma {
     gaPropertyId?: SortOrder
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
+    deleted?: SortOrder
     _count?: GaPropertyCountOrderByAggregateInput
     _max?: GaPropertyMaxOrderByAggregateInput
     _min?: GaPropertyMinOrderByAggregateInput
@@ -36263,6 +36300,7 @@ export namespace Prisma {
     gaPropertyId?: StringWithAggregatesFilter<"GaProperty"> | string
     gaPropertyName?: StringWithAggregatesFilter<"GaProperty"> | string
     gaAccountId?: StringWithAggregatesFilter<"GaProperty"> | string
+    deleted?: BoolWithAggregatesFilter<"GaProperty"> | boolean
   }
 
   export type GaImportRunWhereInput = {
@@ -38241,6 +38279,7 @@ export namespace Prisma {
     id?: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     user: UserCreateNestedOneWithoutGaAccountsInput
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
@@ -38251,6 +38290,7 @@ export namespace Prisma {
     userId: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
   }
@@ -38259,6 +38299,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutGaAccountsNestedInput
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
@@ -38269,6 +38310,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
   }
@@ -38278,12 +38320,14 @@ export namespace Prisma {
     userId: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
   }
 
   export type GaAccountUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type GaAccountUncheckedUpdateManyInput = {
@@ -38291,12 +38335,14 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type GaPropertyCreateInput = {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -38311,6 +38357,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -38323,6 +38370,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -38337,6 +38385,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -38350,12 +38399,14 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
   }
 
   export type GaPropertyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type GaPropertyUncheckedUpdateManyInput = {
@@ -38363,6 +38414,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type GaImportRunCreateInput = {
@@ -40572,6 +40624,7 @@ export namespace Prisma {
     userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
+    deleted?: SortOrder
   }
 
   export type GaAccountMaxOrderByAggregateInput = {
@@ -40579,6 +40632,7 @@ export namespace Prisma {
     userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
+    deleted?: SortOrder
   }
 
   export type GaAccountMinOrderByAggregateInput = {
@@ -40586,6 +40640,7 @@ export namespace Prisma {
     userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
+    deleted?: SortOrder
   }
 
   export type GaAccountScalarRelationFilter = {
@@ -40648,6 +40703,7 @@ export namespace Prisma {
     gaPropertyId?: SortOrder
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
+    deleted?: SortOrder
   }
 
   export type GaPropertyMaxOrderByAggregateInput = {
@@ -40655,6 +40711,7 @@ export namespace Prisma {
     gaPropertyId?: SortOrder
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
+    deleted?: SortOrder
   }
 
   export type GaPropertyMinOrderByAggregateInput = {
@@ -40662,6 +40719,7 @@ export namespace Prisma {
     gaPropertyId?: SortOrder
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
+    deleted?: SortOrder
   }
 
   export type EnumImportStatusFilter<$PrismaModel = never> = {
@@ -45112,6 +45170,7 @@ export namespace Prisma {
     id?: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     user: UserCreateNestedOneWithoutGaAccountsInput
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
   }
@@ -45121,6 +45180,7 @@ export namespace Prisma {
     userId: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
   }
 
@@ -45133,6 +45193,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyCreateNestedManyWithoutGaPropertyInput
@@ -45146,6 +45207,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiMonthly?: GaKpiMonthlyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -45353,6 +45415,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutGaAccountsNestedInput
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
   }
@@ -45362,6 +45425,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
   }
 
@@ -45380,6 +45444,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUpdateManyWithoutGaPropertyNestedInput
@@ -45393,6 +45458,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiMonthly?: GaKpiMonthlyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -45471,6 +45537,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyCreateNestedManyWithoutGaPropertyInput
@@ -45483,6 +45550,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -45634,6 +45702,7 @@ export namespace Prisma {
     gaPropertyId?: StringFilter<"GaProperty"> | string
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
+    deleted?: BoolFilter<"GaProperty"> | boolean
   }
 
   export type ConversationUpsertWithWhereUniqueWithoutGaAccountInput = {
@@ -45672,6 +45741,7 @@ export namespace Prisma {
     id?: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     user: UserCreateNestedOneWithoutGaAccountsInput
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
   }
@@ -45681,6 +45751,7 @@ export namespace Prisma {
     userId: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
   }
 
@@ -45912,6 +45983,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutGaAccountsNestedInput
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
   }
@@ -45921,6 +45993,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
   }
 
@@ -46105,6 +46178,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyCreateNestedManyWithoutGaPropertyInput
@@ -46118,6 +46192,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiMonthly?: GaKpiMonthlyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -46212,6 +46287,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUpdateManyWithoutGaPropertyNestedInput
@@ -46225,6 +46301,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiMonthly?: GaKpiMonthlyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -46309,6 +46386,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -46322,6 +46400,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiMonthly?: GaKpiMonthlyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -46349,6 +46428,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -46362,6 +46442,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiMonthly?: GaKpiMonthlyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -46373,6 +46454,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -46386,6 +46468,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -46413,6 +46496,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -46426,6 +46510,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -46437,6 +46522,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -46450,6 +46536,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -46477,6 +46564,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -46490,6 +46578,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -46501,6 +46590,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
     gaAccount: GaAccountCreateNestedOneWithoutGaPropertiesInput
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -46514,6 +46604,7 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     gaAccountId: string
+    deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -46541,6 +46632,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaAccount?: GaAccountUpdateOneRequiredWithoutGaPropertiesNestedInput
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -46554,6 +46646,7 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -48769,6 +48862,7 @@ export namespace Prisma {
     id?: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
   }
@@ -48777,6 +48871,7 @@ export namespace Prisma {
     id?: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
   }
@@ -49310,6 +49405,7 @@ export namespace Prisma {
     userId?: StringFilter<"GaAccount"> | string
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
+    deleted?: BoolFilter<"GaAccount"> | boolean
   }
 
   export type GaImportRunUpsertWithWhereUniqueWithoutRequestedByInput = {
@@ -50498,6 +50594,7 @@ export namespace Prisma {
     id?: string
     gaPropertyId: string
     gaPropertyName: string
+    deleted?: boolean
   }
 
   export type ConversationCreateManyGaAccountInput = {
@@ -50516,6 +50613,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUpdateManyWithoutGaPropertyNestedInput
@@ -50528,6 +50626,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -50540,6 +50639,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ConversationUpdateWithoutGaAccountInput = {
@@ -51396,6 +51496,7 @@ export namespace Prisma {
     id?: string
     gaAccountId: string
     gaAccountName: string
+    deleted?: boolean
   }
 
   export type GaImportRunCreateManyRequestedByInput = {
@@ -51965,6 +52066,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
   }
@@ -51973,6 +52075,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
   }
@@ -51981,6 +52084,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type GaImportRunUpdateWithoutRequestedByInput = {

@@ -161,14 +161,16 @@ exports.Prisma.GaAccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   gaAccountId: 'gaAccountId',
-  gaAccountName: 'gaAccountName'
+  gaAccountName: 'gaAccountName',
+  deleted: 'deleted'
 };
 
 exports.Prisma.GaPropertyScalarFieldEnum = {
   id: 'id',
   gaPropertyId: 'gaPropertyId',
   gaPropertyName: 'gaPropertyName',
-  gaAccountId: 'gaAccountId'
+  gaAccountId: 'gaAccountId',
+  deleted: 'deleted'
 };
 
 exports.Prisma.GaImportRunScalarFieldEnum = {

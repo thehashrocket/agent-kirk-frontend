@@ -248,11 +248,18 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       where: { email: userEmail },
       include: {
         gaAccounts: {
+          where: {
+            deleted: false, // Only include non-deleted accounts
+          },
           include: {
-            gaProperties: true
-          }
-        }
-      }
+            gaProperties: {
+              where: {
+                deleted: false, // Only include non-deleted properties
+              },
+            },
+          },
+        },
+      },
     });
 
     console.log('GA Metrics API - Found user:', user ? 'yes' : 'no');
