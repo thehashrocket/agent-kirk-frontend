@@ -47,14 +47,28 @@ export async function DELETE(
     }
 
     const { id, accountId } = await params;
-    console.log('Params:', { id, accountId });
 
-    // Find the GA account and verify ownership
-    const gaAccount = await prisma.gaAccount.findFirst({
+   
+
+    // Get current user information including role
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: { role: true },
+    });
+
+    if (!currentUser) {
+      return new NextResponse('User not found', { status: 404 });
+    }
+
+     // Find the GA account and verify ownership
+     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
         id: accountId,
         userId: id,
         deleted: false, // Only allow deletion of non-deleted accounts
+      },
+      include: {
+        user: true,
       },
     });
 
@@ -62,13 +76,21 @@ export async function DELETE(
       return new NextResponse('GA Account not found or already deleted', { status: 404 });
     }
 
-    // Ensure the requesting user owns this GA account
-    // If the user is an account rep, then they can delete any account
-    if (session.user.role === 'ACCOUNT_REP') {
+    // Authorization logic
+    let canDelete = false;
 
-    } else {
-      if (gaAccount.userId !== session.user.id) {
-        return new NextResponse('Unauthorized', { status: 401 });
+    if (currentUser.role.name === 'ADMIN') {
+      // Admins can delete any property
+      canDelete = true;
+    } else if (currentUser.role.name === 'ACCOUNT_REP') {
+      // Account reps can delete properties of their assigned clients
+      if (gaAccount.user.accountRepId === currentUser.id) {
+        canDelete = true;
+      }
+    } else if (currentUser.role.name === 'CLIENT') {
+      // Clients can only delete their own properties
+      if (gaAccount.userId === currentUser.id) {
+        canDelete = true;
       }
     }
 

@@ -223,6 +223,31 @@ export default function ProfilePage() {
     }
   };
 
+  const handleRemoveGaProperty = async (accountId: string, propertyId: string) => {
+    try {
+      if (!profile?.id) {
+        toast.error('Not authenticated');
+        return;
+      }
+
+      const response = await fetch(
+        `/api/users/${profile.id}/ga-accounts/${accountId}/properties/${propertyId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to remove Google Analytics property');
+      }
+
+      toast.success('Google Analytics property removed successfully');
+      await mutate();
+    } catch {
+      toast.error('Failed to remove Google Analytics property');
+    }
+  };
+
   if (!profile) {
     return <div>Loading...</div>;
   }
@@ -374,41 +399,52 @@ export default function ProfilePage() {
                     <Card key={account.id}>
                       <CardContent className="pt-6">
                         <div className="flex justify-between items-start">
-                          <div>
+                          <div className="flex flex-col w-full">
                             <h3 className="font-semibold">{account.gaAccountName}</h3>
                             <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
-                            <div className="mt-4 flex space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => {
-                                  setSelectedGaAccount(account);
-                                  setIsGaPropertyDialogOpen(true);
-                                }}
-                              >
-                                Add Property
-                              </Button>
-                            </div>
                             {account.gaProperties?.length > 0 && (
                               <div className="mt-2">
-                                <p className="text-sm font-medium">Properties:</p>
-                                <ul className="list-disc list-inside text-sm text-gray-600 ml-2">
+                                <h4 className="text-sm font-medium mb-2">Properties:</h4>
+                                <div className="space-y-2">
                                   {account.gaProperties.map((property) => (
-                                    <li key={property.id}>
-                                      {property.gaPropertyName} ({property.gaPropertyId})
-                                    </li>
+                                    <div key={property.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
+                                      <div className="text-sm text-gray-600">
+                                        <span className="font-medium">{property.gaPropertyName}</span>
+                                        <span className="text-gray-500"> ({property.gaPropertyId})</span>
+                                      </div>
+                                      <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        onClick={() => handleRemoveGaProperty(account.id, property.id)}
+                                        className="h-6 px-2 text-xs"
+                                      >
+                                        Remove
+                                      </Button>
+                                    </div>
                                   ))}
-                                </ul>
+                                </div>
                               </div>
                             )}
                           </div>
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => handleRemoveGaAccount(account.id)}
-                          >
-                            Remove
-                          </Button>
+                          <div className="flex flex-row items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                setSelectedGaAccount(account);
+                                setIsGaPropertyDialogOpen(true);
+                              }}
+                            >
+                              Add Property
+                            </Button>
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => handleRemoveGaAccount(account.id)}
+                            >
+                              Remove
+                            </Button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>

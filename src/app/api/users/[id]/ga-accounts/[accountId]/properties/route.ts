@@ -13,6 +13,7 @@
  * 
  * @route GET /api/users/[id]/ga-accounts/[accountId]/properties - Retrieve properties for a GA account
  * @route POST /api/users/[id]/ga-accounts/[accountId]/properties - Create a new GA property
+ * @route DELETE /api/users/[id]/ga-accounts/[accountId]/properties/[propertyId] - Soft delete a GA property
  * @security Requires authentication via NextAuth session
  */
 
@@ -49,11 +50,12 @@ export async function POST(
 
     const { id, accountId } = await params;
 
-    // Verify the GA account belongs to the user
+    // Verify the GA account belongs to the user and is not deleted
     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
         id: accountId,
         userId: id,
+        deleted: false, // Only allow operations on non-deleted accounts
       },
     });
 
@@ -110,11 +112,12 @@ export async function GET(
 
     const { id, accountId } = await params;
 
-    // Verify the GA account belongs to the user
+    // Verify the GA account belongs to the user and is not deleted
     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
         id: accountId,
         userId: id,
+        deleted: false, // Only allow access to non-deleted accounts
       },
     });
 
@@ -125,6 +128,7 @@ export async function GET(
     const gaProperties = await prisma.gaProperty.findMany({
       where: {
         gaAccountId: accountId,
+        deleted: false, // Only return non-deleted properties
       },
     });
 

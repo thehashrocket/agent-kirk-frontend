@@ -139,6 +139,24 @@ export default function ClientDetailsPage() {
     }
   };
 
+  const handleDeleteGaProperty = async (accountId: string, propertyId: string) => {
+    try {
+      const response = await fetch(`/api/users/${params.id}/ga-accounts/${accountId}/properties/${propertyId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete GA property');
+      }
+
+      toast.success('Google Analytics property deleted successfully');
+      // Refresh user data
+      window.location.reload();
+    } catch {
+      toast.error('Failed to delete Google Analytics property');
+    }
+  };
+
   if (!client) {
     return <div>Loading...</div>;
   }
@@ -256,9 +274,19 @@ export default function ClientDetailsPage() {
                     <h4 className="text-sm font-medium mb-2">Properties:</h4>
                     <div className="space-y-2">
                       {account.gaProperties.map((property: GaProperty) => (
-                        <div key={property.id} className="text-sm">
-                          <p className="font-medium">{property.gaPropertyName}</p>
-                          <p className="text-gray-500">ID: {property.gaPropertyId}</p>
+                        <div key={property.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
+                          <div className="text-sm">
+                            <p className="font-medium">{property.gaPropertyName}</p>
+                            <p className="text-gray-500">ID: {property.gaPropertyId}</p>
+                          </div>
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDeleteGaProperty(account.id, property.id)}
+                            className="h-6 px-2 text-xs"
+                          >
+                            Delete
+                          </Button>
                         </div>
                       ))}
                     </div>
