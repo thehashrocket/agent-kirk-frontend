@@ -45,6 +45,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
  * @property {string} role.name - Role display name
  * @property {boolean} isActive - User's active status
  * @property {string|null} accountRepId - Associated account representative ID
+ * @property {object[]} gaAccounts - Google Analytics accounts associated with the user
  */
 interface User {
   id: string;
@@ -57,6 +58,16 @@ interface User {
   };
   isActive: boolean;
   accountRepId: string | null;
+  gaAccounts: {
+    id: string;
+    gaAccountId: string;
+    gaAccountName: string;
+    gaProperties: {
+      id: string;
+      gaPropertyId: string;
+      gaPropertyName: string;
+    }[];
+  }[];
 }
 
 /**
@@ -173,6 +184,38 @@ export default function UsersPage() {
     }
   };
 
+  const toggleUserStatus = async (userId: string, isActive: boolean) => {
+    // Mark as inactive if active, active if inactive
+    // Send a PATCH request to the API
+    // Show a toast notification
+    // Update the user list
+
+    try {
+      const response = await fetch(`/api/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: userId,
+          isActive: isActive
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to toggle user status');
+      }
+
+      toast.success('User status toggled successfully');
+      mutate(
+        (currentData: User[] | undefined) =>
+          currentData?.map(user => user.id === userId ? { ...user, isActive: !user.isActive } : user)
+      );
+    } catch {
+      toast.error('Failed to toggle user status');
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -283,12 +326,30 @@ export default function UsersPage() {
                 )}
               </TableCell>
               <TableCell>
-                <Button
-                  variant="destructive"
-                  onClick={() => handleDeleteUser(user.id)}
-                >
-                  Delete
-                </Button>
+                <div className="flex gap-2 justify-end">
+                  {/* If User is active, show Mark as Inactive, if User is inactive, show Mark as Active */}
+                  {user.isActive ? (
+                    <Button
+                      variant="secondary"
+                      onClick={() => toggleUserStatus(user.id, false)}
+                    >
+                      Mark as Inactive
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      onClick={() => toggleUserStatus(user.id, true)}
+                    >
+                      Mark as Active
+                    </Button>
+                  )}
+                  <Button
+                    variant="destructive"
+                    onClick={() => handleDeleteUser(user.id)}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

@@ -368,6 +368,7 @@ model Query {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  deleted       Boolean   @default(false)
   email         String?   @unique
   password      String? // Adding password field as optional since we support both OAuth and password auth
   emailVerified DateTime?

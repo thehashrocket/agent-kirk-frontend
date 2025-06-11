@@ -348,6 +348,7 @@ exports.Prisma.QueryScalarFieldEnum = {
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  deleted: 'deleted',
   email: 'email',
   password: 'password',
   emailVerified: 'emailVerified',
