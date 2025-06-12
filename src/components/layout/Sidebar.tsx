@@ -62,17 +62,17 @@ const adminNavItems: NavItem[] = [
     icon: <Users />,
     description: "Manage user accounts"
   },
-  { 
-    title: "System Settings", 
-    href: "/admin/settings", 
-    icon: <Settings />,
-    description: "Configure system preferences"
-  },
-  { 
-    title: "Analytics", 
-    href: "/admin/analytics", 
+  {
+    title: "Client Analytics",
+    href: "/admin/client-analytics",
     icon: <BarChart />,
-    description: "System performance metrics"
+    description: "View client analytics"
+  },
+  {
+    title: "Client Reports",
+    href: "/admin/client-reports",
+    icon: <FileText />,
+    description: "Generate client reports"
   },
   { 
     title: "Reports", 
