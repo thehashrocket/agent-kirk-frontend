@@ -345,6 +345,110 @@ exports.Prisma.QueryScalarFieldEnum = {
   conversationId: 'conversationId'
 };
 
+exports.Prisma.SproutFacebookAnalyticsScalarFieldEnum = {
+  id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  engagements: 'engagements',
+  impressions: 'impressions',
+  impressionsUnique: 'impressionsUnique',
+  followersCount: 'followersCount',
+  postContentClicks: 'postContentClicks',
+  postContentClicksOther: 'postContentClicksOther',
+  postLinkClicks: 'postLinkClicks',
+  postPhotoViewClicks: 'postPhotoViewClicks',
+  tabViews: 'tabViews',
+  videoViews: 'videoViews',
+  videoViews10s: 'videoViews10s',
+  videoViewsOrganic: 'videoViewsOrganic',
+  videoViewsPaid: 'videoViewsPaid',
+  videoViewsUnique: 'videoViewsUnique',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SproutInstagramAnalyticsScalarFieldEnum = {
+  id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  commentsCount: 'commentsCount',
+  engagements: 'engagements',
+  impressions: 'impressions',
+  impressionsUnique: 'impressionsUnique',
+  followersCount: 'followersCount',
+  likes: 'likes',
+  saves: 'saves',
+  videoViews: 'videoViews',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SproutInstagramFollowersByCityScalarFieldEnum = {
+  id: 'id',
+  sproutInstagramAnalyticsId: 'sproutInstagramAnalyticsId',
+  city: 'city',
+  count: 'count',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SproutInstagramFollowersByCountryScalarFieldEnum = {
+  id: 'id',
+  sproutInstagramAnalyticsId: 'sproutInstagramAnalyticsId',
+  country: 'country',
+  count: 'count',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SproutLinkedInAnalyticsScalarFieldEnum = {
+  id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  engagements: 'engagements',
+  impressions: 'impressions',
+  impressionsUnique: 'impressionsUnique',
+  followersCount: 'followersCount',
+  reactions: 'reactions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SproutPinterestAnalyticsScalarFieldEnum = {
+  id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  followersCount: 'followersCount',
+  followingCount: 'followingCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SproutSocialAccountScalarFieldEnum = {
+  id: 'id',
+  customerProfileId: 'customerProfileId',
+  networkType: 'networkType',
+  name: 'name',
+  nativeName: 'nativeName',
+  link: 'link',
+  nativeId: 'nativeId',
+  groups: 'groups',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserToSproutSocialAccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -510,6 +614,14 @@ exports.Prisma.ModelName = {
   ParsedQueryData: 'ParsedQueryData',
   ParsedQuerySummary: 'ParsedQuerySummary',
   Query: 'Query',
+  SproutFacebookAnalytics: 'SproutFacebookAnalytics',
+  SproutInstagramAnalytics: 'SproutInstagramAnalytics',
+  SproutInstagramFollowersByCity: 'SproutInstagramFollowersByCity',
+  SproutInstagramFollowersByCountry: 'SproutInstagramFollowersByCountry',
+  SproutLinkedInAnalytics: 'SproutLinkedInAnalytics',
+  SproutPinterestAnalytics: 'SproutPinterestAnalytics',
+  SproutSocialAccount: 'SproutSocialAccount',
+  UserToSproutSocialAccount: 'UserToSproutSocialAccount',
   User: 'User',
   UserSettings: 'UserSettings',
   Ticket: 'Ticket',

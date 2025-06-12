@@ -110,12 +110,12 @@ model GaAccount {
 }
 
 model GaProperty {
-  id             String         @id @default(cuid())
+  id             String           @id @default(cuid())
   gaPropertyId   String
   gaPropertyName String
   gaAccountId    String
-  gaAccount      GaAccount      @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
-  deleted        Boolean        @default(false)
+  gaAccount      GaAccount        @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
+  deleted        Boolean          @default(false)
   // relations
   conversations  Conversation[]
   imports        GaImportRun[]
@@ -126,69 +126,69 @@ model GaProperty {
 }
 
 model GaImportRun {
-  id             String         @id @default(cuid())
-  gaProperty     GaProperty     @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
-  gaPropertyId   String
-  dateStart      DateTime
-  dateEnd        DateTime
-  status         ImportStatus    @default(queued)
-  errorMessage   String?
-  requestedBy    User            @relation("UserToGaImportRuns", fields: [requestedByUserId], references: [id])
+  id                String       @id @default(cuid())
+  gaProperty        GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId      String
+  dateStart         DateTime
+  dateEnd           DateTime
+  status            ImportStatus @default(queued)
+  errorMessage      String?
+  requestedBy       User         @relation("UserToGaImportRuns", fields: [requestedByUserId], references: [id])
   requestedByUserId String
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
 }
 
 model GaKpiDaily {
-  id             String       @id @default(cuid())
-  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
-  gaPropertyId   String
-  date           DateTime     @db.Date
+  id                        String     @id @default(cuid())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId              String
+  date                      DateTime   @db.Date
   // metrics
-  sessions                     Int
-  screenPageViewsPerSession    Float
-  engagementRate               Float     // 0–1
-  avgSessionDurationSec        Int
-  goalCompletions              Int
-  goalCompletionRate           Float     // 0–1
-  createdAt      DateTime      @default(now())
+  sessions                  Int
+  screenPageViewsPerSession Float
+  engagementRate            Float // 0–1
+  avgSessionDurationSec     Int
+  goalCompletions           Int
+  goalCompletionRate        Float // 0–1
+  createdAt                 DateTime   @default(now())
 
   @@unique([gaPropertyId, date])
   @@index([date])
 }
 
 model GaKpiMonthly {
-  id             String       @id @default(cuid())
-  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
-  gaPropertyId   String
-  month          Int          // YYYYMM, e.g. 202503
+  id                        String     @id @default(cuid())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId              String
+  month                     Int // YYYYMM, e.g. 202503
   // metrics
-  sessions                     Int
-  screenPageViewsPerSession    Float
-  engagementRate               Float
-  avgSessionDurationSec        Int
-  goalCompletions              Int
-  goalCompletionRate           Float
-  createdAt      DateTime      @default(now())
+  sessions                  Int
+  screenPageViewsPerSession Float
+  engagementRate            Float
+  avgSessionDurationSec     Int
+  goalCompletions           Int
+  goalCompletionRate        Float
+  createdAt                 DateTime   @default(now())
 
   @@unique([gaPropertyId, month])
   @@index([month])
 }
 
 model GaChannelDaily {
-  id             String       @id @default(cuid())
-  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
-  gaPropertyId   String
-  date           DateTime     @db.Date
-  channelGroup   String       @db.VarChar(64)
+  id                        String     @id @default(cuid())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId              String
+  date                      DateTime   @db.Date
+  channelGroup              String     @db.VarChar(64)
   // metrics
-  sessions                     Int
-  screenPageViewsPerSession    Float
-  engagementRate               Float
-  avgSessionDurationSec        Int
-  goalCompletions              Int
-  goalCompletionRate           Float
-  createdAt      DateTime      @default(now())
+  sessions                  Int
+  screenPageViewsPerSession Float
+  engagementRate            Float
+  avgSessionDurationSec     Int
+  goalCompletions           Int
+  goalCompletionRate        Float
+  createdAt                 DateTime   @default(now())
 
   @@unique([gaPropertyId, date, channelGroup])
   @@index([date])
@@ -196,19 +196,19 @@ model GaChannelDaily {
 }
 
 model GaSourceDaily {
-  id             String       @id @default(cuid())
-  gaProperty     GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
-  gaPropertyId   String
-  date           DateTime     @db.Date
-  trafficSource  String       @db.VarChar(64)
+  id                        String     @id @default(cuid())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  gaPropertyId              String
+  date                      DateTime   @db.Date
+  trafficSource             String     @db.VarChar(64)
   // metrics
-  sessions                     Int
-  screenPageViewsPerSession    Float
-  engagementRate               Float
-  avgSessionDurationSec        Int
-  goalCompletions              Int
-  goalCompletionRate           Float
-  createdAt      DateTime      @default(now())
+  sessions                  Int
+  screenPageViewsPerSession Float
+  engagementRate            Float
+  avgSessionDurationSec     Int
+  goalCompletions           Int
+  goalCompletionRate        Float
+  createdAt                 DateTime   @default(now())
 
   @@unique([gaPropertyId, date, trafficSource])
   @@index([date])
@@ -365,6 +365,141 @@ model Query {
   @@index([conversationId])
 }
 
+model SproutFacebookAnalytics {
+  id                     String              @id @default(cuid())
+  sproutSocialAccountId  String
+  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  customerProfileId      Int
+  reportingDate          DateTime            @db.Date
+  engagements            Int?
+  impressions            Int?
+  impressionsUnique      Int?
+  followersCount         Int?
+  postContentClicks      Int?
+  postContentClicksOther Int?
+  postLinkClicks         Int?
+  postPhotoViewClicks    Int?
+  tabViews               Int?
+  videoViews             Int?
+  videoViews10s          Int?
+  videoViewsOrganic      Int?
+  videoViewsPaid         Int?
+  videoViewsUnique       Int?
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+
+  @@index([sproutSocialAccountId])
+}
+
+model SproutInstagramAnalytics {
+  id                    String                              @id @default(cuid())
+  sproutSocialAccountId String
+  sproutSocialAccount   SproutSocialAccount                 @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  customerProfileId     Int
+  reportingDate         DateTime                            @db.Date
+  commentsCount         Int?
+  engagements           Int?
+  impressions           Int?
+  impressionsUnique     Int?
+  followersCount        Int?
+  likes                 Int?
+  saves                 Int?
+  videoViews            Int?
+  createdAt             DateTime                            @default(now())
+  updatedAt             DateTime                            @updatedAt
+  followersByCity       SproutInstagramFollowersByCity[]
+  followersByCountry    SproutInstagramFollowersByCountry[]
+
+  @@index([sproutSocialAccountId])
+}
+
+model SproutInstagramFollowersByCity {
+  id                         String                   @id @default(cuid())
+  sproutInstagramAnalyticsId String
+  sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
+  city                       String
+  count                      Int
+  createdAt                  DateTime                 @default(now())
+  updatedAt                  DateTime                 @updatedAt
+
+  @@index([sproutInstagramAnalyticsId])
+}
+
+model SproutInstagramFollowersByCountry {
+  id                         String                   @id @default(cuid())
+  sproutInstagramAnalyticsId String
+  sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
+  country                    String
+  count                      Int
+  createdAt                  DateTime                 @default(now())
+  updatedAt                  DateTime                 @updatedAt
+
+  @@index([sproutInstagramAnalyticsId])
+}
+
+model SproutLinkedInAnalytics {
+  id                    String              @id @default(cuid())
+  sproutSocialAccountId String
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  customerProfileId     Int
+  reportingDate         DateTime            @db.Date
+  engagements           Int?
+  impressions           Int?
+  impressionsUnique     Int?
+  followersCount        Int?
+  reactions             Int?
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  @@index([sproutSocialAccountId])
+}
+
+model SproutPinterestAnalytics {
+  id                    String   @id @default(cuid())
+  sproutSocialAccountId String
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  customerProfileId     Int
+  reportingDate         DateTime @db.Date
+  followersCount        Int?
+  followingCount        Int?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([sproutSocialAccountId])
+}
+
+model SproutSocialAccount {
+  id                 String                     @id @default(cuid())
+  customerProfileId  Int
+  networkType        String
+  name               String
+  nativeName         String
+  link               String
+  nativeId           String
+  groups             Int[]
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+  facebookAnalytics  SproutFacebookAnalytics[]
+  linkedInAnalytics  SproutLinkedInAnalytics[]
+  instagramAnalytics SproutInstagramAnalytics[]
+  pinterestAnalytics SproutPinterestAnalytics[]
+  users              UserToSproutSocialAccount[]
+}
+
+model UserToSproutSocialAccount {
+  id                   String             @id @default(cuid())
+  userId               String
+  user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sproutSocialAccountId String
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  @@unique([userId, sproutSocialAccountId])
+  @@index([userId])
+  @@index([sproutSocialAccountId])
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -383,23 +518,24 @@ model User {
   updatedAt     DateTime  @updatedAt
 
   // Relations
-  accounts         Account[]
-  sessions         Session[]
-  queries          Query[]
-  conversations    Conversation[]
-  clientConversations Conversation[] @relation("ClientConversations")
-  sentMessages     Message[]            @relation("SentMessages")
-  receivedMessages Message[]            @relation("ReceivedMessages")
-  notifications    Notification[]
-  settings         UserSettings?
-  givenRatings     ClientSatisfaction[] @relation("ClientRatings")
-  receivedRatings  ClientSatisfaction[] @relation("RepRatings")
-  assignedTickets  Ticket[]             @relation("AssignedTickets")
-  clientTickets    Ticket[]             @relation("ClientTickets")
-  ticketComments   TicketComment[]
-  activities       ClientActivity[]
-  gaAccounts       GaAccount[]          @relation("UserToGaAccount")
-  gaImportRuns     GaImportRun[]        @relation("UserToGaImportRuns")
+  accounts            Account[]
+  sessions            Session[]
+  queries             Query[]
+  conversations       Conversation[]
+  clientConversations Conversation[]       @relation("ClientConversations")
+  sentMessages        Message[]            @relation("SentMessages")
+  receivedMessages    Message[]            @relation("ReceivedMessages")
+  notifications       Notification[]
+  settings            UserSettings?
+  givenRatings        ClientSatisfaction[] @relation("ClientRatings")
+  receivedRatings     ClientSatisfaction[] @relation("RepRatings")
+  assignedTickets     Ticket[]             @relation("AssignedTickets")
+  clientTickets       Ticket[]             @relation("ClientTickets")
+  ticketComments      TicketComment[]
+  activities          ClientActivity[]
+  gaAccounts          GaAccount[]          @relation("UserToGaAccount")
+  gaImportRuns        GaImportRun[]        @relation("UserToGaImportRuns")
+  sproutSocialAccounts UserToSproutSocialAccount[]
 }
 
 model UserSettings {

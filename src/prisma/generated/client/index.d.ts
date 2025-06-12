@@ -109,6 +109,46 @@ export type ParsedQuerySummary = $Result.DefaultSelection<Prisma.$ParsedQuerySum
  */
 export type Query = $Result.DefaultSelection<Prisma.$QueryPayload>
 /**
+ * Model SproutFacebookAnalytics
+ * 
+ */
+export type SproutFacebookAnalytics = $Result.DefaultSelection<Prisma.$SproutFacebookAnalyticsPayload>
+/**
+ * Model SproutInstagramAnalytics
+ * 
+ */
+export type SproutInstagramAnalytics = $Result.DefaultSelection<Prisma.$SproutInstagramAnalyticsPayload>
+/**
+ * Model SproutInstagramFollowersByCity
+ * 
+ */
+export type SproutInstagramFollowersByCity = $Result.DefaultSelection<Prisma.$SproutInstagramFollowersByCityPayload>
+/**
+ * Model SproutInstagramFollowersByCountry
+ * 
+ */
+export type SproutInstagramFollowersByCountry = $Result.DefaultSelection<Prisma.$SproutInstagramFollowersByCountryPayload>
+/**
+ * Model SproutLinkedInAnalytics
+ * 
+ */
+export type SproutLinkedInAnalytics = $Result.DefaultSelection<Prisma.$SproutLinkedInAnalyticsPayload>
+/**
+ * Model SproutPinterestAnalytics
+ * 
+ */
+export type SproutPinterestAnalytics = $Result.DefaultSelection<Prisma.$SproutPinterestAnalyticsPayload>
+/**
+ * Model SproutSocialAccount
+ * 
+ */
+export type SproutSocialAccount = $Result.DefaultSelection<Prisma.$SproutSocialAccountPayload>
+/**
+ * Model UserToSproutSocialAccount
+ * 
+ */
+export type UserToSproutSocialAccount = $Result.DefaultSelection<Prisma.$UserToSproutSocialAccountPayload>
+/**
  * Model User
  * 
  */
@@ -548,6 +588,86 @@ export class PrismaClient<
     * ```
     */
   get query(): Prisma.QueryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutFacebookAnalytics`: Exposes CRUD operations for the **SproutFacebookAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutFacebookAnalytics
+    * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findMany()
+    * ```
+    */
+  get sproutFacebookAnalytics(): Prisma.SproutFacebookAnalyticsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutInstagramAnalytics`: Exposes CRUD operations for the **SproutInstagramAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutInstagramAnalytics
+    * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findMany()
+    * ```
+    */
+  get sproutInstagramAnalytics(): Prisma.SproutInstagramAnalyticsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutInstagramFollowersByCity`: Exposes CRUD operations for the **SproutInstagramFollowersByCity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutInstagramFollowersByCities
+    * const sproutInstagramFollowersByCities = await prisma.sproutInstagramFollowersByCity.findMany()
+    * ```
+    */
+  get sproutInstagramFollowersByCity(): Prisma.SproutInstagramFollowersByCityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutInstagramFollowersByCountry`: Exposes CRUD operations for the **SproutInstagramFollowersByCountry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutInstagramFollowersByCountries
+    * const sproutInstagramFollowersByCountries = await prisma.sproutInstagramFollowersByCountry.findMany()
+    * ```
+    */
+  get sproutInstagramFollowersByCountry(): Prisma.SproutInstagramFollowersByCountryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutLinkedInAnalytics`: Exposes CRUD operations for the **SproutLinkedInAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutLinkedInAnalytics
+    * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findMany()
+    * ```
+    */
+  get sproutLinkedInAnalytics(): Prisma.SproutLinkedInAnalyticsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutPinterestAnalytics`: Exposes CRUD operations for the **SproutPinterestAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutPinterestAnalytics
+    * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findMany()
+    * ```
+    */
+  get sproutPinterestAnalytics(): Prisma.SproutPinterestAnalyticsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutSocialAccount`: Exposes CRUD operations for the **SproutSocialAccount** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutSocialAccounts
+    * const sproutSocialAccounts = await prisma.sproutSocialAccount.findMany()
+    * ```
+    */
+  get sproutSocialAccount(): Prisma.SproutSocialAccountDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userToSproutSocialAccount`: Exposes CRUD operations for the **UserToSproutSocialAccount** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserToSproutSocialAccounts
+    * const userToSproutSocialAccounts = await prisma.userToSproutSocialAccount.findMany()
+    * ```
+    */
+  get userToSproutSocialAccount(): Prisma.UserToSproutSocialAccountDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -1087,6 +1207,14 @@ export namespace Prisma {
     ParsedQueryData: 'ParsedQueryData',
     ParsedQuerySummary: 'ParsedQuerySummary',
     Query: 'Query',
+    SproutFacebookAnalytics: 'SproutFacebookAnalytics',
+    SproutInstagramAnalytics: 'SproutInstagramAnalytics',
+    SproutInstagramFollowersByCity: 'SproutInstagramFollowersByCity',
+    SproutInstagramFollowersByCountry: 'SproutInstagramFollowersByCountry',
+    SproutLinkedInAnalytics: 'SproutLinkedInAnalytics',
+    SproutPinterestAnalytics: 'SproutPinterestAnalytics',
+    SproutSocialAccount: 'SproutSocialAccount',
+    UserToSproutSocialAccount: 'UserToSproutSocialAccount',
     User: 'User',
     UserSettings: 'UserSettings',
     Ticket: 'Ticket',
@@ -1113,7 +1241,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
+      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2523,6 +2651,598 @@ export namespace Prisma {
           }
         }
       }
+      SproutFacebookAnalytics: {
+        payload: Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>
+        fields: Prisma.SproutFacebookAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutFacebookAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutFacebookAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutFacebookAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutFacebookAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.SproutFacebookAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.SproutFacebookAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.SproutFacebookAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutFacebookAnalyticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutFacebookAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.SproutFacebookAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutFacebookAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutFacebookAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutFacebookAnalyticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutFacebookAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutFacebookAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutFacebookAnalytics>
+          }
+          groupBy: {
+            args: Prisma.SproutFacebookAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutFacebookAnalyticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutFacebookAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutFacebookAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
+      SproutInstagramAnalytics: {
+        payload: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>
+        fields: Prisma.SproutInstagramAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutInstagramAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutInstagramAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutInstagramAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutInstagramAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.SproutInstagramAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.SproutInstagramAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.SproutInstagramAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutInstagramAnalyticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutInstagramAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.SproutInstagramAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutInstagramAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutInstagramAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutInstagramAnalyticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutInstagramAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutInstagramAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutInstagramAnalytics>
+          }
+          groupBy: {
+            args: Prisma.SproutInstagramAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutInstagramAnalyticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutInstagramAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutInstagramAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
+      SproutInstagramFollowersByCity: {
+        payload: Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>
+        fields: Prisma.SproutInstagramFollowersByCityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutInstagramFollowersByCityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutInstagramFollowersByCityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutInstagramFollowersByCityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutInstagramFollowersByCityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>
+          }
+          findMany: {
+            args: Prisma.SproutInstagramFollowersByCityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>[]
+          }
+          create: {
+            args: Prisma.SproutInstagramFollowersByCityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>
+          }
+          createMany: {
+            args: Prisma.SproutInstagramFollowersByCityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutInstagramFollowersByCityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutInstagramFollowersByCityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>
+          }
+          update: {
+            args: Prisma.SproutInstagramFollowersByCityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutInstagramFollowersByCityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutInstagramFollowersByCityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutInstagramFollowersByCityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutInstagramFollowersByCityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCityPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutInstagramFollowersByCityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutInstagramFollowersByCity>
+          }
+          groupBy: {
+            args: Prisma.SproutInstagramFollowersByCityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutInstagramFollowersByCityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutInstagramFollowersByCityCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutInstagramFollowersByCityCountAggregateOutputType> | number
+          }
+        }
+      }
+      SproutInstagramFollowersByCountry: {
+        payload: Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>
+        fields: Prisma.SproutInstagramFollowersByCountryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutInstagramFollowersByCountryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutInstagramFollowersByCountryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutInstagramFollowersByCountryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutInstagramFollowersByCountryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>
+          }
+          findMany: {
+            args: Prisma.SproutInstagramFollowersByCountryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>[]
+          }
+          create: {
+            args: Prisma.SproutInstagramFollowersByCountryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>
+          }
+          createMany: {
+            args: Prisma.SproutInstagramFollowersByCountryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutInstagramFollowersByCountryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutInstagramFollowersByCountryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>
+          }
+          update: {
+            args: Prisma.SproutInstagramFollowersByCountryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutInstagramFollowersByCountryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutInstagramFollowersByCountryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutInstagramFollowersByCountryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutInstagramFollowersByCountryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutInstagramFollowersByCountryPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutInstagramFollowersByCountryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutInstagramFollowersByCountry>
+          }
+          groupBy: {
+            args: Prisma.SproutInstagramFollowersByCountryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutInstagramFollowersByCountryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutInstagramFollowersByCountryCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutInstagramFollowersByCountryCountAggregateOutputType> | number
+          }
+        }
+      }
+      SproutLinkedInAnalytics: {
+        payload: Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>
+        fields: Prisma.SproutLinkedInAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutLinkedInAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutLinkedInAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutLinkedInAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutLinkedInAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.SproutLinkedInAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.SproutLinkedInAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.SproutLinkedInAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutLinkedInAnalyticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutLinkedInAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.SproutLinkedInAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutLinkedInAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutLinkedInAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutLinkedInAnalyticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutLinkedInAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutLinkedInAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutLinkedInAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutLinkedInAnalytics>
+          }
+          groupBy: {
+            args: Prisma.SproutLinkedInAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutLinkedInAnalyticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutLinkedInAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutLinkedInAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
+      SproutPinterestAnalytics: {
+        payload: Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>
+        fields: Prisma.SproutPinterestAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutPinterestAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutPinterestAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutPinterestAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutPinterestAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.SproutPinterestAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.SproutPinterestAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.SproutPinterestAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutPinterestAnalyticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutPinterestAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.SproutPinterestAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutPinterestAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutPinterestAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutPinterestAnalyticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutPinterestAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutPinterestAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutPinterestAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutPinterestAnalytics>
+          }
+          groupBy: {
+            args: Prisma.SproutPinterestAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutPinterestAnalyticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutPinterestAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutPinterestAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
+      SproutSocialAccount: {
+        payload: Prisma.$SproutSocialAccountPayload<ExtArgs>
+        fields: Prisma.SproutSocialAccountFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutSocialAccountFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutSocialAccountFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutSocialAccountFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutSocialAccountFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>
+          }
+          findMany: {
+            args: Prisma.SproutSocialAccountFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>[]
+          }
+          create: {
+            args: Prisma.SproutSocialAccountCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>
+          }
+          createMany: {
+            args: Prisma.SproutSocialAccountCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutSocialAccountCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutSocialAccountDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>
+          }
+          update: {
+            args: Prisma.SproutSocialAccountUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutSocialAccountDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutSocialAccountUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutSocialAccountUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutSocialAccountUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutSocialAccountPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutSocialAccountAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutSocialAccount>
+          }
+          groupBy: {
+            args: Prisma.SproutSocialAccountGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutSocialAccountGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutSocialAccountCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutSocialAccountCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserToSproutSocialAccount: {
+        payload: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>
+        fields: Prisma.UserToSproutSocialAccountFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserToSproutSocialAccountFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserToSproutSocialAccountFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>
+          }
+          findFirst: {
+            args: Prisma.UserToSproutSocialAccountFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserToSproutSocialAccountFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>
+          }
+          findMany: {
+            args: Prisma.UserToSproutSocialAccountFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>[]
+          }
+          create: {
+            args: Prisma.UserToSproutSocialAccountCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>
+          }
+          createMany: {
+            args: Prisma.UserToSproutSocialAccountCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserToSproutSocialAccountCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>[]
+          }
+          delete: {
+            args: Prisma.UserToSproutSocialAccountDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>
+          }
+          update: {
+            args: Prisma.UserToSproutSocialAccountUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserToSproutSocialAccountDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserToSproutSocialAccountUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserToSproutSocialAccountUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserToSproutSocialAccountUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToSproutSocialAccountPayload>
+          }
+          aggregate: {
+            args: Prisma.UserToSproutSocialAccountAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserToSproutSocialAccount>
+          }
+          groupBy: {
+            args: Prisma.UserToSproutSocialAccountGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserToSproutSocialAccountGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserToSproutSocialAccountCountArgs<ExtArgs>
+            result: $Utils.Optional<UserToSproutSocialAccountCountAggregateOutputType> | number
+          }
+        }
+      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -3218,6 +3938,14 @@ export namespace Prisma {
     parsedQueryData?: ParsedQueryDataOmit
     parsedQuerySummary?: ParsedQuerySummaryOmit
     query?: QueryOmit
+    sproutFacebookAnalytics?: SproutFacebookAnalyticsOmit
+    sproutInstagramAnalytics?: SproutInstagramAnalyticsOmit
+    sproutInstagramFollowersByCity?: SproutInstagramFollowersByCityOmit
+    sproutInstagramFollowersByCountry?: SproutInstagramFollowersByCountryOmit
+    sproutLinkedInAnalytics?: SproutLinkedInAnalyticsOmit
+    sproutPinterestAnalytics?: SproutPinterestAnalyticsOmit
+    sproutSocialAccount?: SproutSocialAccountOmit
+    userToSproutSocialAccount?: UserToSproutSocialAccountOmit
     user?: UserOmit
     userSettings?: UserSettingsOmit
     ticket?: TicketOmit
@@ -3583,6 +4311,113 @@ export namespace Prisma {
 
 
   /**
+   * Count Type SproutInstagramAnalyticsCountOutputType
+   */
+
+  export type SproutInstagramAnalyticsCountOutputType = {
+    followersByCity: number
+    followersByCountry: number
+  }
+
+  export type SproutInstagramAnalyticsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    followersByCity?: boolean | SproutInstagramAnalyticsCountOutputTypeCountFollowersByCityArgs
+    followersByCountry?: boolean | SproutInstagramAnalyticsCountOutputTypeCountFollowersByCountryArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SproutInstagramAnalyticsCountOutputType without action
+   */
+  export type SproutInstagramAnalyticsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalyticsCountOutputType
+     */
+    select?: SproutInstagramAnalyticsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramAnalyticsCountOutputType without action
+   */
+  export type SproutInstagramAnalyticsCountOutputTypeCountFollowersByCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutInstagramFollowersByCityWhereInput
+  }
+
+  /**
+   * SproutInstagramAnalyticsCountOutputType without action
+   */
+  export type SproutInstagramAnalyticsCountOutputTypeCountFollowersByCountryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutInstagramFollowersByCountryWhereInput
+  }
+
+
+  /**
+   * Count Type SproutSocialAccountCountOutputType
+   */
+
+  export type SproutSocialAccountCountOutputType = {
+    facebookAnalytics: number
+    linkedInAnalytics: number
+    instagramAnalytics: number
+    pinterestAnalytics: number
+    users: number
+  }
+
+  export type SproutSocialAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facebookAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountFacebookAnalyticsArgs
+    linkedInAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountLinkedInAnalyticsArgs
+    instagramAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountInstagramAnalyticsArgs
+    pinterestAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountPinterestAnalyticsArgs
+    users?: boolean | SproutSocialAccountCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccountCountOutputType
+     */
+    select?: SproutSocialAccountCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountFacebookAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookAnalyticsWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountLinkedInAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutLinkedInAnalyticsWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountInstagramAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutInstagramAnalyticsWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountPinterestAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutPinterestAnalyticsWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToSproutSocialAccountWhereInput
+  }
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
@@ -3604,6 +4439,7 @@ export namespace Prisma {
     activities: number
     gaAccounts: number
     gaImportRuns: number
+    sproutSocialAccounts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3624,6 +4460,7 @@ export namespace Prisma {
     activities?: boolean | UserCountOutputTypeCountActivitiesArgs
     gaAccounts?: boolean | UserCountOutputTypeCountGaAccountsArgs
     gaImportRuns?: boolean | UserCountOutputTypeCountGaImportRunsArgs
+    sproutSocialAccounts?: boolean | UserCountOutputTypeCountSproutSocialAccountsArgs
   }
 
   // Custom InputTypes
@@ -3754,6 +4591,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountGaImportRunsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GaImportRunWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSproutSocialAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToSproutSocialAccountWhereInput
   }
 
 
@@ -25895,6 +26739,9534 @@ export namespace Prisma {
 
 
   /**
+   * Model SproutFacebookAnalytics
+   */
+
+  export type AggregateSproutFacebookAnalytics = {
+    _count: SproutFacebookAnalyticsCountAggregateOutputType | null
+    _avg: SproutFacebookAnalyticsAvgAggregateOutputType | null
+    _sum: SproutFacebookAnalyticsSumAggregateOutputType | null
+    _min: SproutFacebookAnalyticsMinAggregateOutputType | null
+    _max: SproutFacebookAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type SproutFacebookAnalyticsAvgAggregateOutputType = {
+    customerProfileId: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    tabViews: number | null
+    videoViews: number | null
+    videoViews10s: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    videoViewsUnique: number | null
+  }
+
+  export type SproutFacebookAnalyticsSumAggregateOutputType = {
+    customerProfileId: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    tabViews: number | null
+    videoViews: number | null
+    videoViews10s: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    videoViewsUnique: number | null
+  }
+
+  export type SproutFacebookAnalyticsMinAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    tabViews: number | null
+    videoViews: number | null
+    videoViews10s: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    videoViewsUnique: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutFacebookAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    tabViews: number | null
+    videoViews: number | null
+    videoViews10s: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    videoViewsUnique: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutFacebookAnalyticsCountAggregateOutputType = {
+    id: number
+    sproutSocialAccountId: number
+    customerProfileId: number
+    reportingDate: number
+    engagements: number
+    impressions: number
+    impressionsUnique: number
+    followersCount: number
+    postContentClicks: number
+    postContentClicksOther: number
+    postLinkClicks: number
+    postPhotoViewClicks: number
+    tabViews: number
+    videoViews: number
+    videoViews10s: number
+    videoViewsOrganic: number
+    videoViewsPaid: number
+    videoViewsUnique: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutFacebookAnalyticsAvgAggregateInputType = {
+    customerProfileId?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    tabViews?: true
+    videoViews?: true
+    videoViews10s?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    videoViewsUnique?: true
+  }
+
+  export type SproutFacebookAnalyticsSumAggregateInputType = {
+    customerProfileId?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    tabViews?: true
+    videoViews?: true
+    videoViews10s?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    videoViewsUnique?: true
+  }
+
+  export type SproutFacebookAnalyticsMinAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    tabViews?: true
+    videoViews?: true
+    videoViews10s?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    videoViewsUnique?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutFacebookAnalyticsMaxAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    tabViews?: true
+    videoViews?: true
+    videoViews10s?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    videoViewsUnique?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutFacebookAnalyticsCountAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    tabViews?: true
+    videoViews?: true
+    videoViews10s?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    videoViewsUnique?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutFacebookAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutFacebookAnalytics to aggregate.
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookAnalyticsOrderByWithRelationInput | SproutFacebookAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutFacebookAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutFacebookAnalytics
+    **/
+    _count?: true | SproutFacebookAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutFacebookAnalyticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutFacebookAnalyticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutFacebookAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutFacebookAnalyticsMaxAggregateInputType
+  }
+
+  export type GetSproutFacebookAnalyticsAggregateType<T extends SproutFacebookAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutFacebookAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutFacebookAnalytics[P]>
+      : GetScalarType<T[P], AggregateSproutFacebookAnalytics[P]>
+  }
+
+
+
+
+  export type SproutFacebookAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookAnalyticsWhereInput
+    orderBy?: SproutFacebookAnalyticsOrderByWithAggregationInput | SproutFacebookAnalyticsOrderByWithAggregationInput[]
+    by: SproutFacebookAnalyticsScalarFieldEnum[] | SproutFacebookAnalyticsScalarFieldEnum
+    having?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutFacebookAnalyticsCountAggregateInputType | true
+    _avg?: SproutFacebookAnalyticsAvgAggregateInputType
+    _sum?: SproutFacebookAnalyticsSumAggregateInputType
+    _min?: SproutFacebookAnalyticsMinAggregateInputType
+    _max?: SproutFacebookAnalyticsMaxAggregateInputType
+  }
+
+  export type SproutFacebookAnalyticsGroupByOutputType = {
+    id: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    tabViews: number | null
+    videoViews: number | null
+    videoViews10s: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    videoViewsUnique: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutFacebookAnalyticsCountAggregateOutputType | null
+    _avg: SproutFacebookAnalyticsAvgAggregateOutputType | null
+    _sum: SproutFacebookAnalyticsSumAggregateOutputType | null
+    _min: SproutFacebookAnalyticsMinAggregateOutputType | null
+    _max: SproutFacebookAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetSproutFacebookAnalyticsGroupByPayload<T extends SproutFacebookAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutFacebookAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutFacebookAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutFacebookAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutFacebookAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutFacebookAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postPhotoViewClicks?: boolean
+    tabViews?: boolean
+    videoViews?: boolean
+    videoViews10s?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    videoViewsUnique?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookAnalytics"]>
+
+  export type SproutFacebookAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postPhotoViewClicks?: boolean
+    tabViews?: boolean
+    videoViews?: boolean
+    videoViews10s?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    videoViewsUnique?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookAnalytics"]>
+
+  export type SproutFacebookAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postPhotoViewClicks?: boolean
+    tabViews?: boolean
+    videoViews?: boolean
+    videoViews10s?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    videoViewsUnique?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookAnalytics"]>
+
+  export type SproutFacebookAnalyticsSelectScalar = {
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postPhotoViewClicks?: boolean
+    tabViews?: boolean
+    videoViews?: boolean
+    videoViews10s?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    videoViewsUnique?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutFacebookAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "engagements" | "impressions" | "impressionsUnique" | "followersCount" | "postContentClicks" | "postContentClicksOther" | "postLinkClicks" | "postPhotoViewClicks" | "tabViews" | "videoViews" | "videoViews10s" | "videoViewsOrganic" | "videoViewsPaid" | "videoViewsUnique" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutFacebookAnalytics"]>
+  export type SproutFacebookAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutFacebookAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutFacebookAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutFacebookAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutFacebookAnalytics"
+    objects: {
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutSocialAccountId: string
+      customerProfileId: number
+      reportingDate: Date
+      engagements: number | null
+      impressions: number | null
+      impressionsUnique: number | null
+      followersCount: number | null
+      postContentClicks: number | null
+      postContentClicksOther: number | null
+      postLinkClicks: number | null
+      postPhotoViewClicks: number | null
+      tabViews: number | null
+      videoViews: number | null
+      videoViews10s: number | null
+      videoViewsOrganic: number | null
+      videoViewsPaid: number | null
+      videoViewsUnique: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutFacebookAnalytics"]>
+    composites: {}
+  }
+
+  type SproutFacebookAnalyticsGetPayload<S extends boolean | null | undefined | SproutFacebookAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload, S>
+
+  type SproutFacebookAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutFacebookAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutFacebookAnalyticsCountAggregateInputType | true
+    }
+
+  export interface SproutFacebookAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutFacebookAnalytics'], meta: { name: 'SproutFacebookAnalytics' } }
+    /**
+     * Find zero or one SproutFacebookAnalytics that matches the filter.
+     * @param {SproutFacebookAnalyticsFindUniqueArgs} args - Arguments to find a SproutFacebookAnalytics
+     * @example
+     * // Get one SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutFacebookAnalyticsFindUniqueArgs>(args: SelectSubset<T, SproutFacebookAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutFacebookAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutFacebookAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a SproutFacebookAnalytics
+     * @example
+     * // Get one SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutFacebookAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutFacebookAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutFacebookAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsFindFirstArgs} args - Arguments to find a SproutFacebookAnalytics
+     * @example
+     * // Get one SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutFacebookAnalyticsFindFirstArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsFindFirstArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutFacebookAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsFindFirstOrThrowArgs} args - Arguments to find a SproutFacebookAnalytics
+     * @example
+     * // Get one SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutFacebookAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutFacebookAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findMany()
+     * 
+     * // Get first 10 SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutFacebookAnalyticsWithIdOnly = await prisma.sproutFacebookAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutFacebookAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutFacebookAnalytics.
+     * @param {SproutFacebookAnalyticsCreateArgs} args - Arguments to create a SproutFacebookAnalytics.
+     * @example
+     * // Create one SproutFacebookAnalytics
+     * const SproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.create({
+     *   data: {
+     *     // ... data to create a SproutFacebookAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutFacebookAnalyticsCreateArgs>(args: SelectSubset<T, SproutFacebookAnalyticsCreateArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutFacebookAnalytics.
+     * @param {SproutFacebookAnalyticsCreateManyArgs} args - Arguments to create many SproutFacebookAnalytics.
+     * @example
+     * // Create many SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutFacebookAnalyticsCreateManyArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutFacebookAnalytics and returns the data saved in the database.
+     * @param {SproutFacebookAnalyticsCreateManyAndReturnArgs} args - Arguments to create many SproutFacebookAnalytics.
+     * @example
+     * // Create many SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutFacebookAnalytics and only return the `id`
+     * const sproutFacebookAnalyticsWithIdOnly = await prisma.sproutFacebookAnalytics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutFacebookAnalyticsCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutFacebookAnalytics.
+     * @param {SproutFacebookAnalyticsDeleteArgs} args - Arguments to delete one SproutFacebookAnalytics.
+     * @example
+     * // Delete one SproutFacebookAnalytics
+     * const SproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one SproutFacebookAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutFacebookAnalyticsDeleteArgs>(args: SelectSubset<T, SproutFacebookAnalyticsDeleteArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutFacebookAnalytics.
+     * @param {SproutFacebookAnalyticsUpdateArgs} args - Arguments to update one SproutFacebookAnalytics.
+     * @example
+     * // Update one SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutFacebookAnalyticsUpdateArgs>(args: SelectSubset<T, SproutFacebookAnalyticsUpdateArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutFacebookAnalytics.
+     * @param {SproutFacebookAnalyticsDeleteManyArgs} args - Arguments to filter SproutFacebookAnalytics to delete.
+     * @example
+     * // Delete a few SproutFacebookAnalytics
+     * const { count } = await prisma.sproutFacebookAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutFacebookAnalyticsDeleteManyArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutFacebookAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutFacebookAnalyticsUpdateManyArgs>(args: SelectSubset<T, SproutFacebookAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutFacebookAnalytics and returns the data updated in the database.
+     * @param {SproutFacebookAnalyticsUpdateManyAndReturnArgs} args - Arguments to update many SproutFacebookAnalytics.
+     * @example
+     * // Update many SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutFacebookAnalytics and only return the `id`
+     * const sproutFacebookAnalyticsWithIdOnly = await prisma.sproutFacebookAnalytics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutFacebookAnalyticsUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutFacebookAnalyticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutFacebookAnalytics.
+     * @param {SproutFacebookAnalyticsUpsertArgs} args - Arguments to update or create a SproutFacebookAnalytics.
+     * @example
+     * // Update or create a SproutFacebookAnalytics
+     * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a SproutFacebookAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutFacebookAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutFacebookAnalyticsUpsertArgs>(args: SelectSubset<T, SproutFacebookAnalyticsUpsertArgs<ExtArgs>>): Prisma__SproutFacebookAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutFacebookAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsCountArgs} args - Arguments to filter SproutFacebookAnalytics to count.
+     * @example
+     * // Count the number of SproutFacebookAnalytics
+     * const count = await prisma.sproutFacebookAnalytics.count({
+     *   where: {
+     *     // ... the filter for the SproutFacebookAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutFacebookAnalyticsCountArgs>(
+      args?: Subset<T, SproutFacebookAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutFacebookAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutFacebookAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutFacebookAnalyticsAggregateArgs>(args: Subset<T, SproutFacebookAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetSproutFacebookAnalyticsAggregateType<T>>
+
+    /**
+     * Group by SproutFacebookAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutFacebookAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutFacebookAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: SproutFacebookAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutFacebookAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutFacebookAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutFacebookAnalytics model
+   */
+  readonly fields: SproutFacebookAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutFacebookAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutFacebookAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutFacebookAnalytics model
+   */
+  interface SproutFacebookAnalyticsFieldRefs {
+    readonly id: FieldRef<"SproutFacebookAnalytics", 'String'>
+    readonly sproutSocialAccountId: FieldRef<"SproutFacebookAnalytics", 'String'>
+    readonly customerProfileId: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
+    readonly engagements: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly impressions: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly impressionsUnique: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly followersCount: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly postContentClicks: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly postContentClicksOther: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly postLinkClicks: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly postPhotoViewClicks: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly tabViews: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly videoViews: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly videoViews10s: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly videoViewsOrganic: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly videoViewsPaid: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly videoViewsUnique: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly createdAt: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutFacebookAnalytics findUnique
+   */
+  export type SproutFacebookAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookAnalytics to fetch.
+     */
+    where: SproutFacebookAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookAnalytics findUniqueOrThrow
+   */
+  export type SproutFacebookAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookAnalytics to fetch.
+     */
+    where: SproutFacebookAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookAnalytics findFirst
+   */
+  export type SproutFacebookAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookAnalytics to fetch.
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookAnalyticsOrderByWithRelationInput | SproutFacebookAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutFacebookAnalytics.
+     */
+    cursor?: SproutFacebookAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutFacebookAnalytics.
+     */
+    distinct?: SproutFacebookAnalyticsScalarFieldEnum | SproutFacebookAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookAnalytics findFirstOrThrow
+   */
+  export type SproutFacebookAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookAnalytics to fetch.
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookAnalyticsOrderByWithRelationInput | SproutFacebookAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutFacebookAnalytics.
+     */
+    cursor?: SproutFacebookAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutFacebookAnalytics.
+     */
+    distinct?: SproutFacebookAnalyticsScalarFieldEnum | SproutFacebookAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookAnalytics findMany
+   */
+  export type SproutFacebookAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookAnalytics to fetch.
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookAnalyticsOrderByWithRelationInput | SproutFacebookAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutFacebookAnalytics.
+     */
+    cursor?: SproutFacebookAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookAnalytics.
+     */
+    skip?: number
+    distinct?: SproutFacebookAnalyticsScalarFieldEnum | SproutFacebookAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookAnalytics create
+   */
+  export type SproutFacebookAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutFacebookAnalytics.
+     */
+    data: XOR<SproutFacebookAnalyticsCreateInput, SproutFacebookAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * SproutFacebookAnalytics createMany
+   */
+  export type SproutFacebookAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutFacebookAnalytics.
+     */
+    data: SproutFacebookAnalyticsCreateManyInput | SproutFacebookAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutFacebookAnalytics createManyAndReturn
+   */
+  export type SproutFacebookAnalyticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutFacebookAnalytics.
+     */
+    data: SproutFacebookAnalyticsCreateManyInput | SproutFacebookAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutFacebookAnalytics update
+   */
+  export type SproutFacebookAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutFacebookAnalytics.
+     */
+    data: XOR<SproutFacebookAnalyticsUpdateInput, SproutFacebookAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which SproutFacebookAnalytics to update.
+     */
+    where: SproutFacebookAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookAnalytics updateMany
+   */
+  export type SproutFacebookAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutFacebookAnalytics.
+     */
+    data: XOR<SproutFacebookAnalyticsUpdateManyMutationInput, SproutFacebookAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutFacebookAnalytics to update
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * Limit how many SproutFacebookAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutFacebookAnalytics updateManyAndReturn
+   */
+  export type SproutFacebookAnalyticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutFacebookAnalytics.
+     */
+    data: XOR<SproutFacebookAnalyticsUpdateManyMutationInput, SproutFacebookAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutFacebookAnalytics to update
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * Limit how many SproutFacebookAnalytics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutFacebookAnalytics upsert
+   */
+  export type SproutFacebookAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutFacebookAnalytics to update in case it exists.
+     */
+    where: SproutFacebookAnalyticsWhereUniqueInput
+    /**
+     * In case the SproutFacebookAnalytics found by the `where` argument doesn't exist, create a new SproutFacebookAnalytics with this data.
+     */
+    create: XOR<SproutFacebookAnalyticsCreateInput, SproutFacebookAnalyticsUncheckedCreateInput>
+    /**
+     * In case the SproutFacebookAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutFacebookAnalyticsUpdateInput, SproutFacebookAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutFacebookAnalytics delete
+   */
+  export type SproutFacebookAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which SproutFacebookAnalytics to delete.
+     */
+    where: SproutFacebookAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookAnalytics deleteMany
+   */
+  export type SproutFacebookAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutFacebookAnalytics to delete
+     */
+    where?: SproutFacebookAnalyticsWhereInput
+    /**
+     * Limit how many SproutFacebookAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutFacebookAnalytics without action
+   */
+  export type SproutFacebookAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SproutInstagramAnalytics
+   */
+
+  export type AggregateSproutInstagramAnalytics = {
+    _count: SproutInstagramAnalyticsCountAggregateOutputType | null
+    _avg: SproutInstagramAnalyticsAvgAggregateOutputType | null
+    _sum: SproutInstagramAnalyticsSumAggregateOutputType | null
+    _min: SproutInstagramAnalyticsMinAggregateOutputType | null
+    _max: SproutInstagramAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type SproutInstagramAnalyticsAvgAggregateOutputType = {
+    customerProfileId: number | null
+    commentsCount: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    likes: number | null
+    saves: number | null
+    videoViews: number | null
+  }
+
+  export type SproutInstagramAnalyticsSumAggregateOutputType = {
+    customerProfileId: number | null
+    commentsCount: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    likes: number | null
+    saves: number | null
+    videoViews: number | null
+  }
+
+  export type SproutInstagramAnalyticsMinAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    commentsCount: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    likes: number | null
+    saves: number | null
+    videoViews: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutInstagramAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    commentsCount: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    likes: number | null
+    saves: number | null
+    videoViews: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutInstagramAnalyticsCountAggregateOutputType = {
+    id: number
+    sproutSocialAccountId: number
+    customerProfileId: number
+    reportingDate: number
+    commentsCount: number
+    engagements: number
+    impressions: number
+    impressionsUnique: number
+    followersCount: number
+    likes: number
+    saves: number
+    videoViews: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutInstagramAnalyticsAvgAggregateInputType = {
+    customerProfileId?: true
+    commentsCount?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    likes?: true
+    saves?: true
+    videoViews?: true
+  }
+
+  export type SproutInstagramAnalyticsSumAggregateInputType = {
+    customerProfileId?: true
+    commentsCount?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    likes?: true
+    saves?: true
+    videoViews?: true
+  }
+
+  export type SproutInstagramAnalyticsMinAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    commentsCount?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    likes?: true
+    saves?: true
+    videoViews?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutInstagramAnalyticsMaxAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    commentsCount?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    likes?: true
+    saves?: true
+    videoViews?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutInstagramAnalyticsCountAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    commentsCount?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    likes?: true
+    saves?: true
+    videoViews?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutInstagramAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutInstagramAnalytics to aggregate.
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramAnalytics to fetch.
+     */
+    orderBy?: SproutInstagramAnalyticsOrderByWithRelationInput | SproutInstagramAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutInstagramAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutInstagramAnalytics
+    **/
+    _count?: true | SproutInstagramAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutInstagramAnalyticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutInstagramAnalyticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutInstagramAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutInstagramAnalyticsMaxAggregateInputType
+  }
+
+  export type GetSproutInstagramAnalyticsAggregateType<T extends SproutInstagramAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutInstagramAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutInstagramAnalytics[P]>
+      : GetScalarType<T[P], AggregateSproutInstagramAnalytics[P]>
+  }
+
+
+
+
+  export type SproutInstagramAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutInstagramAnalyticsWhereInput
+    orderBy?: SproutInstagramAnalyticsOrderByWithAggregationInput | SproutInstagramAnalyticsOrderByWithAggregationInput[]
+    by: SproutInstagramAnalyticsScalarFieldEnum[] | SproutInstagramAnalyticsScalarFieldEnum
+    having?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutInstagramAnalyticsCountAggregateInputType | true
+    _avg?: SproutInstagramAnalyticsAvgAggregateInputType
+    _sum?: SproutInstagramAnalyticsSumAggregateInputType
+    _min?: SproutInstagramAnalyticsMinAggregateInputType
+    _max?: SproutInstagramAnalyticsMaxAggregateInputType
+  }
+
+  export type SproutInstagramAnalyticsGroupByOutputType = {
+    id: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date
+    commentsCount: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    likes: number | null
+    saves: number | null
+    videoViews: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutInstagramAnalyticsCountAggregateOutputType | null
+    _avg: SproutInstagramAnalyticsAvgAggregateOutputType | null
+    _sum: SproutInstagramAnalyticsSumAggregateOutputType | null
+    _min: SproutInstagramAnalyticsMinAggregateOutputType | null
+    _max: SproutInstagramAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetSproutInstagramAnalyticsGroupByPayload<T extends SproutInstagramAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutInstagramAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutInstagramAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutInstagramAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutInstagramAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutInstagramAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    commentsCount?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    likes?: boolean
+    saves?: boolean
+    videoViews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+    followersByCity?: boolean | SproutInstagramAnalytics$followersByCityArgs<ExtArgs>
+    followersByCountry?: boolean | SproutInstagramAnalytics$followersByCountryArgs<ExtArgs>
+    _count?: boolean | SproutInstagramAnalyticsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramAnalytics"]>
+
+  export type SproutInstagramAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    commentsCount?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    likes?: boolean
+    saves?: boolean
+    videoViews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramAnalytics"]>
+
+  export type SproutInstagramAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    commentsCount?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    likes?: boolean
+    saves?: boolean
+    videoViews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramAnalytics"]>
+
+  export type SproutInstagramAnalyticsSelectScalar = {
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    commentsCount?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    likes?: boolean
+    saves?: boolean
+    videoViews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutInstagramAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "commentsCount" | "engagements" | "impressions" | "impressionsUnique" | "followersCount" | "likes" | "saves" | "videoViews" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutInstagramAnalytics"]>
+  export type SproutInstagramAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+    followersByCity?: boolean | SproutInstagramAnalytics$followersByCityArgs<ExtArgs>
+    followersByCountry?: boolean | SproutInstagramAnalytics$followersByCountryArgs<ExtArgs>
+    _count?: boolean | SproutInstagramAnalyticsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SproutInstagramAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutInstagramAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutInstagramAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutInstagramAnalytics"
+    objects: {
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+      followersByCity: Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>[]
+      followersByCountry: Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutSocialAccountId: string
+      customerProfileId: number
+      reportingDate: Date
+      commentsCount: number | null
+      engagements: number | null
+      impressions: number | null
+      impressionsUnique: number | null
+      followersCount: number | null
+      likes: number | null
+      saves: number | null
+      videoViews: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutInstagramAnalytics"]>
+    composites: {}
+  }
+
+  type SproutInstagramAnalyticsGetPayload<S extends boolean | null | undefined | SproutInstagramAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload, S>
+
+  type SproutInstagramAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutInstagramAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutInstagramAnalyticsCountAggregateInputType | true
+    }
+
+  export interface SproutInstagramAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutInstagramAnalytics'], meta: { name: 'SproutInstagramAnalytics' } }
+    /**
+     * Find zero or one SproutInstagramAnalytics that matches the filter.
+     * @param {SproutInstagramAnalyticsFindUniqueArgs} args - Arguments to find a SproutInstagramAnalytics
+     * @example
+     * // Get one SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutInstagramAnalyticsFindUniqueArgs>(args: SelectSubset<T, SproutInstagramAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutInstagramAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutInstagramAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a SproutInstagramAnalytics
+     * @example
+     * // Get one SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutInstagramAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutInstagramAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutInstagramAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsFindFirstArgs} args - Arguments to find a SproutInstagramAnalytics
+     * @example
+     * // Get one SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutInstagramAnalyticsFindFirstArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsFindFirstArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutInstagramAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsFindFirstOrThrowArgs} args - Arguments to find a SproutInstagramAnalytics
+     * @example
+     * // Get one SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutInstagramAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutInstagramAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findMany()
+     * 
+     * // Get first 10 SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutInstagramAnalyticsWithIdOnly = await prisma.sproutInstagramAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutInstagramAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutInstagramAnalytics.
+     * @param {SproutInstagramAnalyticsCreateArgs} args - Arguments to create a SproutInstagramAnalytics.
+     * @example
+     * // Create one SproutInstagramAnalytics
+     * const SproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.create({
+     *   data: {
+     *     // ... data to create a SproutInstagramAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutInstagramAnalyticsCreateArgs>(args: SelectSubset<T, SproutInstagramAnalyticsCreateArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutInstagramAnalytics.
+     * @param {SproutInstagramAnalyticsCreateManyArgs} args - Arguments to create many SproutInstagramAnalytics.
+     * @example
+     * // Create many SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutInstagramAnalyticsCreateManyArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutInstagramAnalytics and returns the data saved in the database.
+     * @param {SproutInstagramAnalyticsCreateManyAndReturnArgs} args - Arguments to create many SproutInstagramAnalytics.
+     * @example
+     * // Create many SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutInstagramAnalytics and only return the `id`
+     * const sproutInstagramAnalyticsWithIdOnly = await prisma.sproutInstagramAnalytics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutInstagramAnalyticsCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutInstagramAnalytics.
+     * @param {SproutInstagramAnalyticsDeleteArgs} args - Arguments to delete one SproutInstagramAnalytics.
+     * @example
+     * // Delete one SproutInstagramAnalytics
+     * const SproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one SproutInstagramAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutInstagramAnalyticsDeleteArgs>(args: SelectSubset<T, SproutInstagramAnalyticsDeleteArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutInstagramAnalytics.
+     * @param {SproutInstagramAnalyticsUpdateArgs} args - Arguments to update one SproutInstagramAnalytics.
+     * @example
+     * // Update one SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutInstagramAnalyticsUpdateArgs>(args: SelectSubset<T, SproutInstagramAnalyticsUpdateArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutInstagramAnalytics.
+     * @param {SproutInstagramAnalyticsDeleteManyArgs} args - Arguments to filter SproutInstagramAnalytics to delete.
+     * @example
+     * // Delete a few SproutInstagramAnalytics
+     * const { count } = await prisma.sproutInstagramAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutInstagramAnalyticsDeleteManyArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutInstagramAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutInstagramAnalyticsUpdateManyArgs>(args: SelectSubset<T, SproutInstagramAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutInstagramAnalytics and returns the data updated in the database.
+     * @param {SproutInstagramAnalyticsUpdateManyAndReturnArgs} args - Arguments to update many SproutInstagramAnalytics.
+     * @example
+     * // Update many SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutInstagramAnalytics and only return the `id`
+     * const sproutInstagramAnalyticsWithIdOnly = await prisma.sproutInstagramAnalytics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutInstagramAnalyticsUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutInstagramAnalyticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutInstagramAnalytics.
+     * @param {SproutInstagramAnalyticsUpsertArgs} args - Arguments to update or create a SproutInstagramAnalytics.
+     * @example
+     * // Update or create a SproutInstagramAnalytics
+     * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a SproutInstagramAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutInstagramAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutInstagramAnalyticsUpsertArgs>(args: SelectSubset<T, SproutInstagramAnalyticsUpsertArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutInstagramAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsCountArgs} args - Arguments to filter SproutInstagramAnalytics to count.
+     * @example
+     * // Count the number of SproutInstagramAnalytics
+     * const count = await prisma.sproutInstagramAnalytics.count({
+     *   where: {
+     *     // ... the filter for the SproutInstagramAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutInstagramAnalyticsCountArgs>(
+      args?: Subset<T, SproutInstagramAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutInstagramAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutInstagramAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutInstagramAnalyticsAggregateArgs>(args: Subset<T, SproutInstagramAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetSproutInstagramAnalyticsAggregateType<T>>
+
+    /**
+     * Group by SproutInstagramAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutInstagramAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutInstagramAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: SproutInstagramAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutInstagramAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutInstagramAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutInstagramAnalytics model
+   */
+  readonly fields: SproutInstagramAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutInstagramAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutInstagramAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    followersByCity<T extends SproutInstagramAnalytics$followersByCityArgs<ExtArgs> = {}>(args?: Subset<T, SproutInstagramAnalytics$followersByCityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    followersByCountry<T extends SproutInstagramAnalytics$followersByCountryArgs<ExtArgs> = {}>(args?: Subset<T, SproutInstagramAnalytics$followersByCountryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutInstagramAnalytics model
+   */
+  interface SproutInstagramAnalyticsFieldRefs {
+    readonly id: FieldRef<"SproutInstagramAnalytics", 'String'>
+    readonly sproutSocialAccountId: FieldRef<"SproutInstagramAnalytics", 'String'>
+    readonly customerProfileId: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
+    readonly commentsCount: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly engagements: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly impressions: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly impressionsUnique: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly followersCount: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly likes: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly saves: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly videoViews: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly createdAt: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutInstagramAnalytics findUnique
+   */
+  export type SproutInstagramAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramAnalytics to fetch.
+     */
+    where: SproutInstagramAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramAnalytics findUniqueOrThrow
+   */
+  export type SproutInstagramAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramAnalytics to fetch.
+     */
+    where: SproutInstagramAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramAnalytics findFirst
+   */
+  export type SproutInstagramAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramAnalytics to fetch.
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramAnalytics to fetch.
+     */
+    orderBy?: SproutInstagramAnalyticsOrderByWithRelationInput | SproutInstagramAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutInstagramAnalytics.
+     */
+    cursor?: SproutInstagramAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutInstagramAnalytics.
+     */
+    distinct?: SproutInstagramAnalyticsScalarFieldEnum | SproutInstagramAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramAnalytics findFirstOrThrow
+   */
+  export type SproutInstagramAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramAnalytics to fetch.
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramAnalytics to fetch.
+     */
+    orderBy?: SproutInstagramAnalyticsOrderByWithRelationInput | SproutInstagramAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutInstagramAnalytics.
+     */
+    cursor?: SproutInstagramAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutInstagramAnalytics.
+     */
+    distinct?: SproutInstagramAnalyticsScalarFieldEnum | SproutInstagramAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramAnalytics findMany
+   */
+  export type SproutInstagramAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramAnalytics to fetch.
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramAnalytics to fetch.
+     */
+    orderBy?: SproutInstagramAnalyticsOrderByWithRelationInput | SproutInstagramAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutInstagramAnalytics.
+     */
+    cursor?: SproutInstagramAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramAnalytics.
+     */
+    skip?: number
+    distinct?: SproutInstagramAnalyticsScalarFieldEnum | SproutInstagramAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramAnalytics create
+   */
+  export type SproutInstagramAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutInstagramAnalytics.
+     */
+    data: XOR<SproutInstagramAnalyticsCreateInput, SproutInstagramAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * SproutInstagramAnalytics createMany
+   */
+  export type SproutInstagramAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutInstagramAnalytics.
+     */
+    data: SproutInstagramAnalyticsCreateManyInput | SproutInstagramAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutInstagramAnalytics createManyAndReturn
+   */
+  export type SproutInstagramAnalyticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutInstagramAnalytics.
+     */
+    data: SproutInstagramAnalyticsCreateManyInput | SproutInstagramAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramAnalytics update
+   */
+  export type SproutInstagramAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutInstagramAnalytics.
+     */
+    data: XOR<SproutInstagramAnalyticsUpdateInput, SproutInstagramAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which SproutInstagramAnalytics to update.
+     */
+    where: SproutInstagramAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramAnalytics updateMany
+   */
+  export type SproutInstagramAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutInstagramAnalytics.
+     */
+    data: XOR<SproutInstagramAnalyticsUpdateManyMutationInput, SproutInstagramAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutInstagramAnalytics to update
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * Limit how many SproutInstagramAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutInstagramAnalytics updateManyAndReturn
+   */
+  export type SproutInstagramAnalyticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutInstagramAnalytics.
+     */
+    data: XOR<SproutInstagramAnalyticsUpdateManyMutationInput, SproutInstagramAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutInstagramAnalytics to update
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * Limit how many SproutInstagramAnalytics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramAnalytics upsert
+   */
+  export type SproutInstagramAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutInstagramAnalytics to update in case it exists.
+     */
+    where: SproutInstagramAnalyticsWhereUniqueInput
+    /**
+     * In case the SproutInstagramAnalytics found by the `where` argument doesn't exist, create a new SproutInstagramAnalytics with this data.
+     */
+    create: XOR<SproutInstagramAnalyticsCreateInput, SproutInstagramAnalyticsUncheckedCreateInput>
+    /**
+     * In case the SproutInstagramAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutInstagramAnalyticsUpdateInput, SproutInstagramAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutInstagramAnalytics delete
+   */
+  export type SproutInstagramAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which SproutInstagramAnalytics to delete.
+     */
+    where: SproutInstagramAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramAnalytics deleteMany
+   */
+  export type SproutInstagramAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutInstagramAnalytics to delete
+     */
+    where?: SproutInstagramAnalyticsWhereInput
+    /**
+     * Limit how many SproutInstagramAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutInstagramAnalytics.followersByCity
+   */
+  export type SproutInstagramAnalytics$followersByCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    where?: SproutInstagramFollowersByCityWhereInput
+    orderBy?: SproutInstagramFollowersByCityOrderByWithRelationInput | SproutInstagramFollowersByCityOrderByWithRelationInput[]
+    cursor?: SproutInstagramFollowersByCityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutInstagramFollowersByCityScalarFieldEnum | SproutInstagramFollowersByCityScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramAnalytics.followersByCountry
+   */
+  export type SproutInstagramAnalytics$followersByCountryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    where?: SproutInstagramFollowersByCountryWhereInput
+    orderBy?: SproutInstagramFollowersByCountryOrderByWithRelationInput | SproutInstagramFollowersByCountryOrderByWithRelationInput[]
+    cursor?: SproutInstagramFollowersByCountryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutInstagramFollowersByCountryScalarFieldEnum | SproutInstagramFollowersByCountryScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramAnalytics without action
+   */
+  export type SproutInstagramAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SproutInstagramFollowersByCity
+   */
+
+  export type AggregateSproutInstagramFollowersByCity = {
+    _count: SproutInstagramFollowersByCityCountAggregateOutputType | null
+    _avg: SproutInstagramFollowersByCityAvgAggregateOutputType | null
+    _sum: SproutInstagramFollowersByCitySumAggregateOutputType | null
+    _min: SproutInstagramFollowersByCityMinAggregateOutputType | null
+    _max: SproutInstagramFollowersByCityMaxAggregateOutputType | null
+  }
+
+  export type SproutInstagramFollowersByCityAvgAggregateOutputType = {
+    count: number | null
+  }
+
+  export type SproutInstagramFollowersByCitySumAggregateOutputType = {
+    count: number | null
+  }
+
+  export type SproutInstagramFollowersByCityMinAggregateOutputType = {
+    id: string | null
+    sproutInstagramAnalyticsId: string | null
+    city: string | null
+    count: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutInstagramFollowersByCityMaxAggregateOutputType = {
+    id: string | null
+    sproutInstagramAnalyticsId: string | null
+    city: string | null
+    count: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutInstagramFollowersByCityCountAggregateOutputType = {
+    id: number
+    sproutInstagramAnalyticsId: number
+    city: number
+    count: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutInstagramFollowersByCityAvgAggregateInputType = {
+    count?: true
+  }
+
+  export type SproutInstagramFollowersByCitySumAggregateInputType = {
+    count?: true
+  }
+
+  export type SproutInstagramFollowersByCityMinAggregateInputType = {
+    id?: true
+    sproutInstagramAnalyticsId?: true
+    city?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutInstagramFollowersByCityMaxAggregateInputType = {
+    id?: true
+    sproutInstagramAnalyticsId?: true
+    city?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutInstagramFollowersByCityCountAggregateInputType = {
+    id?: true
+    sproutInstagramAnalyticsId?: true
+    city?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutInstagramFollowersByCityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutInstagramFollowersByCity to aggregate.
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCities to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCityOrderByWithRelationInput | SproutInstagramFollowersByCityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutInstagramFollowersByCityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutInstagramFollowersByCities
+    **/
+    _count?: true | SproutInstagramFollowersByCityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutInstagramFollowersByCityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutInstagramFollowersByCitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutInstagramFollowersByCityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutInstagramFollowersByCityMaxAggregateInputType
+  }
+
+  export type GetSproutInstagramFollowersByCityAggregateType<T extends SproutInstagramFollowersByCityAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutInstagramFollowersByCity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutInstagramFollowersByCity[P]>
+      : GetScalarType<T[P], AggregateSproutInstagramFollowersByCity[P]>
+  }
+
+
+
+
+  export type SproutInstagramFollowersByCityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutInstagramFollowersByCityWhereInput
+    orderBy?: SproutInstagramFollowersByCityOrderByWithAggregationInput | SproutInstagramFollowersByCityOrderByWithAggregationInput[]
+    by: SproutInstagramFollowersByCityScalarFieldEnum[] | SproutInstagramFollowersByCityScalarFieldEnum
+    having?: SproutInstagramFollowersByCityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutInstagramFollowersByCityCountAggregateInputType | true
+    _avg?: SproutInstagramFollowersByCityAvgAggregateInputType
+    _sum?: SproutInstagramFollowersByCitySumAggregateInputType
+    _min?: SproutInstagramFollowersByCityMinAggregateInputType
+    _max?: SproutInstagramFollowersByCityMaxAggregateInputType
+  }
+
+  export type SproutInstagramFollowersByCityGroupByOutputType = {
+    id: string
+    sproutInstagramAnalyticsId: string
+    city: string
+    count: number
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutInstagramFollowersByCityCountAggregateOutputType | null
+    _avg: SproutInstagramFollowersByCityAvgAggregateOutputType | null
+    _sum: SproutInstagramFollowersByCitySumAggregateOutputType | null
+    _min: SproutInstagramFollowersByCityMinAggregateOutputType | null
+    _max: SproutInstagramFollowersByCityMaxAggregateOutputType | null
+  }
+
+  type GetSproutInstagramFollowersByCityGroupByPayload<T extends SproutInstagramFollowersByCityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutInstagramFollowersByCityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutInstagramFollowersByCityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutInstagramFollowersByCityGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutInstagramFollowersByCityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutInstagramFollowersByCitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    city?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramFollowersByCity"]>
+
+  export type SproutInstagramFollowersByCitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    city?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramFollowersByCity"]>
+
+  export type SproutInstagramFollowersByCitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    city?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramFollowersByCity"]>
+
+  export type SproutInstagramFollowersByCitySelectScalar = {
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    city?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutInstagramFollowersByCityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutInstagramAnalyticsId" | "city" | "count" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutInstagramFollowersByCity"]>
+  export type SproutInstagramFollowersByCityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }
+  export type SproutInstagramFollowersByCityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }
+  export type SproutInstagramFollowersByCityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutInstagramFollowersByCityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutInstagramFollowersByCity"
+    objects: {
+      sproutInstagramAnalytics: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutInstagramAnalyticsId: string
+      city: string
+      count: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutInstagramFollowersByCity"]>
+    composites: {}
+  }
+
+  type SproutInstagramFollowersByCityGetPayload<S extends boolean | null | undefined | SproutInstagramFollowersByCityDefaultArgs> = $Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload, S>
+
+  type SproutInstagramFollowersByCityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutInstagramFollowersByCityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutInstagramFollowersByCityCountAggregateInputType | true
+    }
+
+  export interface SproutInstagramFollowersByCityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutInstagramFollowersByCity'], meta: { name: 'SproutInstagramFollowersByCity' } }
+    /**
+     * Find zero or one SproutInstagramFollowersByCity that matches the filter.
+     * @param {SproutInstagramFollowersByCityFindUniqueArgs} args - Arguments to find a SproutInstagramFollowersByCity
+     * @example
+     * // Get one SproutInstagramFollowersByCity
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutInstagramFollowersByCityFindUniqueArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityFindUniqueArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutInstagramFollowersByCity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutInstagramFollowersByCityFindUniqueOrThrowArgs} args - Arguments to find a SproutInstagramFollowersByCity
+     * @example
+     * // Get one SproutInstagramFollowersByCity
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutInstagramFollowersByCityFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutInstagramFollowersByCity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityFindFirstArgs} args - Arguments to find a SproutInstagramFollowersByCity
+     * @example
+     * // Get one SproutInstagramFollowersByCity
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutInstagramFollowersByCityFindFirstArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCityFindFirstArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutInstagramFollowersByCity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityFindFirstOrThrowArgs} args - Arguments to find a SproutInstagramFollowersByCity
+     * @example
+     * // Get one SproutInstagramFollowersByCity
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutInstagramFollowersByCityFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCityFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutInstagramFollowersByCities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutInstagramFollowersByCities
+     * const sproutInstagramFollowersByCities = await prisma.sproutInstagramFollowersByCity.findMany()
+     * 
+     * // Get first 10 SproutInstagramFollowersByCities
+     * const sproutInstagramFollowersByCities = await prisma.sproutInstagramFollowersByCity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutInstagramFollowersByCityWithIdOnly = await prisma.sproutInstagramFollowersByCity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutInstagramFollowersByCityFindManyArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutInstagramFollowersByCity.
+     * @param {SproutInstagramFollowersByCityCreateArgs} args - Arguments to create a SproutInstagramFollowersByCity.
+     * @example
+     * // Create one SproutInstagramFollowersByCity
+     * const SproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.create({
+     *   data: {
+     *     // ... data to create a SproutInstagramFollowersByCity
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutInstagramFollowersByCityCreateArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityCreateArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutInstagramFollowersByCities.
+     * @param {SproutInstagramFollowersByCityCreateManyArgs} args - Arguments to create many SproutInstagramFollowersByCities.
+     * @example
+     * // Create many SproutInstagramFollowersByCities
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutInstagramFollowersByCityCreateManyArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutInstagramFollowersByCities and returns the data saved in the database.
+     * @param {SproutInstagramFollowersByCityCreateManyAndReturnArgs} args - Arguments to create many SproutInstagramFollowersByCities.
+     * @example
+     * // Create many SproutInstagramFollowersByCities
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutInstagramFollowersByCities and only return the `id`
+     * const sproutInstagramFollowersByCityWithIdOnly = await prisma.sproutInstagramFollowersByCity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutInstagramFollowersByCityCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutInstagramFollowersByCity.
+     * @param {SproutInstagramFollowersByCityDeleteArgs} args - Arguments to delete one SproutInstagramFollowersByCity.
+     * @example
+     * // Delete one SproutInstagramFollowersByCity
+     * const SproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.delete({
+     *   where: {
+     *     // ... filter to delete one SproutInstagramFollowersByCity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutInstagramFollowersByCityDeleteArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityDeleteArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutInstagramFollowersByCity.
+     * @param {SproutInstagramFollowersByCityUpdateArgs} args - Arguments to update one SproutInstagramFollowersByCity.
+     * @example
+     * // Update one SproutInstagramFollowersByCity
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutInstagramFollowersByCityUpdateArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityUpdateArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutInstagramFollowersByCities.
+     * @param {SproutInstagramFollowersByCityDeleteManyArgs} args - Arguments to filter SproutInstagramFollowersByCities to delete.
+     * @example
+     * // Delete a few SproutInstagramFollowersByCities
+     * const { count } = await prisma.sproutInstagramFollowersByCity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutInstagramFollowersByCityDeleteManyArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutInstagramFollowersByCities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutInstagramFollowersByCities
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutInstagramFollowersByCityUpdateManyArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutInstagramFollowersByCities and returns the data updated in the database.
+     * @param {SproutInstagramFollowersByCityUpdateManyAndReturnArgs} args - Arguments to update many SproutInstagramFollowersByCities.
+     * @example
+     * // Update many SproutInstagramFollowersByCities
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutInstagramFollowersByCities and only return the `id`
+     * const sproutInstagramFollowersByCityWithIdOnly = await prisma.sproutInstagramFollowersByCity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutInstagramFollowersByCityUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutInstagramFollowersByCity.
+     * @param {SproutInstagramFollowersByCityUpsertArgs} args - Arguments to update or create a SproutInstagramFollowersByCity.
+     * @example
+     * // Update or create a SproutInstagramFollowersByCity
+     * const sproutInstagramFollowersByCity = await prisma.sproutInstagramFollowersByCity.upsert({
+     *   create: {
+     *     // ... data to create a SproutInstagramFollowersByCity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutInstagramFollowersByCity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutInstagramFollowersByCityUpsertArgs>(args: SelectSubset<T, SproutInstagramFollowersByCityUpsertArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCityClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutInstagramFollowersByCities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityCountArgs} args - Arguments to filter SproutInstagramFollowersByCities to count.
+     * @example
+     * // Count the number of SproutInstagramFollowersByCities
+     * const count = await prisma.sproutInstagramFollowersByCity.count({
+     *   where: {
+     *     // ... the filter for the SproutInstagramFollowersByCities we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutInstagramFollowersByCityCountArgs>(
+      args?: Subset<T, SproutInstagramFollowersByCityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutInstagramFollowersByCityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutInstagramFollowersByCity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutInstagramFollowersByCityAggregateArgs>(args: Subset<T, SproutInstagramFollowersByCityAggregateArgs>): Prisma.PrismaPromise<GetSproutInstagramFollowersByCityAggregateType<T>>
+
+    /**
+     * Group by SproutInstagramFollowersByCity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutInstagramFollowersByCityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutInstagramFollowersByCityGroupByArgs['orderBy'] }
+        : { orderBy?: SproutInstagramFollowersByCityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutInstagramFollowersByCityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutInstagramFollowersByCityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutInstagramFollowersByCity model
+   */
+  readonly fields: SproutInstagramFollowersByCityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutInstagramFollowersByCity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutInstagramFollowersByCityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutInstagramAnalytics<T extends SproutInstagramAnalyticsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutInstagramAnalyticsDefaultArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutInstagramFollowersByCity model
+   */
+  interface SproutInstagramFollowersByCityFieldRefs {
+    readonly id: FieldRef<"SproutInstagramFollowersByCity", 'String'>
+    readonly sproutInstagramAnalyticsId: FieldRef<"SproutInstagramFollowersByCity", 'String'>
+    readonly city: FieldRef<"SproutInstagramFollowersByCity", 'String'>
+    readonly count: FieldRef<"SproutInstagramFollowersByCity", 'Int'>
+    readonly createdAt: FieldRef<"SproutInstagramFollowersByCity", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutInstagramFollowersByCity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutInstagramFollowersByCity findUnique
+   */
+  export type SproutInstagramFollowersByCityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCity to fetch.
+     */
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCity findUniqueOrThrow
+   */
+  export type SproutInstagramFollowersByCityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCity to fetch.
+     */
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCity findFirst
+   */
+  export type SproutInstagramFollowersByCityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCity to fetch.
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCities to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCityOrderByWithRelationInput | SproutInstagramFollowersByCityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutInstagramFollowersByCities.
+     */
+    cursor?: SproutInstagramFollowersByCityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutInstagramFollowersByCities.
+     */
+    distinct?: SproutInstagramFollowersByCityScalarFieldEnum | SproutInstagramFollowersByCityScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramFollowersByCity findFirstOrThrow
+   */
+  export type SproutInstagramFollowersByCityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCity to fetch.
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCities to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCityOrderByWithRelationInput | SproutInstagramFollowersByCityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutInstagramFollowersByCities.
+     */
+    cursor?: SproutInstagramFollowersByCityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutInstagramFollowersByCities.
+     */
+    distinct?: SproutInstagramFollowersByCityScalarFieldEnum | SproutInstagramFollowersByCityScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramFollowersByCity findMany
+   */
+  export type SproutInstagramFollowersByCityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCities to fetch.
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCities to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCityOrderByWithRelationInput | SproutInstagramFollowersByCityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutInstagramFollowersByCities.
+     */
+    cursor?: SproutInstagramFollowersByCityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCities.
+     */
+    skip?: number
+    distinct?: SproutInstagramFollowersByCityScalarFieldEnum | SproutInstagramFollowersByCityScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramFollowersByCity create
+   */
+  export type SproutInstagramFollowersByCityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutInstagramFollowersByCity.
+     */
+    data: XOR<SproutInstagramFollowersByCityCreateInput, SproutInstagramFollowersByCityUncheckedCreateInput>
+  }
+
+  /**
+   * SproutInstagramFollowersByCity createMany
+   */
+  export type SproutInstagramFollowersByCityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutInstagramFollowersByCities.
+     */
+    data: SproutInstagramFollowersByCityCreateManyInput | SproutInstagramFollowersByCityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutInstagramFollowersByCity createManyAndReturn
+   */
+  export type SproutInstagramFollowersByCityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutInstagramFollowersByCities.
+     */
+    data: SproutInstagramFollowersByCityCreateManyInput | SproutInstagramFollowersByCityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramFollowersByCity update
+   */
+  export type SproutInstagramFollowersByCityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutInstagramFollowersByCity.
+     */
+    data: XOR<SproutInstagramFollowersByCityUpdateInput, SproutInstagramFollowersByCityUncheckedUpdateInput>
+    /**
+     * Choose, which SproutInstagramFollowersByCity to update.
+     */
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCity updateMany
+   */
+  export type SproutInstagramFollowersByCityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutInstagramFollowersByCities.
+     */
+    data: XOR<SproutInstagramFollowersByCityUpdateManyMutationInput, SproutInstagramFollowersByCityUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutInstagramFollowersByCities to update
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * Limit how many SproutInstagramFollowersByCities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutInstagramFollowersByCity updateManyAndReturn
+   */
+  export type SproutInstagramFollowersByCityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutInstagramFollowersByCities.
+     */
+    data: XOR<SproutInstagramFollowersByCityUpdateManyMutationInput, SproutInstagramFollowersByCityUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutInstagramFollowersByCities to update
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * Limit how many SproutInstagramFollowersByCities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramFollowersByCity upsert
+   */
+  export type SproutInstagramFollowersByCityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutInstagramFollowersByCity to update in case it exists.
+     */
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+    /**
+     * In case the SproutInstagramFollowersByCity found by the `where` argument doesn't exist, create a new SproutInstagramFollowersByCity with this data.
+     */
+    create: XOR<SproutInstagramFollowersByCityCreateInput, SproutInstagramFollowersByCityUncheckedCreateInput>
+    /**
+     * In case the SproutInstagramFollowersByCity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutInstagramFollowersByCityUpdateInput, SproutInstagramFollowersByCityUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutInstagramFollowersByCity delete
+   */
+  export type SproutInstagramFollowersByCityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+    /**
+     * Filter which SproutInstagramFollowersByCity to delete.
+     */
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCity deleteMany
+   */
+  export type SproutInstagramFollowersByCityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutInstagramFollowersByCities to delete
+     */
+    where?: SproutInstagramFollowersByCityWhereInput
+    /**
+     * Limit how many SproutInstagramFollowersByCities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutInstagramFollowersByCity without action
+   */
+  export type SproutInstagramFollowersByCityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCity
+     */
+    select?: SproutInstagramFollowersByCitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCity
+     */
+    omit?: SproutInstagramFollowersByCityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SproutInstagramFollowersByCountry
+   */
+
+  export type AggregateSproutInstagramFollowersByCountry = {
+    _count: SproutInstagramFollowersByCountryCountAggregateOutputType | null
+    _avg: SproutInstagramFollowersByCountryAvgAggregateOutputType | null
+    _sum: SproutInstagramFollowersByCountrySumAggregateOutputType | null
+    _min: SproutInstagramFollowersByCountryMinAggregateOutputType | null
+    _max: SproutInstagramFollowersByCountryMaxAggregateOutputType | null
+  }
+
+  export type SproutInstagramFollowersByCountryAvgAggregateOutputType = {
+    count: number | null
+  }
+
+  export type SproutInstagramFollowersByCountrySumAggregateOutputType = {
+    count: number | null
+  }
+
+  export type SproutInstagramFollowersByCountryMinAggregateOutputType = {
+    id: string | null
+    sproutInstagramAnalyticsId: string | null
+    country: string | null
+    count: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutInstagramFollowersByCountryMaxAggregateOutputType = {
+    id: string | null
+    sproutInstagramAnalyticsId: string | null
+    country: string | null
+    count: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutInstagramFollowersByCountryCountAggregateOutputType = {
+    id: number
+    sproutInstagramAnalyticsId: number
+    country: number
+    count: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutInstagramFollowersByCountryAvgAggregateInputType = {
+    count?: true
+  }
+
+  export type SproutInstagramFollowersByCountrySumAggregateInputType = {
+    count?: true
+  }
+
+  export type SproutInstagramFollowersByCountryMinAggregateInputType = {
+    id?: true
+    sproutInstagramAnalyticsId?: true
+    country?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutInstagramFollowersByCountryMaxAggregateInputType = {
+    id?: true
+    sproutInstagramAnalyticsId?: true
+    country?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutInstagramFollowersByCountryCountAggregateInputType = {
+    id?: true
+    sproutInstagramAnalyticsId?: true
+    country?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutInstagramFollowersByCountryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutInstagramFollowersByCountry to aggregate.
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCountries to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCountryOrderByWithRelationInput | SproutInstagramFollowersByCountryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutInstagramFollowersByCountryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCountries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCountries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutInstagramFollowersByCountries
+    **/
+    _count?: true | SproutInstagramFollowersByCountryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutInstagramFollowersByCountryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutInstagramFollowersByCountrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutInstagramFollowersByCountryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutInstagramFollowersByCountryMaxAggregateInputType
+  }
+
+  export type GetSproutInstagramFollowersByCountryAggregateType<T extends SproutInstagramFollowersByCountryAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutInstagramFollowersByCountry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutInstagramFollowersByCountry[P]>
+      : GetScalarType<T[P], AggregateSproutInstagramFollowersByCountry[P]>
+  }
+
+
+
+
+  export type SproutInstagramFollowersByCountryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutInstagramFollowersByCountryWhereInput
+    orderBy?: SproutInstagramFollowersByCountryOrderByWithAggregationInput | SproutInstagramFollowersByCountryOrderByWithAggregationInput[]
+    by: SproutInstagramFollowersByCountryScalarFieldEnum[] | SproutInstagramFollowersByCountryScalarFieldEnum
+    having?: SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutInstagramFollowersByCountryCountAggregateInputType | true
+    _avg?: SproutInstagramFollowersByCountryAvgAggregateInputType
+    _sum?: SproutInstagramFollowersByCountrySumAggregateInputType
+    _min?: SproutInstagramFollowersByCountryMinAggregateInputType
+    _max?: SproutInstagramFollowersByCountryMaxAggregateInputType
+  }
+
+  export type SproutInstagramFollowersByCountryGroupByOutputType = {
+    id: string
+    sproutInstagramAnalyticsId: string
+    country: string
+    count: number
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutInstagramFollowersByCountryCountAggregateOutputType | null
+    _avg: SproutInstagramFollowersByCountryAvgAggregateOutputType | null
+    _sum: SproutInstagramFollowersByCountrySumAggregateOutputType | null
+    _min: SproutInstagramFollowersByCountryMinAggregateOutputType | null
+    _max: SproutInstagramFollowersByCountryMaxAggregateOutputType | null
+  }
+
+  type GetSproutInstagramFollowersByCountryGroupByPayload<T extends SproutInstagramFollowersByCountryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutInstagramFollowersByCountryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutInstagramFollowersByCountryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutInstagramFollowersByCountryGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutInstagramFollowersByCountryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutInstagramFollowersByCountrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    country?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramFollowersByCountry"]>
+
+  export type SproutInstagramFollowersByCountrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    country?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramFollowersByCountry"]>
+
+  export type SproutInstagramFollowersByCountrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    country?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutInstagramFollowersByCountry"]>
+
+  export type SproutInstagramFollowersByCountrySelectScalar = {
+    id?: boolean
+    sproutInstagramAnalyticsId?: boolean
+    country?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutInstagramFollowersByCountryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutInstagramAnalyticsId" | "country" | "count" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutInstagramFollowersByCountry"]>
+  export type SproutInstagramFollowersByCountryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }
+  export type SproutInstagramFollowersByCountryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }
+  export type SproutInstagramFollowersByCountryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutInstagramAnalytics?: boolean | SproutInstagramAnalyticsDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutInstagramFollowersByCountryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutInstagramFollowersByCountry"
+    objects: {
+      sproutInstagramAnalytics: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutInstagramAnalyticsId: string
+      country: string
+      count: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutInstagramFollowersByCountry"]>
+    composites: {}
+  }
+
+  type SproutInstagramFollowersByCountryGetPayload<S extends boolean | null | undefined | SproutInstagramFollowersByCountryDefaultArgs> = $Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload, S>
+
+  type SproutInstagramFollowersByCountryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutInstagramFollowersByCountryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutInstagramFollowersByCountryCountAggregateInputType | true
+    }
+
+  export interface SproutInstagramFollowersByCountryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutInstagramFollowersByCountry'], meta: { name: 'SproutInstagramFollowersByCountry' } }
+    /**
+     * Find zero or one SproutInstagramFollowersByCountry that matches the filter.
+     * @param {SproutInstagramFollowersByCountryFindUniqueArgs} args - Arguments to find a SproutInstagramFollowersByCountry
+     * @example
+     * // Get one SproutInstagramFollowersByCountry
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutInstagramFollowersByCountryFindUniqueArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryFindUniqueArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutInstagramFollowersByCountry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutInstagramFollowersByCountryFindUniqueOrThrowArgs} args - Arguments to find a SproutInstagramFollowersByCountry
+     * @example
+     * // Get one SproutInstagramFollowersByCountry
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutInstagramFollowersByCountryFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutInstagramFollowersByCountry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryFindFirstArgs} args - Arguments to find a SproutInstagramFollowersByCountry
+     * @example
+     * // Get one SproutInstagramFollowersByCountry
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutInstagramFollowersByCountryFindFirstArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCountryFindFirstArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutInstagramFollowersByCountry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryFindFirstOrThrowArgs} args - Arguments to find a SproutInstagramFollowersByCountry
+     * @example
+     * // Get one SproutInstagramFollowersByCountry
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutInstagramFollowersByCountryFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCountryFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutInstagramFollowersByCountries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutInstagramFollowersByCountries
+     * const sproutInstagramFollowersByCountries = await prisma.sproutInstagramFollowersByCountry.findMany()
+     * 
+     * // Get first 10 SproutInstagramFollowersByCountries
+     * const sproutInstagramFollowersByCountries = await prisma.sproutInstagramFollowersByCountry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutInstagramFollowersByCountryWithIdOnly = await prisma.sproutInstagramFollowersByCountry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutInstagramFollowersByCountryFindManyArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCountryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutInstagramFollowersByCountry.
+     * @param {SproutInstagramFollowersByCountryCreateArgs} args - Arguments to create a SproutInstagramFollowersByCountry.
+     * @example
+     * // Create one SproutInstagramFollowersByCountry
+     * const SproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.create({
+     *   data: {
+     *     // ... data to create a SproutInstagramFollowersByCountry
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutInstagramFollowersByCountryCreateArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryCreateArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutInstagramFollowersByCountries.
+     * @param {SproutInstagramFollowersByCountryCreateManyArgs} args - Arguments to create many SproutInstagramFollowersByCountries.
+     * @example
+     * // Create many SproutInstagramFollowersByCountries
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutInstagramFollowersByCountryCreateManyArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCountryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutInstagramFollowersByCountries and returns the data saved in the database.
+     * @param {SproutInstagramFollowersByCountryCreateManyAndReturnArgs} args - Arguments to create many SproutInstagramFollowersByCountries.
+     * @example
+     * // Create many SproutInstagramFollowersByCountries
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutInstagramFollowersByCountries and only return the `id`
+     * const sproutInstagramFollowersByCountryWithIdOnly = await prisma.sproutInstagramFollowersByCountry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutInstagramFollowersByCountryCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCountryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutInstagramFollowersByCountry.
+     * @param {SproutInstagramFollowersByCountryDeleteArgs} args - Arguments to delete one SproutInstagramFollowersByCountry.
+     * @example
+     * // Delete one SproutInstagramFollowersByCountry
+     * const SproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.delete({
+     *   where: {
+     *     // ... filter to delete one SproutInstagramFollowersByCountry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutInstagramFollowersByCountryDeleteArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryDeleteArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutInstagramFollowersByCountry.
+     * @param {SproutInstagramFollowersByCountryUpdateArgs} args - Arguments to update one SproutInstagramFollowersByCountry.
+     * @example
+     * // Update one SproutInstagramFollowersByCountry
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutInstagramFollowersByCountryUpdateArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryUpdateArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutInstagramFollowersByCountries.
+     * @param {SproutInstagramFollowersByCountryDeleteManyArgs} args - Arguments to filter SproutInstagramFollowersByCountries to delete.
+     * @example
+     * // Delete a few SproutInstagramFollowersByCountries
+     * const { count } = await prisma.sproutInstagramFollowersByCountry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutInstagramFollowersByCountryDeleteManyArgs>(args?: SelectSubset<T, SproutInstagramFollowersByCountryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutInstagramFollowersByCountries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutInstagramFollowersByCountries
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutInstagramFollowersByCountryUpdateManyArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutInstagramFollowersByCountries and returns the data updated in the database.
+     * @param {SproutInstagramFollowersByCountryUpdateManyAndReturnArgs} args - Arguments to update many SproutInstagramFollowersByCountries.
+     * @example
+     * // Update many SproutInstagramFollowersByCountries
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutInstagramFollowersByCountries and only return the `id`
+     * const sproutInstagramFollowersByCountryWithIdOnly = await prisma.sproutInstagramFollowersByCountry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutInstagramFollowersByCountryUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutInstagramFollowersByCountry.
+     * @param {SproutInstagramFollowersByCountryUpsertArgs} args - Arguments to update or create a SproutInstagramFollowersByCountry.
+     * @example
+     * // Update or create a SproutInstagramFollowersByCountry
+     * const sproutInstagramFollowersByCountry = await prisma.sproutInstagramFollowersByCountry.upsert({
+     *   create: {
+     *     // ... data to create a SproutInstagramFollowersByCountry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutInstagramFollowersByCountry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutInstagramFollowersByCountryUpsertArgs>(args: SelectSubset<T, SproutInstagramFollowersByCountryUpsertArgs<ExtArgs>>): Prisma__SproutInstagramFollowersByCountryClient<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutInstagramFollowersByCountries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryCountArgs} args - Arguments to filter SproutInstagramFollowersByCountries to count.
+     * @example
+     * // Count the number of SproutInstagramFollowersByCountries
+     * const count = await prisma.sproutInstagramFollowersByCountry.count({
+     *   where: {
+     *     // ... the filter for the SproutInstagramFollowersByCountries we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutInstagramFollowersByCountryCountArgs>(
+      args?: Subset<T, SproutInstagramFollowersByCountryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutInstagramFollowersByCountryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutInstagramFollowersByCountry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutInstagramFollowersByCountryAggregateArgs>(args: Subset<T, SproutInstagramFollowersByCountryAggregateArgs>): Prisma.PrismaPromise<GetSproutInstagramFollowersByCountryAggregateType<T>>
+
+    /**
+     * Group by SproutInstagramFollowersByCountry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutInstagramFollowersByCountryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutInstagramFollowersByCountryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutInstagramFollowersByCountryGroupByArgs['orderBy'] }
+        : { orderBy?: SproutInstagramFollowersByCountryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutInstagramFollowersByCountryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutInstagramFollowersByCountryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutInstagramFollowersByCountry model
+   */
+  readonly fields: SproutInstagramFollowersByCountryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutInstagramFollowersByCountry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutInstagramFollowersByCountryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutInstagramAnalytics<T extends SproutInstagramAnalyticsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutInstagramAnalyticsDefaultArgs<ExtArgs>>): Prisma__SproutInstagramAnalyticsClient<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutInstagramFollowersByCountry model
+   */
+  interface SproutInstagramFollowersByCountryFieldRefs {
+    readonly id: FieldRef<"SproutInstagramFollowersByCountry", 'String'>
+    readonly sproutInstagramAnalyticsId: FieldRef<"SproutInstagramFollowersByCountry", 'String'>
+    readonly country: FieldRef<"SproutInstagramFollowersByCountry", 'String'>
+    readonly count: FieldRef<"SproutInstagramFollowersByCountry", 'Int'>
+    readonly createdAt: FieldRef<"SproutInstagramFollowersByCountry", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutInstagramFollowersByCountry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutInstagramFollowersByCountry findUnique
+   */
+  export type SproutInstagramFollowersByCountryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCountry to fetch.
+     */
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry findUniqueOrThrow
+   */
+  export type SproutInstagramFollowersByCountryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCountry to fetch.
+     */
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry findFirst
+   */
+  export type SproutInstagramFollowersByCountryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCountry to fetch.
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCountries to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCountryOrderByWithRelationInput | SproutInstagramFollowersByCountryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutInstagramFollowersByCountries.
+     */
+    cursor?: SproutInstagramFollowersByCountryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCountries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCountries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutInstagramFollowersByCountries.
+     */
+    distinct?: SproutInstagramFollowersByCountryScalarFieldEnum | SproutInstagramFollowersByCountryScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry findFirstOrThrow
+   */
+  export type SproutInstagramFollowersByCountryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCountry to fetch.
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCountries to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCountryOrderByWithRelationInput | SproutInstagramFollowersByCountryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutInstagramFollowersByCountries.
+     */
+    cursor?: SproutInstagramFollowersByCountryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCountries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCountries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutInstagramFollowersByCountries.
+     */
+    distinct?: SproutInstagramFollowersByCountryScalarFieldEnum | SproutInstagramFollowersByCountryScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry findMany
+   */
+  export type SproutInstagramFollowersByCountryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutInstagramFollowersByCountries to fetch.
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutInstagramFollowersByCountries to fetch.
+     */
+    orderBy?: SproutInstagramFollowersByCountryOrderByWithRelationInput | SproutInstagramFollowersByCountryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutInstagramFollowersByCountries.
+     */
+    cursor?: SproutInstagramFollowersByCountryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutInstagramFollowersByCountries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutInstagramFollowersByCountries.
+     */
+    skip?: number
+    distinct?: SproutInstagramFollowersByCountryScalarFieldEnum | SproutInstagramFollowersByCountryScalarFieldEnum[]
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry create
+   */
+  export type SproutInstagramFollowersByCountryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutInstagramFollowersByCountry.
+     */
+    data: XOR<SproutInstagramFollowersByCountryCreateInput, SproutInstagramFollowersByCountryUncheckedCreateInput>
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry createMany
+   */
+  export type SproutInstagramFollowersByCountryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutInstagramFollowersByCountries.
+     */
+    data: SproutInstagramFollowersByCountryCreateManyInput | SproutInstagramFollowersByCountryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry createManyAndReturn
+   */
+  export type SproutInstagramFollowersByCountryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutInstagramFollowersByCountries.
+     */
+    data: SproutInstagramFollowersByCountryCreateManyInput | SproutInstagramFollowersByCountryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry update
+   */
+  export type SproutInstagramFollowersByCountryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutInstagramFollowersByCountry.
+     */
+    data: XOR<SproutInstagramFollowersByCountryUpdateInput, SproutInstagramFollowersByCountryUncheckedUpdateInput>
+    /**
+     * Choose, which SproutInstagramFollowersByCountry to update.
+     */
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry updateMany
+   */
+  export type SproutInstagramFollowersByCountryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutInstagramFollowersByCountries.
+     */
+    data: XOR<SproutInstagramFollowersByCountryUpdateManyMutationInput, SproutInstagramFollowersByCountryUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutInstagramFollowersByCountries to update
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * Limit how many SproutInstagramFollowersByCountries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry updateManyAndReturn
+   */
+  export type SproutInstagramFollowersByCountryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutInstagramFollowersByCountries.
+     */
+    data: XOR<SproutInstagramFollowersByCountryUpdateManyMutationInput, SproutInstagramFollowersByCountryUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutInstagramFollowersByCountries to update
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * Limit how many SproutInstagramFollowersByCountries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry upsert
+   */
+  export type SproutInstagramFollowersByCountryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutInstagramFollowersByCountry to update in case it exists.
+     */
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+    /**
+     * In case the SproutInstagramFollowersByCountry found by the `where` argument doesn't exist, create a new SproutInstagramFollowersByCountry with this data.
+     */
+    create: XOR<SproutInstagramFollowersByCountryCreateInput, SproutInstagramFollowersByCountryUncheckedCreateInput>
+    /**
+     * In case the SproutInstagramFollowersByCountry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutInstagramFollowersByCountryUpdateInput, SproutInstagramFollowersByCountryUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry delete
+   */
+  export type SproutInstagramFollowersByCountryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+    /**
+     * Filter which SproutInstagramFollowersByCountry to delete.
+     */
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry deleteMany
+   */
+  export type SproutInstagramFollowersByCountryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutInstagramFollowersByCountries to delete
+     */
+    where?: SproutInstagramFollowersByCountryWhereInput
+    /**
+     * Limit how many SproutInstagramFollowersByCountries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutInstagramFollowersByCountry without action
+   */
+  export type SproutInstagramFollowersByCountryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramFollowersByCountry
+     */
+    select?: SproutInstagramFollowersByCountrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramFollowersByCountry
+     */
+    omit?: SproutInstagramFollowersByCountryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramFollowersByCountryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SproutLinkedInAnalytics
+   */
+
+  export type AggregateSproutLinkedInAnalytics = {
+    _count: SproutLinkedInAnalyticsCountAggregateOutputType | null
+    _avg: SproutLinkedInAnalyticsAvgAggregateOutputType | null
+    _sum: SproutLinkedInAnalyticsSumAggregateOutputType | null
+    _min: SproutLinkedInAnalyticsMinAggregateOutputType | null
+    _max: SproutLinkedInAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type SproutLinkedInAnalyticsAvgAggregateOutputType = {
+    customerProfileId: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    reactions: number | null
+  }
+
+  export type SproutLinkedInAnalyticsSumAggregateOutputType = {
+    customerProfileId: number | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    reactions: number | null
+  }
+
+  export type SproutLinkedInAnalyticsMinAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    reactions: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutLinkedInAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    reactions: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutLinkedInAnalyticsCountAggregateOutputType = {
+    id: number
+    sproutSocialAccountId: number
+    customerProfileId: number
+    reportingDate: number
+    engagements: number
+    impressions: number
+    impressionsUnique: number
+    followersCount: number
+    reactions: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutLinkedInAnalyticsAvgAggregateInputType = {
+    customerProfileId?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    reactions?: true
+  }
+
+  export type SproutLinkedInAnalyticsSumAggregateInputType = {
+    customerProfileId?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    reactions?: true
+  }
+
+  export type SproutLinkedInAnalyticsMinAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    reactions?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutLinkedInAnalyticsMaxAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    reactions?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutLinkedInAnalyticsCountAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    engagements?: true
+    impressions?: true
+    impressionsUnique?: true
+    followersCount?: true
+    reactions?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutLinkedInAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutLinkedInAnalytics to aggregate.
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutLinkedInAnalytics to fetch.
+     */
+    orderBy?: SproutLinkedInAnalyticsOrderByWithRelationInput | SproutLinkedInAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutLinkedInAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutLinkedInAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutLinkedInAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutLinkedInAnalytics
+    **/
+    _count?: true | SproutLinkedInAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutLinkedInAnalyticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutLinkedInAnalyticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutLinkedInAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutLinkedInAnalyticsMaxAggregateInputType
+  }
+
+  export type GetSproutLinkedInAnalyticsAggregateType<T extends SproutLinkedInAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutLinkedInAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutLinkedInAnalytics[P]>
+      : GetScalarType<T[P], AggregateSproutLinkedInAnalytics[P]>
+  }
+
+
+
+
+  export type SproutLinkedInAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutLinkedInAnalyticsWhereInput
+    orderBy?: SproutLinkedInAnalyticsOrderByWithAggregationInput | SproutLinkedInAnalyticsOrderByWithAggregationInput[]
+    by: SproutLinkedInAnalyticsScalarFieldEnum[] | SproutLinkedInAnalyticsScalarFieldEnum
+    having?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutLinkedInAnalyticsCountAggregateInputType | true
+    _avg?: SproutLinkedInAnalyticsAvgAggregateInputType
+    _sum?: SproutLinkedInAnalyticsSumAggregateInputType
+    _min?: SproutLinkedInAnalyticsMinAggregateInputType
+    _max?: SproutLinkedInAnalyticsMaxAggregateInputType
+  }
+
+  export type SproutLinkedInAnalyticsGroupByOutputType = {
+    id: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date
+    engagements: number | null
+    impressions: number | null
+    impressionsUnique: number | null
+    followersCount: number | null
+    reactions: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutLinkedInAnalyticsCountAggregateOutputType | null
+    _avg: SproutLinkedInAnalyticsAvgAggregateOutputType | null
+    _sum: SproutLinkedInAnalyticsSumAggregateOutputType | null
+    _min: SproutLinkedInAnalyticsMinAggregateOutputType | null
+    _max: SproutLinkedInAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetSproutLinkedInAnalyticsGroupByPayload<T extends SproutLinkedInAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutLinkedInAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutLinkedInAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutLinkedInAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutLinkedInAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutLinkedInAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    reactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
+
+  export type SproutLinkedInAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    reactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
+
+  export type SproutLinkedInAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    reactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
+
+  export type SproutLinkedInAnalyticsSelectScalar = {
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    engagements?: boolean
+    impressions?: boolean
+    impressionsUnique?: boolean
+    followersCount?: boolean
+    reactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutLinkedInAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "engagements" | "impressions" | "impressionsUnique" | "followersCount" | "reactions" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutLinkedInAnalytics"]>
+  export type SproutLinkedInAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutLinkedInAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutLinkedInAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutLinkedInAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutLinkedInAnalytics"
+    objects: {
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutSocialAccountId: string
+      customerProfileId: number
+      reportingDate: Date
+      engagements: number | null
+      impressions: number | null
+      impressionsUnique: number | null
+      followersCount: number | null
+      reactions: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
+    composites: {}
+  }
+
+  type SproutLinkedInAnalyticsGetPayload<S extends boolean | null | undefined | SproutLinkedInAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload, S>
+
+  type SproutLinkedInAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutLinkedInAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutLinkedInAnalyticsCountAggregateInputType | true
+    }
+
+  export interface SproutLinkedInAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutLinkedInAnalytics'], meta: { name: 'SproutLinkedInAnalytics' } }
+    /**
+     * Find zero or one SproutLinkedInAnalytics that matches the filter.
+     * @param {SproutLinkedInAnalyticsFindUniqueArgs} args - Arguments to find a SproutLinkedInAnalytics
+     * @example
+     * // Get one SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutLinkedInAnalyticsFindUniqueArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutLinkedInAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutLinkedInAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a SproutLinkedInAnalytics
+     * @example
+     * // Get one SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutLinkedInAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutLinkedInAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsFindFirstArgs} args - Arguments to find a SproutLinkedInAnalytics
+     * @example
+     * // Get one SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutLinkedInAnalyticsFindFirstArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsFindFirstArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutLinkedInAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsFindFirstOrThrowArgs} args - Arguments to find a SproutLinkedInAnalytics
+     * @example
+     * // Get one SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutLinkedInAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutLinkedInAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findMany()
+     * 
+     * // Get first 10 SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutLinkedInAnalyticsWithIdOnly = await prisma.sproutLinkedInAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutLinkedInAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutLinkedInAnalytics.
+     * @param {SproutLinkedInAnalyticsCreateArgs} args - Arguments to create a SproutLinkedInAnalytics.
+     * @example
+     * // Create one SproutLinkedInAnalytics
+     * const SproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.create({
+     *   data: {
+     *     // ... data to create a SproutLinkedInAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutLinkedInAnalyticsCreateArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsCreateArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutLinkedInAnalytics.
+     * @param {SproutLinkedInAnalyticsCreateManyArgs} args - Arguments to create many SproutLinkedInAnalytics.
+     * @example
+     * // Create many SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutLinkedInAnalyticsCreateManyArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutLinkedInAnalytics and returns the data saved in the database.
+     * @param {SproutLinkedInAnalyticsCreateManyAndReturnArgs} args - Arguments to create many SproutLinkedInAnalytics.
+     * @example
+     * // Create many SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutLinkedInAnalytics and only return the `id`
+     * const sproutLinkedInAnalyticsWithIdOnly = await prisma.sproutLinkedInAnalytics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutLinkedInAnalyticsCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutLinkedInAnalytics.
+     * @param {SproutLinkedInAnalyticsDeleteArgs} args - Arguments to delete one SproutLinkedInAnalytics.
+     * @example
+     * // Delete one SproutLinkedInAnalytics
+     * const SproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one SproutLinkedInAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutLinkedInAnalyticsDeleteArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsDeleteArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutLinkedInAnalytics.
+     * @param {SproutLinkedInAnalyticsUpdateArgs} args - Arguments to update one SproutLinkedInAnalytics.
+     * @example
+     * // Update one SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutLinkedInAnalyticsUpdateArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsUpdateArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutLinkedInAnalytics.
+     * @param {SproutLinkedInAnalyticsDeleteManyArgs} args - Arguments to filter SproutLinkedInAnalytics to delete.
+     * @example
+     * // Delete a few SproutLinkedInAnalytics
+     * const { count } = await prisma.sproutLinkedInAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutLinkedInAnalyticsDeleteManyArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutLinkedInAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutLinkedInAnalyticsUpdateManyArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutLinkedInAnalytics and returns the data updated in the database.
+     * @param {SproutLinkedInAnalyticsUpdateManyAndReturnArgs} args - Arguments to update many SproutLinkedInAnalytics.
+     * @example
+     * // Update many SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutLinkedInAnalytics and only return the `id`
+     * const sproutLinkedInAnalyticsWithIdOnly = await prisma.sproutLinkedInAnalytics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutLinkedInAnalyticsUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutLinkedInAnalytics.
+     * @param {SproutLinkedInAnalyticsUpsertArgs} args - Arguments to update or create a SproutLinkedInAnalytics.
+     * @example
+     * // Update or create a SproutLinkedInAnalytics
+     * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a SproutLinkedInAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutLinkedInAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutLinkedInAnalyticsUpsertArgs>(args: SelectSubset<T, SproutLinkedInAnalyticsUpsertArgs<ExtArgs>>): Prisma__SproutLinkedInAnalyticsClient<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutLinkedInAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsCountArgs} args - Arguments to filter SproutLinkedInAnalytics to count.
+     * @example
+     * // Count the number of SproutLinkedInAnalytics
+     * const count = await prisma.sproutLinkedInAnalytics.count({
+     *   where: {
+     *     // ... the filter for the SproutLinkedInAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutLinkedInAnalyticsCountArgs>(
+      args?: Subset<T, SproutLinkedInAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutLinkedInAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutLinkedInAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutLinkedInAnalyticsAggregateArgs>(args: Subset<T, SproutLinkedInAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetSproutLinkedInAnalyticsAggregateType<T>>
+
+    /**
+     * Group by SproutLinkedInAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutLinkedInAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutLinkedInAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutLinkedInAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: SproutLinkedInAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutLinkedInAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutLinkedInAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutLinkedInAnalytics model
+   */
+  readonly fields: SproutLinkedInAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutLinkedInAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutLinkedInAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutLinkedInAnalytics model
+   */
+  interface SproutLinkedInAnalyticsFieldRefs {
+    readonly id: FieldRef<"SproutLinkedInAnalytics", 'String'>
+    readonly sproutSocialAccountId: FieldRef<"SproutLinkedInAnalytics", 'String'>
+    readonly customerProfileId: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
+    readonly engagements: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly impressions: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly impressionsUnique: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly followersCount: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly reactions: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly createdAt: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutLinkedInAnalytics findUnique
+   */
+  export type SproutLinkedInAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutLinkedInAnalytics to fetch.
+     */
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutLinkedInAnalytics findUniqueOrThrow
+   */
+  export type SproutLinkedInAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutLinkedInAnalytics to fetch.
+     */
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutLinkedInAnalytics findFirst
+   */
+  export type SproutLinkedInAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutLinkedInAnalytics to fetch.
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutLinkedInAnalytics to fetch.
+     */
+    orderBy?: SproutLinkedInAnalyticsOrderByWithRelationInput | SproutLinkedInAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutLinkedInAnalytics.
+     */
+    cursor?: SproutLinkedInAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutLinkedInAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutLinkedInAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutLinkedInAnalytics.
+     */
+    distinct?: SproutLinkedInAnalyticsScalarFieldEnum | SproutLinkedInAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutLinkedInAnalytics findFirstOrThrow
+   */
+  export type SproutLinkedInAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutLinkedInAnalytics to fetch.
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutLinkedInAnalytics to fetch.
+     */
+    orderBy?: SproutLinkedInAnalyticsOrderByWithRelationInput | SproutLinkedInAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutLinkedInAnalytics.
+     */
+    cursor?: SproutLinkedInAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutLinkedInAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutLinkedInAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutLinkedInAnalytics.
+     */
+    distinct?: SproutLinkedInAnalyticsScalarFieldEnum | SproutLinkedInAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutLinkedInAnalytics findMany
+   */
+  export type SproutLinkedInAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutLinkedInAnalytics to fetch.
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutLinkedInAnalytics to fetch.
+     */
+    orderBy?: SproutLinkedInAnalyticsOrderByWithRelationInput | SproutLinkedInAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutLinkedInAnalytics.
+     */
+    cursor?: SproutLinkedInAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutLinkedInAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutLinkedInAnalytics.
+     */
+    skip?: number
+    distinct?: SproutLinkedInAnalyticsScalarFieldEnum | SproutLinkedInAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutLinkedInAnalytics create
+   */
+  export type SproutLinkedInAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutLinkedInAnalytics.
+     */
+    data: XOR<SproutLinkedInAnalyticsCreateInput, SproutLinkedInAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * SproutLinkedInAnalytics createMany
+   */
+  export type SproutLinkedInAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutLinkedInAnalytics.
+     */
+    data: SproutLinkedInAnalyticsCreateManyInput | SproutLinkedInAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutLinkedInAnalytics createManyAndReturn
+   */
+  export type SproutLinkedInAnalyticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutLinkedInAnalytics.
+     */
+    data: SproutLinkedInAnalyticsCreateManyInput | SproutLinkedInAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutLinkedInAnalytics update
+   */
+  export type SproutLinkedInAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutLinkedInAnalytics.
+     */
+    data: XOR<SproutLinkedInAnalyticsUpdateInput, SproutLinkedInAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which SproutLinkedInAnalytics to update.
+     */
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutLinkedInAnalytics updateMany
+   */
+  export type SproutLinkedInAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutLinkedInAnalytics.
+     */
+    data: XOR<SproutLinkedInAnalyticsUpdateManyMutationInput, SproutLinkedInAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutLinkedInAnalytics to update
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * Limit how many SproutLinkedInAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutLinkedInAnalytics updateManyAndReturn
+   */
+  export type SproutLinkedInAnalyticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutLinkedInAnalytics.
+     */
+    data: XOR<SproutLinkedInAnalyticsUpdateManyMutationInput, SproutLinkedInAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutLinkedInAnalytics to update
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * Limit how many SproutLinkedInAnalytics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutLinkedInAnalytics upsert
+   */
+  export type SproutLinkedInAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutLinkedInAnalytics to update in case it exists.
+     */
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+    /**
+     * In case the SproutLinkedInAnalytics found by the `where` argument doesn't exist, create a new SproutLinkedInAnalytics with this data.
+     */
+    create: XOR<SproutLinkedInAnalyticsCreateInput, SproutLinkedInAnalyticsUncheckedCreateInput>
+    /**
+     * In case the SproutLinkedInAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutLinkedInAnalyticsUpdateInput, SproutLinkedInAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutLinkedInAnalytics delete
+   */
+  export type SproutLinkedInAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which SproutLinkedInAnalytics to delete.
+     */
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutLinkedInAnalytics deleteMany
+   */
+  export type SproutLinkedInAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutLinkedInAnalytics to delete
+     */
+    where?: SproutLinkedInAnalyticsWhereInput
+    /**
+     * Limit how many SproutLinkedInAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutLinkedInAnalytics without action
+   */
+  export type SproutLinkedInAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SproutPinterestAnalytics
+   */
+
+  export type AggregateSproutPinterestAnalytics = {
+    _count: SproutPinterestAnalyticsCountAggregateOutputType | null
+    _avg: SproutPinterestAnalyticsAvgAggregateOutputType | null
+    _sum: SproutPinterestAnalyticsSumAggregateOutputType | null
+    _min: SproutPinterestAnalyticsMinAggregateOutputType | null
+    _max: SproutPinterestAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type SproutPinterestAnalyticsAvgAggregateOutputType = {
+    customerProfileId: number | null
+    followersCount: number | null
+    followingCount: number | null
+  }
+
+  export type SproutPinterestAnalyticsSumAggregateOutputType = {
+    customerProfileId: number | null
+    followersCount: number | null
+    followingCount: number | null
+  }
+
+  export type SproutPinterestAnalyticsMinAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    followersCount: number | null
+    followingCount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutPinterestAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    customerProfileId: number | null
+    reportingDate: Date | null
+    followersCount: number | null
+    followingCount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutPinterestAnalyticsCountAggregateOutputType = {
+    id: number
+    sproutSocialAccountId: number
+    customerProfileId: number
+    reportingDate: number
+    followersCount: number
+    followingCount: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutPinterestAnalyticsAvgAggregateInputType = {
+    customerProfileId?: true
+    followersCount?: true
+    followingCount?: true
+  }
+
+  export type SproutPinterestAnalyticsSumAggregateInputType = {
+    customerProfileId?: true
+    followersCount?: true
+    followingCount?: true
+  }
+
+  export type SproutPinterestAnalyticsMinAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    followersCount?: true
+    followingCount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutPinterestAnalyticsMaxAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    followersCount?: true
+    followingCount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutPinterestAnalyticsCountAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    customerProfileId?: true
+    reportingDate?: true
+    followersCount?: true
+    followingCount?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutPinterestAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutPinterestAnalytics to aggregate.
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutPinterestAnalytics to fetch.
+     */
+    orderBy?: SproutPinterestAnalyticsOrderByWithRelationInput | SproutPinterestAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutPinterestAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutPinterestAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutPinterestAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutPinterestAnalytics
+    **/
+    _count?: true | SproutPinterestAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutPinterestAnalyticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutPinterestAnalyticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutPinterestAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutPinterestAnalyticsMaxAggregateInputType
+  }
+
+  export type GetSproutPinterestAnalyticsAggregateType<T extends SproutPinterestAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutPinterestAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutPinterestAnalytics[P]>
+      : GetScalarType<T[P], AggregateSproutPinterestAnalytics[P]>
+  }
+
+
+
+
+  export type SproutPinterestAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutPinterestAnalyticsWhereInput
+    orderBy?: SproutPinterestAnalyticsOrderByWithAggregationInput | SproutPinterestAnalyticsOrderByWithAggregationInput[]
+    by: SproutPinterestAnalyticsScalarFieldEnum[] | SproutPinterestAnalyticsScalarFieldEnum
+    having?: SproutPinterestAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutPinterestAnalyticsCountAggregateInputType | true
+    _avg?: SproutPinterestAnalyticsAvgAggregateInputType
+    _sum?: SproutPinterestAnalyticsSumAggregateInputType
+    _min?: SproutPinterestAnalyticsMinAggregateInputType
+    _max?: SproutPinterestAnalyticsMaxAggregateInputType
+  }
+
+  export type SproutPinterestAnalyticsGroupByOutputType = {
+    id: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date
+    followersCount: number | null
+    followingCount: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutPinterestAnalyticsCountAggregateOutputType | null
+    _avg: SproutPinterestAnalyticsAvgAggregateOutputType | null
+    _sum: SproutPinterestAnalyticsSumAggregateOutputType | null
+    _min: SproutPinterestAnalyticsMinAggregateOutputType | null
+    _max: SproutPinterestAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetSproutPinterestAnalyticsGroupByPayload<T extends SproutPinterestAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutPinterestAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutPinterestAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutPinterestAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutPinterestAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutPinterestAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    followersCount?: boolean
+    followingCount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutPinterestAnalytics"]>
+
+  export type SproutPinterestAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    followersCount?: boolean
+    followingCount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutPinterestAnalytics"]>
+
+  export type SproutPinterestAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    followersCount?: boolean
+    followingCount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutPinterestAnalytics"]>
+
+  export type SproutPinterestAnalyticsSelectScalar = {
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    customerProfileId?: boolean
+    reportingDate?: boolean
+    followersCount?: boolean
+    followingCount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutPinterestAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "followersCount" | "followingCount" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutPinterestAnalytics"]>
+  export type SproutPinterestAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutPinterestAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutPinterestAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutPinterestAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutPinterestAnalytics"
+    objects: {
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutSocialAccountId: string
+      customerProfileId: number
+      reportingDate: Date
+      followersCount: number | null
+      followingCount: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutPinterestAnalytics"]>
+    composites: {}
+  }
+
+  type SproutPinterestAnalyticsGetPayload<S extends boolean | null | undefined | SproutPinterestAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload, S>
+
+  type SproutPinterestAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutPinterestAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutPinterestAnalyticsCountAggregateInputType | true
+    }
+
+  export interface SproutPinterestAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutPinterestAnalytics'], meta: { name: 'SproutPinterestAnalytics' } }
+    /**
+     * Find zero or one SproutPinterestAnalytics that matches the filter.
+     * @param {SproutPinterestAnalyticsFindUniqueArgs} args - Arguments to find a SproutPinterestAnalytics
+     * @example
+     * // Get one SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutPinterestAnalyticsFindUniqueArgs>(args: SelectSubset<T, SproutPinterestAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutPinterestAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutPinterestAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a SproutPinterestAnalytics
+     * @example
+     * // Get one SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutPinterestAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutPinterestAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutPinterestAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsFindFirstArgs} args - Arguments to find a SproutPinterestAnalytics
+     * @example
+     * // Get one SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutPinterestAnalyticsFindFirstArgs>(args?: SelectSubset<T, SproutPinterestAnalyticsFindFirstArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutPinterestAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsFindFirstOrThrowArgs} args - Arguments to find a SproutPinterestAnalytics
+     * @example
+     * // Get one SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutPinterestAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutPinterestAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutPinterestAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findMany()
+     * 
+     * // Get first 10 SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutPinterestAnalyticsWithIdOnly = await prisma.sproutPinterestAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutPinterestAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutPinterestAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutPinterestAnalytics.
+     * @param {SproutPinterestAnalyticsCreateArgs} args - Arguments to create a SproutPinterestAnalytics.
+     * @example
+     * // Create one SproutPinterestAnalytics
+     * const SproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.create({
+     *   data: {
+     *     // ... data to create a SproutPinterestAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutPinterestAnalyticsCreateArgs>(args: SelectSubset<T, SproutPinterestAnalyticsCreateArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutPinterestAnalytics.
+     * @param {SproutPinterestAnalyticsCreateManyArgs} args - Arguments to create many SproutPinterestAnalytics.
+     * @example
+     * // Create many SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutPinterestAnalyticsCreateManyArgs>(args?: SelectSubset<T, SproutPinterestAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutPinterestAnalytics and returns the data saved in the database.
+     * @param {SproutPinterestAnalyticsCreateManyAndReturnArgs} args - Arguments to create many SproutPinterestAnalytics.
+     * @example
+     * // Create many SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutPinterestAnalytics and only return the `id`
+     * const sproutPinterestAnalyticsWithIdOnly = await prisma.sproutPinterestAnalytics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutPinterestAnalyticsCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutPinterestAnalyticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutPinterestAnalytics.
+     * @param {SproutPinterestAnalyticsDeleteArgs} args - Arguments to delete one SproutPinterestAnalytics.
+     * @example
+     * // Delete one SproutPinterestAnalytics
+     * const SproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one SproutPinterestAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutPinterestAnalyticsDeleteArgs>(args: SelectSubset<T, SproutPinterestAnalyticsDeleteArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutPinterestAnalytics.
+     * @param {SproutPinterestAnalyticsUpdateArgs} args - Arguments to update one SproutPinterestAnalytics.
+     * @example
+     * // Update one SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutPinterestAnalyticsUpdateArgs>(args: SelectSubset<T, SproutPinterestAnalyticsUpdateArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutPinterestAnalytics.
+     * @param {SproutPinterestAnalyticsDeleteManyArgs} args - Arguments to filter SproutPinterestAnalytics to delete.
+     * @example
+     * // Delete a few SproutPinterestAnalytics
+     * const { count } = await prisma.sproutPinterestAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutPinterestAnalyticsDeleteManyArgs>(args?: SelectSubset<T, SproutPinterestAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutPinterestAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutPinterestAnalyticsUpdateManyArgs>(args: SelectSubset<T, SproutPinterestAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutPinterestAnalytics and returns the data updated in the database.
+     * @param {SproutPinterestAnalyticsUpdateManyAndReturnArgs} args - Arguments to update many SproutPinterestAnalytics.
+     * @example
+     * // Update many SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutPinterestAnalytics and only return the `id`
+     * const sproutPinterestAnalyticsWithIdOnly = await prisma.sproutPinterestAnalytics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutPinterestAnalyticsUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutPinterestAnalyticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutPinterestAnalytics.
+     * @param {SproutPinterestAnalyticsUpsertArgs} args - Arguments to update or create a SproutPinterestAnalytics.
+     * @example
+     * // Update or create a SproutPinterestAnalytics
+     * const sproutPinterestAnalytics = await prisma.sproutPinterestAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a SproutPinterestAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutPinterestAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutPinterestAnalyticsUpsertArgs>(args: SelectSubset<T, SproutPinterestAnalyticsUpsertArgs<ExtArgs>>): Prisma__SproutPinterestAnalyticsClient<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutPinterestAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsCountArgs} args - Arguments to filter SproutPinterestAnalytics to count.
+     * @example
+     * // Count the number of SproutPinterestAnalytics
+     * const count = await prisma.sproutPinterestAnalytics.count({
+     *   where: {
+     *     // ... the filter for the SproutPinterestAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutPinterestAnalyticsCountArgs>(
+      args?: Subset<T, SproutPinterestAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutPinterestAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutPinterestAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutPinterestAnalyticsAggregateArgs>(args: Subset<T, SproutPinterestAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetSproutPinterestAnalyticsAggregateType<T>>
+
+    /**
+     * Group by SproutPinterestAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutPinterestAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutPinterestAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutPinterestAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: SproutPinterestAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutPinterestAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutPinterestAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutPinterestAnalytics model
+   */
+  readonly fields: SproutPinterestAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutPinterestAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutPinterestAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutPinterestAnalytics model
+   */
+  interface SproutPinterestAnalyticsFieldRefs {
+    readonly id: FieldRef<"SproutPinterestAnalytics", 'String'>
+    readonly sproutSocialAccountId: FieldRef<"SproutPinterestAnalytics", 'String'>
+    readonly customerProfileId: FieldRef<"SproutPinterestAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutPinterestAnalytics", 'DateTime'>
+    readonly followersCount: FieldRef<"SproutPinterestAnalytics", 'Int'>
+    readonly followingCount: FieldRef<"SproutPinterestAnalytics", 'Int'>
+    readonly createdAt: FieldRef<"SproutPinterestAnalytics", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutPinterestAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutPinterestAnalytics findUnique
+   */
+  export type SproutPinterestAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutPinterestAnalytics to fetch.
+     */
+    where: SproutPinterestAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutPinterestAnalytics findUniqueOrThrow
+   */
+  export type SproutPinterestAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutPinterestAnalytics to fetch.
+     */
+    where: SproutPinterestAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutPinterestAnalytics findFirst
+   */
+  export type SproutPinterestAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutPinterestAnalytics to fetch.
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutPinterestAnalytics to fetch.
+     */
+    orderBy?: SproutPinterestAnalyticsOrderByWithRelationInput | SproutPinterestAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutPinterestAnalytics.
+     */
+    cursor?: SproutPinterestAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutPinterestAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutPinterestAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutPinterestAnalytics.
+     */
+    distinct?: SproutPinterestAnalyticsScalarFieldEnum | SproutPinterestAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutPinterestAnalytics findFirstOrThrow
+   */
+  export type SproutPinterestAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutPinterestAnalytics to fetch.
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutPinterestAnalytics to fetch.
+     */
+    orderBy?: SproutPinterestAnalyticsOrderByWithRelationInput | SproutPinterestAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutPinterestAnalytics.
+     */
+    cursor?: SproutPinterestAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutPinterestAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutPinterestAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutPinterestAnalytics.
+     */
+    distinct?: SproutPinterestAnalyticsScalarFieldEnum | SproutPinterestAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutPinterestAnalytics findMany
+   */
+  export type SproutPinterestAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutPinterestAnalytics to fetch.
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutPinterestAnalytics to fetch.
+     */
+    orderBy?: SproutPinterestAnalyticsOrderByWithRelationInput | SproutPinterestAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutPinterestAnalytics.
+     */
+    cursor?: SproutPinterestAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutPinterestAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutPinterestAnalytics.
+     */
+    skip?: number
+    distinct?: SproutPinterestAnalyticsScalarFieldEnum | SproutPinterestAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutPinterestAnalytics create
+   */
+  export type SproutPinterestAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutPinterestAnalytics.
+     */
+    data: XOR<SproutPinterestAnalyticsCreateInput, SproutPinterestAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * SproutPinterestAnalytics createMany
+   */
+  export type SproutPinterestAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutPinterestAnalytics.
+     */
+    data: SproutPinterestAnalyticsCreateManyInput | SproutPinterestAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutPinterestAnalytics createManyAndReturn
+   */
+  export type SproutPinterestAnalyticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutPinterestAnalytics.
+     */
+    data: SproutPinterestAnalyticsCreateManyInput | SproutPinterestAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutPinterestAnalytics update
+   */
+  export type SproutPinterestAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutPinterestAnalytics.
+     */
+    data: XOR<SproutPinterestAnalyticsUpdateInput, SproutPinterestAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which SproutPinterestAnalytics to update.
+     */
+    where: SproutPinterestAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutPinterestAnalytics updateMany
+   */
+  export type SproutPinterestAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutPinterestAnalytics.
+     */
+    data: XOR<SproutPinterestAnalyticsUpdateManyMutationInput, SproutPinterestAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutPinterestAnalytics to update
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * Limit how many SproutPinterestAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutPinterestAnalytics updateManyAndReturn
+   */
+  export type SproutPinterestAnalyticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutPinterestAnalytics.
+     */
+    data: XOR<SproutPinterestAnalyticsUpdateManyMutationInput, SproutPinterestAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutPinterestAnalytics to update
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * Limit how many SproutPinterestAnalytics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutPinterestAnalytics upsert
+   */
+  export type SproutPinterestAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutPinterestAnalytics to update in case it exists.
+     */
+    where: SproutPinterestAnalyticsWhereUniqueInput
+    /**
+     * In case the SproutPinterestAnalytics found by the `where` argument doesn't exist, create a new SproutPinterestAnalytics with this data.
+     */
+    create: XOR<SproutPinterestAnalyticsCreateInput, SproutPinterestAnalyticsUncheckedCreateInput>
+    /**
+     * In case the SproutPinterestAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutPinterestAnalyticsUpdateInput, SproutPinterestAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutPinterestAnalytics delete
+   */
+  export type SproutPinterestAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which SproutPinterestAnalytics to delete.
+     */
+    where: SproutPinterestAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutPinterestAnalytics deleteMany
+   */
+  export type SproutPinterestAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutPinterestAnalytics to delete
+     */
+    where?: SproutPinterestAnalyticsWhereInput
+    /**
+     * Limit how many SproutPinterestAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutPinterestAnalytics without action
+   */
+  export type SproutPinterestAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SproutSocialAccount
+   */
+
+  export type AggregateSproutSocialAccount = {
+    _count: SproutSocialAccountCountAggregateOutputType | null
+    _avg: SproutSocialAccountAvgAggregateOutputType | null
+    _sum: SproutSocialAccountSumAggregateOutputType | null
+    _min: SproutSocialAccountMinAggregateOutputType | null
+    _max: SproutSocialAccountMaxAggregateOutputType | null
+  }
+
+  export type SproutSocialAccountAvgAggregateOutputType = {
+    customerProfileId: number | null
+    groups: number | null
+  }
+
+  export type SproutSocialAccountSumAggregateOutputType = {
+    customerProfileId: number | null
+    groups: number[]
+  }
+
+  export type SproutSocialAccountMinAggregateOutputType = {
+    id: string | null
+    customerProfileId: number | null
+    networkType: string | null
+    name: string | null
+    nativeName: string | null
+    link: string | null
+    nativeId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutSocialAccountMaxAggregateOutputType = {
+    id: string | null
+    customerProfileId: number | null
+    networkType: string | null
+    name: string | null
+    nativeName: string | null
+    link: string | null
+    nativeId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutSocialAccountCountAggregateOutputType = {
+    id: number
+    customerProfileId: number
+    networkType: number
+    name: number
+    nativeName: number
+    link: number
+    nativeId: number
+    groups: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutSocialAccountAvgAggregateInputType = {
+    customerProfileId?: true
+    groups?: true
+  }
+
+  export type SproutSocialAccountSumAggregateInputType = {
+    customerProfileId?: true
+    groups?: true
+  }
+
+  export type SproutSocialAccountMinAggregateInputType = {
+    id?: true
+    customerProfileId?: true
+    networkType?: true
+    name?: true
+    nativeName?: true
+    link?: true
+    nativeId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutSocialAccountMaxAggregateInputType = {
+    id?: true
+    customerProfileId?: true
+    networkType?: true
+    name?: true
+    nativeName?: true
+    link?: true
+    nativeId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutSocialAccountCountAggregateInputType = {
+    id?: true
+    customerProfileId?: true
+    networkType?: true
+    name?: true
+    nativeName?: true
+    link?: true
+    nativeId?: true
+    groups?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutSocialAccountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutSocialAccount to aggregate.
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutSocialAccounts to fetch.
+     */
+    orderBy?: SproutSocialAccountOrderByWithRelationInput | SproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutSocialAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutSocialAccounts
+    **/
+    _count?: true | SproutSocialAccountCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutSocialAccountAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutSocialAccountSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutSocialAccountMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutSocialAccountMaxAggregateInputType
+  }
+
+  export type GetSproutSocialAccountAggregateType<T extends SproutSocialAccountAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutSocialAccount]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutSocialAccount[P]>
+      : GetScalarType<T[P], AggregateSproutSocialAccount[P]>
+  }
+
+
+
+
+  export type SproutSocialAccountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutSocialAccountWhereInput
+    orderBy?: SproutSocialAccountOrderByWithAggregationInput | SproutSocialAccountOrderByWithAggregationInput[]
+    by: SproutSocialAccountScalarFieldEnum[] | SproutSocialAccountScalarFieldEnum
+    having?: SproutSocialAccountScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutSocialAccountCountAggregateInputType | true
+    _avg?: SproutSocialAccountAvgAggregateInputType
+    _sum?: SproutSocialAccountSumAggregateInputType
+    _min?: SproutSocialAccountMinAggregateInputType
+    _max?: SproutSocialAccountMaxAggregateInputType
+  }
+
+  export type SproutSocialAccountGroupByOutputType = {
+    id: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups: number[]
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutSocialAccountCountAggregateOutputType | null
+    _avg: SproutSocialAccountAvgAggregateOutputType | null
+    _sum: SproutSocialAccountSumAggregateOutputType | null
+    _min: SproutSocialAccountMinAggregateOutputType | null
+    _max: SproutSocialAccountMaxAggregateOutputType | null
+  }
+
+  type GetSproutSocialAccountGroupByPayload<T extends SproutSocialAccountGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutSocialAccountGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutSocialAccountGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutSocialAccountGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutSocialAccountGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutSocialAccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    customerProfileId?: boolean
+    networkType?: boolean
+    name?: boolean
+    nativeName?: boolean
+    link?: boolean
+    nativeId?: boolean
+    groups?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    facebookAnalytics?: boolean | SproutSocialAccount$facebookAnalyticsArgs<ExtArgs>
+    linkedInAnalytics?: boolean | SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>
+    instagramAnalytics?: boolean | SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>
+    pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
+    users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
+    _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutSocialAccount"]>
+
+  export type SproutSocialAccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    customerProfileId?: boolean
+    networkType?: boolean
+    name?: boolean
+    nativeName?: boolean
+    link?: boolean
+    nativeId?: boolean
+    groups?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["sproutSocialAccount"]>
+
+  export type SproutSocialAccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    customerProfileId?: boolean
+    networkType?: boolean
+    name?: boolean
+    nativeName?: boolean
+    link?: boolean
+    nativeId?: boolean
+    groups?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["sproutSocialAccount"]>
+
+  export type SproutSocialAccountSelectScalar = {
+    id?: boolean
+    customerProfileId?: boolean
+    networkType?: boolean
+    name?: boolean
+    nativeName?: boolean
+    link?: boolean
+    nativeId?: boolean
+    groups?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutSocialAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerProfileId" | "networkType" | "name" | "nativeName" | "link" | "nativeId" | "groups" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutSocialAccount"]>
+  export type SproutSocialAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facebookAnalytics?: boolean | SproutSocialAccount$facebookAnalyticsArgs<ExtArgs>
+    linkedInAnalytics?: boolean | SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>
+    instagramAnalytics?: boolean | SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>
+    pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
+    users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
+    _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SproutSocialAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SproutSocialAccountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $SproutSocialAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutSocialAccount"
+    objects: {
+      facebookAnalytics: Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>[]
+      linkedInAnalytics: Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>[]
+      instagramAnalytics: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>[]
+      pinterestAnalytics: Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>[]
+      users: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      customerProfileId: number
+      networkType: string
+      name: string
+      nativeName: string
+      link: string
+      nativeId: string
+      groups: number[]
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutSocialAccount"]>
+    composites: {}
+  }
+
+  type SproutSocialAccountGetPayload<S extends boolean | null | undefined | SproutSocialAccountDefaultArgs> = $Result.GetResult<Prisma.$SproutSocialAccountPayload, S>
+
+  type SproutSocialAccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutSocialAccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutSocialAccountCountAggregateInputType | true
+    }
+
+  export interface SproutSocialAccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutSocialAccount'], meta: { name: 'SproutSocialAccount' } }
+    /**
+     * Find zero or one SproutSocialAccount that matches the filter.
+     * @param {SproutSocialAccountFindUniqueArgs} args - Arguments to find a SproutSocialAccount
+     * @example
+     * // Get one SproutSocialAccount
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutSocialAccountFindUniqueArgs>(args: SelectSubset<T, SproutSocialAccountFindUniqueArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutSocialAccount that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutSocialAccountFindUniqueOrThrowArgs} args - Arguments to find a SproutSocialAccount
+     * @example
+     * // Get one SproutSocialAccount
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutSocialAccountFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutSocialAccountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutSocialAccount that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountFindFirstArgs} args - Arguments to find a SproutSocialAccount
+     * @example
+     * // Get one SproutSocialAccount
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutSocialAccountFindFirstArgs>(args?: SelectSubset<T, SproutSocialAccountFindFirstArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutSocialAccount that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountFindFirstOrThrowArgs} args - Arguments to find a SproutSocialAccount
+     * @example
+     * // Get one SproutSocialAccount
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutSocialAccountFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutSocialAccountFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutSocialAccounts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutSocialAccounts
+     * const sproutSocialAccounts = await prisma.sproutSocialAccount.findMany()
+     * 
+     * // Get first 10 SproutSocialAccounts
+     * const sproutSocialAccounts = await prisma.sproutSocialAccount.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutSocialAccountWithIdOnly = await prisma.sproutSocialAccount.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutSocialAccountFindManyArgs>(args?: SelectSubset<T, SproutSocialAccountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutSocialAccount.
+     * @param {SproutSocialAccountCreateArgs} args - Arguments to create a SproutSocialAccount.
+     * @example
+     * // Create one SproutSocialAccount
+     * const SproutSocialAccount = await prisma.sproutSocialAccount.create({
+     *   data: {
+     *     // ... data to create a SproutSocialAccount
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutSocialAccountCreateArgs>(args: SelectSubset<T, SproutSocialAccountCreateArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutSocialAccounts.
+     * @param {SproutSocialAccountCreateManyArgs} args - Arguments to create many SproutSocialAccounts.
+     * @example
+     * // Create many SproutSocialAccounts
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutSocialAccountCreateManyArgs>(args?: SelectSubset<T, SproutSocialAccountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutSocialAccounts and returns the data saved in the database.
+     * @param {SproutSocialAccountCreateManyAndReturnArgs} args - Arguments to create many SproutSocialAccounts.
+     * @example
+     * // Create many SproutSocialAccounts
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutSocialAccounts and only return the `id`
+     * const sproutSocialAccountWithIdOnly = await prisma.sproutSocialAccount.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutSocialAccountCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutSocialAccountCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutSocialAccount.
+     * @param {SproutSocialAccountDeleteArgs} args - Arguments to delete one SproutSocialAccount.
+     * @example
+     * // Delete one SproutSocialAccount
+     * const SproutSocialAccount = await prisma.sproutSocialAccount.delete({
+     *   where: {
+     *     // ... filter to delete one SproutSocialAccount
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutSocialAccountDeleteArgs>(args: SelectSubset<T, SproutSocialAccountDeleteArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutSocialAccount.
+     * @param {SproutSocialAccountUpdateArgs} args - Arguments to update one SproutSocialAccount.
+     * @example
+     * // Update one SproutSocialAccount
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutSocialAccountUpdateArgs>(args: SelectSubset<T, SproutSocialAccountUpdateArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutSocialAccounts.
+     * @param {SproutSocialAccountDeleteManyArgs} args - Arguments to filter SproutSocialAccounts to delete.
+     * @example
+     * // Delete a few SproutSocialAccounts
+     * const { count } = await prisma.sproutSocialAccount.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutSocialAccountDeleteManyArgs>(args?: SelectSubset<T, SproutSocialAccountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutSocialAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutSocialAccounts
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutSocialAccountUpdateManyArgs>(args: SelectSubset<T, SproutSocialAccountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutSocialAccounts and returns the data updated in the database.
+     * @param {SproutSocialAccountUpdateManyAndReturnArgs} args - Arguments to update many SproutSocialAccounts.
+     * @example
+     * // Update many SproutSocialAccounts
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutSocialAccounts and only return the `id`
+     * const sproutSocialAccountWithIdOnly = await prisma.sproutSocialAccount.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutSocialAccountUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutSocialAccountUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutSocialAccount.
+     * @param {SproutSocialAccountUpsertArgs} args - Arguments to update or create a SproutSocialAccount.
+     * @example
+     * // Update or create a SproutSocialAccount
+     * const sproutSocialAccount = await prisma.sproutSocialAccount.upsert({
+     *   create: {
+     *     // ... data to create a SproutSocialAccount
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutSocialAccount we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutSocialAccountUpsertArgs>(args: SelectSubset<T, SproutSocialAccountUpsertArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutSocialAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountCountArgs} args - Arguments to filter SproutSocialAccounts to count.
+     * @example
+     * // Count the number of SproutSocialAccounts
+     * const count = await prisma.sproutSocialAccount.count({
+     *   where: {
+     *     // ... the filter for the SproutSocialAccounts we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutSocialAccountCountArgs>(
+      args?: Subset<T, SproutSocialAccountCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutSocialAccountCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutSocialAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutSocialAccountAggregateArgs>(args: Subset<T, SproutSocialAccountAggregateArgs>): Prisma.PrismaPromise<GetSproutSocialAccountAggregateType<T>>
+
+    /**
+     * Group by SproutSocialAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutSocialAccountGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutSocialAccountGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutSocialAccountGroupByArgs['orderBy'] }
+        : { orderBy?: SproutSocialAccountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutSocialAccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutSocialAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutSocialAccount model
+   */
+  readonly fields: SproutSocialAccountFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutSocialAccount.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutSocialAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facebookAnalytics<T extends SproutSocialAccount$facebookAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    linkedInAnalytics<T extends SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    instagramAnalytics<T extends SproutSocialAccount$instagramAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pinterestAnalytics<T extends SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends SproutSocialAccount$usersArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutSocialAccount model
+   */
+  interface SproutSocialAccountFieldRefs {
+    readonly id: FieldRef<"SproutSocialAccount", 'String'>
+    readonly customerProfileId: FieldRef<"SproutSocialAccount", 'Int'>
+    readonly networkType: FieldRef<"SproutSocialAccount", 'String'>
+    readonly name: FieldRef<"SproutSocialAccount", 'String'>
+    readonly nativeName: FieldRef<"SproutSocialAccount", 'String'>
+    readonly link: FieldRef<"SproutSocialAccount", 'String'>
+    readonly nativeId: FieldRef<"SproutSocialAccount", 'String'>
+    readonly groups: FieldRef<"SproutSocialAccount", 'Int[]'>
+    readonly createdAt: FieldRef<"SproutSocialAccount", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutSocialAccount", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutSocialAccount findUnique
+   */
+  export type SproutSocialAccountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutSocialAccount to fetch.
+     */
+    where: SproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * SproutSocialAccount findUniqueOrThrow
+   */
+  export type SproutSocialAccountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutSocialAccount to fetch.
+     */
+    where: SproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * SproutSocialAccount findFirst
+   */
+  export type SproutSocialAccountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutSocialAccount to fetch.
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutSocialAccounts to fetch.
+     */
+    orderBy?: SproutSocialAccountOrderByWithRelationInput | SproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutSocialAccounts.
+     */
+    cursor?: SproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutSocialAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutSocialAccounts.
+     */
+    distinct?: SproutSocialAccountScalarFieldEnum | SproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount findFirstOrThrow
+   */
+  export type SproutSocialAccountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutSocialAccount to fetch.
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutSocialAccounts to fetch.
+     */
+    orderBy?: SproutSocialAccountOrderByWithRelationInput | SproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutSocialAccounts.
+     */
+    cursor?: SproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutSocialAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutSocialAccounts.
+     */
+    distinct?: SproutSocialAccountScalarFieldEnum | SproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount findMany
+   */
+  export type SproutSocialAccountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutSocialAccounts to fetch.
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutSocialAccounts to fetch.
+     */
+    orderBy?: SproutSocialAccountOrderByWithRelationInput | SproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutSocialAccounts.
+     */
+    cursor?: SproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutSocialAccounts.
+     */
+    skip?: number
+    distinct?: SproutSocialAccountScalarFieldEnum | SproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount create
+   */
+  export type SproutSocialAccountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutSocialAccount.
+     */
+    data: XOR<SproutSocialAccountCreateInput, SproutSocialAccountUncheckedCreateInput>
+  }
+
+  /**
+   * SproutSocialAccount createMany
+   */
+  export type SproutSocialAccountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutSocialAccounts.
+     */
+    data: SproutSocialAccountCreateManyInput | SproutSocialAccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutSocialAccount createManyAndReturn
+   */
+  export type SproutSocialAccountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutSocialAccounts.
+     */
+    data: SproutSocialAccountCreateManyInput | SproutSocialAccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutSocialAccount update
+   */
+  export type SproutSocialAccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutSocialAccount.
+     */
+    data: XOR<SproutSocialAccountUpdateInput, SproutSocialAccountUncheckedUpdateInput>
+    /**
+     * Choose, which SproutSocialAccount to update.
+     */
+    where: SproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * SproutSocialAccount updateMany
+   */
+  export type SproutSocialAccountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutSocialAccounts.
+     */
+    data: XOR<SproutSocialAccountUpdateManyMutationInput, SproutSocialAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutSocialAccounts to update
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * Limit how many SproutSocialAccounts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutSocialAccount updateManyAndReturn
+   */
+  export type SproutSocialAccountUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutSocialAccounts.
+     */
+    data: XOR<SproutSocialAccountUpdateManyMutationInput, SproutSocialAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutSocialAccounts to update
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * Limit how many SproutSocialAccounts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutSocialAccount upsert
+   */
+  export type SproutSocialAccountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutSocialAccount to update in case it exists.
+     */
+    where: SproutSocialAccountWhereUniqueInput
+    /**
+     * In case the SproutSocialAccount found by the `where` argument doesn't exist, create a new SproutSocialAccount with this data.
+     */
+    create: XOR<SproutSocialAccountCreateInput, SproutSocialAccountUncheckedCreateInput>
+    /**
+     * In case the SproutSocialAccount was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutSocialAccountUpdateInput, SproutSocialAccountUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutSocialAccount delete
+   */
+  export type SproutSocialAccountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter which SproutSocialAccount to delete.
+     */
+    where: SproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * SproutSocialAccount deleteMany
+   */
+  export type SproutSocialAccountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutSocialAccounts to delete
+     */
+    where?: SproutSocialAccountWhereInput
+    /**
+     * Limit how many SproutSocialAccounts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutSocialAccount.facebookAnalytics
+   */
+  export type SproutSocialAccount$facebookAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookAnalytics
+     */
+    select?: SproutFacebookAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookAnalytics
+     */
+    omit?: SproutFacebookAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookAnalyticsInclude<ExtArgs> | null
+    where?: SproutFacebookAnalyticsWhereInput
+    orderBy?: SproutFacebookAnalyticsOrderByWithRelationInput | SproutFacebookAnalyticsOrderByWithRelationInput[]
+    cursor?: SproutFacebookAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutFacebookAnalyticsScalarFieldEnum | SproutFacebookAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount.linkedInAnalytics
+   */
+  export type SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutLinkedInAnalytics
+     */
+    select?: SproutLinkedInAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutLinkedInAnalytics
+     */
+    omit?: SproutLinkedInAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutLinkedInAnalyticsInclude<ExtArgs> | null
+    where?: SproutLinkedInAnalyticsWhereInput
+    orderBy?: SproutLinkedInAnalyticsOrderByWithRelationInput | SproutLinkedInAnalyticsOrderByWithRelationInput[]
+    cursor?: SproutLinkedInAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutLinkedInAnalyticsScalarFieldEnum | SproutLinkedInAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount.instagramAnalytics
+   */
+  export type SproutSocialAccount$instagramAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutInstagramAnalytics
+     */
+    select?: SproutInstagramAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutInstagramAnalytics
+     */
+    omit?: SproutInstagramAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutInstagramAnalyticsInclude<ExtArgs> | null
+    where?: SproutInstagramAnalyticsWhereInput
+    orderBy?: SproutInstagramAnalyticsOrderByWithRelationInput | SproutInstagramAnalyticsOrderByWithRelationInput[]
+    cursor?: SproutInstagramAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutInstagramAnalyticsScalarFieldEnum | SproutInstagramAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount.pinterestAnalytics
+   */
+  export type SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutPinterestAnalytics
+     */
+    select?: SproutPinterestAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutPinterestAnalytics
+     */
+    omit?: SproutPinterestAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutPinterestAnalyticsInclude<ExtArgs> | null
+    where?: SproutPinterestAnalyticsWhereInput
+    orderBy?: SproutPinterestAnalyticsOrderByWithRelationInput | SproutPinterestAnalyticsOrderByWithRelationInput[]
+    cursor?: SproutPinterestAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutPinterestAnalyticsScalarFieldEnum | SproutPinterestAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount.users
+   */
+  export type SproutSocialAccount$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    where?: UserToSproutSocialAccountWhereInput
+    orderBy?: UserToSproutSocialAccountOrderByWithRelationInput | UserToSproutSocialAccountOrderByWithRelationInput[]
+    cursor?: UserToSproutSocialAccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount without action
+   */
+  export type SproutSocialAccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutSocialAccount
+     */
+    select?: SproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutSocialAccount
+     */
+    omit?: SproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutSocialAccountInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserToSproutSocialAccount
+   */
+
+  export type AggregateUserToSproutSocialAccount = {
+    _count: UserToSproutSocialAccountCountAggregateOutputType | null
+    _min: UserToSproutSocialAccountMinAggregateOutputType | null
+    _max: UserToSproutSocialAccountMaxAggregateOutputType | null
+  }
+
+  export type UserToSproutSocialAccountMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    sproutSocialAccountId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserToSproutSocialAccountMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    sproutSocialAccountId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserToSproutSocialAccountCountAggregateOutputType = {
+    id: number
+    userId: number
+    sproutSocialAccountId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserToSproutSocialAccountMinAggregateInputType = {
+    id?: true
+    userId?: true
+    sproutSocialAccountId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserToSproutSocialAccountMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    sproutSocialAccountId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserToSproutSocialAccountCountAggregateInputType = {
+    id?: true
+    userId?: true
+    sproutSocialAccountId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserToSproutSocialAccountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserToSproutSocialAccount to aggregate.
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToSproutSocialAccounts to fetch.
+     */
+    orderBy?: UserToSproutSocialAccountOrderByWithRelationInput | UserToSproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserToSproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToSproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToSproutSocialAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserToSproutSocialAccounts
+    **/
+    _count?: true | UserToSproutSocialAccountCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserToSproutSocialAccountMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserToSproutSocialAccountMaxAggregateInputType
+  }
+
+  export type GetUserToSproutSocialAccountAggregateType<T extends UserToSproutSocialAccountAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserToSproutSocialAccount]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserToSproutSocialAccount[P]>
+      : GetScalarType<T[P], AggregateUserToSproutSocialAccount[P]>
+  }
+
+
+
+
+  export type UserToSproutSocialAccountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToSproutSocialAccountWhereInput
+    orderBy?: UserToSproutSocialAccountOrderByWithAggregationInput | UserToSproutSocialAccountOrderByWithAggregationInput[]
+    by: UserToSproutSocialAccountScalarFieldEnum[] | UserToSproutSocialAccountScalarFieldEnum
+    having?: UserToSproutSocialAccountScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserToSproutSocialAccountCountAggregateInputType | true
+    _min?: UserToSproutSocialAccountMinAggregateInputType
+    _max?: UserToSproutSocialAccountMaxAggregateInputType
+  }
+
+  export type UserToSproutSocialAccountGroupByOutputType = {
+    id: string
+    userId: string
+    sproutSocialAccountId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserToSproutSocialAccountCountAggregateOutputType | null
+    _min: UserToSproutSocialAccountMinAggregateOutputType | null
+    _max: UserToSproutSocialAccountMaxAggregateOutputType | null
+  }
+
+  type GetUserToSproutSocialAccountGroupByPayload<T extends UserToSproutSocialAccountGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserToSproutSocialAccountGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserToSproutSocialAccountGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserToSproutSocialAccountGroupByOutputType[P]>
+            : GetScalarType<T[P], UserToSproutSocialAccountGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserToSproutSocialAccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sproutSocialAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userToSproutSocialAccount"]>
+
+  export type UserToSproutSocialAccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sproutSocialAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userToSproutSocialAccount"]>
+
+  export type UserToSproutSocialAccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sproutSocialAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userToSproutSocialAccount"]>
+
+  export type UserToSproutSocialAccountSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    sproutSocialAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserToSproutSocialAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "sproutSocialAccountId" | "createdAt" | "updatedAt", ExtArgs["result"]["userToSproutSocialAccount"]>
+  export type UserToSproutSocialAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type UserToSproutSocialAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type UserToSproutSocialAccountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $UserToSproutSocialAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserToSproutSocialAccount"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      sproutSocialAccountId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userToSproutSocialAccount"]>
+    composites: {}
+  }
+
+  type UserToSproutSocialAccountGetPayload<S extends boolean | null | undefined | UserToSproutSocialAccountDefaultArgs> = $Result.GetResult<Prisma.$UserToSproutSocialAccountPayload, S>
+
+  type UserToSproutSocialAccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserToSproutSocialAccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserToSproutSocialAccountCountAggregateInputType | true
+    }
+
+  export interface UserToSproutSocialAccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserToSproutSocialAccount'], meta: { name: 'UserToSproutSocialAccount' } }
+    /**
+     * Find zero or one UserToSproutSocialAccount that matches the filter.
+     * @param {UserToSproutSocialAccountFindUniqueArgs} args - Arguments to find a UserToSproutSocialAccount
+     * @example
+     * // Get one UserToSproutSocialAccount
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserToSproutSocialAccountFindUniqueArgs>(args: SelectSubset<T, UserToSproutSocialAccountFindUniqueArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserToSproutSocialAccount that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserToSproutSocialAccountFindUniqueOrThrowArgs} args - Arguments to find a UserToSproutSocialAccount
+     * @example
+     * // Get one UserToSproutSocialAccount
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserToSproutSocialAccountFindUniqueOrThrowArgs>(args: SelectSubset<T, UserToSproutSocialAccountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserToSproutSocialAccount that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountFindFirstArgs} args - Arguments to find a UserToSproutSocialAccount
+     * @example
+     * // Get one UserToSproutSocialAccount
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserToSproutSocialAccountFindFirstArgs>(args?: SelectSubset<T, UserToSproutSocialAccountFindFirstArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserToSproutSocialAccount that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountFindFirstOrThrowArgs} args - Arguments to find a UserToSproutSocialAccount
+     * @example
+     * // Get one UserToSproutSocialAccount
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserToSproutSocialAccountFindFirstOrThrowArgs>(args?: SelectSubset<T, UserToSproutSocialAccountFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserToSproutSocialAccounts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserToSproutSocialAccounts
+     * const userToSproutSocialAccounts = await prisma.userToSproutSocialAccount.findMany()
+     * 
+     * // Get first 10 UserToSproutSocialAccounts
+     * const userToSproutSocialAccounts = await prisma.userToSproutSocialAccount.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userToSproutSocialAccountWithIdOnly = await prisma.userToSproutSocialAccount.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserToSproutSocialAccountFindManyArgs>(args?: SelectSubset<T, UserToSproutSocialAccountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserToSproutSocialAccount.
+     * @param {UserToSproutSocialAccountCreateArgs} args - Arguments to create a UserToSproutSocialAccount.
+     * @example
+     * // Create one UserToSproutSocialAccount
+     * const UserToSproutSocialAccount = await prisma.userToSproutSocialAccount.create({
+     *   data: {
+     *     // ... data to create a UserToSproutSocialAccount
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserToSproutSocialAccountCreateArgs>(args: SelectSubset<T, UserToSproutSocialAccountCreateArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserToSproutSocialAccounts.
+     * @param {UserToSproutSocialAccountCreateManyArgs} args - Arguments to create many UserToSproutSocialAccounts.
+     * @example
+     * // Create many UserToSproutSocialAccounts
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserToSproutSocialAccountCreateManyArgs>(args?: SelectSubset<T, UserToSproutSocialAccountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserToSproutSocialAccounts and returns the data saved in the database.
+     * @param {UserToSproutSocialAccountCreateManyAndReturnArgs} args - Arguments to create many UserToSproutSocialAccounts.
+     * @example
+     * // Create many UserToSproutSocialAccounts
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserToSproutSocialAccounts and only return the `id`
+     * const userToSproutSocialAccountWithIdOnly = await prisma.userToSproutSocialAccount.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserToSproutSocialAccountCreateManyAndReturnArgs>(args?: SelectSubset<T, UserToSproutSocialAccountCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserToSproutSocialAccount.
+     * @param {UserToSproutSocialAccountDeleteArgs} args - Arguments to delete one UserToSproutSocialAccount.
+     * @example
+     * // Delete one UserToSproutSocialAccount
+     * const UserToSproutSocialAccount = await prisma.userToSproutSocialAccount.delete({
+     *   where: {
+     *     // ... filter to delete one UserToSproutSocialAccount
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserToSproutSocialAccountDeleteArgs>(args: SelectSubset<T, UserToSproutSocialAccountDeleteArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserToSproutSocialAccount.
+     * @param {UserToSproutSocialAccountUpdateArgs} args - Arguments to update one UserToSproutSocialAccount.
+     * @example
+     * // Update one UserToSproutSocialAccount
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserToSproutSocialAccountUpdateArgs>(args: SelectSubset<T, UserToSproutSocialAccountUpdateArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserToSproutSocialAccounts.
+     * @param {UserToSproutSocialAccountDeleteManyArgs} args - Arguments to filter UserToSproutSocialAccounts to delete.
+     * @example
+     * // Delete a few UserToSproutSocialAccounts
+     * const { count } = await prisma.userToSproutSocialAccount.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserToSproutSocialAccountDeleteManyArgs>(args?: SelectSubset<T, UserToSproutSocialAccountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserToSproutSocialAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserToSproutSocialAccounts
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserToSproutSocialAccountUpdateManyArgs>(args: SelectSubset<T, UserToSproutSocialAccountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserToSproutSocialAccounts and returns the data updated in the database.
+     * @param {UserToSproutSocialAccountUpdateManyAndReturnArgs} args - Arguments to update many UserToSproutSocialAccounts.
+     * @example
+     * // Update many UserToSproutSocialAccounts
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserToSproutSocialAccounts and only return the `id`
+     * const userToSproutSocialAccountWithIdOnly = await prisma.userToSproutSocialAccount.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserToSproutSocialAccountUpdateManyAndReturnArgs>(args: SelectSubset<T, UserToSproutSocialAccountUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserToSproutSocialAccount.
+     * @param {UserToSproutSocialAccountUpsertArgs} args - Arguments to update or create a UserToSproutSocialAccount.
+     * @example
+     * // Update or create a UserToSproutSocialAccount
+     * const userToSproutSocialAccount = await prisma.userToSproutSocialAccount.upsert({
+     *   create: {
+     *     // ... data to create a UserToSproutSocialAccount
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserToSproutSocialAccount we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserToSproutSocialAccountUpsertArgs>(args: SelectSubset<T, UserToSproutSocialAccountUpsertArgs<ExtArgs>>): Prisma__UserToSproutSocialAccountClient<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserToSproutSocialAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountCountArgs} args - Arguments to filter UserToSproutSocialAccounts to count.
+     * @example
+     * // Count the number of UserToSproutSocialAccounts
+     * const count = await prisma.userToSproutSocialAccount.count({
+     *   where: {
+     *     // ... the filter for the UserToSproutSocialAccounts we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserToSproutSocialAccountCountArgs>(
+      args?: Subset<T, UserToSproutSocialAccountCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserToSproutSocialAccountCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserToSproutSocialAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserToSproutSocialAccountAggregateArgs>(args: Subset<T, UserToSproutSocialAccountAggregateArgs>): Prisma.PrismaPromise<GetUserToSproutSocialAccountAggregateType<T>>
+
+    /**
+     * Group by UserToSproutSocialAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToSproutSocialAccountGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserToSproutSocialAccountGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserToSproutSocialAccountGroupByArgs['orderBy'] }
+        : { orderBy?: UserToSproutSocialAccountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserToSproutSocialAccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserToSproutSocialAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserToSproutSocialAccount model
+   */
+  readonly fields: UserToSproutSocialAccountFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserToSproutSocialAccount.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserToSproutSocialAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserToSproutSocialAccount model
+   */
+  interface UserToSproutSocialAccountFieldRefs {
+    readonly id: FieldRef<"UserToSproutSocialAccount", 'String'>
+    readonly userId: FieldRef<"UserToSproutSocialAccount", 'String'>
+    readonly sproutSocialAccountId: FieldRef<"UserToSproutSocialAccount", 'String'>
+    readonly createdAt: FieldRef<"UserToSproutSocialAccount", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserToSproutSocialAccount", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserToSproutSocialAccount findUnique
+   */
+  export type UserToSproutSocialAccountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToSproutSocialAccount to fetch.
+     */
+    where: UserToSproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToSproutSocialAccount findUniqueOrThrow
+   */
+  export type UserToSproutSocialAccountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToSproutSocialAccount to fetch.
+     */
+    where: UserToSproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToSproutSocialAccount findFirst
+   */
+  export type UserToSproutSocialAccountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToSproutSocialAccount to fetch.
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToSproutSocialAccounts to fetch.
+     */
+    orderBy?: UserToSproutSocialAccountOrderByWithRelationInput | UserToSproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserToSproutSocialAccounts.
+     */
+    cursor?: UserToSproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToSproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToSproutSocialAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserToSproutSocialAccounts.
+     */
+    distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * UserToSproutSocialAccount findFirstOrThrow
+   */
+  export type UserToSproutSocialAccountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToSproutSocialAccount to fetch.
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToSproutSocialAccounts to fetch.
+     */
+    orderBy?: UserToSproutSocialAccountOrderByWithRelationInput | UserToSproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserToSproutSocialAccounts.
+     */
+    cursor?: UserToSproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToSproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToSproutSocialAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserToSproutSocialAccounts.
+     */
+    distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * UserToSproutSocialAccount findMany
+   */
+  export type UserToSproutSocialAccountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToSproutSocialAccounts to fetch.
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToSproutSocialAccounts to fetch.
+     */
+    orderBy?: UserToSproutSocialAccountOrderByWithRelationInput | UserToSproutSocialAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserToSproutSocialAccounts.
+     */
+    cursor?: UserToSproutSocialAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToSproutSocialAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToSproutSocialAccounts.
+     */
+    skip?: number
+    distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * UserToSproutSocialAccount create
+   */
+  export type UserToSproutSocialAccountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserToSproutSocialAccount.
+     */
+    data: XOR<UserToSproutSocialAccountCreateInput, UserToSproutSocialAccountUncheckedCreateInput>
+  }
+
+  /**
+   * UserToSproutSocialAccount createMany
+   */
+  export type UserToSproutSocialAccountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserToSproutSocialAccounts.
+     */
+    data: UserToSproutSocialAccountCreateManyInput | UserToSproutSocialAccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserToSproutSocialAccount createManyAndReturn
+   */
+  export type UserToSproutSocialAccountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserToSproutSocialAccounts.
+     */
+    data: UserToSproutSocialAccountCreateManyInput | UserToSproutSocialAccountCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserToSproutSocialAccount update
+   */
+  export type UserToSproutSocialAccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserToSproutSocialAccount.
+     */
+    data: XOR<UserToSproutSocialAccountUpdateInput, UserToSproutSocialAccountUncheckedUpdateInput>
+    /**
+     * Choose, which UserToSproutSocialAccount to update.
+     */
+    where: UserToSproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToSproutSocialAccount updateMany
+   */
+  export type UserToSproutSocialAccountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserToSproutSocialAccounts.
+     */
+    data: XOR<UserToSproutSocialAccountUpdateManyMutationInput, UserToSproutSocialAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which UserToSproutSocialAccounts to update
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * Limit how many UserToSproutSocialAccounts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserToSproutSocialAccount updateManyAndReturn
+   */
+  export type UserToSproutSocialAccountUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * The data used to update UserToSproutSocialAccounts.
+     */
+    data: XOR<UserToSproutSocialAccountUpdateManyMutationInput, UserToSproutSocialAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which UserToSproutSocialAccounts to update
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * Limit how many UserToSproutSocialAccounts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserToSproutSocialAccount upsert
+   */
+  export type UserToSproutSocialAccountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserToSproutSocialAccount to update in case it exists.
+     */
+    where: UserToSproutSocialAccountWhereUniqueInput
+    /**
+     * In case the UserToSproutSocialAccount found by the `where` argument doesn't exist, create a new UserToSproutSocialAccount with this data.
+     */
+    create: XOR<UserToSproutSocialAccountCreateInput, UserToSproutSocialAccountUncheckedCreateInput>
+    /**
+     * In case the UserToSproutSocialAccount was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserToSproutSocialAccountUpdateInput, UserToSproutSocialAccountUncheckedUpdateInput>
+  }
+
+  /**
+   * UserToSproutSocialAccount delete
+   */
+  export type UserToSproutSocialAccountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    /**
+     * Filter which UserToSproutSocialAccount to delete.
+     */
+    where: UserToSproutSocialAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToSproutSocialAccount deleteMany
+   */
+  export type UserToSproutSocialAccountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserToSproutSocialAccounts to delete
+     */
+    where?: UserToSproutSocialAccountWhereInput
+    /**
+     * Limit how many UserToSproutSocialAccounts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserToSproutSocialAccount without action
+   */
+  export type UserToSproutSocialAccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
@@ -26134,6 +36506,7 @@ export namespace Prisma {
     activities?: boolean | User$activitiesArgs<ExtArgs>
     gaAccounts?: boolean | User$gaAccountsArgs<ExtArgs>
     gaImportRuns?: boolean | User$gaImportRunsArgs<ExtArgs>
+    sproutSocialAccounts?: boolean | User$sproutSocialAccountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -26208,6 +36581,7 @@ export namespace Prisma {
     activities?: boolean | User$activitiesArgs<ExtArgs>
     gaAccounts?: boolean | User$gaAccountsArgs<ExtArgs>
     gaImportRuns?: boolean | User$gaImportRunsArgs<ExtArgs>
+    sproutSocialAccounts?: boolean | User$sproutSocialAccountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26242,6 +36616,7 @@ export namespace Prisma {
       activities: Prisma.$ClientActivityPayload<ExtArgs>[]
       gaAccounts: Prisma.$GaAccountPayload<ExtArgs>[]
       gaImportRuns: Prisma.$GaImportRunPayload<ExtArgs>[]
+      sproutSocialAccounts: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -26670,6 +37045,7 @@ export namespace Prisma {
     activities<T extends User$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gaAccounts<T extends User$gaAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$gaAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gaImportRuns<T extends User$gaImportRunsArgs<ExtArgs> = {}>(args?: Subset<T, User$gaImportRunsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GaImportRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sproutSocialAccounts<T extends User$sproutSocialAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$sproutSocialAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27550,6 +37926,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GaImportRunScalarFieldEnum | GaImportRunScalarFieldEnum[]
+  }
+
+  /**
+   * User.sproutSocialAccounts
+   */
+  export type User$sproutSocialAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToSproutSocialAccount
+     */
+    select?: UserToSproutSocialAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToSproutSocialAccount
+     */
+    omit?: UserToSproutSocialAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToSproutSocialAccountInclude<ExtArgs> | null
+    where?: UserToSproutSocialAccountWhereInput
+    orderBy?: UserToSproutSocialAccountOrderByWithRelationInput | UserToSproutSocialAccountOrderByWithRelationInput[]
+    cursor?: UserToSproutSocialAccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
   }
 
   /**
@@ -35617,6 +46017,134 @@ export namespace Prisma {
   export type QueryScalarFieldEnum = (typeof QueryScalarFieldEnum)[keyof typeof QueryScalarFieldEnum]
 
 
+  export const SproutFacebookAnalyticsScalarFieldEnum: {
+    id: 'id',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    customerProfileId: 'customerProfileId',
+    reportingDate: 'reportingDate',
+    engagements: 'engagements',
+    impressions: 'impressions',
+    impressionsUnique: 'impressionsUnique',
+    followersCount: 'followersCount',
+    postContentClicks: 'postContentClicks',
+    postContentClicksOther: 'postContentClicksOther',
+    postLinkClicks: 'postLinkClicks',
+    postPhotoViewClicks: 'postPhotoViewClicks',
+    tabViews: 'tabViews',
+    videoViews: 'videoViews',
+    videoViews10s: 'videoViews10s',
+    videoViewsOrganic: 'videoViewsOrganic',
+    videoViewsPaid: 'videoViewsPaid',
+    videoViewsUnique: 'videoViewsUnique',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutFacebookAnalyticsScalarFieldEnum = (typeof SproutFacebookAnalyticsScalarFieldEnum)[keyof typeof SproutFacebookAnalyticsScalarFieldEnum]
+
+
+  export const SproutInstagramAnalyticsScalarFieldEnum: {
+    id: 'id',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    customerProfileId: 'customerProfileId',
+    reportingDate: 'reportingDate',
+    commentsCount: 'commentsCount',
+    engagements: 'engagements',
+    impressions: 'impressions',
+    impressionsUnique: 'impressionsUnique',
+    followersCount: 'followersCount',
+    likes: 'likes',
+    saves: 'saves',
+    videoViews: 'videoViews',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutInstagramAnalyticsScalarFieldEnum = (typeof SproutInstagramAnalyticsScalarFieldEnum)[keyof typeof SproutInstagramAnalyticsScalarFieldEnum]
+
+
+  export const SproutInstagramFollowersByCityScalarFieldEnum: {
+    id: 'id',
+    sproutInstagramAnalyticsId: 'sproutInstagramAnalyticsId',
+    city: 'city',
+    count: 'count',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutInstagramFollowersByCityScalarFieldEnum = (typeof SproutInstagramFollowersByCityScalarFieldEnum)[keyof typeof SproutInstagramFollowersByCityScalarFieldEnum]
+
+
+  export const SproutInstagramFollowersByCountryScalarFieldEnum: {
+    id: 'id',
+    sproutInstagramAnalyticsId: 'sproutInstagramAnalyticsId',
+    country: 'country',
+    count: 'count',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutInstagramFollowersByCountryScalarFieldEnum = (typeof SproutInstagramFollowersByCountryScalarFieldEnum)[keyof typeof SproutInstagramFollowersByCountryScalarFieldEnum]
+
+
+  export const SproutLinkedInAnalyticsScalarFieldEnum: {
+    id: 'id',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    customerProfileId: 'customerProfileId',
+    reportingDate: 'reportingDate',
+    engagements: 'engagements',
+    impressions: 'impressions',
+    impressionsUnique: 'impressionsUnique',
+    followersCount: 'followersCount',
+    reactions: 'reactions',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutLinkedInAnalyticsScalarFieldEnum = (typeof SproutLinkedInAnalyticsScalarFieldEnum)[keyof typeof SproutLinkedInAnalyticsScalarFieldEnum]
+
+
+  export const SproutPinterestAnalyticsScalarFieldEnum: {
+    id: 'id',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    customerProfileId: 'customerProfileId',
+    reportingDate: 'reportingDate',
+    followersCount: 'followersCount',
+    followingCount: 'followingCount',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutPinterestAnalyticsScalarFieldEnum = (typeof SproutPinterestAnalyticsScalarFieldEnum)[keyof typeof SproutPinterestAnalyticsScalarFieldEnum]
+
+
+  export const SproutSocialAccountScalarFieldEnum: {
+    id: 'id',
+    customerProfileId: 'customerProfileId',
+    networkType: 'networkType',
+    name: 'name',
+    nativeName: 'nativeName',
+    link: 'link',
+    nativeId: 'nativeId',
+    groups: 'groups',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutSocialAccountScalarFieldEnum = (typeof SproutSocialAccountScalarFieldEnum)[keyof typeof SproutSocialAccountScalarFieldEnum]
+
+
+  export const UserToSproutSocialAccountScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserToSproutSocialAccountScalarFieldEnum = (typeof UserToSproutSocialAccountScalarFieldEnum)[keyof typeof UserToSproutSocialAccountScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -37432,6 +47960,682 @@ export namespace Prisma {
     conversationId?: StringNullableWithAggregatesFilter<"Query"> | string | null
   }
 
+  export type SproutFacebookAnalyticsWhereInput = {
+    AND?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
+    OR?: SproutFacebookAnalyticsWhereInput[]
+    NOT?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
+    id?: StringFilter<"SproutFacebookAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutFacebookAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    engagements?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicksOther?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postLinkClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postPhotoViewClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    tabViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews10s?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }
+
+  export type SproutFacebookAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsUnique?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    postContentClicks?: SortOrderInput | SortOrder
+    postContentClicksOther?: SortOrderInput | SortOrder
+    postLinkClicks?: SortOrderInput | SortOrder
+    postPhotoViewClicks?: SortOrderInput | SortOrder
+    tabViews?: SortOrderInput | SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    videoViews10s?: SortOrderInput | SortOrder
+    videoViewsOrganic?: SortOrderInput | SortOrder
+    videoViewsPaid?: SortOrderInput | SortOrder
+    videoViewsUnique?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+  }
+
+  export type SproutFacebookAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
+    OR?: SproutFacebookAnalyticsWhereInput[]
+    NOT?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
+    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutFacebookAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    engagements?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicksOther?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postLinkClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postPhotoViewClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    tabViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews10s?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }, "id">
+
+  export type SproutFacebookAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsUnique?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    postContentClicks?: SortOrderInput | SortOrder
+    postContentClicksOther?: SortOrderInput | SortOrder
+    postLinkClicks?: SortOrderInput | SortOrder
+    postPhotoViewClicks?: SortOrderInput | SortOrder
+    tabViews?: SortOrderInput | SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    videoViews10s?: SortOrderInput | SortOrder
+    videoViewsOrganic?: SortOrderInput | SortOrder
+    videoViewsPaid?: SortOrderInput | SortOrder
+    videoViewsUnique?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutFacebookAnalyticsCountOrderByAggregateInput
+    _avg?: SproutFacebookAnalyticsAvgOrderByAggregateInput
+    _max?: SproutFacebookAnalyticsMaxOrderByAggregateInput
+    _min?: SproutFacebookAnalyticsMinOrderByAggregateInput
+    _sum?: SproutFacebookAnalyticsSumOrderByAggregateInput
+  }
+
+  export type SproutFacebookAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput | SproutFacebookAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput | SproutFacebookAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutFacebookAnalytics"> | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutFacebookAnalytics"> | string
+    customerProfileId?: IntWithAggregatesFilter<"SproutFacebookAnalytics"> | number
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
+    engagements?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    impressions?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    impressionsUnique?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicks?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicksOther?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    postLinkClicks?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    postPhotoViewClicks?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    tabViews?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews10s?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsPaid?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsUnique?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
+  }
+
+  export type SproutInstagramAnalyticsWhereInput = {
+    AND?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
+    OR?: SproutInstagramAnalyticsWhereInput[]
+    NOT?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
+    id?: StringFilter<"SproutInstagramAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    commentsCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    engagements?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    likes?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    saves?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+    followersByCity?: SproutInstagramFollowersByCityListRelationFilter
+    followersByCountry?: SproutInstagramFollowersByCountryListRelationFilter
+  }
+
+  export type SproutInstagramAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    commentsCount?: SortOrderInput | SortOrder
+    engagements?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsUnique?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    likes?: SortOrderInput | SortOrder
+    saves?: SortOrderInput | SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+    followersByCity?: SproutInstagramFollowersByCityOrderByRelationAggregateInput
+    followersByCountry?: SproutInstagramFollowersByCountryOrderByRelationAggregateInput
+  }
+
+  export type SproutInstagramAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
+    OR?: SproutInstagramAnalyticsWhereInput[]
+    NOT?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
+    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    commentsCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    engagements?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    likes?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    saves?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+    followersByCity?: SproutInstagramFollowersByCityListRelationFilter
+    followersByCountry?: SproutInstagramFollowersByCountryListRelationFilter
+  }, "id">
+
+  export type SproutInstagramAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    commentsCount?: SortOrderInput | SortOrder
+    engagements?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsUnique?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    likes?: SortOrderInput | SortOrder
+    saves?: SortOrderInput | SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutInstagramAnalyticsCountOrderByAggregateInput
+    _avg?: SproutInstagramAnalyticsAvgOrderByAggregateInput
+    _max?: SproutInstagramAnalyticsMaxOrderByAggregateInput
+    _min?: SproutInstagramAnalyticsMinOrderByAggregateInput
+    _sum?: SproutInstagramAnalyticsSumOrderByAggregateInput
+  }
+
+  export type SproutInstagramAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput | SproutInstagramAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput | SproutInstagramAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutInstagramAnalytics"> | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutInstagramAnalytics"> | string
+    customerProfileId?: IntWithAggregatesFilter<"SproutInstagramAnalytics"> | number
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
+    commentsCount?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    engagements?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    impressions?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    impressionsUnique?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    likes?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    saves?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    videoViews?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
+  }
+
+  export type SproutInstagramFollowersByCityWhereInput = {
+    AND?: SproutInstagramFollowersByCityWhereInput | SproutInstagramFollowersByCityWhereInput[]
+    OR?: SproutInstagramFollowersByCityWhereInput[]
+    NOT?: SproutInstagramFollowersByCityWhereInput | SproutInstagramFollowersByCityWhereInput[]
+    id?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    sproutInstagramAnalyticsId?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    city?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    count?: IntFilter<"SproutInstagramFollowersByCity"> | number
+    createdAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
+    sproutInstagramAnalytics?: XOR<SproutInstagramAnalyticsScalarRelationFilter, SproutInstagramAnalyticsWhereInput>
+  }
+
+  export type SproutInstagramFollowersByCityOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    city?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutInstagramAnalytics?: SproutInstagramAnalyticsOrderByWithRelationInput
+  }
+
+  export type SproutInstagramFollowersByCityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutInstagramFollowersByCityWhereInput | SproutInstagramFollowersByCityWhereInput[]
+    OR?: SproutInstagramFollowersByCityWhereInput[]
+    NOT?: SproutInstagramFollowersByCityWhereInput | SproutInstagramFollowersByCityWhereInput[]
+    sproutInstagramAnalyticsId?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    city?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    count?: IntFilter<"SproutInstagramFollowersByCity"> | number
+    createdAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
+    sproutInstagramAnalytics?: XOR<SproutInstagramAnalyticsScalarRelationFilter, SproutInstagramAnalyticsWhereInput>
+  }, "id">
+
+  export type SproutInstagramFollowersByCityOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    city?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutInstagramFollowersByCityCountOrderByAggregateInput
+    _avg?: SproutInstagramFollowersByCityAvgOrderByAggregateInput
+    _max?: SproutInstagramFollowersByCityMaxOrderByAggregateInput
+    _min?: SproutInstagramFollowersByCityMinOrderByAggregateInput
+    _sum?: SproutInstagramFollowersByCitySumOrderByAggregateInput
+  }
+
+  export type SproutInstagramFollowersByCityScalarWhereWithAggregatesInput = {
+    AND?: SproutInstagramFollowersByCityScalarWhereWithAggregatesInput | SproutInstagramFollowersByCityScalarWhereWithAggregatesInput[]
+    OR?: SproutInstagramFollowersByCityScalarWhereWithAggregatesInput[]
+    NOT?: SproutInstagramFollowersByCityScalarWhereWithAggregatesInput | SproutInstagramFollowersByCityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutInstagramFollowersByCity"> | string
+    sproutInstagramAnalyticsId?: StringWithAggregatesFilter<"SproutInstagramFollowersByCity"> | string
+    city?: StringWithAggregatesFilter<"SproutInstagramFollowersByCity"> | string
+    count?: IntWithAggregatesFilter<"SproutInstagramFollowersByCity"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"SproutInstagramFollowersByCity"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutInstagramFollowersByCity"> | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryWhereInput = {
+    AND?: SproutInstagramFollowersByCountryWhereInput | SproutInstagramFollowersByCountryWhereInput[]
+    OR?: SproutInstagramFollowersByCountryWhereInput[]
+    NOT?: SproutInstagramFollowersByCountryWhereInput | SproutInstagramFollowersByCountryWhereInput[]
+    id?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    sproutInstagramAnalyticsId?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    country?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    count?: IntFilter<"SproutInstagramFollowersByCountry"> | number
+    createdAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
+    sproutInstagramAnalytics?: XOR<SproutInstagramAnalyticsScalarRelationFilter, SproutInstagramAnalyticsWhereInput>
+  }
+
+  export type SproutInstagramFollowersByCountryOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    country?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutInstagramAnalytics?: SproutInstagramAnalyticsOrderByWithRelationInput
+  }
+
+  export type SproutInstagramFollowersByCountryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutInstagramFollowersByCountryWhereInput | SproutInstagramFollowersByCountryWhereInput[]
+    OR?: SproutInstagramFollowersByCountryWhereInput[]
+    NOT?: SproutInstagramFollowersByCountryWhereInput | SproutInstagramFollowersByCountryWhereInput[]
+    sproutInstagramAnalyticsId?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    country?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    count?: IntFilter<"SproutInstagramFollowersByCountry"> | number
+    createdAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
+    sproutInstagramAnalytics?: XOR<SproutInstagramAnalyticsScalarRelationFilter, SproutInstagramAnalyticsWhereInput>
+  }, "id">
+
+  export type SproutInstagramFollowersByCountryOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    country?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutInstagramFollowersByCountryCountOrderByAggregateInput
+    _avg?: SproutInstagramFollowersByCountryAvgOrderByAggregateInput
+    _max?: SproutInstagramFollowersByCountryMaxOrderByAggregateInput
+    _min?: SproutInstagramFollowersByCountryMinOrderByAggregateInput
+    _sum?: SproutInstagramFollowersByCountrySumOrderByAggregateInput
+  }
+
+  export type SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput = {
+    AND?: SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput | SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput[]
+    OR?: SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput[]
+    NOT?: SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput | SproutInstagramFollowersByCountryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutInstagramFollowersByCountry"> | string
+    sproutInstagramAnalyticsId?: StringWithAggregatesFilter<"SproutInstagramFollowersByCountry"> | string
+    country?: StringWithAggregatesFilter<"SproutInstagramFollowersByCountry"> | string
+    count?: IntWithAggregatesFilter<"SproutInstagramFollowersByCountry"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"SproutInstagramFollowersByCountry"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutInstagramFollowersByCountry"> | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsWhereInput = {
+    AND?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
+    OR?: SproutLinkedInAnalyticsWhereInput[]
+    NOT?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
+    id?: StringFilter<"SproutLinkedInAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutLinkedInAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    engagements?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    reactions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }
+
+  export type SproutLinkedInAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsUnique?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    reactions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+  }
+
+  export type SproutLinkedInAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
+    OR?: SproutLinkedInAnalyticsWhereInput[]
+    NOT?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
+    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutLinkedInAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    engagements?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    reactions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }, "id">
+
+  export type SproutLinkedInAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsUnique?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    reactions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutLinkedInAnalyticsCountOrderByAggregateInput
+    _avg?: SproutLinkedInAnalyticsAvgOrderByAggregateInput
+    _max?: SproutLinkedInAnalyticsMaxOrderByAggregateInput
+    _min?: SproutLinkedInAnalyticsMinOrderByAggregateInput
+    _sum?: SproutLinkedInAnalyticsSumOrderByAggregateInput
+  }
+
+  export type SproutLinkedInAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput | SproutLinkedInAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput | SproutLinkedInAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutLinkedInAnalytics"> | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutLinkedInAnalytics"> | string
+    customerProfileId?: IntWithAggregatesFilter<"SproutLinkedInAnalytics"> | number
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
+    engagements?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    impressions?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    impressionsUnique?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    reactions?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
+  }
+
+  export type SproutPinterestAnalyticsWhereInput = {
+    AND?: SproutPinterestAnalyticsWhereInput | SproutPinterestAnalyticsWhereInput[]
+    OR?: SproutPinterestAnalyticsWhereInput[]
+    NOT?: SproutPinterestAnalyticsWhereInput | SproutPinterestAnalyticsWhereInput[]
+    id?: StringFilter<"SproutPinterestAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutPinterestAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutPinterestAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    followersCount?: IntNullableFilter<"SproutPinterestAnalytics"> | number | null
+    followingCount?: IntNullableFilter<"SproutPinterestAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }
+
+  export type SproutPinterestAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    followingCount?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+  }
+
+  export type SproutPinterestAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutPinterestAnalyticsWhereInput | SproutPinterestAnalyticsWhereInput[]
+    OR?: SproutPinterestAnalyticsWhereInput[]
+    NOT?: SproutPinterestAnalyticsWhereInput | SproutPinterestAnalyticsWhereInput[]
+    sproutSocialAccountId?: StringFilter<"SproutPinterestAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutPinterestAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    followersCount?: IntNullableFilter<"SproutPinterestAnalytics"> | number | null
+    followingCount?: IntNullableFilter<"SproutPinterestAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }, "id">
+
+  export type SproutPinterestAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    followingCount?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutPinterestAnalyticsCountOrderByAggregateInput
+    _avg?: SproutPinterestAnalyticsAvgOrderByAggregateInput
+    _max?: SproutPinterestAnalyticsMaxOrderByAggregateInput
+    _min?: SproutPinterestAnalyticsMinOrderByAggregateInput
+    _sum?: SproutPinterestAnalyticsSumOrderByAggregateInput
+  }
+
+  export type SproutPinterestAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: SproutPinterestAnalyticsScalarWhereWithAggregatesInput | SproutPinterestAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: SproutPinterestAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: SproutPinterestAnalyticsScalarWhereWithAggregatesInput | SproutPinterestAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutPinterestAnalytics"> | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutPinterestAnalytics"> | string
+    customerProfileId?: IntWithAggregatesFilter<"SproutPinterestAnalytics"> | number
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutPinterestAnalytics"> | Date | string
+    followersCount?: IntNullableWithAggregatesFilter<"SproutPinterestAnalytics"> | number | null
+    followingCount?: IntNullableWithAggregatesFilter<"SproutPinterestAnalytics"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"SproutPinterestAnalytics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutPinterestAnalytics"> | Date | string
+  }
+
+  export type SproutSocialAccountWhereInput = {
+    AND?: SproutSocialAccountWhereInput | SproutSocialAccountWhereInput[]
+    OR?: SproutSocialAccountWhereInput[]
+    NOT?: SproutSocialAccountWhereInput | SproutSocialAccountWhereInput[]
+    id?: StringFilter<"SproutSocialAccount"> | string
+    customerProfileId?: IntFilter<"SproutSocialAccount"> | number
+    networkType?: StringFilter<"SproutSocialAccount"> | string
+    name?: StringFilter<"SproutSocialAccount"> | string
+    nativeName?: StringFilter<"SproutSocialAccount"> | string
+    link?: StringFilter<"SproutSocialAccount"> | string
+    nativeId?: StringFilter<"SproutSocialAccount"> | string
+    groups?: IntNullableListFilter<"SproutSocialAccount">
+    createdAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsListRelationFilter
+    linkedInAnalytics?: SproutLinkedInAnalyticsListRelationFilter
+    instagramAnalytics?: SproutInstagramAnalyticsListRelationFilter
+    pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
+    users?: UserToSproutSocialAccountListRelationFilter
+  }
+
+  export type SproutSocialAccountOrderByWithRelationInput = {
+    id?: SortOrder
+    customerProfileId?: SortOrder
+    networkType?: SortOrder
+    name?: SortOrder
+    nativeName?: SortOrder
+    link?: SortOrder
+    nativeId?: SortOrder
+    groups?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    facebookAnalytics?: SproutFacebookAnalyticsOrderByRelationAggregateInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsOrderByRelationAggregateInput
+    instagramAnalytics?: SproutInstagramAnalyticsOrderByRelationAggregateInput
+    pinterestAnalytics?: SproutPinterestAnalyticsOrderByRelationAggregateInput
+    users?: UserToSproutSocialAccountOrderByRelationAggregateInput
+  }
+
+  export type SproutSocialAccountWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutSocialAccountWhereInput | SproutSocialAccountWhereInput[]
+    OR?: SproutSocialAccountWhereInput[]
+    NOT?: SproutSocialAccountWhereInput | SproutSocialAccountWhereInput[]
+    customerProfileId?: IntFilter<"SproutSocialAccount"> | number
+    networkType?: StringFilter<"SproutSocialAccount"> | string
+    name?: StringFilter<"SproutSocialAccount"> | string
+    nativeName?: StringFilter<"SproutSocialAccount"> | string
+    link?: StringFilter<"SproutSocialAccount"> | string
+    nativeId?: StringFilter<"SproutSocialAccount"> | string
+    groups?: IntNullableListFilter<"SproutSocialAccount">
+    createdAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsListRelationFilter
+    linkedInAnalytics?: SproutLinkedInAnalyticsListRelationFilter
+    instagramAnalytics?: SproutInstagramAnalyticsListRelationFilter
+    pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
+    users?: UserToSproutSocialAccountListRelationFilter
+  }, "id">
+
+  export type SproutSocialAccountOrderByWithAggregationInput = {
+    id?: SortOrder
+    customerProfileId?: SortOrder
+    networkType?: SortOrder
+    name?: SortOrder
+    nativeName?: SortOrder
+    link?: SortOrder
+    nativeId?: SortOrder
+    groups?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutSocialAccountCountOrderByAggregateInput
+    _avg?: SproutSocialAccountAvgOrderByAggregateInput
+    _max?: SproutSocialAccountMaxOrderByAggregateInput
+    _min?: SproutSocialAccountMinOrderByAggregateInput
+    _sum?: SproutSocialAccountSumOrderByAggregateInput
+  }
+
+  export type SproutSocialAccountScalarWhereWithAggregatesInput = {
+    AND?: SproutSocialAccountScalarWhereWithAggregatesInput | SproutSocialAccountScalarWhereWithAggregatesInput[]
+    OR?: SproutSocialAccountScalarWhereWithAggregatesInput[]
+    NOT?: SproutSocialAccountScalarWhereWithAggregatesInput | SproutSocialAccountScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutSocialAccount"> | string
+    customerProfileId?: IntWithAggregatesFilter<"SproutSocialAccount"> | number
+    networkType?: StringWithAggregatesFilter<"SproutSocialAccount"> | string
+    name?: StringWithAggregatesFilter<"SproutSocialAccount"> | string
+    nativeName?: StringWithAggregatesFilter<"SproutSocialAccount"> | string
+    link?: StringWithAggregatesFilter<"SproutSocialAccount"> | string
+    nativeId?: StringWithAggregatesFilter<"SproutSocialAccount"> | string
+    groups?: IntNullableListFilter<"SproutSocialAccount">
+    createdAt?: DateTimeWithAggregatesFilter<"SproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutSocialAccount"> | Date | string
+  }
+
+  export type UserToSproutSocialAccountWhereInput = {
+    AND?: UserToSproutSocialAccountWhereInput | UserToSproutSocialAccountWhereInput[]
+    OR?: UserToSproutSocialAccountWhereInput[]
+    NOT?: UserToSproutSocialAccountWhereInput | UserToSproutSocialAccountWhereInput[]
+    id?: StringFilter<"UserToSproutSocialAccount"> | string
+    userId?: StringFilter<"UserToSproutSocialAccount"> | string
+    sproutSocialAccountId?: StringFilter<"UserToSproutSocialAccount"> | string
+    createdAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }
+
+  export type UserToSproutSocialAccountOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+  }
+
+  export type UserToSproutSocialAccountWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_sproutSocialAccountId?: UserToSproutSocialAccountUserIdSproutSocialAccountIdCompoundUniqueInput
+    AND?: UserToSproutSocialAccountWhereInput | UserToSproutSocialAccountWhereInput[]
+    OR?: UserToSproutSocialAccountWhereInput[]
+    NOT?: UserToSproutSocialAccountWhereInput | UserToSproutSocialAccountWhereInput[]
+    userId?: StringFilter<"UserToSproutSocialAccount"> | string
+    sproutSocialAccountId?: StringFilter<"UserToSproutSocialAccount"> | string
+    createdAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }, "id" | "userId_sproutSocialAccountId">
+
+  export type UserToSproutSocialAccountOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserToSproutSocialAccountCountOrderByAggregateInput
+    _max?: UserToSproutSocialAccountMaxOrderByAggregateInput
+    _min?: UserToSproutSocialAccountMinOrderByAggregateInput
+  }
+
+  export type UserToSproutSocialAccountScalarWhereWithAggregatesInput = {
+    AND?: UserToSproutSocialAccountScalarWhereWithAggregatesInput | UserToSproutSocialAccountScalarWhereWithAggregatesInput[]
+    OR?: UserToSproutSocialAccountScalarWhereWithAggregatesInput[]
+    NOT?: UserToSproutSocialAccountScalarWhereWithAggregatesInput | UserToSproutSocialAccountScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserToSproutSocialAccount"> | string
+    userId?: StringWithAggregatesFilter<"UserToSproutSocialAccount"> | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"UserToSproutSocialAccount"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserToSproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserToSproutSocialAccount"> | Date | string
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -37468,6 +48672,7 @@ export namespace Prisma {
     activities?: ClientActivityListRelationFilter
     gaAccounts?: GaAccountListRelationFilter
     gaImportRuns?: GaImportRunListRelationFilter
+    sproutSocialAccounts?: UserToSproutSocialAccountListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -37503,6 +48708,7 @@ export namespace Prisma {
     activities?: ClientActivityOrderByRelationAggregateInput
     gaAccounts?: GaAccountOrderByRelationAggregateInput
     gaImportRuns?: GaImportRunOrderByRelationAggregateInput
+    sproutSocialAccounts?: UserToSproutSocialAccountOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -37541,6 +48747,7 @@ export namespace Prisma {
     activities?: ClientActivityListRelationFilter
     gaAccounts?: GaAccountListRelationFilter
     gaImportRuns?: GaImportRunListRelationFilter
+    sproutSocialAccounts?: UserToSproutSocialAccountListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -39648,6 +50855,754 @@ export namespace Prisma {
     conversationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type SproutFacebookAnalyticsCreateInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postPhotoViewClicks?: number | null
+    tabViews?: number | null
+    videoViews?: number | null
+    videoViews10s?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    videoViewsUnique?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutFacebookAnalyticsInput
+  }
+
+  export type SproutFacebookAnalyticsUncheckedCreateInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postPhotoViewClicks?: number | null
+    tabViews?: number | null
+    videoViews?: number | null
+    videoViews10s?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    videoViewsUnique?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookAnalyticsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutFacebookAnalyticsNestedInput
+  }
+
+  export type SproutFacebookAnalyticsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookAnalyticsCreateManyInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postPhotoViewClicks?: number | null
+    tabViews?: number | null
+    videoViews?: number | null
+    videoViews10s?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    videoViewsUnique?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookAnalyticsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookAnalyticsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramAnalyticsCreateInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
+    followersByCity?: SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    followersByCountry?: SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedCreateInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    followersByCity?: SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    followersByCountry?: SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
+    followersByCity?: SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    followersByCountry?: SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersByCity?: SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    followersByCountry?: SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsCreateManyInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramAnalyticsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCityCreateInput = {
+    id?: string
+    city: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutInstagramAnalytics: SproutInstagramAnalyticsCreateNestedOneWithoutFollowersByCityInput
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedCreateInput = {
+    id?: string
+    sproutInstagramAnalyticsId: string
+    city: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutInstagramAnalytics?: SproutInstagramAnalyticsUpdateOneRequiredWithoutFollowersByCityNestedInput
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutInstagramAnalyticsId?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCityCreateManyInput = {
+    id?: string
+    sproutInstagramAnalyticsId: string
+    city: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutInstagramAnalyticsId?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryCreateInput = {
+    id?: string
+    country: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutInstagramAnalytics: SproutInstagramAnalyticsCreateNestedOneWithoutFollowersByCountryInput
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedCreateInput = {
+    id?: string
+    sproutInstagramAnalyticsId: string
+    country: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutInstagramAnalytics?: SproutInstagramAnalyticsUpdateOneRequiredWithoutFollowersByCountryNestedInput
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutInstagramAnalyticsId?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryCreateManyInput = {
+    id?: string
+    sproutInstagramAnalyticsId: string
+    country: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutInstagramAnalyticsId?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsCreateInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    reactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutLinkedInAnalyticsInput
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedCreateInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    reactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutLinkedInAnalyticsNestedInput
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsCreateManyInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    reactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutPinterestAnalyticsCreateInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    followersCount?: number | null
+    followingCount?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutPinterestAnalyticsInput
+  }
+
+  export type SproutPinterestAnalyticsUncheckedCreateInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    followersCount?: number | null
+    followingCount?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutPinterestAnalyticsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutPinterestAnalyticsNestedInput
+  }
+
+  export type SproutPinterestAnalyticsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutPinterestAnalyticsCreateManyInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    followersCount?: number | null
+    followingCount?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutPinterestAnalyticsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutPinterestAnalyticsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutSocialAccountCreateInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountCreateManyInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutSocialAccountUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutSocialAccountUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutSproutSocialAccountsInput
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserToSproutSocialAccountUncheckedCreateInput = {
+    id?: string
+    userId: string
+    sproutSocialAccountId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToSproutSocialAccountUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSproutSocialAccountsNestedInput
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountCreateManyInput = {
+    id?: string
+    userId: string
+    sproutSocialAccountId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToSproutSocialAccountUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -39679,6 +51634,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -39712,6 +51668,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -39745,6 +51702,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -39778,6 +51736,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -41665,6 +53624,525 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type SproutSocialAccountScalarRelationFilter = {
+    is?: SproutSocialAccountWhereInput
+    isNot?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutFacebookAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    tabViews?: SortOrder
+    videoViews?: SortOrder
+    videoViews10s?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    videoViewsUnique?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookAnalyticsAvgOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    tabViews?: SortOrder
+    videoViews?: SortOrder
+    videoViews10s?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    videoViewsUnique?: SortOrder
+  }
+
+  export type SproutFacebookAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    tabViews?: SortOrder
+    videoViews?: SortOrder
+    videoViews10s?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    videoViewsUnique?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    tabViews?: SortOrder
+    videoViews?: SortOrder
+    videoViews10s?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    videoViewsUnique?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookAnalyticsSumOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    tabViews?: SortOrder
+    videoViews?: SortOrder
+    videoViews10s?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    videoViewsUnique?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCityListRelationFilter = {
+    every?: SproutInstagramFollowersByCityWhereInput
+    some?: SproutInstagramFollowersByCityWhereInput
+    none?: SproutInstagramFollowersByCityWhereInput
+  }
+
+  export type SproutInstagramFollowersByCountryListRelationFilter = {
+    every?: SproutInstagramFollowersByCountryWhereInput
+    some?: SproutInstagramFollowersByCountryWhereInput
+    none?: SproutInstagramFollowersByCountryWhereInput
+  }
+
+  export type SproutInstagramFollowersByCityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCountryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    commentsCount?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    likes?: SortOrder
+    saves?: SortOrder
+    videoViews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsAvgOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    commentsCount?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    likes?: SortOrder
+    saves?: SortOrder
+    videoViews?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    commentsCount?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    likes?: SortOrder
+    saves?: SortOrder
+    videoViews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    commentsCount?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    likes?: SortOrder
+    saves?: SortOrder
+    videoViews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsSumOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    commentsCount?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    likes?: SortOrder
+    saves?: SortOrder
+    videoViews?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsScalarRelationFilter = {
+    is?: SproutInstagramAnalyticsWhereInput
+    isNot?: SproutInstagramAnalyticsWhereInput
+  }
+
+  export type SproutInstagramFollowersByCityCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    city?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCityAvgOrderByAggregateInput = {
+    count?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    city?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCityMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    city?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCitySumOrderByAggregateInput = {
+    count?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCountryCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    country?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCountryAvgOrderByAggregateInput = {
+    count?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCountryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    country?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCountryMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutInstagramAnalyticsId?: SortOrder
+    country?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutInstagramFollowersByCountrySumOrderByAggregateInput = {
+    count?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    reactions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsAvgOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    reactions?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    reactions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    reactions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsSumOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    engagements?: SortOrder
+    impressions?: SortOrder
+    impressionsUnique?: SortOrder
+    followersCount?: SortOrder
+    reactions?: SortOrder
+  }
+
+  export type SproutPinterestAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    followersCount?: SortOrder
+    followingCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutPinterestAnalyticsAvgOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    followersCount?: SortOrder
+    followingCount?: SortOrder
+  }
+
+  export type SproutPinterestAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    followersCount?: SortOrder
+    followingCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutPinterestAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    customerProfileId?: SortOrder
+    reportingDate?: SortOrder
+    followersCount?: SortOrder
+    followingCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutPinterestAnalyticsSumOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    followersCount?: SortOrder
+    followingCount?: SortOrder
+  }
+
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type SproutFacebookAnalyticsListRelationFilter = {
+    every?: SproutFacebookAnalyticsWhereInput
+    some?: SproutFacebookAnalyticsWhereInput
+    none?: SproutFacebookAnalyticsWhereInput
+  }
+
+  export type SproutLinkedInAnalyticsListRelationFilter = {
+    every?: SproutLinkedInAnalyticsWhereInput
+    some?: SproutLinkedInAnalyticsWhereInput
+    none?: SproutLinkedInAnalyticsWhereInput
+  }
+
+  export type SproutInstagramAnalyticsListRelationFilter = {
+    every?: SproutInstagramAnalyticsWhereInput
+    some?: SproutInstagramAnalyticsWhereInput
+    none?: SproutInstagramAnalyticsWhereInput
+  }
+
+  export type SproutPinterestAnalyticsListRelationFilter = {
+    every?: SproutPinterestAnalyticsWhereInput
+    some?: SproutPinterestAnalyticsWhereInput
+    none?: SproutPinterestAnalyticsWhereInput
+  }
+
+  export type UserToSproutSocialAccountListRelationFilter = {
+    every?: UserToSproutSocialAccountWhereInput
+    some?: UserToSproutSocialAccountWhereInput
+    none?: UserToSproutSocialAccountWhereInput
+  }
+
+  export type SproutFacebookAnalyticsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutInstagramAnalyticsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutPinterestAnalyticsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserToSproutSocialAccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutSocialAccountCountOrderByAggregateInput = {
+    id?: SortOrder
+    customerProfileId?: SortOrder
+    networkType?: SortOrder
+    name?: SortOrder
+    nativeName?: SortOrder
+    link?: SortOrder
+    nativeId?: SortOrder
+    groups?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutSocialAccountAvgOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    groups?: SortOrder
+  }
+
+  export type SproutSocialAccountMaxOrderByAggregateInput = {
+    id?: SortOrder
+    customerProfileId?: SortOrder
+    networkType?: SortOrder
+    name?: SortOrder
+    nativeName?: SortOrder
+    link?: SortOrder
+    nativeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutSocialAccountMinOrderByAggregateInput = {
+    id?: SortOrder
+    customerProfileId?: SortOrder
+    networkType?: SortOrder
+    name?: SortOrder
+    nativeName?: SortOrder
+    link?: SortOrder
+    nativeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutSocialAccountSumOrderByAggregateInput = {
+    customerProfileId?: SortOrder
+    groups?: SortOrder
+  }
+
+  export type UserToSproutSocialAccountUserIdSproutSocialAccountIdCompoundUniqueInput = {
+    userId: string
+    sproutSocialAccountId: string
+  }
+
+  export type UserToSproutSocialAccountCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserToSproutSocialAccountMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserToSproutSocialAccountMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -43173,6 +55651,421 @@ export namespace Prisma {
     deleteMany?: ParsedQuerySummaryScalarWhereInput | ParsedQuerySummaryScalarWhereInput[]
   }
 
+  export type SproutSocialAccountCreateNestedOneWithoutFacebookAnalyticsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutFacebookAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutFacebookAnalyticsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutFacebookAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookAnalyticsInput
+    upsert?: SproutSocialAccountUpsertWithoutFacebookAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutFacebookAnalyticsInput, SproutSocialAccountUpdateWithoutFacebookAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput>
+  }
+
+  export type SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput = {
+    create?: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInputEnvelope
+    connect?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+  }
+
+  export type SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput = {
+    create?: XOR<SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInputEnvelope
+    connect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput = {
+    create?: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInputEnvelope
+    connect?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput = {
+    create?: XOR<SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInputEnvelope
+    connect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput
+    upsert?: SproutSocialAccountUpsertWithoutInstagramAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutInstagramAnalyticsInput, SproutSocialAccountUpdateWithoutInstagramAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput = {
+    create?: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    upsert?: SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInputEnvelope
+    set?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    disconnect?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    delete?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    connect?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    update?: SproutInstagramFollowersByCityUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    updateMany?: SproutInstagramFollowersByCityUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput[]
+    deleteMany?: SproutInstagramFollowersByCityScalarWhereInput | SproutInstagramFollowersByCityScalarWhereInput[]
+  }
+
+  export type SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput = {
+    create?: XOR<SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    upsert?: SproutInstagramFollowersByCountryUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInputEnvelope
+    set?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    disconnect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    delete?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    connect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    update?: SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    updateMany?: SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput[]
+    deleteMany?: SproutInstagramFollowersByCountryScalarWhereInput | SproutInstagramFollowersByCountryScalarWhereInput[]
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput = {
+    create?: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    upsert?: SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInputEnvelope
+    set?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    disconnect?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    delete?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    connect?: SproutInstagramFollowersByCityWhereUniqueInput | SproutInstagramFollowersByCityWhereUniqueInput[]
+    update?: SproutInstagramFollowersByCityUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    updateMany?: SproutInstagramFollowersByCityUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput[]
+    deleteMany?: SproutInstagramFollowersByCityScalarWhereInput | SproutInstagramFollowersByCityScalarWhereInput[]
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput = {
+    create?: XOR<SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
+    connectOrCreate?: SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
+    upsert?: SproutInstagramFollowersByCountryUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    createMany?: SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInputEnvelope
+    set?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    disconnect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    delete?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    connect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
+    update?: SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
+    updateMany?: SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput[]
+    deleteMany?: SproutInstagramFollowersByCountryScalarWhereInput | SproutInstagramFollowersByCountryScalarWhereInput[]
+  }
+
+  export type SproutInstagramAnalyticsCreateNestedOneWithoutFollowersByCityInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCityInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCityInput>
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutFollowersByCityInput
+    connect?: SproutInstagramAnalyticsWhereUniqueInput
+  }
+
+  export type SproutInstagramAnalyticsUpdateOneRequiredWithoutFollowersByCityNestedInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCityInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCityInput>
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutFollowersByCityInput
+    upsert?: SproutInstagramAnalyticsUpsertWithoutFollowersByCityInput
+    connect?: SproutInstagramAnalyticsWhereUniqueInput
+    update?: XOR<XOR<SproutInstagramAnalyticsUpdateToOneWithWhereWithoutFollowersByCityInput, SproutInstagramAnalyticsUpdateWithoutFollowersByCityInput>, SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCityInput>
+  }
+
+  export type SproutInstagramAnalyticsCreateNestedOneWithoutFollowersByCountryInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCountryInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCountryInput>
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutFollowersByCountryInput
+    connect?: SproutInstagramAnalyticsWhereUniqueInput
+  }
+
+  export type SproutInstagramAnalyticsUpdateOneRequiredWithoutFollowersByCountryNestedInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCountryInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCountryInput>
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutFollowersByCountryInput
+    upsert?: SproutInstagramAnalyticsUpsertWithoutFollowersByCountryInput
+    connect?: SproutInstagramAnalyticsWhereUniqueInput
+    update?: XOR<XOR<SproutInstagramAnalyticsUpdateToOneWithWhereWithoutFollowersByCountryInput, SproutInstagramAnalyticsUpdateWithoutFollowersByCountryInput>, SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCountryInput>
+  }
+
+  export type SproutSocialAccountCreateNestedOneWithoutLinkedInAnalyticsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutLinkedInAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutLinkedInAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutLinkedInAnalyticsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutLinkedInAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutLinkedInAnalyticsInput
+    upsert?: SproutSocialAccountUpsertWithoutLinkedInAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutLinkedInAnalyticsInput, SproutSocialAccountUpdateWithoutLinkedInAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput>
+  }
+
+  export type SproutSocialAccountCreateNestedOneWithoutPinterestAnalyticsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutPinterestAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutPinterestAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutPinterestAnalyticsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutPinterestAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutPinterestAnalyticsInput
+    upsert?: SproutSocialAccountUpsertWithoutPinterestAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutPinterestAnalyticsInput, SproutSocialAccountUpdateWithoutPinterestAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput>
+  }
+
+  export type SproutSocialAccountCreategroupsInput = {
+    set: number[]
+  }
+
+  export type SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutLinkedInAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutInstagramAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutPinterestAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+  }
+
+  export type UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput> | UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput[] | UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput | UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+  }
+
+  export type SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutLinkedInAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutInstagramAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutPinterestAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+  }
+
+  export type UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput> | UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput[] | UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput | UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+  }
+
+  export type SproutSocialAccountUpdategroupsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    disconnect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    delete?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    connect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    update?: SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutLinkedInAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutLinkedInAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    disconnect?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    delete?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    connect?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    update?: SproutLinkedInAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutLinkedInAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutLinkedInAnalyticsScalarWhereInput | SproutLinkedInAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutInstagramAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutInstagramAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutInstagramAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    disconnect?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    delete?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    connect?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    update?: SproutInstagramAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutInstagramAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutInstagramAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutInstagramAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutInstagramAnalyticsScalarWhereInput | SproutInstagramAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutPinterestAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutPinterestAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutPinterestAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    disconnect?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    delete?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    connect?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    update?: SproutPinterestAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutPinterestAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutPinterestAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutPinterestAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutPinterestAnalyticsScalarWhereInput | SproutPinterestAnalyticsScalarWhereInput[]
+  }
+
+  export type UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput> | UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput[] | UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput | UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: UserToSproutSocialAccountUpsertWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope
+    set?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    disconnect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    delete?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+  }
+
+  export type SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    disconnect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    delete?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    connect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+    update?: SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutLinkedInAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutLinkedInAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    disconnect?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    delete?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    connect?: SproutLinkedInAnalyticsWhereUniqueInput | SproutLinkedInAnalyticsWhereUniqueInput[]
+    update?: SproutLinkedInAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutLinkedInAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutLinkedInAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutLinkedInAnalyticsScalarWhereInput | SproutLinkedInAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutInstagramAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutInstagramAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutInstagramAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    disconnect?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    delete?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    connect?: SproutInstagramAnalyticsWhereUniqueInput | SproutInstagramAnalyticsWhereUniqueInput[]
+    update?: SproutInstagramAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutInstagramAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutInstagramAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutInstagramAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutInstagramAnalyticsScalarWhereInput | SproutInstagramAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutPinterestAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutPinterestAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutPinterestAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    disconnect?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    delete?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    connect?: SproutPinterestAnalyticsWhereUniqueInput | SproutPinterestAnalyticsWhereUniqueInput[]
+    update?: SproutPinterestAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutPinterestAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutPinterestAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutPinterestAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutPinterestAnalyticsScalarWhereInput | SproutPinterestAnalyticsScalarWhereInput[]
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput> | UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput[] | UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput | UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: UserToSproutSocialAccountUpsertWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope
+    set?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    disconnect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    delete?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSproutSocialAccountsInput = {
+    create?: XOR<UserCreateWithoutSproutSocialAccountsInput, UserUncheckedCreateWithoutSproutSocialAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSproutSocialAccountsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SproutSocialAccountCreateNestedOneWithoutUsersInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutUsersInput, SproutSocialAccountUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutUsersInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSproutSocialAccountsNestedInput = {
+    create?: XOR<UserCreateWithoutSproutSocialAccountsInput, UserUncheckedCreateWithoutSproutSocialAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSproutSocialAccountsInput
+    upsert?: UserUpsertWithoutSproutSocialAccountsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSproutSocialAccountsInput, UserUpdateWithoutSproutSocialAccountsInput>, UserUncheckedUpdateWithoutSproutSocialAccountsInput>
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutUsersInput, SproutSocialAccountUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutUsersInput
+    upsert?: SproutSocialAccountUpsertWithoutUsersInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutUsersInput, SproutSocialAccountUpdateWithoutUsersInput>, SproutSocialAccountUncheckedUpdateWithoutUsersInput>
+  }
+
   export type RoleCreateNestedOneWithoutUsersInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
@@ -43310,6 +56203,13 @@ export namespace Prisma {
     connect?: GaImportRunWhereUniqueInput | GaImportRunWhereUniqueInput[]
   }
 
+  export type UserToSproutSocialAccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
+    createMany?: UserToSproutSocialAccountCreateManyUserInputEnvelope
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutAccountRepInput = {
     create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
@@ -43433,6 +56333,13 @@ export namespace Prisma {
     connectOrCreate?: GaImportRunCreateOrConnectWithoutRequestedByInput | GaImportRunCreateOrConnectWithoutRequestedByInput[]
     createMany?: GaImportRunCreateManyRequestedByInputEnvelope
     connect?: GaImportRunWhereUniqueInput | GaImportRunWhereUniqueInput[]
+  }
+
+  export type UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
+    createMany?: UserToSproutSocialAccountCreateManyUserInputEnvelope
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -43705,6 +56612,20 @@ export namespace Prisma {
     deleteMany?: GaImportRunScalarWhereInput | GaImportRunScalarWhereInput[]
   }
 
+  export type UserToSproutSocialAccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
+    upsert?: UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput | UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserToSproutSocialAccountCreateManyUserInputEnvelope
+    set?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    disconnect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    delete?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutAccountRepNestedInput = {
     create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
@@ -43951,6 +56872,20 @@ export namespace Prisma {
     update?: GaImportRunUpdateWithWhereUniqueWithoutRequestedByInput | GaImportRunUpdateWithWhereUniqueWithoutRequestedByInput[]
     updateMany?: GaImportRunUpdateManyWithWhereWithoutRequestedByInput | GaImportRunUpdateManyWithWhereWithoutRequestedByInput[]
     deleteMany?: GaImportRunScalarWhereInput | GaImportRunScalarWhereInput[]
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
+    upsert?: UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput | UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserToSproutSocialAccountCreateManyUserInputEnvelope
+    set?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    disconnect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    delete?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+    update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSettingsInput = {
@@ -44627,6 +57562,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -44659,6 +57595,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -44707,6 +57644,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -44739,6 +57677,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGivenRatingsInput = {
@@ -44771,6 +57710,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGivenRatingsInput = {
@@ -44803,6 +57743,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGivenRatingsInput = {
@@ -44840,6 +57781,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedRatingsInput = {
@@ -44872,6 +57814,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedRatingsInput = {
@@ -44920,6 +57863,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGivenRatingsInput = {
@@ -44952,6 +57896,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedRatingsInput = {
@@ -44995,6 +57940,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedRatingsInput = {
@@ -45027,6 +57973,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutConversationsInput = {
@@ -45059,6 +58006,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationsInput = {
@@ -45091,6 +58039,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationsInput = {
@@ -45128,6 +58077,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientConversationsInput = {
@@ -45160,6 +58110,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientConversationsInput = {
@@ -45306,6 +58257,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -45338,6 +58290,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutClientConversationsInput = {
@@ -45381,6 +58334,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientConversationsInput = {
@@ -45413,6 +58367,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QueryUpsertWithWhereUniqueWithoutConversationInput = {
@@ -45545,6 +58500,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGaAccountsInput = {
@@ -45577,6 +58533,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGaAccountsInput = {
@@ -45697,6 +58654,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGaAccountsInput = {
@@ -45729,6 +58687,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GaPropertyUpsertWithWhereUniqueWithoutGaAccountInput = {
@@ -46288,6 +59247,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGaImportRunsInput = {
@@ -46320,6 +59280,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGaImportRunsInput = {
@@ -46405,6 +59366,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGaImportRunsInput = {
@@ -46437,6 +59399,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GaPropertyCreateWithoutKpiDailyInput = {
@@ -46741,6 +59704,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -46773,6 +59737,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -46821,6 +59786,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -46853,6 +59819,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRoleInput = {
@@ -46885,6 +59852,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -46917,6 +59885,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -46993,6 +59962,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -47025,6 +59995,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -47062,6 +60033,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedMessagesInput = {
@@ -47094,6 +60066,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedMessagesInput = {
@@ -47245,6 +60218,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -47277,6 +60251,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedMessagesInput = {
@@ -47320,6 +60295,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
@@ -47352,6 +60328,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithoutRepliesInput = {
@@ -47487,6 +60464,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -47519,6 +60497,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -47567,6 +60546,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -47599,6 +60579,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QueryCreateWithoutParsedPieDataInput = {
@@ -48001,6 +60982,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQueriesInput = {
@@ -48033,6 +61015,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQueriesInput = {
@@ -48216,6 +61199,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQueriesInput = {
@@ -48248,6 +61232,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConversationUpsertWithoutQueriesInput = {
@@ -48285,6 +61270,1216 @@ export namespace Prisma {
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SproutSocialAccountCreateWithoutFacebookAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutFacebookAnalyticsInput = {
+    where: SproutSocialAccountWhereUniqueInput
+    create: XOR<SproutSocialAccountCreateWithoutFacebookAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpsertWithoutFacebookAnalyticsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutFacebookAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutFacebookAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutFacebookAnalyticsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutFacebookAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutFacebookAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountCreateWithoutInstagramAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput = {
+    where: SproutSocialAccountWhereUniqueInput
+    create: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput = {
+    id?: string
+    city: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput = {
+    id?: string
+    city: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+    create: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInputEnvelope = {
+    data: SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInput | SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput = {
+    id?: string
+    country: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput = {
+    id?: string
+    country: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+    create: XOR<SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInputEnvelope = {
+    data: SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutSocialAccountUpsertWithoutInstagramAnalyticsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutInstagramAnalyticsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+    update: XOR<SproutInstagramFollowersByCityUpdateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedUpdateWithoutSproutInstagramAnalyticsInput>
+    create: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCityUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCityWhereUniqueInput
+    data: XOR<SproutInstagramFollowersByCityUpdateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedUpdateWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCityUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCityScalarWhereInput
+    data: XOR<SproutInstagramFollowersByCityUpdateManyMutationInput, SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCityScalarWhereInput = {
+    AND?: SproutInstagramFollowersByCityScalarWhereInput | SproutInstagramFollowersByCityScalarWhereInput[]
+    OR?: SproutInstagramFollowersByCityScalarWhereInput[]
+    NOT?: SproutInstagramFollowersByCityScalarWhereInput | SproutInstagramFollowersByCityScalarWhereInput[]
+    id?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    sproutInstagramAnalyticsId?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    city?: StringFilter<"SproutInstagramFollowersByCity"> | string
+    count?: IntFilter<"SproutInstagramFollowersByCity"> | number
+    createdAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+    update: XOR<SproutInstagramFollowersByCountryUpdateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedUpdateWithoutSproutInstagramAnalyticsInput>
+    create: XOR<SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCountryWhereUniqueInput
+    data: XOR<SproutInstagramFollowersByCountryUpdateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCountryUncheckedUpdateWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput = {
+    where: SproutInstagramFollowersByCountryScalarWhereInput
+    data: XOR<SproutInstagramFollowersByCountryUpdateManyMutationInput, SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsInput>
+  }
+
+  export type SproutInstagramFollowersByCountryScalarWhereInput = {
+    AND?: SproutInstagramFollowersByCountryScalarWhereInput | SproutInstagramFollowersByCountryScalarWhereInput[]
+    OR?: SproutInstagramFollowersByCountryScalarWhereInput[]
+    NOT?: SproutInstagramFollowersByCountryScalarWhereInput | SproutInstagramFollowersByCountryScalarWhereInput[]
+    id?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    sproutInstagramAnalyticsId?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    country?: StringFilter<"SproutInstagramFollowersByCountry"> | string
+    count?: IntFilter<"SproutInstagramFollowersByCountry"> | number
+    createdAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
+  }
+
+  export type SproutInstagramAnalyticsCreateWithoutFollowersByCityInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
+    followersByCountry?: SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCityInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    followersByCountry?: SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsCreateOrConnectWithoutFollowersByCityInput = {
+    where: SproutInstagramAnalyticsWhereUniqueInput
+    create: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCityInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCityInput>
+  }
+
+  export type SproutInstagramAnalyticsUpsertWithoutFollowersByCityInput = {
+    update: XOR<SproutInstagramAnalyticsUpdateWithoutFollowersByCityInput, SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCityInput>
+    create: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCityInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCityInput>
+    where?: SproutInstagramAnalyticsWhereInput
+  }
+
+  export type SproutInstagramAnalyticsUpdateToOneWithWhereWithoutFollowersByCityInput = {
+    where?: SproutInstagramAnalyticsWhereInput
+    data: XOR<SproutInstagramAnalyticsUpdateWithoutFollowersByCityInput, SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCityInput>
+  }
+
+  export type SproutInstagramAnalyticsUpdateWithoutFollowersByCityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
+    followersByCountry?: SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersByCountry?: SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsCreateWithoutFollowersByCountryInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
+    followersByCity?: SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCountryInput = {
+    id?: string
+    sproutSocialAccountId: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    followersByCity?: SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsCreateOrConnectWithoutFollowersByCountryInput = {
+    where: SproutInstagramAnalyticsWhereUniqueInput
+    create: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCountryInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCountryInput>
+  }
+
+  export type SproutInstagramAnalyticsUpsertWithoutFollowersByCountryInput = {
+    update: XOR<SproutInstagramAnalyticsUpdateWithoutFollowersByCountryInput, SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCountryInput>
+    create: XOR<SproutInstagramAnalyticsCreateWithoutFollowersByCountryInput, SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCountryInput>
+    where?: SproutInstagramAnalyticsWhereInput
+  }
+
+  export type SproutInstagramAnalyticsUpdateToOneWithWhereWithoutFollowersByCountryInput = {
+    where?: SproutInstagramAnalyticsWhereInput
+    data: XOR<SproutInstagramAnalyticsUpdateWithoutFollowersByCountryInput, SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCountryInput>
+  }
+
+  export type SproutInstagramAnalyticsUpdateWithoutFollowersByCountryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
+    followersByCity?: SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCountryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersByCity?: SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutSocialAccountCreateWithoutLinkedInAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutLinkedInAnalyticsInput = {
+    where: SproutSocialAccountWhereUniqueInput
+    create: XOR<SproutSocialAccountCreateWithoutLinkedInAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpsertWithoutLinkedInAnalyticsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutLinkedInAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutLinkedInAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutLinkedInAnalyticsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutLinkedInAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutLinkedInAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountCreateWithoutPinterestAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutPinterestAnalyticsInput = {
+    where: SproutSocialAccountWhereUniqueInput
+    create: XOR<SproutSocialAccountCreateWithoutPinterestAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpsertWithoutPinterestAnalyticsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutPinterestAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutPinterestAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutPinterestAnalyticsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutPinterestAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutPinterestAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postPhotoViewClicks?: number | null
+    tabViews?: number | null
+    videoViews?: number | null
+    videoViews10s?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    videoViewsUnique?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postPhotoViewClicks?: number | null
+    tabViews?: number | null
+    videoViews?: number | null
+    videoViews10s?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    videoViewsUnique?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutFacebookAnalyticsWhereUniqueInput
+    create: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutFacebookAnalyticsCreateManySproutSocialAccountInput | SproutFacebookAnalyticsCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    reactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    reactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutLinkedInAnalyticsCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+    create: XOR<SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutLinkedInAnalyticsCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutLinkedInAnalyticsCreateManySproutSocialAccountInput | SproutLinkedInAnalyticsCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    followersByCity?: SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    followersByCountry?: SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    followersByCity?: SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    followersByCountry?: SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
+  }
+
+  export type SproutInstagramAnalyticsCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutInstagramAnalyticsWhereUniqueInput
+    create: XOR<SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutInstagramAnalyticsCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutInstagramAnalyticsCreateManySproutSocialAccountInput | SproutInstagramAnalyticsCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    followersCount?: number | null
+    followingCount?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    followersCount?: number | null
+    followingCount?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutPinterestAnalyticsCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutPinterestAnalyticsWhereUniqueInput
+    create: XOR<SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutPinterestAnalyticsCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutPinterestAnalyticsCreateManySproutSocialAccountInput | SproutPinterestAnalyticsCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutSproutSocialAccountsInput
+  }
+
+  export type UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    create: XOR<UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope = {
+    data: UserToSproutSocialAccountCreateManySproutSocialAccountInput | UserToSproutSocialAccountCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookAnalyticsWhereUniqueInput
+    update: XOR<SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookAnalyticsWhereUniqueInput
+    data: XOR<SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutFacebookAnalyticsScalarWhereInput
+    data: XOR<SproutFacebookAnalyticsUpdateManyMutationInput, SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookAnalyticsScalarWhereInput = {
+    AND?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
+    OR?: SproutFacebookAnalyticsScalarWhereInput[]
+    NOT?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
+    id?: StringFilter<"SproutFacebookAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutFacebookAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    engagements?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postContentClicksOther?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postLinkClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    postPhotoViewClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    tabViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViews10s?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+    update: XOR<SproutLinkedInAnalyticsUpdateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutLinkedInAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutLinkedInAnalyticsWhereUniqueInput
+    data: XOR<SproutLinkedInAnalyticsUpdateWithoutSproutSocialAccountInput, SproutLinkedInAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutLinkedInAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutLinkedInAnalyticsScalarWhereInput
+    data: XOR<SproutLinkedInAnalyticsUpdateManyMutationInput, SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutLinkedInAnalyticsScalarWhereInput = {
+    AND?: SproutLinkedInAnalyticsScalarWhereInput | SproutLinkedInAnalyticsScalarWhereInput[]
+    OR?: SproutLinkedInAnalyticsScalarWhereInput[]
+    NOT?: SproutLinkedInAnalyticsScalarWhereInput | SproutLinkedInAnalyticsScalarWhereInput[]
+    id?: StringFilter<"SproutLinkedInAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutLinkedInAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    engagements?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    reactions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+  }
+
+  export type SproutInstagramAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutInstagramAnalyticsWhereUniqueInput
+    update: XOR<SproutInstagramAnalyticsUpdateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutInstagramAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutInstagramAnalyticsWhereUniqueInput
+    data: XOR<SproutInstagramAnalyticsUpdateWithoutSproutSocialAccountInput, SproutInstagramAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutInstagramAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutInstagramAnalyticsScalarWhereInput
+    data: XOR<SproutInstagramAnalyticsUpdateManyMutationInput, SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutInstagramAnalyticsScalarWhereInput = {
+    AND?: SproutInstagramAnalyticsScalarWhereInput | SproutInstagramAnalyticsScalarWhereInput[]
+    OR?: SproutInstagramAnalyticsScalarWhereInput[]
+    NOT?: SproutInstagramAnalyticsScalarWhereInput | SproutInstagramAnalyticsScalarWhereInput[]
+    id?: StringFilter<"SproutInstagramAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    commentsCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    engagements?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    impressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    likes?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    saves?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+  }
+
+  export type SproutPinterestAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutPinterestAnalyticsWhereUniqueInput
+    update: XOR<SproutPinterestAnalyticsUpdateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutPinterestAnalyticsCreateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutPinterestAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutPinterestAnalyticsWhereUniqueInput
+    data: XOR<SproutPinterestAnalyticsUpdateWithoutSproutSocialAccountInput, SproutPinterestAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutPinterestAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutPinterestAnalyticsScalarWhereInput
+    data: XOR<SproutPinterestAnalyticsUpdateManyMutationInput, SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutPinterestAnalyticsScalarWhereInput = {
+    AND?: SproutPinterestAnalyticsScalarWhereInput | SproutPinterestAnalyticsScalarWhereInput[]
+    OR?: SproutPinterestAnalyticsScalarWhereInput[]
+    NOT?: SproutPinterestAnalyticsScalarWhereInput | SproutPinterestAnalyticsScalarWhereInput[]
+    id?: StringFilter<"SproutPinterestAnalytics"> | string
+    sproutSocialAccountId?: StringFilter<"SproutPinterestAnalytics"> | string
+    customerProfileId?: IntFilter<"SproutPinterestAnalytics"> | number
+    reportingDate?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    followersCount?: IntNullableFilter<"SproutPinterestAnalytics"> | number | null
+    followingCount?: IntNullableFilter<"SproutPinterestAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutPinterestAnalytics"> | Date | string
+  }
+
+  export type UserToSproutSocialAccountUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    update: XOR<UserToSproutSocialAccountUpdateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<UserToSproutSocialAccountCreateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    data: XOR<UserToSproutSocialAccountUpdateWithoutSproutSocialAccountInput, UserToSproutSocialAccountUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: UserToSproutSocialAccountScalarWhereInput
+    data: XOR<UserToSproutSocialAccountUpdateManyMutationInput, UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type UserToSproutSocialAccountScalarWhereInput = {
+    AND?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+    OR?: UserToSproutSocialAccountScalarWhereInput[]
+    NOT?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+    id?: StringFilter<"UserToSproutSocialAccount"> | string
+    userId?: StringFilter<"UserToSproutSocialAccount"> | string
+    sproutSocialAccountId?: StringFilter<"UserToSproutSocialAccount"> | string
+    createdAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+  }
+
+  export type UserCreateWithoutSproutSocialAccountsInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role: RoleCreateNestedOneWithoutUsersInput
+    accountRep?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    activities?: ClientActivityCreateNestedManyWithoutUserInput
+    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+  }
+
+  export type UserUncheckedCreateWithoutSproutSocialAccountsInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    accountRepId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+  }
+
+  export type UserCreateOrConnectWithoutSproutSocialAccountsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSproutSocialAccountsInput, UserUncheckedCreateWithoutSproutSocialAccountsInput>
+  }
+
+  export type SproutSocialAccountCreateWithoutUsersInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutUsersInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutUsersInput = {
+    where: SproutSocialAccountWhereUniqueInput
+    create: XOR<SproutSocialAccountCreateWithoutUsersInput, SproutSocialAccountUncheckedCreateWithoutUsersInput>
+  }
+
+  export type UserUpsertWithoutSproutSocialAccountsInput = {
+    update: XOR<UserUpdateWithoutSproutSocialAccountsInput, UserUncheckedUpdateWithoutSproutSocialAccountsInput>
+    create: XOR<UserCreateWithoutSproutSocialAccountsInput, UserUncheckedCreateWithoutSproutSocialAccountsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSproutSocialAccountsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSproutSocialAccountsInput, UserUncheckedUpdateWithoutSproutSocialAccountsInput>
+  }
+
+  export type UserUpdateWithoutSproutSocialAccountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    accountRep?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSproutSocialAccountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
+    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+  }
+
+  export type SproutSocialAccountUpsertWithoutUsersInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutUsersInput, SproutSocialAccountUncheckedUpdateWithoutUsersInput>
+    create: XOR<SproutSocialAccountCreateWithoutUsersInput, SproutSocialAccountUncheckedCreateWithoutUsersInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutUsersInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutUsersInput, SproutSocialAccountUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type RoleCreateWithoutUsersInput = {
@@ -48336,6 +62531,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientsInput = {
@@ -48368,6 +62564,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientsInput = {
@@ -48405,6 +62602,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountRepInput = {
@@ -48437,6 +62635,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountRepInput = {
@@ -49002,6 +63201,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserToSproutSocialAccountCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserToSproutSocialAccountUncheckedCreateWithoutUserInput = {
+    id?: string
+    sproutSocialAccountId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToSproutSocialAccountCreateOrConnectWithoutUserInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    create: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserToSproutSocialAccountCreateManyUserInputEnvelope = {
+    data: UserToSproutSocialAccountCreateManyUserInput | UserToSproutSocialAccountCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RoleUpsertWithoutUsersInput = {
     update: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
     create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
@@ -49068,6 +63291,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientsInput = {
@@ -49100,6 +63324,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutAccountRepInput = {
@@ -49510,6 +63735,22 @@ export namespace Prisma {
     data: XOR<GaImportRunUpdateManyMutationInput, GaImportRunUncheckedUpdateManyWithoutRequestedByInput>
   }
 
+  export type UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    update: XOR<UserToSproutSocialAccountUpdateWithoutUserInput, UserToSproutSocialAccountUncheckedUpdateWithoutUserInput>
+    create: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    data: XOR<UserToSproutSocialAccountUpdateWithoutUserInput, UserToSproutSocialAccountUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput = {
+    where: UserToSproutSocialAccountScalarWhereInput
+    data: XOR<UserToSproutSocialAccountUpdateManyMutationInput, UserToSproutSocialAccountUncheckedUpdateManyWithoutUserInput>
+  }
+
   export type UserCreateWithoutSettingsInput = {
     id?: string
     name?: string | null
@@ -49540,6 +63781,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSettingsInput = {
@@ -49572,6 +63814,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSettingsInput = {
@@ -49620,6 +63863,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSettingsInput = {
@@ -49652,6 +63896,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAssignedTicketsInput = {
@@ -49684,6 +63929,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedTicketsInput = {
@@ -49716,6 +63962,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedTicketsInput = {
@@ -49753,6 +64000,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientTicketsInput = {
@@ -49785,6 +64033,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientTicketsInput = {
@@ -49900,6 +64149,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedTicketsInput = {
@@ -49932,6 +64182,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutClientTicketsInput = {
@@ -49975,6 +64226,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientTicketsInput = {
@@ -50007,6 +64259,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TicketAttachmentUpsertWithWhereUniqueWithoutTicketInput = {
@@ -50212,6 +64465,7 @@ export namespace Prisma {
     activities?: ClientActivityCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTicketCommentsInput = {
@@ -50244,6 +64498,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTicketCommentsInput = {
@@ -50331,6 +64586,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTicketCommentsInput = {
@@ -50363,6 +64619,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TicketCreateWithoutTagsInput = {
@@ -50520,6 +64777,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -50552,6 +64810,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -50600,6 +64859,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -50632,6 +64892,7 @@ export namespace Prisma {
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QueryCreateManyConversationInput = {
@@ -51124,6 +65385,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -51156,6 +65418,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -51440,6 +65703,346 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInput = {
+    id?: string
+    city: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInput = {
+    id?: string
+    country: string
+    count: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUpdateWithoutSproutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedUpdateWithoutSproutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUpdateWithoutSproutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedUpdateWithoutSproutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookAnalyticsCreateManySproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postPhotoViewClicks?: number | null
+    tabViews?: number | null
+    videoViews?: number | null
+    videoViews10s?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    videoViewsUnique?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutLinkedInAnalyticsCreateManySproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    reactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutInstagramAnalyticsCreateManySproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    commentsCount?: number | null
+    engagements?: number | null
+    impressions?: number | null
+    impressionsUnique?: number | null
+    followersCount?: number | null
+    likes?: number | null
+    saves?: number | null
+    videoViews?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutPinterestAnalyticsCreateManySproutSocialAccountInput = {
+    id?: string
+    customerProfileId: number
+    reportingDate: Date | string
+    followersCount?: number | null
+    followingCount?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToSproutSocialAccountCreateManySproutSocialAccountInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutInstagramAnalyticsUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersByCity?: SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    followersByCountry?: SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersByCity?: SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    followersByCountry?: SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+  }
+
+  export type SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    saves?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutPinterestAnalyticsUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutPinterestAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    followingCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSproutSocialAccountsNestedInput
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyAccountRepInput = {
     id?: string
     name?: string | null
@@ -51621,6 +66224,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UserToSproutSocialAccountCreateManyUserInput = {
+    id?: string
+    sproutSocialAccountId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutAccountRepInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51651,6 +66261,7 @@ export namespace Prisma {
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountRepInput = {
@@ -51683,6 +66294,7 @@ export namespace Prisma {
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAccountRepInput = {
@@ -52230,6 +66842,27 @@ export namespace Prisma {
     dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
