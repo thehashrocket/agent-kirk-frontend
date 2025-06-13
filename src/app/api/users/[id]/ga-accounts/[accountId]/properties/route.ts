@@ -54,8 +54,12 @@ export async function POST(
     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
         id: accountId,
-        userId: id,
-        deleted: false, // Only allow operations on non-deleted accounts
+        userToGaAccounts: {
+          some: {
+            userId: id
+          }
+        },
+        deleted: false,
       },
     });
 
@@ -116,8 +120,12 @@ export async function GET(
     const gaAccount = await prisma.gaAccount.findFirst({
       where: {
         id: accountId,
-        userId: id,
-        deleted: false, // Only allow access to non-deleted accounts
+        userToGaAccounts: {
+          some: {
+            userId: id
+          }
+        },
+        deleted: false,
       },
     });
 

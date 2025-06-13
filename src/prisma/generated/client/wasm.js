@@ -159,7 +159,6 @@ exports.Prisma.ConversationScalarFieldEnum = {
 
 exports.Prisma.GaAccountScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   gaAccountId: 'gaAccountId',
   gaAccountName: 'gaAccountName',
   deleted: 'deleted'
@@ -449,6 +448,14 @@ exports.Prisma.UserToSproutSocialAccountScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserToGaAccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  gaAccountId: 'gaAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -622,6 +629,7 @@ exports.Prisma.ModelName = {
   SproutPinterestAnalytics: 'SproutPinterestAnalytics',
   SproutSocialAccount: 'SproutSocialAccount',
   UserToSproutSocialAccount: 'UserToSproutSocialAccount',
+  UserToGaAccount: 'UserToGaAccount',
   User: 'User',
   UserSettings: 'UserSettings',
   Ticket: 'Ticket',

@@ -286,14 +286,15 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         id: clientId,
       },
       include: {
-        gaAccounts: {
-          where: {
-            deleted: false,
-          },
+        userToGaAccounts: {
           include: {
-            gaProperties: {
-              where: {
-                deleted: false,
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
               },
             },
           },
@@ -317,16 +318,21 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       );
     }
 
+    // Map and filter userToGaAccounts to get non-deleted gaAccounts
+    const gaAccounts = client.userToGaAccounts
+      .filter(uta => uta.gaAccount && !uta.gaAccount.deleted)
+      .map(uta => uta.gaAccount);
+
     console.log('Admin GA Metrics API - Found client:', client.id);
     console.log('Admin GA Metrics API - Client data:', JSON.stringify({
       id: client.id,
       email: client.email,
-      gaAccountsCount: client.gaAccounts?.length || 0,
-      hasProperties: Boolean(client.gaAccounts?.[0]?.gaProperties?.length)
+      gaAccountsCount: gaAccounts.length || 0,
+      hasProperties: Boolean(gaAccounts[0]?.gaProperties?.length)
     }, null, 2));
 
     // Check if client has GA accounts
-    if (!client?.gaAccounts?.length) {
+    if (!gaAccounts.length) {
       console.log('Admin GA Metrics API - No GA accounts found for client');
       return NextResponse.json(
         { error: 'No GA account found for client', code: 'NO_GA_ACCOUNT' },
@@ -335,9 +341,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     }
 
     // Find the requested property
-    const requestedProperty = client.gaAccounts
-      .flatMap(account => account.gaProperties)
-      .find(property => property.id === requestedPropertyId);
+    const requestedProperty = gaAccounts
+      .flatMap((account: any) => account.gaProperties)
+      .find((property: any) => property.id === requestedPropertyId);
 
     if (!requestedProperty) {
       return NextResponse.json(
@@ -346,8 +352,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       );
     }
 
-    const parentAccount = client.gaAccounts.find(account => 
-      account.gaProperties.some(prop => prop.id === requestedPropertyId)
+    const parentAccount = gaAccounts.find((account: any) => 
+      account.gaProperties.some((prop: any) => prop.id === requestedPropertyId)
     );
 
     if (!parentAccount) {

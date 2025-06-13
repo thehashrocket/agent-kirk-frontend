@@ -99,14 +99,13 @@ model Conversation {
 }
 
 model GaAccount {
-  id            String         @id @default(cuid())
-  userId        String
-  user          User           @relation("UserToGaAccount", fields: [userId], references: [id], onDelete: Cascade)
+  id            String            @id @default(cuid())
   gaAccountId   String
   gaAccountName String
-  deleted       Boolean        @default(false)
-  gaProperties  GaProperty[]   @relation("AccountToProperty")
+  deleted       Boolean           @default(false)
+  gaProperties  GaProperty[]      @relation("AccountToProperty")
   conversations Conversation[]
+  userToGaAccounts UserToGaAccount[] @relation("GaAccountToUserAccounts")
 }
 
 model GaProperty {
@@ -455,21 +454,21 @@ model SproutLinkedInAnalytics {
 }
 
 model SproutPinterestAnalytics {
-  id                    String   @id @default(cuid())
+  id                    String              @id @default(cuid())
   sproutSocialAccountId String
   sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   customerProfileId     Int
-  reportingDate         DateTime @db.Date
+  reportingDate         DateTime            @db.Date
   followersCount        Int?
   followingCount        Int?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 
   @@index([sproutSocialAccountId])
 }
 
 model SproutSocialAccount {
-  id                 String                     @id @default(cuid())
+  id                 String                      @id @default(cuid())
   customerProfileId  Int
   networkType        String
   name               String
@@ -477,8 +476,8 @@ model SproutSocialAccount {
   link               String
   nativeId           String
   groups             Int[]
-  createdAt          DateTime                   @default(now())
-  updatedAt          DateTime                   @updatedAt
+  createdAt          DateTime                    @default(now())
+  updatedAt          DateTime                    @updatedAt
   facebookAnalytics  SproutFacebookAnalytics[]
   linkedInAnalytics  SproutLinkedInAnalytics[]
   instagramAnalytics SproutInstagramAnalytics[]
@@ -487,17 +486,31 @@ model SproutSocialAccount {
 }
 
 model UserToSproutSocialAccount {
-  id                   String             @id @default(cuid())
-  userId               String
-  user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                    String              @id @default(cuid())
+  userId                String
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   sproutSocialAccountId String
   sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
-  createdAt             DateTime           @default(now())
-  updatedAt             DateTime           @updatedAt
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 
   @@unique([userId, sproutSocialAccountId])
   @@index([userId])
   @@index([sproutSocialAccountId])
+}
+
+model UserToGaAccount {
+  id          String    @id @default(cuid())
+  userId      String
+  gaAccountId String
+  gaAccount   GaAccount @relation("GaAccountToUserAccounts", fields: [gaAccountId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now()) @db.Timestamp(3)
+  updatedAt   DateTime  @updatedAt @db.Timestamp(3)
+  user        User      @relation("UserToGaAccounts", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gaAccountId])
+  @@index([userId])
+  @@index([gaAccountId])
 }
 
 model User {
@@ -518,23 +531,23 @@ model User {
   updatedAt     DateTime  @updatedAt
 
   // Relations
-  accounts            Account[]
-  sessions            Session[]
-  queries             Query[]
-  conversations       Conversation[]
-  clientConversations Conversation[]       @relation("ClientConversations")
-  sentMessages        Message[]            @relation("SentMessages")
-  receivedMessages    Message[]            @relation("ReceivedMessages")
-  notifications       Notification[]
-  settings            UserSettings?
-  givenRatings        ClientSatisfaction[] @relation("ClientRatings")
-  receivedRatings     ClientSatisfaction[] @relation("RepRatings")
-  assignedTickets     Ticket[]             @relation("AssignedTickets")
-  clientTickets       Ticket[]             @relation("ClientTickets")
-  ticketComments      TicketComment[]
-  activities          ClientActivity[]
-  gaAccounts          GaAccount[]          @relation("UserToGaAccount")
-  gaImportRuns        GaImportRun[]        @relation("UserToGaImportRuns")
+  accounts             Account[]
+  sessions             Session[]
+  queries              Query[]
+  conversations        Conversation[]
+  clientConversations  Conversation[]              @relation("ClientConversations")
+  sentMessages         Message[]                   @relation("SentMessages")
+  receivedMessages     Message[]                   @relation("ReceivedMessages")
+  notifications        Notification[]
+  settings             UserSettings?
+  givenRatings         ClientSatisfaction[]        @relation("ClientRatings")
+  receivedRatings      ClientSatisfaction[]        @relation("RepRatings")
+  assignedTickets      Ticket[]                    @relation("AssignedTickets")
+  clientTickets        Ticket[]                    @relation("ClientTickets")
+  ticketComments       TicketComment[]
+  activities           ClientActivity[]
+  userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
+  gaImportRuns         GaImportRun[]               @relation("UserToGaImportRuns")
   sproutSocialAccounts UserToSproutSocialAccount[]
 }
 

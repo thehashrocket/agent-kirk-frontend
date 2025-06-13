@@ -149,6 +149,11 @@ export type SproutSocialAccount = $Result.DefaultSelection<Prisma.$SproutSocialA
  */
 export type UserToSproutSocialAccount = $Result.DefaultSelection<Prisma.$UserToSproutSocialAccountPayload>
 /**
+ * Model UserToGaAccount
+ * 
+ */
+export type UserToGaAccount = $Result.DefaultSelection<Prisma.$UserToGaAccountPayload>
+/**
  * Model User
  * 
  */
@@ -668,6 +673,16 @@ export class PrismaClient<
     * ```
     */
   get userToSproutSocialAccount(): Prisma.UserToSproutSocialAccountDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userToGaAccount`: Exposes CRUD operations for the **UserToGaAccount** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserToGaAccounts
+    * const userToGaAccounts = await prisma.userToGaAccount.findMany()
+    * ```
+    */
+  get userToGaAccount(): Prisma.UserToGaAccountDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -1215,6 +1230,7 @@ export namespace Prisma {
     SproutPinterestAnalytics: 'SproutPinterestAnalytics',
     SproutSocialAccount: 'SproutSocialAccount',
     UserToSproutSocialAccount: 'UserToSproutSocialAccount',
+    UserToGaAccount: 'UserToGaAccount',
     User: 'User',
     UserSettings: 'UserSettings',
     Ticket: 'Ticket',
@@ -1241,7 +1257,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
+      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3243,6 +3259,80 @@ export namespace Prisma {
           }
         }
       }
+      UserToGaAccount: {
+        payload: Prisma.$UserToGaAccountPayload<ExtArgs>
+        fields: Prisma.UserToGaAccountFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserToGaAccountFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserToGaAccountFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>
+          }
+          findFirst: {
+            args: Prisma.UserToGaAccountFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserToGaAccountFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>
+          }
+          findMany: {
+            args: Prisma.UserToGaAccountFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>[]
+          }
+          create: {
+            args: Prisma.UserToGaAccountCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>
+          }
+          createMany: {
+            args: Prisma.UserToGaAccountCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserToGaAccountCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>[]
+          }
+          delete: {
+            args: Prisma.UserToGaAccountDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>
+          }
+          update: {
+            args: Prisma.UserToGaAccountUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserToGaAccountDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserToGaAccountUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserToGaAccountUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserToGaAccountUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserToGaAccountPayload>
+          }
+          aggregate: {
+            args: Prisma.UserToGaAccountAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserToGaAccount>
+          }
+          groupBy: {
+            args: Prisma.UserToGaAccountGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserToGaAccountGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserToGaAccountCountArgs<ExtArgs>
+            result: $Utils.Optional<UserToGaAccountCountAggregateOutputType> | number
+          }
+        }
+      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -3946,6 +4036,7 @@ export namespace Prisma {
     sproutPinterestAnalytics?: SproutPinterestAnalyticsOmit
     sproutSocialAccount?: SproutSocialAccountOmit
     userToSproutSocialAccount?: UserToSproutSocialAccountOmit
+    userToGaAccount?: UserToGaAccountOmit
     user?: UserOmit
     userSettings?: UserSettingsOmit
     ticket?: TicketOmit
@@ -4081,11 +4172,13 @@ export namespace Prisma {
   export type GaAccountCountOutputType = {
     gaProperties: number
     conversations: number
+    userToGaAccounts: number
   }
 
   export type GaAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gaProperties?: boolean | GaAccountCountOutputTypeCountGaPropertiesArgs
     conversations?: boolean | GaAccountCountOutputTypeCountConversationsArgs
+    userToGaAccounts?: boolean | GaAccountCountOutputTypeCountUserToGaAccountsArgs
   }
 
   // Custom InputTypes
@@ -4111,6 +4204,13 @@ export namespace Prisma {
    */
   export type GaAccountCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConversationWhereInput
+  }
+
+  /**
+   * GaAccountCountOutputType without action
+   */
+  export type GaAccountCountOutputTypeCountUserToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToGaAccountWhereInput
   }
 
 
@@ -4437,7 +4537,7 @@ export namespace Prisma {
     clientTickets: number
     ticketComments: number
     activities: number
-    gaAccounts: number
+    userToGaAccounts: number
     gaImportRuns: number
     sproutSocialAccounts: number
   }
@@ -4458,7 +4558,7 @@ export namespace Prisma {
     clientTickets?: boolean | UserCountOutputTypeCountClientTicketsArgs
     ticketComments?: boolean | UserCountOutputTypeCountTicketCommentsArgs
     activities?: boolean | UserCountOutputTypeCountActivitiesArgs
-    gaAccounts?: boolean | UserCountOutputTypeCountGaAccountsArgs
+    userToGaAccounts?: boolean | UserCountOutputTypeCountUserToGaAccountsArgs
     gaImportRuns?: boolean | UserCountOutputTypeCountGaImportRunsArgs
     sproutSocialAccounts?: boolean | UserCountOutputTypeCountSproutSocialAccountsArgs
   }
@@ -4582,8 +4682,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GaAccountWhereInput
+  export type UserCountOutputTypeCountUserToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToGaAccountWhereInput
   }
 
   /**
@@ -8227,7 +8327,6 @@ export namespace Prisma {
 
   export type GaAccountMinAggregateOutputType = {
     id: string | null
-    userId: string | null
     gaAccountId: string | null
     gaAccountName: string | null
     deleted: boolean | null
@@ -8235,7 +8334,6 @@ export namespace Prisma {
 
   export type GaAccountMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
     gaAccountId: string | null
     gaAccountName: string | null
     deleted: boolean | null
@@ -8243,7 +8341,6 @@ export namespace Prisma {
 
   export type GaAccountCountAggregateOutputType = {
     id: number
-    userId: number
     gaAccountId: number
     gaAccountName: number
     deleted: number
@@ -8253,7 +8350,6 @@ export namespace Prisma {
 
   export type GaAccountMinAggregateInputType = {
     id?: true
-    userId?: true
     gaAccountId?: true
     gaAccountName?: true
     deleted?: true
@@ -8261,7 +8357,6 @@ export namespace Prisma {
 
   export type GaAccountMaxAggregateInputType = {
     id?: true
-    userId?: true
     gaAccountId?: true
     gaAccountName?: true
     deleted?: true
@@ -8269,7 +8364,6 @@ export namespace Prisma {
 
   export type GaAccountCountAggregateInputType = {
     id?: true
-    userId?: true
     gaAccountId?: true
     gaAccountName?: true
     deleted?: true
@@ -8350,7 +8444,6 @@ export namespace Prisma {
 
   export type GaAccountGroupByOutputType = {
     id: string
-    userId: string
     gaAccountId: string
     gaAccountName: string
     deleted: boolean
@@ -8375,66 +8468,55 @@ export namespace Prisma {
 
   export type GaAccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     gaProperties?: boolean | GaAccount$gaPropertiesArgs<ExtArgs>
     conversations?: boolean | GaAccount$conversationsArgs<ExtArgs>
+    userToGaAccounts?: boolean | GaAccount$userToGaAccountsArgs<ExtArgs>
     _count?: boolean | GaAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaAccount"]>
 
   export type GaAccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaAccount"]>
 
   export type GaAccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaAccount"]>
 
   export type GaAccountSelectScalar = {
     id?: boolean
-    userId?: boolean
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
   }
 
-  export type GaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "gaAccountId" | "gaAccountName" | "deleted", ExtArgs["result"]["gaAccount"]>
+  export type GaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaAccountId" | "gaAccountName" | "deleted", ExtArgs["result"]["gaAccount"]>
   export type GaAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     gaProperties?: boolean | GaAccount$gaPropertiesArgs<ExtArgs>
     conversations?: boolean | GaAccount$conversationsArgs<ExtArgs>
+    userToGaAccounts?: boolean | GaAccount$userToGaAccountsArgs<ExtArgs>
     _count?: boolean | GaAccountCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type GaAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type GaAccountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type GaAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GaAccountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $GaAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GaAccount"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       gaProperties: Prisma.$GaPropertyPayload<ExtArgs>[]
       conversations: Prisma.$ConversationPayload<ExtArgs>[]
+      userToGaAccounts: Prisma.$UserToGaAccountPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
       gaAccountId: string
       gaAccountName: string
       deleted: boolean
@@ -8832,9 +8914,9 @@ export namespace Prisma {
    */
   export interface Prisma__GaAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     gaProperties<T extends GaAccount$gaPropertiesArgs<ExtArgs> = {}>(args?: Subset<T, GaAccount$gaPropertiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GaPropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversations<T extends GaAccount$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, GaAccount$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userToGaAccounts<T extends GaAccount$userToGaAccountsArgs<ExtArgs> = {}>(args?: Subset<T, GaAccount$userToGaAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8865,7 +8947,6 @@ export namespace Prisma {
    */
   interface GaAccountFieldRefs {
     readonly id: FieldRef<"GaAccount", 'String'>
-    readonly userId: FieldRef<"GaAccount", 'String'>
     readonly gaAccountId: FieldRef<"GaAccount", 'String'>
     readonly gaAccountName: FieldRef<"GaAccount", 'String'>
     readonly deleted: FieldRef<"GaAccount", 'Boolean'>
@@ -9118,10 +9199,6 @@ export namespace Prisma {
      */
     data: GaAccountCreateManyInput | GaAccountCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GaAccountIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9192,10 +9269,6 @@ export namespace Prisma {
      * Limit how many GaAccounts to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GaAccountIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9310,6 +9383,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * GaAccount.userToGaAccounts
+   */
+  export type GaAccount$userToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    where?: UserToGaAccountWhereInput
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    cursor?: UserToGaAccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
   }
 
   /**
@@ -36267,6 +36364,1072 @@ export namespace Prisma {
 
 
   /**
+   * Model UserToGaAccount
+   */
+
+  export type AggregateUserToGaAccount = {
+    _count: UserToGaAccountCountAggregateOutputType | null
+    _min: UserToGaAccountMinAggregateOutputType | null
+    _max: UserToGaAccountMaxAggregateOutputType | null
+  }
+
+  export type UserToGaAccountMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    gaAccountId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserToGaAccountMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    gaAccountId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserToGaAccountCountAggregateOutputType = {
+    id: number
+    userId: number
+    gaAccountId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserToGaAccountMinAggregateInputType = {
+    id?: true
+    userId?: true
+    gaAccountId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserToGaAccountMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    gaAccountId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserToGaAccountCountAggregateInputType = {
+    id?: true
+    userId?: true
+    gaAccountId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserToGaAccountAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserToGaAccount to aggregate.
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToGaAccounts to fetch.
+     */
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserToGaAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToGaAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToGaAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserToGaAccounts
+    **/
+    _count?: true | UserToGaAccountCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserToGaAccountMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserToGaAccountMaxAggregateInputType
+  }
+
+  export type GetUserToGaAccountAggregateType<T extends UserToGaAccountAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserToGaAccount]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserToGaAccount[P]>
+      : GetScalarType<T[P], AggregateUserToGaAccount[P]>
+  }
+
+
+
+
+  export type UserToGaAccountGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToGaAccountWhereInput
+    orderBy?: UserToGaAccountOrderByWithAggregationInput | UserToGaAccountOrderByWithAggregationInput[]
+    by: UserToGaAccountScalarFieldEnum[] | UserToGaAccountScalarFieldEnum
+    having?: UserToGaAccountScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserToGaAccountCountAggregateInputType | true
+    _min?: UserToGaAccountMinAggregateInputType
+    _max?: UserToGaAccountMaxAggregateInputType
+  }
+
+  export type UserToGaAccountGroupByOutputType = {
+    id: string
+    userId: string
+    gaAccountId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserToGaAccountCountAggregateOutputType | null
+    _min: UserToGaAccountMinAggregateOutputType | null
+    _max: UserToGaAccountMaxAggregateOutputType | null
+  }
+
+  type GetUserToGaAccountGroupByPayload<T extends UserToGaAccountGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserToGaAccountGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserToGaAccountGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserToGaAccountGroupByOutputType[P]>
+            : GetScalarType<T[P], UserToGaAccountGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserToGaAccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    gaAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userToGaAccount"]>
+
+  export type UserToGaAccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    gaAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userToGaAccount"]>
+
+  export type UserToGaAccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    gaAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userToGaAccount"]>
+
+  export type UserToGaAccountSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    gaAccountId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserToGaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "gaAccountId" | "createdAt" | "updatedAt", ExtArgs["result"]["userToGaAccount"]>
+  export type UserToGaAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserToGaAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserToGaAccountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserToGaAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserToGaAccount"
+    objects: {
+      gaAccount: Prisma.$GaAccountPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      gaAccountId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userToGaAccount"]>
+    composites: {}
+  }
+
+  type UserToGaAccountGetPayload<S extends boolean | null | undefined | UserToGaAccountDefaultArgs> = $Result.GetResult<Prisma.$UserToGaAccountPayload, S>
+
+  type UserToGaAccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserToGaAccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserToGaAccountCountAggregateInputType | true
+    }
+
+  export interface UserToGaAccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserToGaAccount'], meta: { name: 'UserToGaAccount' } }
+    /**
+     * Find zero or one UserToGaAccount that matches the filter.
+     * @param {UserToGaAccountFindUniqueArgs} args - Arguments to find a UserToGaAccount
+     * @example
+     * // Get one UserToGaAccount
+     * const userToGaAccount = await prisma.userToGaAccount.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserToGaAccountFindUniqueArgs>(args: SelectSubset<T, UserToGaAccountFindUniqueArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserToGaAccount that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserToGaAccountFindUniqueOrThrowArgs} args - Arguments to find a UserToGaAccount
+     * @example
+     * // Get one UserToGaAccount
+     * const userToGaAccount = await prisma.userToGaAccount.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserToGaAccountFindUniqueOrThrowArgs>(args: SelectSubset<T, UserToGaAccountFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserToGaAccount that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountFindFirstArgs} args - Arguments to find a UserToGaAccount
+     * @example
+     * // Get one UserToGaAccount
+     * const userToGaAccount = await prisma.userToGaAccount.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserToGaAccountFindFirstArgs>(args?: SelectSubset<T, UserToGaAccountFindFirstArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserToGaAccount that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountFindFirstOrThrowArgs} args - Arguments to find a UserToGaAccount
+     * @example
+     * // Get one UserToGaAccount
+     * const userToGaAccount = await prisma.userToGaAccount.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserToGaAccountFindFirstOrThrowArgs>(args?: SelectSubset<T, UserToGaAccountFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserToGaAccounts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserToGaAccounts
+     * const userToGaAccounts = await prisma.userToGaAccount.findMany()
+     * 
+     * // Get first 10 UserToGaAccounts
+     * const userToGaAccounts = await prisma.userToGaAccount.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userToGaAccountWithIdOnly = await prisma.userToGaAccount.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserToGaAccountFindManyArgs>(args?: SelectSubset<T, UserToGaAccountFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserToGaAccount.
+     * @param {UserToGaAccountCreateArgs} args - Arguments to create a UserToGaAccount.
+     * @example
+     * // Create one UserToGaAccount
+     * const UserToGaAccount = await prisma.userToGaAccount.create({
+     *   data: {
+     *     // ... data to create a UserToGaAccount
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserToGaAccountCreateArgs>(args: SelectSubset<T, UserToGaAccountCreateArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserToGaAccounts.
+     * @param {UserToGaAccountCreateManyArgs} args - Arguments to create many UserToGaAccounts.
+     * @example
+     * // Create many UserToGaAccounts
+     * const userToGaAccount = await prisma.userToGaAccount.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserToGaAccountCreateManyArgs>(args?: SelectSubset<T, UserToGaAccountCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserToGaAccounts and returns the data saved in the database.
+     * @param {UserToGaAccountCreateManyAndReturnArgs} args - Arguments to create many UserToGaAccounts.
+     * @example
+     * // Create many UserToGaAccounts
+     * const userToGaAccount = await prisma.userToGaAccount.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserToGaAccounts and only return the `id`
+     * const userToGaAccountWithIdOnly = await prisma.userToGaAccount.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserToGaAccountCreateManyAndReturnArgs>(args?: SelectSubset<T, UserToGaAccountCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserToGaAccount.
+     * @param {UserToGaAccountDeleteArgs} args - Arguments to delete one UserToGaAccount.
+     * @example
+     * // Delete one UserToGaAccount
+     * const UserToGaAccount = await prisma.userToGaAccount.delete({
+     *   where: {
+     *     // ... filter to delete one UserToGaAccount
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserToGaAccountDeleteArgs>(args: SelectSubset<T, UserToGaAccountDeleteArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserToGaAccount.
+     * @param {UserToGaAccountUpdateArgs} args - Arguments to update one UserToGaAccount.
+     * @example
+     * // Update one UserToGaAccount
+     * const userToGaAccount = await prisma.userToGaAccount.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserToGaAccountUpdateArgs>(args: SelectSubset<T, UserToGaAccountUpdateArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserToGaAccounts.
+     * @param {UserToGaAccountDeleteManyArgs} args - Arguments to filter UserToGaAccounts to delete.
+     * @example
+     * // Delete a few UserToGaAccounts
+     * const { count } = await prisma.userToGaAccount.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserToGaAccountDeleteManyArgs>(args?: SelectSubset<T, UserToGaAccountDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserToGaAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserToGaAccounts
+     * const userToGaAccount = await prisma.userToGaAccount.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserToGaAccountUpdateManyArgs>(args: SelectSubset<T, UserToGaAccountUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserToGaAccounts and returns the data updated in the database.
+     * @param {UserToGaAccountUpdateManyAndReturnArgs} args - Arguments to update many UserToGaAccounts.
+     * @example
+     * // Update many UserToGaAccounts
+     * const userToGaAccount = await prisma.userToGaAccount.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserToGaAccounts and only return the `id`
+     * const userToGaAccountWithIdOnly = await prisma.userToGaAccount.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserToGaAccountUpdateManyAndReturnArgs>(args: SelectSubset<T, UserToGaAccountUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserToGaAccount.
+     * @param {UserToGaAccountUpsertArgs} args - Arguments to update or create a UserToGaAccount.
+     * @example
+     * // Update or create a UserToGaAccount
+     * const userToGaAccount = await prisma.userToGaAccount.upsert({
+     *   create: {
+     *     // ... data to create a UserToGaAccount
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserToGaAccount we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserToGaAccountUpsertArgs>(args: SelectSubset<T, UserToGaAccountUpsertArgs<ExtArgs>>): Prisma__UserToGaAccountClient<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserToGaAccounts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountCountArgs} args - Arguments to filter UserToGaAccounts to count.
+     * @example
+     * // Count the number of UserToGaAccounts
+     * const count = await prisma.userToGaAccount.count({
+     *   where: {
+     *     // ... the filter for the UserToGaAccounts we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserToGaAccountCountArgs>(
+      args?: Subset<T, UserToGaAccountCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserToGaAccountCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserToGaAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserToGaAccountAggregateArgs>(args: Subset<T, UserToGaAccountAggregateArgs>): Prisma.PrismaPromise<GetUserToGaAccountAggregateType<T>>
+
+    /**
+     * Group by UserToGaAccount.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserToGaAccountGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserToGaAccountGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserToGaAccountGroupByArgs['orderBy'] }
+        : { orderBy?: UserToGaAccountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserToGaAccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserToGaAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserToGaAccount model
+   */
+  readonly fields: UserToGaAccountFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserToGaAccount.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserToGaAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    gaAccount<T extends GaAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GaAccountDefaultArgs<ExtArgs>>): Prisma__GaAccountClient<$Result.GetResult<Prisma.$GaAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserToGaAccount model
+   */
+  interface UserToGaAccountFieldRefs {
+    readonly id: FieldRef<"UserToGaAccount", 'String'>
+    readonly userId: FieldRef<"UserToGaAccount", 'String'>
+    readonly gaAccountId: FieldRef<"UserToGaAccount", 'String'>
+    readonly createdAt: FieldRef<"UserToGaAccount", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserToGaAccount", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserToGaAccount findUnique
+   */
+  export type UserToGaAccountFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToGaAccount to fetch.
+     */
+    where: UserToGaAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToGaAccount findUniqueOrThrow
+   */
+  export type UserToGaAccountFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToGaAccount to fetch.
+     */
+    where: UserToGaAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToGaAccount findFirst
+   */
+  export type UserToGaAccountFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToGaAccount to fetch.
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToGaAccounts to fetch.
+     */
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserToGaAccounts.
+     */
+    cursor?: UserToGaAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToGaAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToGaAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserToGaAccounts.
+     */
+    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
+  }
+
+  /**
+   * UserToGaAccount findFirstOrThrow
+   */
+  export type UserToGaAccountFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToGaAccount to fetch.
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToGaAccounts to fetch.
+     */
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserToGaAccounts.
+     */
+    cursor?: UserToGaAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToGaAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToGaAccounts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserToGaAccounts.
+     */
+    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
+  }
+
+  /**
+   * UserToGaAccount findMany
+   */
+  export type UserToGaAccountFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * Filter, which UserToGaAccounts to fetch.
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserToGaAccounts to fetch.
+     */
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserToGaAccounts.
+     */
+    cursor?: UserToGaAccountWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserToGaAccounts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserToGaAccounts.
+     */
+    skip?: number
+    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
+  }
+
+  /**
+   * UserToGaAccount create
+   */
+  export type UserToGaAccountCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserToGaAccount.
+     */
+    data: XOR<UserToGaAccountCreateInput, UserToGaAccountUncheckedCreateInput>
+  }
+
+  /**
+   * UserToGaAccount createMany
+   */
+  export type UserToGaAccountCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserToGaAccounts.
+     */
+    data: UserToGaAccountCreateManyInput | UserToGaAccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserToGaAccount createManyAndReturn
+   */
+  export type UserToGaAccountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserToGaAccounts.
+     */
+    data: UserToGaAccountCreateManyInput | UserToGaAccountCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserToGaAccount update
+   */
+  export type UserToGaAccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserToGaAccount.
+     */
+    data: XOR<UserToGaAccountUpdateInput, UserToGaAccountUncheckedUpdateInput>
+    /**
+     * Choose, which UserToGaAccount to update.
+     */
+    where: UserToGaAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToGaAccount updateMany
+   */
+  export type UserToGaAccountUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserToGaAccounts.
+     */
+    data: XOR<UserToGaAccountUpdateManyMutationInput, UserToGaAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which UserToGaAccounts to update
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * Limit how many UserToGaAccounts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserToGaAccount updateManyAndReturn
+   */
+  export type UserToGaAccountUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * The data used to update UserToGaAccounts.
+     */
+    data: XOR<UserToGaAccountUpdateManyMutationInput, UserToGaAccountUncheckedUpdateManyInput>
+    /**
+     * Filter which UserToGaAccounts to update
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * Limit how many UserToGaAccounts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserToGaAccount upsert
+   */
+  export type UserToGaAccountUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserToGaAccount to update in case it exists.
+     */
+    where: UserToGaAccountWhereUniqueInput
+    /**
+     * In case the UserToGaAccount found by the `where` argument doesn't exist, create a new UserToGaAccount with this data.
+     */
+    create: XOR<UserToGaAccountCreateInput, UserToGaAccountUncheckedCreateInput>
+    /**
+     * In case the UserToGaAccount was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserToGaAccountUpdateInput, UserToGaAccountUncheckedUpdateInput>
+  }
+
+  /**
+   * UserToGaAccount delete
+   */
+  export type UserToGaAccountDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    /**
+     * Filter which UserToGaAccount to delete.
+     */
+    where: UserToGaAccountWhereUniqueInput
+  }
+
+  /**
+   * UserToGaAccount deleteMany
+   */
+  export type UserToGaAccountDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserToGaAccounts to delete
+     */
+    where?: UserToGaAccountWhereInput
+    /**
+     * Limit how many UserToGaAccounts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserToGaAccount without action
+   */
+  export type UserToGaAccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
@@ -36504,7 +37667,7 @@ export namespace Prisma {
     clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
     ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
     activities?: boolean | User$activitiesArgs<ExtArgs>
-    gaAccounts?: boolean | User$gaAccountsArgs<ExtArgs>
+    userToGaAccounts?: boolean | User$userToGaAccountsArgs<ExtArgs>
     gaImportRuns?: boolean | User$gaImportRunsArgs<ExtArgs>
     sproutSocialAccounts?: boolean | User$sproutSocialAccountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -36579,7 +37742,7 @@ export namespace Prisma {
     clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
     ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
     activities?: boolean | User$activitiesArgs<ExtArgs>
-    gaAccounts?: boolean | User$gaAccountsArgs<ExtArgs>
+    userToGaAccounts?: boolean | User$userToGaAccountsArgs<ExtArgs>
     gaImportRuns?: boolean | User$gaImportRunsArgs<ExtArgs>
     sproutSocialAccounts?: boolean | User$sproutSocialAccountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -36614,7 +37777,7 @@ export namespace Prisma {
       clientTickets: Prisma.$TicketPayload<ExtArgs>[]
       ticketComments: Prisma.$TicketCommentPayload<ExtArgs>[]
       activities: Prisma.$ClientActivityPayload<ExtArgs>[]
-      gaAccounts: Prisma.$GaAccountPayload<ExtArgs>[]
+      userToGaAccounts: Prisma.$UserToGaAccountPayload<ExtArgs>[]
       gaImportRuns: Prisma.$GaImportRunPayload<ExtArgs>[]
       sproutSocialAccounts: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
     }
@@ -37043,7 +38206,7 @@ export namespace Prisma {
     clientTickets<T extends User$clientTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ticketComments<T extends User$ticketCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activities<T extends User$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    gaAccounts<T extends User$gaAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$gaAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userToGaAccounts<T extends User$userToGaAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$userToGaAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gaImportRuns<T extends User$gaImportRunsArgs<ExtArgs> = {}>(args?: Subset<T, User$gaImportRunsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GaImportRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sproutSocialAccounts<T extends User$sproutSocialAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$sproutSocialAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -37881,27 +39044,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.gaAccounts
+   * User.userToGaAccounts
    */
-  export type User$gaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$userToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GaAccount
+     * Select specific fields to fetch from the UserToGaAccount
      */
-    select?: GaAccountSelect<ExtArgs> | null
+    select?: UserToGaAccountSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GaAccount
+     * Omit specific fields from the UserToGaAccount
      */
-    omit?: GaAccountOmit<ExtArgs> | null
+    omit?: UserToGaAccountOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GaAccountInclude<ExtArgs> | null
-    where?: GaAccountWhereInput
-    orderBy?: GaAccountOrderByWithRelationInput | GaAccountOrderByWithRelationInput[]
-    cursor?: GaAccountWhereUniqueInput
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    where?: UserToGaAccountWhereInput
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    cursor?: UserToGaAccountWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: GaAccountScalarFieldEnum | GaAccountScalarFieldEnum[]
+    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
   }
 
   /**
@@ -45783,7 +46946,6 @@ export namespace Prisma {
 
   export const GaAccountScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
     gaAccountId: 'gaAccountId',
     gaAccountName: 'gaAccountName',
     deleted: 'deleted'
@@ -46143,6 +47305,17 @@ export namespace Prisma {
   };
 
   export type UserToSproutSocialAccountScalarFieldEnum = (typeof UserToSproutSocialAccountScalarFieldEnum)[keyof typeof UserToSproutSocialAccountScalarFieldEnum]
+
+
+  export const UserToGaAccountScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    gaAccountId: 'gaAccountId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserToGaAccountScalarFieldEnum = (typeof UserToGaAccountScalarFieldEnum)[keyof typeof UserToGaAccountScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
@@ -46716,24 +47889,22 @@ export namespace Prisma {
     OR?: GaAccountWhereInput[]
     NOT?: GaAccountWhereInput | GaAccountWhereInput[]
     id?: StringFilter<"GaAccount"> | string
-    userId?: StringFilter<"GaAccount"> | string
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
     deleted?: BoolFilter<"GaAccount"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     gaProperties?: GaPropertyListRelationFilter
     conversations?: ConversationListRelationFilter
+    userToGaAccounts?: UserToGaAccountListRelationFilter
   }
 
   export type GaAccountOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
-    user?: UserOrderByWithRelationInput
     gaProperties?: GaPropertyOrderByRelationAggregateInput
     conversations?: ConversationOrderByRelationAggregateInput
+    userToGaAccounts?: UserToGaAccountOrderByRelationAggregateInput
   }
 
   export type GaAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -46741,18 +47912,16 @@ export namespace Prisma {
     AND?: GaAccountWhereInput | GaAccountWhereInput[]
     OR?: GaAccountWhereInput[]
     NOT?: GaAccountWhereInput | GaAccountWhereInput[]
-    userId?: StringFilter<"GaAccount"> | string
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
     deleted?: BoolFilter<"GaAccount"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     gaProperties?: GaPropertyListRelationFilter
     conversations?: ConversationListRelationFilter
+    userToGaAccounts?: UserToGaAccountListRelationFilter
   }, "id">
 
   export type GaAccountOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
@@ -46766,7 +47935,6 @@ export namespace Prisma {
     OR?: GaAccountScalarWhereWithAggregatesInput[]
     NOT?: GaAccountScalarWhereWithAggregatesInput | GaAccountScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"GaAccount"> | string
-    userId?: StringWithAggregatesFilter<"GaAccount"> | string
     gaAccountId?: StringWithAggregatesFilter<"GaAccount"> | string
     gaAccountName?: StringWithAggregatesFilter<"GaAccount"> | string
     deleted?: BoolWithAggregatesFilter<"GaAccount"> | boolean
@@ -48636,6 +49804,65 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"UserToSproutSocialAccount"> | Date | string
   }
 
+  export type UserToGaAccountWhereInput = {
+    AND?: UserToGaAccountWhereInput | UserToGaAccountWhereInput[]
+    OR?: UserToGaAccountWhereInput[]
+    NOT?: UserToGaAccountWhereInput | UserToGaAccountWhereInput[]
+    id?: StringFilter<"UserToGaAccount"> | string
+    userId?: StringFilter<"UserToGaAccount"> | string
+    gaAccountId?: StringFilter<"UserToGaAccount"> | string
+    createdAt?: DateTimeFilter<"UserToGaAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"UserToGaAccount"> | Date | string
+    gaAccount?: XOR<GaAccountScalarRelationFilter, GaAccountWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserToGaAccountOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    gaAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    gaAccount?: GaAccountOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserToGaAccountWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_gaAccountId?: UserToGaAccountUserIdGaAccountIdCompoundUniqueInput
+    AND?: UserToGaAccountWhereInput | UserToGaAccountWhereInput[]
+    OR?: UserToGaAccountWhereInput[]
+    NOT?: UserToGaAccountWhereInput | UserToGaAccountWhereInput[]
+    userId?: StringFilter<"UserToGaAccount"> | string
+    gaAccountId?: StringFilter<"UserToGaAccount"> | string
+    createdAt?: DateTimeFilter<"UserToGaAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"UserToGaAccount"> | Date | string
+    gaAccount?: XOR<GaAccountScalarRelationFilter, GaAccountWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_gaAccountId">
+
+  export type UserToGaAccountOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    gaAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserToGaAccountCountOrderByAggregateInput
+    _max?: UserToGaAccountMaxOrderByAggregateInput
+    _min?: UserToGaAccountMinOrderByAggregateInput
+  }
+
+  export type UserToGaAccountScalarWhereWithAggregatesInput = {
+    AND?: UserToGaAccountScalarWhereWithAggregatesInput | UserToGaAccountScalarWhereWithAggregatesInput[]
+    OR?: UserToGaAccountScalarWhereWithAggregatesInput[]
+    NOT?: UserToGaAccountScalarWhereWithAggregatesInput | UserToGaAccountScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserToGaAccount"> | string
+    userId?: StringWithAggregatesFilter<"UserToGaAccount"> | string
+    gaAccountId?: StringWithAggregatesFilter<"UserToGaAccount"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserToGaAccount"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserToGaAccount"> | Date | string
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -48670,7 +49897,7 @@ export namespace Prisma {
     clientTickets?: TicketListRelationFilter
     ticketComments?: TicketCommentListRelationFilter
     activities?: ClientActivityListRelationFilter
-    gaAccounts?: GaAccountListRelationFilter
+    userToGaAccounts?: UserToGaAccountListRelationFilter
     gaImportRuns?: GaImportRunListRelationFilter
     sproutSocialAccounts?: UserToSproutSocialAccountListRelationFilter
   }
@@ -48706,7 +49933,7 @@ export namespace Prisma {
     clientTickets?: TicketOrderByRelationAggregateInput
     ticketComments?: TicketCommentOrderByRelationAggregateInput
     activities?: ClientActivityOrderByRelationAggregateInput
-    gaAccounts?: GaAccountOrderByRelationAggregateInput
+    userToGaAccounts?: UserToGaAccountOrderByRelationAggregateInput
     gaImportRuns?: GaImportRunOrderByRelationAggregateInput
     sproutSocialAccounts?: UserToSproutSocialAccountOrderByRelationAggregateInput
   }
@@ -48745,7 +49972,7 @@ export namespace Prisma {
     clientTickets?: TicketListRelationFilter
     ticketComments?: TicketCommentListRelationFilter
     activities?: ClientActivityListRelationFilter
-    gaAccounts?: GaAccountListRelationFilter
+    userToGaAccounts?: UserToGaAccountListRelationFilter
     gaImportRuns?: GaImportRunListRelationFilter
     sproutSocialAccounts?: UserToSproutSocialAccountListRelationFilter
   }, "id" | "email">
@@ -49506,19 +50733,19 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
-    user: UserCreateNestedOneWithoutGaAccountsInput
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutGaAccountInput
   }
 
   export type GaAccountUncheckedCreateInput = {
     id?: string
-    userId: string
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput
   }
 
   export type GaAccountUpdateInput = {
@@ -49526,24 +50753,23 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutGaAccountsNestedInput
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutGaAccountNestedInput
   }
 
   export type GaAccountUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput
   }
 
   export type GaAccountCreateManyInput = {
     id?: string
-    userId: string
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
@@ -49558,7 +50784,6 @@ export namespace Prisma {
 
   export type GaAccountUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -51603,6 +52828,60 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserToGaAccountCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccount: GaAccountCreateNestedOneWithoutUserToGaAccountsInput
+    user: UserCreateNestedOneWithoutUserToGaAccountsInput
+  }
+
+  export type UserToGaAccountUncheckedCreateInput = {
+    id?: string
+    userId: string
+    gaAccountId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToGaAccountUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccount?: GaAccountUpdateOneRequiredWithoutUserToGaAccountsNestedInput
+    user?: UserUpdateOneRequiredWithoutUserToGaAccountsNestedInput
+  }
+
+  export type UserToGaAccountUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    gaAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToGaAccountCreateManyInput = {
+    id?: string
+    userId: string
+    gaAccountId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserToGaAccountUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToGaAccountUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    gaAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -51632,7 +52911,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -51666,7 +52945,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -51700,7 +52979,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -51734,7 +53013,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -52596,6 +53875,12 @@ export namespace Prisma {
     none?: ConversationWhereInput
   }
 
+  export type UserToGaAccountListRelationFilter = {
+    every?: UserToGaAccountWhereInput
+    some?: UserToGaAccountWhereInput
+    none?: UserToGaAccountWhereInput
+  }
+
   export type GaPropertyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -52604,9 +53889,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserToGaAccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type GaAccountCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
@@ -52614,7 +53902,6 @@ export namespace Prisma {
 
   export type GaAccountMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
@@ -52622,7 +53909,6 @@ export namespace Prisma {
 
   export type GaAccountMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
@@ -54143,6 +55429,35 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type UserToGaAccountUserIdGaAccountIdCompoundUniqueInput = {
+    userId: string
+    gaAccountId: string
+  }
+
+  export type UserToGaAccountCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    gaAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserToGaAccountMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    gaAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserToGaAccountMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    gaAccountId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -54206,12 +55521,6 @@ export namespace Prisma {
     none?: ClientActivityWhereInput
   }
 
-  export type GaAccountListRelationFilter = {
-    every?: GaAccountWhereInput
-    some?: GaAccountWhereInput
-    none?: GaAccountWhereInput
-  }
-
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -54237,10 +55546,6 @@ export namespace Prisma {
   }
 
   export type ClientActivityOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type GaAccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -54779,12 +56084,6 @@ export namespace Prisma {
     deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutGaAccountsInput = {
-    create?: XOR<UserCreateWithoutGaAccountsInput, UserUncheckedCreateWithoutGaAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutGaAccountsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type GaPropertyCreateNestedManyWithoutGaAccountInput = {
     create?: XOR<GaPropertyCreateWithoutGaAccountInput, GaPropertyUncheckedCreateWithoutGaAccountInput> | GaPropertyCreateWithoutGaAccountInput[] | GaPropertyUncheckedCreateWithoutGaAccountInput[]
     connectOrCreate?: GaPropertyCreateOrConnectWithoutGaAccountInput | GaPropertyCreateOrConnectWithoutGaAccountInput[]
@@ -54797,6 +56096,13 @@ export namespace Prisma {
     connectOrCreate?: ConversationCreateOrConnectWithoutGaAccountInput | ConversationCreateOrConnectWithoutGaAccountInput[]
     createMany?: ConversationCreateManyGaAccountInputEnvelope
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type UserToGaAccountCreateNestedManyWithoutGaAccountInput = {
+    create?: XOR<UserToGaAccountCreateWithoutGaAccountInput, UserToGaAccountUncheckedCreateWithoutGaAccountInput> | UserToGaAccountCreateWithoutGaAccountInput[] | UserToGaAccountUncheckedCreateWithoutGaAccountInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutGaAccountInput | UserToGaAccountCreateOrConnectWithoutGaAccountInput[]
+    createMany?: UserToGaAccountCreateManyGaAccountInputEnvelope
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
   }
 
   export type GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput = {
@@ -54813,12 +56119,11 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutGaAccountsNestedInput = {
-    create?: XOR<UserCreateWithoutGaAccountsInput, UserUncheckedCreateWithoutGaAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutGaAccountsInput
-    upsert?: UserUpsertWithoutGaAccountsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGaAccountsInput, UserUpdateWithoutGaAccountsInput>, UserUncheckedUpdateWithoutGaAccountsInput>
+  export type UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput = {
+    create?: XOR<UserToGaAccountCreateWithoutGaAccountInput, UserToGaAccountUncheckedCreateWithoutGaAccountInput> | UserToGaAccountCreateWithoutGaAccountInput[] | UserToGaAccountUncheckedCreateWithoutGaAccountInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutGaAccountInput | UserToGaAccountCreateOrConnectWithoutGaAccountInput[]
+    createMany?: UserToGaAccountCreateManyGaAccountInputEnvelope
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
   }
 
   export type GaPropertyUpdateManyWithoutGaAccountNestedInput = {
@@ -54849,6 +56154,20 @@ export namespace Prisma {
     deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
   }
 
+  export type UserToGaAccountUpdateManyWithoutGaAccountNestedInput = {
+    create?: XOR<UserToGaAccountCreateWithoutGaAccountInput, UserToGaAccountUncheckedCreateWithoutGaAccountInput> | UserToGaAccountCreateWithoutGaAccountInput[] | UserToGaAccountUncheckedCreateWithoutGaAccountInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutGaAccountInput | UserToGaAccountCreateOrConnectWithoutGaAccountInput[]
+    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutGaAccountInput | UserToGaAccountUpsertWithWhereUniqueWithoutGaAccountInput[]
+    createMany?: UserToGaAccountCreateManyGaAccountInputEnvelope
+    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    update?: UserToGaAccountUpdateWithWhereUniqueWithoutGaAccountInput | UserToGaAccountUpdateWithWhereUniqueWithoutGaAccountInput[]
+    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutGaAccountInput | UserToGaAccountUpdateManyWithWhereWithoutGaAccountInput[]
+    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
+  }
+
   export type GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput = {
     create?: XOR<GaPropertyCreateWithoutGaAccountInput, GaPropertyUncheckedCreateWithoutGaAccountInput> | GaPropertyCreateWithoutGaAccountInput[] | GaPropertyUncheckedCreateWithoutGaAccountInput[]
     connectOrCreate?: GaPropertyCreateOrConnectWithoutGaAccountInput | GaPropertyCreateOrConnectWithoutGaAccountInput[]
@@ -54875,6 +56194,20 @@ export namespace Prisma {
     update?: ConversationUpdateWithWhereUniqueWithoutGaAccountInput | ConversationUpdateWithWhereUniqueWithoutGaAccountInput[]
     updateMany?: ConversationUpdateManyWithWhereWithoutGaAccountInput | ConversationUpdateManyWithWhereWithoutGaAccountInput[]
     deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput = {
+    create?: XOR<UserToGaAccountCreateWithoutGaAccountInput, UserToGaAccountUncheckedCreateWithoutGaAccountInput> | UserToGaAccountCreateWithoutGaAccountInput[] | UserToGaAccountUncheckedCreateWithoutGaAccountInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutGaAccountInput | UserToGaAccountCreateOrConnectWithoutGaAccountInput[]
+    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutGaAccountInput | UserToGaAccountUpsertWithWhereUniqueWithoutGaAccountInput[]
+    createMany?: UserToGaAccountCreateManyGaAccountInputEnvelope
+    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    update?: UserToGaAccountUpdateWithWhereUniqueWithoutGaAccountInput | UserToGaAccountUpdateWithWhereUniqueWithoutGaAccountInput[]
+    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutGaAccountInput | UserToGaAccountUpdateManyWithWhereWithoutGaAccountInput[]
+    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
   }
 
   export type GaAccountCreateNestedOneWithoutGaPropertiesInput = {
@@ -56066,6 +57399,34 @@ export namespace Prisma {
     update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutUsersInput, SproutSocialAccountUpdateWithoutUsersInput>, SproutSocialAccountUncheckedUpdateWithoutUsersInput>
   }
 
+  export type GaAccountCreateNestedOneWithoutUserToGaAccountsInput = {
+    create?: XOR<GaAccountCreateWithoutUserToGaAccountsInput, GaAccountUncheckedCreateWithoutUserToGaAccountsInput>
+    connectOrCreate?: GaAccountCreateOrConnectWithoutUserToGaAccountsInput
+    connect?: GaAccountWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUserToGaAccountsInput = {
+    create?: XOR<UserCreateWithoutUserToGaAccountsInput, UserUncheckedCreateWithoutUserToGaAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserToGaAccountsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GaAccountUpdateOneRequiredWithoutUserToGaAccountsNestedInput = {
+    create?: XOR<GaAccountCreateWithoutUserToGaAccountsInput, GaAccountUncheckedCreateWithoutUserToGaAccountsInput>
+    connectOrCreate?: GaAccountCreateOrConnectWithoutUserToGaAccountsInput
+    upsert?: GaAccountUpsertWithoutUserToGaAccountsInput
+    connect?: GaAccountWhereUniqueInput
+    update?: XOR<XOR<GaAccountUpdateToOneWithWhereWithoutUserToGaAccountsInput, GaAccountUpdateWithoutUserToGaAccountsInput>, GaAccountUncheckedUpdateWithoutUserToGaAccountsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutUserToGaAccountsNestedInput = {
+    create?: XOR<UserCreateWithoutUserToGaAccountsInput, UserUncheckedCreateWithoutUserToGaAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserToGaAccountsInput
+    upsert?: UserUpsertWithoutUserToGaAccountsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserToGaAccountsInput, UserUpdateWithoutUserToGaAccountsInput>, UserUncheckedUpdateWithoutUserToGaAccountsInput>
+  }
+
   export type RoleCreateNestedOneWithoutUsersInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
@@ -56189,11 +57550,11 @@ export namespace Prisma {
     connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
   }
 
-  export type GaAccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<GaAccountCreateWithoutUserInput, GaAccountUncheckedCreateWithoutUserInput> | GaAccountCreateWithoutUserInput[] | GaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GaAccountCreateOrConnectWithoutUserInput | GaAccountCreateOrConnectWithoutUserInput[]
-    createMany?: GaAccountCreateManyUserInputEnvelope
-    connect?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
+  export type UserToGaAccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
   }
 
   export type GaImportRunCreateNestedManyWithoutRequestedByInput = {
@@ -56321,11 +57682,11 @@ export namespace Prisma {
     connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
   }
 
-  export type GaAccountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<GaAccountCreateWithoutUserInput, GaAccountUncheckedCreateWithoutUserInput> | GaAccountCreateWithoutUserInput[] | GaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GaAccountCreateOrConnectWithoutUserInput | GaAccountCreateOrConnectWithoutUserInput[]
-    createMany?: GaAccountCreateManyUserInputEnvelope
-    connect?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
+  export type UserToGaAccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
   }
 
   export type GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput = {
@@ -56584,18 +57945,18 @@ export namespace Prisma {
     deleteMany?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
   }
 
-  export type GaAccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GaAccountCreateWithoutUserInput, GaAccountUncheckedCreateWithoutUserInput> | GaAccountCreateWithoutUserInput[] | GaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GaAccountCreateOrConnectWithoutUserInput | GaAccountCreateOrConnectWithoutUserInput[]
-    upsert?: GaAccountUpsertWithWhereUniqueWithoutUserInput | GaAccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GaAccountCreateManyUserInputEnvelope
-    set?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    disconnect?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    delete?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    connect?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    update?: GaAccountUpdateWithWhereUniqueWithoutUserInput | GaAccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GaAccountUpdateManyWithWhereWithoutUserInput | GaAccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GaAccountScalarWhereInput | GaAccountScalarWhereInput[]
+  export type UserToGaAccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutUserInput | UserToGaAccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    update?: UserToGaAccountUpdateWithWhereUniqueWithoutUserInput | UserToGaAccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutUserInput | UserToGaAccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
   }
 
   export type GaImportRunUpdateManyWithoutRequestedByNestedInput = {
@@ -56846,18 +58207,18 @@ export namespace Prisma {
     deleteMany?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
   }
 
-  export type GaAccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GaAccountCreateWithoutUserInput, GaAccountUncheckedCreateWithoutUserInput> | GaAccountCreateWithoutUserInput[] | GaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GaAccountCreateOrConnectWithoutUserInput | GaAccountCreateOrConnectWithoutUserInput[]
-    upsert?: GaAccountUpsertWithWhereUniqueWithoutUserInput | GaAccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GaAccountCreateManyUserInputEnvelope
-    set?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    disconnect?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    delete?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    connect?: GaAccountWhereUniqueInput | GaAccountWhereUniqueInput[]
-    update?: GaAccountUpdateWithWhereUniqueWithoutUserInput | GaAccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GaAccountUpdateManyWithWhereWithoutUserInput | GaAccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GaAccountScalarWhereInput | GaAccountScalarWhereInput[]
+  export type UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutUserInput | UserToGaAccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    update?: UserToGaAccountUpdateWithWhereUniqueWithoutUserInput | UserToGaAccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutUserInput | UserToGaAccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
   }
 
   export type GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput = {
@@ -57560,7 +58921,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -57593,7 +58954,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -57642,7 +59003,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -57675,7 +59036,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -57708,7 +59069,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -57741,7 +59102,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -57779,7 +59140,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -57812,7 +59173,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -57861,7 +59222,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -57894,7 +59255,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -57938,7 +59299,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -57971,7 +59332,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -58004,7 +59365,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -58037,7 +59398,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -58075,7 +59436,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -58108,7 +59469,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -58167,17 +59528,17 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
-    user: UserCreateNestedOneWithoutGaAccountsInput
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutGaAccountInput
   }
 
   export type GaAccountUncheckedCreateWithoutConversationsInput = {
     id?: string
-    userId: string
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput
   }
 
   export type GaAccountCreateOrConnectWithoutConversationsInput = {
@@ -58255,7 +59616,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -58288,7 +59649,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -58332,7 +59693,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -58365,7 +59726,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -58420,17 +59781,17 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutGaAccountsNestedInput
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutGaAccountNestedInput
   }
 
   export type GaAccountUncheckedUpdateWithoutConversationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput
   }
 
   export type GaPropertyUpsertWithoutConversationsInput = {
@@ -58468,77 +59829,6 @@ export namespace Prisma {
     kpiMonthly?: GaKpiMonthlyUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     sourceDaily?: GaSourceDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
-  }
-
-  export type UserCreateWithoutGaAccountsInput = {
-    id?: string
-    name?: string | null
-    deleted?: boolean
-    email?: string | null
-    password?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    role: RoleCreateNestedOneWithoutUsersInput
-    accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
-    activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
-    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutGaAccountsInput = {
-    id?: string
-    name?: string | null
-    deleted?: boolean
-    email?: string | null
-    password?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    roleId: string
-    isActive?: boolean
-    accountRepId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
-    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutGaAccountsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutGaAccountsInput, UserUncheckedCreateWithoutGaAccountsInput>
   }
 
   export type GaPropertyCreateWithoutGaAccountInput = {
@@ -58613,81 +59903,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutGaAccountsInput = {
-    update: XOR<UserUpdateWithoutGaAccountsInput, UserUncheckedUpdateWithoutGaAccountsInput>
-    create: XOR<UserCreateWithoutGaAccountsInput, UserUncheckedCreateWithoutGaAccountsInput>
-    where?: UserWhereInput
+  export type UserToGaAccountCreateWithoutGaAccountInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUserToGaAccountsInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutGaAccountsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutGaAccountsInput, UserUncheckedUpdateWithoutGaAccountsInput>
+  export type UserToGaAccountUncheckedCreateWithoutGaAccountInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type UserUpdateWithoutGaAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
-    accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
-    activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+  export type UserToGaAccountCreateOrConnectWithoutGaAccountInput = {
+    where: UserToGaAccountWhereUniqueInput
+    create: XOR<UserToGaAccountCreateWithoutGaAccountInput, UserToGaAccountUncheckedCreateWithoutGaAccountInput>
   }
 
-  export type UserUncheckedUpdateWithoutGaAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    roleId?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
-    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+  export type UserToGaAccountCreateManyGaAccountInputEnvelope = {
+    data: UserToGaAccountCreateManyGaAccountInput | UserToGaAccountCreateManyGaAccountInput[]
+    skipDuplicates?: boolean
   }
 
   export type GaPropertyUpsertWithWhereUniqueWithoutGaAccountInput = {
@@ -58749,22 +59986,49 @@ export namespace Prisma {
     userId?: StringFilter<"Conversation"> | string
   }
 
+  export type UserToGaAccountUpsertWithWhereUniqueWithoutGaAccountInput = {
+    where: UserToGaAccountWhereUniqueInput
+    update: XOR<UserToGaAccountUpdateWithoutGaAccountInput, UserToGaAccountUncheckedUpdateWithoutGaAccountInput>
+    create: XOR<UserToGaAccountCreateWithoutGaAccountInput, UserToGaAccountUncheckedCreateWithoutGaAccountInput>
+  }
+
+  export type UserToGaAccountUpdateWithWhereUniqueWithoutGaAccountInput = {
+    where: UserToGaAccountWhereUniqueInput
+    data: XOR<UserToGaAccountUpdateWithoutGaAccountInput, UserToGaAccountUncheckedUpdateWithoutGaAccountInput>
+  }
+
+  export type UserToGaAccountUpdateManyWithWhereWithoutGaAccountInput = {
+    where: UserToGaAccountScalarWhereInput
+    data: XOR<UserToGaAccountUpdateManyMutationInput, UserToGaAccountUncheckedUpdateManyWithoutGaAccountInput>
+  }
+
+  export type UserToGaAccountScalarWhereInput = {
+    AND?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
+    OR?: UserToGaAccountScalarWhereInput[]
+    NOT?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
+    id?: StringFilter<"UserToGaAccount"> | string
+    userId?: StringFilter<"UserToGaAccount"> | string
+    gaAccountId?: StringFilter<"UserToGaAccount"> | string
+    createdAt?: DateTimeFilter<"UserToGaAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"UserToGaAccount"> | Date | string
+  }
+
   export type GaAccountCreateWithoutGaPropertiesInput = {
     id?: string
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
-    user: UserCreateNestedOneWithoutGaAccountsInput
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutGaAccountInput
   }
 
   export type GaAccountUncheckedCreateWithoutGaPropertiesInput = {
     id?: string
-    userId: string
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput
   }
 
   export type GaAccountCreateOrConnectWithoutGaPropertiesInput = {
@@ -58996,17 +60260,17 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutGaAccountsNestedInput
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutGaAccountNestedInput
   }
 
   export type GaAccountUncheckedUpdateWithoutGaPropertiesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput
   }
 
   export type ConversationUpsertWithWhereUniqueWithoutGaPropertyInput = {
@@ -59246,7 +60510,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
@@ -59279,7 +60543,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -59365,7 +60629,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
@@ -59398,7 +60662,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -59702,7 +60966,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -59735,7 +60999,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -59784,7 +61048,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -59817,7 +61081,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -59850,7 +61114,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -59883,7 +61147,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -59960,7 +61224,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -59993,7 +61257,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -60031,7 +61295,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -60064,7 +61328,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -60216,7 +61480,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -60249,7 +61513,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -60293,7 +61557,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -60326,7 +61590,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -60462,7 +61726,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -60495,7 +61759,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -60544,7 +61808,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -60577,7 +61841,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -60980,7 +62244,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -61013,7 +62277,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -61197,7 +62461,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -61230,7 +62494,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -62279,7 +63543,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
   }
 
@@ -62312,7 +63576,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
   }
 
@@ -62400,7 +63664,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
   }
 
@@ -62433,7 +63697,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
   }
 
@@ -62480,6 +63744,206 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type GaAccountCreateWithoutUserToGaAccountsInput = {
+    id?: string
+    gaAccountId: string
+    gaAccountName: string
+    deleted?: boolean
+    gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
+    conversations?: ConversationCreateNestedManyWithoutGaAccountInput
+  }
+
+  export type GaAccountUncheckedCreateWithoutUserToGaAccountsInput = {
+    id?: string
+    gaAccountId: string
+    gaAccountName: string
+    deleted?: boolean
+    gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
+  }
+
+  export type GaAccountCreateOrConnectWithoutUserToGaAccountsInput = {
+    where: GaAccountWhereUniqueInput
+    create: XOR<GaAccountCreateWithoutUserToGaAccountsInput, GaAccountUncheckedCreateWithoutUserToGaAccountsInput>
+  }
+
+  export type UserCreateWithoutUserToGaAccountsInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role: RoleCreateNestedOneWithoutUsersInput
+    accountRep?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    activities?: ClientActivityCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserToGaAccountsInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    accountRepId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserToGaAccountsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserToGaAccountsInput, UserUncheckedCreateWithoutUserToGaAccountsInput>
+  }
+
+  export type GaAccountUpsertWithoutUserToGaAccountsInput = {
+    update: XOR<GaAccountUpdateWithoutUserToGaAccountsInput, GaAccountUncheckedUpdateWithoutUserToGaAccountsInput>
+    create: XOR<GaAccountCreateWithoutUserToGaAccountsInput, GaAccountUncheckedCreateWithoutUserToGaAccountsInput>
+    where?: GaAccountWhereInput
+  }
+
+  export type GaAccountUpdateToOneWithWhereWithoutUserToGaAccountsInput = {
+    where?: GaAccountWhereInput
+    data: XOR<GaAccountUpdateWithoutUserToGaAccountsInput, GaAccountUncheckedUpdateWithoutUserToGaAccountsInput>
+  }
+
+  export type GaAccountUpdateWithoutUserToGaAccountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    gaAccountId?: StringFieldUpdateOperationsInput | string
+    gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
+    conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
+  }
+
+  export type GaAccountUncheckedUpdateWithoutUserToGaAccountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    gaAccountId?: StringFieldUpdateOperationsInput | string
+    gaAccountName?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
+  }
+
+  export type UserUpsertWithoutUserToGaAccountsInput = {
+    update: XOR<UserUpdateWithoutUserToGaAccountsInput, UserUncheckedUpdateWithoutUserToGaAccountsInput>
+    create: XOR<UserCreateWithoutUserToGaAccountsInput, UserUncheckedCreateWithoutUserToGaAccountsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserToGaAccountsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserToGaAccountsInput, UserUncheckedUpdateWithoutUserToGaAccountsInput>
+  }
+
+  export type UserUpdateWithoutUserToGaAccountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    accountRep?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserToGaAccountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleCreateWithoutUsersInput = {
@@ -62529,7 +63993,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -62562,7 +64026,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -62600,7 +64064,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -62633,7 +64097,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -63141,31 +64605,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type GaAccountCreateWithoutUserInput = {
+  export type UserToGaAccountCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccount: GaAccountCreateNestedOneWithoutUserToGaAccountsInput
+  }
+
+  export type UserToGaAccountUncheckedCreateWithoutUserInput = {
     id?: string
     gaAccountId: string
-    gaAccountName: string
-    deleted?: boolean
-    gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
-    conversations?: ConversationCreateNestedManyWithoutGaAccountInput
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type GaAccountUncheckedCreateWithoutUserInput = {
-    id?: string
-    gaAccountId: string
-    gaAccountName: string
-    deleted?: boolean
-    gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
+  export type UserToGaAccountCreateOrConnectWithoutUserInput = {
+    where: UserToGaAccountWhereUniqueInput
+    create: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput>
   }
 
-  export type GaAccountCreateOrConnectWithoutUserInput = {
-    where: GaAccountWhereUniqueInput
-    create: XOR<GaAccountCreateWithoutUserInput, GaAccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type GaAccountCreateManyUserInputEnvelope = {
-    data: GaAccountCreateManyUserInput | GaAccountCreateManyUserInput[]
+  export type UserToGaAccountCreateManyUserInputEnvelope = {
+    data: UserToGaAccountCreateManyUserInput | UserToGaAccountCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -63289,7 +64749,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -63322,7 +64782,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -63692,31 +65152,20 @@ export namespace Prisma {
     userId?: StringFilter<"ClientActivity"> | string
   }
 
-  export type GaAccountUpsertWithWhereUniqueWithoutUserInput = {
-    where: GaAccountWhereUniqueInput
-    update: XOR<GaAccountUpdateWithoutUserInput, GaAccountUncheckedUpdateWithoutUserInput>
-    create: XOR<GaAccountCreateWithoutUserInput, GaAccountUncheckedCreateWithoutUserInput>
+  export type UserToGaAccountUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserToGaAccountWhereUniqueInput
+    update: XOR<UserToGaAccountUpdateWithoutUserInput, UserToGaAccountUncheckedUpdateWithoutUserInput>
+    create: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput>
   }
 
-  export type GaAccountUpdateWithWhereUniqueWithoutUserInput = {
-    where: GaAccountWhereUniqueInput
-    data: XOR<GaAccountUpdateWithoutUserInput, GaAccountUncheckedUpdateWithoutUserInput>
+  export type UserToGaAccountUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserToGaAccountWhereUniqueInput
+    data: XOR<UserToGaAccountUpdateWithoutUserInput, UserToGaAccountUncheckedUpdateWithoutUserInput>
   }
 
-  export type GaAccountUpdateManyWithWhereWithoutUserInput = {
-    where: GaAccountScalarWhereInput
-    data: XOR<GaAccountUpdateManyMutationInput, GaAccountUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type GaAccountScalarWhereInput = {
-    AND?: GaAccountScalarWhereInput | GaAccountScalarWhereInput[]
-    OR?: GaAccountScalarWhereInput[]
-    NOT?: GaAccountScalarWhereInput | GaAccountScalarWhereInput[]
-    id?: StringFilter<"GaAccount"> | string
-    userId?: StringFilter<"GaAccount"> | string
-    gaAccountId?: StringFilter<"GaAccount"> | string
-    gaAccountName?: StringFilter<"GaAccount"> | string
-    deleted?: BoolFilter<"GaAccount"> | boolean
+  export type UserToGaAccountUpdateManyWithWhereWithoutUserInput = {
+    where: UserToGaAccountScalarWhereInput
+    data: XOR<UserToGaAccountUpdateManyMutationInput, UserToGaAccountUncheckedUpdateManyWithoutUserInput>
   }
 
   export type GaImportRunUpsertWithWhereUniqueWithoutRequestedByInput = {
@@ -63779,7 +65228,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -63812,7 +65261,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -63861,7 +65310,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -63894,7 +65343,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -63927,7 +65376,7 @@ export namespace Prisma {
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -63960,7 +65409,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -63998,7 +65447,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -64031,7 +65480,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -64147,7 +65596,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -64180,7 +65629,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -64224,7 +65673,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -64257,7 +65706,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -64463,7 +65912,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -64496,7 +65945,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -64584,7 +66033,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -64617,7 +66066,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -64775,7 +66224,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
-    gaAccounts?: GaAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
@@ -64808,7 +66257,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
-    gaAccounts?: GaAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
@@ -64857,7 +66306,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -64890,7 +66339,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -64976,6 +66425,13 @@ export namespace Prisma {
     userId: string
   }
 
+  export type UserToGaAccountCreateManyGaAccountInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type GaPropertyUpdateWithoutGaAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     gaPropertyId?: StringFieldUpdateOperationsInput | string
@@ -65045,6 +66501,27 @@ export namespace Prisma {
     gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserToGaAccountUpdateWithoutGaAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserToGaAccountsNestedInput
+  }
+
+  export type UserToGaAccountUncheckedUpdateWithoutGaAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToGaAccountUncheckedUpdateManyWithoutGaAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConversationCreateManyGaPropertyInput = {
@@ -65383,7 +66860,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -65416,7 +66893,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -66206,11 +67683,11 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type GaAccountCreateManyUserInput = {
+  export type UserToGaAccountCreateManyUserInput = {
     id?: string
     gaAccountId: string
-    gaAccountName: string
-    deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaImportRunCreateManyRequestedByInput = {
@@ -66259,7 +67736,7 @@ export namespace Prisma {
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
@@ -66292,7 +67769,7 @@ export namespace Prisma {
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    gaAccounts?: GaAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -66788,29 +68265,25 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type GaAccountUpdateWithoutUserInput = {
+  export type UserToGaAccountUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    gaAccountId?: StringFieldUpdateOperationsInput | string
-    gaAccountName?: StringFieldUpdateOperationsInput | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
-    conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccount?: GaAccountUpdateOneRequiredWithoutUserToGaAccountsNestedInput
   }
 
-  export type GaAccountUncheckedUpdateWithoutUserInput = {
+  export type UserToGaAccountUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
-    gaAccountName?: StringFieldUpdateOperationsInput | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type GaAccountUncheckedUpdateManyWithoutUserInput = {
+  export type UserToGaAccountUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
-    gaAccountName?: StringFieldUpdateOperationsInput | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaImportRunUpdateWithoutRequestedByInput = {

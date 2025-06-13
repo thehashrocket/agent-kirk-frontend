@@ -51,18 +51,15 @@ export async function GET(request: Request): Promise<NextResponse> {
 
     // Fetch the client with their GA accounts and properties
     const client = await prisma.user.findUnique({
-      where: {
-        id: clientId,
-      },
+      where: { id: clientId },
       include: {
-        gaAccounts: {
-          where: {
-            deleted: false,
-          },
+        userToGaAccounts: {
           include: {
-            gaProperties: {
-              where: {
-                deleted: false,
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: { deleted: false },
+                },
               },
             },
           },
@@ -85,7 +82,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       id: client.id,
       name: client.name,
       email: client.email,
-      gaAccounts: client.gaAccounts,
+      gaAccounts: client.userToGaAccounts.map((uta: { gaAccount: any }) => uta.gaAccount),
     });
 
   } catch (error) {

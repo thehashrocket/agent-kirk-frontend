@@ -65,15 +65,19 @@ export async function DELETE(
       where: {
         id: propertyId,
         gaAccountId: accountId,
-        deleted: false, // Only allow deletion of non-deleted properties
+        deleted: false,
       },
       include: {
         gaAccount: {
           include: {
-            user: true,
-          },
-        },
-      },
+            userToGaAccounts: {
+              include: {
+                user: true
+              }
+            }
+          }
+        }
+      }
     });
 
     if (!gaProperty) {
@@ -84,16 +88,15 @@ export async function DELETE(
     let canDelete = false;
 
     if (currentUser.role.name === 'ADMIN') {
-      // Admins can delete any property
       canDelete = true;
     } else if (currentUser.role.name === 'ACCOUNT_REP') {
-      // Account reps can delete properties of their assigned clients
-      if (gaProperty.gaAccount.user.accountRepId === currentUser.id) {
+      const userAccount = gaProperty.gaAccount.userToGaAccounts[0]?.user;
+      if (userAccount?.accountRepId === currentUser.id) {
         canDelete = true;
       }
     } else if (currentUser.role.name === 'CLIENT') {
-      // Clients can only delete their own properties
-      if (gaProperty.gaAccount.userId === currentUser.id) {
+      const userAccount = gaProperty.gaAccount.userToGaAccounts[0]?.user;
+      if (userAccount?.id === currentUser.id) {
         canDelete = true;
       }
     }
@@ -102,8 +105,8 @@ export async function DELETE(
       console.log('Delete GA Property - Access denied:', {
         currentUserRole: currentUser.role.name,
         currentUserId: currentUser.id,
-        propertyOwnerId: gaProperty.gaAccount.userId,
-        propertyOwnerAccountRepId: gaProperty.gaAccount.user.accountRepId,
+        propertyOwnerId: gaProperty.gaAccount.userToGaAccounts[0]?.user?.id,
+        propertyOwnerAccountRepId: gaProperty.gaAccount.userToGaAccounts[0]?.user?.accountRepId,
       });
       return new NextResponse('Forbidden - Insufficient permissions', { status: 403 });
     }

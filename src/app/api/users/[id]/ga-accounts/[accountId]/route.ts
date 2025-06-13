@@ -64,11 +64,19 @@ export async function DELETE(
      const gaAccount = await prisma.gaAccount.findFirst({
       where: {
         id: accountId,
-        userId: id,
-        deleted: false, // Only allow deletion of non-deleted accounts
+        userToGaAccounts: {
+          some: {
+            userId: id
+          }
+        },
+        deleted: false,
       },
       include: {
-        user: true,
+        userToGaAccounts: {
+          include: {
+            user: true
+          }
+        }
       },
     });
 
@@ -80,16 +88,15 @@ export async function DELETE(
     let canDelete = false;
 
     if (currentUser.role.name === 'ADMIN') {
-      // Admins can delete any property
       canDelete = true;
     } else if (currentUser.role.name === 'ACCOUNT_REP') {
-      // Account reps can delete properties of their assigned clients
-      if (gaAccount.user.accountRepId === currentUser.id) {
+      const userAccount = gaAccount.userToGaAccounts[0]?.user;
+      if (userAccount?.accountRepId === currentUser.id) {
         canDelete = true;
       }
     } else if (currentUser.role.name === 'CLIENT') {
-      // Clients can only delete their own properties
-      if (gaAccount.userId === currentUser.id) {
+      const userAccount = gaAccount.userToGaAccounts[0]?.user;
+      if (userAccount?.id === currentUser.id) {
         canDelete = true;
       }
     }

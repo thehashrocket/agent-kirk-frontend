@@ -33,14 +33,20 @@ export async function GET() {
       where: { email: session.user.email },
       include: {
         role: true,
-        gaAccounts: {
+        userToGaAccounts: {
           where: {
-            deleted: false, // Only include non-deleted accounts
+            gaAccount: {
+              deleted: false
+            }
           },
           include: {
-            gaProperties: {
-              where: {
-                deleted: false, // Only include non-deleted properties
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
               },
             },
           },
@@ -51,6 +57,8 @@ export async function GET() {
     if (!user) {
       return new NextResponse('User not found', { status: 404 });
     }
+
+    console.log('User:', JSON.stringify(user, null, 2));
 
     return NextResponse.json(user);
   } catch (error) {

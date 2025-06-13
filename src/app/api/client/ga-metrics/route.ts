@@ -197,6 +197,59 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
   try {
     console.log('GA Metrics API - Starting request');
     
+    // Get user from session or auth header
+    const session = await getServerSession(authOptions);
+    let userEmail = session?.user?.email;
+
+    // If no session, try bearer token
+    const authHeader = request.headers.get('authorization');
+    console.log('GA Metrics API - Auth Header:', authHeader);
+
+    if (!userEmail) {
+      console.log('GA Metrics API - No user email found from session or token');
+      return NextResponse.json(
+        { error: 'Unauthorized', code: 'UNAUTHORIZED' },
+        { status: 401 }
+      );
+    }
+
+    console.log('GA Metrics API - Looking up user:', userEmail);
+    // Get user's GA property with accounts
+    const user = await prisma.user.findUnique({
+      where: { email: userEmail },
+      include: {
+        userToGaAccounts: {
+          include: {
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
+              },
+            },
+          },
+        },
+        role: true,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'User not found', code: 'USER_NOT_FOUND' },
+        { status: 404 }
+      );
+    }
+
+    console.log('GA Metrics API - Found user:', user ? 'yes' : 'no');
+    console.log('GA Metrics API - User data:', JSON.stringify({
+      id: user.id,
+      email: user.email,
+      gaAccountsCount: user.userToGaAccounts.filter(uta => uta.gaAccount && !uta.gaAccount.deleted).length || 0,
+      hasProperties: Boolean(user.userToGaAccounts.filter(uta => uta.gaAccount && !uta.gaAccount.deleted)[0]?.gaAccount?.gaProperties?.length)
+    }, null, 2));
+
     // Get the URL query parameters
     const { searchParams } = new URL(request.url);
     
@@ -226,56 +279,16 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       displayRangeTo: displayDateTo.toISOString()
     });
 
-    // Get user from session or auth header
-    const session = await getServerSession(authOptions);
-    let userEmail = session?.user?.email;
-
-    // If no session, try bearer token
-    const authHeader = request.headers.get('authorization');
-    console.log('GA Metrics API - Auth Header:', authHeader);
-
-    if (!userEmail) {
-      console.log('GA Metrics API - No user email found from session or token');
-      return NextResponse.json(
-        { error: 'Unauthorized', code: 'UNAUTHORIZED' },
-        { status: 401 }
-      );
-    }
-
-    console.log('GA Metrics API - Looking up user:', userEmail);
-    // Get user's GA property with accounts
-    const user = await prisma.user.findUnique({
-      where: { email: userEmail },
-      include: {
-        gaAccounts: {
-          where: {
-            deleted: false, // Only include non-deleted accounts
-          },
-          include: {
-            gaProperties: {
-              where: {
-                deleted: false, // Only include non-deleted properties
-              },
-            },
-          },
-        },
-      },
-    });
-
-    console.log('GA Metrics API - Found user:', user ? 'yes' : 'no');
-    console.log('GA Metrics API - User data:', JSON.stringify({
-      id: user?.id,
-      email: user?.email,
-      gaAccountsCount: user?.gaAccounts?.length || 0,
-      hasProperties: Boolean(user?.gaAccounts?.[0]?.gaProperties?.length)
-    }, null, 2));
-
     let gaPropertyId: string | undefined;
     let accountGA4: string | undefined;
     let propertyGA4: string | undefined;
 
-    // Check if user has GA accounts
-    if (!user?.gaAccounts?.length) {
+    // Map and filter userToGaAccounts to get non-deleted gaAccounts
+    const gaAccounts = user?.userToGaAccounts
+      ?.filter(uta => uta.gaAccount && !uta.gaAccount.deleted)
+      .map(uta => uta.gaAccount) || [];
+
+    if (!gaAccounts.length) {
       console.log('GA Metrics API - No GA accounts found for user');
       return NextResponse.json(
         { error: 'No GA account found', code: 'NO_GA_ACCOUNT' },
@@ -285,13 +298,13 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
 
     // Find the requested property if specified
     if (requestedPropertyId) {
-      const requestedProperty = user.gaAccounts
-        .flatMap(account => account.gaProperties)
-        .find(property => property.id === requestedPropertyId);
+      const requestedProperty = gaAccounts
+        .flatMap((account: any) => account.gaProperties)
+        .find((property: any) => property.id === requestedPropertyId);
 
       if (requestedProperty) {
-        const parentAccount = user.gaAccounts.find(account => 
-          account.gaProperties.some(prop => prop.id === requestedPropertyId)
+        const parentAccount = gaAccounts.find((account: any) => 
+          account.gaProperties.some((prop: any) => prop.id === requestedPropertyId)
         );
         if (parentAccount) {
           gaPropertyId = requestedProperty.id;
@@ -304,10 +317,10 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     // If no property was found or no property was requested, use the first property
     if (!gaPropertyId || !accountGA4 || !propertyGA4) {
       // If no properties exist, create one
-      if (!user.gaAccounts[0].gaProperties?.length) {
+      if (!gaAccounts[0]?.gaProperties?.length) {
         console.log('GA Metrics API - No GA properties found, creating default property');
         try {
-          const gaAccount = user.gaAccounts[0];
+          const gaAccount = gaAccounts[0];
           const newProperty = await prisma.gaProperty.create({
             data: {
               gaPropertyId: gaAccount.gaAccountId, // Use account ID as property ID for now
@@ -345,9 +358,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
           );
         }
       } else {
-        gaPropertyId = user.gaAccounts[0].gaProperties[0].id;
-        accountGA4 = user.gaAccounts[0].gaAccountId;
-        propertyGA4 = user.gaAccounts[0].gaProperties[0].gaPropertyId;
+        gaPropertyId = gaAccounts[0].gaProperties[0].id;
+        accountGA4 = gaAccounts[0].gaAccountId;
+        propertyGA4 = gaAccounts[0].gaProperties[0].gaPropertyId;
       }
     }
 
@@ -360,8 +373,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       );
     }
 
-    // Instead of only checking if data exists, count the records to determine if we need full history
-    console.log('GA Metrics API - Checking if data exists in tables');
+    // Check if data exists in tables
     const [kpiDailyCount, kpiMonthlyCount, channelDailyCount, sourceDailyCount] = await Promise.all([
       prisma.gaKpiDaily.count({ where: { gaPropertyId } }),
       prisma.gaKpiMonthly.count({ where: { gaPropertyId } }),
@@ -369,32 +381,22 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       prisma.gaSourceDaily.count({ where: { gaPropertyId } })
     ]);
     
-    // Determine if we need to fetch historical data (5 years) or just the selected range + previous year
+    // Determine if we need to fetch historical data
     const needsHistoricalData = kpiDailyCount === 0 || kpiMonthlyCount === 0 || 
                                channelDailyCount === 0 || sourceDailyCount === 0;
-    
-    // console.log('GA Metrics API - Data check results:', {
-    //   kpiDailyCount,
-    //   kpiMonthlyCount,
-    //   channelDailyCount,
-    //   sourceDailyCount,
-    //   needsHistoricalData
-    // });
     
     // Set date ranges based on what we need
     let queryDateFrom: Date;
     let queryDateTo: Date = new Date(); // Always use today as the end date
     
     if (needsHistoricalData) {
-      // If we need historical data, fetch 5 years worth
       console.log('GA Metrics API - No data found, will fetch 5 years of historical data');
       queryDateFrom = new Date();
       queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 5);
     } else {
-      // Otherwise, get the selected range + previous year for YoY comparison
       console.log('GA Metrics API - Data exists, fetching selected range + previous year');
       queryDateFrom = new Date(dateFrom);
-      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1); // Go back one year from start date
+      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
     }
 
     // IF we don't need historical data, we can pull the most recent month of data from the LLM_DASHBOARD_URL
@@ -409,6 +411,13 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         queryDateFrom: queryDateFrom.toISOString(),
         queryDateTo: queryDateTo.toISOString()
       });
+
+      if (!user) {
+        return NextResponse.json(
+          { error: 'User not found', code: 'USER_NOT_FOUND' },
+          { status: 404 }
+        );
+      }
 
       const importRun = await prisma.gaImportRun.create({
         data: {
@@ -799,6 +808,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
             url: process.env.LLM_DASHBOARD_URL,
             status: llmResponse.status,
             statusText: llmResponse.statusText,
+            errorText: errorText
           });
 
           if (llmResponse.status === 404) {
@@ -813,6 +823,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         let llmData: LLMDashboardResponse;
         try {
           llmData = await llmResponse.json();
+          console.log('GA Metrics API - LLM response:', JSON.stringify(llmData, null, 2));
         } catch (jsonError) {
           console.error('GA Metrics API - Failed to parse LLM response as JSON:', jsonError);
           const responseText = await llmResponse.text();

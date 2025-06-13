@@ -105,14 +105,15 @@ export async function GET(
       const users = await prisma.user.findMany({
         include: {
           role: true,
-          gaAccounts: {
-            where: {
-              deleted: false, // Only include non-deleted accounts
-            },
+          userToGaAccounts: {
             include: {
-              gaProperties: {
-                where: {
-                  deleted: false, // Only include non-deleted properties
+              gaAccount: {
+                include: {
+                  gaProperties: {
+                    where: {
+                      deleted: false,
+                    },
+                  },
                 },
               },
             },
@@ -130,14 +131,15 @@ export async function GET(
         },
         include: {
           role: true,
-          gaAccounts: {
-            where: {
-              deleted: false, // Only include non-deleted accounts
-            },
+          userToGaAccounts: {
             include: {
-              gaProperties: {
-                where: {
-                  deleted: false, // Only include non-deleted properties
+              gaAccount: {
+                include: {
+                  gaProperties: {
+                    where: {
+                      deleted: false,
+                    },
+                  },
                 },
               },
             },
@@ -153,14 +155,15 @@ export async function GET(
         where: { id: currentUser.id },
         include: {
           role: true,
-          gaAccounts: {
-            where: {
-              deleted: false, // Only include non-deleted accounts
-            },
+          userToGaAccounts: {
             include: {
-              gaProperties: {
-                where: {
-                  deleted: false, // Only include non-deleted properties
+              gaAccount: {
+                include: {
+                  gaProperties: {
+                    where: {
+                      deleted: false,
+                    },
+                  },
                 },
               },
             },

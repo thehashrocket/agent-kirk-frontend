@@ -56,7 +56,19 @@ export function GaAccountSelector({
           throw new Error('Failed to fetch accounts');
         }
         const data = await response.json();
-        const fetchedAccounts = data.gaAccounts || [];
+        
+        // Transform the nested userToGaAccounts data into the expected format
+        const fetchedAccounts = data.userToGaAccounts?.map((userToGaAccount: any) => ({
+          id: userToGaAccount.gaAccount.id,
+          gaAccountId: userToGaAccount.gaAccount.gaAccountId,
+          gaAccountName: userToGaAccount.gaAccount.gaAccountName,
+          gaProperties: userToGaAccount.gaAccount.gaProperties.map((property: any) => ({
+            id: property.id,
+            gaPropertyId: property.gaPropertyId,
+            gaPropertyName: property.gaPropertyName
+          }))
+        })) || [];
+
         setAccounts(fetchedAccounts);
 
         // Auto-select first account and property if available

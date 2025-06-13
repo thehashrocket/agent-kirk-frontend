@@ -61,7 +61,11 @@ export async function POST(req: Request) {
       data: {
         gaAccountId,
         gaAccountName,
-        userId: session.user.id,
+        userToGaAccounts: {
+          create: {
+            userId: session.user.id
+          }
+        }
       },
     });
 

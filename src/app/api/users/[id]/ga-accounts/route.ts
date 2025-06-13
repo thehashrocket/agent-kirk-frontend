@@ -68,7 +68,11 @@ export async function POST(
       data: {
         gaAccountId: validatedData.gaAccountId,
         gaAccountName: validatedData.gaAccountName,
-        userId: id,
+        userToGaAccounts: {
+          create: {
+            userId: id
+          }
+        }
       },
     });
 
@@ -123,13 +127,17 @@ export async function GET(
 
     const gaAccounts = await prisma.gaAccount.findMany({
       where: {
-        userId: id,
-        deleted: false, // Only return non-deleted accounts
+        userToGaAccounts: {
+          some: {
+            userId: id
+          }
+        },
+        deleted: false,
       },
       include: {
         gaProperties: {
           where: {
-            deleted: false, // Only include non-deleted properties
+            deleted: false,
           },
         },
       },

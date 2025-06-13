@@ -65,14 +65,15 @@ export async function GET(
       where: { id },
       include: {
         role: true,
-        gaAccounts: {
-          where: {
-            deleted: false, // Only include non-deleted accounts
-          },
+        userToGaAccounts: {
           include: {
-            gaProperties: {
-              where: {
-                deleted: false, // Only include non-deleted properties
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
               },
             },
           },
@@ -169,13 +170,25 @@ export async function DELETE(
     });
 
     await prisma.gaAccount.updateMany({
-      where: { userId: id },
+      where: {
+        userToGaAccounts: {
+          some: {
+            userId: id
+          }
+        }
+      },
       data: { deleted: true },
     });
 
     // Soft delete all GaProperties associated with the user's GaAccounts
     const gaAccounts = await prisma.gaAccount.findMany({
-      where: { userId: id },
+      where: {
+        userToGaAccounts: {
+          some: {
+            userId: id
+          }
+        }
+      },
     });
     for (const gaAccount of gaAccounts) {
       await prisma.gaProperty.updateMany({
@@ -225,6 +238,22 @@ export async function PATCH(
 
     const user = await prisma.user.findUnique({
       where: { id },
+      include: {
+        role: true,
+        userToGaAccounts: {
+          include: {
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     if (!user) {
@@ -260,11 +289,14 @@ export async function PATCH(
       data: updateData,
       include: {
         role: true,
-        gaAccounts: {
-          where: { deleted: false },
+        userToGaAccounts: {
           include: {
-            gaProperties: {
-              where: { deleted: false },
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: { deleted: false },
+                },
+              },
             },
           },
         },

@@ -99,14 +99,13 @@ model Conversation {
 }
 
 model GaAccount {
-  id            String         @id @default(cuid())
-  userId        String
-  user          User           @relation("UserToGaAccount", fields: [userId], references: [id], onDelete: Cascade)
-  gaAccountId   String
-  gaAccountName String
-  deleted       Boolean        @default(false)
-  gaProperties  GaProperty[]   @relation("AccountToProperty")
-  conversations Conversation[]
+  id               String            @id @default(cuid())
+  gaAccountId      String
+  gaAccountName    String
+  deleted          Boolean           @default(false)
+  gaProperties     GaProperty[]      @relation("AccountToProperty")
+  conversations    Conversation[]
+  userToGaAccounts UserToGaAccount[] @relation("GaAccountToUserAccounts")
 }
 
 model GaProperty {
@@ -500,6 +499,20 @@ model UserToSproutSocialAccount {
   @@index([sproutSocialAccountId])
 }
 
+model UserToGaAccount {
+  id          String    @id @default(cuid())
+  userId      String
+  gaAccountId String
+  gaAccount   GaAccount @relation("GaAccountToUserAccounts", fields: [gaAccountId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now()) @db.Timestamp(3)
+  updatedAt   DateTime  @updatedAt @db.Timestamp(3)
+  user        User      @relation("UserToGaAccounts", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gaAccountId])
+  @@index([userId])
+  @@index([gaAccountId])
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -533,7 +546,7 @@ model User {
   clientTickets        Ticket[]                    @relation("ClientTickets")
   ticketComments       TicketComment[]
   activities           ClientActivity[]
-  gaAccounts           GaAccount[]                 @relation("UserToGaAccount")
+  userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
   gaImportRuns         GaImportRun[]               @relation("UserToGaImportRuns")
   sproutSocialAccounts UserToSproutSocialAccount[]
 }

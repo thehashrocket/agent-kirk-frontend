@@ -82,6 +82,8 @@ export default function GaMetrics() {
       
       const response = await fetch(url);
 
+      console.log('GA Metrics API - Response:', response);
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch analytics data');
@@ -109,16 +111,10 @@ export default function GaMetrics() {
     }
   }, [selectedPropertyId, fetchGaMetrics]);
 
-  // Handle error state
-  if (error) {
-    return (
-      <Card>
-        <CardContent className="py-6">
-          <p className="text-center text-red-500">{error}</p>
-        </CardContent>
-      </Card>
-    );
-  }
+  // Reset error when account or property changes
+  useEffect(() => {
+    setError(null);
+  }, [selectedAccountId, selectedPropertyId]);
 
   return (
     <div className="space-y-6">
@@ -136,7 +132,14 @@ export default function GaMetrics() {
         </h2>
       )}
       
-      {isLoading ? (
+      {/* Metrics area: show error, loading, data, or empty state */}
+      {error ? (
+        <Card>
+          <CardContent className="py-6">
+            <p className="text-center text-red-500">{error}</p>
+          </CardContent>
+        </Card>
+      ) : isLoading ? (
         <Card>
           <CardContent className="py-6">
             <div className="flex items-center justify-center gap-2">
