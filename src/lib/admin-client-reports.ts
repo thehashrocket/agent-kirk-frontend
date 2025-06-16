@@ -61,14 +61,20 @@ export const getAllClientsWithGaData = cache(async (): Promise<ClientWithGaData[
         }
       },
       include: {
-        gaAccounts: {
+        userToGaAccounts: {
           where: {
-            deleted: false,
+            gaAccount: {
+              deleted: false,
+            }
           },
           include: {
-            gaProperties: {
-              where: {
-                deleted: false,
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
               },
             },
           },
@@ -86,7 +92,10 @@ export const getAllClientsWithGaData = cache(async (): Promise<ClientWithGaData[
       },
     });
 
-    return clients;
+    return clients.map(client => ({
+      ...client,
+      gaAccounts: client.userToGaAccounts.map(uta => uta.gaAccount),
+    }));
   } catch (error) {
     console.error('Error fetching clients with GA data:', error);
     throw new Error('Failed to fetch clients with GA data');

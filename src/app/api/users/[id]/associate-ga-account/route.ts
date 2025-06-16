@@ -161,7 +161,7 @@ export async function POST(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
     const session = await getServerSession(authOptions);
@@ -196,7 +196,7 @@ export async function DELETE(
 
     // Verify the target user exists
     const targetUser = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
       include: { role: true },
     });
 
@@ -207,7 +207,7 @@ export async function DELETE(
     // Find and delete the association
     const association = await prisma.userToGaAccount.findFirst({
       where: {
-        userId: params.id,
+        userId: (await params).id,
         gaAccountId: gaAccountId,
       },
     });
