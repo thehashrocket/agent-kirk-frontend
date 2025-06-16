@@ -14,7 +14,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,6 +31,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/utils';
@@ -48,18 +49,43 @@ interface GaAccount {
   gaProperties: GaProperty[];
 }
 
-interface UserProfile {
+interface User {
   id: string;
   name: string | null;
   email: string | null;
+  userToGaAccounts: {
+    gaAccount: {
+      id: string;
+      gaAccountId: string;
+      gaAccountName: string;
+      gaProperties: GaProperty[];
+    };
+  }[];
+}
+
+interface TransformedUser extends Omit<User, 'userToGaAccounts'> {
   gaAccounts: GaAccount[];
 }
 
 export default function AccountRepProfilePage() {
   const { data: session } = useSession();
-  const { data: profile, mutate, error } = useSWR<UserProfile>(
+  const { data: userData, mutate, error } = useSWR<User>(
     session?.user?.id ? `/api/users/${session.user.id}` : null,
     fetcher
+  );
+
+  // Transform the user data to match our component's structure
+  const profile = useMemo<TransformedUser | null>(() => 
+    userData ? {
+      ...userData,
+      gaAccounts: userData.userToGaAccounts?.map(({ gaAccount }) => ({
+        id: gaAccount.id,
+        gaAccountId: gaAccount.gaAccountId,
+        gaAccountName: gaAccount.gaAccountName,
+        gaProperties: gaAccount.gaProperties
+      })) || []
+    } : null,
+    [userData]
   );
 
   const [newPassword, setNewPassword] = useState('');
@@ -67,14 +93,42 @@ export default function AccountRepProfilePage() {
   const [isGaDialogOpen, setIsGaDialogOpen] = useState(false);
   const [isGaPropertyDialogOpen, setIsGaPropertyDialogOpen] = useState(false);
   const [selectedGaAccount, setSelectedGaAccount] = useState<GaAccount | null>(null);
-  const [newGaAccount, setNewGaAccount] = useState({
-    gaAccountId: '',
-    gaAccountName: '',
-  });
+  const [availableGaAccounts, setAvailableGaAccounts] = useState<GaAccount[]>([]);
+  const [selectedAccounts, setSelectedAccounts] = useState<string[]>([]);
+  const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
   const [newGaProperty, setNewGaProperty] = useState({
     gaPropertyId: '',
     gaPropertyName: '',
   });
+
+  // Fetch available GA accounts when dialog opens
+  useEffect(() => {
+    const fetchAvailableAccounts = async () => {
+      if (!isGaDialogOpen) return;
+      
+      setIsLoadingAccounts(true);
+      try {
+        const response = await fetch('/api/admin/available-ga-accounts');
+        if (!response.ok) {
+          throw new Error('Failed to fetch available GA accounts');
+        }
+        const data = await response.json();
+        setAvailableGaAccounts(data);
+        
+        // Pre-select accounts that the user already has access to
+        if (profile) {
+          const existingAccountIds = profile.gaAccounts.map(account => account.id);
+          setSelectedAccounts(existingAccountIds);
+        }
+      } catch (error) {
+        toast.error('Failed to fetch available GA accounts');
+      } finally {
+        setIsLoadingAccounts(false);
+      }
+    };
+
+    fetchAvailableAccounts();
+  }, [isGaDialogOpen, profile]);
 
   const handleChangePassword = async () => {
     try {
@@ -113,76 +167,77 @@ export default function AccountRepProfilePage() {
     }
   };
 
-  const handleAddGaAccount = async () => {
-    try {
-      if (!session?.user?.id) {
-        toast.error('Not authenticated');
-        return;
-      }
-
-      const response = await fetch(`/api/users/${session.user.id}/ga-accounts`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newGaAccount),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add Google Analytics account');
-      }
-
-      toast.success('Google Analytics account added successfully');
-      setIsGaDialogOpen(false);
-      setNewGaAccount({ gaAccountId: '', gaAccountName: '' });
-      await mutate();
-    } catch {
-      toast.error('Failed to add Google Analytics account');
+  const handleAddGaAccounts = async () => {
+    if (selectedAccounts.length === 0) {
+      toast.error('Please select at least one GA account');
+      return;
     }
-  };
 
-  const handleRemoveGaAccount = async (accountId: string) => {
     try {
-      if (!session?.user?.id) {
-        toast.error('Not authenticated');
-        return;
-      }
+      // Get the current account IDs
+      const currentAccountIds = profile?.gaAccounts.map(account => account.id) || [];
+      
+      // Find accounts to add (selected but not currently associated)
+      const accountsToAdd = selectedAccounts.filter(id => !currentAccountIds.includes(id));
+      
+      // Find accounts to remove (currently associated but not selected)
+      const accountsToRemove = currentAccountIds.filter(id => !selectedAccounts.includes(id));
 
-      const response = await fetch(`/api/users/${session.user.id}/ga-accounts/${accountId}`, {
-        method: 'DELETE',
-      });
+      // Handle removals first
+      await Promise.all(
+        accountsToRemove.map(async (accountId) => {
+          const response = await fetch(
+            `/api/users/${session?.user?.id}/associate-ga-account?gaAccountId=${accountId}`,
+            { method: 'DELETE' }
+          );
+          if (!response.ok) {
+            throw new Error('Failed to disassociate GA account');
+          }
+        })
+      );
 
-      if (!response.ok) {
-        throw new Error('Failed to remove Google Analytics account');
-      }
+      // Then handle additions
+      await Promise.all(
+        accountsToAdd.map(async (accountId) => {
+          const response = await fetch(`/api/users/${session?.user?.id}/associate-ga-account`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ gaAccountId: accountId }),
+          });
 
-      toast.success('Google Analytics account removed successfully');
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to associate GA account');
+          }
+        })
+      );
+
+      toast.success('Google Analytics accounts updated successfully');
+      setIsGaDialogOpen(false);
+      setSelectedAccounts([]);
       await mutate();
-    } catch {
-      toast.error('Failed to remove Google Analytics account');
+    } catch (error) {
+      console.error('Error updating GA accounts:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to update Google Analytics accounts');
     }
   };
 
   const handleAddGaProperty = async () => {
-    try {
-      if (!session?.user?.id || !selectedGaAccount) {
-        toast.error('Not authenticated or no account selected');
-        return;
-      }
+    if (!selectedGaAccount) return;
 
-      const response = await fetch(
-        `/api/users/${session.user.id}/ga-accounts/${selectedGaAccount.id}/properties`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newGaProperty),
-        }
-      );
+    try {
+      const response = await fetch(`/api/users/${session?.user?.id}/ga-accounts/${selectedGaAccount.id}/properties`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newGaProperty),
+      });
 
       if (!response.ok) {
-        throw new Error('Failed to add Google Analytics property');
+        throw new Error('Failed to add GA property');
       }
 
       toast.success('Google Analytics property added successfully');
@@ -192,6 +247,23 @@ export default function AccountRepProfilePage() {
       await mutate();
     } catch {
       toast.error('Failed to add Google Analytics property');
+    }
+  };
+
+  const handleDeleteGaProperty = async (accountId: string, propertyId: string) => {
+    try {
+      const response = await fetch(`/api/users/${session?.user?.id}/ga-accounts/${accountId}/properties/${propertyId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete GA property');
+      }
+
+      toast.success('Google Analytics property deleted successfully');
+      await mutate();
+    } catch {
+      toast.error('Failed to delete Google Analytics property');
     }
   };
 
@@ -253,141 +325,160 @@ export default function AccountRepProfilePage() {
 
         {/* Google Analytics Accounts */}
         <Card>
-          <CardHeader>
-            <CardTitle>Google Analytics Accounts</CardTitle>
-            <CardDescription>Manage your connected Google Analytics accounts</CardDescription>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Google Analytics Accounts</CardTitle>
+              <CardDescription>Manage your connected Google Analytics accounts</CardDescription>
+            </div>
+            <Dialog open={isGaDialogOpen} onOpenChange={setIsGaDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>Add GA Account</Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Add Google Analytics Accounts</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  {isLoadingAccounts ? (
+                    <div className="flex justify-center py-4">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+                    </div>
+                  ) : (
+                    <div className="max-h-[400px] overflow-y-auto space-y-2">
+                      {availableGaAccounts.map((account) => (
+                        <div
+                          key={account.id}
+                          className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                            selectedAccounts.includes(account.id)
+                              ? 'bg-primary-50 border-primary-200'
+                              : 'hover:bg-gray-50'
+                          }`}
+                          onClick={() => {
+                            setSelectedAccounts((prev) =>
+                              prev.includes(account.id)
+                                ? prev.filter((id) => id !== account.id)
+                                : [...prev, account.id]
+                            );
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedAccounts.includes(account.id)}
+                            onChange={() => {}}
+                            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                          />
+                          <div>
+                            <p className="font-medium">{account.gaAccountName}</p>
+                            <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
+                            <p className="text-sm text-gray-500">
+                              {account.gaProperties.length} properties
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex justify-end space-x-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setIsGaDialogOpen(false);
+                        setSelectedAccounts([]);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button onClick={handleAddGaAccounts}>
+                      Add Selected Accounts
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <Button
-                onClick={() => setIsGaDialogOpen(true)}
-                className="mb-4"
-              >
-                Add GA Account
-              </Button>
-
-              <Dialog open={isGaDialogOpen} onOpenChange={setIsGaDialogOpen}>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Add Google Analytics Account</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium">Account ID</label>
-                      <Input
-                        value={newGaAccount.gaAccountId}
-                        onChange={(e) =>
-                          setNewGaAccount({
-                            ...newGaAccount,
-                            gaAccountId: e.target.value,
-                          })
-                        }
-                        placeholder="Enter GA Account ID"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium">Account Name</label>
-                      <Input
-                        value={newGaAccount.gaAccountName}
-                        onChange={(e) =>
-                          setNewGaAccount({
-                            ...newGaAccount,
-                            gaAccountName: e.target.value,
-                          })
-                        }
-                        placeholder="Enter GA Account Name"
-                      />
-                    </div>
-                    <Button onClick={handleAddGaAccount}>Add Account</Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
-
-              <Dialog open={isGaPropertyDialogOpen} onOpenChange={setIsGaPropertyDialogOpen}>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Add Google Analytics Property</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium">Property ID</label>
-                      <Input
-                        value={newGaProperty.gaPropertyId}
-                        onChange={(e) =>
-                          setNewGaProperty({
-                            ...newGaProperty,
-                            gaPropertyId: e.target.value,
-                          })
-                        }
-                        placeholder="Enter GA Property ID"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium">Property Name</label>
-                      <Input
-                        value={newGaProperty.gaPropertyName}
-                        onChange={(e) =>
-                          setNewGaProperty({
-                            ...newGaProperty,
-                            gaPropertyName: e.target.value,
-                          })
-                        }
-                        placeholder="Enter GA Property Name"
-                      />
-                    </div>
-                    <Button onClick={handleAddGaProperty}>Add Property</Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
-
-              {profile.gaAccounts?.length > 0 ? (
-                <div className="space-y-4">
-                  {profile.gaAccounts.map((account) => (
-                    <Card key={account.id}>
-                      <CardContent className="pt-6">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-semibold">{account.gaAccountName}</h3>
-                            <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
-                            <div className="mt-4 flex space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => {
-                                  setSelectedGaAccount(account);
-                                  setIsGaPropertyDialogOpen(true);
-                                }}
-                              >
-                                Add Property
-                              </Button>
-                            </div>
-                            {account.gaProperties?.length > 0 && (
-                              <div className="mt-2">
-                                <p className="text-sm font-medium">Properties:</p>
-                                <ul className="list-disc list-inside text-sm text-gray-600 ml-2">
-                                  {account.gaProperties.map((property) => (
-                                    <li key={property.id}>
-                                      {property.gaPropertyName} ({property.gaPropertyId})
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            )}
-                          </div>
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => handleRemoveGaAccount(account.id)}
-                          >
-                            Remove
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+              {profile.gaAccounts.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  No Google Analytics accounts associated with your profile.
                 </div>
               ) : (
-                <p className="text-gray-500">No Google Analytics accounts connected</p>
+                profile.gaAccounts.map((account) => (
+                  <Card key={account.id} className="p-4">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-semibold">{account.gaAccountName}</h3>
+                        <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
+                      </div>
+                      <div className="flex flex-row items-center gap-2">
+                        <Dialog open={isGaPropertyDialogOpen && selectedGaAccount?.id === account.id}
+                          onOpenChange={(open) => {
+                            setIsGaPropertyDialogOpen(open);
+                            if (!open) setSelectedGaAccount(null);
+                          }}>
+                          <DialogTrigger asChild>
+                            <Button
+                              variant="outline"
+                              onClick={() => setSelectedGaAccount(account)}
+                            >
+                              Add Property
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>Add Google Analytics Property</DialogTitle>
+                            </DialogHeader>
+                            <div className="space-y-4">
+                              <Input
+                                placeholder="Property ID"
+                                value={newGaProperty.gaPropertyId}
+                                onChange={(e) =>
+                                  setNewGaProperty({ ...newGaProperty, gaPropertyId: e.target.value })
+                                }
+                              />
+                              <Input
+                                placeholder="Property Name"
+                                value={newGaProperty.gaPropertyName}
+                                onChange={(e) =>
+                                  setNewGaProperty({ ...newGaProperty, gaPropertyName: e.target.value })
+                                }
+                              />
+                              <Button onClick={handleAddGaProperty}>Add Property</Button>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    </div>
+                    {/* Properties List */}
+                    <div className="pl-4 border-l-2 border-gray-100">
+                      <h4 className="text-sm font-medium mb-2">Properties:</h4>
+                      <div className="space-y-2">
+                        {account.gaProperties.length === 0 ? (
+                          <div className="text-sm text-gray-500 py-2">
+                            No properties associated with this account.
+                          </div>
+                        ) : (
+                          account.gaProperties.map((property) => (
+                            <div key={property.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
+                              <div className="text-sm">
+                                <p className="font-medium">{property.gaPropertyName}</p>
+                                <p className="text-gray-500">ID: {property.gaPropertyId}</p>
+                              </div>
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => handleDeleteGaProperty(account.id, property.id)}
+                                className="h-6 px-2 text-xs"
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+                ))
               )}
             </div>
           </CardContent>
