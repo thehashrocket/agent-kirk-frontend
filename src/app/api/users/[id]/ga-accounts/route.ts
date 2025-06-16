@@ -2,7 +2,7 @@
  * @fileoverview API route handlers for managing Google Analytics accounts for users.
  * This module provides endpoints to create and retrieve GA accounts associated with a user.
  * 
- * @route POST /api/users/[id]/ga-accounts - Create a new GA account for a user
+ * @route POST /api/users/[id]/ga-accounts - Create new GA accounts for a user
  * @route GET /api/users/[id]/ga-accounts - Retrieve all GA accounts for a user
  * 
  * @see Related files:
@@ -20,8 +20,7 @@ import { z } from 'zod';
  * Validation schema for GA account creation
  */
 const gaAccountSchema = z.object({
-  gaAccountId: z.string().min(1, 'GA Account ID is required'),
-  gaAccountName: z.string().min(1, 'GA Account Name is required'),
+  accountIds: z.array(z.string()).min(1, 'At least one GA account ID is required'),
 });
 
 type GaAccountInput = z.infer<typeof gaAccountSchema>;
@@ -40,11 +39,11 @@ class GaAccountError extends Error {
 }
 
 /**
- * Creates a new Google Analytics account for a user
+ * Creates new Google Analytics accounts for a user
  * 
- * @param request - The incoming request containing GA account details
+ * @param request - The incoming request containing GA account IDs
  * @param params - Route parameters containing the user ID
- * @returns The created GA account or an error response
+ * @returns The created GA accounts or an error response
  * 
  * @throws {GaAccountError} If validation fails or user is unauthorized
  */
@@ -64,19 +63,37 @@ export async function POST(
 
     const { id } = await params;
 
-    const gaAccount = await prisma.gaAccount.create({
-      data: {
-        gaAccountId: validatedData.gaAccountId,
-        gaAccountName: validatedData.gaAccountName,
-        userToGaAccounts: {
-          create: {
-            userId: id
-          }
-        }
-      },
+    // Get current user information including role
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: { role: true },
     });
 
-    return NextResponse.json(gaAccount, { status: 201 });
+    if (!currentUser) {
+      throw new GaAccountError('User not found', 404);
+    }
+
+    // Verify the user has permission to add GA accounts
+    if (currentUser.role.name !== 'ADMIN' && currentUser.role.name !== 'ACCOUNT_REP') {
+      throw new GaAccountError('Forbidden - Insufficient permissions', 403);
+    }
+
+    // Create user-to-GA-account relationships for each selected account
+    const userToGaAccounts = await prisma.$transaction(
+      validatedData.accountIds.map((accountId) =>
+        prisma.userToGaAccount.create({
+          data: {
+            userId: id,
+            gaAccountId: accountId,
+          },
+          include: {
+            gaAccount: true,
+          },
+        })
+      )
+    );
+
+    return NextResponse.json(userToGaAccounts.map((uta) => uta.gaAccount), { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
