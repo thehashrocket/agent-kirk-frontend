@@ -51,15 +51,23 @@ export async function POST(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    console.log('Session User:', session?.user);
+    console.log('Looking up user with ID:', session.user.id);
+    
     // Get current user information including role
     const currentUser = await prisma.user.findUnique({
       where: { id: session.user.id },
       include: { role: true },
     });
 
+    console.log('Current User Query Result:', currentUser);
+
     if (!currentUser) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      console.log('Current user not found in database with ID:', session.user.id);
+      return NextResponse.json({ error: 'Current user not found in database' }, { status: 404 });
     }
+
+    console.log('Current User:', currentUser);
 
     // Check admin/account rep role
     if (currentUser.role.name !== 'ADMIN' && currentUser.role.name !== 'ACCOUNT_REP') {
@@ -70,14 +78,23 @@ export async function POST(
     const body = await request.json();
     const validatedData = associateGaAccountSchema.parse(body);
 
+    // Get the target user ID from params
+    const targetUserId = (await params).id;
+    console.log('Target User ID:', targetUserId);
+
     // Verify the target user exists
     const targetUser = await prisma.user.findUnique({
-      where: { id: (await params).id },
+      where: { id: targetUserId },
       include: { role: true },
     });
 
+    console.log('Target User Query Result:', targetUser);
+
     if (!targetUser) {
-      return NextResponse.json({ error: 'Target user not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Target user not found', userId: targetUserId },
+        { status: 404 }
+      );
     }
 
     // Verify the GA account exists and is not deleted
@@ -88,6 +105,8 @@ export async function POST(
       },
     });
 
+    console.log('GA Account Query Result:', gaAccount);
+
     if (!gaAccount) {
       return NextResponse.json({ error: 'GA Account not found' }, { status: 404 });
     }
@@ -95,7 +114,7 @@ export async function POST(
     // Check if the association already exists
     const existingAssociation = await prisma.userToGaAccount.findFirst({
       where: {
-        userId: (await params).id,
+        userId: targetUserId,
         gaAccountId: validatedData.gaAccountId,
       },
     });
@@ -107,7 +126,7 @@ export async function POST(
     // Create the association
     const userToGaAccount = await prisma.userToGaAccount.create({
       data: {
-        userId: (await params).id,
+        userId: targetUserId,
         gaAccountId: validatedData.gaAccountId,
       },
       include: {

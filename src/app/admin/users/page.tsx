@@ -7,6 +7,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import {
   Table,
   TableBody,
@@ -291,7 +292,9 @@ export default function UsersPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users?.map((user: User) => (
+          {users?.map((user: User) => {
+            console.log('Rendering user row with ID:', user.id, 'Type:', typeof user.id);
+            return (
             <TableRow key={user.id}>
               <TableCell>
                 <Avatar>
@@ -327,7 +330,11 @@ export default function UsersPage() {
               </TableCell>
               <TableCell>
                 <div className="flex gap-2 justify-end">
-                  {/* If User is active, show Mark as Inactive, if User is inactive, show Mark as Active */}
+                  <Link href={`/admin/users/${user.id}`}>
+                    <Button variant="outline">
+                      View Details
+                    </Button>
+                  </Link>
                   {user.isActive ? (
                     <Button
                       variant="secondary"
@@ -352,7 +359,8 @@ export default function UsersPage() {
                 </div>
               </TableCell>
             </TableRow>
-          ))}
+            );
+          })}
         </TableBody>
       </Table>
     </div>
