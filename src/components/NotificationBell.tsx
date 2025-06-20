@@ -88,6 +88,23 @@ export function NotificationBell() {
     }
   }, [markAsRead, router]);
 
+  const handleClearAllNotifications = useCallback(async () => {
+    try {
+      const response = await fetch('/api/notifications/clear', {
+        method: 'POST',
+      });
+      if (!response.ok) throw new Error('Failed to clear all notifications');
+      
+      setNotifications([]);
+      setUnreadCount(0);
+    } catch (error) {
+      console.error('Failed to clear all notifications:', error);
+      toast.error('Failed to clear notifications', {
+        description: 'Please try again later',
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -149,6 +166,10 @@ export function NotificationBell() {
       <PopoverContent className="w-80 p-0" align="end">
         <div className="p-4 border-b">
           <h4 className="font-semibold">Notifications</h4>
+          {/* Clear all notifications button */}
+          <Button variant="ghost" size="sm" className="w-full mt-2" onClick={handleClearAllNotifications}>
+            Clear all
+          </Button>
         </div>
         <ScrollArea className="h-[400px]">
           {notifications.length === 0 ? (
