@@ -114,7 +114,7 @@ export default function ClientDetailsPage() {
   useEffect(() => {
     const fetchAvailableAccounts = async () => {
       if (!isGaAccountDialogOpen) return;
-      
+
       setIsLoadingAccounts(true);
       try {
         const response = await fetch('/api/admin/available-ga-accounts');
@@ -123,7 +123,7 @@ export default function ClientDetailsPage() {
         }
         const data = await response.json();
         setAvailableGaAccounts(data);
-        
+
         // Pre-select accounts that the client already has access to
         if (client) {
           const existingAccountIds = client.gaAccounts.map(account => account.id);
@@ -148,10 +148,10 @@ export default function ClientDetailsPage() {
     try {
       // Get the current account IDs
       const currentAccountIds = client?.gaAccounts.map(account => account.id) || [];
-      
+
       // Find accounts to add (selected but not currently associated)
       const accountsToAdd = selectedAccounts.filter(id => !currentAccountIds.includes(id));
-      
+
       // Find accounts to remove (currently associated but not selected)
       const accountsToRemove = currentAccountIds.filter(id => !selectedAccounts.includes(id));
 
@@ -335,11 +335,10 @@ export default function ClientDetailsPage() {
                       {availableGaAccounts.map((account) => (
                         <div
                           key={account.id}
-                          className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
-                            selectedAccounts.includes(account.id)
+                          className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${selectedAccounts.includes(account.id)
                               ? 'bg-primary-50 border-primary-200'
                               : 'hover:bg-gray-50'
-                          }`}
+                            }`}
                           onClick={() => {
                             setSelectedAccounts((prev) =>
                               prev.includes(account.id)
@@ -351,7 +350,7 @@ export default function ClientDetailsPage() {
                           <input
                             type="checkbox"
                             checked={selectedAccounts.includes(account.id)}
-                            onChange={() => {}}
+                            onChange={() => { }}
                             className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                           />
                           <div>
@@ -434,8 +433,8 @@ export default function ClientDetailsPage() {
                             </div>
                           </DialogContent>
                         </Dialog>
-                        <Button 
-                          variant="destructive" 
+                        <Button
+                          variant="destructive"
                           onClick={() => handleDisassociateGaAccount(account.id)}
                         >
                           Disassociate Account

@@ -151,7 +151,20 @@ export default function ChatPage() {
       if (!response.ok) {
         throw new Error('Failed to fetch clients');
       }
-      return response.json();
+      const users = await response.json();
+      
+      // Transform the data to match the expected Client interface
+      return users.map((user: any) => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        gaAccounts: user.userToGaAccounts?.map((association: any) => ({
+          id: association.gaAccount.id,
+          gaAccountId: association.gaAccount.gaAccountId,
+          gaAccountName: association.gaAccount.gaAccountName,
+          gaProperties: association.gaAccount.gaProperties || []
+        })) || []
+      }));
     },
     enabled: !!session?.user?.id && isAccountRep, // Only enable for account reps
   });
