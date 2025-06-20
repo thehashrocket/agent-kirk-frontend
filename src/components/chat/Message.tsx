@@ -5,6 +5,7 @@
 
 'use client';
 
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { MessageContent } from './MessageContent';
 import { Button } from '@/components/ui/button';
@@ -12,6 +13,43 @@ import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { LoadingDots } from './LoadingDots';
 import { ChartPreviewModal } from './ChartPreviewModal';
 import { MessageStatus, MESSAGE_STATUS } from '@/types/chat';
+
+const FUNNY_PROCESSING_MESSAGES = [
+  "Consulting my crystal ball...",
+  "Teaching AI to count to infinity...",
+  "Brewing the perfect response...",
+  "Asking the rubber duck for advice...",
+  "Channeling my inner Einstein...",
+  "Calculating the meaning of life...",
+  "Translating from human to awesome...",
+  "Performing digital gymnastics...",
+  "Convincing electrons to cooperate...",
+  "Summoning the algorithm spirits...",
+  "Debugging reality.exe...",
+  "Optimizing my thinking cap...",
+  "Consulting the digital oracle...",
+  "Spinning up the hamster wheels...",
+  "Downloading more RAM for thoughts...",
+  "Calibrating my sarcasm detector...",
+  "Polishing my virtual neurons...",
+  "Reticulating splines...",
+  "Herding digital cats...",
+  "Convincing my CPU to think faster..."
+];
+
+function useCyclingMessage(messages: string[], intervalMs = 2000) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % messages.length);
+    }, intervalMs);
+
+    return () => clearInterval(interval);
+  }, [messages.length, intervalMs]);
+
+  return messages[currentIndex];
+}
 
 interface MessageProps {
   id: string;
@@ -34,6 +72,7 @@ export function Message({
 }: MessageProps) {
   const isUser = role === 'user';
   const shouldShowCharts = !isUser && status === MESSAGE_STATUS.COMPLETED;
+  const currentProcessingMessage = useCyclingMessage(FUNNY_PROCESSING_MESSAGES, 2000);
   
   const containerClasses = cn(
     'flex w-full space-x-2',
@@ -53,7 +92,9 @@ export function Message({
         
         {status === MESSAGE_STATUS.PROCESSING && (
           <div className="flex items-center space-x-2 text-xs opacity-70">
-            <span>Processing response</span>
+            <span className="transition-opacity duration-300">
+              {currentProcessingMessage}
+            </span>
             <LoadingDots />
           </div>
         )}

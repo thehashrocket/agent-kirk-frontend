@@ -84,9 +84,9 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onR
             onRate={onRateMessage}
           />
         ))}
-        {isLoading && (
+        {/* {isLoading && (
           <LoadingIndicator message="Loading messages" />
-        )}
+        )} */}
         <div ref={scrollRef} />
       </div>
     </ScrollArea>

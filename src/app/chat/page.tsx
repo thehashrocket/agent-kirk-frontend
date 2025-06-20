@@ -328,7 +328,7 @@ export default function ChatPage() {
       // Create a temporary assistant message
       const tempAssistantMessage: Message = {
         id: crypto.randomUUID(),
-        content: 'Thinking...',
+        content: '',
         role: 'assistant',
         timestamp: new Date().toISOString(),
         status: MESSAGE_STATUS.PROCESSING
