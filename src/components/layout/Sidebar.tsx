@@ -105,12 +105,12 @@ const accountRepNavItems: NavItem[] = [
     icon: <Users />,
     description: "Manage client accounts"
   },
-  // { 
-  //   title: "Need Help?", 
-  //   href: "/account-rep/tickets", 
-  //   icon: <Ticket />,
-  //   description: "Handle support requests"
-  // },
+  {
+    title: "Client Analytics",
+    href: "/account-rep/client-analytics",
+    icon: <BarChart />,
+    description: "View client analytics"
+  },
   { 
     title: "Messages", 
     href: "/account-rep/messages", 

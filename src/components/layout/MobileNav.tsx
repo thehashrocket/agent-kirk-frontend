@@ -54,7 +54,7 @@ const adminNavItems: NavItem[] = [
   { title: "Dashboard", href: "/admin/dashboard", icon: <LayoutDashboard /> },
   { title: "User Management", href: "/admin/users", icon: <Users /> },
   { title: "System Settings", href: "/admin/settings", icon: <Settings /> },
-  { title: "Analytics", href: "/admin/analytics", icon: <BarChart /> },
+  { title: "Client Analytics", href: "/admin/client-analytics", icon: <BarChart /> },
   { title: "Reports", href: "/admin/reports", icon: <FileText /> },
   { title: "Messages", href: "/admin/messages", icon: <MessageSquare /> },
 ]
@@ -66,7 +66,7 @@ const adminNavItems: NavItem[] = [
 const accountRepNavItems: NavItem[] = [
   { title: "Dashboard", href: "/account-rep/dashboard", icon: <LayoutDashboard /> },
   { title: "Client Management", href: "/account-rep/clients", icon: <Users /> },
-  // { title: "Need Help?", href: "/account-rep/tickets", icon: <Ticket /> },
+  { title: "Client Analytics", href: "/account-rep/client-analytics", icon: <BarChart /> },
   { title: "Messages", href: "/account-rep/messages", icon: <MessageSquare /> },
   { title: "Reports", href: "/account-rep/reports", icon: <FileText /> },
   { title: "Chat", href: "/chat", icon: <MessageSquare /> },

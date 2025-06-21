@@ -7,7 +7,6 @@
 import { prisma, type Prisma, type ClientSatisfaction } from './prisma';
 import { cache } from 'react';
 import { subDays } from 'date-fns';
-import type { Decimal } from '@prisma/client/runtime/library';
 
 interface HistoricalStats {
   current: number;
@@ -542,5 +541,59 @@ export const getSystemDetailedSatisfactionMetrics = cache(async (clientId?: stri
   } catch (error) {
     console.error('Error fetching system detailed satisfaction metrics:', error);
     throw new Error('Failed to fetch system detailed satisfaction metrics');
+  }
+});
+
+/**
+ * Get clients with GA data for a specific account representative
+ */
+export const getAccountRepClientsWithGaData = cache(async (accountRepId: string): Promise<ClientWithGaData[]> => {
+  try {
+    const clients = await prisma.user.findMany({
+      where: {
+        role: {
+          name: 'CLIENT'
+        },
+        accountRepId: accountRepId, // Filter by account rep
+      },
+      include: {
+        userToGaAccounts: {
+          where: {
+            gaAccount: {
+              deleted: false,
+            }
+          },
+          include: {
+            gaAccount: {
+              include: {
+                gaProperties: {
+                  where: {
+                    deleted: false,
+                  },
+                },
+              },
+            },
+          },
+        },
+        accountRep: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: {
+        name: 'asc',
+      },
+    });
+
+    return clients.map(client => ({
+      ...client,
+      gaAccounts: client.userToGaAccounts.map(uta => uta.gaAccount),
+    }));
+  } catch (error) {
+    console.error('Error fetching account rep clients with GA data:', error);
+    throw new Error('Failed to fetch account rep clients with GA data');
   }
 }); 
