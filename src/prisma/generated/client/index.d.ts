@@ -114,6 +114,11 @@ export type Query = $Result.DefaultSelection<Prisma.$QueryPayload>
  */
 export type SproutFacebookAnalytics = $Result.DefaultSelection<Prisma.$SproutFacebookAnalyticsPayload>
 /**
+ * Model SproutFacebookPostAnalytics
+ * 
+ */
+export type SproutFacebookPostAnalytics = $Result.DefaultSelection<Prisma.$SproutFacebookPostAnalyticsPayload>
+/**
  * Model SproutInstagramAnalytics
  * 
  */
@@ -603,6 +608,16 @@ export class PrismaClient<
     * ```
     */
   get sproutFacebookAnalytics(): Prisma.SproutFacebookAnalyticsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutFacebookPostAnalytics`: Exposes CRUD operations for the **SproutFacebookPostAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutFacebookPostAnalytics
+    * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findMany()
+    * ```
+    */
+  get sproutFacebookPostAnalytics(): Prisma.SproutFacebookPostAnalyticsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.sproutInstagramAnalytics`: Exposes CRUD operations for the **SproutInstagramAnalytics** model.
@@ -1223,6 +1238,7 @@ export namespace Prisma {
     ParsedQuerySummary: 'ParsedQuerySummary',
     Query: 'Query',
     SproutFacebookAnalytics: 'SproutFacebookAnalytics',
+    SproutFacebookPostAnalytics: 'SproutFacebookPostAnalytics',
     SproutInstagramAnalytics: 'SproutInstagramAnalytics',
     SproutInstagramFollowersByCity: 'SproutInstagramFollowersByCity',
     SproutInstagramFollowersByCountry: 'SproutInstagramFollowersByCountry',
@@ -1257,7 +1273,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
+      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2741,6 +2757,80 @@ export namespace Prisma {
           }
         }
       }
+      SproutFacebookPostAnalytics: {
+        payload: Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>
+        fields: Prisma.SproutFacebookPostAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutFacebookPostAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutFacebookPostAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutFacebookPostAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutFacebookPostAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.SproutFacebookPostAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.SproutFacebookPostAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.SproutFacebookPostAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutFacebookPostAnalyticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutFacebookPostAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.SproutFacebookPostAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutFacebookPostAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutFacebookPostAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutFacebookPostAnalyticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutFacebookPostAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutFacebookPostAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutFacebookPostAnalytics>
+          }
+          groupBy: {
+            args: Prisma.SproutFacebookPostAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutFacebookPostAnalyticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutFacebookPostAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutFacebookPostAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
       SproutInstagramAnalytics: {
         payload: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>
         fields: Prisma.SproutInstagramAnalyticsFieldRefs
@@ -4029,6 +4119,7 @@ export namespace Prisma {
     parsedQuerySummary?: ParsedQuerySummaryOmit
     query?: QueryOmit
     sproutFacebookAnalytics?: SproutFacebookAnalyticsOmit
+    sproutFacebookPostAnalytics?: SproutFacebookPostAnalyticsOmit
     sproutInstagramAnalytics?: SproutInstagramAnalyticsOmit
     sproutInstagramFollowersByCity?: SproutInstagramFollowersByCityOmit
     sproutInstagramFollowersByCountry?: SproutInstagramFollowersByCountryOmit
@@ -4460,6 +4551,7 @@ export namespace Prisma {
     instagramAnalytics: number
     pinterestAnalytics: number
     users: number
+    facebookPostAnalytics: number
   }
 
   export type SproutSocialAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4468,6 +4560,7 @@ export namespace Prisma {
     instagramAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountInstagramAnalyticsArgs
     pinterestAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountPinterestAnalyticsArgs
     users?: boolean | SproutSocialAccountCountOutputTypeCountUsersArgs
+    facebookPostAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountFacebookPostAnalyticsArgs
   }
 
   // Custom InputTypes
@@ -4514,6 +4607,13 @@ export namespace Prisma {
    */
   export type SproutSocialAccountCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserToSproutSocialAccountWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountFacebookPostAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookPostAnalyticsWhereInput
   }
 
 
@@ -26850,9 +26950,10 @@ export namespace Prisma {
   export type SproutFacebookAnalyticsAvgAggregateOutputType = {
     customerProfileId: number | null
     engagements: number | null
+    followersCount: number | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
+    netFollowerGrowth: number | null
     postContentClicks: number | null
     postContentClicksOther: number | null
     postLinkClicks: number | null
@@ -26868,9 +26969,10 @@ export namespace Prisma {
   export type SproutFacebookAnalyticsSumAggregateOutputType = {
     customerProfileId: number | null
     engagements: number | null
+    followersCount: number | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
+    netFollowerGrowth: number | null
     postContentClicks: number | null
     postContentClicksOther: number | null
     postLinkClicks: number | null
@@ -26884,72 +26986,75 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsMinAggregateOutputType = {
-    id: string | null
-    sproutSocialAccountId: string | null
+    createdAt: Date | null
     customerProfileId: number | null
-    reportingDate: Date | null
     engagements: number | null
+    followersCount: number | null
+    id: string | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
+    netFollowerGrowth: number | null
     postContentClicks: number | null
     postContentClicksOther: number | null
     postLinkClicks: number | null
     postPhotoViewClicks: number | null
+    reportingDate: Date | null
+    sproutSocialAccountId: string | null
     tabViews: number | null
+    updatedAt: Date | null
     videoViews: number | null
     videoViews10s: number | null
     videoViewsOrganic: number | null
     videoViewsPaid: number | null
     videoViewsUnique: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type SproutFacebookAnalyticsMaxAggregateOutputType = {
-    id: string | null
-    sproutSocialAccountId: string | null
+    createdAt: Date | null
     customerProfileId: number | null
-    reportingDate: Date | null
     engagements: number | null
+    followersCount: number | null
+    id: string | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
+    netFollowerGrowth: number | null
     postContentClicks: number | null
     postContentClicksOther: number | null
     postLinkClicks: number | null
     postPhotoViewClicks: number | null
+    reportingDate: Date | null
+    sproutSocialAccountId: string | null
     tabViews: number | null
+    updatedAt: Date | null
     videoViews: number | null
     videoViews10s: number | null
     videoViewsOrganic: number | null
     videoViewsPaid: number | null
     videoViewsUnique: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type SproutFacebookAnalyticsCountAggregateOutputType = {
-    id: number
-    sproutSocialAccountId: number
+    createdAt: number
     customerProfileId: number
-    reportingDate: number
     engagements: number
+    followersCount: number
+    id: number
     impressions: number
     impressionsUnique: number
-    followersCount: number
+    netFollowerGrowth: number
     postContentClicks: number
     postContentClicksOther: number
     postLinkClicks: number
     postPhotoViewClicks: number
+    reportingDate: number
+    sproutSocialAccountId: number
     tabViews: number
+    updatedAt: number
     videoViews: number
     videoViews10s: number
     videoViewsOrganic: number
     videoViewsPaid: number
     videoViewsUnique: number
-    createdAt: number
-    updatedAt: number
     _all: number
   }
 
@@ -26957,9 +27062,10 @@ export namespace Prisma {
   export type SproutFacebookAnalyticsAvgAggregateInputType = {
     customerProfileId?: true
     engagements?: true
+    followersCount?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
+    netFollowerGrowth?: true
     postContentClicks?: true
     postContentClicksOther?: true
     postLinkClicks?: true
@@ -26975,9 +27081,10 @@ export namespace Prisma {
   export type SproutFacebookAnalyticsSumAggregateInputType = {
     customerProfileId?: true
     engagements?: true
+    followersCount?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
+    netFollowerGrowth?: true
     postContentClicks?: true
     postContentClicksOther?: true
     postLinkClicks?: true
@@ -26991,72 +27098,75 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsMinAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
+    createdAt?: true
     customerProfileId?: true
-    reportingDate?: true
     engagements?: true
+    followersCount?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
+    netFollowerGrowth?: true
     postContentClicks?: true
     postContentClicksOther?: true
     postLinkClicks?: true
     postPhotoViewClicks?: true
+    reportingDate?: true
+    sproutSocialAccountId?: true
     tabViews?: true
+    updatedAt?: true
     videoViews?: true
     videoViews10s?: true
     videoViewsOrganic?: true
     videoViewsPaid?: true
     videoViewsUnique?: true
-    createdAt?: true
-    updatedAt?: true
   }
 
   export type SproutFacebookAnalyticsMaxAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
+    createdAt?: true
     customerProfileId?: true
-    reportingDate?: true
     engagements?: true
+    followersCount?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
+    netFollowerGrowth?: true
     postContentClicks?: true
     postContentClicksOther?: true
     postLinkClicks?: true
     postPhotoViewClicks?: true
+    reportingDate?: true
+    sproutSocialAccountId?: true
     tabViews?: true
+    updatedAt?: true
     videoViews?: true
     videoViews10s?: true
     videoViewsOrganic?: true
     videoViewsPaid?: true
     videoViewsUnique?: true
-    createdAt?: true
-    updatedAt?: true
   }
 
   export type SproutFacebookAnalyticsCountAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
+    createdAt?: true
     customerProfileId?: true
-    reportingDate?: true
     engagements?: true
+    followersCount?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
+    netFollowerGrowth?: true
     postContentClicks?: true
     postContentClicksOther?: true
     postLinkClicks?: true
     postPhotoViewClicks?: true
+    reportingDate?: true
+    sproutSocialAccountId?: true
     tabViews?: true
+    updatedAt?: true
     videoViews?: true
     videoViews10s?: true
     videoViewsOrganic?: true
     videoViewsPaid?: true
     videoViewsUnique?: true
-    createdAt?: true
-    updatedAt?: true
     _all?: true
   }
 
@@ -27147,26 +27257,27 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsGroupByOutputType = {
-    id: string
-    sproutSocialAccountId: string
+    createdAt: Date
     customerProfileId: number
-    reportingDate: Date
     engagements: number | null
+    followersCount: number | null
+    id: string
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
+    netFollowerGrowth: number | null
     postContentClicks: number | null
     postContentClicksOther: number | null
     postLinkClicks: number | null
     postPhotoViewClicks: number | null
+    reportingDate: Date
+    sproutSocialAccountId: string
     tabViews: number | null
+    updatedAt: Date
     videoViews: number | null
     videoViews10s: number | null
     videoViewsOrganic: number | null
     videoViewsPaid: number | null
     videoViewsUnique: number | null
-    createdAt: Date
-    updatedAt: Date
     _count: SproutFacebookAnalyticsCountAggregateOutputType | null
     _avg: SproutFacebookAnalyticsAvgAggregateOutputType | null
     _sum: SproutFacebookAnalyticsSumAggregateOutputType | null
@@ -27189,101 +27300,105 @@ export namespace Prisma {
 
 
   export type SproutFacebookAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
+    netFollowerGrowth?: boolean
     postContentClicks?: boolean
     postContentClicksOther?: boolean
     postLinkClicks?: boolean
     postPhotoViewClicks?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     tabViews?: boolean
+    updatedAt?: boolean
     videoViews?: boolean
     videoViews10s?: boolean
     videoViewsOrganic?: boolean
     videoViewsPaid?: boolean
     videoViewsUnique?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutFacebookAnalytics"]>
 
   export type SproutFacebookAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
+    netFollowerGrowth?: boolean
     postContentClicks?: boolean
     postContentClicksOther?: boolean
     postLinkClicks?: boolean
     postPhotoViewClicks?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     tabViews?: boolean
+    updatedAt?: boolean
     videoViews?: boolean
     videoViews10s?: boolean
     videoViewsOrganic?: boolean
     videoViewsPaid?: boolean
     videoViewsUnique?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutFacebookAnalytics"]>
 
   export type SproutFacebookAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
+    netFollowerGrowth?: boolean
     postContentClicks?: boolean
     postContentClicksOther?: boolean
     postLinkClicks?: boolean
     postPhotoViewClicks?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     tabViews?: boolean
+    updatedAt?: boolean
     videoViews?: boolean
     videoViews10s?: boolean
     videoViewsOrganic?: boolean
     videoViewsPaid?: boolean
     videoViewsUnique?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutFacebookAnalytics"]>
 
   export type SproutFacebookAnalyticsSelectScalar = {
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
+    netFollowerGrowth?: boolean
     postContentClicks?: boolean
     postContentClicksOther?: boolean
     postLinkClicks?: boolean
     postPhotoViewClicks?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     tabViews?: boolean
+    updatedAt?: boolean
     videoViews?: boolean
     videoViews10s?: boolean
     videoViewsOrganic?: boolean
     videoViewsPaid?: boolean
     videoViewsUnique?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
   }
 
-  export type SproutFacebookAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "engagements" | "impressions" | "impressionsUnique" | "followersCount" | "postContentClicks" | "postContentClicksOther" | "postLinkClicks" | "postPhotoViewClicks" | "tabViews" | "videoViews" | "videoViews10s" | "videoViewsOrganic" | "videoViewsPaid" | "videoViewsUnique" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutFacebookAnalytics"]>
+  export type SproutFacebookAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"createdAt" | "customerProfileId" | "engagements" | "followersCount" | "id" | "impressions" | "impressionsUnique" | "netFollowerGrowth" | "postContentClicks" | "postContentClicksOther" | "postLinkClicks" | "postPhotoViewClicks" | "reportingDate" | "sproutSocialAccountId" | "tabViews" | "updatedAt" | "videoViews" | "videoViews10s" | "videoViewsOrganic" | "videoViewsPaid" | "videoViewsUnique", ExtArgs["result"]["sproutFacebookAnalytics"]>
   export type SproutFacebookAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }
@@ -27300,26 +27415,27 @@ export namespace Prisma {
       sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      sproutSocialAccountId: string
+      createdAt: Date
       customerProfileId: number
-      reportingDate: Date
       engagements: number | null
+      followersCount: number | null
+      id: string
       impressions: number | null
       impressionsUnique: number | null
-      followersCount: number | null
+      netFollowerGrowth: number | null
       postContentClicks: number | null
       postContentClicksOther: number | null
       postLinkClicks: number | null
       postPhotoViewClicks: number | null
+      reportingDate: Date
+      sproutSocialAccountId: string
       tabViews: number | null
+      updatedAt: Date
       videoViews: number | null
       videoViews10s: number | null
       videoViewsOrganic: number | null
       videoViewsPaid: number | null
       videoViewsUnique: number | null
-      createdAt: Date
-      updatedAt: Date
     }, ExtArgs["result"]["sproutFacebookAnalytics"]>
     composites: {}
   }
@@ -27403,8 +27519,8 @@ export namespace Prisma {
      * // Get first 10 SproutFacebookAnalytics
      * const sproutFacebookAnalytics = await prisma.sproutFacebookAnalytics.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const sproutFacebookAnalyticsWithIdOnly = await prisma.sproutFacebookAnalytics.findMany({ select: { id: true } })
+     * // Only select the `createdAt`
+     * const sproutFacebookAnalyticsWithCreatedAtOnly = await prisma.sproutFacebookAnalytics.findMany({ select: { createdAt: true } })
      * 
      */
     findMany<T extends SproutFacebookAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutFacebookAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -27448,9 +27564,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many SproutFacebookAnalytics and only return the `id`
-     * const sproutFacebookAnalyticsWithIdOnly = await prisma.sproutFacebookAnalytics.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many SproutFacebookAnalytics and only return the `createdAt`
+     * const sproutFacebookAnalyticsWithCreatedAtOnly = await prisma.sproutFacebookAnalytics.createManyAndReturn({
+     *   select: { createdAt: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -27539,9 +27655,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more SproutFacebookAnalytics and only return the `id`
-     * const sproutFacebookAnalyticsWithIdOnly = await prisma.sproutFacebookAnalytics.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more SproutFacebookAnalytics and only return the `createdAt`
+     * const sproutFacebookAnalyticsWithCreatedAtOnly = await prisma.sproutFacebookAnalytics.updateManyAndReturn({
+     *   select: { createdAt: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -27744,26 +27860,27 @@ export namespace Prisma {
    * Fields of the SproutFacebookAnalytics model
    */
   interface SproutFacebookAnalyticsFieldRefs {
-    readonly id: FieldRef<"SproutFacebookAnalytics", 'String'>
-    readonly sproutSocialAccountId: FieldRef<"SproutFacebookAnalytics", 'String'>
+    readonly createdAt: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
     readonly customerProfileId: FieldRef<"SproutFacebookAnalytics", 'Int'>
-    readonly reportingDate: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
     readonly engagements: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly followersCount: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly id: FieldRef<"SproutFacebookAnalytics", 'String'>
     readonly impressions: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly impressionsUnique: FieldRef<"SproutFacebookAnalytics", 'Int'>
-    readonly followersCount: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly netFollowerGrowth: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly postContentClicks: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly postContentClicksOther: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly postLinkClicks: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly postPhotoViewClicks: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
+    readonly sproutSocialAccountId: FieldRef<"SproutFacebookAnalytics", 'String'>
     readonly tabViews: FieldRef<"SproutFacebookAnalytics", 'Int'>
+    readonly updatedAt: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
     readonly videoViews: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly videoViews10s: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly videoViewsOrganic: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly videoViewsPaid: FieldRef<"SproutFacebookAnalytics", 'Int'>
     readonly videoViewsUnique: FieldRef<"SproutFacebookAnalytics", 'Int'>
-    readonly createdAt: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
-    readonly updatedAt: FieldRef<"SproutFacebookAnalytics", 'DateTime'>
   }
     
 
@@ -28179,6 +28296,1681 @@ export namespace Prisma {
 
 
   /**
+   * Model SproutFacebookPostAnalytics
+   */
+
+  export type AggregateSproutFacebookPostAnalytics = {
+    _count: SproutFacebookPostAnalyticsCountAggregateOutputType | null
+    _avg: SproutFacebookPostAnalyticsAvgAggregateOutputType | null
+    _sum: SproutFacebookPostAnalyticsSumAggregateOutputType | null
+    _min: SproutFacebookPostAnalyticsMinAggregateOutputType | null
+    _max: SproutFacebookPostAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type SproutFacebookPostAnalyticsAvgAggregateOutputType = {
+    angryReactions: number | null
+    commentsCount: number | null
+    hahaReactions: number | null
+    impressions: number | null
+    impressionsFollower: number | null
+    impressionsNonFollower: number | null
+    impressionsNonViral: number | null
+    impressionsOrganic: number | null
+    impressionsPaid: number | null
+    impressionsViral: number | null
+    likes: number | null
+    loveReactions: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    postVideoPlayClicks: number | null
+    questionAnswers: number | null
+    reach: number | null
+    reachFollower: number | null
+    reachNonViral: number | null
+    reachOrganic: number | null
+    reachPaid: number | null
+    reachViral: number | null
+    reactions: number | null
+    sadReactions: number | null
+    sharesCount: number | null
+    videoLength: number | null
+    videoViews: number | null
+    videoViewsAutoplay: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    wowReactions: number | null
+  }
+
+  export type SproutFacebookPostAnalyticsSumAggregateOutputType = {
+    angryReactions: number | null
+    commentsCount: number | null
+    hahaReactions: number | null
+    impressions: number | null
+    impressionsFollower: number | null
+    impressionsNonFollower: number | null
+    impressionsNonViral: number | null
+    impressionsOrganic: number | null
+    impressionsPaid: number | null
+    impressionsViral: number | null
+    likes: number | null
+    loveReactions: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postPhotoViewClicks: number | null
+    postVideoPlayClicks: number | null
+    questionAnswers: number | null
+    reach: number | null
+    reachFollower: number | null
+    reachNonViral: number | null
+    reachOrganic: number | null
+    reachPaid: number | null
+    reachViral: number | null
+    reactions: number | null
+    sadReactions: number | null
+    sharesCount: number | null
+    videoLength: number | null
+    videoViews: number | null
+    videoViewsAutoplay: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    wowReactions: number | null
+  }
+
+  export type SproutFacebookPostAnalyticsMinAggregateOutputType = {
+    id: string | null
+    angryReactions: number | null
+    clientNativeId: string | null
+    commentsCount: number | null
+    hahaReactions: number | null
+    impressions: number | null
+    impressionsFollower: number | null
+    impressionsNonFollower: number | null
+    impressionsNonViral: number | null
+    impressionsOrganic: number | null
+    impressionsPaid: number | null
+    impressionsViral: number | null
+    likes: number | null
+    loveReactions: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postNativeId: string | null
+    postPhotoViewClicks: number | null
+    postVideoPlayClicks: number | null
+    questionAnswers: number | null
+    reach: number | null
+    reachFollower: number | null
+    reachNonViral: number | null
+    reachOrganic: number | null
+    reachPaid: number | null
+    reachViral: number | null
+    reactions: number | null
+    reportingDate: Date | null
+    sadReactions: number | null
+    sharesCount: number | null
+    sproutSocialAccountId: string | null
+    videoLength: number | null
+    videoViews: number | null
+    videoViewsAutoplay: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    wowReactions: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutFacebookPostAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    angryReactions: number | null
+    clientNativeId: string | null
+    commentsCount: number | null
+    hahaReactions: number | null
+    impressions: number | null
+    impressionsFollower: number | null
+    impressionsNonFollower: number | null
+    impressionsNonViral: number | null
+    impressionsOrganic: number | null
+    impressionsPaid: number | null
+    impressionsViral: number | null
+    likes: number | null
+    loveReactions: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postNativeId: string | null
+    postPhotoViewClicks: number | null
+    postVideoPlayClicks: number | null
+    questionAnswers: number | null
+    reach: number | null
+    reachFollower: number | null
+    reachNonViral: number | null
+    reachOrganic: number | null
+    reachPaid: number | null
+    reachViral: number | null
+    reactions: number | null
+    reportingDate: Date | null
+    sadReactions: number | null
+    sharesCount: number | null
+    sproutSocialAccountId: string | null
+    videoLength: number | null
+    videoViews: number | null
+    videoViewsAutoplay: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    wowReactions: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutFacebookPostAnalyticsCountAggregateOutputType = {
+    id: number
+    angryReactions: number
+    clientNativeId: number
+    commentsCount: number
+    hahaReactions: number
+    impressions: number
+    impressionsFollower: number
+    impressionsNonFollower: number
+    impressionsNonViral: number
+    impressionsOrganic: number
+    impressionsPaid: number
+    impressionsViral: number
+    likes: number
+    loveReactions: number
+    postContentClicks: number
+    postContentClicksOther: number
+    postLinkClicks: number
+    postNativeId: number
+    postPhotoViewClicks: number
+    postVideoPlayClicks: number
+    questionAnswers: number
+    reach: number
+    reachFollower: number
+    reachNonViral: number
+    reachOrganic: number
+    reachPaid: number
+    reachViral: number
+    reactions: number
+    reportingDate: number
+    sadReactions: number
+    sharesCount: number
+    sproutSocialAccountId: number
+    videoLength: number
+    videoViews: number
+    videoViewsAutoplay: number
+    videoViewsOrganic: number
+    videoViewsPaid: number
+    wowReactions: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutFacebookPostAnalyticsAvgAggregateInputType = {
+    angryReactions?: true
+    commentsCount?: true
+    hahaReactions?: true
+    impressions?: true
+    impressionsFollower?: true
+    impressionsNonFollower?: true
+    impressionsNonViral?: true
+    impressionsOrganic?: true
+    impressionsPaid?: true
+    impressionsViral?: true
+    likes?: true
+    loveReactions?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    postVideoPlayClicks?: true
+    questionAnswers?: true
+    reach?: true
+    reachFollower?: true
+    reachNonViral?: true
+    reachOrganic?: true
+    reachPaid?: true
+    reachViral?: true
+    reactions?: true
+    sadReactions?: true
+    sharesCount?: true
+    videoLength?: true
+    videoViews?: true
+    videoViewsAutoplay?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    wowReactions?: true
+  }
+
+  export type SproutFacebookPostAnalyticsSumAggregateInputType = {
+    angryReactions?: true
+    commentsCount?: true
+    hahaReactions?: true
+    impressions?: true
+    impressionsFollower?: true
+    impressionsNonFollower?: true
+    impressionsNonViral?: true
+    impressionsOrganic?: true
+    impressionsPaid?: true
+    impressionsViral?: true
+    likes?: true
+    loveReactions?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postPhotoViewClicks?: true
+    postVideoPlayClicks?: true
+    questionAnswers?: true
+    reach?: true
+    reachFollower?: true
+    reachNonViral?: true
+    reachOrganic?: true
+    reachPaid?: true
+    reachViral?: true
+    reactions?: true
+    sadReactions?: true
+    sharesCount?: true
+    videoLength?: true
+    videoViews?: true
+    videoViewsAutoplay?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    wowReactions?: true
+  }
+
+  export type SproutFacebookPostAnalyticsMinAggregateInputType = {
+    id?: true
+    angryReactions?: true
+    clientNativeId?: true
+    commentsCount?: true
+    hahaReactions?: true
+    impressions?: true
+    impressionsFollower?: true
+    impressionsNonFollower?: true
+    impressionsNonViral?: true
+    impressionsOrganic?: true
+    impressionsPaid?: true
+    impressionsViral?: true
+    likes?: true
+    loveReactions?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postNativeId?: true
+    postPhotoViewClicks?: true
+    postVideoPlayClicks?: true
+    questionAnswers?: true
+    reach?: true
+    reachFollower?: true
+    reachNonViral?: true
+    reachOrganic?: true
+    reachPaid?: true
+    reachViral?: true
+    reactions?: true
+    reportingDate?: true
+    sadReactions?: true
+    sharesCount?: true
+    sproutSocialAccountId?: true
+    videoLength?: true
+    videoViews?: true
+    videoViewsAutoplay?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    wowReactions?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutFacebookPostAnalyticsMaxAggregateInputType = {
+    id?: true
+    angryReactions?: true
+    clientNativeId?: true
+    commentsCount?: true
+    hahaReactions?: true
+    impressions?: true
+    impressionsFollower?: true
+    impressionsNonFollower?: true
+    impressionsNonViral?: true
+    impressionsOrganic?: true
+    impressionsPaid?: true
+    impressionsViral?: true
+    likes?: true
+    loveReactions?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postNativeId?: true
+    postPhotoViewClicks?: true
+    postVideoPlayClicks?: true
+    questionAnswers?: true
+    reach?: true
+    reachFollower?: true
+    reachNonViral?: true
+    reachOrganic?: true
+    reachPaid?: true
+    reachViral?: true
+    reactions?: true
+    reportingDate?: true
+    sadReactions?: true
+    sharesCount?: true
+    sproutSocialAccountId?: true
+    videoLength?: true
+    videoViews?: true
+    videoViewsAutoplay?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    wowReactions?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutFacebookPostAnalyticsCountAggregateInputType = {
+    id?: true
+    angryReactions?: true
+    clientNativeId?: true
+    commentsCount?: true
+    hahaReactions?: true
+    impressions?: true
+    impressionsFollower?: true
+    impressionsNonFollower?: true
+    impressionsNonViral?: true
+    impressionsOrganic?: true
+    impressionsPaid?: true
+    impressionsViral?: true
+    likes?: true
+    loveReactions?: true
+    postContentClicks?: true
+    postContentClicksOther?: true
+    postLinkClicks?: true
+    postNativeId?: true
+    postPhotoViewClicks?: true
+    postVideoPlayClicks?: true
+    questionAnswers?: true
+    reach?: true
+    reachFollower?: true
+    reachNonViral?: true
+    reachOrganic?: true
+    reachPaid?: true
+    reachViral?: true
+    reactions?: true
+    reportingDate?: true
+    sadReactions?: true
+    sharesCount?: true
+    sproutSocialAccountId?: true
+    videoLength?: true
+    videoViews?: true
+    videoViewsAutoplay?: true
+    videoViewsOrganic?: true
+    videoViewsPaid?: true
+    wowReactions?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutFacebookPostAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutFacebookPostAnalytics to aggregate.
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPostAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookPostAnalyticsOrderByWithRelationInput | SproutFacebookPostAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutFacebookPostAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPostAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPostAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutFacebookPostAnalytics
+    **/
+    _count?: true | SproutFacebookPostAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SproutFacebookPostAnalyticsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SproutFacebookPostAnalyticsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutFacebookPostAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutFacebookPostAnalyticsMaxAggregateInputType
+  }
+
+  export type GetSproutFacebookPostAnalyticsAggregateType<T extends SproutFacebookPostAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutFacebookPostAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutFacebookPostAnalytics[P]>
+      : GetScalarType<T[P], AggregateSproutFacebookPostAnalytics[P]>
+  }
+
+
+
+
+  export type SproutFacebookPostAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookPostAnalyticsWhereInput
+    orderBy?: SproutFacebookPostAnalyticsOrderByWithAggregationInput | SproutFacebookPostAnalyticsOrderByWithAggregationInput[]
+    by: SproutFacebookPostAnalyticsScalarFieldEnum[] | SproutFacebookPostAnalyticsScalarFieldEnum
+    having?: SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutFacebookPostAnalyticsCountAggregateInputType | true
+    _avg?: SproutFacebookPostAnalyticsAvgAggregateInputType
+    _sum?: SproutFacebookPostAnalyticsSumAggregateInputType
+    _min?: SproutFacebookPostAnalyticsMinAggregateInputType
+    _max?: SproutFacebookPostAnalyticsMaxAggregateInputType
+  }
+
+  export type SproutFacebookPostAnalyticsGroupByOutputType = {
+    id: string
+    angryReactions: number | null
+    clientNativeId: string
+    commentsCount: number | null
+    hahaReactions: number | null
+    impressions: number | null
+    impressionsFollower: number | null
+    impressionsNonFollower: number | null
+    impressionsNonViral: number | null
+    impressionsOrganic: number | null
+    impressionsPaid: number | null
+    impressionsViral: number | null
+    likes: number | null
+    loveReactions: number | null
+    postContentClicks: number | null
+    postContentClicksOther: number | null
+    postLinkClicks: number | null
+    postNativeId: string
+    postPhotoViewClicks: number | null
+    postVideoPlayClicks: number | null
+    questionAnswers: number | null
+    reach: number | null
+    reachFollower: number | null
+    reachNonViral: number | null
+    reachOrganic: number | null
+    reachPaid: number | null
+    reachViral: number | null
+    reactions: number | null
+    reportingDate: Date
+    sadReactions: number | null
+    sharesCount: number | null
+    sproutSocialAccountId: string
+    videoLength: number | null
+    videoViews: number | null
+    videoViewsAutoplay: number | null
+    videoViewsOrganic: number | null
+    videoViewsPaid: number | null
+    wowReactions: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutFacebookPostAnalyticsCountAggregateOutputType | null
+    _avg: SproutFacebookPostAnalyticsAvgAggregateOutputType | null
+    _sum: SproutFacebookPostAnalyticsSumAggregateOutputType | null
+    _min: SproutFacebookPostAnalyticsMinAggregateOutputType | null
+    _max: SproutFacebookPostAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetSproutFacebookPostAnalyticsGroupByPayload<T extends SproutFacebookPostAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutFacebookPostAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutFacebookPostAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutFacebookPostAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutFacebookPostAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutFacebookPostAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    angryReactions?: boolean
+    clientNativeId?: boolean
+    commentsCount?: boolean
+    hahaReactions?: boolean
+    impressions?: boolean
+    impressionsFollower?: boolean
+    impressionsNonFollower?: boolean
+    impressionsNonViral?: boolean
+    impressionsOrganic?: boolean
+    impressionsPaid?: boolean
+    impressionsViral?: boolean
+    likes?: boolean
+    loveReactions?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postNativeId?: boolean
+    postPhotoViewClicks?: boolean
+    postVideoPlayClicks?: boolean
+    questionAnswers?: boolean
+    reach?: boolean
+    reachFollower?: boolean
+    reachNonViral?: boolean
+    reachOrganic?: boolean
+    reachPaid?: boolean
+    reachViral?: boolean
+    reactions?: boolean
+    reportingDate?: boolean
+    sadReactions?: boolean
+    sharesCount?: boolean
+    sproutSocialAccountId?: boolean
+    videoLength?: boolean
+    videoViews?: boolean
+    videoViewsAutoplay?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    wowReactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookPostAnalytics"]>
+
+  export type SproutFacebookPostAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    angryReactions?: boolean
+    clientNativeId?: boolean
+    commentsCount?: boolean
+    hahaReactions?: boolean
+    impressions?: boolean
+    impressionsFollower?: boolean
+    impressionsNonFollower?: boolean
+    impressionsNonViral?: boolean
+    impressionsOrganic?: boolean
+    impressionsPaid?: boolean
+    impressionsViral?: boolean
+    likes?: boolean
+    loveReactions?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postNativeId?: boolean
+    postPhotoViewClicks?: boolean
+    postVideoPlayClicks?: boolean
+    questionAnswers?: boolean
+    reach?: boolean
+    reachFollower?: boolean
+    reachNonViral?: boolean
+    reachOrganic?: boolean
+    reachPaid?: boolean
+    reachViral?: boolean
+    reactions?: boolean
+    reportingDate?: boolean
+    sadReactions?: boolean
+    sharesCount?: boolean
+    sproutSocialAccountId?: boolean
+    videoLength?: boolean
+    videoViews?: boolean
+    videoViewsAutoplay?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    wowReactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookPostAnalytics"]>
+
+  export type SproutFacebookPostAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    angryReactions?: boolean
+    clientNativeId?: boolean
+    commentsCount?: boolean
+    hahaReactions?: boolean
+    impressions?: boolean
+    impressionsFollower?: boolean
+    impressionsNonFollower?: boolean
+    impressionsNonViral?: boolean
+    impressionsOrganic?: boolean
+    impressionsPaid?: boolean
+    impressionsViral?: boolean
+    likes?: boolean
+    loveReactions?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postNativeId?: boolean
+    postPhotoViewClicks?: boolean
+    postVideoPlayClicks?: boolean
+    questionAnswers?: boolean
+    reach?: boolean
+    reachFollower?: boolean
+    reachNonViral?: boolean
+    reachOrganic?: boolean
+    reachPaid?: boolean
+    reachViral?: boolean
+    reactions?: boolean
+    reportingDate?: boolean
+    sadReactions?: boolean
+    sharesCount?: boolean
+    sproutSocialAccountId?: boolean
+    videoLength?: boolean
+    videoViews?: boolean
+    videoViewsAutoplay?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    wowReactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookPostAnalytics"]>
+
+  export type SproutFacebookPostAnalyticsSelectScalar = {
+    id?: boolean
+    angryReactions?: boolean
+    clientNativeId?: boolean
+    commentsCount?: boolean
+    hahaReactions?: boolean
+    impressions?: boolean
+    impressionsFollower?: boolean
+    impressionsNonFollower?: boolean
+    impressionsNonViral?: boolean
+    impressionsOrganic?: boolean
+    impressionsPaid?: boolean
+    impressionsViral?: boolean
+    likes?: boolean
+    loveReactions?: boolean
+    postContentClicks?: boolean
+    postContentClicksOther?: boolean
+    postLinkClicks?: boolean
+    postNativeId?: boolean
+    postPhotoViewClicks?: boolean
+    postVideoPlayClicks?: boolean
+    questionAnswers?: boolean
+    reach?: boolean
+    reachFollower?: boolean
+    reachNonViral?: boolean
+    reachOrganic?: boolean
+    reachPaid?: boolean
+    reachViral?: boolean
+    reactions?: boolean
+    reportingDate?: boolean
+    sadReactions?: boolean
+    sharesCount?: boolean
+    sproutSocialAccountId?: boolean
+    videoLength?: boolean
+    videoViews?: boolean
+    videoViewsAutoplay?: boolean
+    videoViewsOrganic?: boolean
+    videoViewsPaid?: boolean
+    wowReactions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutFacebookPostAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "angryReactions" | "clientNativeId" | "commentsCount" | "hahaReactions" | "impressions" | "impressionsFollower" | "impressionsNonFollower" | "impressionsNonViral" | "impressionsOrganic" | "impressionsPaid" | "impressionsViral" | "likes" | "loveReactions" | "postContentClicks" | "postContentClicksOther" | "postLinkClicks" | "postNativeId" | "postPhotoViewClicks" | "postVideoPlayClicks" | "questionAnswers" | "reach" | "reachFollower" | "reachNonViral" | "reachOrganic" | "reachPaid" | "reachViral" | "reactions" | "reportingDate" | "sadReactions" | "sharesCount" | "sproutSocialAccountId" | "videoLength" | "videoViews" | "videoViewsAutoplay" | "videoViewsOrganic" | "videoViewsPaid" | "wowReactions" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutFacebookPostAnalytics"]>
+  export type SproutFacebookPostAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutFacebookPostAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutFacebookPostAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutFacebookPostAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutFacebookPostAnalytics"
+    objects: {
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      angryReactions: number | null
+      clientNativeId: string
+      commentsCount: number | null
+      hahaReactions: number | null
+      impressions: number | null
+      impressionsFollower: number | null
+      impressionsNonFollower: number | null
+      impressionsNonViral: number | null
+      impressionsOrganic: number | null
+      impressionsPaid: number | null
+      impressionsViral: number | null
+      likes: number | null
+      loveReactions: number | null
+      postContentClicks: number | null
+      postContentClicksOther: number | null
+      postLinkClicks: number | null
+      postNativeId: string
+      postPhotoViewClicks: number | null
+      postVideoPlayClicks: number | null
+      questionAnswers: number | null
+      reach: number | null
+      reachFollower: number | null
+      reachNonViral: number | null
+      reachOrganic: number | null
+      reachPaid: number | null
+      reachViral: number | null
+      reactions: number | null
+      reportingDate: Date
+      sadReactions: number | null
+      sharesCount: number | null
+      sproutSocialAccountId: string
+      videoLength: number | null
+      videoViews: number | null
+      videoViewsAutoplay: number | null
+      videoViewsOrganic: number | null
+      videoViewsPaid: number | null
+      wowReactions: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutFacebookPostAnalytics"]>
+    composites: {}
+  }
+
+  type SproutFacebookPostAnalyticsGetPayload<S extends boolean | null | undefined | SproutFacebookPostAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload, S>
+
+  type SproutFacebookPostAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutFacebookPostAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutFacebookPostAnalyticsCountAggregateInputType | true
+    }
+
+  export interface SproutFacebookPostAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutFacebookPostAnalytics'], meta: { name: 'SproutFacebookPostAnalytics' } }
+    /**
+     * Find zero or one SproutFacebookPostAnalytics that matches the filter.
+     * @param {SproutFacebookPostAnalyticsFindUniqueArgs} args - Arguments to find a SproutFacebookPostAnalytics
+     * @example
+     * // Get one SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutFacebookPostAnalyticsFindUniqueArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutFacebookPostAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutFacebookPostAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a SproutFacebookPostAnalytics
+     * @example
+     * // Get one SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutFacebookPostAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutFacebookPostAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsFindFirstArgs} args - Arguments to find a SproutFacebookPostAnalytics
+     * @example
+     * // Get one SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutFacebookPostAnalyticsFindFirstArgs>(args?: SelectSubset<T, SproutFacebookPostAnalyticsFindFirstArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutFacebookPostAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsFindFirstOrThrowArgs} args - Arguments to find a SproutFacebookPostAnalytics
+     * @example
+     * // Get one SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutFacebookPostAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutFacebookPostAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutFacebookPostAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findMany()
+     * 
+     * // Get first 10 SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutFacebookPostAnalyticsWithIdOnly = await prisma.sproutFacebookPostAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutFacebookPostAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutFacebookPostAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutFacebookPostAnalytics.
+     * @param {SproutFacebookPostAnalyticsCreateArgs} args - Arguments to create a SproutFacebookPostAnalytics.
+     * @example
+     * // Create one SproutFacebookPostAnalytics
+     * const SproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.create({
+     *   data: {
+     *     // ... data to create a SproutFacebookPostAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutFacebookPostAnalyticsCreateArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsCreateArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutFacebookPostAnalytics.
+     * @param {SproutFacebookPostAnalyticsCreateManyArgs} args - Arguments to create many SproutFacebookPostAnalytics.
+     * @example
+     * // Create many SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutFacebookPostAnalyticsCreateManyArgs>(args?: SelectSubset<T, SproutFacebookPostAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutFacebookPostAnalytics and returns the data saved in the database.
+     * @param {SproutFacebookPostAnalyticsCreateManyAndReturnArgs} args - Arguments to create many SproutFacebookPostAnalytics.
+     * @example
+     * // Create many SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutFacebookPostAnalytics and only return the `id`
+     * const sproutFacebookPostAnalyticsWithIdOnly = await prisma.sproutFacebookPostAnalytics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutFacebookPostAnalyticsCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutFacebookPostAnalyticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutFacebookPostAnalytics.
+     * @param {SproutFacebookPostAnalyticsDeleteArgs} args - Arguments to delete one SproutFacebookPostAnalytics.
+     * @example
+     * // Delete one SproutFacebookPostAnalytics
+     * const SproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one SproutFacebookPostAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutFacebookPostAnalyticsDeleteArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsDeleteArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutFacebookPostAnalytics.
+     * @param {SproutFacebookPostAnalyticsUpdateArgs} args - Arguments to update one SproutFacebookPostAnalytics.
+     * @example
+     * // Update one SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutFacebookPostAnalyticsUpdateArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsUpdateArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutFacebookPostAnalytics.
+     * @param {SproutFacebookPostAnalyticsDeleteManyArgs} args - Arguments to filter SproutFacebookPostAnalytics to delete.
+     * @example
+     * // Delete a few SproutFacebookPostAnalytics
+     * const { count } = await prisma.sproutFacebookPostAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutFacebookPostAnalyticsDeleteManyArgs>(args?: SelectSubset<T, SproutFacebookPostAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutFacebookPostAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutFacebookPostAnalyticsUpdateManyArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutFacebookPostAnalytics and returns the data updated in the database.
+     * @param {SproutFacebookPostAnalyticsUpdateManyAndReturnArgs} args - Arguments to update many SproutFacebookPostAnalytics.
+     * @example
+     * // Update many SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutFacebookPostAnalytics and only return the `id`
+     * const sproutFacebookPostAnalyticsWithIdOnly = await prisma.sproutFacebookPostAnalytics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutFacebookPostAnalyticsUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutFacebookPostAnalytics.
+     * @param {SproutFacebookPostAnalyticsUpsertArgs} args - Arguments to update or create a SproutFacebookPostAnalytics.
+     * @example
+     * // Update or create a SproutFacebookPostAnalytics
+     * const sproutFacebookPostAnalytics = await prisma.sproutFacebookPostAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a SproutFacebookPostAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutFacebookPostAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutFacebookPostAnalyticsUpsertArgs>(args: SelectSubset<T, SproutFacebookPostAnalyticsUpsertArgs<ExtArgs>>): Prisma__SproutFacebookPostAnalyticsClient<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutFacebookPostAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsCountArgs} args - Arguments to filter SproutFacebookPostAnalytics to count.
+     * @example
+     * // Count the number of SproutFacebookPostAnalytics
+     * const count = await prisma.sproutFacebookPostAnalytics.count({
+     *   where: {
+     *     // ... the filter for the SproutFacebookPostAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutFacebookPostAnalyticsCountArgs>(
+      args?: Subset<T, SproutFacebookPostAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutFacebookPostAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutFacebookPostAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutFacebookPostAnalyticsAggregateArgs>(args: Subset<T, SproutFacebookPostAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetSproutFacebookPostAnalyticsAggregateType<T>>
+
+    /**
+     * Group by SproutFacebookPostAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutFacebookPostAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutFacebookPostAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: SproutFacebookPostAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutFacebookPostAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutFacebookPostAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutFacebookPostAnalytics model
+   */
+  readonly fields: SproutFacebookPostAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutFacebookPostAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutFacebookPostAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutFacebookPostAnalytics model
+   */
+  interface SproutFacebookPostAnalyticsFieldRefs {
+    readonly id: FieldRef<"SproutFacebookPostAnalytics", 'String'>
+    readonly angryReactions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly clientNativeId: FieldRef<"SproutFacebookPostAnalytics", 'String'>
+    readonly commentsCount: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly hahaReactions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressionsFollower: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressionsNonFollower: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressionsNonViral: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressionsOrganic: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressionsPaid: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly impressionsViral: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly likes: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly loveReactions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly postContentClicks: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly postContentClicksOther: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly postLinkClicks: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly postNativeId: FieldRef<"SproutFacebookPostAnalytics", 'String'>
+    readonly postPhotoViewClicks: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly postVideoPlayClicks: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly questionAnswers: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reach: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reachFollower: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reachNonViral: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reachOrganic: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reachPaid: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reachViral: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reactions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutFacebookPostAnalytics", 'DateTime'>
+    readonly sadReactions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly sharesCount: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly sproutSocialAccountId: FieldRef<"SproutFacebookPostAnalytics", 'String'>
+    readonly videoLength: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly videoViews: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly videoViewsAutoplay: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly videoViewsOrganic: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly videoViewsPaid: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly wowReactions: FieldRef<"SproutFacebookPostAnalytics", 'Int'>
+    readonly createdAt: FieldRef<"SproutFacebookPostAnalytics", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutFacebookPostAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutFacebookPostAnalytics findUnique
+   */
+  export type SproutFacebookPostAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPostAnalytics to fetch.
+     */
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPostAnalytics findUniqueOrThrow
+   */
+  export type SproutFacebookPostAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPostAnalytics to fetch.
+     */
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPostAnalytics findFirst
+   */
+  export type SproutFacebookPostAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPostAnalytics to fetch.
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPostAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookPostAnalyticsOrderByWithRelationInput | SproutFacebookPostAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutFacebookPostAnalytics.
+     */
+    cursor?: SproutFacebookPostAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPostAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPostAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutFacebookPostAnalytics.
+     */
+    distinct?: SproutFacebookPostAnalyticsScalarFieldEnum | SproutFacebookPostAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookPostAnalytics findFirstOrThrow
+   */
+  export type SproutFacebookPostAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPostAnalytics to fetch.
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPostAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookPostAnalyticsOrderByWithRelationInput | SproutFacebookPostAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutFacebookPostAnalytics.
+     */
+    cursor?: SproutFacebookPostAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPostAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPostAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutFacebookPostAnalytics.
+     */
+    distinct?: SproutFacebookPostAnalyticsScalarFieldEnum | SproutFacebookPostAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookPostAnalytics findMany
+   */
+  export type SproutFacebookPostAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPostAnalytics to fetch.
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPostAnalytics to fetch.
+     */
+    orderBy?: SproutFacebookPostAnalyticsOrderByWithRelationInput | SproutFacebookPostAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutFacebookPostAnalytics.
+     */
+    cursor?: SproutFacebookPostAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPostAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPostAnalytics.
+     */
+    skip?: number
+    distinct?: SproutFacebookPostAnalyticsScalarFieldEnum | SproutFacebookPostAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookPostAnalytics create
+   */
+  export type SproutFacebookPostAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutFacebookPostAnalytics.
+     */
+    data: XOR<SproutFacebookPostAnalyticsCreateInput, SproutFacebookPostAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * SproutFacebookPostAnalytics createMany
+   */
+  export type SproutFacebookPostAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutFacebookPostAnalytics.
+     */
+    data: SproutFacebookPostAnalyticsCreateManyInput | SproutFacebookPostAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutFacebookPostAnalytics createManyAndReturn
+   */
+  export type SproutFacebookPostAnalyticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutFacebookPostAnalytics.
+     */
+    data: SproutFacebookPostAnalyticsCreateManyInput | SproutFacebookPostAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutFacebookPostAnalytics update
+   */
+  export type SproutFacebookPostAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutFacebookPostAnalytics.
+     */
+    data: XOR<SproutFacebookPostAnalyticsUpdateInput, SproutFacebookPostAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which SproutFacebookPostAnalytics to update.
+     */
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPostAnalytics updateMany
+   */
+  export type SproutFacebookPostAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutFacebookPostAnalytics.
+     */
+    data: XOR<SproutFacebookPostAnalyticsUpdateManyMutationInput, SproutFacebookPostAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutFacebookPostAnalytics to update
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * Limit how many SproutFacebookPostAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutFacebookPostAnalytics updateManyAndReturn
+   */
+  export type SproutFacebookPostAnalyticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutFacebookPostAnalytics.
+     */
+    data: XOR<SproutFacebookPostAnalyticsUpdateManyMutationInput, SproutFacebookPostAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutFacebookPostAnalytics to update
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * Limit how many SproutFacebookPostAnalytics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutFacebookPostAnalytics upsert
+   */
+  export type SproutFacebookPostAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutFacebookPostAnalytics to update in case it exists.
+     */
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+    /**
+     * In case the SproutFacebookPostAnalytics found by the `where` argument doesn't exist, create a new SproutFacebookPostAnalytics with this data.
+     */
+    create: XOR<SproutFacebookPostAnalyticsCreateInput, SproutFacebookPostAnalyticsUncheckedCreateInput>
+    /**
+     * In case the SproutFacebookPostAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutFacebookPostAnalyticsUpdateInput, SproutFacebookPostAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutFacebookPostAnalytics delete
+   */
+  export type SproutFacebookPostAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which SproutFacebookPostAnalytics to delete.
+     */
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPostAnalytics deleteMany
+   */
+  export type SproutFacebookPostAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutFacebookPostAnalytics to delete
+     */
+    where?: SproutFacebookPostAnalyticsWhereInput
+    /**
+     * Limit how many SproutFacebookPostAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutFacebookPostAnalytics without action
+   */
+  export type SproutFacebookPostAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model SproutInstagramAnalytics
    */
 
@@ -28191,155 +29983,269 @@ export namespace Prisma {
   }
 
   export type SproutInstagramAnalyticsAvgAggregateOutputType = {
-    customerProfileId: number | null
     commentsCount: number | null
+    customerProfileId: number | null
+    emailContacts: number | null
     engagements: number | null
+    followersCount: number | null
+    getDirectionsClicks: number | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     likes: number | null
+    phoneCallClicks: number | null
+    postsSentCount: number | null
+    profileFollowerAdds: number | null
+    profileFollowers: number | null
+    profileImpressionsUnique: number | null
+    profileReachUnique: number | null
+    profileViews: number | null
+    profileViewsUnique: number | null
     saves: number | null
     videoViews: number | null
+    websiteClicks: number | null
   }
 
   export type SproutInstagramAnalyticsSumAggregateOutputType = {
-    customerProfileId: number | null
     commentsCount: number | null
+    customerProfileId: number | null
+    emailContacts: number | null
     engagements: number | null
+    followersCount: number | null
+    getDirectionsClicks: number | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     likes: number | null
+    phoneCallClicks: number | null
+    postsSentCount: number | null
+    profileFollowerAdds: number | null
+    profileFollowers: number | null
+    profileImpressionsUnique: number | null
+    profileReachUnique: number | null
+    profileViews: number | null
+    profileViewsUnique: number | null
     saves: number | null
     videoViews: number | null
+    websiteClicks: number | null
   }
 
   export type SproutInstagramAnalyticsMinAggregateOutputType = {
-    id: string | null
-    sproutSocialAccountId: string | null
-    customerProfileId: number | null
-    reportingDate: Date | null
     commentsCount: number | null
+    createdAt: Date | null
+    customerProfileId: number | null
+    emailContacts: number | null
     engagements: number | null
+    followersCount: number | null
+    getDirectionsClicks: number | null
+    id: string | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     likes: number | null
+    phoneCallClicks: number | null
+    postsSentCount: number | null
+    profileFollowerAdds: number | null
+    profileFollowers: number | null
+    profileImpressionsUnique: number | null
+    profileReachUnique: number | null
+    profileViews: number | null
+    profileViewsUnique: number | null
+    reportingDate: Date | null
     saves: number | null
-    videoViews: number | null
-    createdAt: Date | null
+    sproutSocialAccountId: string | null
     updatedAt: Date | null
+    videoViews: number | null
+    websiteClicks: number | null
   }
 
   export type SproutInstagramAnalyticsMaxAggregateOutputType = {
-    id: string | null
-    sproutSocialAccountId: string | null
-    customerProfileId: number | null
-    reportingDate: Date | null
     commentsCount: number | null
+    createdAt: Date | null
+    customerProfileId: number | null
+    emailContacts: number | null
     engagements: number | null
+    followersCount: number | null
+    getDirectionsClicks: number | null
+    id: string | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     likes: number | null
+    phoneCallClicks: number | null
+    postsSentCount: number | null
+    profileFollowerAdds: number | null
+    profileFollowers: number | null
+    profileImpressionsUnique: number | null
+    profileReachUnique: number | null
+    profileViews: number | null
+    profileViewsUnique: number | null
+    reportingDate: Date | null
     saves: number | null
-    videoViews: number | null
-    createdAt: Date | null
+    sproutSocialAccountId: string | null
     updatedAt: Date | null
+    videoViews: number | null
+    websiteClicks: number | null
   }
 
   export type SproutInstagramAnalyticsCountAggregateOutputType = {
-    id: number
-    sproutSocialAccountId: number
-    customerProfileId: number
-    reportingDate: number
     commentsCount: number
+    createdAt: number
+    customerProfileId: number
+    emailContacts: number
     engagements: number
+    followersCount: number
+    getDirectionsClicks: number
+    id: number
     impressions: number
     impressionsUnique: number
-    followersCount: number
     likes: number
+    phoneCallClicks: number
+    postsSendByContentType: number
+    postsSentByPostType: number
+    postsSentCount: number
+    profileFollowerAdds: number
+    profileFollowers: number
+    profileImpressionsUnique: number
+    profileReachUnique: number
+    profileViews: number
+    profileViewsUnique: number
+    reportingDate: number
     saves: number
-    videoViews: number
-    createdAt: number
+    sproutSocialAccountId: number
     updatedAt: number
+    videoViews: number
+    websiteClicks: number
     _all: number
   }
 
 
   export type SproutInstagramAnalyticsAvgAggregateInputType = {
-    customerProfileId?: true
     commentsCount?: true
+    customerProfileId?: true
+    emailContacts?: true
     engagements?: true
+    followersCount?: true
+    getDirectionsClicks?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     likes?: true
+    phoneCallClicks?: true
+    postsSentCount?: true
+    profileFollowerAdds?: true
+    profileFollowers?: true
+    profileImpressionsUnique?: true
+    profileReachUnique?: true
+    profileViews?: true
+    profileViewsUnique?: true
     saves?: true
     videoViews?: true
+    websiteClicks?: true
   }
 
   export type SproutInstagramAnalyticsSumAggregateInputType = {
-    customerProfileId?: true
     commentsCount?: true
+    customerProfileId?: true
+    emailContacts?: true
     engagements?: true
+    followersCount?: true
+    getDirectionsClicks?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     likes?: true
+    phoneCallClicks?: true
+    postsSentCount?: true
+    profileFollowerAdds?: true
+    profileFollowers?: true
+    profileImpressionsUnique?: true
+    profileReachUnique?: true
+    profileViews?: true
+    profileViewsUnique?: true
     saves?: true
     videoViews?: true
+    websiteClicks?: true
   }
 
   export type SproutInstagramAnalyticsMinAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
-    customerProfileId?: true
-    reportingDate?: true
     commentsCount?: true
+    createdAt?: true
+    customerProfileId?: true
+    emailContacts?: true
     engagements?: true
+    followersCount?: true
+    getDirectionsClicks?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     likes?: true
+    phoneCallClicks?: true
+    postsSentCount?: true
+    profileFollowerAdds?: true
+    profileFollowers?: true
+    profileImpressionsUnique?: true
+    profileReachUnique?: true
+    profileViews?: true
+    profileViewsUnique?: true
+    reportingDate?: true
     saves?: true
-    videoViews?: true
-    createdAt?: true
+    sproutSocialAccountId?: true
     updatedAt?: true
+    videoViews?: true
+    websiteClicks?: true
   }
 
   export type SproutInstagramAnalyticsMaxAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
-    customerProfileId?: true
-    reportingDate?: true
     commentsCount?: true
+    createdAt?: true
+    customerProfileId?: true
+    emailContacts?: true
     engagements?: true
+    followersCount?: true
+    getDirectionsClicks?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     likes?: true
+    phoneCallClicks?: true
+    postsSentCount?: true
+    profileFollowerAdds?: true
+    profileFollowers?: true
+    profileImpressionsUnique?: true
+    profileReachUnique?: true
+    profileViews?: true
+    profileViewsUnique?: true
+    reportingDate?: true
     saves?: true
-    videoViews?: true
-    createdAt?: true
+    sproutSocialAccountId?: true
     updatedAt?: true
+    videoViews?: true
+    websiteClicks?: true
   }
 
   export type SproutInstagramAnalyticsCountAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
-    customerProfileId?: true
-    reportingDate?: true
     commentsCount?: true
+    createdAt?: true
+    customerProfileId?: true
+    emailContacts?: true
     engagements?: true
+    followersCount?: true
+    getDirectionsClicks?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     likes?: true
+    phoneCallClicks?: true
+    postsSendByContentType?: true
+    postsSentByPostType?: true
+    postsSentCount?: true
+    profileFollowerAdds?: true
+    profileFollowers?: true
+    profileImpressionsUnique?: true
+    profileReachUnique?: true
+    profileViews?: true
+    profileViewsUnique?: true
+    reportingDate?: true
     saves?: true
-    videoViews?: true
-    createdAt?: true
+    sproutSocialAccountId?: true
     updatedAt?: true
+    videoViews?: true
+    websiteClicks?: true
     _all?: true
   }
 
@@ -28430,20 +30336,33 @@ export namespace Prisma {
   }
 
   export type SproutInstagramAnalyticsGroupByOutputType = {
-    id: string
-    sproutSocialAccountId: string
-    customerProfileId: number
-    reportingDate: Date
     commentsCount: number | null
+    createdAt: Date
+    customerProfileId: number
+    emailContacts: number | null
     engagements: number | null
+    followersCount: number | null
+    getDirectionsClicks: number | null
+    id: string
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     likes: number | null
+    phoneCallClicks: number | null
+    postsSendByContentType: JsonValue | null
+    postsSentByPostType: JsonValue | null
+    postsSentCount: number | null
+    profileFollowerAdds: number | null
+    profileFollowers: number | null
+    profileImpressionsUnique: number | null
+    profileReachUnique: number | null
+    profileViews: number | null
+    profileViewsUnique: number | null
+    reportingDate: Date
     saves: number | null
-    videoViews: number | null
-    createdAt: Date
+    sproutSocialAccountId: string
     updatedAt: Date
+    videoViews: number | null
+    websiteClicks: number | null
     _count: SproutInstagramAnalyticsCountAggregateOutputType | null
     _avg: SproutInstagramAnalyticsAvgAggregateOutputType | null
     _sum: SproutInstagramAnalyticsSumAggregateOutputType | null
@@ -28466,84 +30385,136 @@ export namespace Prisma {
 
 
   export type SproutInstagramAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
-    customerProfileId?: boolean
-    reportingDate?: boolean
     commentsCount?: boolean
+    createdAt?: boolean
+    customerProfileId?: boolean
+    emailContacts?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    getDirectionsClicks?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     likes?: boolean
+    phoneCallClicks?: boolean
+    postsSendByContentType?: boolean
+    postsSentByPostType?: boolean
+    postsSentCount?: boolean
+    profileFollowerAdds?: boolean
+    profileFollowers?: boolean
+    profileImpressionsUnique?: boolean
+    profileReachUnique?: boolean
+    profileViews?: boolean
+    profileViewsUnique?: boolean
+    reportingDate?: boolean
     saves?: boolean
-    videoViews?: boolean
-    createdAt?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
-    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+    videoViews?: boolean
+    websiteClicks?: boolean
     followersByCity?: boolean | SproutInstagramAnalytics$followersByCityArgs<ExtArgs>
     followersByCountry?: boolean | SproutInstagramAnalytics$followersByCountryArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
     _count?: boolean | SproutInstagramAnalyticsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutInstagramAnalytics"]>
 
   export type SproutInstagramAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
-    customerProfileId?: boolean
-    reportingDate?: boolean
     commentsCount?: boolean
+    createdAt?: boolean
+    customerProfileId?: boolean
+    emailContacts?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    getDirectionsClicks?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     likes?: boolean
+    phoneCallClicks?: boolean
+    postsSendByContentType?: boolean
+    postsSentByPostType?: boolean
+    postsSentCount?: boolean
+    profileFollowerAdds?: boolean
+    profileFollowers?: boolean
+    profileImpressionsUnique?: boolean
+    profileReachUnique?: boolean
+    profileViews?: boolean
+    profileViewsUnique?: boolean
+    reportingDate?: boolean
     saves?: boolean
-    videoViews?: boolean
-    createdAt?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
+    videoViews?: boolean
+    websiteClicks?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutInstagramAnalytics"]>
 
   export type SproutInstagramAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
-    customerProfileId?: boolean
-    reportingDate?: boolean
     commentsCount?: boolean
+    createdAt?: boolean
+    customerProfileId?: boolean
+    emailContacts?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    getDirectionsClicks?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     likes?: boolean
+    phoneCallClicks?: boolean
+    postsSendByContentType?: boolean
+    postsSentByPostType?: boolean
+    postsSentCount?: boolean
+    profileFollowerAdds?: boolean
+    profileFollowers?: boolean
+    profileImpressionsUnique?: boolean
+    profileReachUnique?: boolean
+    profileViews?: boolean
+    profileViewsUnique?: boolean
+    reportingDate?: boolean
     saves?: boolean
-    videoViews?: boolean
-    createdAt?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
+    videoViews?: boolean
+    websiteClicks?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutInstagramAnalytics"]>
 
   export type SproutInstagramAnalyticsSelectScalar = {
-    id?: boolean
-    sproutSocialAccountId?: boolean
-    customerProfileId?: boolean
-    reportingDate?: boolean
     commentsCount?: boolean
+    createdAt?: boolean
+    customerProfileId?: boolean
+    emailContacts?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    getDirectionsClicks?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     likes?: boolean
+    phoneCallClicks?: boolean
+    postsSendByContentType?: boolean
+    postsSentByPostType?: boolean
+    postsSentCount?: boolean
+    profileFollowerAdds?: boolean
+    profileFollowers?: boolean
+    profileImpressionsUnique?: boolean
+    profileReachUnique?: boolean
+    profileViews?: boolean
+    profileViewsUnique?: boolean
+    reportingDate?: boolean
     saves?: boolean
-    videoViews?: boolean
-    createdAt?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
+    videoViews?: boolean
+    websiteClicks?: boolean
   }
 
-  export type SproutInstagramAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "commentsCount" | "engagements" | "impressions" | "impressionsUnique" | "followersCount" | "likes" | "saves" | "videoViews" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutInstagramAnalytics"]>
+  export type SproutInstagramAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"commentsCount" | "createdAt" | "customerProfileId" | "emailContacts" | "engagements" | "followersCount" | "getDirectionsClicks" | "id" | "impressions" | "impressionsUnique" | "likes" | "phoneCallClicks" | "postsSendByContentType" | "postsSentByPostType" | "postsSentCount" | "profileFollowerAdds" | "profileFollowers" | "profileImpressionsUnique" | "profileReachUnique" | "profileViews" | "profileViewsUnique" | "reportingDate" | "saves" | "sproutSocialAccountId" | "updatedAt" | "videoViews" | "websiteClicks", ExtArgs["result"]["sproutInstagramAnalytics"]>
   export type SproutInstagramAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
     followersByCity?: boolean | SproutInstagramAnalytics$followersByCityArgs<ExtArgs>
     followersByCountry?: boolean | SproutInstagramAnalytics$followersByCountryArgs<ExtArgs>
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
     _count?: boolean | SproutInstagramAnalyticsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SproutInstagramAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28556,25 +30527,38 @@ export namespace Prisma {
   export type $SproutInstagramAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SproutInstagramAnalytics"
     objects: {
-      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
       followersByCity: Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>[]
       followersByCountry: Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>[]
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      sproutSocialAccountId: string
-      customerProfileId: number
-      reportingDate: Date
       commentsCount: number | null
+      createdAt: Date
+      customerProfileId: number
+      emailContacts: number | null
       engagements: number | null
+      followersCount: number | null
+      getDirectionsClicks: number | null
+      id: string
       impressions: number | null
       impressionsUnique: number | null
-      followersCount: number | null
       likes: number | null
+      phoneCallClicks: number | null
+      postsSendByContentType: Prisma.JsonValue | null
+      postsSentByPostType: Prisma.JsonValue | null
+      postsSentCount: number | null
+      profileFollowerAdds: number | null
+      profileFollowers: number | null
+      profileImpressionsUnique: number | null
+      profileReachUnique: number | null
+      profileViews: number | null
+      profileViewsUnique: number | null
+      reportingDate: Date
       saves: number | null
-      videoViews: number | null
-      createdAt: Date
+      sproutSocialAccountId: string
       updatedAt: Date
+      videoViews: number | null
+      websiteClicks: number | null
     }, ExtArgs["result"]["sproutInstagramAnalytics"]>
     composites: {}
   }
@@ -28658,8 +30642,8 @@ export namespace Prisma {
      * // Get first 10 SproutInstagramAnalytics
      * const sproutInstagramAnalytics = await prisma.sproutInstagramAnalytics.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const sproutInstagramAnalyticsWithIdOnly = await prisma.sproutInstagramAnalytics.findMany({ select: { id: true } })
+     * // Only select the `commentsCount`
+     * const sproutInstagramAnalyticsWithCommentsCountOnly = await prisma.sproutInstagramAnalytics.findMany({ select: { commentsCount: true } })
      * 
      */
     findMany<T extends SproutInstagramAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutInstagramAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -28703,9 +30687,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many SproutInstagramAnalytics and only return the `id`
-     * const sproutInstagramAnalyticsWithIdOnly = await prisma.sproutInstagramAnalytics.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many SproutInstagramAnalytics and only return the `commentsCount`
+     * const sproutInstagramAnalyticsWithCommentsCountOnly = await prisma.sproutInstagramAnalytics.createManyAndReturn({
+     *   select: { commentsCount: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -28794,9 +30778,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more SproutInstagramAnalytics and only return the `id`
-     * const sproutInstagramAnalyticsWithIdOnly = await prisma.sproutInstagramAnalytics.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more SproutInstagramAnalytics and only return the `commentsCount`
+     * const sproutInstagramAnalyticsWithCommentsCountOnly = await prisma.sproutInstagramAnalytics.updateManyAndReturn({
+     *   select: { commentsCount: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -28969,9 +30953,9 @@ export namespace Prisma {
    */
   export interface Prisma__SproutInstagramAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     followersByCity<T extends SproutInstagramAnalytics$followersByCityArgs<ExtArgs> = {}>(args?: Subset<T, SproutInstagramAnalytics$followersByCityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     followersByCountry<T extends SproutInstagramAnalytics$followersByCountryArgs<ExtArgs> = {}>(args?: Subset<T, SproutInstagramAnalytics$followersByCountryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramFollowersByCountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -29001,20 +30985,33 @@ export namespace Prisma {
    * Fields of the SproutInstagramAnalytics model
    */
   interface SproutInstagramAnalyticsFieldRefs {
-    readonly id: FieldRef<"SproutInstagramAnalytics", 'String'>
-    readonly sproutSocialAccountId: FieldRef<"SproutInstagramAnalytics", 'String'>
-    readonly customerProfileId: FieldRef<"SproutInstagramAnalytics", 'Int'>
-    readonly reportingDate: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
     readonly commentsCount: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly createdAt: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
+    readonly customerProfileId: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly emailContacts: FieldRef<"SproutInstagramAnalytics", 'Int'>
     readonly engagements: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly followersCount: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly getDirectionsClicks: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly id: FieldRef<"SproutInstagramAnalytics", 'String'>
     readonly impressions: FieldRef<"SproutInstagramAnalytics", 'Int'>
     readonly impressionsUnique: FieldRef<"SproutInstagramAnalytics", 'Int'>
-    readonly followersCount: FieldRef<"SproutInstagramAnalytics", 'Int'>
     readonly likes: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly phoneCallClicks: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly postsSendByContentType: FieldRef<"SproutInstagramAnalytics", 'Json'>
+    readonly postsSentByPostType: FieldRef<"SproutInstagramAnalytics", 'Json'>
+    readonly postsSentCount: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly profileFollowerAdds: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly profileFollowers: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly profileImpressionsUnique: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly profileReachUnique: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly profileViews: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly profileViewsUnique: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly reportingDate: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
     readonly saves: FieldRef<"SproutInstagramAnalytics", 'Int'>
-    readonly videoViews: FieldRef<"SproutInstagramAnalytics", 'Int'>
-    readonly createdAt: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
+    readonly sproutSocialAccountId: FieldRef<"SproutInstagramAnalytics", 'String'>
     readonly updatedAt: FieldRef<"SproutInstagramAnalytics", 'DateTime'>
+    readonly videoViews: FieldRef<"SproutInstagramAnalytics", 'Int'>
+    readonly websiteClicks: FieldRef<"SproutInstagramAnalytics", 'Int'>
   }
     
 
@@ -31702,60 +33699,60 @@ export namespace Prisma {
   export type SproutLinkedInAnalyticsAvgAggregateOutputType = {
     customerProfileId: number | null
     engagements: number | null
+    followersCount: number | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     reactions: number | null
   }
 
   export type SproutLinkedInAnalyticsSumAggregateOutputType = {
     customerProfileId: number | null
     engagements: number | null
+    followersCount: number | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     reactions: number | null
   }
 
   export type SproutLinkedInAnalyticsMinAggregateOutputType = {
-    id: string | null
-    sproutSocialAccountId: string | null
+    createdAt: Date | null
     customerProfileId: number | null
-    reportingDate: Date | null
     engagements: number | null
+    followersCount: number | null
+    id: string | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     reactions: number | null
-    createdAt: Date | null
+    reportingDate: Date | null
+    sproutSocialAccountId: string | null
     updatedAt: Date | null
   }
 
   export type SproutLinkedInAnalyticsMaxAggregateOutputType = {
-    id: string | null
-    sproutSocialAccountId: string | null
+    createdAt: Date | null
     customerProfileId: number | null
-    reportingDate: Date | null
     engagements: number | null
+    followersCount: number | null
+    id: string | null
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     reactions: number | null
-    createdAt: Date | null
+    reportingDate: Date | null
+    sproutSocialAccountId: string | null
     updatedAt: Date | null
   }
 
   export type SproutLinkedInAnalyticsCountAggregateOutputType = {
-    id: number
-    sproutSocialAccountId: number
+    createdAt: number
     customerProfileId: number
-    reportingDate: number
     engagements: number
+    followersCount: number
+    id: number
     impressions: number
     impressionsUnique: number
-    followersCount: number
     reactions: number
-    createdAt: number
+    reportingDate: number
+    sproutSocialAccountId: number
     updatedAt: number
     _all: number
   }
@@ -31764,60 +33761,60 @@ export namespace Prisma {
   export type SproutLinkedInAnalyticsAvgAggregateInputType = {
     customerProfileId?: true
     engagements?: true
+    followersCount?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     reactions?: true
   }
 
   export type SproutLinkedInAnalyticsSumAggregateInputType = {
     customerProfileId?: true
     engagements?: true
+    followersCount?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     reactions?: true
   }
 
   export type SproutLinkedInAnalyticsMinAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
+    createdAt?: true
     customerProfileId?: true
-    reportingDate?: true
     engagements?: true
+    followersCount?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     reactions?: true
-    createdAt?: true
+    reportingDate?: true
+    sproutSocialAccountId?: true
     updatedAt?: true
   }
 
   export type SproutLinkedInAnalyticsMaxAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
+    createdAt?: true
     customerProfileId?: true
-    reportingDate?: true
     engagements?: true
+    followersCount?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     reactions?: true
-    createdAt?: true
+    reportingDate?: true
+    sproutSocialAccountId?: true
     updatedAt?: true
   }
 
   export type SproutLinkedInAnalyticsCountAggregateInputType = {
-    id?: true
-    sproutSocialAccountId?: true
+    createdAt?: true
     customerProfileId?: true
-    reportingDate?: true
     engagements?: true
+    followersCount?: true
+    id?: true
     impressions?: true
     impressionsUnique?: true
-    followersCount?: true
     reactions?: true
-    createdAt?: true
+    reportingDate?: true
+    sproutSocialAccountId?: true
     updatedAt?: true
     _all?: true
   }
@@ -31909,16 +33906,16 @@ export namespace Prisma {
   }
 
   export type SproutLinkedInAnalyticsGroupByOutputType = {
-    id: string
-    sproutSocialAccountId: string
+    createdAt: Date
     customerProfileId: number
-    reportingDate: Date
     engagements: number | null
+    followersCount: number | null
+    id: string
     impressions: number | null
     impressionsUnique: number | null
-    followersCount: number | null
     reactions: number | null
-    createdAt: Date
+    reportingDate: Date
+    sproutSocialAccountId: string
     updatedAt: Date
     _count: SproutLinkedInAnalyticsCountAggregateOutputType | null
     _avg: SproutLinkedInAnalyticsAvgAggregateOutputType | null
@@ -31942,65 +33939,65 @@ export namespace Prisma {
 
 
   export type SproutLinkedInAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     reactions?: boolean
-    createdAt?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
 
   export type SproutLinkedInAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     reactions?: boolean
-    createdAt?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
 
   export type SproutLinkedInAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     reactions?: boolean
-    createdAt?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
 
   export type SproutLinkedInAnalyticsSelectScalar = {
-    id?: boolean
-    sproutSocialAccountId?: boolean
+    createdAt?: boolean
     customerProfileId?: boolean
-    reportingDate?: boolean
     engagements?: boolean
+    followersCount?: boolean
+    id?: boolean
     impressions?: boolean
     impressionsUnique?: boolean
-    followersCount?: boolean
     reactions?: boolean
-    createdAt?: boolean
+    reportingDate?: boolean
+    sproutSocialAccountId?: boolean
     updatedAt?: boolean
   }
 
-  export type SproutLinkedInAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "customerProfileId" | "reportingDate" | "engagements" | "impressions" | "impressionsUnique" | "followersCount" | "reactions" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutLinkedInAnalytics"]>
+  export type SproutLinkedInAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"createdAt" | "customerProfileId" | "engagements" | "followersCount" | "id" | "impressions" | "impressionsUnique" | "reactions" | "reportingDate" | "sproutSocialAccountId" | "updatedAt", ExtArgs["result"]["sproutLinkedInAnalytics"]>
   export type SproutLinkedInAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
   }
@@ -32017,16 +34014,16 @@ export namespace Prisma {
       sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      sproutSocialAccountId: string
+      createdAt: Date
       customerProfileId: number
-      reportingDate: Date
       engagements: number | null
+      followersCount: number | null
+      id: string
       impressions: number | null
       impressionsUnique: number | null
-      followersCount: number | null
       reactions: number | null
-      createdAt: Date
+      reportingDate: Date
+      sproutSocialAccountId: string
       updatedAt: Date
     }, ExtArgs["result"]["sproutLinkedInAnalytics"]>
     composites: {}
@@ -32111,8 +34108,8 @@ export namespace Prisma {
      * // Get first 10 SproutLinkedInAnalytics
      * const sproutLinkedInAnalytics = await prisma.sproutLinkedInAnalytics.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const sproutLinkedInAnalyticsWithIdOnly = await prisma.sproutLinkedInAnalytics.findMany({ select: { id: true } })
+     * // Only select the `createdAt`
+     * const sproutLinkedInAnalyticsWithCreatedAtOnly = await prisma.sproutLinkedInAnalytics.findMany({ select: { createdAt: true } })
      * 
      */
     findMany<T extends SproutLinkedInAnalyticsFindManyArgs>(args?: SelectSubset<T, SproutLinkedInAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -32156,9 +34153,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many SproutLinkedInAnalytics and only return the `id`
-     * const sproutLinkedInAnalyticsWithIdOnly = await prisma.sproutLinkedInAnalytics.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many SproutLinkedInAnalytics and only return the `createdAt`
+     * const sproutLinkedInAnalyticsWithCreatedAtOnly = await prisma.sproutLinkedInAnalytics.createManyAndReturn({
+     *   select: { createdAt: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -32247,9 +34244,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more SproutLinkedInAnalytics and only return the `id`
-     * const sproutLinkedInAnalyticsWithIdOnly = await prisma.sproutLinkedInAnalytics.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more SproutLinkedInAnalytics and only return the `createdAt`
+     * const sproutLinkedInAnalyticsWithCreatedAtOnly = await prisma.sproutLinkedInAnalytics.updateManyAndReturn({
+     *   select: { createdAt: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -32452,16 +34449,16 @@ export namespace Prisma {
    * Fields of the SproutLinkedInAnalytics model
    */
   interface SproutLinkedInAnalyticsFieldRefs {
-    readonly id: FieldRef<"SproutLinkedInAnalytics", 'String'>
-    readonly sproutSocialAccountId: FieldRef<"SproutLinkedInAnalytics", 'String'>
+    readonly createdAt: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
     readonly customerProfileId: FieldRef<"SproutLinkedInAnalytics", 'Int'>
-    readonly reportingDate: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
     readonly engagements: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly followersCount: FieldRef<"SproutLinkedInAnalytics", 'Int'>
+    readonly id: FieldRef<"SproutLinkedInAnalytics", 'String'>
     readonly impressions: FieldRef<"SproutLinkedInAnalytics", 'Int'>
     readonly impressionsUnique: FieldRef<"SproutLinkedInAnalytics", 'Int'>
-    readonly followersCount: FieldRef<"SproutLinkedInAnalytics", 'Int'>
     readonly reactions: FieldRef<"SproutLinkedInAnalytics", 'Int'>
-    readonly createdAt: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
+    readonly reportingDate: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
+    readonly sproutSocialAccountId: FieldRef<"SproutLinkedInAnalytics", 'String'>
     readonly updatedAt: FieldRef<"SproutLinkedInAnalytics", 'DateTime'>
   }
     
@@ -34259,6 +36256,7 @@ export namespace Prisma {
     instagramAnalytics?: boolean | SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>
     pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
     users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
+    facebookPostAnalytics?: boolean | SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs>
     _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutSocialAccount"]>
 
@@ -34308,6 +36306,7 @@ export namespace Prisma {
     instagramAnalytics?: boolean | SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>
     pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
     users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
+    facebookPostAnalytics?: boolean | SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs>
     _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SproutSocialAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -34321,6 +36320,7 @@ export namespace Prisma {
       instagramAnalytics: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>[]
       pinterestAnalytics: Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>[]
       users: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
+      facebookPostAnalytics: Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -34732,6 +36732,7 @@ export namespace Prisma {
     instagramAnalytics<T extends SproutSocialAccount$instagramAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pinterestAnalytics<T extends SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends SproutSocialAccount$usersArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    facebookPostAnalytics<T extends SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -35276,6 +37277,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount.facebookPostAnalytics
+   */
+  export type SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPostAnalytics
+     */
+    select?: SproutFacebookPostAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPostAnalytics
+     */
+    omit?: SproutFacebookPostAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostAnalyticsInclude<ExtArgs> | null
+    where?: SproutFacebookPostAnalyticsWhereInput
+    orderBy?: SproutFacebookPostAnalyticsOrderByWithRelationInput | SproutFacebookPostAnalyticsOrderByWithRelationInput[]
+    cursor?: SproutFacebookPostAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutFacebookPostAnalyticsScalarFieldEnum | SproutFacebookPostAnalyticsScalarFieldEnum[]
   }
 
   /**
@@ -47180,46 +49205,106 @@ export namespace Prisma {
 
 
   export const SproutFacebookAnalyticsScalarFieldEnum: {
-    id: 'id',
-    sproutSocialAccountId: 'sproutSocialAccountId',
+    createdAt: 'createdAt',
     customerProfileId: 'customerProfileId',
-    reportingDate: 'reportingDate',
     engagements: 'engagements',
+    followersCount: 'followersCount',
+    id: 'id',
     impressions: 'impressions',
     impressionsUnique: 'impressionsUnique',
-    followersCount: 'followersCount',
+    netFollowerGrowth: 'netFollowerGrowth',
     postContentClicks: 'postContentClicks',
     postContentClicksOther: 'postContentClicksOther',
     postLinkClicks: 'postLinkClicks',
     postPhotoViewClicks: 'postPhotoViewClicks',
+    reportingDate: 'reportingDate',
+    sproutSocialAccountId: 'sproutSocialAccountId',
     tabViews: 'tabViews',
+    updatedAt: 'updatedAt',
     videoViews: 'videoViews',
     videoViews10s: 'videoViews10s',
     videoViewsOrganic: 'videoViewsOrganic',
     videoViewsPaid: 'videoViewsPaid',
-    videoViewsUnique: 'videoViewsUnique',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    videoViewsUnique: 'videoViewsUnique'
   };
 
   export type SproutFacebookAnalyticsScalarFieldEnum = (typeof SproutFacebookAnalyticsScalarFieldEnum)[keyof typeof SproutFacebookAnalyticsScalarFieldEnum]
 
 
-  export const SproutInstagramAnalyticsScalarFieldEnum: {
+  export const SproutFacebookPostAnalyticsScalarFieldEnum: {
     id: 'id',
-    sproutSocialAccountId: 'sproutSocialAccountId',
-    customerProfileId: 'customerProfileId',
-    reportingDate: 'reportingDate',
+    angryReactions: 'angryReactions',
+    clientNativeId: 'clientNativeId',
     commentsCount: 'commentsCount',
-    engagements: 'engagements',
+    hahaReactions: 'hahaReactions',
     impressions: 'impressions',
-    impressionsUnique: 'impressionsUnique',
-    followersCount: 'followersCount',
+    impressionsFollower: 'impressionsFollower',
+    impressionsNonFollower: 'impressionsNonFollower',
+    impressionsNonViral: 'impressionsNonViral',
+    impressionsOrganic: 'impressionsOrganic',
+    impressionsPaid: 'impressionsPaid',
+    impressionsViral: 'impressionsViral',
     likes: 'likes',
-    saves: 'saves',
+    loveReactions: 'loveReactions',
+    postContentClicks: 'postContentClicks',
+    postContentClicksOther: 'postContentClicksOther',
+    postLinkClicks: 'postLinkClicks',
+    postNativeId: 'postNativeId',
+    postPhotoViewClicks: 'postPhotoViewClicks',
+    postVideoPlayClicks: 'postVideoPlayClicks',
+    questionAnswers: 'questionAnswers',
+    reach: 'reach',
+    reachFollower: 'reachFollower',
+    reachNonViral: 'reachNonViral',
+    reachOrganic: 'reachOrganic',
+    reachPaid: 'reachPaid',
+    reachViral: 'reachViral',
+    reactions: 'reactions',
+    reportingDate: 'reportingDate',
+    sadReactions: 'sadReactions',
+    sharesCount: 'sharesCount',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    videoLength: 'videoLength',
     videoViews: 'videoViews',
+    videoViewsAutoplay: 'videoViewsAutoplay',
+    videoViewsOrganic: 'videoViewsOrganic',
+    videoViewsPaid: 'videoViewsPaid',
+    wowReactions: 'wowReactions',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+  };
+
+  export type SproutFacebookPostAnalyticsScalarFieldEnum = (typeof SproutFacebookPostAnalyticsScalarFieldEnum)[keyof typeof SproutFacebookPostAnalyticsScalarFieldEnum]
+
+
+  export const SproutInstagramAnalyticsScalarFieldEnum: {
+    commentsCount: 'commentsCount',
+    createdAt: 'createdAt',
+    customerProfileId: 'customerProfileId',
+    emailContacts: 'emailContacts',
+    engagements: 'engagements',
+    followersCount: 'followersCount',
+    getDirectionsClicks: 'getDirectionsClicks',
+    id: 'id',
+    impressions: 'impressions',
+    impressionsUnique: 'impressionsUnique',
+    likes: 'likes',
+    phoneCallClicks: 'phoneCallClicks',
+    postsSendByContentType: 'postsSendByContentType',
+    postsSentByPostType: 'postsSentByPostType',
+    postsSentCount: 'postsSentCount',
+    profileFollowerAdds: 'profileFollowerAdds',
+    profileFollowers: 'profileFollowers',
+    profileImpressionsUnique: 'profileImpressionsUnique',
+    profileReachUnique: 'profileReachUnique',
+    profileViews: 'profileViews',
+    profileViewsUnique: 'profileViewsUnique',
+    reportingDate: 'reportingDate',
+    saves: 'saves',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    updatedAt: 'updatedAt',
+    videoViews: 'videoViews',
+    websiteClicks: 'websiteClicks'
   };
 
   export type SproutInstagramAnalyticsScalarFieldEnum = (typeof SproutInstagramAnalyticsScalarFieldEnum)[keyof typeof SproutInstagramAnalyticsScalarFieldEnum]
@@ -47250,16 +49335,16 @@ export namespace Prisma {
 
 
   export const SproutLinkedInAnalyticsScalarFieldEnum: {
-    id: 'id',
-    sproutSocialAccountId: 'sproutSocialAccountId',
+    createdAt: 'createdAt',
     customerProfileId: 'customerProfileId',
-    reportingDate: 'reportingDate',
     engagements: 'engagements',
+    followersCount: 'followersCount',
+    id: 'id',
     impressions: 'impressions',
     impressionsUnique: 'impressionsUnique',
-    followersCount: 'followersCount',
     reactions: 'reactions',
-    createdAt: 'createdAt',
+    reportingDate: 'reportingDate',
+    sproutSocialAccountId: 'sproutSocialAccountId',
     updatedAt: 'updatedAt'
   };
 
@@ -49132,50 +51217,52 @@ export namespace Prisma {
     AND?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
     OR?: SproutFacebookAnalyticsWhereInput[]
     NOT?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
-    id?: StringFilter<"SproutFacebookAnalytics"> | string
-    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
+    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     customerProfileId?: IntFilter<"SproutFacebookAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     engagements?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    id?: StringFilter<"SproutFacebookAnalytics"> | string
     impressions?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    netFollowerGrowth?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicksOther?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postLinkClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postPhotoViewClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
     tabViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     videoViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViews10s?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsOrganic?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
-    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
   }
 
   export type SproutFacebookAnalyticsOrderByWithRelationInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    id?: SortOrder
     impressions?: SortOrderInput | SortOrder
     impressionsUnique?: SortOrderInput | SortOrder
-    followersCount?: SortOrderInput | SortOrder
+    netFollowerGrowth?: SortOrderInput | SortOrder
     postContentClicks?: SortOrderInput | SortOrder
     postContentClicksOther?: SortOrderInput | SortOrder
     postLinkClicks?: SortOrderInput | SortOrder
     postPhotoViewClicks?: SortOrderInput | SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     tabViews?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     videoViews?: SortOrderInput | SortOrder
     videoViews10s?: SortOrderInput | SortOrder
     videoViewsOrganic?: SortOrderInput | SortOrder
     videoViewsPaid?: SortOrderInput | SortOrder
     videoViewsUnique?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
   }
 
@@ -49184,49 +51271,51 @@ export namespace Prisma {
     AND?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
     OR?: SproutFacebookAnalyticsWhereInput[]
     NOT?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
-    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
+    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     customerProfileId?: IntFilter<"SproutFacebookAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     engagements?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     impressions?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    netFollowerGrowth?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicksOther?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postLinkClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postPhotoViewClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
     tabViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     videoViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViews10s?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsOrganic?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
-    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
   }, "id">
 
   export type SproutFacebookAnalyticsOrderByWithAggregationInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    id?: SortOrder
     impressions?: SortOrderInput | SortOrder
     impressionsUnique?: SortOrderInput | SortOrder
-    followersCount?: SortOrderInput | SortOrder
+    netFollowerGrowth?: SortOrderInput | SortOrder
     postContentClicks?: SortOrderInput | SortOrder
     postContentClicksOther?: SortOrderInput | SortOrder
     postLinkClicks?: SortOrderInput | SortOrder
     postPhotoViewClicks?: SortOrderInput | SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     tabViews?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
     videoViews?: SortOrderInput | SortOrder
     videoViews10s?: SortOrderInput | SortOrder
     videoViewsOrganic?: SortOrderInput | SortOrder
     videoViewsPaid?: SortOrderInput | SortOrder
     videoViewsUnique?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     _count?: SproutFacebookAnalyticsCountOrderByAggregateInput
     _avg?: SproutFacebookAnalyticsAvgOrderByAggregateInput
     _max?: SproutFacebookAnalyticsMaxOrderByAggregateInput
@@ -49238,69 +51327,328 @@ export namespace Prisma {
     AND?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput | SproutFacebookAnalyticsScalarWhereWithAggregatesInput[]
     OR?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput[]
     NOT?: SproutFacebookAnalyticsScalarWhereWithAggregatesInput | SproutFacebookAnalyticsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SproutFacebookAnalytics"> | string
-    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutFacebookAnalytics"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
     customerProfileId?: IntWithAggregatesFilter<"SproutFacebookAnalytics"> | number
-    reportingDate?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
     engagements?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    id?: StringWithAggregatesFilter<"SproutFacebookAnalytics"> | string
     impressions?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     impressionsUnique?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
-    followersCount?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    netFollowerGrowth?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicks?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicksOther?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     postLinkClicks?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     postPhotoViewClicks?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutFacebookAnalytics"> | string
     tabViews?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
     videoViews?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     videoViews10s?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsOrganic?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsPaid?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsUnique?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
-    createdAt?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"SproutFacebookAnalytics"> | Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsWhereInput = {
+    AND?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
+    OR?: SproutFacebookPostAnalyticsWhereInput[]
+    NOT?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
+    id?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    angryReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    clientNativeId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    commentsCount?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    hahaReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    likes?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    loveReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicksOther?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postLinkClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postNativeId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    postPhotoViewClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postVideoPlayClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    questionAnswers?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reach?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachNonViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    sadReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    sharesCount?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    videoLength?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsAutoplay?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    wowReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }
+
+  export type SproutFacebookPostAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    angryReactions?: SortOrderInput | SortOrder
+    clientNativeId?: SortOrder
+    commentsCount?: SortOrderInput | SortOrder
+    hahaReactions?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsFollower?: SortOrderInput | SortOrder
+    impressionsNonFollower?: SortOrderInput | SortOrder
+    impressionsNonViral?: SortOrderInput | SortOrder
+    impressionsOrganic?: SortOrderInput | SortOrder
+    impressionsPaid?: SortOrderInput | SortOrder
+    impressionsViral?: SortOrderInput | SortOrder
+    likes?: SortOrderInput | SortOrder
+    loveReactions?: SortOrderInput | SortOrder
+    postContentClicks?: SortOrderInput | SortOrder
+    postContentClicksOther?: SortOrderInput | SortOrder
+    postLinkClicks?: SortOrderInput | SortOrder
+    postNativeId?: SortOrder
+    postPhotoViewClicks?: SortOrderInput | SortOrder
+    postVideoPlayClicks?: SortOrderInput | SortOrder
+    questionAnswers?: SortOrderInput | SortOrder
+    reach?: SortOrderInput | SortOrder
+    reachFollower?: SortOrderInput | SortOrder
+    reachNonViral?: SortOrderInput | SortOrder
+    reachOrganic?: SortOrderInput | SortOrder
+    reachPaid?: SortOrderInput | SortOrder
+    reachViral?: SortOrderInput | SortOrder
+    reactions?: SortOrderInput | SortOrder
+    reportingDate?: SortOrder
+    sadReactions?: SortOrderInput | SortOrder
+    sharesCount?: SortOrderInput | SortOrder
+    sproutSocialAccountId?: SortOrder
+    videoLength?: SortOrderInput | SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    videoViewsAutoplay?: SortOrderInput | SortOrder
+    videoViewsOrganic?: SortOrderInput | SortOrder
+    videoViewsPaid?: SortOrderInput | SortOrder
+    wowReactions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+  }
+
+  export type SproutFacebookPostAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
+    OR?: SproutFacebookPostAnalyticsWhereInput[]
+    NOT?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
+    angryReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    clientNativeId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    commentsCount?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    hahaReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    likes?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    loveReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicksOther?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postLinkClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postNativeId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    postPhotoViewClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postVideoPlayClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    questionAnswers?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reach?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachNonViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    sadReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    sharesCount?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    videoLength?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsAutoplay?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    wowReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }, "id">
+
+  export type SproutFacebookPostAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    angryReactions?: SortOrderInput | SortOrder
+    clientNativeId?: SortOrder
+    commentsCount?: SortOrderInput | SortOrder
+    hahaReactions?: SortOrderInput | SortOrder
+    impressions?: SortOrderInput | SortOrder
+    impressionsFollower?: SortOrderInput | SortOrder
+    impressionsNonFollower?: SortOrderInput | SortOrder
+    impressionsNonViral?: SortOrderInput | SortOrder
+    impressionsOrganic?: SortOrderInput | SortOrder
+    impressionsPaid?: SortOrderInput | SortOrder
+    impressionsViral?: SortOrderInput | SortOrder
+    likes?: SortOrderInput | SortOrder
+    loveReactions?: SortOrderInput | SortOrder
+    postContentClicks?: SortOrderInput | SortOrder
+    postContentClicksOther?: SortOrderInput | SortOrder
+    postLinkClicks?: SortOrderInput | SortOrder
+    postNativeId?: SortOrder
+    postPhotoViewClicks?: SortOrderInput | SortOrder
+    postVideoPlayClicks?: SortOrderInput | SortOrder
+    questionAnswers?: SortOrderInput | SortOrder
+    reach?: SortOrderInput | SortOrder
+    reachFollower?: SortOrderInput | SortOrder
+    reachNonViral?: SortOrderInput | SortOrder
+    reachOrganic?: SortOrderInput | SortOrder
+    reachPaid?: SortOrderInput | SortOrder
+    reachViral?: SortOrderInput | SortOrder
+    reactions?: SortOrderInput | SortOrder
+    reportingDate?: SortOrder
+    sadReactions?: SortOrderInput | SortOrder
+    sharesCount?: SortOrderInput | SortOrder
+    sproutSocialAccountId?: SortOrder
+    videoLength?: SortOrderInput | SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    videoViewsAutoplay?: SortOrderInput | SortOrder
+    videoViewsOrganic?: SortOrderInput | SortOrder
+    videoViewsPaid?: SortOrderInput | SortOrder
+    wowReactions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutFacebookPostAnalyticsCountOrderByAggregateInput
+    _avg?: SproutFacebookPostAnalyticsAvgOrderByAggregateInput
+    _max?: SproutFacebookPostAnalyticsMaxOrderByAggregateInput
+    _min?: SproutFacebookPostAnalyticsMinOrderByAggregateInput
+    _sum?: SproutFacebookPostAnalyticsSumOrderByAggregateInput
+  }
+
+  export type SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput | SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput | SproutFacebookPostAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutFacebookPostAnalytics"> | string
+    angryReactions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    clientNativeId?: StringWithAggregatesFilter<"SproutFacebookPostAnalytics"> | string
+    commentsCount?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    hahaReactions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsFollower?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonFollower?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonViral?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsOrganic?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsPaid?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsViral?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    likes?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    loveReactions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicks?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicksOther?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    postLinkClicks?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    postNativeId?: StringWithAggregatesFilter<"SproutFacebookPostAnalytics"> | string
+    postPhotoViewClicks?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    postVideoPlayClicks?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    questionAnswers?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reach?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachFollower?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachNonViral?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachOrganic?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachPaid?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachViral?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reactions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutFacebookPostAnalytics"> | Date | string
+    sadReactions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    sharesCount?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutFacebookPostAnalytics"> | string
+    videoLength?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViews?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsAutoplay?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsPaid?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    wowReactions?: IntNullableWithAggregatesFilter<"SproutFacebookPostAnalytics"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"SproutFacebookPostAnalytics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutFacebookPostAnalytics"> | Date | string
   }
 
   export type SproutInstagramAnalyticsWhereInput = {
     AND?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
     OR?: SproutInstagramAnalyticsWhereInput[]
     NOT?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
-    id?: StringFilter<"SproutInstagramAnalytics"> | string
-    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
-    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
     commentsCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
+    emailContacts?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     engagements?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    getDirectionsClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    id?: StringFilter<"SproutInstagramAnalytics"> | string
     impressions?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     likes?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    phoneCallClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    postsSendByContentType?: JsonNullableFilter<"SproutInstagramAnalytics">
+    postsSentByPostType?: JsonNullableFilter<"SproutInstagramAnalytics">
+    postsSentCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowerAdds?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowers?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileImpressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileReachUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileViewsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
     saves?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
-    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    websiteClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     followersByCity?: SproutInstagramFollowersByCityListRelationFilter
     followersByCountry?: SproutInstagramFollowersByCountryListRelationFilter
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
   }
 
   export type SproutInstagramAnalyticsOrderByWithRelationInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
-    customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     commentsCount?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrderInput | SortOrder
     engagements?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    getDirectionsClicks?: SortOrderInput | SortOrder
+    id?: SortOrder
     impressions?: SortOrderInput | SortOrder
     impressionsUnique?: SortOrderInput | SortOrder
-    followersCount?: SortOrderInput | SortOrder
     likes?: SortOrderInput | SortOrder
+    phoneCallClicks?: SortOrderInput | SortOrder
+    postsSendByContentType?: SortOrderInput | SortOrder
+    postsSentByPostType?: SortOrderInput | SortOrder
+    postsSentCount?: SortOrderInput | SortOrder
+    profileFollowerAdds?: SortOrderInput | SortOrder
+    profileFollowers?: SortOrderInput | SortOrder
+    profileImpressionsUnique?: SortOrderInput | SortOrder
+    profileReachUnique?: SortOrderInput | SortOrder
+    profileViews?: SortOrderInput | SortOrder
+    profileViewsUnique?: SortOrderInput | SortOrder
+    reportingDate?: SortOrder
     saves?: SortOrderInput | SortOrder
-    videoViews?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
-    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+    videoViews?: SortOrderInput | SortOrder
+    websiteClicks?: SortOrderInput | SortOrder
     followersByCity?: SproutInstagramFollowersByCityOrderByRelationAggregateInput
     followersByCountry?: SproutInstagramFollowersByCountryOrderByRelationAggregateInput
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
   }
 
   export type SproutInstagramAnalyticsWhereUniqueInput = Prisma.AtLeast<{
@@ -49308,39 +51656,65 @@ export namespace Prisma {
     AND?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
     OR?: SproutInstagramAnalyticsWhereInput[]
     NOT?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
-    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
-    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
     commentsCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
+    emailContacts?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     engagements?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    getDirectionsClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     impressions?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     likes?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    phoneCallClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    postsSendByContentType?: JsonNullableFilter<"SproutInstagramAnalytics">
+    postsSentByPostType?: JsonNullableFilter<"SproutInstagramAnalytics">
+    postsSentCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowerAdds?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowers?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileImpressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileReachUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileViewsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
     saves?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
-    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    websiteClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     followersByCity?: SproutInstagramFollowersByCityListRelationFilter
     followersByCountry?: SproutInstagramFollowersByCountryListRelationFilter
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
   }, "id">
 
   export type SproutInstagramAnalyticsOrderByWithAggregationInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
-    customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     commentsCount?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrderInput | SortOrder
     engagements?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    getDirectionsClicks?: SortOrderInput | SortOrder
+    id?: SortOrder
     impressions?: SortOrderInput | SortOrder
     impressionsUnique?: SortOrderInput | SortOrder
-    followersCount?: SortOrderInput | SortOrder
     likes?: SortOrderInput | SortOrder
+    phoneCallClicks?: SortOrderInput | SortOrder
+    postsSendByContentType?: SortOrderInput | SortOrder
+    postsSentByPostType?: SortOrderInput | SortOrder
+    postsSentCount?: SortOrderInput | SortOrder
+    profileFollowerAdds?: SortOrderInput | SortOrder
+    profileFollowers?: SortOrderInput | SortOrder
+    profileImpressionsUnique?: SortOrderInput | SortOrder
+    profileReachUnique?: SortOrderInput | SortOrder
+    profileViews?: SortOrderInput | SortOrder
+    profileViewsUnique?: SortOrderInput | SortOrder
+    reportingDate?: SortOrder
     saves?: SortOrderInput | SortOrder
-    videoViews?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
+    videoViews?: SortOrderInput | SortOrder
+    websiteClicks?: SortOrderInput | SortOrder
     _count?: SproutInstagramAnalyticsCountOrderByAggregateInput
     _avg?: SproutInstagramAnalyticsAvgOrderByAggregateInput
     _max?: SproutInstagramAnalyticsMaxOrderByAggregateInput
@@ -49352,20 +51726,33 @@ export namespace Prisma {
     AND?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput | SproutInstagramAnalyticsScalarWhereWithAggregatesInput[]
     OR?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput[]
     NOT?: SproutInstagramAnalyticsScalarWhereWithAggregatesInput | SproutInstagramAnalyticsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SproutInstagramAnalytics"> | string
-    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutInstagramAnalytics"> | string
-    customerProfileId?: IntWithAggregatesFilter<"SproutInstagramAnalytics"> | number
-    reportingDate?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
     commentsCount?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
+    customerProfileId?: IntWithAggregatesFilter<"SproutInstagramAnalytics"> | number
+    emailContacts?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
     engagements?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    getDirectionsClicks?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    id?: StringWithAggregatesFilter<"SproutInstagramAnalytics"> | string
     impressions?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
     impressionsUnique?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
-    followersCount?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
     likes?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    phoneCallClicks?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    postsSendByContentType?: JsonNullableWithAggregatesFilter<"SproutInstagramAnalytics">
+    postsSentByPostType?: JsonNullableWithAggregatesFilter<"SproutInstagramAnalytics">
+    postsSentCount?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowerAdds?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowers?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    profileImpressionsUnique?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    profileReachUnique?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    profileViews?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    profileViewsUnique?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
     saves?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
-    videoViews?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
-    createdAt?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutInstagramAnalytics"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"SproutInstagramAnalytics"> | Date | string
+    videoViews?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
+    websiteClicks?: IntNullableWithAggregatesFilter<"SproutInstagramAnalytics"> | number | null
   }
 
   export type SproutInstagramFollowersByCityWhereInput = {
@@ -49496,31 +51883,31 @@ export namespace Prisma {
     AND?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
     OR?: SproutLinkedInAnalyticsWhereInput[]
     NOT?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
-    id?: StringFilter<"SproutLinkedInAnalytics"> | string
-    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
+    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     customerProfileId?: IntFilter<"SproutLinkedInAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     engagements?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    id?: StringFilter<"SproutLinkedInAnalytics"> | string
     impressions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     reactions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
   }
 
   export type SproutLinkedInAnalyticsOrderByWithRelationInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    id?: SortOrder
     impressions?: SortOrderInput | SortOrder
     impressionsUnique?: SortOrderInput | SortOrder
-    followersCount?: SortOrderInput | SortOrder
     reactions?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
     sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
   }
@@ -49530,30 +51917,30 @@ export namespace Prisma {
     AND?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
     OR?: SproutLinkedInAnalyticsWhereInput[]
     NOT?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
-    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
+    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     customerProfileId?: IntFilter<"SproutLinkedInAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     engagements?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     impressions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     reactions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
   }, "id">
 
   export type SproutLinkedInAnalyticsOrderByWithAggregationInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrderInput | SortOrder
+    followersCount?: SortOrderInput | SortOrder
+    id?: SortOrder
     impressions?: SortOrderInput | SortOrder
     impressionsUnique?: SortOrderInput | SortOrder
-    followersCount?: SortOrderInput | SortOrder
     reactions?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
     _count?: SproutLinkedInAnalyticsCountOrderByAggregateInput
     _avg?: SproutLinkedInAnalyticsAvgOrderByAggregateInput
@@ -49566,16 +51953,16 @@ export namespace Prisma {
     AND?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput | SproutLinkedInAnalyticsScalarWhereWithAggregatesInput[]
     OR?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput[]
     NOT?: SproutLinkedInAnalyticsScalarWhereWithAggregatesInput | SproutLinkedInAnalyticsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SproutLinkedInAnalytics"> | string
-    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutLinkedInAnalytics"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
     customerProfileId?: IntWithAggregatesFilter<"SproutLinkedInAnalytics"> | number
-    reportingDate?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
     engagements?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
+    id?: StringWithAggregatesFilter<"SproutLinkedInAnalytics"> | string
     impressions?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
     impressionsUnique?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
-    followersCount?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
     reactions?: IntNullableWithAggregatesFilter<"SproutLinkedInAnalytics"> | number | null
-    createdAt?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
+    reportingDate?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutLinkedInAnalytics"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"SproutLinkedInAnalytics"> | Date | string
   }
 
@@ -49670,6 +52057,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsListRelationFilter
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsListRelationFilter
   }
 
   export type SproutSocialAccountOrderByWithRelationInput = {
@@ -49688,6 +52076,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsOrderByRelationAggregateInput
     pinterestAnalytics?: SproutPinterestAnalyticsOrderByRelationAggregateInput
     users?: UserToSproutSocialAccountOrderByRelationAggregateInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsOrderByRelationAggregateInput
   }
 
   export type SproutSocialAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -49709,6 +52098,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsListRelationFilter
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsListRelationFilter
   }, "id">
 
   export type SproutSocialAccountOrderByWithAggregationInput = {
@@ -52081,289 +54471,687 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsCreateInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
+    netFollowerGrowth?: number | null
     postContentClicks?: number | null
     postContentClicksOther?: number | null
     postLinkClicks?: number | null
     postPhotoViewClicks?: number | null
+    reportingDate: Date | string
     tabViews?: number | null
+    updatedAt?: Date | string
     videoViews?: number | null
     videoViews10s?: number | null
     videoViewsOrganic?: number | null
     videoViewsPaid?: number | null
     videoViewsUnique?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutFacebookAnalyticsInput
   }
 
   export type SproutFacebookAnalyticsUncheckedCreateInput = {
-    id?: string
-    sproutSocialAccountId: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
+    netFollowerGrowth?: number | null
     postContentClicks?: number | null
     postContentClicksOther?: number | null
     postLinkClicks?: number | null
     postPhotoViewClicks?: number | null
+    reportingDate: Date | string
+    sproutSocialAccountId: string
     tabViews?: number | null
+    updatedAt?: Date | string
     videoViews?: number | null
     videoViews10s?: number | null
     videoViewsOrganic?: number | null
     videoViewsPaid?: number | null
     videoViewsUnique?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SproutFacebookAnalyticsUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutFacebookAnalyticsNestedInput
   }
 
   export type SproutFacebookAnalyticsUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutFacebookAnalyticsCreateManyInput = {
-    id?: string
-    sproutSocialAccountId: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
+    netFollowerGrowth?: number | null
     postContentClicks?: number | null
     postContentClicksOther?: number | null
     postLinkClicks?: number | null
     postPhotoViewClicks?: number | null
+    reportingDate: Date | string
+    sproutSocialAccountId: string
     tabViews?: number | null
+    updatedAt?: Date | string
     videoViews?: number | null
     videoViews10s?: number | null
     videoViewsOrganic?: number | null
     videoViewsPaid?: number | null
     videoViewsUnique?: number | null
+  }
+
+  export type SproutFacebookAnalyticsUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type SproutFacebookAnalyticsUncheckedUpdateManyInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type SproutFacebookPostAnalyticsCreateInput = {
+    id?: string
+    angryReactions?: number | null
+    clientNativeId: string
+    commentsCount?: number | null
+    hahaReactions?: number | null
+    impressions?: number | null
+    impressionsFollower?: number | null
+    impressionsNonFollower?: number | null
+    impressionsNonViral?: number | null
+    impressionsOrganic?: number | null
+    impressionsPaid?: number | null
+    impressionsViral?: number | null
+    likes?: number | null
+    loveReactions?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postNativeId: string
+    postPhotoViewClicks?: number | null
+    postVideoPlayClicks?: number | null
+    questionAnswers?: number | null
+    reach?: number | null
+    reachFollower?: number | null
+    reachNonViral?: number | null
+    reachOrganic?: number | null
+    reachPaid?: number | null
+    reachViral?: number | null
+    reactions?: number | null
+    reportingDate: Date | string
+    sadReactions?: number | null
+    sharesCount?: number | null
+    videoLength?: number | null
+    videoViews?: number | null
+    videoViewsAutoplay?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    wowReactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutFacebookPostAnalyticsInput
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedCreateInput = {
+    id?: string
+    angryReactions?: number | null
+    clientNativeId: string
+    commentsCount?: number | null
+    hahaReactions?: number | null
+    impressions?: number | null
+    impressionsFollower?: number | null
+    impressionsNonFollower?: number | null
+    impressionsNonViral?: number | null
+    impressionsOrganic?: number | null
+    impressionsPaid?: number | null
+    impressionsViral?: number | null
+    likes?: number | null
+    loveReactions?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postNativeId: string
+    postPhotoViewClicks?: number | null
+    postVideoPlayClicks?: number | null
+    questionAnswers?: number | null
+    reach?: number | null
+    reachFollower?: number | null
+    reachNonViral?: number | null
+    reachOrganic?: number | null
+    reachPaid?: number | null
+    reachViral?: number | null
+    reactions?: number | null
+    reportingDate: Date | string
+    sadReactions?: number | null
+    sharesCount?: number | null
+    sproutSocialAccountId: string
+    videoLength?: number | null
+    videoViews?: number | null
+    videoViewsAutoplay?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    wowReactions?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type SproutFacebookAnalyticsUpdateManyMutationInput = {
+  export type SproutFacebookPostAnalyticsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
-    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutFacebookPostAnalyticsNestedInput
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SproutFacebookAnalyticsUncheckedUpdateManyInput = {
+  export type SproutFacebookPostAnalyticsCreateManyInput = {
+    id?: string
+    angryReactions?: number | null
+    clientNativeId: string
+    commentsCount?: number | null
+    hahaReactions?: number | null
+    impressions?: number | null
+    impressionsFollower?: number | null
+    impressionsNonFollower?: number | null
+    impressionsNonViral?: number | null
+    impressionsOrganic?: number | null
+    impressionsPaid?: number | null
+    impressionsViral?: number | null
+    likes?: number | null
+    loveReactions?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postNativeId: string
+    postPhotoViewClicks?: number | null
+    postVideoPlayClicks?: number | null
+    questionAnswers?: number | null
+    reach?: number | null
+    reachFollower?: number | null
+    reachNonViral?: number | null
+    reachOrganic?: number | null
+    reachPaid?: number | null
+    reachViral?: number | null
+    reactions?: number | null
+    reportingDate: Date | string
+    sadReactions?: number | null
+    sharesCount?: number | null
+    sproutSocialAccountId: string
+    videoLength?: number | null
+    videoViews?: number | null
+    videoViewsAutoplay?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    wowReactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
-    impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutInstagramAnalyticsCreateInput = {
-    id?: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
     updatedAt?: Date | string
-    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCity?: SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput
     followersByCountry?: SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
   }
 
   export type SproutInstagramAnalyticsUncheckedCreateInput = {
-    id?: string
-    sproutSocialAccountId: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
+    sproutSocialAccountId: string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCity?: SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
     followersByCountry?: SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
   }
 
   export type SproutInstagramAnalyticsUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCity?: SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput
     followersByCountry?: SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCity?: SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
     followersByCountry?: SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsCreateManyInput = {
-    id?: string
-    sproutSocialAccountId: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
+    sproutSocialAccountId: string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
   }
 
   export type SproutInstagramAnalyticsUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SproutInstagramAnalyticsUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SproutInstagramFollowersByCityCreateInput = {
@@ -52491,99 +55279,99 @@ export namespace Prisma {
   }
 
   export type SproutLinkedInAnalyticsCreateInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     reactions?: number | null
-    createdAt?: Date | string
+    reportingDate: Date | string
     updatedAt?: Date | string
     sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutLinkedInAnalyticsInput
   }
 
   export type SproutLinkedInAnalyticsUncheckedCreateInput = {
-    id?: string
-    sproutSocialAccountId: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     reactions?: number | null
-    createdAt?: Date | string
+    reportingDate: Date | string
+    sproutSocialAccountId: string
     updatedAt?: Date | string
   }
 
   export type SproutLinkedInAnalyticsUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutLinkedInAnalyticsNestedInput
   }
 
   export type SproutLinkedInAnalyticsUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutLinkedInAnalyticsCreateManyInput = {
-    id?: string
-    sproutSocialAccountId: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     reactions?: number | null
-    createdAt?: Date | string
+    reportingDate: Date | string
+    sproutSocialAccountId: string
     updatedAt?: Date | string
   }
 
   export type SproutLinkedInAnalyticsUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutLinkedInAnalyticsUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -52679,6 +55467,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateInput = {
@@ -52697,6 +55486,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUpdateInput = {
@@ -52715,6 +55505,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateInput = {
@@ -52733,6 +55524,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateManyInput = {
@@ -54916,34 +57708,36 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsCountOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
+    netFollowerGrowth?: SortOrder
     postContentClicks?: SortOrder
     postContentClicksOther?: SortOrder
     postLinkClicks?: SortOrder
     postPhotoViewClicks?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     tabViews?: SortOrder
+    updatedAt?: SortOrder
     videoViews?: SortOrder
     videoViews10s?: SortOrder
     videoViewsOrganic?: SortOrder
     videoViewsPaid?: SortOrder
     videoViewsUnique?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type SproutFacebookAnalyticsAvgOrderByAggregateInput = {
     customerProfileId?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
+    netFollowerGrowth?: SortOrder
     postContentClicks?: SortOrder
     postContentClicksOther?: SortOrder
     postLinkClicks?: SortOrder
@@ -54957,57 +57751,60 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
+    netFollowerGrowth?: SortOrder
     postContentClicks?: SortOrder
     postContentClicksOther?: SortOrder
     postLinkClicks?: SortOrder
     postPhotoViewClicks?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     tabViews?: SortOrder
+    updatedAt?: SortOrder
     videoViews?: SortOrder
     videoViews10s?: SortOrder
     videoViewsOrganic?: SortOrder
     videoViewsPaid?: SortOrder
     videoViewsUnique?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type SproutFacebookAnalyticsMinOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
+    netFollowerGrowth?: SortOrder
     postContentClicks?: SortOrder
     postContentClicksOther?: SortOrder
     postLinkClicks?: SortOrder
     postPhotoViewClicks?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     tabViews?: SortOrder
+    updatedAt?: SortOrder
     videoViews?: SortOrder
     videoViews10s?: SortOrder
     videoViewsOrganic?: SortOrder
     videoViewsPaid?: SortOrder
     videoViewsUnique?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type SproutFacebookAnalyticsSumOrderByAggregateInput = {
     customerProfileId?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
+    netFollowerGrowth?: SortOrder
     postContentClicks?: SortOrder
     postContentClicksOther?: SortOrder
     postLinkClicks?: SortOrder
@@ -55018,6 +57815,207 @@ export namespace Prisma {
     videoViewsOrganic?: SortOrder
     videoViewsPaid?: SortOrder
     videoViewsUnique?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    angryReactions?: SortOrder
+    clientNativeId?: SortOrder
+    commentsCount?: SortOrder
+    hahaReactions?: SortOrder
+    impressions?: SortOrder
+    impressionsFollower?: SortOrder
+    impressionsNonFollower?: SortOrder
+    impressionsNonViral?: SortOrder
+    impressionsOrganic?: SortOrder
+    impressionsPaid?: SortOrder
+    impressionsViral?: SortOrder
+    likes?: SortOrder
+    loveReactions?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postNativeId?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    postVideoPlayClicks?: SortOrder
+    questionAnswers?: SortOrder
+    reach?: SortOrder
+    reachFollower?: SortOrder
+    reachNonViral?: SortOrder
+    reachOrganic?: SortOrder
+    reachPaid?: SortOrder
+    reachViral?: SortOrder
+    reactions?: SortOrder
+    reportingDate?: SortOrder
+    sadReactions?: SortOrder
+    sharesCount?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    videoLength?: SortOrder
+    videoViews?: SortOrder
+    videoViewsAutoplay?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    wowReactions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsAvgOrderByAggregateInput = {
+    angryReactions?: SortOrder
+    commentsCount?: SortOrder
+    hahaReactions?: SortOrder
+    impressions?: SortOrder
+    impressionsFollower?: SortOrder
+    impressionsNonFollower?: SortOrder
+    impressionsNonViral?: SortOrder
+    impressionsOrganic?: SortOrder
+    impressionsPaid?: SortOrder
+    impressionsViral?: SortOrder
+    likes?: SortOrder
+    loveReactions?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    postVideoPlayClicks?: SortOrder
+    questionAnswers?: SortOrder
+    reach?: SortOrder
+    reachFollower?: SortOrder
+    reachNonViral?: SortOrder
+    reachOrganic?: SortOrder
+    reachPaid?: SortOrder
+    reachViral?: SortOrder
+    reactions?: SortOrder
+    sadReactions?: SortOrder
+    sharesCount?: SortOrder
+    videoLength?: SortOrder
+    videoViews?: SortOrder
+    videoViewsAutoplay?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    wowReactions?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    angryReactions?: SortOrder
+    clientNativeId?: SortOrder
+    commentsCount?: SortOrder
+    hahaReactions?: SortOrder
+    impressions?: SortOrder
+    impressionsFollower?: SortOrder
+    impressionsNonFollower?: SortOrder
+    impressionsNonViral?: SortOrder
+    impressionsOrganic?: SortOrder
+    impressionsPaid?: SortOrder
+    impressionsViral?: SortOrder
+    likes?: SortOrder
+    loveReactions?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postNativeId?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    postVideoPlayClicks?: SortOrder
+    questionAnswers?: SortOrder
+    reach?: SortOrder
+    reachFollower?: SortOrder
+    reachNonViral?: SortOrder
+    reachOrganic?: SortOrder
+    reachPaid?: SortOrder
+    reachViral?: SortOrder
+    reactions?: SortOrder
+    reportingDate?: SortOrder
+    sadReactions?: SortOrder
+    sharesCount?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    videoLength?: SortOrder
+    videoViews?: SortOrder
+    videoViewsAutoplay?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    wowReactions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    angryReactions?: SortOrder
+    clientNativeId?: SortOrder
+    commentsCount?: SortOrder
+    hahaReactions?: SortOrder
+    impressions?: SortOrder
+    impressionsFollower?: SortOrder
+    impressionsNonFollower?: SortOrder
+    impressionsNonViral?: SortOrder
+    impressionsOrganic?: SortOrder
+    impressionsPaid?: SortOrder
+    impressionsViral?: SortOrder
+    likes?: SortOrder
+    loveReactions?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postNativeId?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    postVideoPlayClicks?: SortOrder
+    questionAnswers?: SortOrder
+    reach?: SortOrder
+    reachFollower?: SortOrder
+    reachNonViral?: SortOrder
+    reachOrganic?: SortOrder
+    reachPaid?: SortOrder
+    reachViral?: SortOrder
+    reactions?: SortOrder
+    reportingDate?: SortOrder
+    sadReactions?: SortOrder
+    sharesCount?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    videoLength?: SortOrder
+    videoViews?: SortOrder
+    videoViewsAutoplay?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    wowReactions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsSumOrderByAggregateInput = {
+    angryReactions?: SortOrder
+    commentsCount?: SortOrder
+    hahaReactions?: SortOrder
+    impressions?: SortOrder
+    impressionsFollower?: SortOrder
+    impressionsNonFollower?: SortOrder
+    impressionsNonViral?: SortOrder
+    impressionsOrganic?: SortOrder
+    impressionsPaid?: SortOrder
+    impressionsViral?: SortOrder
+    likes?: SortOrder
+    loveReactions?: SortOrder
+    postContentClicks?: SortOrder
+    postContentClicksOther?: SortOrder
+    postLinkClicks?: SortOrder
+    postPhotoViewClicks?: SortOrder
+    postVideoPlayClicks?: SortOrder
+    questionAnswers?: SortOrder
+    reach?: SortOrder
+    reachFollower?: SortOrder
+    reachNonViral?: SortOrder
+    reachOrganic?: SortOrder
+    reachPaid?: SortOrder
+    reachViral?: SortOrder
+    reactions?: SortOrder
+    sadReactions?: SortOrder
+    sharesCount?: SortOrder
+    videoLength?: SortOrder
+    videoViews?: SortOrder
+    videoViewsAutoplay?: SortOrder
+    videoViewsOrganic?: SortOrder
+    videoViewsPaid?: SortOrder
+    wowReactions?: SortOrder
   }
 
   export type SproutInstagramFollowersByCityListRelationFilter = {
@@ -55041,78 +58039,135 @@ export namespace Prisma {
   }
 
   export type SproutInstagramAnalyticsCountOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
-    customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     commentsCount?: SortOrder
+    createdAt?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    getDirectionsClicks?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     likes?: SortOrder
+    phoneCallClicks?: SortOrder
+    postsSendByContentType?: SortOrder
+    postsSentByPostType?: SortOrder
+    postsSentCount?: SortOrder
+    profileFollowerAdds?: SortOrder
+    profileFollowers?: SortOrder
+    profileImpressionsUnique?: SortOrder
+    profileReachUnique?: SortOrder
+    profileViews?: SortOrder
+    profileViewsUnique?: SortOrder
+    reportingDate?: SortOrder
     saves?: SortOrder
-    videoViews?: SortOrder
-    createdAt?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
+    videoViews?: SortOrder
+    websiteClicks?: SortOrder
   }
 
   export type SproutInstagramAnalyticsAvgOrderByAggregateInput = {
-    customerProfileId?: SortOrder
     commentsCount?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    getDirectionsClicks?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     likes?: SortOrder
+    phoneCallClicks?: SortOrder
+    postsSentCount?: SortOrder
+    profileFollowerAdds?: SortOrder
+    profileFollowers?: SortOrder
+    profileImpressionsUnique?: SortOrder
+    profileReachUnique?: SortOrder
+    profileViews?: SortOrder
+    profileViewsUnique?: SortOrder
     saves?: SortOrder
     videoViews?: SortOrder
+    websiteClicks?: SortOrder
   }
 
   export type SproutInstagramAnalyticsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
-    customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     commentsCount?: SortOrder
+    createdAt?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    getDirectionsClicks?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     likes?: SortOrder
+    phoneCallClicks?: SortOrder
+    postsSentCount?: SortOrder
+    profileFollowerAdds?: SortOrder
+    profileFollowers?: SortOrder
+    profileImpressionsUnique?: SortOrder
+    profileReachUnique?: SortOrder
+    profileViews?: SortOrder
+    profileViewsUnique?: SortOrder
+    reportingDate?: SortOrder
     saves?: SortOrder
-    videoViews?: SortOrder
-    createdAt?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
+    videoViews?: SortOrder
+    websiteClicks?: SortOrder
   }
 
   export type SproutInstagramAnalyticsMinOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
-    customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     commentsCount?: SortOrder
+    createdAt?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    getDirectionsClicks?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     likes?: SortOrder
+    phoneCallClicks?: SortOrder
+    postsSentCount?: SortOrder
+    profileFollowerAdds?: SortOrder
+    profileFollowers?: SortOrder
+    profileImpressionsUnique?: SortOrder
+    profileReachUnique?: SortOrder
+    profileViews?: SortOrder
+    profileViewsUnique?: SortOrder
+    reportingDate?: SortOrder
     saves?: SortOrder
-    videoViews?: SortOrder
-    createdAt?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
+    videoViews?: SortOrder
+    websiteClicks?: SortOrder
   }
 
   export type SproutInstagramAnalyticsSumOrderByAggregateInput = {
-    customerProfileId?: SortOrder
     commentsCount?: SortOrder
+    customerProfileId?: SortOrder
+    emailContacts?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    getDirectionsClicks?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     likes?: SortOrder
+    phoneCallClicks?: SortOrder
+    postsSentCount?: SortOrder
+    profileFollowerAdds?: SortOrder
+    profileFollowers?: SortOrder
+    profileImpressionsUnique?: SortOrder
+    profileReachUnique?: SortOrder
+    profileViews?: SortOrder
+    profileViewsUnique?: SortOrder
     saves?: SortOrder
     videoViews?: SortOrder
+    websiteClicks?: SortOrder
   }
 
   export type SproutInstagramAnalyticsScalarRelationFilter = {
@@ -55191,62 +58246,62 @@ export namespace Prisma {
   }
 
   export type SproutLinkedInAnalyticsCountOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     reactions?: SortOrder
-    createdAt?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SproutLinkedInAnalyticsAvgOrderByAggregateInput = {
     customerProfileId?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     reactions?: SortOrder
   }
 
   export type SproutLinkedInAnalyticsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     reactions?: SortOrder
-    createdAt?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SproutLinkedInAnalyticsMinOrderByAggregateInput = {
-    id?: SortOrder
-    sproutSocialAccountId?: SortOrder
+    createdAt?: SortOrder
     customerProfileId?: SortOrder
-    reportingDate?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
+    id?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     reactions?: SortOrder
-    createdAt?: SortOrder
+    reportingDate?: SortOrder
+    sproutSocialAccountId?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SproutLinkedInAnalyticsSumOrderByAggregateInput = {
     customerProfileId?: SortOrder
     engagements?: SortOrder
+    followersCount?: SortOrder
     impressions?: SortOrder
     impressionsUnique?: SortOrder
-    followersCount?: SortOrder
     reactions?: SortOrder
   }
 
@@ -55333,6 +58388,12 @@ export namespace Prisma {
     none?: UserToSproutSocialAccountWhereInput
   }
 
+  export type SproutFacebookPostAnalyticsListRelationFilter = {
+    every?: SproutFacebookPostAnalyticsWhereInput
+    some?: SproutFacebookPostAnalyticsWhereInput
+    none?: SproutFacebookPostAnalyticsWhereInput
+  }
+
   export type SproutFacebookAnalyticsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -55350,6 +58411,10 @@ export namespace Prisma {
   }
 
   export type UserToSproutSocialAccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -56998,10 +60063,18 @@ export namespace Prisma {
     update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutFacebookAnalyticsInput, SproutSocialAccountUpdateWithoutFacebookAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput>
   }
 
-  export type SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput = {
-    create?: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
-    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput
+  export type SproutSocialAccountCreateNestedOneWithoutFacebookPostAnalyticsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookPostAnalyticsInput
     connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutFacebookPostAnalyticsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookPostAnalyticsInput
+    upsert?: SproutSocialAccountUpsertWithoutFacebookPostAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutFacebookPostAnalyticsInput, SproutSocialAccountUpdateWithoutFacebookPostAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutFacebookPostAnalyticsInput>
   }
 
   export type SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput = {
@@ -57018,6 +60091,12 @@ export namespace Prisma {
     connect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
   }
 
+  export type SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
   export type SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput = {
     create?: XOR<SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput, SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput> | SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput[] | SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput[]
     connectOrCreate?: SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCityCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
@@ -57030,14 +60109,6 @@ export namespace Prisma {
     connectOrCreate?: SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryCreateOrConnectWithoutSproutInstagramAnalyticsInput[]
     createMany?: SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInputEnvelope
     connect?: SproutInstagramFollowersByCountryWhereUniqueInput | SproutInstagramFollowersByCountryWhereUniqueInput[]
-  }
-
-  export type SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput = {
-    create?: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
-    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput
-    upsert?: SproutSocialAccountUpsertWithoutInstagramAnalyticsInput
-    connect?: SproutSocialAccountWhereUniqueInput
-    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutInstagramAnalyticsInput, SproutSocialAccountUpdateWithoutInstagramAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
   }
 
   export type SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput = {
@@ -57066,6 +60137,14 @@ export namespace Prisma {
     update?: SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpdateWithWhereUniqueWithoutSproutInstagramAnalyticsInput[]
     updateMany?: SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput | SproutInstagramFollowersByCountryUpdateManyWithWhereWithoutSproutInstagramAnalyticsInput[]
     deleteMany?: SproutInstagramFollowersByCountryScalarWhereInput | SproutInstagramFollowersByCountryScalarWhereInput[]
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput
+    upsert?: SproutSocialAccountUpsertWithoutInstagramAnalyticsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutInstagramAnalyticsInput, SproutSocialAccountUpdateWithoutInstagramAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
   }
 
   export type SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput = {
@@ -57191,6 +60270,13 @@ export namespace Prisma {
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
   }
 
+  export type SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+  }
+
   export type SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
     create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
@@ -57224,6 +60310,13 @@ export namespace Prisma {
     connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput | UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput[]
     createMany?: UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostAnalyticsCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
   }
 
   export type SproutSocialAccountUpdategroupsInput = {
@@ -57301,6 +60394,20 @@ export namespace Prisma {
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
   }
 
+  export type SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookPostAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    disconnect?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    delete?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    connect?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    update?: SproutFacebookPostAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookPostAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookPostAnalyticsScalarWhereInput | SproutFacebookPostAnalyticsScalarWhereInput[]
+  }
+
   export type SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
     create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
@@ -57369,6 +60476,20 @@ export namespace Prisma {
     update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
     updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput[]
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookPostAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostAnalyticsCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    disconnect?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    delete?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    connect?: SproutFacebookPostAnalyticsWhereUniqueInput | SproutFacebookPostAnalyticsWhereUniqueInput[]
+    update?: SproutFacebookPostAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookPostAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookPostAnalyticsScalarWhereInput | SproutFacebookPostAnalyticsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSproutSocialAccountsInput = {
@@ -62551,6 +65672,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput = {
@@ -62568,6 +65690,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutFacebookAnalyticsInput = {
@@ -62601,6 +65724,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput = {
@@ -62618,9 +65742,10 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
-  export type SproutSocialAccountCreateWithoutInstagramAnalyticsInput = {
+  export type SproutSocialAccountCreateWithoutFacebookPostAnalyticsInput = {
     id?: string
     customerProfileId: number
     networkType: string
@@ -62633,11 +65758,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
   }
 
-  export type SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput = {
+  export type SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput = {
     id?: string
     customerProfileId: number
     networkType: string
@@ -62650,13 +65776,61 @@ export namespace Prisma {
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
-  export type SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput = {
+  export type SproutSocialAccountCreateOrConnectWithoutFacebookPostAnalyticsInput = {
     where: SproutSocialAccountWhereUniqueInput
-    create: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpsertWithoutFacebookPostAnalyticsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutFacebookPostAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutFacebookPostAnalyticsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutFacebookPostAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutFacebookPostAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutFacebookPostAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput = {
@@ -62711,49 +65885,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SproutSocialAccountUpsertWithoutInstagramAnalyticsInput = {
-    update: XOR<SproutSocialAccountUpdateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
+  export type SproutSocialAccountCreateWithoutInstagramAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput = {
+    where: SproutSocialAccountWhereUniqueInput
     create: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
-    where?: SproutSocialAccountWhereInput
-  }
-
-  export type SproutSocialAccountUpdateToOneWithWhereWithoutInstagramAnalyticsInput = {
-    where?: SproutSocialAccountWhereInput
-    data: XOR<SproutSocialAccountUpdateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
-  }
-
-  export type SproutSocialAccountUpdateWithoutInstagramAnalyticsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    networkType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    nativeName?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    nativeId?: StringFieldUpdateOperationsInput | string
-    groups?: SproutSocialAccountUpdategroupsInput | number[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
-    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
-    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
-    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-  }
-
-  export type SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    networkType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    nativeName?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    nativeId?: StringFieldUpdateOperationsInput | string
-    groups?: SproutSocialAccountUpdategroupsInput | number[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
@@ -62812,39 +65982,112 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
   }
 
+  export type SproutSocialAccountUpsertWithoutInstagramAnalyticsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
+    create: XOR<SproutSocialAccountCreateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutInstagramAnalyticsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutInstagramAnalyticsInput, SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
   export type SproutInstagramAnalyticsCreateWithoutFollowersByCityInput = {
-    id?: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
     updatedAt?: Date | string
-    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCountry?: SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
   }
 
   export type SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCityInput = {
-    id?: string
-    sproutSocialAccountId: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
+    sproutSocialAccountId: string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCountry?: SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
   }
 
@@ -62865,74 +66108,126 @@ export namespace Prisma {
   }
 
   export type SproutInstagramAnalyticsUpdateWithoutFollowersByCityInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCountry?: SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCityInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCountry?: SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsCreateWithoutFollowersByCountryInput = {
-    id?: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
     updatedAt?: Date | string
-    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCity?: SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutInstagramAnalyticsInput
   }
 
   export type SproutInstagramAnalyticsUncheckedCreateWithoutFollowersByCountryInput = {
-    id?: string
-    sproutSocialAccountId: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
+    sproutSocialAccountId: string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCity?: SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
   }
 
@@ -62953,38 +66248,64 @@ export namespace Prisma {
   }
 
   export type SproutInstagramAnalyticsUpdateWithoutFollowersByCountryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCity?: SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsUncheckedUpdateWithoutFollowersByCountryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCity?: SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
   }
 
@@ -63003,6 +66324,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput = {
@@ -63020,6 +66342,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutLinkedInAnalyticsInput = {
@@ -63053,6 +66376,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput = {
@@ -63070,6 +66394,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateWithoutPinterestAnalyticsInput = {
@@ -63087,6 +66412,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput = {
@@ -63104,6 +66430,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutPinterestAnalyticsInput = {
@@ -63137,6 +66464,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput = {
@@ -63154,50 +66482,53 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
+    netFollowerGrowth?: number | null
     postContentClicks?: number | null
     postContentClicksOther?: number | null
     postLinkClicks?: number | null
     postPhotoViewClicks?: number | null
+    reportingDate: Date | string
     tabViews?: number | null
+    updatedAt?: Date | string
     videoViews?: number | null
     videoViews10s?: number | null
     videoViewsOrganic?: number | null
     videoViewsPaid?: number | null
     videoViewsUnique?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
+    netFollowerGrowth?: number | null
     postContentClicks?: number | null
     postContentClicksOther?: number | null
     postLinkClicks?: number | null
     postPhotoViewClicks?: number | null
+    reportingDate: Date | string
     tabViews?: number | null
+    updatedAt?: Date | string
     videoViews?: number | null
     videoViews10s?: number | null
     videoViewsOrganic?: number | null
     videoViewsPaid?: number | null
     videoViewsUnique?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput = {
@@ -63211,28 +66542,28 @@ export namespace Prisma {
   }
 
   export type SproutLinkedInAnalyticsCreateWithoutSproutSocialAccountInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     reactions?: number | null
-    createdAt?: Date | string
+    reportingDate: Date | string
     updatedAt?: Date | string
   }
 
   export type SproutLinkedInAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     reactions?: number | null
-    createdAt?: Date | string
+    reportingDate: Date | string
     updatedAt?: Date | string
   }
 
@@ -63247,37 +66578,63 @@ export namespace Prisma {
   }
 
   export type SproutInstagramAnalyticsCreateWithoutSproutSocialAccountInput = {
-    id?: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCity?: SproutInstagramFollowersByCityCreateNestedManyWithoutSproutInstagramAnalyticsInput
     followersByCountry?: SproutInstagramFollowersByCountryCreateNestedManyWithoutSproutInstagramAnalyticsInput
   }
 
   export type SproutInstagramAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
-    id?: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
     followersByCity?: SproutInstagramFollowersByCityUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
     followersByCountry?: SproutInstagramFollowersByCountryUncheckedCreateNestedManyWithoutSproutInstagramAnalyticsInput
   }
@@ -63346,6 +66703,100 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    angryReactions?: number | null
+    clientNativeId: string
+    commentsCount?: number | null
+    hahaReactions?: number | null
+    impressions?: number | null
+    impressionsFollower?: number | null
+    impressionsNonFollower?: number | null
+    impressionsNonViral?: number | null
+    impressionsOrganic?: number | null
+    impressionsPaid?: number | null
+    impressionsViral?: number | null
+    likes?: number | null
+    loveReactions?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postNativeId: string
+    postPhotoViewClicks?: number | null
+    postVideoPlayClicks?: number | null
+    questionAnswers?: number | null
+    reach?: number | null
+    reachFollower?: number | null
+    reachNonViral?: number | null
+    reachOrganic?: number | null
+    reachPaid?: number | null
+    reachViral?: number | null
+    reactions?: number | null
+    reportingDate: Date | string
+    sadReactions?: number | null
+    sharesCount?: number | null
+    videoLength?: number | null
+    videoViews?: number | null
+    videoViewsAutoplay?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    wowReactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    angryReactions?: number | null
+    clientNativeId: string
+    commentsCount?: number | null
+    hahaReactions?: number | null
+    impressions?: number | null
+    impressionsFollower?: number | null
+    impressionsNonFollower?: number | null
+    impressionsNonViral?: number | null
+    impressionsOrganic?: number | null
+    impressionsPaid?: number | null
+    impressionsViral?: number | null
+    likes?: number | null
+    loveReactions?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postNativeId: string
+    postPhotoViewClicks?: number | null
+    postVideoPlayClicks?: number | null
+    questionAnswers?: number | null
+    reach?: number | null
+    reachFollower?: number | null
+    reachNonViral?: number | null
+    reachOrganic?: number | null
+    reachPaid?: number | null
+    reachViral?: number | null
+    reactions?: number | null
+    reportingDate: Date | string
+    sadReactions?: number | null
+    sharesCount?: number | null
+    videoLength?: number | null
+    videoViews?: number | null
+    videoViewsAutoplay?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    wowReactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+    create: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostAnalyticsCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutFacebookPostAnalyticsCreateManySproutSocialAccountInput | SproutFacebookPostAnalyticsCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
     where: SproutFacebookAnalyticsWhereUniqueInput
     update: XOR<SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
@@ -63366,26 +66817,27 @@ export namespace Prisma {
     AND?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
     OR?: SproutFacebookAnalyticsScalarWhereInput[]
     NOT?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
-    id?: StringFilter<"SproutFacebookAnalytics"> | string
-    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
+    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     customerProfileId?: IntFilter<"SproutFacebookAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     engagements?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    id?: StringFilter<"SproutFacebookAnalytics"> | string
     impressions?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    netFollowerGrowth?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postContentClicksOther?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postLinkClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     postPhotoViewClicks?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookAnalytics"> | string
     tabViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     videoViews?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViews10s?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsOrganic?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
-    updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
   }
 
   export type SproutLinkedInAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
@@ -63408,16 +66860,16 @@ export namespace Prisma {
     AND?: SproutLinkedInAnalyticsScalarWhereInput | SproutLinkedInAnalyticsScalarWhereInput[]
     OR?: SproutLinkedInAnalyticsScalarWhereInput[]
     NOT?: SproutLinkedInAnalyticsScalarWhereInput | SproutLinkedInAnalyticsScalarWhereInput[]
-    id?: StringFilter<"SproutLinkedInAnalytics"> | string
-    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
+    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     customerProfileId?: IntFilter<"SproutLinkedInAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     engagements?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
+    id?: StringFilter<"SproutLinkedInAnalytics"> | string
     impressions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
     reactions?: IntNullableFilter<"SproutLinkedInAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    reportingDate?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
   }
 
@@ -63441,20 +66893,33 @@ export namespace Prisma {
     AND?: SproutInstagramAnalyticsScalarWhereInput | SproutInstagramAnalyticsScalarWhereInput[]
     OR?: SproutInstagramAnalyticsScalarWhereInput[]
     NOT?: SproutInstagramAnalyticsScalarWhereInput | SproutInstagramAnalyticsScalarWhereInput[]
-    id?: StringFilter<"SproutInstagramAnalytics"> | string
-    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
-    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
-    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
     commentsCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    customerProfileId?: IntFilter<"SproutInstagramAnalytics"> | number
+    emailContacts?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     engagements?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    getDirectionsClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    id?: StringFilter<"SproutInstagramAnalytics"> | string
     impressions?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     impressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    followersCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
     likes?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    phoneCallClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    postsSendByContentType?: JsonNullableFilter<"SproutInstagramAnalytics">
+    postsSentByPostType?: JsonNullableFilter<"SproutInstagramAnalytics">
+    postsSentCount?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowerAdds?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileFollowers?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileImpressionsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileReachUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    profileViewsUnique?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
     saves?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
-    createdAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    sproutSocialAccountId?: StringFilter<"SproutInstagramAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutInstagramAnalytics"> | Date | string
+    videoViews?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
+    websiteClicks?: IntNullableFilter<"SproutInstagramAnalytics"> | number | null
   }
 
   export type SproutPinterestAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
@@ -63512,6 +66977,68 @@ export namespace Prisma {
     sproutSocialAccountId?: StringFilter<"UserToSproutSocialAccount"> | string
     createdAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
     updatedAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+    update: XOR<SproutFacebookPostAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostAnalyticsWhereUniqueInput
+    data: XOR<SproutFacebookPostAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostAnalyticsScalarWhereInput
+    data: XOR<SproutFacebookPostAnalyticsUpdateManyMutationInput, SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostAnalyticsScalarWhereInput = {
+    AND?: SproutFacebookPostAnalyticsScalarWhereInput | SproutFacebookPostAnalyticsScalarWhereInput[]
+    OR?: SproutFacebookPostAnalyticsScalarWhereInput[]
+    NOT?: SproutFacebookPostAnalyticsScalarWhereInput | SproutFacebookPostAnalyticsScalarWhereInput[]
+    id?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    angryReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    clientNativeId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    commentsCount?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    hahaReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsNonViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    impressionsViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    likes?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    loveReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postContentClicksOther?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postLinkClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postNativeId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    postPhotoViewClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    postVideoPlayClicks?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    questionAnswers?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reach?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachFollower?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachNonViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reachViral?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    reportingDate?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    sadReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    sharesCount?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPostAnalytics"> | string
+    videoLength?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViews?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsAutoplay?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsOrganic?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    videoViewsPaid?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    wowReactions?: IntNullableFilter<"SproutFacebookPostAnalytics"> | number | null
+    createdAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
   }
 
   export type UserCreateWithoutSproutSocialAccountsInput = {
@@ -63600,6 +67127,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutUsersInput = {
@@ -63617,6 +67145,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutUsersInput = {
@@ -63727,6 +67256,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutUsersInput = {
@@ -63744,6 +67274,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type GaAccountCreateWithoutUserToGaAccountsInput = {
@@ -67245,54 +70776,68 @@ export namespace Prisma {
   }
 
   export type SproutFacebookAnalyticsCreateManySproutSocialAccountInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
+    netFollowerGrowth?: number | null
     postContentClicks?: number | null
     postContentClicksOther?: number | null
     postLinkClicks?: number | null
     postPhotoViewClicks?: number | null
+    reportingDate: Date | string
     tabViews?: number | null
+    updatedAt?: Date | string
     videoViews?: number | null
     videoViews10s?: number | null
     videoViewsOrganic?: number | null
     videoViewsPaid?: number | null
     videoViewsUnique?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type SproutLinkedInAnalyticsCreateManySproutSocialAccountInput = {
-    id?: string
+    createdAt?: Date | string
     customerProfileId: number
-    reportingDate: Date | string
     engagements?: number | null
+    followersCount?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     reactions?: number | null
-    createdAt?: Date | string
+    reportingDate: Date | string
     updatedAt?: Date | string
   }
 
   export type SproutInstagramAnalyticsCreateManySproutSocialAccountInput = {
-    id?: string
-    customerProfileId: number
-    reportingDate: Date | string
     commentsCount?: number | null
+    createdAt?: Date | string
+    customerProfileId: number
+    emailContacts?: number | null
     engagements?: number | null
+    followersCount?: number | null
+    getDirectionsClicks?: number | null
+    id?: string
     impressions?: number | null
     impressionsUnique?: number | null
-    followersCount?: number | null
     likes?: number | null
+    phoneCallClicks?: number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: number | null
+    profileFollowerAdds?: number | null
+    profileFollowers?: number | null
+    profileImpressionsUnique?: number | null
+    profileReachUnique?: number | null
+    profileViews?: number | null
+    profileViewsUnique?: number | null
+    reportingDate: Date | string
     saves?: number | null
-    videoViews?: number | null
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoViews?: number | null
+    websiteClicks?: number | null
   }
 
   export type SproutPinterestAnalyticsCreateManySproutSocialAccountInput = {
@@ -67312,161 +70857,245 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type SproutFacebookPostAnalyticsCreateManySproutSocialAccountInput = {
+    id?: string
+    angryReactions?: number | null
+    clientNativeId: string
+    commentsCount?: number | null
+    hahaReactions?: number | null
+    impressions?: number | null
+    impressionsFollower?: number | null
+    impressionsNonFollower?: number | null
+    impressionsNonViral?: number | null
+    impressionsOrganic?: number | null
+    impressionsPaid?: number | null
+    impressionsViral?: number | null
+    likes?: number | null
+    loveReactions?: number | null
+    postContentClicks?: number | null
+    postContentClicksOther?: number | null
+    postLinkClicks?: number | null
+    postNativeId: string
+    postPhotoViewClicks?: number | null
+    postVideoPlayClicks?: number | null
+    questionAnswers?: number | null
+    reach?: number | null
+    reachFollower?: number | null
+    reachNonViral?: number | null
+    reachOrganic?: number | null
+    reachPaid?: number | null
+    reachViral?: number | null
+    reactions?: number | null
+    reportingDate: Date | string
+    sadReactions?: number | null
+    sharesCount?: number | null
+    videoLength?: number | null
+    videoViews?: number | null
+    videoViewsAutoplay?: number | null
+    videoViewsOrganic?: number | null
+    videoViewsPaid?: number | null
+    wowReactions?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
     postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
     postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     tabViews?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videoViews?: NullableIntFieldUpdateOperationsInput | number | null
     videoViews10s?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
     videoViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutLinkedInAnalyticsUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutLinkedInAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     reactions?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutInstagramAnalyticsUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCity?: SproutInstagramFollowersByCityUpdateManyWithoutSproutInstagramAnalyticsNestedInput
     followersByCountry?: SproutInstagramFollowersByCountryUpdateManyWithoutSproutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
     followersByCity?: SproutInstagramFollowersByCityUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
     followersByCountry?: SproutInstagramFollowersByCountryUncheckedUpdateManyWithoutSproutInstagramAnalyticsNestedInput
   }
 
   export type SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customerProfileId?: IntFieldUpdateOperationsInput | number
-    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    emailContacts?: NullableIntFieldUpdateOperationsInput | number | null
     engagements?: NullableIntFieldUpdateOperationsInput | number | null
+    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
+    getDirectionsClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    id?: StringFieldUpdateOperationsInput | string
     impressions?: NullableIntFieldUpdateOperationsInput | number | null
     impressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
-    followersCount?: NullableIntFieldUpdateOperationsInput | number | null
     likes?: NullableIntFieldUpdateOperationsInput | number | null
+    phoneCallClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postsSendByContentType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentByPostType?: NullableJsonNullValueInput | InputJsonValue
+    postsSentCount?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowerAdds?: NullableIntFieldUpdateOperationsInput | number | null
+    profileFollowers?: NullableIntFieldUpdateOperationsInput | number | null
+    profileImpressionsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileReachUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViews?: NullableIntFieldUpdateOperationsInput | number | null
+    profileViewsUnique?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     saves?: NullableIntFieldUpdateOperationsInput | number | null
-    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    websiteClicks?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SproutPinterestAnalyticsUpdateWithoutSproutSocialAccountInput = {
@@ -67516,6 +71145,132 @@ export namespace Prisma {
   export type UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    angryReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    clientNativeId?: StringFieldUpdateOperationsInput | string
+    commentsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    hahaReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressions?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    impressionsViral?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: NullableIntFieldUpdateOperationsInput | number | null
+    loveReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postContentClicksOther?: NullableIntFieldUpdateOperationsInput | number | null
+    postLinkClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postPhotoViewClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    postVideoPlayClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    questionAnswers?: NullableIntFieldUpdateOperationsInput | number | null
+    reach?: NullableIntFieldUpdateOperationsInput | number | null
+    reachFollower?: NullableIntFieldUpdateOperationsInput | number | null
+    reachNonViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reachOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    reachPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    reachViral?: NullableIntFieldUpdateOperationsInput | number | null
+    reactions?: NullableIntFieldUpdateOperationsInput | number | null
+    reportingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    sadReactions?: NullableIntFieldUpdateOperationsInput | number | null
+    sharesCount?: NullableIntFieldUpdateOperationsInput | number | null
+    videoLength?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViews?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsAutoplay?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsOrganic?: NullableIntFieldUpdateOperationsInput | number | null
+    videoViewsPaid?: NullableIntFieldUpdateOperationsInput | number | null
+    wowReactions?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

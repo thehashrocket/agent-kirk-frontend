@@ -99,12 +99,12 @@ model Conversation {
 }
 
 model GaAccount {
-  id            String            @id @default(cuid())
-  gaAccountId   String
-  gaAccountName String
-  deleted       Boolean           @default(false)
-  gaProperties  GaProperty[]      @relation("AccountToProperty")
-  conversations Conversation[]
+  id               String            @id @default(cuid())
+  gaAccountId      String
+  gaAccountName    String
+  deleted          Boolean           @default(false)
+  gaProperties     GaProperty[]      @relation("AccountToProperty")
+  conversations    Conversation[]
   userToGaAccounts UserToGaAccount[] @relation("GaAccountToUserAccounts")
 }
 
@@ -365,25 +365,72 @@ model Query {
 }
 
 model SproutFacebookAnalytics {
-  id                     String              @id @default(cuid())
-  sproutSocialAccountId  String
-  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  createdAt              DateTime            @default(now())
   customerProfileId      Int
-  reportingDate          DateTime            @db.Date
   engagements            Int?
+  followersCount         Int?
+  id                     String              @id @default(cuid())
   impressions            Int?
   impressionsUnique      Int?
-  followersCount         Int?
+  netFollowerGrowth      Int?
   postContentClicks      Int?
   postContentClicksOther Int?
   postLinkClicks         Int?
   postPhotoViewClicks    Int?
+  reportingDate          DateTime            @db.Date
+  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  sproutSocialAccountId  String
   tabViews               Int?
+  updatedAt              DateTime            @updatedAt
   videoViews             Int?
   videoViews10s          Int?
   videoViewsOrganic      Int?
   videoViewsPaid         Int?
   videoViewsUnique       Int?
+
+  @@index([sproutSocialAccountId])
+}
+
+model SproutFacebookPostAnalytics {
+  id                     String              @id @default(cuid())
+  angryReactions         Int?
+  clientNativeId         String
+  commentsCount          Int?
+  hahaReactions          Int?
+  impressions            Int?
+  impressionsFollower    Int?
+  impressionsNonFollower Int?
+  impressionsNonViral    Int?
+  impressionsOrganic     Int?
+  impressionsPaid        Int?
+  impressionsViral       Int?
+  likes                  Int?
+  loveReactions          Int?
+  postContentClicks      Int?
+  postContentClicksOther Int?
+  postLinkClicks         Int?
+  postNativeId           String
+  postPhotoViewClicks    Int?
+  postVideoPlayClicks    Int?
+  questionAnswers        Int?
+  reach                  Int?
+  reachFollower          Int?
+  reachNonViral          Int?
+  reachOrganic           Int?
+  reachPaid              Int?
+  reachViral             Int?
+  reactions              Int?
+  reportingDate          DateTime            @db.Date
+  sadReactions           Int?
+  sharesCount            Int?
+  sproutSocialAccountId  String
+  videoLength            Int?
+  videoViews             Int?
+  videoViewsAutoplay     Int?
+  videoViewsOrganic      Int?
+  videoViewsPaid         Int?
+  wowReactions           Int?
+  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   createdAt              DateTime            @default(now())
   updatedAt              DateTime            @updatedAt
 
@@ -391,24 +438,36 @@ model SproutFacebookAnalytics {
 }
 
 model SproutInstagramAnalytics {
-  id                    String                              @id @default(cuid())
-  sproutSocialAccountId String
-  sproutSocialAccount   SproutSocialAccount                 @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
-  customerProfileId     Int
-  reportingDate         DateTime                            @db.Date
-  commentsCount         Int?
-  engagements           Int?
-  impressions           Int?
-  impressionsUnique     Int?
-  followersCount        Int?
-  likes                 Int?
-  saves                 Int?
-  videoViews            Int?
-  createdAt             DateTime                            @default(now())
-  updatedAt             DateTime                            @updatedAt
-  followersByCity       SproutInstagramFollowersByCity[]
-  followersByCountry    SproutInstagramFollowersByCountry[]
-
+  commentsCount            Int?
+  createdAt                DateTime                            @default(now())
+  customerProfileId        Int
+  emailContacts            Int?
+  engagements              Int?
+  followersByCity          SproutInstagramFollowersByCity[]
+  followersByCountry       SproutInstagramFollowersByCountry[]
+  followersCount           Int?
+  getDirectionsClicks      Int?
+  id                       String                              @id @default(cuid())
+  impressions              Int?
+  impressionsUnique        Int?
+  likes                    Int?
+  phoneCallClicks          Int?
+  postsSendByContentType   Json?
+  postsSentByPostType      Json?
+  postsSentCount           Int?
+  profileFollowerAdds      Int?
+  profileFollowers         Int?
+  profileImpressionsUnique Int?
+  profileReachUnique       Int?
+  profileViews             Int?
+  profileViewsUnique       Int?
+  reportingDate            DateTime                            @db.Date
+  saves                    Int?
+  sproutSocialAccount      SproutSocialAccount                 @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  sproutSocialAccountId    String
+  updatedAt                DateTime                            @updatedAt
+  videoViews               Int?
+  websiteClicks            Int?
   @@index([sproutSocialAccountId])
 }
 
@@ -437,17 +496,17 @@ model SproutInstagramFollowersByCountry {
 }
 
 model SproutLinkedInAnalytics {
-  id                    String              @id @default(cuid())
-  sproutSocialAccountId String
-  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  createdAt             DateTime            @default(now())
   customerProfileId     Int
-  reportingDate         DateTime            @db.Date
   engagements           Int?
+  followersCount        Int?
+  id                    String              @id @default(cuid())
   impressions           Int?
   impressionsUnique     Int?
-  followersCount        Int?
   reactions             Int?
-  createdAt             DateTime            @default(now())
+  reportingDate         DateTime            @db.Date
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  sproutSocialAccountId String
   updatedAt             DateTime            @updatedAt
 
   @@index([sproutSocialAccountId])
@@ -468,21 +527,22 @@ model SproutPinterestAnalytics {
 }
 
 model SproutSocialAccount {
-  id                 String                      @id @default(cuid())
-  customerProfileId  Int
-  networkType        String
-  name               String
-  nativeName         String
-  link               String
-  nativeId           String
-  groups             Int[]
-  createdAt          DateTime                    @default(now())
-  updatedAt          DateTime                    @updatedAt
-  facebookAnalytics  SproutFacebookAnalytics[]
-  linkedInAnalytics  SproutLinkedInAnalytics[]
-  instagramAnalytics SproutInstagramAnalytics[]
-  pinterestAnalytics SproutPinterestAnalytics[]
-  users              UserToSproutSocialAccount[]
+  id                    String                        @id @default(cuid())
+  customerProfileId     Int
+  networkType           String
+  name                  String
+  nativeName            String
+  link                  String
+  nativeId              String
+  groups                Int[]
+  createdAt             DateTime                      @default(now())
+  updatedAt             DateTime                      @updatedAt
+  facebookAnalytics     SproutFacebookAnalytics[]
+  linkedInAnalytics     SproutLinkedInAnalytics[]
+  instagramAnalytics    SproutInstagramAnalytics[]
+  pinterestAnalytics    SproutPinterestAnalytics[]
+  users                 UserToSproutSocialAccount[]
+  facebookPostAnalytics SproutFacebookPostAnalytics[]
 }
 
 model UserToSproutSocialAccount {
