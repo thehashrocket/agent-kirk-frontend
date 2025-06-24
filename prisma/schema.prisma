@@ -98,6 +98,121 @@ model Conversation {
   @@index([clientId])
 }
 
+model EmailCampaignContent {
+  id                String   @id @default(cuid())
+  email_campaign_id String
+  subject           String
+  html_content      String   @db.Text
+  plain_content     String   @db.Text
+  web_id            Int
+  type              String
+  content_type      String
+  recipients        Int      @default(0)
+  create_time       DateTime
+  send_time         DateTime
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  emailCampaign EmailCampaign @relation(fields: [email_campaign_id], references: [id])
+}
+
+model EmailCampaign {
+  id              String   @id @default(cuid())
+  campaign_id     String   @unique
+  campaign_name   String
+  email_client_id String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  email_client            EmailClient               @relation(fields: [email_client_id], references: [id])
+  emailCampaignContents   EmailCampaignContent[]
+  emailCampaignDailyStats EmailCampaignDailyStats[]
+}
+
+model EmailCampaignDailyStats {
+  id                              String   @id @default(cuid())
+  email_campaign_id               String
+  date                            DateTime @db.Date
+  email_client_id                 String
+  opens                           Int      @default(0)
+  clicks                          Int      @default(0)
+  bounces                         Int      @default(0)
+  unsubscribes                    Int      @default(0)
+  total_opens                     Int      @default(0)
+  daily_total_open_rate           Int      @default(0)
+  cumulative_total_open_rate      Int      @default(0)
+  unique_opens                    Int      @default(0)
+  daily_unique_open_rate          Int      @default(0)
+  cumulative_unique_open_rate     Int      @default(0)
+  total_clicks                    Int      @default(0)
+  daily_total_click_rate          Int      @default(0)
+  cumulative_total_click_rate     Int      @default(0)
+  unique_clicks                   Int      @default(0)
+  daily_unique_click_rate         Int      @default(0)
+  cumulative_unique_click_rate    Int      @default(0)
+  daily_unique_click_to_open_rate Int      @default(0)
+  daily_total_click_to_open_rate  Int      @default(0)
+  spam_reports                    Int      @default(0)
+  daily_spam_reports_rate         Int      @default(0)
+  cumulative_spam_reports_rate    Int      @default(0)
+  spam_report_drops               Int      @default(0)
+  daily_unsubscribe_rate          Int      @default(0)
+  cumulative_unsubscribe_rate     Int      @default(0)
+  single_send_name                String
+  variation                       String
+  phase                           String
+  requests                        Int      @default(0)
+  delivered                       Int      @default(0)
+  daily_bounce_rate               Int      @default(0)
+  cumulative_bounce_rate          Int      @default(0)
+  bounce_drops                    Int      @default(0)
+  createdAt                       DateTime @default(now())
+  updatedAt                       DateTime @updatedAt
+
+  // Relations
+  email_client  EmailClient   @relation(fields: [email_client_id], references: [id])
+  emailCampaign EmailCampaign @relation(fields: [email_campaign_id], references: [id])
+}
+
+model EmailClient {
+  id          String   @id @default(cuid())
+  client_name String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  emailCampaigns         EmailCampaign[]
+  emailClientCredentials EmailClientCredentials[]
+  emailGlobalDailyStats  EmailGlobalDailyStats[]
+  emailCampaignDailyStats EmailCampaignDailyStats[]
+  
+}
+
+model EmailClientCredentials {
+  id              String   @id @default(cuid())
+  email_client_id String
+  platform_name   String
+  api_key         String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  emailClient EmailClient @relation(fields: [email_client_id], references: [id])
+}
+
+model EmailGlobalDailyStats {
+  id              String   @id @default(cuid())
+  email_client_id String
+  date            DateTime @db.Date
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  email_client   EmailClient               @relation(fields: [email_client_id], references: [id])
+}
+
 model GaAccount {
   id               String            @id @default(cuid())
   gaAccountId      String
@@ -367,69 +482,69 @@ model Query {
 model SproutFacebookAnalytics {
   createdAt              DateTime            @default(now())
   customerProfileId      Int
-  engagements            Int?
-  followersCount         Int?
+  engagements            Int?                @default(0)
+  followersCount         Int?                @default(0)
   id                     String              @id @default(cuid())
-  impressions            Int?
-  impressionsUnique      Int?
-  netFollowerGrowth      Int?
-  postContentClicks      Int?
-  postContentClicksOther Int?
-  postLinkClicks         Int?
-  postPhotoViewClicks    Int?
+  impressions            Int?                @default(0)
+  impressionsUnique      Int?                @default(0)
+  netFollowerGrowth      Int?                @default(0)
+  postContentClicks      Int?                @default(0)
+  postContentClicksOther Int?                @default(0)
+  postLinkClicks         Int?                @default(0)
+  postPhotoViewClicks    Int?                @default(0)
   reportingDate          DateTime            @db.Date
   sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   sproutSocialAccountId  String
-  tabViews               Int?
+  tabViews               Int?                @default(0)
   updatedAt              DateTime            @updatedAt
-  videoViews             Int?
-  videoViews10s          Int?
-  videoViewsOrganic      Int?
-  videoViewsPaid         Int?
-  videoViewsUnique       Int?
+  videoViews             Int?                @default(0)
+  videoViews10s          Int?                @default(0)
+  videoViewsOrganic      Int?                @default(0)
+  videoViewsPaid         Int?                @default(0)
+  videoViewsUnique       Int?                @default(0)
 
   @@index([sproutSocialAccountId])
 }
 
 model SproutFacebookPostAnalytics {
   id                     String              @id @default(cuid())
-  angryReactions         Int?
+  angryReactions         Int?                @default(0)
   clientNativeId         String
-  commentsCount          Int?
-  hahaReactions          Int?
-  impressions            Int?
-  impressionsFollower    Int?
-  impressionsNonFollower Int?
-  impressionsNonViral    Int?
-  impressionsOrganic     Int?
-  impressionsPaid        Int?
-  impressionsViral       Int?
-  likes                  Int?
-  loveReactions          Int?
-  postContentClicks      Int?
-  postContentClicksOther Int?
-  postLinkClicks         Int?
+  commentsCount          Int?                @default(0)
+  hahaReactions          Int?                @default(0)
+  impressions            Int?                @default(0)
+  impressionsFollower    Int?                @default(0)
+  impressionsNonFollower Int?                @default(0)
+  impressionsNonViral    Int?                @default(0)
+  impressionsOrganic     Int?                @default(0)
+  impressionsPaid        Int?                @default(0)
+  impressionsViral       Int?                @default(0)
+  likes                  Int?                @default(0)
+  loveReactions          Int?                @default(0)
+  postContentClicks      Int?                @default(0)
+  postContentClicksOther Int?                @default(0)
+  postLinkClicks         Int?                @default(0)
   postNativeId           String
-  postPhotoViewClicks    Int?
-  postVideoPlayClicks    Int?
-  questionAnswers        Int?
-  reach                  Int?
-  reachFollower          Int?
-  reachNonViral          Int?
-  reachOrganic           Int?
-  reachPaid              Int?
-  reachViral             Int?
-  reactions              Int?
+  postPhotoViewClicks    Int?                @default(0)
+  postVideoPlayClicks    Int?                @default(0)
+  questionAnswers        Int?                @default(0)
+  reach                  Int?                @default(0)
+  reachFollower          Int?                @default(0)
+  reachNonViral          Int?                @default(0)
+  reachOrganic           Int?                @default(0)
+  reachPaid              Int?                @default(0)
+  reachViral             Int?                @default(0)
+  reactions              Int?                @default(0)
   reportingDate          DateTime            @db.Date
-  sadReactions           Int?
-  sharesCount            Int?
+  sadReactions           Int?                @default(0)
+  sharesCount            Int?                @default(0)
   sproutSocialAccountId  String
-  videoLength            Int?
-  videoViews             Int?
-  videoViewsAutoplay     Int?
-  videoViewsOrganic      Int?
-  videoViewsPaid         Int?
-  wowReactions           Int?
+  videoLength            Int?                @default(0)
+  videoViews             Int?                @default(0)
+  videoViewsAutoplay     Int?                @default(0)
+  videoViewsOrganic      Int?                @default(0)
+  videoViewsPaid         Int?                @default(0)
+  wowReactions           Int?                @default(0)
   sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   createdAt              DateTime            @default(now())
   updatedAt              DateTime            @updatedAt
@@ -438,36 +553,37 @@ model SproutFacebookPostAnalytics {
 }
 
 model SproutInstagramAnalytics {
-  commentsCount            Int?
+  commentsCount            Int?                                @default(0)
   createdAt                DateTime                            @default(now())
   customerProfileId        Int
-  emailContacts            Int?
-  engagements              Int?
+  emailContacts            Int?                                @default(0)
+  engagements              Int?                                @default(0)
   followersByCity          SproutInstagramFollowersByCity[]
   followersByCountry       SproutInstagramFollowersByCountry[]
-  followersCount           Int?
-  getDirectionsClicks      Int?
+  followersCount           Int?                                @default(0)
+  getDirectionsClicks      Int?                                @default(0)
   id                       String                              @id @default(cuid())
-  impressions              Int?
-  impressionsUnique        Int?
-  likes                    Int?
-  phoneCallClicks          Int?
+  impressions              Int?                                @default(0)
+  impressionsUnique        Int?                                @default(0)
+  likes                    Int?                                @default(0)
+  phoneCallClicks          Int?                                @default(0)
   postsSendByContentType   Json?
   postsSentByPostType      Json?
-  postsSentCount           Int?
-  profileFollowerAdds      Int?
-  profileFollowers         Int?
-  profileImpressionsUnique Int?
-  profileReachUnique       Int?
-  profileViews             Int?
-  profileViewsUnique       Int?
+  postsSentCount           Int?                                @default(0)
+  profileFollowerAdds      Int?                                @default(0)
+  profileFollowers         Int?                                @default(0)
+  profileImpressionsUnique Int?                                @default(0)
+  profileReachUnique       Int?                                @default(0)
+  profileViews             Int?                                @default(0)
+  profileViewsUnique       Int?                                @default(0)
   reportingDate            DateTime                            @db.Date
-  saves                    Int?
+  saves                    Int?                                @default(0)
   sproutSocialAccount      SproutSocialAccount                 @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   sproutSocialAccountId    String
   updatedAt                DateTime                            @updatedAt
-  videoViews               Int?
-  websiteClicks            Int?
+  videoViews               Int?                                @default(0)
+  websiteClicks            Int?                                @default(0)
+
   @@index([sproutSocialAccountId])
 }
 
@@ -476,7 +592,7 @@ model SproutInstagramFollowersByCity {
   sproutInstagramAnalyticsId String
   sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
   city                       String
-  count                      Int
+  count                      Int                      @default(0)
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
 
@@ -488,7 +604,7 @@ model SproutInstagramFollowersByCountry {
   sproutInstagramAnalyticsId String
   sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
   country                    String
-  count                      Int
+  count                      Int                      @default(0)
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
 
@@ -498,12 +614,12 @@ model SproutInstagramFollowersByCountry {
 model SproutLinkedInAnalytics {
   createdAt             DateTime            @default(now())
   customerProfileId     Int
-  engagements           Int?
-  followersCount        Int?
+  engagements           Int?                @default(0)
+  followersCount        Int?                @default(0)
   id                    String              @id @default(cuid())
-  impressions           Int?
-  impressionsUnique     Int?
-  reactions             Int?
+  impressions           Int?                @default(0)
+  impressionsUnique     Int?                @default(0)
+  reactions             Int?                @default(0)
   reportingDate         DateTime            @db.Date
   sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   sproutSocialAccountId String
@@ -518,8 +634,8 @@ model SproutPinterestAnalytics {
   sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   customerProfileId     Int
   reportingDate         DateTime            @db.Date
-  followersCount        Int?
-  followingCount        Int?
+  followersCount        Int?                @default(0)
+  followingCount        Int?                @default(0)
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
 

@@ -29,6 +29,36 @@ export type ClientSatisfaction = $Result.DefaultSelection<Prisma.$ClientSatisfac
  */
 export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
 /**
+ * Model EmailCampaignContent
+ * 
+ */
+export type EmailCampaignContent = $Result.DefaultSelection<Prisma.$EmailCampaignContentPayload>
+/**
+ * Model EmailCampaign
+ * 
+ */
+export type EmailCampaign = $Result.DefaultSelection<Prisma.$EmailCampaignPayload>
+/**
+ * Model EmailCampaignDailyStats
+ * 
+ */
+export type EmailCampaignDailyStats = $Result.DefaultSelection<Prisma.$EmailCampaignDailyStatsPayload>
+/**
+ * Model EmailClient
+ * 
+ */
+export type EmailClient = $Result.DefaultSelection<Prisma.$EmailClientPayload>
+/**
+ * Model EmailClientCredentials
+ * 
+ */
+export type EmailClientCredentials = $Result.DefaultSelection<Prisma.$EmailClientCredentialsPayload>
+/**
+ * Model EmailGlobalDailyStats
+ * 
+ */
+export type EmailGlobalDailyStats = $Result.DefaultSelection<Prisma.$EmailGlobalDailyStatsPayload>
+/**
  * Model GaAccount
  * 
  */
@@ -438,6 +468,66 @@ export class PrismaClient<
     * ```
     */
   get conversation(): Prisma.ConversationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailCampaignContent`: Exposes CRUD operations for the **EmailCampaignContent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailCampaignContents
+    * const emailCampaignContents = await prisma.emailCampaignContent.findMany()
+    * ```
+    */
+  get emailCampaignContent(): Prisma.EmailCampaignContentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailCampaign`: Exposes CRUD operations for the **EmailCampaign** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailCampaigns
+    * const emailCampaigns = await prisma.emailCampaign.findMany()
+    * ```
+    */
+  get emailCampaign(): Prisma.EmailCampaignDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailCampaignDailyStats`: Exposes CRUD operations for the **EmailCampaignDailyStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailCampaignDailyStats
+    * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findMany()
+    * ```
+    */
+  get emailCampaignDailyStats(): Prisma.EmailCampaignDailyStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailClient`: Exposes CRUD operations for the **EmailClient** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailClients
+    * const emailClients = await prisma.emailClient.findMany()
+    * ```
+    */
+  get emailClient(): Prisma.EmailClientDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailClientCredentials`: Exposes CRUD operations for the **EmailClientCredentials** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailClientCredentials
+    * const emailClientCredentials = await prisma.emailClientCredentials.findMany()
+    * ```
+    */
+  get emailClientCredentials(): Prisma.EmailClientCredentialsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailGlobalDailyStats`: Exposes CRUD operations for the **EmailGlobalDailyStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailGlobalDailyStats
+    * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findMany()
+    * ```
+    */
+  get emailGlobalDailyStats(): Prisma.EmailGlobalDailyStatsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.gaAccount`: Exposes CRUD operations for the **GaAccount** model.
@@ -1221,6 +1311,12 @@ export namespace Prisma {
     Account: 'Account',
     ClientSatisfaction: 'ClientSatisfaction',
     Conversation: 'Conversation',
+    EmailCampaignContent: 'EmailCampaignContent',
+    EmailCampaign: 'EmailCampaign',
+    EmailCampaignDailyStats: 'EmailCampaignDailyStats',
+    EmailClient: 'EmailClient',
+    EmailClientCredentials: 'EmailClientCredentials',
+    EmailGlobalDailyStats: 'EmailGlobalDailyStats',
     GaAccount: 'GaAccount',
     GaProperty: 'GaProperty',
     GaImportRun: 'GaImportRun',
@@ -1273,7 +1369,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientSatisfaction" | "conversation" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
+      modelProps: "account" | "clientSatisfaction" | "conversation" | "emailCampaignContent" | "emailCampaign" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1496,6 +1592,450 @@ export namespace Prisma {
           count: {
             args: Prisma.ConversationCountArgs<ExtArgs>
             result: $Utils.Optional<ConversationCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailCampaignContent: {
+        payload: Prisma.$EmailCampaignContentPayload<ExtArgs>
+        fields: Prisma.EmailCampaignContentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailCampaignContentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailCampaignContentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailCampaignContentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailCampaignContentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          findMany: {
+            args: Prisma.EmailCampaignContentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
+          }
+          create: {
+            args: Prisma.EmailCampaignContentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          createMany: {
+            args: Prisma.EmailCampaignContentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailCampaignContentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailCampaignContentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          update: {
+            args: Prisma.EmailCampaignContentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailCampaignContentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailCampaignContentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailCampaignContentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailCampaignContentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailCampaignContentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailCampaignContent>
+          }
+          groupBy: {
+            args: Prisma.EmailCampaignContentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignContentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailCampaignContentCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignContentCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailCampaign: {
+        payload: Prisma.$EmailCampaignPayload<ExtArgs>
+        fields: Prisma.EmailCampaignFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailCampaignFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailCampaignFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailCampaignFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailCampaignFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          findMany: {
+            args: Prisma.EmailCampaignFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>[]
+          }
+          create: {
+            args: Prisma.EmailCampaignCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          createMany: {
+            args: Prisma.EmailCampaignCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailCampaignCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailCampaignDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          update: {
+            args: Prisma.EmailCampaignUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailCampaignDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailCampaignUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailCampaignUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailCampaignUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailCampaignAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailCampaign>
+          }
+          groupBy: {
+            args: Prisma.EmailCampaignGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailCampaignCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailCampaignDailyStats: {
+        payload: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>
+        fields: Prisma.EmailCampaignDailyStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailCampaignDailyStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailCampaignDailyStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailCampaignDailyStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailCampaignDailyStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>
+          }
+          findMany: {
+            args: Prisma.EmailCampaignDailyStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>[]
+          }
+          create: {
+            args: Prisma.EmailCampaignDailyStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>
+          }
+          createMany: {
+            args: Prisma.EmailCampaignDailyStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailCampaignDailyStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailCampaignDailyStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>
+          }
+          update: {
+            args: Prisma.EmailCampaignDailyStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailCampaignDailyStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailCampaignDailyStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailCampaignDailyStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailCampaignDailyStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignDailyStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailCampaignDailyStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailCampaignDailyStats>
+          }
+          groupBy: {
+            args: Prisma.EmailCampaignDailyStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignDailyStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailCampaignDailyStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignDailyStatsCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailClient: {
+        payload: Prisma.$EmailClientPayload<ExtArgs>
+        fields: Prisma.EmailClientFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailClientFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailClientFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailClientFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailClientFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>
+          }
+          findMany: {
+            args: Prisma.EmailClientFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>[]
+          }
+          create: {
+            args: Prisma.EmailClientCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>
+          }
+          createMany: {
+            args: Prisma.EmailClientCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailClientCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailClientDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>
+          }
+          update: {
+            args: Prisma.EmailClientUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailClientDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailClientUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailClientUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailClientUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailClientAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailClient>
+          }
+          groupBy: {
+            args: Prisma.EmailClientGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailClientGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailClientCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailClientCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailClientCredentials: {
+        payload: Prisma.$EmailClientCredentialsPayload<ExtArgs>
+        fields: Prisma.EmailClientCredentialsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailClientCredentialsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailClientCredentialsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailClientCredentialsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailClientCredentialsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>
+          }
+          findMany: {
+            args: Prisma.EmailClientCredentialsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>[]
+          }
+          create: {
+            args: Prisma.EmailClientCredentialsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>
+          }
+          createMany: {
+            args: Prisma.EmailClientCredentialsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailClientCredentialsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailClientCredentialsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>
+          }
+          update: {
+            args: Prisma.EmailClientCredentialsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailClientCredentialsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailClientCredentialsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailClientCredentialsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailClientCredentialsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailClientCredentialsPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailClientCredentialsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailClientCredentials>
+          }
+          groupBy: {
+            args: Prisma.EmailClientCredentialsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailClientCredentialsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailClientCredentialsCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailClientCredentialsCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailGlobalDailyStats: {
+        payload: Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>
+        fields: Prisma.EmailGlobalDailyStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailGlobalDailyStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailGlobalDailyStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailGlobalDailyStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailGlobalDailyStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>
+          }
+          findMany: {
+            args: Prisma.EmailGlobalDailyStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>[]
+          }
+          create: {
+            args: Prisma.EmailGlobalDailyStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>
+          }
+          createMany: {
+            args: Prisma.EmailGlobalDailyStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailGlobalDailyStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailGlobalDailyStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>
+          }
+          update: {
+            args: Prisma.EmailGlobalDailyStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailGlobalDailyStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailGlobalDailyStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailGlobalDailyStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailGlobalDailyStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailGlobalDailyStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailGlobalDailyStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailGlobalDailyStats>
+          }
+          groupBy: {
+            args: Prisma.EmailGlobalDailyStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailGlobalDailyStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailGlobalDailyStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailGlobalDailyStatsCountAggregateOutputType> | number
           }
         }
       }
@@ -4102,6 +4642,12 @@ export namespace Prisma {
     account?: AccountOmit
     clientSatisfaction?: ClientSatisfactionOmit
     conversation?: ConversationOmit
+    emailCampaignContent?: EmailCampaignContentOmit
+    emailCampaign?: EmailCampaignOmit
+    emailCampaignDailyStats?: EmailCampaignDailyStatsOmit
+    emailClient?: EmailClientOmit
+    emailClientCredentials?: EmailClientCredentialsOmit
+    emailGlobalDailyStats?: EmailGlobalDailyStatsOmit
     gaAccount?: GaAccountOmit
     gaProperty?: GaPropertyOmit
     gaImportRun?: GaImportRunOmit
@@ -4253,6 +4799,104 @@ export namespace Prisma {
    */
   export type ConversationCountOutputTypeCountQueriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QueryWhereInput
+  }
+
+
+  /**
+   * Count Type EmailCampaignCountOutputType
+   */
+
+  export type EmailCampaignCountOutputType = {
+    emailCampaignContents: number
+    emailCampaignDailyStats: number
+  }
+
+  export type EmailCampaignCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailCampaignContents?: boolean | EmailCampaignCountOutputTypeCountEmailCampaignContentsArgs
+    emailCampaignDailyStats?: boolean | EmailCampaignCountOutputTypeCountEmailCampaignDailyStatsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EmailCampaignCountOutputType without action
+   */
+  export type EmailCampaignCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignCountOutputType
+     */
+    select?: EmailCampaignCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaignCountOutputType without action
+   */
+  export type EmailCampaignCountOutputTypeCountEmailCampaignContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignContentWhereInput
+  }
+
+  /**
+   * EmailCampaignCountOutputType without action
+   */
+  export type EmailCampaignCountOutputTypeCountEmailCampaignDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignDailyStatsWhereInput
+  }
+
+
+  /**
+   * Count Type EmailClientCountOutputType
+   */
+
+  export type EmailClientCountOutputType = {
+    emailCampaigns: number
+    emailClientCredentials: number
+    emailGlobalDailyStats: number
+    emailCampaignDailyStats: number
+  }
+
+  export type EmailClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailCampaigns?: boolean | EmailClientCountOutputTypeCountEmailCampaignsArgs
+    emailClientCredentials?: boolean | EmailClientCountOutputTypeCountEmailClientCredentialsArgs
+    emailGlobalDailyStats?: boolean | EmailClientCountOutputTypeCountEmailGlobalDailyStatsArgs
+    emailCampaignDailyStats?: boolean | EmailClientCountOutputTypeCountEmailCampaignDailyStatsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EmailClientCountOutputType without action
+   */
+  export type EmailClientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCountOutputType
+     */
+    select?: EmailClientCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EmailClientCountOutputType without action
+   */
+  export type EmailClientCountOutputTypeCountEmailCampaignsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignWhereInput
+  }
+
+  /**
+   * EmailClientCountOutputType without action
+   */
+  export type EmailClientCountOutputTypeCountEmailClientCredentialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailClientCredentialsWhereInput
+  }
+
+  /**
+   * EmailClientCountOutputType without action
+   */
+  export type EmailClientCountOutputTypeCountEmailGlobalDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailGlobalDailyStatsWhereInput
+  }
+
+  /**
+   * EmailClientCountOutputType without action
+   */
+  export type EmailClientCountOutputTypeCountEmailCampaignDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignDailyStatsWhereInput
   }
 
 
@@ -8412,6 +9056,7246 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailCampaignContent
+   */
+
+  export type AggregateEmailCampaignContent = {
+    _count: EmailCampaignContentCountAggregateOutputType | null
+    _avg: EmailCampaignContentAvgAggregateOutputType | null
+    _sum: EmailCampaignContentSumAggregateOutputType | null
+    _min: EmailCampaignContentMinAggregateOutputType | null
+    _max: EmailCampaignContentMaxAggregateOutputType | null
+  }
+
+  export type EmailCampaignContentAvgAggregateOutputType = {
+    web_id: number | null
+    recipients: number | null
+  }
+
+  export type EmailCampaignContentSumAggregateOutputType = {
+    web_id: number | null
+    recipients: number | null
+  }
+
+  export type EmailCampaignContentMinAggregateOutputType = {
+    id: string | null
+    email_campaign_id: string | null
+    subject: string | null
+    html_content: string | null
+    plain_content: string | null
+    web_id: number | null
+    type: string | null
+    content_type: string | null
+    recipients: number | null
+    create_time: Date | null
+    send_time: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailCampaignContentMaxAggregateOutputType = {
+    id: string | null
+    email_campaign_id: string | null
+    subject: string | null
+    html_content: string | null
+    plain_content: string | null
+    web_id: number | null
+    type: string | null
+    content_type: string | null
+    recipients: number | null
+    create_time: Date | null
+    send_time: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailCampaignContentCountAggregateOutputType = {
+    id: number
+    email_campaign_id: number
+    subject: number
+    html_content: number
+    plain_content: number
+    web_id: number
+    type: number
+    content_type: number
+    recipients: number
+    create_time: number
+    send_time: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailCampaignContentAvgAggregateInputType = {
+    web_id?: true
+    recipients?: true
+  }
+
+  export type EmailCampaignContentSumAggregateInputType = {
+    web_id?: true
+    recipients?: true
+  }
+
+  export type EmailCampaignContentMinAggregateInputType = {
+    id?: true
+    email_campaign_id?: true
+    subject?: true
+    html_content?: true
+    plain_content?: true
+    web_id?: true
+    type?: true
+    content_type?: true
+    recipients?: true
+    create_time?: true
+    send_time?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailCampaignContentMaxAggregateInputType = {
+    id?: true
+    email_campaign_id?: true
+    subject?: true
+    html_content?: true
+    plain_content?: true
+    web_id?: true
+    type?: true
+    content_type?: true
+    recipients?: true
+    create_time?: true
+    send_time?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailCampaignContentCountAggregateInputType = {
+    id?: true
+    email_campaign_id?: true
+    subject?: true
+    html_content?: true
+    plain_content?: true
+    web_id?: true
+    type?: true
+    content_type?: true
+    recipients?: true
+    create_time?: true
+    send_time?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailCampaignContentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaignContent to aggregate.
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignContents to fetch.
+     */
+    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailCampaignContentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignContents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignContents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailCampaignContents
+    **/
+    _count?: true | EmailCampaignContentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EmailCampaignContentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmailCampaignContentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailCampaignContentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailCampaignContentMaxAggregateInputType
+  }
+
+  export type GetEmailCampaignContentAggregateType<T extends EmailCampaignContentAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailCampaignContent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailCampaignContent[P]>
+      : GetScalarType<T[P], AggregateEmailCampaignContent[P]>
+  }
+
+
+
+
+  export type EmailCampaignContentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignContentWhereInput
+    orderBy?: EmailCampaignContentOrderByWithAggregationInput | EmailCampaignContentOrderByWithAggregationInput[]
+    by: EmailCampaignContentScalarFieldEnum[] | EmailCampaignContentScalarFieldEnum
+    having?: EmailCampaignContentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailCampaignContentCountAggregateInputType | true
+    _avg?: EmailCampaignContentAvgAggregateInputType
+    _sum?: EmailCampaignContentSumAggregateInputType
+    _min?: EmailCampaignContentMinAggregateInputType
+    _max?: EmailCampaignContentMaxAggregateInputType
+  }
+
+  export type EmailCampaignContentGroupByOutputType = {
+    id: string
+    email_campaign_id: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients: number
+    create_time: Date
+    send_time: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailCampaignContentCountAggregateOutputType | null
+    _avg: EmailCampaignContentAvgAggregateOutputType | null
+    _sum: EmailCampaignContentSumAggregateOutputType | null
+    _min: EmailCampaignContentMinAggregateOutputType | null
+    _max: EmailCampaignContentMaxAggregateOutputType | null
+  }
+
+  type GetEmailCampaignContentGroupByPayload<T extends EmailCampaignContentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailCampaignContentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailCampaignContentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailCampaignContentGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailCampaignContentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailCampaignContentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_campaign_id?: boolean
+    subject?: boolean
+    html_content?: boolean
+    plain_content?: boolean
+    web_id?: boolean
+    type?: boolean
+    content_type?: boolean
+    recipients?: boolean
+    create_time?: boolean
+    send_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaignContent"]>
+
+  export type EmailCampaignContentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_campaign_id?: boolean
+    subject?: boolean
+    html_content?: boolean
+    plain_content?: boolean
+    web_id?: boolean
+    type?: boolean
+    content_type?: boolean
+    recipients?: boolean
+    create_time?: boolean
+    send_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaignContent"]>
+
+  export type EmailCampaignContentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_campaign_id?: boolean
+    subject?: boolean
+    html_content?: boolean
+    plain_content?: boolean
+    web_id?: boolean
+    type?: boolean
+    content_type?: boolean
+    recipients?: boolean
+    create_time?: boolean
+    send_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaignContent"]>
+
+  export type EmailCampaignContentSelectScalar = {
+    id?: boolean
+    email_campaign_id?: boolean
+    subject?: boolean
+    html_content?: boolean
+    plain_content?: boolean
+    web_id?: boolean
+    type?: boolean
+    content_type?: boolean
+    recipients?: boolean
+    create_time?: boolean
+    send_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailCampaignContentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_campaign_id" | "subject" | "html_content" | "plain_content" | "web_id" | "type" | "content_type" | "recipients" | "create_time" | "send_time" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignContent"]>
+  export type EmailCampaignContentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignContentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignContentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailCampaignContentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailCampaignContent"
+    objects: {
+      emailCampaign: Prisma.$EmailCampaignPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email_campaign_id: string
+      subject: string
+      html_content: string
+      plain_content: string
+      web_id: number
+      type: string
+      content_type: string
+      recipients: number
+      create_time: Date
+      send_time: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailCampaignContent"]>
+    composites: {}
+  }
+
+  type EmailCampaignContentGetPayload<S extends boolean | null | undefined | EmailCampaignContentDefaultArgs> = $Result.GetResult<Prisma.$EmailCampaignContentPayload, S>
+
+  type EmailCampaignContentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailCampaignContentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailCampaignContentCountAggregateInputType | true
+    }
+
+  export interface EmailCampaignContentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailCampaignContent'], meta: { name: 'EmailCampaignContent' } }
+    /**
+     * Find zero or one EmailCampaignContent that matches the filter.
+     * @param {EmailCampaignContentFindUniqueArgs} args - Arguments to find a EmailCampaignContent
+     * @example
+     * // Get one EmailCampaignContent
+     * const emailCampaignContent = await prisma.emailCampaignContent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailCampaignContentFindUniqueArgs>(args: SelectSubset<T, EmailCampaignContentFindUniqueArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailCampaignContent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailCampaignContentFindUniqueOrThrowArgs} args - Arguments to find a EmailCampaignContent
+     * @example
+     * // Get one EmailCampaignContent
+     * const emailCampaignContent = await prisma.emailCampaignContent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailCampaignContentFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailCampaignContentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaignContent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentFindFirstArgs} args - Arguments to find a EmailCampaignContent
+     * @example
+     * // Get one EmailCampaignContent
+     * const emailCampaignContent = await prisma.emailCampaignContent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailCampaignContentFindFirstArgs>(args?: SelectSubset<T, EmailCampaignContentFindFirstArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaignContent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentFindFirstOrThrowArgs} args - Arguments to find a EmailCampaignContent
+     * @example
+     * // Get one EmailCampaignContent
+     * const emailCampaignContent = await prisma.emailCampaignContent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailCampaignContentFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailCampaignContentFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailCampaignContents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailCampaignContents
+     * const emailCampaignContents = await prisma.emailCampaignContent.findMany()
+     * 
+     * // Get first 10 EmailCampaignContents
+     * const emailCampaignContents = await prisma.emailCampaignContent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailCampaignContentWithIdOnly = await prisma.emailCampaignContent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailCampaignContentFindManyArgs>(args?: SelectSubset<T, EmailCampaignContentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailCampaignContent.
+     * @param {EmailCampaignContentCreateArgs} args - Arguments to create a EmailCampaignContent.
+     * @example
+     * // Create one EmailCampaignContent
+     * const EmailCampaignContent = await prisma.emailCampaignContent.create({
+     *   data: {
+     *     // ... data to create a EmailCampaignContent
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailCampaignContentCreateArgs>(args: SelectSubset<T, EmailCampaignContentCreateArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailCampaignContents.
+     * @param {EmailCampaignContentCreateManyArgs} args - Arguments to create many EmailCampaignContents.
+     * @example
+     * // Create many EmailCampaignContents
+     * const emailCampaignContent = await prisma.emailCampaignContent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailCampaignContentCreateManyArgs>(args?: SelectSubset<T, EmailCampaignContentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailCampaignContents and returns the data saved in the database.
+     * @param {EmailCampaignContentCreateManyAndReturnArgs} args - Arguments to create many EmailCampaignContents.
+     * @example
+     * // Create many EmailCampaignContents
+     * const emailCampaignContent = await prisma.emailCampaignContent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailCampaignContents and only return the `id`
+     * const emailCampaignContentWithIdOnly = await prisma.emailCampaignContent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailCampaignContentCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailCampaignContentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailCampaignContent.
+     * @param {EmailCampaignContentDeleteArgs} args - Arguments to delete one EmailCampaignContent.
+     * @example
+     * // Delete one EmailCampaignContent
+     * const EmailCampaignContent = await prisma.emailCampaignContent.delete({
+     *   where: {
+     *     // ... filter to delete one EmailCampaignContent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailCampaignContentDeleteArgs>(args: SelectSubset<T, EmailCampaignContentDeleteArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailCampaignContent.
+     * @param {EmailCampaignContentUpdateArgs} args - Arguments to update one EmailCampaignContent.
+     * @example
+     * // Update one EmailCampaignContent
+     * const emailCampaignContent = await prisma.emailCampaignContent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailCampaignContentUpdateArgs>(args: SelectSubset<T, EmailCampaignContentUpdateArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailCampaignContents.
+     * @param {EmailCampaignContentDeleteManyArgs} args - Arguments to filter EmailCampaignContents to delete.
+     * @example
+     * // Delete a few EmailCampaignContents
+     * const { count } = await prisma.emailCampaignContent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailCampaignContentDeleteManyArgs>(args?: SelectSubset<T, EmailCampaignContentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaignContents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailCampaignContents
+     * const emailCampaignContent = await prisma.emailCampaignContent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailCampaignContentUpdateManyArgs>(args: SelectSubset<T, EmailCampaignContentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaignContents and returns the data updated in the database.
+     * @param {EmailCampaignContentUpdateManyAndReturnArgs} args - Arguments to update many EmailCampaignContents.
+     * @example
+     * // Update many EmailCampaignContents
+     * const emailCampaignContent = await prisma.emailCampaignContent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailCampaignContents and only return the `id`
+     * const emailCampaignContentWithIdOnly = await prisma.emailCampaignContent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailCampaignContentUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailCampaignContentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailCampaignContent.
+     * @param {EmailCampaignContentUpsertArgs} args - Arguments to update or create a EmailCampaignContent.
+     * @example
+     * // Update or create a EmailCampaignContent
+     * const emailCampaignContent = await prisma.emailCampaignContent.upsert({
+     *   create: {
+     *     // ... data to create a EmailCampaignContent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailCampaignContent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailCampaignContentUpsertArgs>(args: SelectSubset<T, EmailCampaignContentUpsertArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailCampaignContents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentCountArgs} args - Arguments to filter EmailCampaignContents to count.
+     * @example
+     * // Count the number of EmailCampaignContents
+     * const count = await prisma.emailCampaignContent.count({
+     *   where: {
+     *     // ... the filter for the EmailCampaignContents we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailCampaignContentCountArgs>(
+      args?: Subset<T, EmailCampaignContentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailCampaignContentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailCampaignContent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailCampaignContentAggregateArgs>(args: Subset<T, EmailCampaignContentAggregateArgs>): Prisma.PrismaPromise<GetEmailCampaignContentAggregateType<T>>
+
+    /**
+     * Group by EmailCampaignContent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignContentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailCampaignContentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailCampaignContentGroupByArgs['orderBy'] }
+        : { orderBy?: EmailCampaignContentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailCampaignContentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailCampaignContentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailCampaignContent model
+   */
+  readonly fields: EmailCampaignContentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailCampaignContent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailCampaignContentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emailCampaign<T extends EmailCampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaignDefaultArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailCampaignContent model
+   */
+  interface EmailCampaignContentFieldRefs {
+    readonly id: FieldRef<"EmailCampaignContent", 'String'>
+    readonly email_campaign_id: FieldRef<"EmailCampaignContent", 'String'>
+    readonly subject: FieldRef<"EmailCampaignContent", 'String'>
+    readonly html_content: FieldRef<"EmailCampaignContent", 'String'>
+    readonly plain_content: FieldRef<"EmailCampaignContent", 'String'>
+    readonly web_id: FieldRef<"EmailCampaignContent", 'Int'>
+    readonly type: FieldRef<"EmailCampaignContent", 'String'>
+    readonly content_type: FieldRef<"EmailCampaignContent", 'String'>
+    readonly recipients: FieldRef<"EmailCampaignContent", 'Int'>
+    readonly create_time: FieldRef<"EmailCampaignContent", 'DateTime'>
+    readonly send_time: FieldRef<"EmailCampaignContent", 'DateTime'>
+    readonly createdAt: FieldRef<"EmailCampaignContent", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailCampaignContent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailCampaignContent findUnique
+   */
+  export type EmailCampaignContentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignContent to fetch.
+     */
+    where: EmailCampaignContentWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignContent findUniqueOrThrow
+   */
+  export type EmailCampaignContentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignContent to fetch.
+     */
+    where: EmailCampaignContentWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignContent findFirst
+   */
+  export type EmailCampaignContentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignContent to fetch.
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignContents to fetch.
+     */
+    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaignContents.
+     */
+    cursor?: EmailCampaignContentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignContents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignContents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaignContents.
+     */
+    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaignContent findFirstOrThrow
+   */
+  export type EmailCampaignContentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignContent to fetch.
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignContents to fetch.
+     */
+    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaignContents.
+     */
+    cursor?: EmailCampaignContentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignContents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignContents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaignContents.
+     */
+    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaignContent findMany
+   */
+  export type EmailCampaignContentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignContents to fetch.
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignContents to fetch.
+     */
+    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailCampaignContents.
+     */
+    cursor?: EmailCampaignContentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignContents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignContents.
+     */
+    skip?: number
+    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaignContent create
+   */
+  export type EmailCampaignContentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailCampaignContent.
+     */
+    data: XOR<EmailCampaignContentCreateInput, EmailCampaignContentUncheckedCreateInput>
+  }
+
+  /**
+   * EmailCampaignContent createMany
+   */
+  export type EmailCampaignContentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailCampaignContents.
+     */
+    data: EmailCampaignContentCreateManyInput | EmailCampaignContentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailCampaignContent createManyAndReturn
+   */
+  export type EmailCampaignContentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailCampaignContents.
+     */
+    data: EmailCampaignContentCreateManyInput | EmailCampaignContentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaignContent update
+   */
+  export type EmailCampaignContentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailCampaignContent.
+     */
+    data: XOR<EmailCampaignContentUpdateInput, EmailCampaignContentUncheckedUpdateInput>
+    /**
+     * Choose, which EmailCampaignContent to update.
+     */
+    where: EmailCampaignContentWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignContent updateMany
+   */
+  export type EmailCampaignContentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailCampaignContents.
+     */
+    data: XOR<EmailCampaignContentUpdateManyMutationInput, EmailCampaignContentUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaignContents to update
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * Limit how many EmailCampaignContents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaignContent updateManyAndReturn
+   */
+  export type EmailCampaignContentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailCampaignContents.
+     */
+    data: XOR<EmailCampaignContentUpdateManyMutationInput, EmailCampaignContentUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaignContents to update
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * Limit how many EmailCampaignContents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaignContent upsert
+   */
+  export type EmailCampaignContentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailCampaignContent to update in case it exists.
+     */
+    where: EmailCampaignContentWhereUniqueInput
+    /**
+     * In case the EmailCampaignContent found by the `where` argument doesn't exist, create a new EmailCampaignContent with this data.
+     */
+    create: XOR<EmailCampaignContentCreateInput, EmailCampaignContentUncheckedCreateInput>
+    /**
+     * In case the EmailCampaignContent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailCampaignContentUpdateInput, EmailCampaignContentUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailCampaignContent delete
+   */
+  export type EmailCampaignContentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    /**
+     * Filter which EmailCampaignContent to delete.
+     */
+    where: EmailCampaignContentWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignContent deleteMany
+   */
+  export type EmailCampaignContentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaignContents to delete
+     */
+    where?: EmailCampaignContentWhereInput
+    /**
+     * Limit how many EmailCampaignContents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaignContent without action
+   */
+  export type EmailCampaignContentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailCampaign
+   */
+
+  export type AggregateEmailCampaign = {
+    _count: EmailCampaignCountAggregateOutputType | null
+    _min: EmailCampaignMinAggregateOutputType | null
+    _max: EmailCampaignMaxAggregateOutputType | null
+  }
+
+  export type EmailCampaignMinAggregateOutputType = {
+    id: string | null
+    campaign_id: string | null
+    campaign_name: string | null
+    email_client_id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailCampaignMaxAggregateOutputType = {
+    id: string | null
+    campaign_id: string | null
+    campaign_name: string | null
+    email_client_id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailCampaignCountAggregateOutputType = {
+    id: number
+    campaign_id: number
+    campaign_name: number
+    email_client_id: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailCampaignMinAggregateInputType = {
+    id?: true
+    campaign_id?: true
+    campaign_name?: true
+    email_client_id?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailCampaignMaxAggregateInputType = {
+    id?: true
+    campaign_id?: true
+    campaign_name?: true
+    email_client_id?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailCampaignCountAggregateInputType = {
+    id?: true
+    campaign_id?: true
+    campaign_name?: true
+    email_client_id?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailCampaignAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaign to aggregate.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailCampaigns
+    **/
+    _count?: true | EmailCampaignCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailCampaignMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailCampaignMaxAggregateInputType
+  }
+
+  export type GetEmailCampaignAggregateType<T extends EmailCampaignAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailCampaign]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailCampaign[P]>
+      : GetScalarType<T[P], AggregateEmailCampaign[P]>
+  }
+
+
+
+
+  export type EmailCampaignGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignWhereInput
+    orderBy?: EmailCampaignOrderByWithAggregationInput | EmailCampaignOrderByWithAggregationInput[]
+    by: EmailCampaignScalarFieldEnum[] | EmailCampaignScalarFieldEnum
+    having?: EmailCampaignScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailCampaignCountAggregateInputType | true
+    _min?: EmailCampaignMinAggregateInputType
+    _max?: EmailCampaignMaxAggregateInputType
+  }
+
+  export type EmailCampaignGroupByOutputType = {
+    id: string
+    campaign_id: string
+    campaign_name: string
+    email_client_id: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailCampaignCountAggregateOutputType | null
+    _min: EmailCampaignMinAggregateOutputType | null
+    _max: EmailCampaignMaxAggregateOutputType | null
+  }
+
+  type GetEmailCampaignGroupByPayload<T extends EmailCampaignGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailCampaignGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailCampaignGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    campaign_id?: boolean
+    campaign_name?: boolean
+    email_client_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
+    emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
+    _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    campaign_id?: boolean
+    campaign_name?: boolean
+    email_client_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    campaign_id?: boolean
+    campaign_name?: boolean
+    email_client_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectScalar = {
+    id?: boolean
+    campaign_id?: boolean
+    campaign_name?: boolean
+    email_client_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "campaign_id" | "campaign_name" | "email_client_id" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaign"]>
+  export type EmailCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
+    emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
+    _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailCampaignPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailCampaign"
+    objects: {
+      email_client: Prisma.$EmailClientPayload<ExtArgs>
+      emailCampaignContents: Prisma.$EmailCampaignContentPayload<ExtArgs>[]
+      emailCampaignDailyStats: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      campaign_id: string
+      campaign_name: string
+      email_client_id: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailCampaign"]>
+    composites: {}
+  }
+
+  type EmailCampaignGetPayload<S extends boolean | null | undefined | EmailCampaignDefaultArgs> = $Result.GetResult<Prisma.$EmailCampaignPayload, S>
+
+  type EmailCampaignCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailCampaignFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailCampaignCountAggregateInputType | true
+    }
+
+  export interface EmailCampaignDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailCampaign'], meta: { name: 'EmailCampaign' } }
+    /**
+     * Find zero or one EmailCampaign that matches the filter.
+     * @param {EmailCampaignFindUniqueArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailCampaignFindUniqueArgs>(args: SelectSubset<T, EmailCampaignFindUniqueArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailCampaign that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailCampaignFindUniqueOrThrowArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailCampaignFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailCampaignFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaign that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindFirstArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailCampaignFindFirstArgs>(args?: SelectSubset<T, EmailCampaignFindFirstArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaign that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindFirstOrThrowArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailCampaignFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailCampaignFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailCampaigns that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailCampaigns
+     * const emailCampaigns = await prisma.emailCampaign.findMany()
+     * 
+     * // Get first 10 EmailCampaigns
+     * const emailCampaigns = await prisma.emailCampaign.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailCampaignFindManyArgs>(args?: SelectSubset<T, EmailCampaignFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailCampaign.
+     * @param {EmailCampaignCreateArgs} args - Arguments to create a EmailCampaign.
+     * @example
+     * // Create one EmailCampaign
+     * const EmailCampaign = await prisma.emailCampaign.create({
+     *   data: {
+     *     // ... data to create a EmailCampaign
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailCampaignCreateArgs>(args: SelectSubset<T, EmailCampaignCreateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailCampaigns.
+     * @param {EmailCampaignCreateManyArgs} args - Arguments to create many EmailCampaigns.
+     * @example
+     * // Create many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailCampaignCreateManyArgs>(args?: SelectSubset<T, EmailCampaignCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailCampaigns and returns the data saved in the database.
+     * @param {EmailCampaignCreateManyAndReturnArgs} args - Arguments to create many EmailCampaigns.
+     * @example
+     * // Create many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailCampaigns and only return the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailCampaignCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailCampaignCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailCampaign.
+     * @param {EmailCampaignDeleteArgs} args - Arguments to delete one EmailCampaign.
+     * @example
+     * // Delete one EmailCampaign
+     * const EmailCampaign = await prisma.emailCampaign.delete({
+     *   where: {
+     *     // ... filter to delete one EmailCampaign
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailCampaignDeleteArgs>(args: SelectSubset<T, EmailCampaignDeleteArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailCampaign.
+     * @param {EmailCampaignUpdateArgs} args - Arguments to update one EmailCampaign.
+     * @example
+     * // Update one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailCampaignUpdateArgs>(args: SelectSubset<T, EmailCampaignUpdateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailCampaigns.
+     * @param {EmailCampaignDeleteManyArgs} args - Arguments to filter EmailCampaigns to delete.
+     * @example
+     * // Delete a few EmailCampaigns
+     * const { count } = await prisma.emailCampaign.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailCampaignDeleteManyArgs>(args?: SelectSubset<T, EmailCampaignDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailCampaignUpdateManyArgs>(args: SelectSubset<T, EmailCampaignUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaigns and returns the data updated in the database.
+     * @param {EmailCampaignUpdateManyAndReturnArgs} args - Arguments to update many EmailCampaigns.
+     * @example
+     * // Update many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailCampaigns and only return the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailCampaignUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailCampaignUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailCampaign.
+     * @param {EmailCampaignUpsertArgs} args - Arguments to update or create a EmailCampaign.
+     * @example
+     * // Update or create a EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.upsert({
+     *   create: {
+     *     // ... data to create a EmailCampaign
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailCampaign we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailCampaignUpsertArgs>(args: SelectSubset<T, EmailCampaignUpsertArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailCampaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignCountArgs} args - Arguments to filter EmailCampaigns to count.
+     * @example
+     * // Count the number of EmailCampaigns
+     * const count = await prisma.emailCampaign.count({
+     *   where: {
+     *     // ... the filter for the EmailCampaigns we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailCampaignCountArgs>(
+      args?: Subset<T, EmailCampaignCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailCampaignCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailCampaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailCampaignAggregateArgs>(args: Subset<T, EmailCampaignAggregateArgs>): Prisma.PrismaPromise<GetEmailCampaignAggregateType<T>>
+
+    /**
+     * Group by EmailCampaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailCampaignGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailCampaignGroupByArgs['orderBy'] }
+        : { orderBy?: EmailCampaignGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailCampaignGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailCampaignGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailCampaign model
+   */
+  readonly fields: EmailCampaignFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailCampaign.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    email_client<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    emailCampaignContents<T extends EmailCampaign$emailCampaignContentsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignContentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailCampaignDailyStats<T extends EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailCampaign model
+   */
+  interface EmailCampaignFieldRefs {
+    readonly id: FieldRef<"EmailCampaign", 'String'>
+    readonly campaign_id: FieldRef<"EmailCampaign", 'String'>
+    readonly campaign_name: FieldRef<"EmailCampaign", 'String'>
+    readonly email_client_id: FieldRef<"EmailCampaign", 'String'>
+    readonly createdAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailCampaign", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailCampaign findUnique
+   */
+  export type EmailCampaignFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign findUniqueOrThrow
+   */
+  export type EmailCampaignFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign findFirst
+   */
+  export type EmailCampaignFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaigns.
+     */
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign findFirstOrThrow
+   */
+  export type EmailCampaignFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaigns.
+     */
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign findMany
+   */
+  export type EmailCampaignFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaigns to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign create
+   */
+  export type EmailCampaignCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailCampaign.
+     */
+    data: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
+  }
+
+  /**
+   * EmailCampaign createMany
+   */
+  export type EmailCampaignCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailCampaigns.
+     */
+    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailCampaign createManyAndReturn
+   */
+  export type EmailCampaignCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailCampaigns.
+     */
+    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaign update
+   */
+  export type EmailCampaignUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailCampaign.
+     */
+    data: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
+    /**
+     * Choose, which EmailCampaign to update.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign updateMany
+   */
+  export type EmailCampaignUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailCampaigns.
+     */
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaigns to update
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaign updateManyAndReturn
+   */
+  export type EmailCampaignUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailCampaigns.
+     */
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaigns to update
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaign upsert
+   */
+  export type EmailCampaignUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailCampaign to update in case it exists.
+     */
+    where: EmailCampaignWhereUniqueInput
+    /**
+     * In case the EmailCampaign found by the `where` argument doesn't exist, create a new EmailCampaign with this data.
+     */
+    create: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
+    /**
+     * In case the EmailCampaign was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailCampaign delete
+   */
+  export type EmailCampaignDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter which EmailCampaign to delete.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign deleteMany
+   */
+  export type EmailCampaignDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaigns to delete
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaign.emailCampaignContents
+   */
+  export type EmailCampaign$emailCampaignContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    where?: EmailCampaignContentWhereInput
+    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
+    cursor?: EmailCampaignContentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign.emailCampaignDailyStats
+   */
+  export type EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    where?: EmailCampaignDailyStatsWhereInput
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign without action
+   */
+  export type EmailCampaignDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailCampaignDailyStats
+   */
+
+  export type AggregateEmailCampaignDailyStats = {
+    _count: EmailCampaignDailyStatsCountAggregateOutputType | null
+    _avg: EmailCampaignDailyStatsAvgAggregateOutputType | null
+    _sum: EmailCampaignDailyStatsSumAggregateOutputType | null
+    _min: EmailCampaignDailyStatsMinAggregateOutputType | null
+    _max: EmailCampaignDailyStatsMaxAggregateOutputType | null
+  }
+
+  export type EmailCampaignDailyStatsAvgAggregateOutputType = {
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubscribes: number | null
+    total_opens: number | null
+    daily_total_open_rate: number | null
+    cumulative_total_open_rate: number | null
+    unique_opens: number | null
+    daily_unique_open_rate: number | null
+    cumulative_unique_open_rate: number | null
+    total_clicks: number | null
+    daily_total_click_rate: number | null
+    cumulative_total_click_rate: number | null
+    unique_clicks: number | null
+    daily_unique_click_rate: number | null
+    cumulative_unique_click_rate: number | null
+    daily_unique_click_to_open_rate: number | null
+    daily_total_click_to_open_rate: number | null
+    spam_reports: number | null
+    daily_spam_reports_rate: number | null
+    cumulative_spam_reports_rate: number | null
+    spam_report_drops: number | null
+    daily_unsubscribe_rate: number | null
+    cumulative_unsubscribe_rate: number | null
+    requests: number | null
+    delivered: number | null
+    daily_bounce_rate: number | null
+    cumulative_bounce_rate: number | null
+    bounce_drops: number | null
+  }
+
+  export type EmailCampaignDailyStatsSumAggregateOutputType = {
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubscribes: number | null
+    total_opens: number | null
+    daily_total_open_rate: number | null
+    cumulative_total_open_rate: number | null
+    unique_opens: number | null
+    daily_unique_open_rate: number | null
+    cumulative_unique_open_rate: number | null
+    total_clicks: number | null
+    daily_total_click_rate: number | null
+    cumulative_total_click_rate: number | null
+    unique_clicks: number | null
+    daily_unique_click_rate: number | null
+    cumulative_unique_click_rate: number | null
+    daily_unique_click_to_open_rate: number | null
+    daily_total_click_to_open_rate: number | null
+    spam_reports: number | null
+    daily_spam_reports_rate: number | null
+    cumulative_spam_reports_rate: number | null
+    spam_report_drops: number | null
+    daily_unsubscribe_rate: number | null
+    cumulative_unsubscribe_rate: number | null
+    requests: number | null
+    delivered: number | null
+    daily_bounce_rate: number | null
+    cumulative_bounce_rate: number | null
+    bounce_drops: number | null
+  }
+
+  export type EmailCampaignDailyStatsMinAggregateOutputType = {
+    id: string | null
+    email_campaign_id: string | null
+    date: Date | null
+    email_client_id: string | null
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubscribes: number | null
+    total_opens: number | null
+    daily_total_open_rate: number | null
+    cumulative_total_open_rate: number | null
+    unique_opens: number | null
+    daily_unique_open_rate: number | null
+    cumulative_unique_open_rate: number | null
+    total_clicks: number | null
+    daily_total_click_rate: number | null
+    cumulative_total_click_rate: number | null
+    unique_clicks: number | null
+    daily_unique_click_rate: number | null
+    cumulative_unique_click_rate: number | null
+    daily_unique_click_to_open_rate: number | null
+    daily_total_click_to_open_rate: number | null
+    spam_reports: number | null
+    daily_spam_reports_rate: number | null
+    cumulative_spam_reports_rate: number | null
+    spam_report_drops: number | null
+    daily_unsubscribe_rate: number | null
+    cumulative_unsubscribe_rate: number | null
+    single_send_name: string | null
+    variation: string | null
+    phase: string | null
+    requests: number | null
+    delivered: number | null
+    daily_bounce_rate: number | null
+    cumulative_bounce_rate: number | null
+    bounce_drops: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailCampaignDailyStatsMaxAggregateOutputType = {
+    id: string | null
+    email_campaign_id: string | null
+    date: Date | null
+    email_client_id: string | null
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubscribes: number | null
+    total_opens: number | null
+    daily_total_open_rate: number | null
+    cumulative_total_open_rate: number | null
+    unique_opens: number | null
+    daily_unique_open_rate: number | null
+    cumulative_unique_open_rate: number | null
+    total_clicks: number | null
+    daily_total_click_rate: number | null
+    cumulative_total_click_rate: number | null
+    unique_clicks: number | null
+    daily_unique_click_rate: number | null
+    cumulative_unique_click_rate: number | null
+    daily_unique_click_to_open_rate: number | null
+    daily_total_click_to_open_rate: number | null
+    spam_reports: number | null
+    daily_spam_reports_rate: number | null
+    cumulative_spam_reports_rate: number | null
+    spam_report_drops: number | null
+    daily_unsubscribe_rate: number | null
+    cumulative_unsubscribe_rate: number | null
+    single_send_name: string | null
+    variation: string | null
+    phase: string | null
+    requests: number | null
+    delivered: number | null
+    daily_bounce_rate: number | null
+    cumulative_bounce_rate: number | null
+    bounce_drops: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailCampaignDailyStatsCountAggregateOutputType = {
+    id: number
+    email_campaign_id: number
+    date: number
+    email_client_id: number
+    opens: number
+    clicks: number
+    bounces: number
+    unsubscribes: number
+    total_opens: number
+    daily_total_open_rate: number
+    cumulative_total_open_rate: number
+    unique_opens: number
+    daily_unique_open_rate: number
+    cumulative_unique_open_rate: number
+    total_clicks: number
+    daily_total_click_rate: number
+    cumulative_total_click_rate: number
+    unique_clicks: number
+    daily_unique_click_rate: number
+    cumulative_unique_click_rate: number
+    daily_unique_click_to_open_rate: number
+    daily_total_click_to_open_rate: number
+    spam_reports: number
+    daily_spam_reports_rate: number
+    cumulative_spam_reports_rate: number
+    spam_report_drops: number
+    daily_unsubscribe_rate: number
+    cumulative_unsubscribe_rate: number
+    single_send_name: number
+    variation: number
+    phase: number
+    requests: number
+    delivered: number
+    daily_bounce_rate: number
+    cumulative_bounce_rate: number
+    bounce_drops: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailCampaignDailyStatsAvgAggregateInputType = {
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubscribes?: true
+    total_opens?: true
+    daily_total_open_rate?: true
+    cumulative_total_open_rate?: true
+    unique_opens?: true
+    daily_unique_open_rate?: true
+    cumulative_unique_open_rate?: true
+    total_clicks?: true
+    daily_total_click_rate?: true
+    cumulative_total_click_rate?: true
+    unique_clicks?: true
+    daily_unique_click_rate?: true
+    cumulative_unique_click_rate?: true
+    daily_unique_click_to_open_rate?: true
+    daily_total_click_to_open_rate?: true
+    spam_reports?: true
+    daily_spam_reports_rate?: true
+    cumulative_spam_reports_rate?: true
+    spam_report_drops?: true
+    daily_unsubscribe_rate?: true
+    cumulative_unsubscribe_rate?: true
+    requests?: true
+    delivered?: true
+    daily_bounce_rate?: true
+    cumulative_bounce_rate?: true
+    bounce_drops?: true
+  }
+
+  export type EmailCampaignDailyStatsSumAggregateInputType = {
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubscribes?: true
+    total_opens?: true
+    daily_total_open_rate?: true
+    cumulative_total_open_rate?: true
+    unique_opens?: true
+    daily_unique_open_rate?: true
+    cumulative_unique_open_rate?: true
+    total_clicks?: true
+    daily_total_click_rate?: true
+    cumulative_total_click_rate?: true
+    unique_clicks?: true
+    daily_unique_click_rate?: true
+    cumulative_unique_click_rate?: true
+    daily_unique_click_to_open_rate?: true
+    daily_total_click_to_open_rate?: true
+    spam_reports?: true
+    daily_spam_reports_rate?: true
+    cumulative_spam_reports_rate?: true
+    spam_report_drops?: true
+    daily_unsubscribe_rate?: true
+    cumulative_unsubscribe_rate?: true
+    requests?: true
+    delivered?: true
+    daily_bounce_rate?: true
+    cumulative_bounce_rate?: true
+    bounce_drops?: true
+  }
+
+  export type EmailCampaignDailyStatsMinAggregateInputType = {
+    id?: true
+    email_campaign_id?: true
+    date?: true
+    email_client_id?: true
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubscribes?: true
+    total_opens?: true
+    daily_total_open_rate?: true
+    cumulative_total_open_rate?: true
+    unique_opens?: true
+    daily_unique_open_rate?: true
+    cumulative_unique_open_rate?: true
+    total_clicks?: true
+    daily_total_click_rate?: true
+    cumulative_total_click_rate?: true
+    unique_clicks?: true
+    daily_unique_click_rate?: true
+    cumulative_unique_click_rate?: true
+    daily_unique_click_to_open_rate?: true
+    daily_total_click_to_open_rate?: true
+    spam_reports?: true
+    daily_spam_reports_rate?: true
+    cumulative_spam_reports_rate?: true
+    spam_report_drops?: true
+    daily_unsubscribe_rate?: true
+    cumulative_unsubscribe_rate?: true
+    single_send_name?: true
+    variation?: true
+    phase?: true
+    requests?: true
+    delivered?: true
+    daily_bounce_rate?: true
+    cumulative_bounce_rate?: true
+    bounce_drops?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailCampaignDailyStatsMaxAggregateInputType = {
+    id?: true
+    email_campaign_id?: true
+    date?: true
+    email_client_id?: true
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubscribes?: true
+    total_opens?: true
+    daily_total_open_rate?: true
+    cumulative_total_open_rate?: true
+    unique_opens?: true
+    daily_unique_open_rate?: true
+    cumulative_unique_open_rate?: true
+    total_clicks?: true
+    daily_total_click_rate?: true
+    cumulative_total_click_rate?: true
+    unique_clicks?: true
+    daily_unique_click_rate?: true
+    cumulative_unique_click_rate?: true
+    daily_unique_click_to_open_rate?: true
+    daily_total_click_to_open_rate?: true
+    spam_reports?: true
+    daily_spam_reports_rate?: true
+    cumulative_spam_reports_rate?: true
+    spam_report_drops?: true
+    daily_unsubscribe_rate?: true
+    cumulative_unsubscribe_rate?: true
+    single_send_name?: true
+    variation?: true
+    phase?: true
+    requests?: true
+    delivered?: true
+    daily_bounce_rate?: true
+    cumulative_bounce_rate?: true
+    bounce_drops?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailCampaignDailyStatsCountAggregateInputType = {
+    id?: true
+    email_campaign_id?: true
+    date?: true
+    email_client_id?: true
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubscribes?: true
+    total_opens?: true
+    daily_total_open_rate?: true
+    cumulative_total_open_rate?: true
+    unique_opens?: true
+    daily_unique_open_rate?: true
+    cumulative_unique_open_rate?: true
+    total_clicks?: true
+    daily_total_click_rate?: true
+    cumulative_total_click_rate?: true
+    unique_clicks?: true
+    daily_unique_click_rate?: true
+    cumulative_unique_click_rate?: true
+    daily_unique_click_to_open_rate?: true
+    daily_total_click_to_open_rate?: true
+    spam_reports?: true
+    daily_spam_reports_rate?: true
+    cumulative_spam_reports_rate?: true
+    spam_report_drops?: true
+    daily_unsubscribe_rate?: true
+    cumulative_unsubscribe_rate?: true
+    single_send_name?: true
+    variation?: true
+    phase?: true
+    requests?: true
+    delivered?: true
+    daily_bounce_rate?: true
+    cumulative_bounce_rate?: true
+    bounce_drops?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailCampaignDailyStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaignDailyStats to aggregate.
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignDailyStats to fetch.
+     */
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignDailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailCampaignDailyStats
+    **/
+    _count?: true | EmailCampaignDailyStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EmailCampaignDailyStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmailCampaignDailyStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailCampaignDailyStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailCampaignDailyStatsMaxAggregateInputType
+  }
+
+  export type GetEmailCampaignDailyStatsAggregateType<T extends EmailCampaignDailyStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailCampaignDailyStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailCampaignDailyStats[P]>
+      : GetScalarType<T[P], AggregateEmailCampaignDailyStats[P]>
+  }
+
+
+
+
+  export type EmailCampaignDailyStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignDailyStatsWhereInput
+    orderBy?: EmailCampaignDailyStatsOrderByWithAggregationInput | EmailCampaignDailyStatsOrderByWithAggregationInput[]
+    by: EmailCampaignDailyStatsScalarFieldEnum[] | EmailCampaignDailyStatsScalarFieldEnum
+    having?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailCampaignDailyStatsCountAggregateInputType | true
+    _avg?: EmailCampaignDailyStatsAvgAggregateInputType
+    _sum?: EmailCampaignDailyStatsSumAggregateInputType
+    _min?: EmailCampaignDailyStatsMinAggregateInputType
+    _max?: EmailCampaignDailyStatsMaxAggregateInputType
+  }
+
+  export type EmailCampaignDailyStatsGroupByOutputType = {
+    id: string
+    email_campaign_id: string
+    date: Date
+    email_client_id: string
+    opens: number
+    clicks: number
+    bounces: number
+    unsubscribes: number
+    total_opens: number
+    daily_total_open_rate: number
+    cumulative_total_open_rate: number
+    unique_opens: number
+    daily_unique_open_rate: number
+    cumulative_unique_open_rate: number
+    total_clicks: number
+    daily_total_click_rate: number
+    cumulative_total_click_rate: number
+    unique_clicks: number
+    daily_unique_click_rate: number
+    cumulative_unique_click_rate: number
+    daily_unique_click_to_open_rate: number
+    daily_total_click_to_open_rate: number
+    spam_reports: number
+    daily_spam_reports_rate: number
+    cumulative_spam_reports_rate: number
+    spam_report_drops: number
+    daily_unsubscribe_rate: number
+    cumulative_unsubscribe_rate: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests: number
+    delivered: number
+    daily_bounce_rate: number
+    cumulative_bounce_rate: number
+    bounce_drops: number
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailCampaignDailyStatsCountAggregateOutputType | null
+    _avg: EmailCampaignDailyStatsAvgAggregateOutputType | null
+    _sum: EmailCampaignDailyStatsSumAggregateOutputType | null
+    _min: EmailCampaignDailyStatsMinAggregateOutputType | null
+    _max: EmailCampaignDailyStatsMaxAggregateOutputType | null
+  }
+
+  type GetEmailCampaignDailyStatsGroupByPayload<T extends EmailCampaignDailyStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailCampaignDailyStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailCampaignDailyStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailCampaignDailyStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailCampaignDailyStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailCampaignDailyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_campaign_id?: boolean
+    date?: boolean
+    email_client_id?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubscribes?: boolean
+    total_opens?: boolean
+    daily_total_open_rate?: boolean
+    cumulative_total_open_rate?: boolean
+    unique_opens?: boolean
+    daily_unique_open_rate?: boolean
+    cumulative_unique_open_rate?: boolean
+    total_clicks?: boolean
+    daily_total_click_rate?: boolean
+    cumulative_total_click_rate?: boolean
+    unique_clicks?: boolean
+    daily_unique_click_rate?: boolean
+    cumulative_unique_click_rate?: boolean
+    daily_unique_click_to_open_rate?: boolean
+    daily_total_click_to_open_rate?: boolean
+    spam_reports?: boolean
+    daily_spam_reports_rate?: boolean
+    cumulative_spam_reports_rate?: boolean
+    spam_report_drops?: boolean
+    daily_unsubscribe_rate?: boolean
+    cumulative_unsubscribe_rate?: boolean
+    single_send_name?: boolean
+    variation?: boolean
+    phase?: boolean
+    requests?: boolean
+    delivered?: boolean
+    daily_bounce_rate?: boolean
+    cumulative_bounce_rate?: boolean
+    bounce_drops?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaignDailyStats"]>
+
+  export type EmailCampaignDailyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_campaign_id?: boolean
+    date?: boolean
+    email_client_id?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubscribes?: boolean
+    total_opens?: boolean
+    daily_total_open_rate?: boolean
+    cumulative_total_open_rate?: boolean
+    unique_opens?: boolean
+    daily_unique_open_rate?: boolean
+    cumulative_unique_open_rate?: boolean
+    total_clicks?: boolean
+    daily_total_click_rate?: boolean
+    cumulative_total_click_rate?: boolean
+    unique_clicks?: boolean
+    daily_unique_click_rate?: boolean
+    cumulative_unique_click_rate?: boolean
+    daily_unique_click_to_open_rate?: boolean
+    daily_total_click_to_open_rate?: boolean
+    spam_reports?: boolean
+    daily_spam_reports_rate?: boolean
+    cumulative_spam_reports_rate?: boolean
+    spam_report_drops?: boolean
+    daily_unsubscribe_rate?: boolean
+    cumulative_unsubscribe_rate?: boolean
+    single_send_name?: boolean
+    variation?: boolean
+    phase?: boolean
+    requests?: boolean
+    delivered?: boolean
+    daily_bounce_rate?: boolean
+    cumulative_bounce_rate?: boolean
+    bounce_drops?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaignDailyStats"]>
+
+  export type EmailCampaignDailyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_campaign_id?: boolean
+    date?: boolean
+    email_client_id?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubscribes?: boolean
+    total_opens?: boolean
+    daily_total_open_rate?: boolean
+    cumulative_total_open_rate?: boolean
+    unique_opens?: boolean
+    daily_unique_open_rate?: boolean
+    cumulative_unique_open_rate?: boolean
+    total_clicks?: boolean
+    daily_total_click_rate?: boolean
+    cumulative_total_click_rate?: boolean
+    unique_clicks?: boolean
+    daily_unique_click_rate?: boolean
+    cumulative_unique_click_rate?: boolean
+    daily_unique_click_to_open_rate?: boolean
+    daily_total_click_to_open_rate?: boolean
+    spam_reports?: boolean
+    daily_spam_reports_rate?: boolean
+    cumulative_spam_reports_rate?: boolean
+    spam_report_drops?: boolean
+    daily_unsubscribe_rate?: boolean
+    cumulative_unsubscribe_rate?: boolean
+    single_send_name?: boolean
+    variation?: boolean
+    phase?: boolean
+    requests?: boolean
+    delivered?: boolean
+    daily_bounce_rate?: boolean
+    cumulative_bounce_rate?: boolean
+    bounce_drops?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaignDailyStats"]>
+
+  export type EmailCampaignDailyStatsSelectScalar = {
+    id?: boolean
+    email_campaign_id?: boolean
+    date?: boolean
+    email_client_id?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubscribes?: boolean
+    total_opens?: boolean
+    daily_total_open_rate?: boolean
+    cumulative_total_open_rate?: boolean
+    unique_opens?: boolean
+    daily_unique_open_rate?: boolean
+    cumulative_unique_open_rate?: boolean
+    total_clicks?: boolean
+    daily_total_click_rate?: boolean
+    cumulative_total_click_rate?: boolean
+    unique_clicks?: boolean
+    daily_unique_click_rate?: boolean
+    cumulative_unique_click_rate?: boolean
+    daily_unique_click_to_open_rate?: boolean
+    daily_total_click_to_open_rate?: boolean
+    spam_reports?: boolean
+    daily_spam_reports_rate?: boolean
+    cumulative_spam_reports_rate?: boolean
+    spam_report_drops?: boolean
+    daily_unsubscribe_rate?: boolean
+    cumulative_unsubscribe_rate?: boolean
+    single_send_name?: boolean
+    variation?: boolean
+    phase?: boolean
+    requests?: boolean
+    delivered?: boolean
+    daily_bounce_rate?: boolean
+    cumulative_bounce_rate?: boolean
+    bounce_drops?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailCampaignDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_campaign_id" | "date" | "email_client_id" | "opens" | "clicks" | "bounces" | "unsubscribes" | "total_opens" | "daily_total_open_rate" | "cumulative_total_open_rate" | "unique_opens" | "daily_unique_open_rate" | "cumulative_unique_open_rate" | "total_clicks" | "daily_total_click_rate" | "cumulative_total_click_rate" | "unique_clicks" | "daily_unique_click_rate" | "cumulative_unique_click_rate" | "daily_unique_click_to_open_rate" | "daily_total_click_to_open_rate" | "spam_reports" | "daily_spam_reports_rate" | "cumulative_spam_reports_rate" | "spam_report_drops" | "daily_unsubscribe_rate" | "cumulative_unsubscribe_rate" | "single_send_name" | "variation" | "phase" | "requests" | "delivered" | "daily_bounce_rate" | "cumulative_bounce_rate" | "bounce_drops" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignDailyStats"]>
+  export type EmailCampaignDailyStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignDailyStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignDailyStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailCampaignDailyStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailCampaignDailyStats"
+    objects: {
+      email_client: Prisma.$EmailClientPayload<ExtArgs>
+      emailCampaign: Prisma.$EmailCampaignPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email_campaign_id: string
+      date: Date
+      email_client_id: string
+      opens: number
+      clicks: number
+      bounces: number
+      unsubscribes: number
+      total_opens: number
+      daily_total_open_rate: number
+      cumulative_total_open_rate: number
+      unique_opens: number
+      daily_unique_open_rate: number
+      cumulative_unique_open_rate: number
+      total_clicks: number
+      daily_total_click_rate: number
+      cumulative_total_click_rate: number
+      unique_clicks: number
+      daily_unique_click_rate: number
+      cumulative_unique_click_rate: number
+      daily_unique_click_to_open_rate: number
+      daily_total_click_to_open_rate: number
+      spam_reports: number
+      daily_spam_reports_rate: number
+      cumulative_spam_reports_rate: number
+      spam_report_drops: number
+      daily_unsubscribe_rate: number
+      cumulative_unsubscribe_rate: number
+      single_send_name: string
+      variation: string
+      phase: string
+      requests: number
+      delivered: number
+      daily_bounce_rate: number
+      cumulative_bounce_rate: number
+      bounce_drops: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailCampaignDailyStats"]>
+    composites: {}
+  }
+
+  type EmailCampaignDailyStatsGetPayload<S extends boolean | null | undefined | EmailCampaignDailyStatsDefaultArgs> = $Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload, S>
+
+  type EmailCampaignDailyStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailCampaignDailyStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailCampaignDailyStatsCountAggregateInputType | true
+    }
+
+  export interface EmailCampaignDailyStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailCampaignDailyStats'], meta: { name: 'EmailCampaignDailyStats' } }
+    /**
+     * Find zero or one EmailCampaignDailyStats that matches the filter.
+     * @param {EmailCampaignDailyStatsFindUniqueArgs} args - Arguments to find a EmailCampaignDailyStats
+     * @example
+     * // Get one EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailCampaignDailyStatsFindUniqueArgs>(args: SelectSubset<T, EmailCampaignDailyStatsFindUniqueArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailCampaignDailyStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailCampaignDailyStatsFindUniqueOrThrowArgs} args - Arguments to find a EmailCampaignDailyStats
+     * @example
+     * // Get one EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailCampaignDailyStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailCampaignDailyStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaignDailyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsFindFirstArgs} args - Arguments to find a EmailCampaignDailyStats
+     * @example
+     * // Get one EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailCampaignDailyStatsFindFirstArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsFindFirstArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaignDailyStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsFindFirstOrThrowArgs} args - Arguments to find a EmailCampaignDailyStats
+     * @example
+     * // Get one EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailCampaignDailyStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailCampaignDailyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findMany()
+     * 
+     * // Get first 10 EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailCampaignDailyStatsWithIdOnly = await prisma.emailCampaignDailyStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailCampaignDailyStatsFindManyArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailCampaignDailyStats.
+     * @param {EmailCampaignDailyStatsCreateArgs} args - Arguments to create a EmailCampaignDailyStats.
+     * @example
+     * // Create one EmailCampaignDailyStats
+     * const EmailCampaignDailyStats = await prisma.emailCampaignDailyStats.create({
+     *   data: {
+     *     // ... data to create a EmailCampaignDailyStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailCampaignDailyStatsCreateArgs>(args: SelectSubset<T, EmailCampaignDailyStatsCreateArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailCampaignDailyStats.
+     * @param {EmailCampaignDailyStatsCreateManyArgs} args - Arguments to create many EmailCampaignDailyStats.
+     * @example
+     * // Create many EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailCampaignDailyStatsCreateManyArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailCampaignDailyStats and returns the data saved in the database.
+     * @param {EmailCampaignDailyStatsCreateManyAndReturnArgs} args - Arguments to create many EmailCampaignDailyStats.
+     * @example
+     * // Create many EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailCampaignDailyStats and only return the `id`
+     * const emailCampaignDailyStatsWithIdOnly = await prisma.emailCampaignDailyStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailCampaignDailyStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailCampaignDailyStats.
+     * @param {EmailCampaignDailyStatsDeleteArgs} args - Arguments to delete one EmailCampaignDailyStats.
+     * @example
+     * // Delete one EmailCampaignDailyStats
+     * const EmailCampaignDailyStats = await prisma.emailCampaignDailyStats.delete({
+     *   where: {
+     *     // ... filter to delete one EmailCampaignDailyStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailCampaignDailyStatsDeleteArgs>(args: SelectSubset<T, EmailCampaignDailyStatsDeleteArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailCampaignDailyStats.
+     * @param {EmailCampaignDailyStatsUpdateArgs} args - Arguments to update one EmailCampaignDailyStats.
+     * @example
+     * // Update one EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailCampaignDailyStatsUpdateArgs>(args: SelectSubset<T, EmailCampaignDailyStatsUpdateArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailCampaignDailyStats.
+     * @param {EmailCampaignDailyStatsDeleteManyArgs} args - Arguments to filter EmailCampaignDailyStats to delete.
+     * @example
+     * // Delete a few EmailCampaignDailyStats
+     * const { count } = await prisma.emailCampaignDailyStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailCampaignDailyStatsDeleteManyArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaignDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailCampaignDailyStatsUpdateManyArgs>(args: SelectSubset<T, EmailCampaignDailyStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaignDailyStats and returns the data updated in the database.
+     * @param {EmailCampaignDailyStatsUpdateManyAndReturnArgs} args - Arguments to update many EmailCampaignDailyStats.
+     * @example
+     * // Update many EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailCampaignDailyStats and only return the `id`
+     * const emailCampaignDailyStatsWithIdOnly = await prisma.emailCampaignDailyStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailCampaignDailyStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailCampaignDailyStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailCampaignDailyStats.
+     * @param {EmailCampaignDailyStatsUpsertArgs} args - Arguments to update or create a EmailCampaignDailyStats.
+     * @example
+     * // Update or create a EmailCampaignDailyStats
+     * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.upsert({
+     *   create: {
+     *     // ... data to create a EmailCampaignDailyStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailCampaignDailyStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailCampaignDailyStatsUpsertArgs>(args: SelectSubset<T, EmailCampaignDailyStatsUpsertArgs<ExtArgs>>): Prisma__EmailCampaignDailyStatsClient<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailCampaignDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsCountArgs} args - Arguments to filter EmailCampaignDailyStats to count.
+     * @example
+     * // Count the number of EmailCampaignDailyStats
+     * const count = await prisma.emailCampaignDailyStats.count({
+     *   where: {
+     *     // ... the filter for the EmailCampaignDailyStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailCampaignDailyStatsCountArgs>(
+      args?: Subset<T, EmailCampaignDailyStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailCampaignDailyStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailCampaignDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailCampaignDailyStatsAggregateArgs>(args: Subset<T, EmailCampaignDailyStatsAggregateArgs>): Prisma.PrismaPromise<GetEmailCampaignDailyStatsAggregateType<T>>
+
+    /**
+     * Group by EmailCampaignDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignDailyStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailCampaignDailyStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailCampaignDailyStatsGroupByArgs['orderBy'] }
+        : { orderBy?: EmailCampaignDailyStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailCampaignDailyStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailCampaignDailyStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailCampaignDailyStats model
+   */
+  readonly fields: EmailCampaignDailyStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailCampaignDailyStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailCampaignDailyStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    email_client<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    emailCampaign<T extends EmailCampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaignDefaultArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailCampaignDailyStats model
+   */
+  interface EmailCampaignDailyStatsFieldRefs {
+    readonly id: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly email_campaign_id: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly date: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
+    readonly email_client_id: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly bounces: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly unsubscribes: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly total_opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_total_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_total_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly unique_opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_unique_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_unique_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly total_clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_total_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_total_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly unique_clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_unique_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_unique_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_unique_click_to_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_total_click_to_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly spam_reports: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_spam_reports_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_spam_reports_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly spam_report_drops: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_unsubscribe_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_unsubscribe_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly single_send_name: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly variation: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly phase: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly requests: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly delivered: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly daily_bounce_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulative_bounce_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly bounce_drops: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly createdAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailCampaignDailyStats findUnique
+   */
+  export type EmailCampaignDailyStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignDailyStats to fetch.
+     */
+    where: EmailCampaignDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignDailyStats findUniqueOrThrow
+   */
+  export type EmailCampaignDailyStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignDailyStats to fetch.
+     */
+    where: EmailCampaignDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignDailyStats findFirst
+   */
+  export type EmailCampaignDailyStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignDailyStats to fetch.
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignDailyStats to fetch.
+     */
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaignDailyStats.
+     */
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignDailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaignDailyStats.
+     */
+    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaignDailyStats findFirstOrThrow
+   */
+  export type EmailCampaignDailyStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignDailyStats to fetch.
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignDailyStats to fetch.
+     */
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaignDailyStats.
+     */
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignDailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaignDailyStats.
+     */
+    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaignDailyStats findMany
+   */
+  export type EmailCampaignDailyStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaignDailyStats to fetch.
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaignDailyStats to fetch.
+     */
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailCampaignDailyStats.
+     */
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaignDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaignDailyStats.
+     */
+    skip?: number
+    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaignDailyStats create
+   */
+  export type EmailCampaignDailyStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailCampaignDailyStats.
+     */
+    data: XOR<EmailCampaignDailyStatsCreateInput, EmailCampaignDailyStatsUncheckedCreateInput>
+  }
+
+  /**
+   * EmailCampaignDailyStats createMany
+   */
+  export type EmailCampaignDailyStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailCampaignDailyStats.
+     */
+    data: EmailCampaignDailyStatsCreateManyInput | EmailCampaignDailyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailCampaignDailyStats createManyAndReturn
+   */
+  export type EmailCampaignDailyStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailCampaignDailyStats.
+     */
+    data: EmailCampaignDailyStatsCreateManyInput | EmailCampaignDailyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaignDailyStats update
+   */
+  export type EmailCampaignDailyStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailCampaignDailyStats.
+     */
+    data: XOR<EmailCampaignDailyStatsUpdateInput, EmailCampaignDailyStatsUncheckedUpdateInput>
+    /**
+     * Choose, which EmailCampaignDailyStats to update.
+     */
+    where: EmailCampaignDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignDailyStats updateMany
+   */
+  export type EmailCampaignDailyStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailCampaignDailyStats.
+     */
+    data: XOR<EmailCampaignDailyStatsUpdateManyMutationInput, EmailCampaignDailyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaignDailyStats to update
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * Limit how many EmailCampaignDailyStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaignDailyStats updateManyAndReturn
+   */
+  export type EmailCampaignDailyStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailCampaignDailyStats.
+     */
+    data: XOR<EmailCampaignDailyStatsUpdateManyMutationInput, EmailCampaignDailyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaignDailyStats to update
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * Limit how many EmailCampaignDailyStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaignDailyStats upsert
+   */
+  export type EmailCampaignDailyStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailCampaignDailyStats to update in case it exists.
+     */
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    /**
+     * In case the EmailCampaignDailyStats found by the `where` argument doesn't exist, create a new EmailCampaignDailyStats with this data.
+     */
+    create: XOR<EmailCampaignDailyStatsCreateInput, EmailCampaignDailyStatsUncheckedCreateInput>
+    /**
+     * In case the EmailCampaignDailyStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailCampaignDailyStatsUpdateInput, EmailCampaignDailyStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailCampaignDailyStats delete
+   */
+  export type EmailCampaignDailyStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter which EmailCampaignDailyStats to delete.
+     */
+    where: EmailCampaignDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaignDailyStats deleteMany
+   */
+  export type EmailCampaignDailyStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaignDailyStats to delete
+     */
+    where?: EmailCampaignDailyStatsWhereInput
+    /**
+     * Limit how many EmailCampaignDailyStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaignDailyStats without action
+   */
+  export type EmailCampaignDailyStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailClient
+   */
+
+  export type AggregateEmailClient = {
+    _count: EmailClientCountAggregateOutputType | null
+    _min: EmailClientMinAggregateOutputType | null
+    _max: EmailClientMaxAggregateOutputType | null
+  }
+
+  export type EmailClientMinAggregateOutputType = {
+    id: string | null
+    client_name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailClientMaxAggregateOutputType = {
+    id: string | null
+    client_name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailClientCountAggregateOutputType = {
+    id: number
+    client_name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailClientMinAggregateInputType = {
+    id?: true
+    client_name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailClientMaxAggregateInputType = {
+    id?: true
+    client_name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailClientCountAggregateInputType = {
+    id?: true
+    client_name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailClientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailClient to aggregate.
+     */
+    where?: EmailClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClients to fetch.
+     */
+    orderBy?: EmailClientOrderByWithRelationInput | EmailClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClients.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailClients
+    **/
+    _count?: true | EmailClientCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailClientMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailClientMaxAggregateInputType
+  }
+
+  export type GetEmailClientAggregateType<T extends EmailClientAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailClient]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailClient[P]>
+      : GetScalarType<T[P], AggregateEmailClient[P]>
+  }
+
+
+
+
+  export type EmailClientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailClientWhereInput
+    orderBy?: EmailClientOrderByWithAggregationInput | EmailClientOrderByWithAggregationInput[]
+    by: EmailClientScalarFieldEnum[] | EmailClientScalarFieldEnum
+    having?: EmailClientScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailClientCountAggregateInputType | true
+    _min?: EmailClientMinAggregateInputType
+    _max?: EmailClientMaxAggregateInputType
+  }
+
+  export type EmailClientGroupByOutputType = {
+    id: string
+    client_name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailClientCountAggregateOutputType | null
+    _min: EmailClientMinAggregateOutputType | null
+    _max: EmailClientMaxAggregateOutputType | null
+  }
+
+  type GetEmailClientGroupByPayload<T extends EmailClientGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailClientGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailClientGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailClientGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailClientGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    client_name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailCampaigns?: boolean | EmailClient$emailCampaignsArgs<ExtArgs>
+    emailClientCredentials?: boolean | EmailClient$emailClientCredentialsArgs<ExtArgs>
+    emailGlobalDailyStats?: boolean | EmailClient$emailGlobalDailyStatsArgs<ExtArgs>
+    emailCampaignDailyStats?: boolean | EmailClient$emailCampaignDailyStatsArgs<ExtArgs>
+    _count?: boolean | EmailClientCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailClient"]>
+
+  export type EmailClientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    client_name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emailClient"]>
+
+  export type EmailClientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    client_name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emailClient"]>
+
+  export type EmailClientSelectScalar = {
+    id?: boolean
+    client_name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_name" | "createdAt" | "updatedAt", ExtArgs["result"]["emailClient"]>
+  export type EmailClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailCampaigns?: boolean | EmailClient$emailCampaignsArgs<ExtArgs>
+    emailClientCredentials?: boolean | EmailClient$emailClientCredentialsArgs<ExtArgs>
+    emailGlobalDailyStats?: boolean | EmailClient$emailGlobalDailyStatsArgs<ExtArgs>
+    emailCampaignDailyStats?: boolean | EmailClient$emailCampaignDailyStatsArgs<ExtArgs>
+    _count?: boolean | EmailClientCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EmailClientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EmailClientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EmailClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailClient"
+    objects: {
+      emailCampaigns: Prisma.$EmailCampaignPayload<ExtArgs>[]
+      emailClientCredentials: Prisma.$EmailClientCredentialsPayload<ExtArgs>[]
+      emailGlobalDailyStats: Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>[]
+      emailCampaignDailyStats: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      client_name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailClient"]>
+    composites: {}
+  }
+
+  type EmailClientGetPayload<S extends boolean | null | undefined | EmailClientDefaultArgs> = $Result.GetResult<Prisma.$EmailClientPayload, S>
+
+  type EmailClientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailClientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailClientCountAggregateInputType | true
+    }
+
+  export interface EmailClientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailClient'], meta: { name: 'EmailClient' } }
+    /**
+     * Find zero or one EmailClient that matches the filter.
+     * @param {EmailClientFindUniqueArgs} args - Arguments to find a EmailClient
+     * @example
+     * // Get one EmailClient
+     * const emailClient = await prisma.emailClient.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailClientFindUniqueArgs>(args: SelectSubset<T, EmailClientFindUniqueArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailClient that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailClientFindUniqueOrThrowArgs} args - Arguments to find a EmailClient
+     * @example
+     * // Get one EmailClient
+     * const emailClient = await prisma.emailClient.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailClientFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailClientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailClient that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientFindFirstArgs} args - Arguments to find a EmailClient
+     * @example
+     * // Get one EmailClient
+     * const emailClient = await prisma.emailClient.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailClientFindFirstArgs>(args?: SelectSubset<T, EmailClientFindFirstArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailClient that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientFindFirstOrThrowArgs} args - Arguments to find a EmailClient
+     * @example
+     * // Get one EmailClient
+     * const emailClient = await prisma.emailClient.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailClientFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailClientFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailClients that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailClients
+     * const emailClients = await prisma.emailClient.findMany()
+     * 
+     * // Get first 10 EmailClients
+     * const emailClients = await prisma.emailClient.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailClientWithIdOnly = await prisma.emailClient.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailClientFindManyArgs>(args?: SelectSubset<T, EmailClientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailClient.
+     * @param {EmailClientCreateArgs} args - Arguments to create a EmailClient.
+     * @example
+     * // Create one EmailClient
+     * const EmailClient = await prisma.emailClient.create({
+     *   data: {
+     *     // ... data to create a EmailClient
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailClientCreateArgs>(args: SelectSubset<T, EmailClientCreateArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailClients.
+     * @param {EmailClientCreateManyArgs} args - Arguments to create many EmailClients.
+     * @example
+     * // Create many EmailClients
+     * const emailClient = await prisma.emailClient.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailClientCreateManyArgs>(args?: SelectSubset<T, EmailClientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailClients and returns the data saved in the database.
+     * @param {EmailClientCreateManyAndReturnArgs} args - Arguments to create many EmailClients.
+     * @example
+     * // Create many EmailClients
+     * const emailClient = await prisma.emailClient.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailClients and only return the `id`
+     * const emailClientWithIdOnly = await prisma.emailClient.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailClientCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailClientCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailClient.
+     * @param {EmailClientDeleteArgs} args - Arguments to delete one EmailClient.
+     * @example
+     * // Delete one EmailClient
+     * const EmailClient = await prisma.emailClient.delete({
+     *   where: {
+     *     // ... filter to delete one EmailClient
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailClientDeleteArgs>(args: SelectSubset<T, EmailClientDeleteArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailClient.
+     * @param {EmailClientUpdateArgs} args - Arguments to update one EmailClient.
+     * @example
+     * // Update one EmailClient
+     * const emailClient = await prisma.emailClient.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailClientUpdateArgs>(args: SelectSubset<T, EmailClientUpdateArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailClients.
+     * @param {EmailClientDeleteManyArgs} args - Arguments to filter EmailClients to delete.
+     * @example
+     * // Delete a few EmailClients
+     * const { count } = await prisma.emailClient.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailClientDeleteManyArgs>(args?: SelectSubset<T, EmailClientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailClients.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailClients
+     * const emailClient = await prisma.emailClient.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailClientUpdateManyArgs>(args: SelectSubset<T, EmailClientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailClients and returns the data updated in the database.
+     * @param {EmailClientUpdateManyAndReturnArgs} args - Arguments to update many EmailClients.
+     * @example
+     * // Update many EmailClients
+     * const emailClient = await prisma.emailClient.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailClients and only return the `id`
+     * const emailClientWithIdOnly = await prisma.emailClient.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailClientUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailClientUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailClient.
+     * @param {EmailClientUpsertArgs} args - Arguments to update or create a EmailClient.
+     * @example
+     * // Update or create a EmailClient
+     * const emailClient = await prisma.emailClient.upsert({
+     *   create: {
+     *     // ... data to create a EmailClient
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailClient we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailClientUpsertArgs>(args: SelectSubset<T, EmailClientUpsertArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailClients.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCountArgs} args - Arguments to filter EmailClients to count.
+     * @example
+     * // Count the number of EmailClients
+     * const count = await prisma.emailClient.count({
+     *   where: {
+     *     // ... the filter for the EmailClients we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailClientCountArgs>(
+      args?: Subset<T, EmailClientCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailClientCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailClient.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailClientAggregateArgs>(args: Subset<T, EmailClientAggregateArgs>): Prisma.PrismaPromise<GetEmailClientAggregateType<T>>
+
+    /**
+     * Group by EmailClient.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailClientGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailClientGroupByArgs['orderBy'] }
+        : { orderBy?: EmailClientGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailClientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailClientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailClient model
+   */
+  readonly fields: EmailClientFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailClient.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emailCampaigns<T extends EmailClient$emailCampaignsArgs<ExtArgs> = {}>(args?: Subset<T, EmailClient$emailCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailClientCredentials<T extends EmailClient$emailClientCredentialsArgs<ExtArgs> = {}>(args?: Subset<T, EmailClient$emailClientCredentialsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailGlobalDailyStats<T extends EmailClient$emailGlobalDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailClient$emailGlobalDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailCampaignDailyStats<T extends EmailClient$emailCampaignDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailClient$emailCampaignDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailClient model
+   */
+  interface EmailClientFieldRefs {
+    readonly id: FieldRef<"EmailClient", 'String'>
+    readonly client_name: FieldRef<"EmailClient", 'String'>
+    readonly createdAt: FieldRef<"EmailClient", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailClient", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailClient findUnique
+   */
+  export type EmailClientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClient to fetch.
+     */
+    where: EmailClientWhereUniqueInput
+  }
+
+  /**
+   * EmailClient findUniqueOrThrow
+   */
+  export type EmailClientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClient to fetch.
+     */
+    where: EmailClientWhereUniqueInput
+  }
+
+  /**
+   * EmailClient findFirst
+   */
+  export type EmailClientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClient to fetch.
+     */
+    where?: EmailClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClients to fetch.
+     */
+    orderBy?: EmailClientOrderByWithRelationInput | EmailClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailClients.
+     */
+    cursor?: EmailClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClients.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailClients.
+     */
+    distinct?: EmailClientScalarFieldEnum | EmailClientScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient findFirstOrThrow
+   */
+  export type EmailClientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClient to fetch.
+     */
+    where?: EmailClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClients to fetch.
+     */
+    orderBy?: EmailClientOrderByWithRelationInput | EmailClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailClients.
+     */
+    cursor?: EmailClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClients.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailClients.
+     */
+    distinct?: EmailClientScalarFieldEnum | EmailClientScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient findMany
+   */
+  export type EmailClientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClients to fetch.
+     */
+    where?: EmailClientWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClients to fetch.
+     */
+    orderBy?: EmailClientOrderByWithRelationInput | EmailClientOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailClients.
+     */
+    cursor?: EmailClientWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClients from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClients.
+     */
+    skip?: number
+    distinct?: EmailClientScalarFieldEnum | EmailClientScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient create
+   */
+  export type EmailClientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailClient.
+     */
+    data: XOR<EmailClientCreateInput, EmailClientUncheckedCreateInput>
+  }
+
+  /**
+   * EmailClient createMany
+   */
+  export type EmailClientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailClients.
+     */
+    data: EmailClientCreateManyInput | EmailClientCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailClient createManyAndReturn
+   */
+  export type EmailClientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailClients.
+     */
+    data: EmailClientCreateManyInput | EmailClientCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailClient update
+   */
+  export type EmailClientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailClient.
+     */
+    data: XOR<EmailClientUpdateInput, EmailClientUncheckedUpdateInput>
+    /**
+     * Choose, which EmailClient to update.
+     */
+    where: EmailClientWhereUniqueInput
+  }
+
+  /**
+   * EmailClient updateMany
+   */
+  export type EmailClientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailClients.
+     */
+    data: XOR<EmailClientUpdateManyMutationInput, EmailClientUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailClients to update
+     */
+    where?: EmailClientWhereInput
+    /**
+     * Limit how many EmailClients to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailClient updateManyAndReturn
+   */
+  export type EmailClientUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailClients.
+     */
+    data: XOR<EmailClientUpdateManyMutationInput, EmailClientUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailClients to update
+     */
+    where?: EmailClientWhereInput
+    /**
+     * Limit how many EmailClients to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailClient upsert
+   */
+  export type EmailClientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailClient to update in case it exists.
+     */
+    where: EmailClientWhereUniqueInput
+    /**
+     * In case the EmailClient found by the `where` argument doesn't exist, create a new EmailClient with this data.
+     */
+    create: XOR<EmailClientCreateInput, EmailClientUncheckedCreateInput>
+    /**
+     * In case the EmailClient was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailClientUpdateInput, EmailClientUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailClient delete
+   */
+  export type EmailClientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+    /**
+     * Filter which EmailClient to delete.
+     */
+    where: EmailClientWhereUniqueInput
+  }
+
+  /**
+   * EmailClient deleteMany
+   */
+  export type EmailClientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailClients to delete
+     */
+    where?: EmailClientWhereInput
+    /**
+     * Limit how many EmailClients to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailClient.emailCampaigns
+   */
+  export type EmailClient$emailCampaignsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    where?: EmailCampaignWhereInput
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    cursor?: EmailCampaignWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient.emailClientCredentials
+   */
+  export type EmailClient$emailClientCredentialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    where?: EmailClientCredentialsWhereInput
+    orderBy?: EmailClientCredentialsOrderByWithRelationInput | EmailClientCredentialsOrderByWithRelationInput[]
+    cursor?: EmailClientCredentialsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailClientCredentialsScalarFieldEnum | EmailClientCredentialsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient.emailGlobalDailyStats
+   */
+  export type EmailClient$emailGlobalDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    where?: EmailGlobalDailyStatsWhereInput
+    orderBy?: EmailGlobalDailyStatsOrderByWithRelationInput | EmailGlobalDailyStatsOrderByWithRelationInput[]
+    cursor?: EmailGlobalDailyStatsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailGlobalDailyStatsScalarFieldEnum | EmailGlobalDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient.emailCampaignDailyStats
+   */
+  export type EmailClient$emailCampaignDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    where?: EmailCampaignDailyStatsWhereInput
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClient without action
+   */
+  export type EmailClientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClient
+     */
+    select?: EmailClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClient
+     */
+    omit?: EmailClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailClientCredentials
+   */
+
+  export type AggregateEmailClientCredentials = {
+    _count: EmailClientCredentialsCountAggregateOutputType | null
+    _min: EmailClientCredentialsMinAggregateOutputType | null
+    _max: EmailClientCredentialsMaxAggregateOutputType | null
+  }
+
+  export type EmailClientCredentialsMinAggregateOutputType = {
+    id: string | null
+    email_client_id: string | null
+    platform_name: string | null
+    api_key: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailClientCredentialsMaxAggregateOutputType = {
+    id: string | null
+    email_client_id: string | null
+    platform_name: string | null
+    api_key: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailClientCredentialsCountAggregateOutputType = {
+    id: number
+    email_client_id: number
+    platform_name: number
+    api_key: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailClientCredentialsMinAggregateInputType = {
+    id?: true
+    email_client_id?: true
+    platform_name?: true
+    api_key?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailClientCredentialsMaxAggregateInputType = {
+    id?: true
+    email_client_id?: true
+    platform_name?: true
+    api_key?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailClientCredentialsCountAggregateInputType = {
+    id?: true
+    email_client_id?: true
+    platform_name?: true
+    api_key?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailClientCredentialsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailClientCredentials to aggregate.
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClientCredentials to fetch.
+     */
+    orderBy?: EmailClientCredentialsOrderByWithRelationInput | EmailClientCredentialsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailClientCredentialsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClientCredentials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClientCredentials.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailClientCredentials
+    **/
+    _count?: true | EmailClientCredentialsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailClientCredentialsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailClientCredentialsMaxAggregateInputType
+  }
+
+  export type GetEmailClientCredentialsAggregateType<T extends EmailClientCredentialsAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailClientCredentials]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailClientCredentials[P]>
+      : GetScalarType<T[P], AggregateEmailClientCredentials[P]>
+  }
+
+
+
+
+  export type EmailClientCredentialsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailClientCredentialsWhereInput
+    orderBy?: EmailClientCredentialsOrderByWithAggregationInput | EmailClientCredentialsOrderByWithAggregationInput[]
+    by: EmailClientCredentialsScalarFieldEnum[] | EmailClientCredentialsScalarFieldEnum
+    having?: EmailClientCredentialsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailClientCredentialsCountAggregateInputType | true
+    _min?: EmailClientCredentialsMinAggregateInputType
+    _max?: EmailClientCredentialsMaxAggregateInputType
+  }
+
+  export type EmailClientCredentialsGroupByOutputType = {
+    id: string
+    email_client_id: string
+    platform_name: string
+    api_key: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailClientCredentialsCountAggregateOutputType | null
+    _min: EmailClientCredentialsMinAggregateOutputType | null
+    _max: EmailClientCredentialsMaxAggregateOutputType | null
+  }
+
+  type GetEmailClientCredentialsGroupByPayload<T extends EmailClientCredentialsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailClientCredentialsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailClientCredentialsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailClientCredentialsGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailClientCredentialsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailClientCredentialsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_client_id?: boolean
+    platform_name?: boolean
+    api_key?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailClientCredentials"]>
+
+  export type EmailClientCredentialsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_client_id?: boolean
+    platform_name?: boolean
+    api_key?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailClientCredentials"]>
+
+  export type EmailClientCredentialsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_client_id?: boolean
+    platform_name?: boolean
+    api_key?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailClientCredentials"]>
+
+  export type EmailClientCredentialsSelectScalar = {
+    id?: boolean
+    email_client_id?: boolean
+    platform_name?: boolean
+    api_key?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailClientCredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_client_id" | "platform_name" | "api_key" | "createdAt" | "updatedAt", ExtArgs["result"]["emailClientCredentials"]>
+  export type EmailClientCredentialsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+  export type EmailClientCredentialsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+  export type EmailClientCredentialsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailClientCredentialsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailClientCredentials"
+    objects: {
+      emailClient: Prisma.$EmailClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email_client_id: string
+      platform_name: string
+      api_key: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailClientCredentials"]>
+    composites: {}
+  }
+
+  type EmailClientCredentialsGetPayload<S extends boolean | null | undefined | EmailClientCredentialsDefaultArgs> = $Result.GetResult<Prisma.$EmailClientCredentialsPayload, S>
+
+  type EmailClientCredentialsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailClientCredentialsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailClientCredentialsCountAggregateInputType | true
+    }
+
+  export interface EmailClientCredentialsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailClientCredentials'], meta: { name: 'EmailClientCredentials' } }
+    /**
+     * Find zero or one EmailClientCredentials that matches the filter.
+     * @param {EmailClientCredentialsFindUniqueArgs} args - Arguments to find a EmailClientCredentials
+     * @example
+     * // Get one EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailClientCredentialsFindUniqueArgs>(args: SelectSubset<T, EmailClientCredentialsFindUniqueArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailClientCredentials that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailClientCredentialsFindUniqueOrThrowArgs} args - Arguments to find a EmailClientCredentials
+     * @example
+     * // Get one EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailClientCredentialsFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailClientCredentialsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailClientCredentials that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsFindFirstArgs} args - Arguments to find a EmailClientCredentials
+     * @example
+     * // Get one EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailClientCredentialsFindFirstArgs>(args?: SelectSubset<T, EmailClientCredentialsFindFirstArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailClientCredentials that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsFindFirstOrThrowArgs} args - Arguments to find a EmailClientCredentials
+     * @example
+     * // Get one EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailClientCredentialsFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailClientCredentialsFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailClientCredentials that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.findMany()
+     * 
+     * // Get first 10 EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailClientCredentialsWithIdOnly = await prisma.emailClientCredentials.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailClientCredentialsFindManyArgs>(args?: SelectSubset<T, EmailClientCredentialsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailClientCredentials.
+     * @param {EmailClientCredentialsCreateArgs} args - Arguments to create a EmailClientCredentials.
+     * @example
+     * // Create one EmailClientCredentials
+     * const EmailClientCredentials = await prisma.emailClientCredentials.create({
+     *   data: {
+     *     // ... data to create a EmailClientCredentials
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailClientCredentialsCreateArgs>(args: SelectSubset<T, EmailClientCredentialsCreateArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailClientCredentials.
+     * @param {EmailClientCredentialsCreateManyArgs} args - Arguments to create many EmailClientCredentials.
+     * @example
+     * // Create many EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailClientCredentialsCreateManyArgs>(args?: SelectSubset<T, EmailClientCredentialsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailClientCredentials and returns the data saved in the database.
+     * @param {EmailClientCredentialsCreateManyAndReturnArgs} args - Arguments to create many EmailClientCredentials.
+     * @example
+     * // Create many EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailClientCredentials and only return the `id`
+     * const emailClientCredentialsWithIdOnly = await prisma.emailClientCredentials.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailClientCredentialsCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailClientCredentialsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailClientCredentials.
+     * @param {EmailClientCredentialsDeleteArgs} args - Arguments to delete one EmailClientCredentials.
+     * @example
+     * // Delete one EmailClientCredentials
+     * const EmailClientCredentials = await prisma.emailClientCredentials.delete({
+     *   where: {
+     *     // ... filter to delete one EmailClientCredentials
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailClientCredentialsDeleteArgs>(args: SelectSubset<T, EmailClientCredentialsDeleteArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailClientCredentials.
+     * @param {EmailClientCredentialsUpdateArgs} args - Arguments to update one EmailClientCredentials.
+     * @example
+     * // Update one EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailClientCredentialsUpdateArgs>(args: SelectSubset<T, EmailClientCredentialsUpdateArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailClientCredentials.
+     * @param {EmailClientCredentialsDeleteManyArgs} args - Arguments to filter EmailClientCredentials to delete.
+     * @example
+     * // Delete a few EmailClientCredentials
+     * const { count } = await prisma.emailClientCredentials.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailClientCredentialsDeleteManyArgs>(args?: SelectSubset<T, EmailClientCredentialsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailClientCredentials.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailClientCredentialsUpdateManyArgs>(args: SelectSubset<T, EmailClientCredentialsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailClientCredentials and returns the data updated in the database.
+     * @param {EmailClientCredentialsUpdateManyAndReturnArgs} args - Arguments to update many EmailClientCredentials.
+     * @example
+     * // Update many EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailClientCredentials and only return the `id`
+     * const emailClientCredentialsWithIdOnly = await prisma.emailClientCredentials.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailClientCredentialsUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailClientCredentialsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailClientCredentials.
+     * @param {EmailClientCredentialsUpsertArgs} args - Arguments to update or create a EmailClientCredentials.
+     * @example
+     * // Update or create a EmailClientCredentials
+     * const emailClientCredentials = await prisma.emailClientCredentials.upsert({
+     *   create: {
+     *     // ... data to create a EmailClientCredentials
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailClientCredentials we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailClientCredentialsUpsertArgs>(args: SelectSubset<T, EmailClientCredentialsUpsertArgs<ExtArgs>>): Prisma__EmailClientCredentialsClient<$Result.GetResult<Prisma.$EmailClientCredentialsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailClientCredentials.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsCountArgs} args - Arguments to filter EmailClientCredentials to count.
+     * @example
+     * // Count the number of EmailClientCredentials
+     * const count = await prisma.emailClientCredentials.count({
+     *   where: {
+     *     // ... the filter for the EmailClientCredentials we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailClientCredentialsCountArgs>(
+      args?: Subset<T, EmailClientCredentialsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailClientCredentialsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailClientCredentials.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailClientCredentialsAggregateArgs>(args: Subset<T, EmailClientCredentialsAggregateArgs>): Prisma.PrismaPromise<GetEmailClientCredentialsAggregateType<T>>
+
+    /**
+     * Group by EmailClientCredentials.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailClientCredentialsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailClientCredentialsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailClientCredentialsGroupByArgs['orderBy'] }
+        : { orderBy?: EmailClientCredentialsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailClientCredentialsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailClientCredentialsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailClientCredentials model
+   */
+  readonly fields: EmailClientCredentialsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailClientCredentials.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailClientCredentialsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailClientCredentials model
+   */
+  interface EmailClientCredentialsFieldRefs {
+    readonly id: FieldRef<"EmailClientCredentials", 'String'>
+    readonly email_client_id: FieldRef<"EmailClientCredentials", 'String'>
+    readonly platform_name: FieldRef<"EmailClientCredentials", 'String'>
+    readonly api_key: FieldRef<"EmailClientCredentials", 'String'>
+    readonly createdAt: FieldRef<"EmailClientCredentials", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailClientCredentials", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailClientCredentials findUnique
+   */
+  export type EmailClientCredentialsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClientCredentials to fetch.
+     */
+    where: EmailClientCredentialsWhereUniqueInput
+  }
+
+  /**
+   * EmailClientCredentials findUniqueOrThrow
+   */
+  export type EmailClientCredentialsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClientCredentials to fetch.
+     */
+    where: EmailClientCredentialsWhereUniqueInput
+  }
+
+  /**
+   * EmailClientCredentials findFirst
+   */
+  export type EmailClientCredentialsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClientCredentials to fetch.
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClientCredentials to fetch.
+     */
+    orderBy?: EmailClientCredentialsOrderByWithRelationInput | EmailClientCredentialsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailClientCredentials.
+     */
+    cursor?: EmailClientCredentialsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClientCredentials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClientCredentials.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailClientCredentials.
+     */
+    distinct?: EmailClientCredentialsScalarFieldEnum | EmailClientCredentialsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClientCredentials findFirstOrThrow
+   */
+  export type EmailClientCredentialsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClientCredentials to fetch.
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClientCredentials to fetch.
+     */
+    orderBy?: EmailClientCredentialsOrderByWithRelationInput | EmailClientCredentialsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailClientCredentials.
+     */
+    cursor?: EmailClientCredentialsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClientCredentials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClientCredentials.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailClientCredentials.
+     */
+    distinct?: EmailClientCredentialsScalarFieldEnum | EmailClientCredentialsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClientCredentials findMany
+   */
+  export type EmailClientCredentialsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailClientCredentials to fetch.
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailClientCredentials to fetch.
+     */
+    orderBy?: EmailClientCredentialsOrderByWithRelationInput | EmailClientCredentialsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailClientCredentials.
+     */
+    cursor?: EmailClientCredentialsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailClientCredentials from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailClientCredentials.
+     */
+    skip?: number
+    distinct?: EmailClientCredentialsScalarFieldEnum | EmailClientCredentialsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailClientCredentials create
+   */
+  export type EmailClientCredentialsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailClientCredentials.
+     */
+    data: XOR<EmailClientCredentialsCreateInput, EmailClientCredentialsUncheckedCreateInput>
+  }
+
+  /**
+   * EmailClientCredentials createMany
+   */
+  export type EmailClientCredentialsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailClientCredentials.
+     */
+    data: EmailClientCredentialsCreateManyInput | EmailClientCredentialsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailClientCredentials createManyAndReturn
+   */
+  export type EmailClientCredentialsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailClientCredentials.
+     */
+    data: EmailClientCredentialsCreateManyInput | EmailClientCredentialsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailClientCredentials update
+   */
+  export type EmailClientCredentialsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailClientCredentials.
+     */
+    data: XOR<EmailClientCredentialsUpdateInput, EmailClientCredentialsUncheckedUpdateInput>
+    /**
+     * Choose, which EmailClientCredentials to update.
+     */
+    where: EmailClientCredentialsWhereUniqueInput
+  }
+
+  /**
+   * EmailClientCredentials updateMany
+   */
+  export type EmailClientCredentialsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailClientCredentials.
+     */
+    data: XOR<EmailClientCredentialsUpdateManyMutationInput, EmailClientCredentialsUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailClientCredentials to update
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * Limit how many EmailClientCredentials to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailClientCredentials updateManyAndReturn
+   */
+  export type EmailClientCredentialsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailClientCredentials.
+     */
+    data: XOR<EmailClientCredentialsUpdateManyMutationInput, EmailClientCredentialsUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailClientCredentials to update
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * Limit how many EmailClientCredentials to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailClientCredentials upsert
+   */
+  export type EmailClientCredentialsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailClientCredentials to update in case it exists.
+     */
+    where: EmailClientCredentialsWhereUniqueInput
+    /**
+     * In case the EmailClientCredentials found by the `where` argument doesn't exist, create a new EmailClientCredentials with this data.
+     */
+    create: XOR<EmailClientCredentialsCreateInput, EmailClientCredentialsUncheckedCreateInput>
+    /**
+     * In case the EmailClientCredentials was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailClientCredentialsUpdateInput, EmailClientCredentialsUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailClientCredentials delete
+   */
+  export type EmailClientCredentialsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+    /**
+     * Filter which EmailClientCredentials to delete.
+     */
+    where: EmailClientCredentialsWhereUniqueInput
+  }
+
+  /**
+   * EmailClientCredentials deleteMany
+   */
+  export type EmailClientCredentialsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailClientCredentials to delete
+     */
+    where?: EmailClientCredentialsWhereInput
+    /**
+     * Limit how many EmailClientCredentials to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailClientCredentials without action
+   */
+  export type EmailClientCredentialsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailClientCredentials
+     */
+    select?: EmailClientCredentialsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailClientCredentials
+     */
+    omit?: EmailClientCredentialsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailClientCredentialsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailGlobalDailyStats
+   */
+
+  export type AggregateEmailGlobalDailyStats = {
+    _count: EmailGlobalDailyStatsCountAggregateOutputType | null
+    _min: EmailGlobalDailyStatsMinAggregateOutputType | null
+    _max: EmailGlobalDailyStatsMaxAggregateOutputType | null
+  }
+
+  export type EmailGlobalDailyStatsMinAggregateOutputType = {
+    id: string | null
+    email_client_id: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailGlobalDailyStatsMaxAggregateOutputType = {
+    id: string | null
+    email_client_id: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmailGlobalDailyStatsCountAggregateOutputType = {
+    id: number
+    email_client_id: number
+    date: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmailGlobalDailyStatsMinAggregateInputType = {
+    id?: true
+    email_client_id?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailGlobalDailyStatsMaxAggregateInputType = {
+    id?: true
+    email_client_id?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmailGlobalDailyStatsCountAggregateInputType = {
+    id?: true
+    email_client_id?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmailGlobalDailyStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailGlobalDailyStats to aggregate.
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailGlobalDailyStats to fetch.
+     */
+    orderBy?: EmailGlobalDailyStatsOrderByWithRelationInput | EmailGlobalDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailGlobalDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailGlobalDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailGlobalDailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailGlobalDailyStats
+    **/
+    _count?: true | EmailGlobalDailyStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailGlobalDailyStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailGlobalDailyStatsMaxAggregateInputType
+  }
+
+  export type GetEmailGlobalDailyStatsAggregateType<T extends EmailGlobalDailyStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailGlobalDailyStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailGlobalDailyStats[P]>
+      : GetScalarType<T[P], AggregateEmailGlobalDailyStats[P]>
+  }
+
+
+
+
+  export type EmailGlobalDailyStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailGlobalDailyStatsWhereInput
+    orderBy?: EmailGlobalDailyStatsOrderByWithAggregationInput | EmailGlobalDailyStatsOrderByWithAggregationInput[]
+    by: EmailGlobalDailyStatsScalarFieldEnum[] | EmailGlobalDailyStatsScalarFieldEnum
+    having?: EmailGlobalDailyStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailGlobalDailyStatsCountAggregateInputType | true
+    _min?: EmailGlobalDailyStatsMinAggregateInputType
+    _max?: EmailGlobalDailyStatsMaxAggregateInputType
+  }
+
+  export type EmailGlobalDailyStatsGroupByOutputType = {
+    id: string
+    email_client_id: string
+    date: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: EmailGlobalDailyStatsCountAggregateOutputType | null
+    _min: EmailGlobalDailyStatsMinAggregateOutputType | null
+    _max: EmailGlobalDailyStatsMaxAggregateOutputType | null
+  }
+
+  type GetEmailGlobalDailyStatsGroupByPayload<T extends EmailGlobalDailyStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailGlobalDailyStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailGlobalDailyStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailGlobalDailyStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailGlobalDailyStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailGlobalDailyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_client_id?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailGlobalDailyStats"]>
+
+  export type EmailGlobalDailyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_client_id?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailGlobalDailyStats"]>
+
+  export type EmailGlobalDailyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_client_id?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailGlobalDailyStats"]>
+
+  export type EmailGlobalDailyStatsSelectScalar = {
+    id?: boolean
+    email_client_id?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmailGlobalDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_client_id" | "date" | "createdAt" | "updatedAt", ExtArgs["result"]["emailGlobalDailyStats"]>
+  export type EmailGlobalDailyStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+  export type EmailGlobalDailyStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+  export type EmailGlobalDailyStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailGlobalDailyStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailGlobalDailyStats"
+    objects: {
+      email_client: Prisma.$EmailClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email_client_id: string
+      date: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["emailGlobalDailyStats"]>
+    composites: {}
+  }
+
+  type EmailGlobalDailyStatsGetPayload<S extends boolean | null | undefined | EmailGlobalDailyStatsDefaultArgs> = $Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload, S>
+
+  type EmailGlobalDailyStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailGlobalDailyStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailGlobalDailyStatsCountAggregateInputType | true
+    }
+
+  export interface EmailGlobalDailyStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailGlobalDailyStats'], meta: { name: 'EmailGlobalDailyStats' } }
+    /**
+     * Find zero or one EmailGlobalDailyStats that matches the filter.
+     * @param {EmailGlobalDailyStatsFindUniqueArgs} args - Arguments to find a EmailGlobalDailyStats
+     * @example
+     * // Get one EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailGlobalDailyStatsFindUniqueArgs>(args: SelectSubset<T, EmailGlobalDailyStatsFindUniqueArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailGlobalDailyStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailGlobalDailyStatsFindUniqueOrThrowArgs} args - Arguments to find a EmailGlobalDailyStats
+     * @example
+     * // Get one EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailGlobalDailyStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailGlobalDailyStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailGlobalDailyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsFindFirstArgs} args - Arguments to find a EmailGlobalDailyStats
+     * @example
+     * // Get one EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailGlobalDailyStatsFindFirstArgs>(args?: SelectSubset<T, EmailGlobalDailyStatsFindFirstArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailGlobalDailyStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsFindFirstOrThrowArgs} args - Arguments to find a EmailGlobalDailyStats
+     * @example
+     * // Get one EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailGlobalDailyStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailGlobalDailyStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailGlobalDailyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findMany()
+     * 
+     * // Get first 10 EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailGlobalDailyStatsWithIdOnly = await prisma.emailGlobalDailyStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailGlobalDailyStatsFindManyArgs>(args?: SelectSubset<T, EmailGlobalDailyStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailGlobalDailyStats.
+     * @param {EmailGlobalDailyStatsCreateArgs} args - Arguments to create a EmailGlobalDailyStats.
+     * @example
+     * // Create one EmailGlobalDailyStats
+     * const EmailGlobalDailyStats = await prisma.emailGlobalDailyStats.create({
+     *   data: {
+     *     // ... data to create a EmailGlobalDailyStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailGlobalDailyStatsCreateArgs>(args: SelectSubset<T, EmailGlobalDailyStatsCreateArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailGlobalDailyStats.
+     * @param {EmailGlobalDailyStatsCreateManyArgs} args - Arguments to create many EmailGlobalDailyStats.
+     * @example
+     * // Create many EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailGlobalDailyStatsCreateManyArgs>(args?: SelectSubset<T, EmailGlobalDailyStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailGlobalDailyStats and returns the data saved in the database.
+     * @param {EmailGlobalDailyStatsCreateManyAndReturnArgs} args - Arguments to create many EmailGlobalDailyStats.
+     * @example
+     * // Create many EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailGlobalDailyStats and only return the `id`
+     * const emailGlobalDailyStatsWithIdOnly = await prisma.emailGlobalDailyStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailGlobalDailyStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailGlobalDailyStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailGlobalDailyStats.
+     * @param {EmailGlobalDailyStatsDeleteArgs} args - Arguments to delete one EmailGlobalDailyStats.
+     * @example
+     * // Delete one EmailGlobalDailyStats
+     * const EmailGlobalDailyStats = await prisma.emailGlobalDailyStats.delete({
+     *   where: {
+     *     // ... filter to delete one EmailGlobalDailyStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailGlobalDailyStatsDeleteArgs>(args: SelectSubset<T, EmailGlobalDailyStatsDeleteArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailGlobalDailyStats.
+     * @param {EmailGlobalDailyStatsUpdateArgs} args - Arguments to update one EmailGlobalDailyStats.
+     * @example
+     * // Update one EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailGlobalDailyStatsUpdateArgs>(args: SelectSubset<T, EmailGlobalDailyStatsUpdateArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailGlobalDailyStats.
+     * @param {EmailGlobalDailyStatsDeleteManyArgs} args - Arguments to filter EmailGlobalDailyStats to delete.
+     * @example
+     * // Delete a few EmailGlobalDailyStats
+     * const { count } = await prisma.emailGlobalDailyStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailGlobalDailyStatsDeleteManyArgs>(args?: SelectSubset<T, EmailGlobalDailyStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailGlobalDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailGlobalDailyStatsUpdateManyArgs>(args: SelectSubset<T, EmailGlobalDailyStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailGlobalDailyStats and returns the data updated in the database.
+     * @param {EmailGlobalDailyStatsUpdateManyAndReturnArgs} args - Arguments to update many EmailGlobalDailyStats.
+     * @example
+     * // Update many EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailGlobalDailyStats and only return the `id`
+     * const emailGlobalDailyStatsWithIdOnly = await prisma.emailGlobalDailyStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailGlobalDailyStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailGlobalDailyStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailGlobalDailyStats.
+     * @param {EmailGlobalDailyStatsUpsertArgs} args - Arguments to update or create a EmailGlobalDailyStats.
+     * @example
+     * // Update or create a EmailGlobalDailyStats
+     * const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.upsert({
+     *   create: {
+     *     // ... data to create a EmailGlobalDailyStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailGlobalDailyStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailGlobalDailyStatsUpsertArgs>(args: SelectSubset<T, EmailGlobalDailyStatsUpsertArgs<ExtArgs>>): Prisma__EmailGlobalDailyStatsClient<$Result.GetResult<Prisma.$EmailGlobalDailyStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailGlobalDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsCountArgs} args - Arguments to filter EmailGlobalDailyStats to count.
+     * @example
+     * // Count the number of EmailGlobalDailyStats
+     * const count = await prisma.emailGlobalDailyStats.count({
+     *   where: {
+     *     // ... the filter for the EmailGlobalDailyStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailGlobalDailyStatsCountArgs>(
+      args?: Subset<T, EmailGlobalDailyStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailGlobalDailyStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailGlobalDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailGlobalDailyStatsAggregateArgs>(args: Subset<T, EmailGlobalDailyStatsAggregateArgs>): Prisma.PrismaPromise<GetEmailGlobalDailyStatsAggregateType<T>>
+
+    /**
+     * Group by EmailGlobalDailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailGlobalDailyStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailGlobalDailyStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailGlobalDailyStatsGroupByArgs['orderBy'] }
+        : { orderBy?: EmailGlobalDailyStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailGlobalDailyStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailGlobalDailyStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailGlobalDailyStats model
+   */
+  readonly fields: EmailGlobalDailyStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailGlobalDailyStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailGlobalDailyStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    email_client<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailGlobalDailyStats model
+   */
+  interface EmailGlobalDailyStatsFieldRefs {
+    readonly id: FieldRef<"EmailGlobalDailyStats", 'String'>
+    readonly email_client_id: FieldRef<"EmailGlobalDailyStats", 'String'>
+    readonly date: FieldRef<"EmailGlobalDailyStats", 'DateTime'>
+    readonly createdAt: FieldRef<"EmailGlobalDailyStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailGlobalDailyStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailGlobalDailyStats findUnique
+   */
+  export type EmailGlobalDailyStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailGlobalDailyStats to fetch.
+     */
+    where: EmailGlobalDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailGlobalDailyStats findUniqueOrThrow
+   */
+  export type EmailGlobalDailyStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailGlobalDailyStats to fetch.
+     */
+    where: EmailGlobalDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailGlobalDailyStats findFirst
+   */
+  export type EmailGlobalDailyStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailGlobalDailyStats to fetch.
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailGlobalDailyStats to fetch.
+     */
+    orderBy?: EmailGlobalDailyStatsOrderByWithRelationInput | EmailGlobalDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailGlobalDailyStats.
+     */
+    cursor?: EmailGlobalDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailGlobalDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailGlobalDailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailGlobalDailyStats.
+     */
+    distinct?: EmailGlobalDailyStatsScalarFieldEnum | EmailGlobalDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailGlobalDailyStats findFirstOrThrow
+   */
+  export type EmailGlobalDailyStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailGlobalDailyStats to fetch.
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailGlobalDailyStats to fetch.
+     */
+    orderBy?: EmailGlobalDailyStatsOrderByWithRelationInput | EmailGlobalDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailGlobalDailyStats.
+     */
+    cursor?: EmailGlobalDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailGlobalDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailGlobalDailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailGlobalDailyStats.
+     */
+    distinct?: EmailGlobalDailyStatsScalarFieldEnum | EmailGlobalDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailGlobalDailyStats findMany
+   */
+  export type EmailGlobalDailyStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailGlobalDailyStats to fetch.
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailGlobalDailyStats to fetch.
+     */
+    orderBy?: EmailGlobalDailyStatsOrderByWithRelationInput | EmailGlobalDailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailGlobalDailyStats.
+     */
+    cursor?: EmailGlobalDailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailGlobalDailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailGlobalDailyStats.
+     */
+    skip?: number
+    distinct?: EmailGlobalDailyStatsScalarFieldEnum | EmailGlobalDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailGlobalDailyStats create
+   */
+  export type EmailGlobalDailyStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailGlobalDailyStats.
+     */
+    data: XOR<EmailGlobalDailyStatsCreateInput, EmailGlobalDailyStatsUncheckedCreateInput>
+  }
+
+  /**
+   * EmailGlobalDailyStats createMany
+   */
+  export type EmailGlobalDailyStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailGlobalDailyStats.
+     */
+    data: EmailGlobalDailyStatsCreateManyInput | EmailGlobalDailyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailGlobalDailyStats createManyAndReturn
+   */
+  export type EmailGlobalDailyStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailGlobalDailyStats.
+     */
+    data: EmailGlobalDailyStatsCreateManyInput | EmailGlobalDailyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailGlobalDailyStats update
+   */
+  export type EmailGlobalDailyStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailGlobalDailyStats.
+     */
+    data: XOR<EmailGlobalDailyStatsUpdateInput, EmailGlobalDailyStatsUncheckedUpdateInput>
+    /**
+     * Choose, which EmailGlobalDailyStats to update.
+     */
+    where: EmailGlobalDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailGlobalDailyStats updateMany
+   */
+  export type EmailGlobalDailyStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailGlobalDailyStats.
+     */
+    data: XOR<EmailGlobalDailyStatsUpdateManyMutationInput, EmailGlobalDailyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailGlobalDailyStats to update
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * Limit how many EmailGlobalDailyStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailGlobalDailyStats updateManyAndReturn
+   */
+  export type EmailGlobalDailyStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailGlobalDailyStats.
+     */
+    data: XOR<EmailGlobalDailyStatsUpdateManyMutationInput, EmailGlobalDailyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailGlobalDailyStats to update
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * Limit how many EmailGlobalDailyStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailGlobalDailyStats upsert
+   */
+  export type EmailGlobalDailyStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailGlobalDailyStats to update in case it exists.
+     */
+    where: EmailGlobalDailyStatsWhereUniqueInput
+    /**
+     * In case the EmailGlobalDailyStats found by the `where` argument doesn't exist, create a new EmailGlobalDailyStats with this data.
+     */
+    create: XOR<EmailGlobalDailyStatsCreateInput, EmailGlobalDailyStatsUncheckedCreateInput>
+    /**
+     * In case the EmailGlobalDailyStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailGlobalDailyStatsUpdateInput, EmailGlobalDailyStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailGlobalDailyStats delete
+   */
+  export type EmailGlobalDailyStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
+    /**
+     * Filter which EmailGlobalDailyStats to delete.
+     */
+    where: EmailGlobalDailyStatsWhereUniqueInput
+  }
+
+  /**
+   * EmailGlobalDailyStats deleteMany
+   */
+  export type EmailGlobalDailyStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailGlobalDailyStats to delete
+     */
+    where?: EmailGlobalDailyStatsWhereInput
+    /**
+     * Limit how many EmailGlobalDailyStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailGlobalDailyStats without action
+   */
+  export type EmailGlobalDailyStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailGlobalDailyStats
+     */
+    select?: EmailGlobalDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailGlobalDailyStats
+     */
+    omit?: EmailGlobalDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailGlobalDailyStatsInclude<ExtArgs> | null
   }
 
 
@@ -48969,6 +56853,114 @@ export namespace Prisma {
   export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
 
 
+  export const EmailCampaignContentScalarFieldEnum: {
+    id: 'id',
+    email_campaign_id: 'email_campaign_id',
+    subject: 'subject',
+    html_content: 'html_content',
+    plain_content: 'plain_content',
+    web_id: 'web_id',
+    type: 'type',
+    content_type: 'content_type',
+    recipients: 'recipients',
+    create_time: 'create_time',
+    send_time: 'send_time',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailCampaignContentScalarFieldEnum = (typeof EmailCampaignContentScalarFieldEnum)[keyof typeof EmailCampaignContentScalarFieldEnum]
+
+
+  export const EmailCampaignScalarFieldEnum: {
+    id: 'id',
+    campaign_id: 'campaign_id',
+    campaign_name: 'campaign_name',
+    email_client_id: 'email_client_id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailCampaignScalarFieldEnum = (typeof EmailCampaignScalarFieldEnum)[keyof typeof EmailCampaignScalarFieldEnum]
+
+
+  export const EmailCampaignDailyStatsScalarFieldEnum: {
+    id: 'id',
+    email_campaign_id: 'email_campaign_id',
+    date: 'date',
+    email_client_id: 'email_client_id',
+    opens: 'opens',
+    clicks: 'clicks',
+    bounces: 'bounces',
+    unsubscribes: 'unsubscribes',
+    total_opens: 'total_opens',
+    daily_total_open_rate: 'daily_total_open_rate',
+    cumulative_total_open_rate: 'cumulative_total_open_rate',
+    unique_opens: 'unique_opens',
+    daily_unique_open_rate: 'daily_unique_open_rate',
+    cumulative_unique_open_rate: 'cumulative_unique_open_rate',
+    total_clicks: 'total_clicks',
+    daily_total_click_rate: 'daily_total_click_rate',
+    cumulative_total_click_rate: 'cumulative_total_click_rate',
+    unique_clicks: 'unique_clicks',
+    daily_unique_click_rate: 'daily_unique_click_rate',
+    cumulative_unique_click_rate: 'cumulative_unique_click_rate',
+    daily_unique_click_to_open_rate: 'daily_unique_click_to_open_rate',
+    daily_total_click_to_open_rate: 'daily_total_click_to_open_rate',
+    spam_reports: 'spam_reports',
+    daily_spam_reports_rate: 'daily_spam_reports_rate',
+    cumulative_spam_reports_rate: 'cumulative_spam_reports_rate',
+    spam_report_drops: 'spam_report_drops',
+    daily_unsubscribe_rate: 'daily_unsubscribe_rate',
+    cumulative_unsubscribe_rate: 'cumulative_unsubscribe_rate',
+    single_send_name: 'single_send_name',
+    variation: 'variation',
+    phase: 'phase',
+    requests: 'requests',
+    delivered: 'delivered',
+    daily_bounce_rate: 'daily_bounce_rate',
+    cumulative_bounce_rate: 'cumulative_bounce_rate',
+    bounce_drops: 'bounce_drops',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailCampaignDailyStatsScalarFieldEnum = (typeof EmailCampaignDailyStatsScalarFieldEnum)[keyof typeof EmailCampaignDailyStatsScalarFieldEnum]
+
+
+  export const EmailClientScalarFieldEnum: {
+    id: 'id',
+    client_name: 'client_name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailClientScalarFieldEnum = (typeof EmailClientScalarFieldEnum)[keyof typeof EmailClientScalarFieldEnum]
+
+
+  export const EmailClientCredentialsScalarFieldEnum: {
+    id: 'id',
+    email_client_id: 'email_client_id',
+    platform_name: 'platform_name',
+    api_key: 'api_key',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailClientCredentialsScalarFieldEnum = (typeof EmailClientCredentialsScalarFieldEnum)[keyof typeof EmailClientCredentialsScalarFieldEnum]
+
+
+  export const EmailGlobalDailyStatsScalarFieldEnum: {
+    id: 'id',
+    email_client_id: 'email_client_id',
+    date: 'date',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmailGlobalDailyStatsScalarFieldEnum = (typeof EmailGlobalDailyStatsScalarFieldEnum)[keyof typeof EmailGlobalDailyStatsScalarFieldEnum]
+
+
   export const GaAccountScalarFieldEnum: {
     id: 'id',
     gaAccountId: 'gaAccountId',
@@ -49967,6 +57959,568 @@ export namespace Prisma {
     gaPropertyId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     clientId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     userId?: StringWithAggregatesFilter<"Conversation"> | string
+  }
+
+  export type EmailCampaignContentWhereInput = {
+    AND?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
+    OR?: EmailCampaignContentWhereInput[]
+    NOT?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
+    id?: StringFilter<"EmailCampaignContent"> | string
+    email_campaign_id?: StringFilter<"EmailCampaignContent"> | string
+    subject?: StringFilter<"EmailCampaignContent"> | string
+    html_content?: StringFilter<"EmailCampaignContent"> | string
+    plain_content?: StringFilter<"EmailCampaignContent"> | string
+    web_id?: IntFilter<"EmailCampaignContent"> | number
+    type?: StringFilter<"EmailCampaignContent"> | string
+    content_type?: StringFilter<"EmailCampaignContent"> | string
+    recipients?: IntFilter<"EmailCampaignContent"> | number
+    create_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    send_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
+  }
+
+  export type EmailCampaignContentOrderByWithRelationInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    subject?: SortOrder
+    html_content?: SortOrder
+    plain_content?: SortOrder
+    web_id?: SortOrder
+    type?: SortOrder
+    content_type?: SortOrder
+    recipients?: SortOrder
+    create_time?: SortOrder
+    send_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    emailCampaign?: EmailCampaignOrderByWithRelationInput
+  }
+
+  export type EmailCampaignContentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
+    OR?: EmailCampaignContentWhereInput[]
+    NOT?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
+    email_campaign_id?: StringFilter<"EmailCampaignContent"> | string
+    subject?: StringFilter<"EmailCampaignContent"> | string
+    html_content?: StringFilter<"EmailCampaignContent"> | string
+    plain_content?: StringFilter<"EmailCampaignContent"> | string
+    web_id?: IntFilter<"EmailCampaignContent"> | number
+    type?: StringFilter<"EmailCampaignContent"> | string
+    content_type?: StringFilter<"EmailCampaignContent"> | string
+    recipients?: IntFilter<"EmailCampaignContent"> | number
+    create_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    send_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
+  }, "id">
+
+  export type EmailCampaignContentOrderByWithAggregationInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    subject?: SortOrder
+    html_content?: SortOrder
+    plain_content?: SortOrder
+    web_id?: SortOrder
+    type?: SortOrder
+    content_type?: SortOrder
+    recipients?: SortOrder
+    create_time?: SortOrder
+    send_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailCampaignContentCountOrderByAggregateInput
+    _avg?: EmailCampaignContentAvgOrderByAggregateInput
+    _max?: EmailCampaignContentMaxOrderByAggregateInput
+    _min?: EmailCampaignContentMinOrderByAggregateInput
+    _sum?: EmailCampaignContentSumOrderByAggregateInput
+  }
+
+  export type EmailCampaignContentScalarWhereWithAggregatesInput = {
+    AND?: EmailCampaignContentScalarWhereWithAggregatesInput | EmailCampaignContentScalarWhereWithAggregatesInput[]
+    OR?: EmailCampaignContentScalarWhereWithAggregatesInput[]
+    NOT?: EmailCampaignContentScalarWhereWithAggregatesInput | EmailCampaignContentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    email_campaign_id?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    subject?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    html_content?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    plain_content?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    web_id?: IntWithAggregatesFilter<"EmailCampaignContent"> | number
+    type?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    content_type?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    recipients?: IntWithAggregatesFilter<"EmailCampaignContent"> | number
+    create_time?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
+    send_time?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
+  }
+
+  export type EmailCampaignWhereInput = {
+    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    OR?: EmailCampaignWhereInput[]
+    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    id?: StringFilter<"EmailCampaign"> | string
+    campaign_id?: StringFilter<"EmailCampaign"> | string
+    campaign_name?: StringFilter<"EmailCampaign"> | string
+    email_client_id?: StringFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailCampaignContents?: EmailCampaignContentListRelationFilter
+    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
+  }
+
+  export type EmailCampaignOrderByWithRelationInput = {
+    id?: SortOrder
+    campaign_id?: SortOrder
+    campaign_name?: SortOrder
+    email_client_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    email_client?: EmailClientOrderByWithRelationInput
+    emailCampaignContents?: EmailCampaignContentOrderByRelationAggregateInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsOrderByRelationAggregateInput
+  }
+
+  export type EmailCampaignWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    campaign_id?: string
+    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    OR?: EmailCampaignWhereInput[]
+    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    campaign_name?: StringFilter<"EmailCampaign"> | string
+    email_client_id?: StringFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailCampaignContents?: EmailCampaignContentListRelationFilter
+    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
+  }, "id" | "campaign_id">
+
+  export type EmailCampaignOrderByWithAggregationInput = {
+    id?: SortOrder
+    campaign_id?: SortOrder
+    campaign_name?: SortOrder
+    email_client_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailCampaignCountOrderByAggregateInput
+    _max?: EmailCampaignMaxOrderByAggregateInput
+    _min?: EmailCampaignMinOrderByAggregateInput
+  }
+
+  export type EmailCampaignScalarWhereWithAggregatesInput = {
+    AND?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
+    OR?: EmailCampaignScalarWhereWithAggregatesInput[]
+    NOT?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    campaign_id?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    campaign_name?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    email_client_id?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+  }
+
+  export type EmailCampaignDailyStatsWhereInput = {
+    AND?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
+    OR?: EmailCampaignDailyStatsWhereInput[]
+    NOT?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
+    id?: StringFilter<"EmailCampaignDailyStats"> | string
+    email_campaign_id?: StringFilter<"EmailCampaignDailyStats"> | string
+    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    email_client_id?: StringFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounces?: IntFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
+    total_opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    unique_opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    total_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    unique_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    spam_reports?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    spam_report_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    single_send_name?: StringFilter<"EmailCampaignDailyStats"> | string
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
+    phase?: StringFilter<"EmailCampaignDailyStats"> | string
+    requests?: IntFilter<"EmailCampaignDailyStats"> | number
+    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounce_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
+  }
+
+  export type EmailCampaignDailyStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    date?: SortOrder
+    email_client_id?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    single_send_name?: SortOrder
+    variation?: SortOrder
+    phase?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    email_client?: EmailClientOrderByWithRelationInput
+    emailCampaign?: EmailCampaignOrderByWithRelationInput
+  }
+
+  export type EmailCampaignDailyStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
+    OR?: EmailCampaignDailyStatsWhereInput[]
+    NOT?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
+    email_campaign_id?: StringFilter<"EmailCampaignDailyStats"> | string
+    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    email_client_id?: StringFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounces?: IntFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
+    total_opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    unique_opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    total_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    unique_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    spam_reports?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    spam_report_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    single_send_name?: StringFilter<"EmailCampaignDailyStats"> | string
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
+    phase?: StringFilter<"EmailCampaignDailyStats"> | string
+    requests?: IntFilter<"EmailCampaignDailyStats"> | number
+    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounce_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
+  }, "id">
+
+  export type EmailCampaignDailyStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    date?: SortOrder
+    email_client_id?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    single_send_name?: SortOrder
+    variation?: SortOrder
+    phase?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailCampaignDailyStatsCountOrderByAggregateInput
+    _avg?: EmailCampaignDailyStatsAvgOrderByAggregateInput
+    _max?: EmailCampaignDailyStatsMaxOrderByAggregateInput
+    _min?: EmailCampaignDailyStatsMinOrderByAggregateInput
+    _sum?: EmailCampaignDailyStatsSumOrderByAggregateInput
+  }
+
+  export type EmailCampaignDailyStatsScalarWhereWithAggregatesInput = {
+    AND?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput | EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
+    OR?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
+    NOT?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput | EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    email_campaign_id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    date?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
+    email_client_id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    bounces?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    total_opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_total_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    unique_opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    total_clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    unique_clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_to_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_to_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    spam_reports?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_spam_reports_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_spam_reports_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    spam_report_drops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_unsubscribe_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unsubscribe_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    single_send_name?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    variation?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    phase?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    requests?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    delivered?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    daily_bounce_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulative_bounce_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    bounce_drops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
+  }
+
+  export type EmailClientWhereInput = {
+    AND?: EmailClientWhereInput | EmailClientWhereInput[]
+    OR?: EmailClientWhereInput[]
+    NOT?: EmailClientWhereInput | EmailClientWhereInput[]
+    id?: StringFilter<"EmailClient"> | string
+    client_name?: StringFilter<"EmailClient"> | string
+    createdAt?: DateTimeFilter<"EmailClient"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailClient"> | Date | string
+    emailCampaigns?: EmailCampaignListRelationFilter
+    emailClientCredentials?: EmailClientCredentialsListRelationFilter
+    emailGlobalDailyStats?: EmailGlobalDailyStatsListRelationFilter
+    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
+  }
+
+  export type EmailClientOrderByWithRelationInput = {
+    id?: SortOrder
+    client_name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    emailCampaigns?: EmailCampaignOrderByRelationAggregateInput
+    emailClientCredentials?: EmailClientCredentialsOrderByRelationAggregateInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsOrderByRelationAggregateInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsOrderByRelationAggregateInput
+  }
+
+  export type EmailClientWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailClientWhereInput | EmailClientWhereInput[]
+    OR?: EmailClientWhereInput[]
+    NOT?: EmailClientWhereInput | EmailClientWhereInput[]
+    client_name?: StringFilter<"EmailClient"> | string
+    createdAt?: DateTimeFilter<"EmailClient"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailClient"> | Date | string
+    emailCampaigns?: EmailCampaignListRelationFilter
+    emailClientCredentials?: EmailClientCredentialsListRelationFilter
+    emailGlobalDailyStats?: EmailGlobalDailyStatsListRelationFilter
+    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
+  }, "id">
+
+  export type EmailClientOrderByWithAggregationInput = {
+    id?: SortOrder
+    client_name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailClientCountOrderByAggregateInput
+    _max?: EmailClientMaxOrderByAggregateInput
+    _min?: EmailClientMinOrderByAggregateInput
+  }
+
+  export type EmailClientScalarWhereWithAggregatesInput = {
+    AND?: EmailClientScalarWhereWithAggregatesInput | EmailClientScalarWhereWithAggregatesInput[]
+    OR?: EmailClientScalarWhereWithAggregatesInput[]
+    NOT?: EmailClientScalarWhereWithAggregatesInput | EmailClientScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailClient"> | string
+    client_name?: StringWithAggregatesFilter<"EmailClient"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailClient"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailClient"> | Date | string
+  }
+
+  export type EmailClientCredentialsWhereInput = {
+    AND?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
+    OR?: EmailClientCredentialsWhereInput[]
+    NOT?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
+    id?: StringFilter<"EmailClientCredentials"> | string
+    email_client_id?: StringFilter<"EmailClientCredentials"> | string
+    platform_name?: StringFilter<"EmailClientCredentials"> | string
+    api_key?: StringFilter<"EmailClientCredentials"> | string
+    createdAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+  }
+
+  export type EmailClientCredentialsOrderByWithRelationInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    platform_name?: SortOrder
+    api_key?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    emailClient?: EmailClientOrderByWithRelationInput
+  }
+
+  export type EmailClientCredentialsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
+    OR?: EmailClientCredentialsWhereInput[]
+    NOT?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
+    email_client_id?: StringFilter<"EmailClientCredentials"> | string
+    platform_name?: StringFilter<"EmailClientCredentials"> | string
+    api_key?: StringFilter<"EmailClientCredentials"> | string
+    createdAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+  }, "id">
+
+  export type EmailClientCredentialsOrderByWithAggregationInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    platform_name?: SortOrder
+    api_key?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailClientCredentialsCountOrderByAggregateInput
+    _max?: EmailClientCredentialsMaxOrderByAggregateInput
+    _min?: EmailClientCredentialsMinOrderByAggregateInput
+  }
+
+  export type EmailClientCredentialsScalarWhereWithAggregatesInput = {
+    AND?: EmailClientCredentialsScalarWhereWithAggregatesInput | EmailClientCredentialsScalarWhereWithAggregatesInput[]
+    OR?: EmailClientCredentialsScalarWhereWithAggregatesInput[]
+    NOT?: EmailClientCredentialsScalarWhereWithAggregatesInput | EmailClientCredentialsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    email_client_id?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    platform_name?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    api_key?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailClientCredentials"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailClientCredentials"> | Date | string
+  }
+
+  export type EmailGlobalDailyStatsWhereInput = {
+    AND?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
+    OR?: EmailGlobalDailyStatsWhereInput[]
+    NOT?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
+    id?: StringFilter<"EmailGlobalDailyStats"> | string
+    email_client_id?: StringFilter<"EmailGlobalDailyStats"> | string
+    date?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    createdAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+  }
+
+  export type EmailGlobalDailyStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    email_client?: EmailClientOrderByWithRelationInput
+  }
+
+  export type EmailGlobalDailyStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
+    OR?: EmailGlobalDailyStatsWhereInput[]
+    NOT?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
+    email_client_id?: StringFilter<"EmailGlobalDailyStats"> | string
+    date?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    createdAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+  }, "id">
+
+  export type EmailGlobalDailyStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmailGlobalDailyStatsCountOrderByAggregateInput
+    _max?: EmailGlobalDailyStatsMaxOrderByAggregateInput
+    _min?: EmailGlobalDailyStatsMinOrderByAggregateInput
+  }
+
+  export type EmailGlobalDailyStatsScalarWhereWithAggregatesInput = {
+    AND?: EmailGlobalDailyStatsScalarWhereWithAggregatesInput | EmailGlobalDailyStatsScalarWhereWithAggregatesInput[]
+    OR?: EmailGlobalDailyStatsScalarWhereWithAggregatesInput[]
+    NOT?: EmailGlobalDailyStatsScalarWhereWithAggregatesInput | EmailGlobalDailyStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailGlobalDailyStats"> | string
+    email_client_id?: StringWithAggregatesFilter<"EmailGlobalDailyStats"> | string
+    date?: DateTimeWithAggregatesFilter<"EmailGlobalDailyStats"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailGlobalDailyStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailGlobalDailyStats"> | Date | string
   }
 
   export type GaAccountWhereInput = {
@@ -53118,6 +61672,654 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type EmailCampaignContentCreateInput = {
+    id?: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients?: number
+    create_time: Date | string
+    send_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignContentsInput
+  }
+
+  export type EmailCampaignContentUncheckedCreateInput = {
+    id?: string
+    email_campaign_id: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients?: number
+    create_time: Date | string
+    send_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignContentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignContentsNestedInput
+  }
+
+  export type EmailCampaignContentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignContentCreateManyInput = {
+    id?: string
+    email_campaign_id: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients?: number
+    create_time: Date | string
+    send_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignContentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignContentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignCreateInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email_client: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUncheckedCreateInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    email_client_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignCreateManyInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    email_client_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsCreateInput = {
+    id?: string
+    date: Date | string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email_client: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
+    emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput
+  }
+
+  export type EmailCampaignDailyStatsUncheckedCreateInput = {
+    id?: string
+    email_campaign_id: string
+    date: Date | string
+    email_client_id: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
+    emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsCreateManyInput = {
+    id?: string
+    email_campaign_id: string
+    date: Date | string
+    email_client_id: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCreateInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientUncheckedCreateInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientCreateManyInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailClientUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCredentialsCreateInput = {
+    id?: string
+    platform_name: string
+    api_key: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailClient: EmailClientCreateNestedOneWithoutEmailClientCredentialsInput
+  }
+
+  export type EmailClientCredentialsUncheckedCreateInput = {
+    id?: string
+    email_client_id: string
+    platform_name: string
+    api_key: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailClientCredentialsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailClientCredentialsNestedInput
+  }
+
+  export type EmailClientCredentialsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCredentialsCreateManyInput = {
+    id?: string
+    email_client_id: string
+    platform_name: string
+    api_key: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailClientCredentialsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCredentialsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsCreateInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email_client: EmailClientCreateNestedOneWithoutEmailGlobalDailyStatsInput
+  }
+
+  export type EmailGlobalDailyStatsUncheckedCreateInput = {
+    id?: string
+    email_client_id: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client?: EmailClientUpdateOneRequiredWithoutEmailGlobalDailyStatsNestedInput
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsCreateManyInput = {
+    id?: string
+    email_client_id: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GaAccountCreateInput = {
     id?: string
     gaAccountId: string
@@ -55157,7 +64359,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCityCreateInput = {
     id?: string
     city: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     sproutInstagramAnalytics: SproutInstagramAnalyticsCreateNestedOneWithoutFollowersByCityInput
@@ -55167,7 +64369,7 @@ export namespace Prisma {
     id?: string
     sproutInstagramAnalyticsId: string
     city: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -55194,7 +64396,7 @@ export namespace Prisma {
     id?: string
     sproutInstagramAnalyticsId: string
     city: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -55219,7 +64421,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCountryCreateInput = {
     id?: string
     country: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     sproutInstagramAnalytics: SproutInstagramAnalyticsCreateNestedOneWithoutFollowersByCountryInput
@@ -55229,7 +64431,7 @@ export namespace Prisma {
     id?: string
     sproutInstagramAnalyticsId: string
     country: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -55256,7 +64458,7 @@ export namespace Prisma {
     id?: string
     sproutInstagramAnalyticsId: string
     country: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -56655,6 +65857,437 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EmailCampaignScalarRelationFilter = {
+    is?: EmailCampaignWhereInput
+    isNot?: EmailCampaignWhereInput
+  }
+
+  export type EmailCampaignContentCountOrderByAggregateInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    subject?: SortOrder
+    html_content?: SortOrder
+    plain_content?: SortOrder
+    web_id?: SortOrder
+    type?: SortOrder
+    content_type?: SortOrder
+    recipients?: SortOrder
+    create_time?: SortOrder
+    send_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignContentAvgOrderByAggregateInput = {
+    web_id?: SortOrder
+    recipients?: SortOrder
+  }
+
+  export type EmailCampaignContentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    subject?: SortOrder
+    html_content?: SortOrder
+    plain_content?: SortOrder
+    web_id?: SortOrder
+    type?: SortOrder
+    content_type?: SortOrder
+    recipients?: SortOrder
+    create_time?: SortOrder
+    send_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignContentMinOrderByAggregateInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    subject?: SortOrder
+    html_content?: SortOrder
+    plain_content?: SortOrder
+    web_id?: SortOrder
+    type?: SortOrder
+    content_type?: SortOrder
+    recipients?: SortOrder
+    create_time?: SortOrder
+    send_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignContentSumOrderByAggregateInput = {
+    web_id?: SortOrder
+    recipients?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EmailClientScalarRelationFilter = {
+    is?: EmailClientWhereInput
+    isNot?: EmailClientWhereInput
+  }
+
+  export type EmailCampaignContentListRelationFilter = {
+    every?: EmailCampaignContentWhereInput
+    some?: EmailCampaignContentWhereInput
+    none?: EmailCampaignContentWhereInput
+  }
+
+  export type EmailCampaignDailyStatsListRelationFilter = {
+    every?: EmailCampaignDailyStatsWhereInput
+    some?: EmailCampaignDailyStatsWhereInput
+    none?: EmailCampaignDailyStatsWhereInput
+  }
+
+  export type EmailCampaignContentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailCampaignCountOrderByAggregateInput = {
+    id?: SortOrder
+    campaign_id?: SortOrder
+    campaign_name?: SortOrder
+    email_client_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignMaxOrderByAggregateInput = {
+    id?: SortOrder
+    campaign_id?: SortOrder
+    campaign_name?: SortOrder
+    email_client_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignMinOrderByAggregateInput = {
+    id?: SortOrder
+    campaign_id?: SortOrder
+    campaign_name?: SortOrder
+    email_client_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    date?: SortOrder
+    email_client_id?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    single_send_name?: SortOrder
+    variation?: SortOrder
+    phase?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsAvgOrderByAggregateInput = {
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    date?: SortOrder
+    email_client_id?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    single_send_name?: SortOrder
+    variation?: SortOrder
+    phase?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    email_campaign_id?: SortOrder
+    date?: SortOrder
+    email_client_id?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    single_send_name?: SortOrder
+    variation?: SortOrder
+    phase?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsSumOrderByAggregateInput = {
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubscribes?: SortOrder
+    total_opens?: SortOrder
+    daily_total_open_rate?: SortOrder
+    cumulative_total_open_rate?: SortOrder
+    unique_opens?: SortOrder
+    daily_unique_open_rate?: SortOrder
+    cumulative_unique_open_rate?: SortOrder
+    total_clicks?: SortOrder
+    daily_total_click_rate?: SortOrder
+    cumulative_total_click_rate?: SortOrder
+    unique_clicks?: SortOrder
+    daily_unique_click_rate?: SortOrder
+    cumulative_unique_click_rate?: SortOrder
+    daily_unique_click_to_open_rate?: SortOrder
+    daily_total_click_to_open_rate?: SortOrder
+    spam_reports?: SortOrder
+    daily_spam_reports_rate?: SortOrder
+    cumulative_spam_reports_rate?: SortOrder
+    spam_report_drops?: SortOrder
+    daily_unsubscribe_rate?: SortOrder
+    cumulative_unsubscribe_rate?: SortOrder
+    requests?: SortOrder
+    delivered?: SortOrder
+    daily_bounce_rate?: SortOrder
+    cumulative_bounce_rate?: SortOrder
+    bounce_drops?: SortOrder
+  }
+
+  export type EmailCampaignListRelationFilter = {
+    every?: EmailCampaignWhereInput
+    some?: EmailCampaignWhereInput
+    none?: EmailCampaignWhereInput
+  }
+
+  export type EmailClientCredentialsListRelationFilter = {
+    every?: EmailClientCredentialsWhereInput
+    some?: EmailClientCredentialsWhereInput
+    none?: EmailClientCredentialsWhereInput
+  }
+
+  export type EmailGlobalDailyStatsListRelationFilter = {
+    every?: EmailGlobalDailyStatsWhereInput
+    some?: EmailGlobalDailyStatsWhereInput
+    none?: EmailGlobalDailyStatsWhereInput
+  }
+
+  export type EmailCampaignOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailClientCredentialsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailGlobalDailyStatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailClientCountOrderByAggregateInput = {
+    id?: SortOrder
+    client_name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailClientMaxOrderByAggregateInput = {
+    id?: SortOrder
+    client_name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailClientMinOrderByAggregateInput = {
+    id?: SortOrder
+    client_name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailClientCredentialsCountOrderByAggregateInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    platform_name?: SortOrder
+    api_key?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailClientCredentialsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    platform_name?: SortOrder
+    api_key?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailClientCredentialsMinOrderByAggregateInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    platform_name?: SortOrder
+    api_key?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailGlobalDailyStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailGlobalDailyStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmailGlobalDailyStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    email_client_id?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type GaPropertyListRelationFilter = {
     every?: GaPropertyWhereInput
     some?: GaPropertyWhereInput
@@ -56843,17 +66476,6 @@ export namespace Prisma {
     _max?: NestedEnumImportStatusFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type GaKpiDailyGaPropertyIdDateCompoundUniqueInput = {
     gaPropertyId: string
     date: Date | string
@@ -56914,22 +66536,6 @@ export namespace Prisma {
     avgSessionDurationSec?: SortOrder
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type GaKpiMonthlyGaPropertyIdMonthCompoundUniqueInput = {
@@ -59149,6 +68755,350 @@ export namespace Prisma {
     deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
   }
 
+  export type EmailCampaignCreateNestedOneWithoutEmailCampaignContentsInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput
+    connect?: EmailCampaignWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EmailCampaignUpdateOneRequiredWithoutEmailCampaignContentsNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput
+    upsert?: EmailCampaignUpsertWithoutEmailCampaignContentsInput
+    connect?: EmailCampaignWhereUniqueInput
+    update?: XOR<XOR<EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignContentsInput, EmailCampaignUpdateWithoutEmailCampaignContentsInput>, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
+  }
+
+  export type EmailClientCreateNestedOneWithoutEmailCampaignsInput = {
+    create?: XOR<EmailClientCreateWithoutEmailCampaignsInput, EmailClientUncheckedCreateWithoutEmailCampaignsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailCampaignsInput
+    connect?: EmailClientWhereUniqueInput
+  }
+
+  export type EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
+    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+  }
+
+  export type EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignDailyStatsCreateWithoutEmailCampaignInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailCampaignInputEnvelope
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+  }
+
+  export type EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
+    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+  }
+
+  export type EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignDailyStatsCreateWithoutEmailCampaignInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailCampaignInputEnvelope
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+  }
+
+  export type EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput = {
+    create?: XOR<EmailClientCreateWithoutEmailCampaignsInput, EmailClientUncheckedCreateWithoutEmailCampaignsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailCampaignsInput
+    upsert?: EmailClientUpsertWithoutEmailCampaignsInput
+    connect?: EmailClientWhereUniqueInput
+    update?: XOR<XOR<EmailClientUpdateToOneWithWhereWithoutEmailCampaignsInput, EmailClientUpdateWithoutEmailCampaignsInput>, EmailClientUncheckedUpdateWithoutEmailCampaignsInput>
+  }
+
+  export type EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
+    upsert?: EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
+    set?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    disconnect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    delete?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    update?: EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput[]
+    updateMany?: EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput[]
+    deleteMany?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
+  }
+
+  export type EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignDailyStatsCreateWithoutEmailCampaignInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput[]
+    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailCampaignInputEnvelope
+    set?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    disconnect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    delete?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput[]
+    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput[]
+    deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
+    upsert?: EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
+    set?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    disconnect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    delete?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+    update?: EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput[]
+    updateMany?: EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput[]
+    deleteMany?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignDailyStatsCreateWithoutEmailCampaignInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput[]
+    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailCampaignInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailCampaignInputEnvelope
+    set?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    disconnect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    delete?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput[]
+    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput[]
+    deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput = {
+    create?: XOR<EmailClientCreateWithoutEmailCampaignDailyStatsInput, EmailClientUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailCampaignDailyStatsInput
+    connect?: EmailClientWhereUniqueInput
+  }
+
+  export type EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailCampaignDailyStatsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignDailyStatsInput
+    connect?: EmailCampaignWhereUniqueInput
+  }
+
+  export type EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput = {
+    create?: XOR<EmailClientCreateWithoutEmailCampaignDailyStatsInput, EmailClientUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailCampaignDailyStatsInput
+    upsert?: EmailClientUpsertWithoutEmailCampaignDailyStatsInput
+    connect?: EmailClientWhereUniqueInput
+    update?: XOR<XOR<EmailClientUpdateToOneWithWhereWithoutEmailCampaignDailyStatsInput, EmailClientUpdateWithoutEmailCampaignDailyStatsInput>, EmailClientUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
+  }
+
+  export type EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailCampaignDailyStatsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignDailyStatsInput
+    upsert?: EmailCampaignUpsertWithoutEmailCampaignDailyStatsInput
+    connect?: EmailCampaignWhereUniqueInput
+    update?: XOR<XOR<EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignDailyStatsInput, EmailCampaignUpdateWithoutEmailCampaignDailyStatsInput>, EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
+  }
+
+  export type EmailCampaignCreateNestedManyWithoutEmail_clientInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
+    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+  }
+
+  export type EmailClientCredentialsCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailClientCredentialsCreateWithoutEmailClientInput, EmailClientCredentialsUncheckedCreateWithoutEmailClientInput> | EmailClientCredentialsCreateWithoutEmailClientInput[] | EmailClientCredentialsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailClientCredentialsCreateOrConnectWithoutEmailClientInput | EmailClientCredentialsCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailClientCredentialsCreateManyEmailClientInputEnvelope
+    connect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+  }
+
+  export type EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+    connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+  }
+
+  export type EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+  }
+
+  export type EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
+    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+  }
+
+  export type EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailClientCredentialsCreateWithoutEmailClientInput, EmailClientCredentialsUncheckedCreateWithoutEmailClientInput> | EmailClientCredentialsCreateWithoutEmailClientInput[] | EmailClientCredentialsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailClientCredentialsCreateOrConnectWithoutEmailClientInput | EmailClientCredentialsCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailClientCredentialsCreateManyEmailClientInputEnvelope
+    connect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+  }
+
+  export type EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+    connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+  }
+
+  export type EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+  }
+
+  export type EmailCampaignUpdateManyWithoutEmail_clientNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
+    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput[]
+    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+    set?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    disconnect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    delete?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    update?: EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput[]
+    updateMany?: EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput[]
+    deleteMany?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
+  }
+
+  export type EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailClientCredentialsCreateWithoutEmailClientInput, EmailClientCredentialsUncheckedCreateWithoutEmailClientInput> | EmailClientCredentialsCreateWithoutEmailClientInput[] | EmailClientCredentialsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailClientCredentialsCreateOrConnectWithoutEmailClientInput | EmailClientCredentialsCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailClientCredentialsUpsertWithWhereUniqueWithoutEmailClientInput | EmailClientCredentialsUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailClientCredentialsCreateManyEmailClientInputEnvelope
+    set?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    disconnect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    delete?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    connect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    update?: EmailClientCredentialsUpdateWithWhereUniqueWithoutEmailClientInput | EmailClientCredentialsUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailClientCredentialsUpdateManyWithWhereWithoutEmailClientInput | EmailClientCredentialsUpdateManyWithWhereWithoutEmailClientInput[]
+    deleteMany?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
+  }
+
+  export type EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    upsert?: EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+    set?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    disconnect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    delete?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    update?: EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
+    updateMany?: EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    deleteMany?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+    set?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    disconnect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    delete?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
+    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
+    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput[]
+    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+    set?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    disconnect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    delete?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
+    update?: EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput[]
+    updateMany?: EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput[]
+    deleteMany?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
+  }
+
+  export type EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailClientCredentialsCreateWithoutEmailClientInput, EmailClientCredentialsUncheckedCreateWithoutEmailClientInput> | EmailClientCredentialsCreateWithoutEmailClientInput[] | EmailClientCredentialsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailClientCredentialsCreateOrConnectWithoutEmailClientInput | EmailClientCredentialsCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailClientCredentialsUpsertWithWhereUniqueWithoutEmailClientInput | EmailClientCredentialsUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailClientCredentialsCreateManyEmailClientInputEnvelope
+    set?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    disconnect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    delete?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    connect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
+    update?: EmailClientCredentialsUpdateWithWhereUniqueWithoutEmailClientInput | EmailClientCredentialsUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailClientCredentialsUpdateManyWithWhereWithoutEmailClientInput | EmailClientCredentialsUpdateManyWithWhereWithoutEmailClientInput[]
+    deleteMany?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    upsert?: EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+    set?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    disconnect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    delete?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
+    update?: EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
+    updateMany?: EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    deleteMany?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
+    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+    set?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    disconnect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    delete?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
+    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
+    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailClientCreateNestedOneWithoutEmailClientCredentialsInput = {
+    create?: XOR<EmailClientCreateWithoutEmailClientCredentialsInput, EmailClientUncheckedCreateWithoutEmailClientCredentialsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailClientCredentialsInput
+    connect?: EmailClientWhereUniqueInput
+  }
+
+  export type EmailClientUpdateOneRequiredWithoutEmailClientCredentialsNestedInput = {
+    create?: XOR<EmailClientCreateWithoutEmailClientCredentialsInput, EmailClientUncheckedCreateWithoutEmailClientCredentialsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailClientCredentialsInput
+    upsert?: EmailClientUpsertWithoutEmailClientCredentialsInput
+    connect?: EmailClientWhereUniqueInput
+    update?: XOR<XOR<EmailClientUpdateToOneWithWhereWithoutEmailClientCredentialsInput, EmailClientUpdateWithoutEmailClientCredentialsInput>, EmailClientUncheckedUpdateWithoutEmailClientCredentialsInput>
+  }
+
+  export type EmailClientCreateNestedOneWithoutEmailGlobalDailyStatsInput = {
+    create?: XOR<EmailClientCreateWithoutEmailGlobalDailyStatsInput, EmailClientUncheckedCreateWithoutEmailGlobalDailyStatsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailGlobalDailyStatsInput
+    connect?: EmailClientWhereUniqueInput
+  }
+
+  export type EmailClientUpdateOneRequiredWithoutEmailGlobalDailyStatsNestedInput = {
+    create?: XOR<EmailClientCreateWithoutEmailGlobalDailyStatsInput, EmailClientUncheckedCreateWithoutEmailGlobalDailyStatsInput>
+    connectOrCreate?: EmailClientCreateOrConnectWithoutEmailGlobalDailyStatsInput
+    upsert?: EmailClientUpsertWithoutEmailGlobalDailyStatsInput
+    connect?: EmailClientWhereUniqueInput
+    update?: XOR<XOR<EmailClientUpdateToOneWithWhereWithoutEmailGlobalDailyStatsInput, EmailClientUpdateWithoutEmailGlobalDailyStatsInput>, EmailClientUncheckedUpdateWithoutEmailGlobalDailyStatsInput>
+  }
+
   export type GaPropertyCreateNestedManyWithoutGaAccountInput = {
     create?: XOR<GaPropertyCreateWithoutGaAccountInput, GaPropertyUncheckedCreateWithoutGaAccountInput> | GaPropertyCreateWithoutGaAccountInput[] | GaPropertyUncheckedCreateWithoutGaAccountInput[]
     connectOrCreate?: GaPropertyCreateOrConnectWithoutGaAccountInput | GaPropertyCreateOrConnectWithoutGaAccountInput[]
@@ -59577,14 +69527,6 @@ export namespace Prisma {
     create?: XOR<GaPropertyCreateWithoutKpiDailyInput, GaPropertyUncheckedCreateWithoutKpiDailyInput>
     connectOrCreate?: GaPropertyCreateOrConnectWithoutKpiDailyInput
     connect?: GaPropertyWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type GaPropertyUpdateOneRequiredWithoutKpiDailyNestedInput = {
@@ -61832,6 +71774,22 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type NestedEnumImportStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ImportStatus | EnumImportStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ImportStatus[] | ListEnumImportStatusFieldRefInput<$PrismaModel>
@@ -61847,22 +71805,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumImportStatusFilter<$PrismaModel>
     _max?: NestedEnumImportStatusFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {
@@ -62950,6 +72892,836 @@ export namespace Prisma {
     kpiMonthly?: GaKpiMonthlyUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     sourceDaily?: GaSourceDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
+  }
+
+  export type EmailCampaignCreateWithoutEmailCampaignContentsInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email_client: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    email_client_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput = {
+    where: EmailCampaignWhereUniqueInput
+    create: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+  }
+
+  export type EmailCampaignUpsertWithoutEmailCampaignContentsInput = {
+    update: XOR<EmailCampaignUpdateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
+    create: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+    where?: EmailCampaignWhereInput
+  }
+
+  export type EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignContentsInput = {
+    where?: EmailCampaignWhereInput
+    data: XOR<EmailCampaignUpdateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
+  }
+
+  export type EmailCampaignUpdateWithoutEmailCampaignContentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailClientCreateWithoutEmailCampaignsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientUncheckedCreateWithoutEmailCampaignsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientCreateOrConnectWithoutEmailCampaignsInput = {
+    where: EmailClientWhereUniqueInput
+    create: XOR<EmailClientCreateWithoutEmailCampaignsInput, EmailClientUncheckedCreateWithoutEmailCampaignsInput>
+  }
+
+  export type EmailCampaignContentCreateWithoutEmailCampaignInput = {
+    id?: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients?: number
+    create_time: Date | string
+    send_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput = {
+    id?: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients?: number
+    create_time: Date | string
+    send_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput = {
+    where: EmailCampaignContentWhereUniqueInput
+    create: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignContentCreateManyEmailCampaignInputEnvelope = {
+    data: EmailCampaignContentCreateManyEmailCampaignInput | EmailCampaignContentCreateManyEmailCampaignInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailCampaignDailyStatsCreateWithoutEmailCampaignInput = {
+    id?: string
+    date: Date | string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email_client: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
+  }
+
+  export type EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput = {
+    id?: string
+    date: Date | string
+    email_client_id: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput = {
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    create: XOR<EmailCampaignDailyStatsCreateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignDailyStatsCreateManyEmailCampaignInputEnvelope = {
+    data: EmailCampaignDailyStatsCreateManyEmailCampaignInput | EmailCampaignDailyStatsCreateManyEmailCampaignInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailClientUpsertWithoutEmailCampaignsInput = {
+    update: XOR<EmailClientUpdateWithoutEmailCampaignsInput, EmailClientUncheckedUpdateWithoutEmailCampaignsInput>
+    create: XOR<EmailClientCreateWithoutEmailCampaignsInput, EmailClientUncheckedCreateWithoutEmailCampaignsInput>
+    where?: EmailClientWhereInput
+  }
+
+  export type EmailClientUpdateToOneWithWhereWithoutEmailCampaignsInput = {
+    where?: EmailClientWhereInput
+    data: XOR<EmailClientUpdateWithoutEmailCampaignsInput, EmailClientUncheckedUpdateWithoutEmailCampaignsInput>
+  }
+
+  export type EmailClientUpdateWithoutEmailCampaignsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientUncheckedUpdateWithoutEmailCampaignsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput = {
+    where: EmailCampaignContentWhereUniqueInput
+    update: XOR<EmailCampaignContentUpdateWithoutEmailCampaignInput, EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput>
+    create: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput = {
+    where: EmailCampaignContentWhereUniqueInput
+    data: XOR<EmailCampaignContentUpdateWithoutEmailCampaignInput, EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput = {
+    where: EmailCampaignContentScalarWhereInput
+    data: XOR<EmailCampaignContentUpdateManyMutationInput, EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignContentScalarWhereInput = {
+    AND?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
+    OR?: EmailCampaignContentScalarWhereInput[]
+    NOT?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
+    id?: StringFilter<"EmailCampaignContent"> | string
+    email_campaign_id?: StringFilter<"EmailCampaignContent"> | string
+    subject?: StringFilter<"EmailCampaignContent"> | string
+    html_content?: StringFilter<"EmailCampaignContent"> | string
+    plain_content?: StringFilter<"EmailCampaignContent"> | string
+    web_id?: IntFilter<"EmailCampaignContent"> | number
+    type?: StringFilter<"EmailCampaignContent"> | string
+    content_type?: StringFilter<"EmailCampaignContent"> | string
+    recipients?: IntFilter<"EmailCampaignContent"> | number
+    create_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    send_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailCampaignInput = {
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    update: XOR<EmailCampaignDailyStatsUpdateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmailCampaignInput>
+    create: XOR<EmailCampaignDailyStatsCreateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput = {
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    data: XOR<EmailCampaignDailyStatsUpdateWithoutEmailCampaignInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput = {
+    where: EmailCampaignDailyStatsScalarWhereInput
+    data: XOR<EmailCampaignDailyStatsUpdateManyMutationInput, EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignInput>
+  }
+
+  export type EmailCampaignDailyStatsScalarWhereInput = {
+    AND?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+    OR?: EmailCampaignDailyStatsScalarWhereInput[]
+    NOT?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+    id?: StringFilter<"EmailCampaignDailyStats"> | string
+    email_campaign_id?: StringFilter<"EmailCampaignDailyStats"> | string
+    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    email_client_id?: StringFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounces?: IntFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
+    total_opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    unique_opens?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    total_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    unique_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unique_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_total_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    spam_reports?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    spam_report_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    single_send_name?: StringFilter<"EmailCampaignDailyStats"> | string
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
+    phase?: StringFilter<"EmailCampaignDailyStats"> | string
+    requests?: IntFilter<"EmailCampaignDailyStats"> | number
+    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
+    daily_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulative_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounce_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+  }
+
+  export type EmailClientCreateWithoutEmailCampaignDailyStatsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientUncheckedCreateWithoutEmailCampaignDailyStatsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientCreateOrConnectWithoutEmailCampaignDailyStatsInput = {
+    where: EmailClientWhereUniqueInput
+    create: XOR<EmailClientCreateWithoutEmailCampaignDailyStatsInput, EmailClientUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+  }
+
+  export type EmailCampaignCreateWithoutEmailCampaignDailyStatsInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email_client: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    email_client_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignCreateOrConnectWithoutEmailCampaignDailyStatsInput = {
+    where: EmailCampaignWhereUniqueInput
+    create: XOR<EmailCampaignCreateWithoutEmailCampaignDailyStatsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+  }
+
+  export type EmailClientUpsertWithoutEmailCampaignDailyStatsInput = {
+    update: XOR<EmailClientUpdateWithoutEmailCampaignDailyStatsInput, EmailClientUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
+    create: XOR<EmailClientCreateWithoutEmailCampaignDailyStatsInput, EmailClientUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+    where?: EmailClientWhereInput
+  }
+
+  export type EmailClientUpdateToOneWithWhereWithoutEmailCampaignDailyStatsInput = {
+    where?: EmailClientWhereInput
+    data: XOR<EmailClientUpdateWithoutEmailCampaignDailyStatsInput, EmailClientUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
+  }
+
+  export type EmailClientUpdateWithoutEmailCampaignDailyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientUncheckedUpdateWithoutEmailCampaignDailyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailCampaignUpsertWithoutEmailCampaignDailyStatsInput = {
+    update: XOR<EmailCampaignUpdateWithoutEmailCampaignDailyStatsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
+    create: XOR<EmailCampaignCreateWithoutEmailCampaignDailyStatsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput>
+    where?: EmailCampaignWhereInput
+  }
+
+  export type EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignDailyStatsInput = {
+    where?: EmailCampaignWhereInput
+    data: XOR<EmailCampaignUpdateWithoutEmailCampaignDailyStatsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
+  }
+
+  export type EmailCampaignUpdateWithoutEmailCampaignDailyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignCreateWithoutEmail_clientInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUncheckedCreateWithoutEmail_clientInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignCreateOrConnectWithoutEmail_clientInput = {
+    where: EmailCampaignWhereUniqueInput
+    create: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignCreateManyEmail_clientInputEnvelope = {
+    data: EmailCampaignCreateManyEmail_clientInput | EmailCampaignCreateManyEmail_clientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailClientCredentialsCreateWithoutEmailClientInput = {
+    id?: string
+    platform_name: string
+    api_key: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailClientCredentialsUncheckedCreateWithoutEmailClientInput = {
+    id?: string
+    platform_name: string
+    api_key: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailClientCredentialsCreateOrConnectWithoutEmailClientInput = {
+    where: EmailClientCredentialsWhereUniqueInput
+    create: XOR<EmailClientCredentialsCreateWithoutEmailClientInput, EmailClientCredentialsUncheckedCreateWithoutEmailClientInput>
+  }
+
+  export type EmailClientCredentialsCreateManyEmailClientInputEnvelope = {
+    data: EmailClientCredentialsCreateManyEmailClientInput | EmailClientCredentialsCreateManyEmailClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailGlobalDailyStatsCreateWithoutEmail_clientInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput = {
+    where: EmailGlobalDailyStatsWhereUniqueInput
+    create: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput>
+  }
+
+  export type EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope = {
+    data: EmailGlobalDailyStatsCreateManyEmail_clientInput | EmailGlobalDailyStatsCreateManyEmail_clientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailCampaignDailyStatsCreateWithoutEmail_clientInput = {
+    id?: string
+    date: Date | string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput
+  }
+
+  export type EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput = {
+    id?: string
+    email_campaign_id: string
+    date: Date | string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput = {
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    create: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope = {
+    data: EmailCampaignDailyStatsCreateManyEmail_clientInput | EmailCampaignDailyStatsCreateManyEmail_clientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput = {
+    where: EmailCampaignWhereUniqueInput
+    update: XOR<EmailCampaignUpdateWithoutEmail_clientInput, EmailCampaignUncheckedUpdateWithoutEmail_clientInput>
+    create: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput = {
+    where: EmailCampaignWhereUniqueInput
+    data: XOR<EmailCampaignUpdateWithoutEmail_clientInput, EmailCampaignUncheckedUpdateWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput = {
+    where: EmailCampaignScalarWhereInput
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignScalarWhereInput = {
+    AND?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
+    OR?: EmailCampaignScalarWhereInput[]
+    NOT?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
+    id?: StringFilter<"EmailCampaign"> | string
+    campaign_id?: StringFilter<"EmailCampaign"> | string
+    campaign_name?: StringFilter<"EmailCampaign"> | string
+    email_client_id?: StringFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+  }
+
+  export type EmailClientCredentialsUpsertWithWhereUniqueWithoutEmailClientInput = {
+    where: EmailClientCredentialsWhereUniqueInput
+    update: XOR<EmailClientCredentialsUpdateWithoutEmailClientInput, EmailClientCredentialsUncheckedUpdateWithoutEmailClientInput>
+    create: XOR<EmailClientCredentialsCreateWithoutEmailClientInput, EmailClientCredentialsUncheckedCreateWithoutEmailClientInput>
+  }
+
+  export type EmailClientCredentialsUpdateWithWhereUniqueWithoutEmailClientInput = {
+    where: EmailClientCredentialsWhereUniqueInput
+    data: XOR<EmailClientCredentialsUpdateWithoutEmailClientInput, EmailClientCredentialsUncheckedUpdateWithoutEmailClientInput>
+  }
+
+  export type EmailClientCredentialsUpdateManyWithWhereWithoutEmailClientInput = {
+    where: EmailClientCredentialsScalarWhereInput
+    data: XOR<EmailClientCredentialsUpdateManyMutationInput, EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientInput>
+  }
+
+  export type EmailClientCredentialsScalarWhereInput = {
+    AND?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
+    OR?: EmailClientCredentialsScalarWhereInput[]
+    NOT?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
+    id?: StringFilter<"EmailClientCredentials"> | string
+    email_client_id?: StringFilter<"EmailClientCredentials"> | string
+    platform_name?: StringFilter<"EmailClientCredentials"> | string
+    api_key?: StringFilter<"EmailClientCredentials"> | string
+    createdAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput = {
+    where: EmailGlobalDailyStatsWhereUniqueInput
+    update: XOR<EmailGlobalDailyStatsUpdateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedUpdateWithoutEmail_clientInput>
+    create: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput>
+  }
+
+  export type EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput = {
+    where: EmailGlobalDailyStatsWhereUniqueInput
+    data: XOR<EmailGlobalDailyStatsUpdateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedUpdateWithoutEmail_clientInput>
+  }
+
+  export type EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput = {
+    where: EmailGlobalDailyStatsScalarWhereInput
+    data: XOR<EmailGlobalDailyStatsUpdateManyMutationInput, EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientInput>
+  }
+
+  export type EmailGlobalDailyStatsScalarWhereInput = {
+    AND?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
+    OR?: EmailGlobalDailyStatsScalarWhereInput[]
+    NOT?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
+    id?: StringFilter<"EmailGlobalDailyStats"> | string
+    email_client_id?: StringFilter<"EmailGlobalDailyStats"> | string
+    date?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    createdAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput = {
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    update: XOR<EmailCampaignDailyStatsUpdateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmail_clientInput>
+    create: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput = {
+    where: EmailCampaignDailyStatsWhereUniqueInput
+    data: XOR<EmailCampaignDailyStatsUpdateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmail_clientInput>
+  }
+
+  export type EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput = {
+    where: EmailCampaignDailyStatsScalarWhereInput
+    data: XOR<EmailCampaignDailyStatsUpdateManyMutationInput, EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientInput>
+  }
+
+  export type EmailClientCreateWithoutEmailClientCredentialsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientUncheckedCreateWithoutEmailClientCredentialsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientCreateOrConnectWithoutEmailClientCredentialsInput = {
+    where: EmailClientWhereUniqueInput
+    create: XOR<EmailClientCreateWithoutEmailClientCredentialsInput, EmailClientUncheckedCreateWithoutEmailClientCredentialsInput>
+  }
+
+  export type EmailClientUpsertWithoutEmailClientCredentialsInput = {
+    update: XOR<EmailClientUpdateWithoutEmailClientCredentialsInput, EmailClientUncheckedUpdateWithoutEmailClientCredentialsInput>
+    create: XOR<EmailClientCreateWithoutEmailClientCredentialsInput, EmailClientUncheckedCreateWithoutEmailClientCredentialsInput>
+    where?: EmailClientWhereInput
+  }
+
+  export type EmailClientUpdateToOneWithWhereWithoutEmailClientCredentialsInput = {
+    where?: EmailClientWhereInput
+    data: XOR<EmailClientUpdateWithoutEmailClientCredentialsInput, EmailClientUncheckedUpdateWithoutEmailClientCredentialsInput>
+  }
+
+  export type EmailClientUpdateWithoutEmailClientCredentialsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientUncheckedUpdateWithoutEmailClientCredentialsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientCreateWithoutEmailGlobalDailyStatsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientUncheckedCreateWithoutEmailGlobalDailyStatsInput = {
+    id?: string
+    client_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+  }
+
+  export type EmailClientCreateOrConnectWithoutEmailGlobalDailyStatsInput = {
+    where: EmailClientWhereUniqueInput
+    create: XOR<EmailClientCreateWithoutEmailGlobalDailyStatsInput, EmailClientUncheckedCreateWithoutEmailGlobalDailyStatsInput>
+  }
+
+  export type EmailClientUpsertWithoutEmailGlobalDailyStatsInput = {
+    update: XOR<EmailClientUpdateWithoutEmailGlobalDailyStatsInput, EmailClientUncheckedUpdateWithoutEmailGlobalDailyStatsInput>
+    create: XOR<EmailClientCreateWithoutEmailGlobalDailyStatsInput, EmailClientUncheckedCreateWithoutEmailGlobalDailyStatsInput>
+    where?: EmailClientWhereInput
+  }
+
+  export type EmailClientUpdateToOneWithWhereWithoutEmailGlobalDailyStatsInput = {
+    where?: EmailClientWhereInput
+    data: XOR<EmailClientUpdateWithoutEmailGlobalDailyStatsInput, EmailClientUncheckedUpdateWithoutEmailGlobalDailyStatsInput>
+  }
+
+  export type EmailClientUpdateWithoutEmailGlobalDailyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+  }
+
+  export type EmailClientUncheckedUpdateWithoutEmailGlobalDailyStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
   }
 
   export type GaPropertyCreateWithoutGaAccountInput = {
@@ -65836,7 +76608,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCityCreateWithoutSproutInstagramAnalyticsInput = {
     id?: string
     city: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65844,7 +76616,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCityUncheckedCreateWithoutSproutInstagramAnalyticsInput = {
     id?: string
     city: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65862,7 +76634,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCountryCreateWithoutSproutInstagramAnalyticsInput = {
     id?: string
     country: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65870,7 +76642,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCountryUncheckedCreateWithoutSproutInstagramAnalyticsInput = {
     id?: string
     country: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -69937,6 +80709,482 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type EmailCampaignContentCreateManyEmailCampaignInput = {
+    id?: string
+    subject: string
+    html_content: string
+    plain_content: string
+    web_id: number
+    type: string
+    content_type: string
+    recipients?: number
+    create_time: Date | string
+    send_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignDailyStatsCreateManyEmailCampaignInput = {
+    id?: string
+    date: Date | string
+    email_client_id: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignContentUpdateWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    html_content?: StringFieldUpdateOperationsInput | string
+    plain_content?: StringFieldUpdateOperationsInput | string
+    web_id?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    content_type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpdateWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    email_client_id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignCreateManyEmail_clientInput = {
+    id?: string
+    campaign_id: string
+    campaign_name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailClientCredentialsCreateManyEmailClientInput = {
+    id?: string
+    platform_name: string
+    api_key: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsCreateManyEmail_clientInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignDailyStatsCreateManyEmail_clientInput = {
+    id?: string
+    email_campaign_id: string
+    date: Date | string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubscribes?: number
+    total_opens?: number
+    daily_total_open_rate?: number
+    cumulative_total_open_rate?: number
+    unique_opens?: number
+    daily_unique_open_rate?: number
+    cumulative_unique_open_rate?: number
+    total_clicks?: number
+    daily_total_click_rate?: number
+    cumulative_total_click_rate?: number
+    unique_clicks?: number
+    daily_unique_click_rate?: number
+    cumulative_unique_click_rate?: number
+    daily_unique_click_to_open_rate?: number
+    daily_total_click_to_open_rate?: number
+    spam_reports?: number
+    daily_spam_reports_rate?: number
+    cumulative_spam_reports_rate?: number
+    spam_report_drops?: number
+    daily_unsubscribe_rate?: number
+    cumulative_unsubscribe_rate?: number
+    single_send_name: string
+    variation: string
+    phase: string
+    requests?: number
+    delivered?: number
+    daily_bounce_rate?: number
+    cumulative_bounce_rate?: number
+    bounce_drops?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignUpdateWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateManyWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaign_id?: StringFieldUpdateOperationsInput | string
+    campaign_name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCredentialsUpdateWithoutEmailClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCredentialsUncheckedUpdateWithoutEmailClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform_name?: StringFieldUpdateOperationsInput | string
+    api_key?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUpdateWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpdateWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    total_opens?: IntFieldUpdateOperationsInput | number
+    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
+    unique_opens?: IntFieldUpdateOperationsInput | number
+    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
+    total_clicks?: IntFieldUpdateOperationsInput | number
+    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
+    unique_clicks?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
+    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
+    spam_reports?: IntFieldUpdateOperationsInput | number
+    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
+    spam_report_drops?: IntFieldUpdateOperationsInput | number
+    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
+    single_send_name?: StringFieldUpdateOperationsInput | string
+    variation?: StringFieldUpdateOperationsInput | string
+    phase?: StringFieldUpdateOperationsInput | string
+    requests?: IntFieldUpdateOperationsInput | number
+    delivered?: IntFieldUpdateOperationsInput | number
+    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
+    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
+    bounce_drops?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GaPropertyCreateManyGaAccountInput = {
     id?: string
     gaPropertyId: string
@@ -70714,7 +81962,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCityCreateManySproutInstagramAnalyticsInput = {
     id?: string
     city: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -70722,7 +81970,7 @@ export namespace Prisma {
   export type SproutInstagramFollowersByCountryCreateManySproutInstagramAnalyticsInput = {
     id?: string
     country: string
-    count: number
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }

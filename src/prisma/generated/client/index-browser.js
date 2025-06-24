@@ -157,6 +157,96 @@ exports.Prisma.ConversationScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.EmailCampaignContentScalarFieldEnum = {
+  id: 'id',
+  email_campaign_id: 'email_campaign_id',
+  subject: 'subject',
+  html_content: 'html_content',
+  plain_content: 'plain_content',
+  web_id: 'web_id',
+  type: 'type',
+  content_type: 'content_type',
+  recipients: 'recipients',
+  create_time: 'create_time',
+  send_time: 'send_time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailCampaignScalarFieldEnum = {
+  id: 'id',
+  campaign_id: 'campaign_id',
+  campaign_name: 'campaign_name',
+  email_client_id: 'email_client_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
+  id: 'id',
+  email_campaign_id: 'email_campaign_id',
+  date: 'date',
+  email_client_id: 'email_client_id',
+  opens: 'opens',
+  clicks: 'clicks',
+  bounces: 'bounces',
+  unsubscribes: 'unsubscribes',
+  total_opens: 'total_opens',
+  daily_total_open_rate: 'daily_total_open_rate',
+  cumulative_total_open_rate: 'cumulative_total_open_rate',
+  unique_opens: 'unique_opens',
+  daily_unique_open_rate: 'daily_unique_open_rate',
+  cumulative_unique_open_rate: 'cumulative_unique_open_rate',
+  total_clicks: 'total_clicks',
+  daily_total_click_rate: 'daily_total_click_rate',
+  cumulative_total_click_rate: 'cumulative_total_click_rate',
+  unique_clicks: 'unique_clicks',
+  daily_unique_click_rate: 'daily_unique_click_rate',
+  cumulative_unique_click_rate: 'cumulative_unique_click_rate',
+  daily_unique_click_to_open_rate: 'daily_unique_click_to_open_rate',
+  daily_total_click_to_open_rate: 'daily_total_click_to_open_rate',
+  spam_reports: 'spam_reports',
+  daily_spam_reports_rate: 'daily_spam_reports_rate',
+  cumulative_spam_reports_rate: 'cumulative_spam_reports_rate',
+  spam_report_drops: 'spam_report_drops',
+  daily_unsubscribe_rate: 'daily_unsubscribe_rate',
+  cumulative_unsubscribe_rate: 'cumulative_unsubscribe_rate',
+  single_send_name: 'single_send_name',
+  variation: 'variation',
+  phase: 'phase',
+  requests: 'requests',
+  delivered: 'delivered',
+  daily_bounce_rate: 'daily_bounce_rate',
+  cumulative_bounce_rate: 'cumulative_bounce_rate',
+  bounce_drops: 'bounce_drops',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailClientScalarFieldEnum = {
+  id: 'id',
+  client_name: 'client_name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailClientCredentialsScalarFieldEnum = {
+  id: 'id',
+  email_client_id: 'email_client_id',
+  platform_name: 'platform_name',
+  api_key: 'api_key',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailGlobalDailyStatsScalarFieldEnum = {
+  id: 'id',
+  email_client_id: 'email_client_id',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.GaAccountScalarFieldEnum = {
   id: 'id',
   gaAccountId: 'gaAccountId',
@@ -662,6 +752,12 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   ClientSatisfaction: 'ClientSatisfaction',
   Conversation: 'Conversation',
+  EmailCampaignContent: 'EmailCampaignContent',
+  EmailCampaign: 'EmailCampaign',
+  EmailCampaignDailyStats: 'EmailCampaignDailyStats',
+  EmailClient: 'EmailClient',
+  EmailClientCredentials: 'EmailClientCredentials',
+  EmailGlobalDailyStats: 'EmailGlobalDailyStats',
   GaAccount: 'GaAccount',
   GaProperty: 'GaProperty',
   GaImportRun: 'GaImportRun',
