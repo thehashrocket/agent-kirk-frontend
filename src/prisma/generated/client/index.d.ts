@@ -61102,6 +61102,7 @@ export namespace Prisma {
 
   export type SproutFacebookAnalyticsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    customerProfileId_reportingDate?: SproutFacebookAnalyticsCustomerProfileIdReportingDateCompoundUniqueInput
     AND?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
     OR?: SproutFacebookAnalyticsWhereInput[]
     NOT?: SproutFacebookAnalyticsWhereInput | SproutFacebookAnalyticsWhereInput[]
@@ -61126,7 +61127,7 @@ export namespace Prisma {
     videoViewsPaid?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     videoViewsUnique?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
-  }, "id">
+  }, "id" | "customerProfileId_reportingDate">
 
   export type SproutFacebookAnalyticsOrderByWithAggregationInput = {
     createdAt?: SortOrder
@@ -61277,6 +61278,7 @@ export namespace Prisma {
 
   export type SproutFacebookPostAnalyticsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    postNativeId_reportingDate?: SproutFacebookPostAnalyticsPostNativeIdReportingDateCompoundUniqueInput
     AND?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
     OR?: SproutFacebookPostAnalyticsWhereInput[]
     NOT?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
@@ -61320,7 +61322,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
     updatedAt?: DateTimeFilter<"SproutFacebookPostAnalytics"> | Date | string
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
-  }, "id">
+  }, "id" | "postNativeId_reportingDate">
 
   export type SproutFacebookPostAnalyticsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -61487,6 +61489,7 @@ export namespace Prisma {
 
   export type SproutInstagramAnalyticsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    customerProfileId_reportingDate?: SproutInstagramAnalyticsCustomerProfileIdReportingDateCompoundUniqueInput
     AND?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
     OR?: SproutInstagramAnalyticsWhereInput[]
     NOT?: SproutInstagramAnalyticsWhereInput | SproutInstagramAnalyticsWhereInput[]
@@ -61519,7 +61522,7 @@ export namespace Prisma {
     followersByCity?: SproutInstagramFollowersByCityListRelationFilter
     followersByCountry?: SproutInstagramFollowersByCountryListRelationFilter
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
-  }, "id">
+  }, "id" | "customerProfileId_reportingDate">
 
   export type SproutInstagramAnalyticsOrderByWithAggregationInput = {
     commentsCount?: SortOrderInput | SortOrder
@@ -61614,6 +61617,7 @@ export namespace Prisma {
 
   export type SproutInstagramFollowersByCityWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    sproutInstagramAnalyticsId_city?: SproutInstagramFollowersByCitySproutInstagramAnalyticsIdCityCompoundUniqueInput
     AND?: SproutInstagramFollowersByCityWhereInput | SproutInstagramFollowersByCityWhereInput[]
     OR?: SproutInstagramFollowersByCityWhereInput[]
     NOT?: SproutInstagramFollowersByCityWhereInput | SproutInstagramFollowersByCityWhereInput[]
@@ -61623,7 +61627,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
     updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCity"> | Date | string
     sproutInstagramAnalytics?: XOR<SproutInstagramAnalyticsScalarRelationFilter, SproutInstagramAnalyticsWhereInput>
-  }, "id">
+  }, "id" | "sproutInstagramAnalyticsId_city">
 
   export type SproutInstagramFollowersByCityOrderByWithAggregationInput = {
     id?: SortOrder
@@ -61676,6 +61680,7 @@ export namespace Prisma {
 
   export type SproutInstagramFollowersByCountryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    sproutInstagramAnalyticsId_country?: SproutInstagramFollowersByCountrySproutInstagramAnalyticsIdCountryCompoundUniqueInput
     AND?: SproutInstagramFollowersByCountryWhereInput | SproutInstagramFollowersByCountryWhereInput[]
     OR?: SproutInstagramFollowersByCountryWhereInput[]
     NOT?: SproutInstagramFollowersByCountryWhereInput | SproutInstagramFollowersByCountryWhereInput[]
@@ -61685,7 +61690,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
     updatedAt?: DateTimeFilter<"SproutInstagramFollowersByCountry"> | Date | string
     sproutInstagramAnalytics?: XOR<SproutInstagramAnalyticsScalarRelationFilter, SproutInstagramAnalyticsWhereInput>
-  }, "id">
+  }, "id" | "sproutInstagramAnalyticsId_country">
 
   export type SproutInstagramFollowersByCountryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -61748,6 +61753,7 @@ export namespace Prisma {
 
   export type SproutLinkedInAnalyticsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    customerProfileId_reportingDate?: SproutLinkedInAnalyticsCustomerProfileIdReportingDateCompoundUniqueInput
     AND?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
     OR?: SproutLinkedInAnalyticsWhereInput[]
     NOT?: SproutLinkedInAnalyticsWhereInput | SproutLinkedInAnalyticsWhereInput[]
@@ -61762,7 +61768,7 @@ export namespace Prisma {
     sproutSocialAccountId?: StringFilter<"SproutLinkedInAnalytics"> | string
     updatedAt?: DateTimeFilter<"SproutLinkedInAnalytics"> | Date | string
     sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
-  }, "id">
+  }, "id" | "customerProfileId_reportingDate">
 
   export type SproutLinkedInAnalyticsOrderByWithAggregationInput = {
     createdAt?: SortOrder
@@ -61915,10 +61921,10 @@ export namespace Prisma {
 
   export type SproutSocialAccountWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    customerProfileId?: number
     AND?: SproutSocialAccountWhereInput | SproutSocialAccountWhereInput[]
     OR?: SproutSocialAccountWhereInput[]
     NOT?: SproutSocialAccountWhereInput | SproutSocialAccountWhereInput[]
-    customerProfileId?: IntFilter<"SproutSocialAccount"> | number
     networkType?: StringFilter<"SproutSocialAccount"> | string
     name?: StringFilter<"SproutSocialAccount"> | string
     nativeName?: StringFilter<"SproutSocialAccount"> | string
@@ -61933,7 +61939,7 @@ export namespace Prisma {
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
     facebookPostAnalytics?: SproutFacebookPostAnalyticsListRelationFilter
-  }, "id">
+  }, "id" | "customerProfileId">
 
   export type SproutSocialAccountOrderByWithAggregationInput = {
     id?: SortOrder
@@ -68681,6 +68687,11 @@ export namespace Prisma {
     isNot?: SproutSocialAccountWhereInput
   }
 
+  export type SproutFacebookAnalyticsCustomerProfileIdReportingDateCompoundUniqueInput = {
+    customerProfileId: number
+    reportingDate: Date | string
+  }
+
   export type SproutFacebookAnalyticsCountOrderByAggregateInput = {
     createdAt?: SortOrder
     customerProfileId?: SortOrder
@@ -68789,6 +68800,11 @@ export namespace Prisma {
     videoViewsOrganic?: SortOrder
     videoViewsPaid?: SortOrder
     videoViewsUnique?: SortOrder
+  }
+
+  export type SproutFacebookPostAnalyticsPostNativeIdReportingDateCompoundUniqueInput = {
+    postNativeId: string
+    reportingDate: Date | string
   }
 
   export type SproutFacebookPostAnalyticsCountOrderByAggregateInput = {
@@ -69012,6 +69028,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type SproutInstagramAnalyticsCustomerProfileIdReportingDateCompoundUniqueInput = {
+    customerProfileId: number
+    reportingDate: Date | string
+  }
+
   export type SproutInstagramAnalyticsCountOrderByAggregateInput = {
     commentsCount?: SortOrder
     createdAt?: SortOrder
@@ -69149,6 +69170,11 @@ export namespace Prisma {
     isNot?: SproutInstagramAnalyticsWhereInput
   }
 
+  export type SproutInstagramFollowersByCitySproutInstagramAnalyticsIdCityCompoundUniqueInput = {
+    sproutInstagramAnalyticsId: string
+    city: string
+  }
+
   export type SproutInstagramFollowersByCityCountOrderByAggregateInput = {
     id?: SortOrder
     sproutInstagramAnalyticsId?: SortOrder
@@ -69184,6 +69210,11 @@ export namespace Prisma {
     count?: SortOrder
   }
 
+  export type SproutInstagramFollowersByCountrySproutInstagramAnalyticsIdCountryCompoundUniqueInput = {
+    sproutInstagramAnalyticsId: string
+    country: string
+  }
+
   export type SproutInstagramFollowersByCountryCountOrderByAggregateInput = {
     id?: SortOrder
     sproutInstagramAnalyticsId?: SortOrder
@@ -69217,6 +69248,11 @@ export namespace Prisma {
 
   export type SproutInstagramFollowersByCountrySumOrderByAggregateInput = {
     count?: SortOrder
+  }
+
+  export type SproutLinkedInAnalyticsCustomerProfileIdReportingDateCompoundUniqueInput = {
+    customerProfileId: number
+    reportingDate: Date | string
   }
 
   export type SproutLinkedInAnalyticsCountOrderByAggregateInput = {

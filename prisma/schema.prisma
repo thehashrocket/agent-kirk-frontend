@@ -512,6 +512,7 @@ model SproutFacebookAnalytics {
   videoViewsPaid         Int?                @default(0)
   videoViewsUnique       Int?                @default(0)
 
+  @@unique([customerProfileId, reportingDate])
   @@index([sproutSocialAccountId])
 }
 
@@ -558,6 +559,7 @@ model SproutFacebookPostAnalytics {
   createdAt              DateTime            @default(now())
   updatedAt              DateTime            @updatedAt
 
+  @@unique([postNativeId, reportingDate])
   @@index([sproutSocialAccountId])
 }
 
@@ -593,6 +595,7 @@ model SproutInstagramAnalytics {
   videoViews               Int?                                @default(0)
   websiteClicks            Int?                                @default(0)
 
+  @@unique([customerProfileId, reportingDate])
   @@index([sproutSocialAccountId])
 }
 
@@ -605,6 +608,7 @@ model SproutInstagramFollowersByCity {
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
 
+  @@unique([sproutInstagramAnalyticsId, city])
   @@index([sproutInstagramAnalyticsId])
 }
 
@@ -617,6 +621,7 @@ model SproutInstagramFollowersByCountry {
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
 
+  @@unique([sproutInstagramAnalyticsId, country])
   @@index([sproutInstagramAnalyticsId])
 }
 
@@ -634,6 +639,7 @@ model SproutLinkedInAnalytics {
   sproutSocialAccountId String
   updatedAt             DateTime            @updatedAt
 
+  @@unique([customerProfileId, reportingDate])
   @@index([sproutSocialAccountId])
 }
 
@@ -653,7 +659,7 @@ model SproutPinterestAnalytics {
 
 model SproutSocialAccount {
   id                    String                        @id @default(cuid())
-  customerProfileId     Int
+  customerProfileId     Int                           @unique
   networkType           String
   name                  String
   nativeName            String
