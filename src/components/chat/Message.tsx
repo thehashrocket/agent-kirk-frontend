@@ -5,14 +5,24 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { cn } from '@/lib/utils';
 import { MessageContent } from './MessageContent';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { LoadingDots } from './LoadingDots';
-import { ChartPreviewModal } from './ChartPreviewModal';
 import { MessageStatus, MESSAGE_STATUS } from '@/types/chat';
+
+// Lazy load the chart modal to prevent unnecessary renders
+const ChartPreviewModal = lazy(() => import('./ChartPreviewModal').then(mod => ({ default: mod.ChartPreviewModal })));
+
+function LazyChartPreviewModal({ queryId }: { queryId: string }) {
+  return (
+    <Suspense fallback={<div className="text-xs text-muted-foreground">Loading charts...</div>}>
+      <ChartPreviewModal queryId={queryId} />
+    </Suspense>
+  );
+}
 
 const FUNNY_PROCESSING_MESSAGES = [
   "Consulting my crystal ball...",
@@ -61,7 +71,7 @@ interface MessageProps {
   onRate?: (messageId: string, rating: -1 | 1) => void;
 }
 
-export function Message({
+export const Message = React.memo(function Message({
   id,
   content,
   role,
@@ -107,7 +117,7 @@ export function Message({
 
         {shouldShowCharts && (
           <div className="mt-2">
-            <ChartPreviewModal queryId={id} />
+            <LazyChartPreviewModal queryId={id} />
           </div>
         )}
 
@@ -140,4 +150,4 @@ export function Message({
       </div>
     </div>
   );
-} 
+});

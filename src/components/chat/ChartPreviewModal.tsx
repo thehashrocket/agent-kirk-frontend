@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -36,7 +36,7 @@ export function getTopSources(data: any, max = 5) {
   return top;
 }
 
-export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
+export const ChartPreviewModal = React.memo(function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
   const [open, setOpen] = useState(false);
   const { data, isLoading, error } = useChartData(open ? queryId : null);
 
@@ -105,4 +105,4 @@ export function ChartPreviewModal({ queryId }: ChartPreviewModalProps) {
       </DialogContent>
     </Dialog>
   );
-} 
+});

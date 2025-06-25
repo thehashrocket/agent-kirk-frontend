@@ -35,8 +35,11 @@ export function useChartData(queryId: string | null) {
     ? queryId.slice(0, -9)  // Remove exactly '-response'
     : queryId;
 
-  console.log('useChartData - Original QueryId:', queryId);
-  console.log('useChartData - Transformed QueryId:', queryIdWithoutResponse);
+  // Only log when we actually have a queryId to avoid spam
+  if (queryIdWithoutResponse) {
+    console.log('useChartData - Original QueryId:', queryId);
+    console.log('useChartData - Transformed QueryId:', queryIdWithoutResponse);
+  }
 
   const { data, error, isLoading } = useSWR<ChartDataResponse>(
     queryIdWithoutResponse ? `/api/queries/${queryIdWithoutResponse}/chart-data` : null,
