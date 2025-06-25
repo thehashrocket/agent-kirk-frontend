@@ -24,6 +24,11 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  */
 export type ClientSatisfaction = $Result.DefaultSelection<Prisma.$ClientSatisfactionPayload>
 /**
+ * Model Company
+ * 
+ */
+export type Company = $Result.DefaultSelection<Prisma.$CompanyPayload>
+/**
  * Model Conversation
  * 
  */
@@ -458,6 +463,16 @@ export class PrismaClient<
     * ```
     */
   get clientSatisfaction(): Prisma.ClientSatisfactionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.company`: Exposes CRUD operations for the **Company** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Companies
+    * const companies = await prisma.company.findMany()
+    * ```
+    */
+  get company(): Prisma.CompanyDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.conversation`: Exposes CRUD operations for the **Conversation** model.
@@ -1310,6 +1325,7 @@ export namespace Prisma {
   export const ModelName: {
     Account: 'Account',
     ClientSatisfaction: 'ClientSatisfaction',
+    Company: 'Company',
     Conversation: 'Conversation',
     EmailCampaignContent: 'EmailCampaignContent',
     EmailCampaign: 'EmailCampaign',
@@ -1369,7 +1385,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientSatisfaction" | "conversation" | "emailCampaignContent" | "emailCampaign" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
+      modelProps: "account" | "clientSatisfaction" | "company" | "conversation" | "emailCampaignContent" | "emailCampaign" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1518,6 +1534,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ClientSatisfactionCountArgs<ExtArgs>
             result: $Utils.Optional<ClientSatisfactionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Company: {
+        payload: Prisma.$CompanyPayload<ExtArgs>
+        fields: Prisma.CompanyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CompanyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CompanyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          findFirst: {
+            args: Prisma.CompanyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CompanyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          findMany: {
+            args: Prisma.CompanyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>[]
+          }
+          create: {
+            args: Prisma.CompanyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          createMany: {
+            args: Prisma.CompanyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CompanyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>[]
+          }
+          delete: {
+            args: Prisma.CompanyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          update: {
+            args: Prisma.CompanyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          deleteMany: {
+            args: Prisma.CompanyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CompanyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CompanyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>[]
+          }
+          upsert: {
+            args: Prisma.CompanyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CompanyPayload>
+          }
+          aggregate: {
+            args: Prisma.CompanyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCompany>
+          }
+          groupBy: {
+            args: Prisma.CompanyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CompanyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CompanyCountArgs<ExtArgs>
+            result: $Utils.Optional<CompanyCountAggregateOutputType> | number
           }
         }
       }
@@ -4641,6 +4731,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     account?: AccountOmit
     clientSatisfaction?: ClientSatisfactionOmit
+    company?: CompanyOmit
     conversation?: ConversationOmit
     emailCampaignContent?: EmailCampaignContentOmit
     emailCampaign?: EmailCampaignOmit
@@ -4769,6 +4860,37 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type CompanyCountOutputType
+   */
+
+  export type CompanyCountOutputType = {
+    users: number
+  }
+
+  export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | CompanyCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompanyCountOutputType
+     */
+    select?: CompanyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
 
 
   /**
@@ -5266,45 +5388,45 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    clients: number
     accounts: number
-    sessions: number
-    queries: number
-    conversations: number
-    clientConversations: number
-    sentMessages: number
-    receivedMessages: number
-    notifications: number
-    givenRatings: number
-    receivedRatings: number
-    assignedTickets: number
-    clientTickets: number
-    ticketComments: number
     activities: number
-    userToGaAccounts: number
+    assignedTickets: number
+    clientConversations: number
+    clients: number
+    clientTickets: number
+    conversations: number
     gaImportRuns: number
+    givenRatings: number
+    notifications: number
+    queries: number
+    receivedMessages: number
+    receivedRatings: number
+    sentMessages: number
+    sessions: number
     sproutSocialAccounts: number
+    ticketComments: number
+    userToGaAccounts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    clients?: boolean | UserCountOutputTypeCountClientsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-    queries?: boolean | UserCountOutputTypeCountQueriesArgs
-    conversations?: boolean | UserCountOutputTypeCountConversationsArgs
-    clientConversations?: boolean | UserCountOutputTypeCountClientConversationsArgs
-    sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
-    receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
-    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
-    givenRatings?: boolean | UserCountOutputTypeCountGivenRatingsArgs
-    receivedRatings?: boolean | UserCountOutputTypeCountReceivedRatingsArgs
-    assignedTickets?: boolean | UserCountOutputTypeCountAssignedTicketsArgs
-    clientTickets?: boolean | UserCountOutputTypeCountClientTicketsArgs
-    ticketComments?: boolean | UserCountOutputTypeCountTicketCommentsArgs
     activities?: boolean | UserCountOutputTypeCountActivitiesArgs
-    userToGaAccounts?: boolean | UserCountOutputTypeCountUserToGaAccountsArgs
+    assignedTickets?: boolean | UserCountOutputTypeCountAssignedTicketsArgs
+    clientConversations?: boolean | UserCountOutputTypeCountClientConversationsArgs
+    clients?: boolean | UserCountOutputTypeCountClientsArgs
+    clientTickets?: boolean | UserCountOutputTypeCountClientTicketsArgs
+    conversations?: boolean | UserCountOutputTypeCountConversationsArgs
     gaImportRuns?: boolean | UserCountOutputTypeCountGaImportRunsArgs
+    givenRatings?: boolean | UserCountOutputTypeCountGivenRatingsArgs
+    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+    queries?: boolean | UserCountOutputTypeCountQueriesArgs
+    receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
+    receivedRatings?: boolean | UserCountOutputTypeCountReceivedRatingsArgs
+    sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     sproutSocialAccounts?: boolean | UserCountOutputTypeCountSproutSocialAccountsArgs
+    ticketComments?: boolean | UserCountOutputTypeCountTicketCommentsArgs
+    userToGaAccounts?: boolean | UserCountOutputTypeCountUserToGaAccountsArgs
   }
 
   // Custom InputTypes
@@ -5321,99 +5443,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountQueriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: QueryWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConversationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountClientConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConversationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MessageWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MessageWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NotificationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountGivenRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ClientSatisfactionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountReceivedRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ClientSatisfactionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountAssignedTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountClientTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountTicketCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TicketCommentWhereInput
   }
 
   /**
@@ -5426,8 +5457,36 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUserToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserToGaAccountWhereInput
+  export type UserCountOutputTypeCountAssignedTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
   }
 
   /**
@@ -5440,8 +5499,71 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountGivenRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientSatisfactionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountQueriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QueryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReceivedRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientSatisfactionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountSproutSocialAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserToSproutSocialAccountWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTicketCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketCommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserToGaAccountWhereInput
   }
 
 
@@ -7822,6 +7944,1063 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ClientSatisfactionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Company
+   */
+
+  export type AggregateCompany = {
+    _count: CompanyCountAggregateOutputType | null
+    _min: CompanyMinAggregateOutputType | null
+    _max: CompanyMaxAggregateOutputType | null
+  }
+
+  export type CompanyMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CompanyMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CompanyCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CompanyMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CompanyMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CompanyCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CompanyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Company to aggregate.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Companies
+    **/
+    _count?: true | CompanyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CompanyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CompanyMaxAggregateInputType
+  }
+
+  export type GetCompanyAggregateType<T extends CompanyAggregateArgs> = {
+        [P in keyof T & keyof AggregateCompany]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCompany[P]>
+      : GetScalarType<T[P], AggregateCompany[P]>
+  }
+
+
+
+
+  export type CompanyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompanyWhereInput
+    orderBy?: CompanyOrderByWithAggregationInput | CompanyOrderByWithAggregationInput[]
+    by: CompanyScalarFieldEnum[] | CompanyScalarFieldEnum
+    having?: CompanyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CompanyCountAggregateInputType | true
+    _min?: CompanyMinAggregateInputType
+    _max?: CompanyMaxAggregateInputType
+  }
+
+  export type CompanyGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CompanyCountAggregateOutputType | null
+    _min: CompanyMinAggregateOutputType | null
+    _max: CompanyMaxAggregateOutputType | null
+  }
+
+  type GetCompanyGroupByPayload<T extends CompanyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CompanyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CompanyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CompanyGroupByOutputType[P]>
+            : GetScalarType<T[P], CompanyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CompanySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    users?: boolean | Company$usersArgs<ExtArgs>
+    _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["company"]>
+
+  export type CompanySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["company"]>
+
+  export type CompanySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["company"]>
+
+  export type CompanySelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+  export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | Company$usersArgs<ExtArgs>
+    _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CompanyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CompanyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Company"
+    objects: {
+      users: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["company"]>
+    composites: {}
+  }
+
+  type CompanyGetPayload<S extends boolean | null | undefined | CompanyDefaultArgs> = $Result.GetResult<Prisma.$CompanyPayload, S>
+
+  type CompanyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CompanyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CompanyCountAggregateInputType | true
+    }
+
+  export interface CompanyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Company'], meta: { name: 'Company' } }
+    /**
+     * Find zero or one Company that matches the filter.
+     * @param {CompanyFindUniqueArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CompanyFindUniqueArgs>(args: SelectSubset<T, CompanyFindUniqueArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Company that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CompanyFindUniqueOrThrowArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CompanyFindUniqueOrThrowArgs>(args: SelectSubset<T, CompanyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Company that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFindFirstArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CompanyFindFirstArgs>(args?: SelectSubset<T, CompanyFindFirstArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Company that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFindFirstOrThrowArgs} args - Arguments to find a Company
+     * @example
+     * // Get one Company
+     * const company = await prisma.company.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CompanyFindFirstOrThrowArgs>(args?: SelectSubset<T, CompanyFindFirstOrThrowArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Companies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Companies
+     * const companies = await prisma.company.findMany()
+     * 
+     * // Get first 10 Companies
+     * const companies = await prisma.company.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const companyWithIdOnly = await prisma.company.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CompanyFindManyArgs>(args?: SelectSubset<T, CompanyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Company.
+     * @param {CompanyCreateArgs} args - Arguments to create a Company.
+     * @example
+     * // Create one Company
+     * const Company = await prisma.company.create({
+     *   data: {
+     *     // ... data to create a Company
+     *   }
+     * })
+     * 
+     */
+    create<T extends CompanyCreateArgs>(args: SelectSubset<T, CompanyCreateArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Companies.
+     * @param {CompanyCreateManyArgs} args - Arguments to create many Companies.
+     * @example
+     * // Create many Companies
+     * const company = await prisma.company.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CompanyCreateManyArgs>(args?: SelectSubset<T, CompanyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Companies and returns the data saved in the database.
+     * @param {CompanyCreateManyAndReturnArgs} args - Arguments to create many Companies.
+     * @example
+     * // Create many Companies
+     * const company = await prisma.company.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Companies and only return the `id`
+     * const companyWithIdOnly = await prisma.company.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CompanyCreateManyAndReturnArgs>(args?: SelectSubset<T, CompanyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Company.
+     * @param {CompanyDeleteArgs} args - Arguments to delete one Company.
+     * @example
+     * // Delete one Company
+     * const Company = await prisma.company.delete({
+     *   where: {
+     *     // ... filter to delete one Company
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CompanyDeleteArgs>(args: SelectSubset<T, CompanyDeleteArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Company.
+     * @param {CompanyUpdateArgs} args - Arguments to update one Company.
+     * @example
+     * // Update one Company
+     * const company = await prisma.company.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CompanyUpdateArgs>(args: SelectSubset<T, CompanyUpdateArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Companies.
+     * @param {CompanyDeleteManyArgs} args - Arguments to filter Companies to delete.
+     * @example
+     * // Delete a few Companies
+     * const { count } = await prisma.company.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CompanyDeleteManyArgs>(args?: SelectSubset<T, CompanyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Companies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Companies
+     * const company = await prisma.company.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CompanyUpdateManyArgs>(args: SelectSubset<T, CompanyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Companies and returns the data updated in the database.
+     * @param {CompanyUpdateManyAndReturnArgs} args - Arguments to update many Companies.
+     * @example
+     * // Update many Companies
+     * const company = await prisma.company.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Companies and only return the `id`
+     * const companyWithIdOnly = await prisma.company.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CompanyUpdateManyAndReturnArgs>(args: SelectSubset<T, CompanyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Company.
+     * @param {CompanyUpsertArgs} args - Arguments to update or create a Company.
+     * @example
+     * // Update or create a Company
+     * const company = await prisma.company.upsert({
+     *   create: {
+     *     // ... data to create a Company
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Company we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CompanyUpsertArgs>(args: SelectSubset<T, CompanyUpsertArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Companies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyCountArgs} args - Arguments to filter Companies to count.
+     * @example
+     * // Count the number of Companies
+     * const count = await prisma.company.count({
+     *   where: {
+     *     // ... the filter for the Companies we want to count
+     *   }
+     * })
+    **/
+    count<T extends CompanyCountArgs>(
+      args?: Subset<T, CompanyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CompanyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Company.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CompanyAggregateArgs>(args: Subset<T, CompanyAggregateArgs>): Prisma.PrismaPromise<GetCompanyAggregateType<T>>
+
+    /**
+     * Group by Company.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CompanyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CompanyGroupByArgs['orderBy'] }
+        : { orderBy?: CompanyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CompanyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompanyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Company model
+   */
+  readonly fields: CompanyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Company.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends Company$usersArgs<ExtArgs> = {}>(args?: Subset<T, Company$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Company model
+   */
+  interface CompanyFieldRefs {
+    readonly id: FieldRef<"Company", 'String'>
+    readonly name: FieldRef<"Company", 'String'>
+    readonly createdAt: FieldRef<"Company", 'DateTime'>
+    readonly updatedAt: FieldRef<"Company", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Company findUnique
+   */
+  export type CompanyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company findUniqueOrThrow
+   */
+  export type CompanyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company findFirst
+   */
+  export type CompanyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Companies.
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Companies.
+     */
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Company findFirstOrThrow
+   */
+  export type CompanyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Company to fetch.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Companies.
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Companies.
+     */
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Company findMany
+   */
+  export type CompanyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter, which Companies to fetch.
+     */
+    where?: CompanyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Companies to fetch.
+     */
+    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Companies.
+     */
+    cursor?: CompanyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Companies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Companies.
+     */
+    skip?: number
+    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Company create
+   */
+  export type CompanyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Company.
+     */
+    data: XOR<CompanyCreateInput, CompanyUncheckedCreateInput>
+  }
+
+  /**
+   * Company createMany
+   */
+  export type CompanyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Companies.
+     */
+    data: CompanyCreateManyInput | CompanyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Company createManyAndReturn
+   */
+  export type CompanyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * The data used to create many Companies.
+     */
+    data: CompanyCreateManyInput | CompanyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Company update
+   */
+  export type CompanyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Company.
+     */
+    data: XOR<CompanyUpdateInput, CompanyUncheckedUpdateInput>
+    /**
+     * Choose, which Company to update.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company updateMany
+   */
+  export type CompanyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Companies.
+     */
+    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyInput>
+    /**
+     * Filter which Companies to update
+     */
+    where?: CompanyWhereInput
+    /**
+     * Limit how many Companies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Company updateManyAndReturn
+   */
+  export type CompanyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * The data used to update Companies.
+     */
+    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyInput>
+    /**
+     * Filter which Companies to update
+     */
+    where?: CompanyWhereInput
+    /**
+     * Limit how many Companies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Company upsert
+   */
+  export type CompanyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Company to update in case it exists.
+     */
+    where: CompanyWhereUniqueInput
+    /**
+     * In case the Company found by the `where` argument doesn't exist, create a new Company with this data.
+     */
+    create: XOR<CompanyCreateInput, CompanyUncheckedCreateInput>
+    /**
+     * In case the Company was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CompanyUpdateInput, CompanyUncheckedUpdateInput>
+  }
+
+  /**
+   * Company delete
+   */
+  export type CompanyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    /**
+     * Filter which Company to delete.
+     */
+    where: CompanyWhereUniqueInput
+  }
+
+  /**
+   * Company deleteMany
+   */
+  export type CompanyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Companies to delete
+     */
+    where?: CompanyWhereInput
+    /**
+     * Limit how many Companies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Company.users
+   */
+  export type Company$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Company without action
+   */
+  export type CompanyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
   }
 
 
@@ -47350,6 +48529,7 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: string | null
+    companyId: string | null
     name: string | null
     deleted: boolean | null
     email: string | null
@@ -47365,6 +48545,7 @@ export namespace Prisma {
 
   export type UserMaxAggregateOutputType = {
     id: string | null
+    companyId: string | null
     name: string | null
     deleted: boolean | null
     email: string | null
@@ -47380,6 +48561,7 @@ export namespace Prisma {
 
   export type UserCountAggregateOutputType = {
     id: number
+    companyId: number
     name: number
     deleted: number
     email: number
@@ -47397,6 +48579,7 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
+    companyId?: true
     name?: true
     deleted?: true
     email?: true
@@ -47412,6 +48595,7 @@ export namespace Prisma {
 
   export type UserMaxAggregateInputType = {
     id?: true
+    companyId?: true
     name?: true
     deleted?: true
     email?: true
@@ -47427,6 +48611,7 @@ export namespace Prisma {
 
   export type UserCountAggregateInputType = {
     id?: true
+    companyId?: true
     name?: true
     deleted?: true
     email?: true
@@ -47515,6 +48700,7 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
+    companyId: string | null
     name: string | null
     deleted: boolean
     email: string | null
@@ -47547,6 +48733,7 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    companyId?: boolean
     name?: boolean
     deleted?: boolean
     email?: boolean
@@ -47560,30 +48747,32 @@ export namespace Prisma {
     updatedAt?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
-    clients?: boolean | User$clientsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    queries?: boolean | User$queriesArgs<ExtArgs>
-    conversations?: boolean | User$conversationsArgs<ExtArgs>
-    clientConversations?: boolean | User$clientConversationsArgs<ExtArgs>
-    sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
-    receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
-    settings?: boolean | User$settingsArgs<ExtArgs>
-    givenRatings?: boolean | User$givenRatingsArgs<ExtArgs>
-    receivedRatings?: boolean | User$receivedRatingsArgs<ExtArgs>
-    assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
-    clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
-    ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
     activities?: boolean | User$activitiesArgs<ExtArgs>
-    userToGaAccounts?: boolean | User$userToGaAccountsArgs<ExtArgs>
+    assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
+    clientConversations?: boolean | User$clientConversationsArgs<ExtArgs>
+    clients?: boolean | User$clientsArgs<ExtArgs>
+    clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
+    conversations?: boolean | User$conversationsArgs<ExtArgs>
     gaImportRuns?: boolean | User$gaImportRunsArgs<ExtArgs>
+    givenRatings?: boolean | User$givenRatingsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
+    queries?: boolean | User$queriesArgs<ExtArgs>
+    receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
+    receivedRatings?: boolean | User$receivedRatingsArgs<ExtArgs>
+    sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    settings?: boolean | User$settingsArgs<ExtArgs>
     sproutSocialAccounts?: boolean | User$sproutSocialAccountsArgs<ExtArgs>
+    ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
+    userToGaAccounts?: boolean | User$userToGaAccountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    companyId?: boolean
     name?: boolean
     deleted?: boolean
     email?: boolean
@@ -47597,10 +48786,12 @@ export namespace Prisma {
     updatedAt?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    companyId?: boolean
     name?: boolean
     deleted?: boolean
     email?: boolean
@@ -47614,10 +48805,12 @@ export namespace Prisma {
     updatedAt?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
+    companyId?: boolean
     name?: boolean
     deleted?: boolean
     email?: boolean
@@ -47631,38 +48824,41 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "deleted" | "email" | "password" | "emailVerified" | "image" | "roleId" | "isActive" | "accountRepId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "name" | "deleted" | "email" | "password" | "emailVerified" | "image" | "roleId" | "isActive" | "accountRepId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
-    clients?: boolean | User$clientsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    queries?: boolean | User$queriesArgs<ExtArgs>
-    conversations?: boolean | User$conversationsArgs<ExtArgs>
-    clientConversations?: boolean | User$clientConversationsArgs<ExtArgs>
-    sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
-    receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
-    settings?: boolean | User$settingsArgs<ExtArgs>
-    givenRatings?: boolean | User$givenRatingsArgs<ExtArgs>
-    receivedRatings?: boolean | User$receivedRatingsArgs<ExtArgs>
-    assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
-    clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
-    ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
     activities?: boolean | User$activitiesArgs<ExtArgs>
-    userToGaAccounts?: boolean | User$userToGaAccountsArgs<ExtArgs>
+    assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
+    clientConversations?: boolean | User$clientConversationsArgs<ExtArgs>
+    clients?: boolean | User$clientsArgs<ExtArgs>
+    clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
+    conversations?: boolean | User$conversationsArgs<ExtArgs>
     gaImportRuns?: boolean | User$gaImportRunsArgs<ExtArgs>
+    givenRatings?: boolean | User$givenRatingsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
+    queries?: boolean | User$queriesArgs<ExtArgs>
+    receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
+    receivedRatings?: boolean | User$receivedRatingsArgs<ExtArgs>
+    sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    settings?: boolean | User$settingsArgs<ExtArgs>
     sproutSocialAccounts?: boolean | User$sproutSocialAccountsArgs<ExtArgs>
+    ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
+    userToGaAccounts?: boolean | User$userToGaAccountsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
+    company?: boolean | User$companyArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -47670,28 +48866,30 @@ export namespace Prisma {
     objects: {
       role: Prisma.$RolePayload<ExtArgs>
       accountRep: Prisma.$UserPayload<ExtArgs> | null
-      clients: Prisma.$UserPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
-      queries: Prisma.$QueryPayload<ExtArgs>[]
-      conversations: Prisma.$ConversationPayload<ExtArgs>[]
-      clientConversations: Prisma.$ConversationPayload<ExtArgs>[]
-      sentMessages: Prisma.$MessagePayload<ExtArgs>[]
-      receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
-      notifications: Prisma.$NotificationPayload<ExtArgs>[]
-      settings: Prisma.$UserSettingsPayload<ExtArgs> | null
-      givenRatings: Prisma.$ClientSatisfactionPayload<ExtArgs>[]
-      receivedRatings: Prisma.$ClientSatisfactionPayload<ExtArgs>[]
-      assignedTickets: Prisma.$TicketPayload<ExtArgs>[]
-      clientTickets: Prisma.$TicketPayload<ExtArgs>[]
-      ticketComments: Prisma.$TicketCommentPayload<ExtArgs>[]
       activities: Prisma.$ClientActivityPayload<ExtArgs>[]
-      userToGaAccounts: Prisma.$UserToGaAccountPayload<ExtArgs>[]
+      assignedTickets: Prisma.$TicketPayload<ExtArgs>[]
+      clientConversations: Prisma.$ConversationPayload<ExtArgs>[]
+      clients: Prisma.$UserPayload<ExtArgs>[]
+      clientTickets: Prisma.$TicketPayload<ExtArgs>[]
+      company: Prisma.$CompanyPayload<ExtArgs> | null
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
       gaImportRuns: Prisma.$GaImportRunPayload<ExtArgs>[]
+      givenRatings: Prisma.$ClientSatisfactionPayload<ExtArgs>[]
+      notifications: Prisma.$NotificationPayload<ExtArgs>[]
+      queries: Prisma.$QueryPayload<ExtArgs>[]
+      receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
+      receivedRatings: Prisma.$ClientSatisfactionPayload<ExtArgs>[]
+      sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
+      settings: Prisma.$UserSettingsPayload<ExtArgs> | null
       sproutSocialAccounts: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
+      ticketComments: Prisma.$TicketCommentPayload<ExtArgs>[]
+      userToGaAccounts: Prisma.$UserToGaAccountPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      companyId: string | null
       name: string | null
       deleted: boolean
       email: string | null
@@ -48099,25 +49297,26 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     accountRep<T extends User$accountRepArgs<ExtArgs> = {}>(args?: Subset<T, User$accountRepArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    clients<T extends User$clientsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    queries<T extends User$queriesArgs<ExtArgs> = {}>(args?: Subset<T, User$queriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QueryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    conversations<T extends User$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    clientConversations<T extends User$clientConversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    receivedMessages<T extends User$receivedMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    settings<T extends User$settingsArgs<ExtArgs> = {}>(args?: Subset<T, User$settingsArgs<ExtArgs>>): Prisma__UserSettingsClient<$Result.GetResult<Prisma.$UserSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    givenRatings<T extends User$givenRatingsArgs<ExtArgs> = {}>(args?: Subset<T, User$givenRatingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientSatisfactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    receivedRatings<T extends User$receivedRatingsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedRatingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientSatisfactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    assignedTickets<T extends User$assignedTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    clientTickets<T extends User$clientTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ticketComments<T extends User$ticketCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activities<T extends User$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    userToGaAccounts<T extends User$userToGaAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$userToGaAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assignedTickets<T extends User$assignedTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientConversations<T extends User$clientConversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clients<T extends User$clientsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientTickets<T extends User$clientTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    company<T extends User$companyArgs<ExtArgs> = {}>(args?: Subset<T, User$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    conversations<T extends User$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gaImportRuns<T extends User$gaImportRunsArgs<ExtArgs> = {}>(args?: Subset<T, User$gaImportRunsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GaImportRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    givenRatings<T extends User$givenRatingsArgs<ExtArgs> = {}>(args?: Subset<T, User$givenRatingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientSatisfactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    queries<T extends User$queriesArgs<ExtArgs> = {}>(args?: Subset<T, User$queriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QueryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    receivedMessages<T extends User$receivedMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    receivedRatings<T extends User$receivedRatingsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedRatingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientSatisfactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    settings<T extends User$settingsArgs<ExtArgs> = {}>(args?: Subset<T, User$settingsArgs<ExtArgs>>): Prisma__UserSettingsClient<$Result.GetResult<Prisma.$UserSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sproutSocialAccounts<T extends User$sproutSocialAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$sproutSocialAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ticketComments<T extends User$ticketCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userToGaAccounts<T extends User$userToGaAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$userToGaAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToGaAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -48148,6 +49347,7 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
+    readonly companyId: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly deleted: FieldRef<"User", 'Boolean'>
     readonly email: FieldRef<"User", 'String'>
@@ -48574,30 +49774,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.clients
-   */
-  export type User$clientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
    * User.accounts
    */
   export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -48619,313 +49795,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
-   * User.sessions
-   */
-  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Session
-     */
-    omit?: SessionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
-   * User.queries
-   */
-  export type User$queriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Query
-     */
-    select?: QuerySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Query
-     */
-    omit?: QueryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: QueryInclude<ExtArgs> | null
-    where?: QueryWhereInput
-    orderBy?: QueryOrderByWithRelationInput | QueryOrderByWithRelationInput[]
-    cursor?: QueryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: QueryScalarFieldEnum | QueryScalarFieldEnum[]
-  }
-
-  /**
-   * User.conversations
-   */
-  export type User$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Conversation
-     */
-    select?: ConversationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Conversation
-     */
-    omit?: ConversationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConversationInclude<ExtArgs> | null
-    where?: ConversationWhereInput
-    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
-    cursor?: ConversationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
-  }
-
-  /**
-   * User.clientConversations
-   */
-  export type User$clientConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Conversation
-     */
-    select?: ConversationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Conversation
-     */
-    omit?: ConversationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConversationInclude<ExtArgs> | null
-    where?: ConversationWhereInput
-    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
-    cursor?: ConversationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
-  }
-
-  /**
-   * User.sentMessages
-   */
-  export type User$sentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-    where?: MessageWhereInput
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
-    cursor?: MessageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
-  }
-
-  /**
-   * User.receivedMessages
-   */
-  export type User$receivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-    where?: MessageWhereInput
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
-    cursor?: MessageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
-  }
-
-  /**
-   * User.notifications
-   */
-  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Notification
-     */
-    select?: NotificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Notification
-     */
-    omit?: NotificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NotificationInclude<ExtArgs> | null
-    where?: NotificationWhereInput
-    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
-    cursor?: NotificationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
-  }
-
-  /**
-   * User.settings
-   */
-  export type User$settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserSettings
-     */
-    select?: UserSettingsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserSettings
-     */
-    omit?: UserSettingsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserSettingsInclude<ExtArgs> | null
-    where?: UserSettingsWhereInput
-  }
-
-  /**
-   * User.givenRatings
-   */
-  export type User$givenRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ClientSatisfaction
-     */
-    select?: ClientSatisfactionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ClientSatisfaction
-     */
-    omit?: ClientSatisfactionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientSatisfactionInclude<ExtArgs> | null
-    where?: ClientSatisfactionWhereInput
-    orderBy?: ClientSatisfactionOrderByWithRelationInput | ClientSatisfactionOrderByWithRelationInput[]
-    cursor?: ClientSatisfactionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ClientSatisfactionScalarFieldEnum | ClientSatisfactionScalarFieldEnum[]
-  }
-
-  /**
-   * User.receivedRatings
-   */
-  export type User$receivedRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ClientSatisfaction
-     */
-    select?: ClientSatisfactionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ClientSatisfaction
-     */
-    omit?: ClientSatisfactionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientSatisfactionInclude<ExtArgs> | null
-    where?: ClientSatisfactionWhereInput
-    orderBy?: ClientSatisfactionOrderByWithRelationInput | ClientSatisfactionOrderByWithRelationInput[]
-    cursor?: ClientSatisfactionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ClientSatisfactionScalarFieldEnum | ClientSatisfactionScalarFieldEnum[]
-  }
-
-  /**
-   * User.assignedTickets
-   */
-  export type User$assignedTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ticket
-     */
-    select?: TicketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ticket
-     */
-    omit?: TicketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketInclude<ExtArgs> | null
-    where?: TicketWhereInput
-    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
-    cursor?: TicketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
-  }
-
-  /**
-   * User.clientTickets
-   */
-  export type User$clientTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ticket
-     */
-    select?: TicketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ticket
-     */
-    omit?: TicketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketInclude<ExtArgs> | null
-    where?: TicketWhereInput
-    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
-    cursor?: TicketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
-  }
-
-  /**
-   * User.ticketComments
-   */
-  export type User$ticketCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TicketComment
-     */
-    select?: TicketCommentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TicketComment
-     */
-    omit?: TicketCommentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TicketCommentInclude<ExtArgs> | null
-    where?: TicketCommentWhereInput
-    orderBy?: TicketCommentOrderByWithRelationInput | TicketCommentOrderByWithRelationInput[]
-    cursor?: TicketCommentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TicketCommentScalarFieldEnum | TicketCommentScalarFieldEnum[]
   }
 
   /**
@@ -48953,27 +49822,142 @@ export namespace Prisma {
   }
 
   /**
-   * User.userToGaAccounts
+   * User.assignedTickets
    */
-  export type User$userToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$assignedTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserToGaAccount
+     * Select specific fields to fetch from the Ticket
      */
-    select?: UserToGaAccountSelect<ExtArgs> | null
+    select?: TicketSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserToGaAccount
+     * Omit specific fields from the Ticket
      */
-    omit?: UserToGaAccountOmit<ExtArgs> | null
+    omit?: TicketOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserToGaAccountInclude<ExtArgs> | null
-    where?: UserToGaAccountWhereInput
-    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
-    cursor?: UserToGaAccountWhereUniqueInput
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    cursor?: TicketWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientConversations
+   */
+  export type User$clientConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * User.clients
+   */
+  export type User$clientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientTickets
+   */
+  export type User$clientTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    cursor?: TicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * User.company
+   */
+  export type User$companyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    where?: CompanyWhereInput
+  }
+
+  /**
+   * User.conversations
+   */
+  export type User$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
   }
 
   /**
@@ -49001,6 +49985,193 @@ export namespace Prisma {
   }
 
   /**
+   * User.givenRatings
+   */
+  export type User$givenRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientSatisfaction
+     */
+    select?: ClientSatisfactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientSatisfaction
+     */
+    omit?: ClientSatisfactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientSatisfactionInclude<ExtArgs> | null
+    where?: ClientSatisfactionWhereInput
+    orderBy?: ClientSatisfactionOrderByWithRelationInput | ClientSatisfactionOrderByWithRelationInput[]
+    cursor?: ClientSatisfactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientSatisfactionScalarFieldEnum | ClientSatisfactionScalarFieldEnum[]
+  }
+
+  /**
+   * User.notifications
+   */
+  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.queries
+   */
+  export type User$queriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Query
+     */
+    select?: QuerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Query
+     */
+    omit?: QueryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QueryInclude<ExtArgs> | null
+    where?: QueryWhereInput
+    orderBy?: QueryOrderByWithRelationInput | QueryOrderByWithRelationInput[]
+    cursor?: QueryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QueryScalarFieldEnum | QueryScalarFieldEnum[]
+  }
+
+  /**
+   * User.receivedMessages
+   */
+  export type User$receivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.receivedRatings
+   */
+  export type User$receivedRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientSatisfaction
+     */
+    select?: ClientSatisfactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientSatisfaction
+     */
+    omit?: ClientSatisfactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientSatisfactionInclude<ExtArgs> | null
+    where?: ClientSatisfactionWhereInput
+    orderBy?: ClientSatisfactionOrderByWithRelationInput | ClientSatisfactionOrderByWithRelationInput[]
+    cursor?: ClientSatisfactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientSatisfactionScalarFieldEnum | ClientSatisfactionScalarFieldEnum[]
+  }
+
+  /**
+   * User.sentMessages
+   */
+  export type User$sentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.sessions
+   */
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.settings
+   */
+  export type User$settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSettings
+     */
+    select?: UserSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSettings
+     */
+    omit?: UserSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSettingsInclude<ExtArgs> | null
+    where?: UserSettingsWhereInput
+  }
+
+  /**
    * User.sproutSocialAccounts
    */
   export type User$sproutSocialAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -49022,6 +50193,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.ticketComments
+   */
+  export type User$ticketCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketComment
+     */
+    select?: TicketCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketComment
+     */
+    omit?: TicketCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketCommentInclude<ExtArgs> | null
+    where?: TicketCommentWhereInput
+    orderBy?: TicketCommentOrderByWithRelationInput | TicketCommentOrderByWithRelationInput[]
+    cursor?: TicketCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketCommentScalarFieldEnum | TicketCommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.userToGaAccounts
+   */
+  export type User$userToGaAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserToGaAccount
+     */
+    select?: UserToGaAccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserToGaAccount
+     */
+    omit?: UserToGaAccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserToGaAccountInclude<ExtArgs> | null
+    where?: UserToGaAccountWhereInput
+    orderBy?: UserToGaAccountOrderByWithRelationInput | UserToGaAccountOrderByWithRelationInput[]
+    cursor?: UserToGaAccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserToGaAccountScalarFieldEnum | UserToGaAccountScalarFieldEnum[]
   }
 
   /**
@@ -56837,6 +58056,16 @@ export namespace Prisma {
   export type ClientSatisfactionScalarFieldEnum = (typeof ClientSatisfactionScalarFieldEnum)[keyof typeof ClientSatisfactionScalarFieldEnum]
 
 
+  export const CompanyScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
   export const ConversationScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -57397,6 +58626,7 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
+    companyId: 'companyId',
     name: 'name',
     deleted: 'deleted',
     email: 'email',
@@ -57867,6 +59097,56 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ClientSatisfaction"> | Date | string
     userId?: StringWithAggregatesFilter<"ClientSatisfaction"> | string
     accountRepId?: StringWithAggregatesFilter<"ClientSatisfaction"> | string
+  }
+
+  export type CompanyWhereInput = {
+    AND?: CompanyWhereInput | CompanyWhereInput[]
+    OR?: CompanyWhereInput[]
+    NOT?: CompanyWhereInput | CompanyWhereInput[]
+    id?: StringFilter<"Company"> | string
+    name?: StringFilter<"Company"> | string
+    createdAt?: DateTimeFilter<"Company"> | Date | string
+    updatedAt?: DateTimeFilter<"Company"> | Date | string
+    users?: UserListRelationFilter
+  }
+
+  export type CompanyOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    users?: UserOrderByRelationAggregateInput
+  }
+
+  export type CompanyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CompanyWhereInput | CompanyWhereInput[]
+    OR?: CompanyWhereInput[]
+    NOT?: CompanyWhereInput | CompanyWhereInput[]
+    name?: StringFilter<"Company"> | string
+    createdAt?: DateTimeFilter<"Company"> | Date | string
+    updatedAt?: DateTimeFilter<"Company"> | Date | string
+    users?: UserListRelationFilter
+  }, "id">
+
+  export type CompanyOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CompanyCountOrderByAggregateInput
+    _max?: CompanyMaxOrderByAggregateInput
+    _min?: CompanyMinOrderByAggregateInput
+  }
+
+  export type CompanyScalarWhereWithAggregatesInput = {
+    AND?: CompanyScalarWhereWithAggregatesInput | CompanyScalarWhereWithAggregatesInput[]
+    OR?: CompanyScalarWhereWithAggregatesInput[]
+    NOT?: CompanyScalarWhereWithAggregatesInput | CompanyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Company"> | string
+    name?: StringWithAggregatesFilter<"Company"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
   }
 
   export type ConversationWhereInput = {
@@ -60812,6 +62092,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
+    companyId?: StringNullableFilter<"User"> | string | null
     name?: StringNullableFilter<"User"> | string | null
     deleted?: BoolFilter<"User"> | boolean
     email?: StringNullableFilter<"User"> | string | null
@@ -60825,29 +62106,31 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     accountRep?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    clients?: UserListRelationFilter
     accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
-    queries?: QueryListRelationFilter
-    conversations?: ConversationListRelationFilter
-    clientConversations?: ConversationListRelationFilter
-    sentMessages?: MessageListRelationFilter
-    receivedMessages?: MessageListRelationFilter
-    notifications?: NotificationListRelationFilter
-    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
-    givenRatings?: ClientSatisfactionListRelationFilter
-    receivedRatings?: ClientSatisfactionListRelationFilter
-    assignedTickets?: TicketListRelationFilter
-    clientTickets?: TicketListRelationFilter
-    ticketComments?: TicketCommentListRelationFilter
     activities?: ClientActivityListRelationFilter
-    userToGaAccounts?: UserToGaAccountListRelationFilter
+    assignedTickets?: TicketListRelationFilter
+    clientConversations?: ConversationListRelationFilter
+    clients?: UserListRelationFilter
+    clientTickets?: TicketListRelationFilter
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    conversations?: ConversationListRelationFilter
     gaImportRuns?: GaImportRunListRelationFilter
+    givenRatings?: ClientSatisfactionListRelationFilter
+    notifications?: NotificationListRelationFilter
+    queries?: QueryListRelationFilter
+    receivedMessages?: MessageListRelationFilter
+    receivedRatings?: ClientSatisfactionListRelationFilter
+    sentMessages?: MessageListRelationFilter
+    sessions?: SessionListRelationFilter
+    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
     sproutSocialAccounts?: UserToSproutSocialAccountListRelationFilter
+    ticketComments?: TicketCommentListRelationFilter
+    userToGaAccounts?: UserToGaAccountListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
+    companyId?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
     deleted?: SortOrder
     email?: SortOrderInput | SortOrder
@@ -60861,25 +62144,26 @@ export namespace Prisma {
     updatedAt?: SortOrder
     role?: RoleOrderByWithRelationInput
     accountRep?: UserOrderByWithRelationInput
-    clients?: UserOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
-    sessions?: SessionOrderByRelationAggregateInput
-    queries?: QueryOrderByRelationAggregateInput
-    conversations?: ConversationOrderByRelationAggregateInput
-    clientConversations?: ConversationOrderByRelationAggregateInput
-    sentMessages?: MessageOrderByRelationAggregateInput
-    receivedMessages?: MessageOrderByRelationAggregateInput
-    notifications?: NotificationOrderByRelationAggregateInput
-    settings?: UserSettingsOrderByWithRelationInput
-    givenRatings?: ClientSatisfactionOrderByRelationAggregateInput
-    receivedRatings?: ClientSatisfactionOrderByRelationAggregateInput
-    assignedTickets?: TicketOrderByRelationAggregateInput
-    clientTickets?: TicketOrderByRelationAggregateInput
-    ticketComments?: TicketCommentOrderByRelationAggregateInput
     activities?: ClientActivityOrderByRelationAggregateInput
-    userToGaAccounts?: UserToGaAccountOrderByRelationAggregateInput
+    assignedTickets?: TicketOrderByRelationAggregateInput
+    clientConversations?: ConversationOrderByRelationAggregateInput
+    clients?: UserOrderByRelationAggregateInput
+    clientTickets?: TicketOrderByRelationAggregateInput
+    company?: CompanyOrderByWithRelationInput
+    conversations?: ConversationOrderByRelationAggregateInput
     gaImportRuns?: GaImportRunOrderByRelationAggregateInput
+    givenRatings?: ClientSatisfactionOrderByRelationAggregateInput
+    notifications?: NotificationOrderByRelationAggregateInput
+    queries?: QueryOrderByRelationAggregateInput
+    receivedMessages?: MessageOrderByRelationAggregateInput
+    receivedRatings?: ClientSatisfactionOrderByRelationAggregateInput
+    sentMessages?: MessageOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
+    settings?: UserSettingsOrderByWithRelationInput
     sproutSocialAccounts?: UserToSproutSocialAccountOrderByRelationAggregateInput
+    ticketComments?: TicketCommentOrderByRelationAggregateInput
+    userToGaAccounts?: UserToGaAccountOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -60888,6 +62172,7 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    companyId?: StringNullableFilter<"User"> | string | null
     name?: StringNullableFilter<"User"> | string | null
     deleted?: BoolFilter<"User"> | boolean
     password?: StringNullableFilter<"User"> | string | null
@@ -60900,29 +62185,31 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     accountRep?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    clients?: UserListRelationFilter
     accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
-    queries?: QueryListRelationFilter
-    conversations?: ConversationListRelationFilter
-    clientConversations?: ConversationListRelationFilter
-    sentMessages?: MessageListRelationFilter
-    receivedMessages?: MessageListRelationFilter
-    notifications?: NotificationListRelationFilter
-    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
-    givenRatings?: ClientSatisfactionListRelationFilter
-    receivedRatings?: ClientSatisfactionListRelationFilter
-    assignedTickets?: TicketListRelationFilter
-    clientTickets?: TicketListRelationFilter
-    ticketComments?: TicketCommentListRelationFilter
     activities?: ClientActivityListRelationFilter
-    userToGaAccounts?: UserToGaAccountListRelationFilter
+    assignedTickets?: TicketListRelationFilter
+    clientConversations?: ConversationListRelationFilter
+    clients?: UserListRelationFilter
+    clientTickets?: TicketListRelationFilter
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    conversations?: ConversationListRelationFilter
     gaImportRuns?: GaImportRunListRelationFilter
+    givenRatings?: ClientSatisfactionListRelationFilter
+    notifications?: NotificationListRelationFilter
+    queries?: QueryListRelationFilter
+    receivedMessages?: MessageListRelationFilter
+    receivedRatings?: ClientSatisfactionListRelationFilter
+    sentMessages?: MessageListRelationFilter
+    sessions?: SessionListRelationFilter
+    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
     sproutSocialAccounts?: UserToSproutSocialAccountListRelationFilter
+    ticketComments?: TicketCommentListRelationFilter
+    userToGaAccounts?: UserToGaAccountListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
+    companyId?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
     deleted?: SortOrder
     email?: SortOrderInput | SortOrder
@@ -60944,6 +62231,7 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
+    companyId?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     deleted?: BoolWithAggregatesFilter<"User"> | boolean
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -61579,6 +62867,59 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     accountRepId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CompanyCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CompanyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompanyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConversationCreateInput = {
@@ -64889,29 +66230,31 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -64923,25 +66266,25 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -64957,29 +66300,31 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -64991,29 +66336,30 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -65042,6 +66388,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -65778,6 +67125,37 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CompanyCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CompanyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CompanyMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -66776,16 +68154,6 @@ export namespace Prisma {
     identifier?: SortOrder
     token?: SortOrder
     expires?: SortOrder
-  }
-
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type RoleCountOrderByAggregateInput = {
@@ -68151,27 +69519,10 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
-  }
-
-  export type NotificationListRelationFilter = {
-    every?: NotificationWhereInput
-    some?: NotificationWhereInput
-    none?: NotificationWhereInput
-  }
-
-  export type UserSettingsNullableScalarRelationFilter = {
-    is?: UserSettingsWhereInput | null
-    isNot?: UserSettingsWhereInput | null
-  }
-
-  export type ClientSatisfactionListRelationFilter = {
-    every?: ClientSatisfactionWhereInput
-    some?: ClientSatisfactionWhereInput
-    none?: ClientSatisfactionWhereInput
+  export type ClientActivityListRelationFilter = {
+    every?: ClientActivityWhereInput
+    some?: ClientActivityWhereInput
+    none?: ClientActivityWhereInput
   }
 
   export type TicketListRelationFilter = {
@@ -68180,39 +69531,41 @@ export namespace Prisma {
     none?: TicketWhereInput
   }
 
+  export type CompanyNullableScalarRelationFilter = {
+    is?: CompanyWhereInput | null
+    isNot?: CompanyWhereInput | null
+  }
+
+  export type ClientSatisfactionListRelationFilter = {
+    every?: ClientSatisfactionWhereInput
+    some?: ClientSatisfactionWhereInput
+    none?: ClientSatisfactionWhereInput
+  }
+
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
+  }
+
+  export type UserSettingsNullableScalarRelationFilter = {
+    is?: UserSettingsWhereInput | null
+    isNot?: UserSettingsWhereInput | null
+  }
+
   export type TicketCommentListRelationFilter = {
     every?: TicketCommentWhereInput
     some?: TicketCommentWhereInput
     none?: TicketCommentWhereInput
   }
 
-  export type ClientActivityListRelationFilter = {
-    every?: ClientActivityWhereInput
-    some?: ClientActivityWhereInput
-    none?: ClientActivityWhereInput
-  }
-
   export type AccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NotificationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ClientSatisfactionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TicketOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TicketCommentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -68220,8 +69573,29 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type TicketOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientSatisfactionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TicketCommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
+    companyId?: SortOrder
     name?: SortOrder
     deleted?: SortOrder
     email?: SortOrder
@@ -68237,6 +69611,7 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
+    companyId?: SortOrder
     name?: SortOrder
     deleted?: SortOrder
     email?: SortOrder
@@ -68252,6 +69627,7 @@ export namespace Prisma {
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
+    companyId?: SortOrder
     name?: SortOrder
     deleted?: SortOrder
     email?: SortOrder
@@ -68645,6 +70021,48 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutReceivedRatingsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReceivedRatingsInput, UserUpdateWithoutReceivedRatingsInput>, UserUncheckedUpdateWithoutReceivedRatingsInput>
+  }
+
+  export type UserCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCompanyInput | UserUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCompanyInput | UserUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCompanyInput | UserUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCompanyInput | UserUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCompanyInput | UserUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCompanyInput | UserUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutConversationsInput = {
@@ -70502,108 +71920,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type UserCreateNestedManyWithoutAccountRepInput = {
-    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
-    createMany?: UserCreateManyAccountRepInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type QueryCreateNestedManyWithoutUserInput = {
-    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
-    createMany?: QueryCreateManyUserInputEnvelope
-    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-  }
-
-  export type ConversationCreateNestedManyWithoutUserInput = {
-    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
-    createMany?: ConversationCreateManyUserInputEnvelope
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-  }
-
-  export type ConversationCreateNestedManyWithoutClientInput = {
-    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
-    createMany?: ConversationCreateManyClientInputEnvelope
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-  }
-
-  export type MessageCreateNestedManyWithoutSenderInput = {
-    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
-    createMany?: MessageCreateManySenderInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
-  export type MessageCreateNestedManyWithoutRecipientInput = {
-    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
-    createMany?: MessageCreateManyRecipientInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
-  export type NotificationCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
-  export type UserSettingsCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    connect?: UserSettingsWhereUniqueInput
-  }
-
-  export type ClientSatisfactionCreateNestedManyWithoutUserInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
-    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-  }
-
-  export type ClientSatisfactionCreateNestedManyWithoutAccountRepInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
-    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-  }
-
-  export type TicketCreateNestedManyWithoutAssignedToInput = {
-    create?: XOR<TicketCreateWithoutAssignedToInput, TicketUncheckedCreateWithoutAssignedToInput> | TicketCreateWithoutAssignedToInput[] | TicketUncheckedCreateWithoutAssignedToInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutAssignedToInput | TicketCreateOrConnectWithoutAssignedToInput[]
-    createMany?: TicketCreateManyAssignedToInputEnvelope
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type TicketCreateNestedManyWithoutClientInput = {
-    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
-    createMany?: TicketCreateManyClientInputEnvelope
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-  }
-
-  export type TicketCommentCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
-    createMany?: TicketCommentCreateManyAuthorInputEnvelope
-    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
   }
 
   export type ClientActivityCreateNestedManyWithoutUserInput = {
@@ -70613,11 +71934,45 @@ export namespace Prisma {
     connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
   }
 
-  export type UserToGaAccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
-    createMany?: UserToGaAccountCreateManyUserInputEnvelope
-    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+  export type TicketCreateNestedManyWithoutAssignedToInput = {
+    create?: XOR<TicketCreateWithoutAssignedToInput, TicketUncheckedCreateWithoutAssignedToInput> | TicketCreateWithoutAssignedToInput[] | TicketUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutAssignedToInput | TicketCreateOrConnectWithoutAssignedToInput[]
+    createMany?: TicketCreateManyAssignedToInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type ConversationCreateNestedManyWithoutClientInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutAccountRepInput = {
+    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
+    createMany?: UserCreateManyAccountRepInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type TicketCreateNestedManyWithoutClientInput = {
+    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
+    createMany?: TicketCreateManyClientInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type CompanyCreateNestedOneWithoutUsersInput = {
+    create?: XOR<CompanyCreateWithoutUsersInput, CompanyUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUsersInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
   export type GaImportRunCreateNestedManyWithoutRequestedByInput = {
@@ -70627,6 +71982,61 @@ export namespace Prisma {
     connect?: GaImportRunWhereUniqueInput | GaImportRunWhereUniqueInput[]
   }
 
+  export type ClientSatisfactionCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
+    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+  }
+
+  export type NotificationCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type QueryCreateNestedManyWithoutUserInput = {
+    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
+    createMany?: QueryCreateManyUserInputEnvelope
+    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+  }
+
+  export type MessageCreateNestedManyWithoutRecipientInput = {
+    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
+    createMany?: MessageCreateManyRecipientInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ClientSatisfactionCreateNestedManyWithoutAccountRepInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
+    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+  }
+
+  export type MessageCreateNestedManyWithoutSenderInput = {
+    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
+    createMany?: MessageCreateManySenderInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type UserSettingsCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    connect?: UserSettingsWhereUniqueInput
+  }
+
   export type UserToSproutSocialAccountCreateNestedManyWithoutUserInput = {
     create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
@@ -70634,11 +72044,18 @@ export namespace Prisma {
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
   }
 
-  export type UserUncheckedCreateNestedManyWithoutAccountRepInput = {
-    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
-    createMany?: UserCreateManyAccountRepInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  export type TicketCommentCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: TicketCommentCreateManyAuthorInputEnvelope
+    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+  }
+
+  export type UserToGaAccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -70648,73 +72065,11 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type QueryUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
-    createMany?: QueryCreateManyUserInputEnvelope
-    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-  }
-
-  export type ConversationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
-    createMany?: ConversationCreateManyUserInputEnvelope
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-  }
-
-  export type ConversationUncheckedCreateNestedManyWithoutClientInput = {
-    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
-    createMany?: ConversationCreateManyClientInputEnvelope
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-  }
-
-  export type MessageUncheckedCreateNestedManyWithoutSenderInput = {
-    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
-    createMany?: MessageCreateManySenderInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
-  export type MessageUncheckedCreateNestedManyWithoutRecipientInput = {
-    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
-    createMany?: MessageCreateManyRecipientInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
-  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
-  export type UserSettingsUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    connect?: UserSettingsWhereUniqueInput
-  }
-
-  export type ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
-    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-  }
-
-  export type ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
-    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+  export type ClientActivityUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput> | ClientActivityCreateWithoutUserInput[] | ClientActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientActivityCreateOrConnectWithoutUserInput | ClientActivityCreateOrConnectWithoutUserInput[]
+    createMany?: ClientActivityCreateManyUserInputEnvelope
+    connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
   }
 
   export type TicketUncheckedCreateNestedManyWithoutAssignedToInput = {
@@ -70724,6 +72079,20 @@ export namespace Prisma {
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
   }
 
+  export type ConversationUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutAccountRepInput = {
+    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
+    createMany?: UserCreateManyAccountRepInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type TicketUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
     connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
@@ -70731,25 +72100,11 @@ export namespace Prisma {
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
   }
 
-  export type TicketCommentUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
-    createMany?: TicketCommentCreateManyAuthorInputEnvelope
-    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-  }
-
-  export type ClientActivityUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput> | ClientActivityCreateWithoutUserInput[] | ClientActivityUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ClientActivityCreateOrConnectWithoutUserInput | ClientActivityCreateOrConnectWithoutUserInput[]
-    createMany?: ClientActivityCreateManyUserInputEnvelope
-    connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
-  }
-
-  export type UserToGaAccountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
-    createMany?: UserToGaAccountCreateManyUserInputEnvelope
-    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+  export type ConversationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
   export type GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput = {
@@ -70759,11 +72114,80 @@ export namespace Prisma {
     connect?: GaImportRunWhereUniqueInput | GaImportRunWhereUniqueInput[]
   }
 
+  export type ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
+    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type QueryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
+    createMany?: QueryCreateManyUserInputEnvelope
+    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutRecipientInput = {
+    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
+    createMany?: MessageCreateManyRecipientInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
+    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
+    createMany?: MessageCreateManySenderInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type UserSettingsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    connect?: UserSettingsWhereUniqueInput
+  }
+
   export type UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
     createMany?: UserToSproutSocialAccountCreateManyUserInputEnvelope
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+  }
+
+  export type TicketCommentUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: TicketCommentCreateManyAuthorInputEnvelope
+    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+  }
+
+  export type UserToGaAccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -70788,20 +72212,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientsInput, UserUpdateWithoutClientsInput>, UserUncheckedUpdateWithoutClientsInput>
   }
 
-  export type UserUpdateManyWithoutAccountRepNestedInput = {
-    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAccountRepInput | UserUpsertWithWhereUniqueWithoutAccountRepInput[]
-    createMany?: UserCreateManyAccountRepInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAccountRepInput | UserUpdateWithWhereUniqueWithoutAccountRepInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAccountRepInput | UserUpdateManyWithWhereWithoutAccountRepInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
   export type AccountUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -70814,184 +72224,6 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type QueryUpdateManyWithoutUserNestedInput = {
-    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
-    upsert?: QueryUpsertWithWhereUniqueWithoutUserInput | QueryUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: QueryCreateManyUserInputEnvelope
-    set?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    disconnect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    delete?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    update?: QueryUpdateWithWhereUniqueWithoutUserInput | QueryUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: QueryUpdateManyWithWhereWithoutUserInput | QueryUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
-  }
-
-  export type ConversationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
-    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ConversationCreateManyUserInputEnvelope
-    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
-  }
-
-  export type ConversationUpdateManyWithoutClientNestedInput = {
-    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
-    upsert?: ConversationUpsertWithWhereUniqueWithoutClientInput | ConversationUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: ConversationCreateManyClientInputEnvelope
-    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    update?: ConversationUpdateWithWhereUniqueWithoutClientInput | ConversationUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: ConversationUpdateManyWithWhereWithoutClientInput | ConversationUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
-  }
-
-  export type MessageUpdateManyWithoutSenderNestedInput = {
-    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
-    createMany?: MessageCreateManySenderInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
-  }
-
-  export type MessageUpdateManyWithoutRecipientNestedInput = {
-    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutRecipientInput | MessageUpsertWithWhereUniqueWithoutRecipientInput[]
-    createMany?: MessageCreateManyRecipientInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutRecipientInput | MessageUpdateWithWhereUniqueWithoutRecipientInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutRecipientInput | MessageUpdateManyWithWhereWithoutRecipientInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
-  }
-
-  export type NotificationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
-  export type UserSettingsUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    upsert?: UserSettingsUpsertWithoutUserInput
-    disconnect?: UserSettingsWhereInput | boolean
-    delete?: UserSettingsWhereInput | boolean
-    connect?: UserSettingsWhereUniqueInput
-    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ClientSatisfactionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
-    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput | ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
-    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput | ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutUserInput | ClientSatisfactionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
-  }
-
-  export type ClientSatisfactionUpdateManyWithoutAccountRepNestedInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
-    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput[]
-    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
-    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput[]
-    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput | ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput[]
-    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
-  }
-
-  export type TicketUpdateManyWithoutAssignedToNestedInput = {
-    create?: XOR<TicketCreateWithoutAssignedToInput, TicketUncheckedCreateWithoutAssignedToInput> | TicketCreateWithoutAssignedToInput[] | TicketUncheckedCreateWithoutAssignedToInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutAssignedToInput | TicketCreateOrConnectWithoutAssignedToInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutAssignedToInput | TicketUpsertWithWhereUniqueWithoutAssignedToInput[]
-    createMany?: TicketCreateManyAssignedToInputEnvelope
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutAssignedToInput | TicketUpdateWithWhereUniqueWithoutAssignedToInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutAssignedToInput | TicketUpdateManyWithWhereWithoutAssignedToInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type TicketUpdateManyWithoutClientNestedInput = {
-    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
-    upsert?: TicketUpsertWithWhereUniqueWithoutClientInput | TicketUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: TicketCreateManyClientInputEnvelope
-    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
-    update?: TicketUpdateWithWhereUniqueWithoutClientInput | TicketUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: TicketUpdateManyWithWhereWithoutClientInput | TicketUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
-  }
-
-  export type TicketCommentUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
-    upsert?: TicketCommentUpsertWithWhereUniqueWithoutAuthorInput | TicketCommentUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: TicketCommentCreateManyAuthorInputEnvelope
-    set?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    disconnect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    delete?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    update?: TicketCommentUpdateWithWhereUniqueWithoutAuthorInput | TicketCommentUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: TicketCommentUpdateManyWithWhereWithoutAuthorInput | TicketCommentUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: TicketCommentScalarWhereInput | TicketCommentScalarWhereInput[]
   }
 
   export type ClientActivityUpdateManyWithoutUserNestedInput = {
@@ -71008,18 +72240,84 @@ export namespace Prisma {
     deleteMany?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
   }
 
-  export type UserToGaAccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
-    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutUserInput | UserToGaAccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserToGaAccountCreateManyUserInputEnvelope
-    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    update?: UserToGaAccountUpdateWithWhereUniqueWithoutUserInput | UserToGaAccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutUserInput | UserToGaAccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
+  export type TicketUpdateManyWithoutAssignedToNestedInput = {
+    create?: XOR<TicketCreateWithoutAssignedToInput, TicketUncheckedCreateWithoutAssignedToInput> | TicketCreateWithoutAssignedToInput[] | TicketUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutAssignedToInput | TicketCreateOrConnectWithoutAssignedToInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutAssignedToInput | TicketUpsertWithWhereUniqueWithoutAssignedToInput[]
+    createMany?: TicketCreateManyAssignedToInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutAssignedToInput | TicketUpdateWithWhereUniqueWithoutAssignedToInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutAssignedToInput | TicketUpdateManyWithWhereWithoutAssignedToInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type ConversationUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutClientInput | ConversationUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutClientInput | ConversationUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutClientInput | ConversationUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutAccountRepNestedInput = {
+    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutAccountRepInput | UserUpsertWithWhereUniqueWithoutAccountRepInput[]
+    createMany?: UserCreateManyAccountRepInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutAccountRepInput | UserUpdateWithWhereUniqueWithoutAccountRepInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutAccountRepInput | UserUpdateManyWithWhereWithoutAccountRepInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type TicketUpdateManyWithoutClientNestedInput = {
+    create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutClientInput | TicketUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: TicketCreateManyClientInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutClientInput | TicketUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutClientInput | TicketUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type CompanyUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<CompanyCreateWithoutUsersInput, CompanyUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUsersInput
+    upsert?: CompanyUpsertWithoutUsersInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUsersInput, CompanyUpdateWithoutUsersInput>, CompanyUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type ConversationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
   }
 
   export type GaImportRunUpdateManyWithoutRequestedByNestedInput = {
@@ -71036,6 +72334,114 @@ export namespace Prisma {
     deleteMany?: GaImportRunScalarWhereInput | GaImportRunScalarWhereInput[]
   }
 
+  export type ClientSatisfactionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
+    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput | ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
+    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput | ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutUserInput | ClientSatisfactionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+  }
+
+  export type NotificationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type QueryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
+    upsert?: QueryUpsertWithWhereUniqueWithoutUserInput | QueryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: QueryCreateManyUserInputEnvelope
+    set?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    disconnect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    delete?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    update?: QueryUpdateWithWhereUniqueWithoutUserInput | QueryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: QueryUpdateManyWithWhereWithoutUserInput | QueryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
+  }
+
+  export type MessageUpdateManyWithoutRecipientNestedInput = {
+    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutRecipientInput | MessageUpsertWithWhereUniqueWithoutRecipientInput[]
+    createMany?: MessageCreateManyRecipientInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutRecipientInput | MessageUpdateWithWhereUniqueWithoutRecipientInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutRecipientInput | MessageUpdateManyWithWhereWithoutRecipientInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ClientSatisfactionUpdateManyWithoutAccountRepNestedInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
+    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput[]
+    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
+    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput[]
+    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput | ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput[]
+    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+  }
+
+  export type MessageUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: MessageCreateManySenderInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type UserSettingsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    upsert?: UserSettingsUpsertWithoutUserInput
+    disconnect?: UserSettingsWhereInput | boolean
+    delete?: UserSettingsWhereInput | boolean
+    connect?: UserSettingsWhereUniqueInput
+    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
+  }
+
   export type UserToSproutSocialAccountUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
@@ -71050,18 +72456,32 @@ export namespace Prisma {
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
   }
 
-  export type UserUncheckedUpdateManyWithoutAccountRepNestedInput = {
-    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAccountRepInput | UserUpsertWithWhereUniqueWithoutAccountRepInput[]
-    createMany?: UserCreateManyAccountRepInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAccountRepInput | UserUpdateWithWhereUniqueWithoutAccountRepInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAccountRepInput | UserUpdateManyWithWhereWithoutAccountRepInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  export type TicketCommentUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: TicketCommentUpsertWithWhereUniqueWithoutAuthorInput | TicketCommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: TicketCommentCreateManyAuthorInputEnvelope
+    set?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    disconnect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    delete?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    update?: TicketCommentUpdateWithWhereUniqueWithoutAuthorInput | TicketCommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: TicketCommentUpdateManyWithWhereWithoutAuthorInput | TicketCommentUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: TicketCommentScalarWhereInput | TicketCommentScalarWhereInput[]
+  }
+
+  export type UserToGaAccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutUserInput | UserToGaAccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    update?: UserToGaAccountUpdateWithWhereUniqueWithoutUserInput | UserToGaAccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutUserInput | UserToGaAccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
   }
 
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -71078,140 +72498,18 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type QueryUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
-    upsert?: QueryUpsertWithWhereUniqueWithoutUserInput | QueryUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: QueryCreateManyUserInputEnvelope
-    set?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    disconnect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    delete?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
-    update?: QueryUpdateWithWhereUniqueWithoutUserInput | QueryUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: QueryUpdateManyWithWhereWithoutUserInput | QueryUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
-  }
-
-  export type ConversationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
-    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ConversationCreateManyUserInputEnvelope
-    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
-  }
-
-  export type ConversationUncheckedUpdateManyWithoutClientNestedInput = {
-    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
-    upsert?: ConversationUpsertWithWhereUniqueWithoutClientInput | ConversationUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: ConversationCreateManyClientInputEnvelope
-    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
-    update?: ConversationUpdateWithWhereUniqueWithoutClientInput | ConversationUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: ConversationUpdateManyWithWhereWithoutClientInput | ConversationUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
-  }
-
-  export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
-    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
-    createMany?: MessageCreateManySenderInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
-  }
-
-  export type MessageUncheckedUpdateManyWithoutRecipientNestedInput = {
-    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutRecipientInput | MessageUpsertWithWhereUniqueWithoutRecipientInput[]
-    createMany?: MessageCreateManyRecipientInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutRecipientInput | MessageUpdateWithWhereUniqueWithoutRecipientInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutRecipientInput | MessageUpdateManyWithWhereWithoutRecipientInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
-  }
-
-  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
-  export type UserSettingsUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    upsert?: UserSettingsUpsertWithoutUserInput
-    disconnect?: UserSettingsWhereInput | boolean
-    delete?: UserSettingsWhereInput | boolean
-    connect?: UserSettingsWhereUniqueInput
-    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
-    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput | ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
-    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput | ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutUserInput | ClientSatisfactionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
-  }
-
-  export type ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput = {
-    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
-    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
-    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput[]
-    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
-    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
-    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput[]
-    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput | ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput[]
-    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+  export type ClientActivityUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput> | ClientActivityCreateWithoutUserInput[] | ClientActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientActivityCreateOrConnectWithoutUserInput | ClientActivityCreateOrConnectWithoutUserInput[]
+    upsert?: ClientActivityUpsertWithWhereUniqueWithoutUserInput | ClientActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientActivityCreateManyUserInputEnvelope
+    set?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
+    disconnect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
+    delete?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
+    connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
+    update?: ClientActivityUpdateWithWhereUniqueWithoutUserInput | ClientActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientActivityUpdateManyWithWhereWithoutUserInput | ClientActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
   }
 
   export type TicketUncheckedUpdateManyWithoutAssignedToNestedInput = {
@@ -71228,6 +72526,34 @@ export namespace Prisma {
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
+  export type ConversationUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput> | ConversationCreateWithoutClientInput[] | ConversationUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutClientInput | ConversationCreateOrConnectWithoutClientInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutClientInput | ConversationUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ConversationCreateManyClientInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutClientInput | ConversationUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutClientInput | ConversationUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutAccountRepNestedInput = {
+    create?: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput> | UserCreateWithoutAccountRepInput[] | UserUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAccountRepInput | UserCreateOrConnectWithoutAccountRepInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutAccountRepInput | UserUpsertWithWhereUniqueWithoutAccountRepInput[]
+    createMany?: UserCreateManyAccountRepInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutAccountRepInput | UserUpdateWithWhereUniqueWithoutAccountRepInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutAccountRepInput | UserUpdateManyWithWhereWithoutAccountRepInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
   export type TicketUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput> | TicketCreateWithoutClientInput[] | TicketUncheckedCreateWithoutClientInput[]
     connectOrCreate?: TicketCreateOrConnectWithoutClientInput | TicketCreateOrConnectWithoutClientInput[]
@@ -71242,46 +72568,18 @@ export namespace Prisma {
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
-  export type TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
-    upsert?: TicketCommentUpsertWithWhereUniqueWithoutAuthorInput | TicketCommentUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: TicketCommentCreateManyAuthorInputEnvelope
-    set?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    disconnect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    delete?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
-    update?: TicketCommentUpdateWithWhereUniqueWithoutAuthorInput | TicketCommentUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: TicketCommentUpdateManyWithWhereWithoutAuthorInput | TicketCommentUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: TicketCommentScalarWhereInput | TicketCommentScalarWhereInput[]
-  }
-
-  export type ClientActivityUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput> | ClientActivityCreateWithoutUserInput[] | ClientActivityUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ClientActivityCreateOrConnectWithoutUserInput | ClientActivityCreateOrConnectWithoutUserInput[]
-    upsert?: ClientActivityUpsertWithWhereUniqueWithoutUserInput | ClientActivityUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ClientActivityCreateManyUserInputEnvelope
-    set?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
-    disconnect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
-    delete?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
-    connect?: ClientActivityWhereUniqueInput | ClientActivityWhereUniqueInput[]
-    update?: ClientActivityUpdateWithWhereUniqueWithoutUserInput | ClientActivityUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ClientActivityUpdateManyWithWhereWithoutUserInput | ClientActivityUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
-  }
-
-  export type UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
-    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutUserInput | UserToGaAccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserToGaAccountCreateManyUserInputEnvelope
-    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
-    update?: UserToGaAccountUpdateWithWhereUniqueWithoutUserInput | UserToGaAccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutUserInput | UserToGaAccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
+  export type ConversationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput> | ConversationCreateWithoutUserInput[] | ConversationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutUserInput | ConversationCreateOrConnectWithoutUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutUserInput | ConversationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversationCreateManyUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutUserInput | ConversationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutUserInput | ConversationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
   }
 
   export type GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput = {
@@ -71298,6 +72596,114 @@ export namespace Prisma {
     deleteMany?: GaImportRunScalarWhereInput | GaImportRunScalarWhereInput[]
   }
 
+  export type ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput> | ClientSatisfactionCreateWithoutUserInput[] | ClientSatisfactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutUserInput | ClientSatisfactionCreateOrConnectWithoutUserInput[]
+    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput | ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientSatisfactionCreateManyUserInputEnvelope
+    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput | ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutUserInput | ClientSatisfactionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type QueryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput> | QueryCreateWithoutUserInput[] | QueryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: QueryCreateOrConnectWithoutUserInput | QueryCreateOrConnectWithoutUserInput[]
+    upsert?: QueryUpsertWithWhereUniqueWithoutUserInput | QueryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: QueryCreateManyUserInputEnvelope
+    set?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    disconnect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    delete?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    connect?: QueryWhereUniqueInput | QueryWhereUniqueInput[]
+    update?: QueryUpdateWithWhereUniqueWithoutUserInput | QueryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: QueryUpdateManyWithWhereWithoutUserInput | QueryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutRecipientNestedInput = {
+    create?: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput> | MessageCreateWithoutRecipientInput[] | MessageUncheckedCreateWithoutRecipientInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutRecipientInput | MessageCreateOrConnectWithoutRecipientInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutRecipientInput | MessageUpsertWithWhereUniqueWithoutRecipientInput[]
+    createMany?: MessageCreateManyRecipientInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutRecipientInput | MessageUpdateWithWhereUniqueWithoutRecipientInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutRecipientInput | MessageUpdateManyWithWhereWithoutRecipientInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput = {
+    create?: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput> | ClientSatisfactionCreateWithoutAccountRepInput[] | ClientSatisfactionUncheckedCreateWithoutAccountRepInput[]
+    connectOrCreate?: ClientSatisfactionCreateOrConnectWithoutAccountRepInput | ClientSatisfactionCreateOrConnectWithoutAccountRepInput[]
+    upsert?: ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput[]
+    createMany?: ClientSatisfactionCreateManyAccountRepInputEnvelope
+    set?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    disconnect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    delete?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    connect?: ClientSatisfactionWhereUniqueInput | ClientSatisfactionWhereUniqueInput[]
+    update?: ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput | ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput[]
+    updateMany?: ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput | ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput[]
+    deleteMany?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: MessageCreateManySenderInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type UserSettingsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    upsert?: UserSettingsUpsertWithoutUserInput
+    disconnect?: UserSettingsWhereInput | boolean
+    delete?: UserSettingsWhereInput | boolean
+    connect?: UserSettingsWhereUniqueInput
+    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
+  }
+
   export type UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput> | UserToSproutSocialAccountCreateWithoutUserInput[] | UserToSproutSocialAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutUserInput | UserToSproutSocialAccountCreateOrConnectWithoutUserInput[]
@@ -71310,6 +72716,34 @@ export namespace Prisma {
     update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+  }
+
+  export type TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<TicketCommentCreateWithoutAuthorInput, TicketCommentUncheckedCreateWithoutAuthorInput> | TicketCommentCreateWithoutAuthorInput[] | TicketCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: TicketCommentUpsertWithWhereUniqueWithoutAuthorInput | TicketCommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: TicketCommentCreateManyAuthorInputEnvelope
+    set?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    disconnect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    delete?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+    update?: TicketCommentUpdateWithWhereUniqueWithoutAuthorInput | TicketCommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: TicketCommentUpdateManyWithWhereWithoutAuthorInput | TicketCommentUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: TicketCommentScalarWhereInput | TicketCommentScalarWhereInput[]
+  }
+
+  export type UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserToGaAccountCreateWithoutUserInput, UserToGaAccountUncheckedCreateWithoutUserInput> | UserToGaAccountCreateWithoutUserInput[] | UserToGaAccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserToGaAccountCreateOrConnectWithoutUserInput | UserToGaAccountCreateOrConnectWithoutUserInput[]
+    upsert?: UserToGaAccountUpsertWithWhereUniqueWithoutUserInput | UserToGaAccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserToGaAccountCreateManyUserInputEnvelope
+    set?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    disconnect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    delete?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    connect?: UserToGaAccountWhereUniqueInput | UserToGaAccountWhereUniqueInput[]
+    update?: UserToGaAccountUpdateWithWhereUniqueWithoutUserInput | UserToGaAccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserToGaAccountUpdateManyWithWhereWithoutUserInput | UserToGaAccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserToGaAccountScalarWhereInput | UserToGaAccountScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSettingsInput = {
@@ -71969,28 +73403,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -72002,24 +73438,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -72051,28 +73487,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72084,24 +73522,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGivenRatingsInput = {
@@ -72117,28 +73555,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGivenRatingsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -72150,24 +73590,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGivenRatingsInput = {
@@ -72188,28 +73628,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedRatingsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -72221,24 +73663,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedRatingsInput = {
@@ -72270,28 +73712,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGivenRatingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72303,24 +73747,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedRatingsInput = {
@@ -72347,28 +73791,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedRatingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72380,24 +73826,137 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCompanyInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role: RoleCreateNestedOneWithoutUsersInput
+    accountRep?: UserCreateNestedOneWithoutClientsInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    activities?: ClientActivityCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCompanyInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    accountRepId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCompanyInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type UserCreateManyCompanyInputEnvelope = {
+    data: UserCreateManyCompanyInput | UserCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
+    create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutCompanyInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    companyId?: StringNullableFilter<"User"> | string | null
+    name?: StringNullableFilter<"User"> | string | null
+    deleted?: BoolFilter<"User"> | boolean
+    email?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
+    emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
+    image?: StringNullableFilter<"User"> | string | null
+    roleId?: StringFilter<"User"> | string
+    isActive?: BoolFilter<"User"> | boolean
+    accountRepId?: StringNullableFilter<"User"> | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
   export type UserCreateWithoutConversationsInput = {
@@ -72413,28 +73972,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -72446,24 +74007,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationsInput = {
@@ -72484,28 +74045,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientConversationsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -72517,24 +74080,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientConversationsInput = {
@@ -72664,28 +74227,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72697,24 +74262,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutClientConversationsInput = {
@@ -72741,28 +74306,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientConversationsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72774,24 +74341,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QueryUpsertWithWhereUniqueWithoutConversationInput = {
@@ -74387,28 +75954,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGaImportRunsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -74420,24 +75989,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGaImportRunsInput = {
@@ -74506,28 +76075,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGaImportRunsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74539,24 +76110,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GaPropertyCreateWithoutKpiDailyInput = {
@@ -74844,28 +76415,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -74877,24 +76450,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -74926,28 +76499,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74959,24 +76534,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRoleInput = {
@@ -74991,29 +76566,31 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -75024,25 +76601,25 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -75071,24 +76648,6 @@ export namespace Prisma {
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRoleInput>
   }
 
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
-    deleted?: BoolFilter<"User"> | boolean
-    email?: StringNullableFilter<"User"> | string | null
-    password?: StringNullableFilter<"User"> | string | null
-    emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
-    image?: StringNullableFilter<"User"> | string | null
-    roleId?: StringFilter<"User"> | string
-    isActive?: BoolFilter<"User"> | boolean
-    accountRepId?: StringNullableFilter<"User"> | string | null
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-  }
-
   export type UserCreateWithoutSentMessagesInput = {
     id?: string
     name?: string | null
@@ -75102,28 +76661,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -75135,24 +76696,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -75173,28 +76734,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedMessagesInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -75206,24 +76769,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedMessagesInput = {
@@ -75358,28 +76921,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75391,24 +76956,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedMessagesInput = {
@@ -75435,28 +77000,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75468,24 +77035,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithoutRepliesInput = {
@@ -75604,28 +77171,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -75637,24 +77206,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -75686,28 +77255,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75719,24 +77290,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QueryCreateWithoutParsedPieDataInput = {
@@ -76122,28 +77693,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQueriesInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -76155,24 +77728,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQueriesInput = {
@@ -76339,28 +77912,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQueriesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76372,24 +77947,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConversationUpsertWithoutQueriesInput = {
@@ -77826,28 +79401,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSproutSocialAccountsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -77859,24 +79436,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSproutSocialAccountsInput = {
@@ -77949,28 +79526,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSproutSocialAccountsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77982,24 +79561,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SproutSocialAccountUpsertWithoutUsersInput = {
@@ -78085,28 +79664,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutUserToGaAccountsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -78118,24 +79699,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutUserToGaAccountsInput = {
@@ -78196,28 +79777,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserToGaAccountsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78229,24 +79812,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type RoleCreateWithoutUsersInput = {
@@ -78282,27 +79865,29 @@ export namespace Prisma {
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -78315,104 +79900,28 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
-  }
-
-  export type UserCreateWithoutAccountRepInput = {
-    id?: string
-    name?: string | null
-    deleted?: boolean
-    email?: string | null
-    password?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    role: RoleCreateNestedOneWithoutUsersInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
-    activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
-    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
-    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutAccountRepInput = {
-    id?: string
-    name?: string | null
-    deleted?: boolean
-    email?: string | null
-    password?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    roleId: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
-    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
-    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutAccountRepInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput>
-  }
-
-  export type UserCreateManyAccountRepInputEnvelope = {
-    data: UserCreateManyAccountRepInput | UserCreateManyAccountRepInput[]
-    skipDuplicates?: boolean
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -78453,25 +79962,364 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SessionCreateWithoutUserInput = {
+  export type ClientActivityCreateWithoutUserInput = {
     id?: string
-    sessionToken: string
-    expires: Date | string
+    type: string
+    description: string
+    status?: $Enums.ActivityStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type SessionUncheckedCreateWithoutUserInput = {
+  export type ClientActivityUncheckedCreateWithoutUserInput = {
     id?: string
-    sessionToken: string
-    expires: Date | string
+    type: string
+    description: string
+    status?: $Enums.ActivityStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  export type ClientActivityCreateOrConnectWithoutUserInput = {
+    where: ClientActivityWhereUniqueInput
+    create: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput>
   }
 
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+  export type ClientActivityCreateManyUserInputEnvelope = {
+    data: ClientActivityCreateManyUserInput | ClientActivityCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketCreateWithoutAssignedToInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: UserCreateNestedOneWithoutClientTicketsInput
+    attachments?: TicketAttachmentCreateNestedManyWithoutTicketInput
+    comments?: TicketCommentCreateNestedManyWithoutTicketInput
+    tags?: TicketTagCreateNestedManyWithoutTicketsInput
+  }
+
+  export type TicketUncheckedCreateWithoutAssignedToInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clientId: string
+    attachments?: TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
+    comments?: TicketCommentUncheckedCreateNestedManyWithoutTicketInput
+    tags?: TicketTagUncheckedCreateNestedManyWithoutTicketsInput
+  }
+
+  export type TicketCreateOrConnectWithoutAssignedToInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutAssignedToInput, TicketUncheckedCreateWithoutAssignedToInput>
+  }
+
+  export type TicketCreateManyAssignedToInputEnvelope = {
+    data: TicketCreateManyAssignedToInput | TicketCreateManyAssignedToInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationsInput
+    queries?: QueryCreateNestedManyWithoutConversationInput
+    gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
+    gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
+  }
+
+  export type ConversationUncheckedCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccountId?: string | null
+    gaPropertyId?: string | null
+    userId: string
+    queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutClientInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput>
+  }
+
+  export type ConversationCreateManyClientInputEnvelope = {
+    data: ConversationCreateManyClientInput | ConversationCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutAccountRepInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role: RoleCreateNestedOneWithoutUsersInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    activities?: ClientActivityCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAccountRepInput = {
+    id?: string
+    companyId?: string | null
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAccountRepInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput>
+  }
+
+  export type UserCreateManyAccountRepInputEnvelope = {
+    data: UserCreateManyAccountRepInput | UserCreateManyAccountRepInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedTo?: UserCreateNestedOneWithoutAssignedTicketsInput
+    attachments?: TicketAttachmentCreateNestedManyWithoutTicketInput
+    comments?: TicketCommentCreateNestedManyWithoutTicketInput
+    tags?: TicketTagCreateNestedManyWithoutTicketsInput
+  }
+
+  export type TicketUncheckedCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedToId?: string | null
+    attachments?: TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
+    comments?: TicketCommentUncheckedCreateNestedManyWithoutTicketInput
+    tags?: TicketTagUncheckedCreateNestedManyWithoutTicketsInput
+  }
+
+  export type TicketCreateOrConnectWithoutClientInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput>
+  }
+
+  export type TicketCreateManyClientInputEnvelope = {
+    data: TicketCreateManyClientInput | TicketCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CompanyCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CompanyUncheckedCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CompanyCreateOrConnectWithoutUsersInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutUsersInput, CompanyUncheckedCreateWithoutUsersInput>
+  }
+
+  export type ConversationCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: UserCreateNestedOneWithoutClientConversationsInput
+    queries?: QueryCreateNestedManyWithoutConversationInput
+    gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
+    gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
+  }
+
+  export type ConversationUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccountId?: string | null
+    gaPropertyId?: string | null
+    clientId?: string | null
+    queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationCreateManyUserInputEnvelope = {
+    data: ConversationCreateManyUserInput | ConversationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GaImportRunCreateWithoutRequestedByInput = {
+    id?: string
+    dateStart: Date | string
+    dateEnd: Date | string
+    status?: $Enums.ImportStatus
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaProperty: GaPropertyCreateNestedOneWithoutImportsInput
+  }
+
+  export type GaImportRunUncheckedCreateWithoutRequestedByInput = {
+    id?: string
+    gaPropertyId: string
+    dateStart: Date | string
+    dateEnd: Date | string
+    status?: $Enums.ImportStatus
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GaImportRunCreateOrConnectWithoutRequestedByInput = {
+    where: GaImportRunWhereUniqueInput
+    create: XOR<GaImportRunCreateWithoutRequestedByInput, GaImportRunUncheckedCreateWithoutRequestedByInput>
+  }
+
+  export type GaImportRunCreateManyRequestedByInputEnvelope = {
+    data: GaImportRunCreateManyRequestedByInput | GaImportRunCreateManyRequestedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientSatisfactionCreateWithoutUserInput = {
+    id?: string
+    rating: number
+    feedback?: string | null
+    createdAt?: Date | string
+    accountRep: UserCreateNestedOneWithoutReceivedRatingsInput
+  }
+
+  export type ClientSatisfactionUncheckedCreateWithoutUserInput = {
+    id?: string
+    rating: number
+    feedback?: string | null
+    createdAt?: Date | string
+    accountRepId: string
+  }
+
+  export type ClientSatisfactionCreateOrConnectWithoutUserInput = {
+    where: ClientSatisfactionWhereUniqueInput
+    create: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ClientSatisfactionCreateManyUserInputEnvelope = {
+    data: ClientSatisfactionCreateManyUserInput | ClientSatisfactionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    content: string
+    isRead?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    content: string
+    isRead?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationCreateManyUserInputEnvelope = {
+    data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -78519,75 +80367,69 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ConversationCreateWithoutUserInput = {
+  export type MessageCreateWithoutRecipientInput = {
     id?: string
-    title: string
-    description?: string | null
-    isStarred?: boolean
+    content: string
+    isRead?: boolean
+    archived?: boolean
+    isThreadStart?: boolean
+    threadId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client?: UserCreateNestedOneWithoutClientConversationsInput
-    queries?: QueryCreateNestedManyWithoutConversationInput
-    gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
-    gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
+    sender: UserCreateNestedOneWithoutSentMessagesInput
+    parent?: MessageCreateNestedOneWithoutRepliesInput
+    replies?: MessageCreateNestedManyWithoutParentInput
+    attachments?: MessageAttachmentCreateNestedManyWithoutMessageInput
   }
 
-  export type ConversationUncheckedCreateWithoutUserInput = {
+  export type MessageUncheckedCreateWithoutRecipientInput = {
     id?: string
-    title: string
-    description?: string | null
-    isStarred?: boolean
+    content: string
+    isRead?: boolean
+    archived?: boolean
+    isThreadStart?: boolean
+    threadId?: string | null
+    parentId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    gaAccountId?: string | null
-    gaPropertyId?: string | null
-    clientId?: string | null
-    queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
+    senderId: string
+    replies?: MessageUncheckedCreateNestedManyWithoutParentInput
+    attachments?: MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
   }
 
-  export type ConversationCreateOrConnectWithoutUserInput = {
-    where: ConversationWhereUniqueInput
-    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  export type MessageCreateOrConnectWithoutRecipientInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput>
   }
 
-  export type ConversationCreateManyUserInputEnvelope = {
-    data: ConversationCreateManyUserInput | ConversationCreateManyUserInput[]
+  export type MessageCreateManyRecipientInputEnvelope = {
+    data: MessageCreateManyRecipientInput | MessageCreateManyRecipientInput[]
     skipDuplicates?: boolean
   }
 
-  export type ConversationCreateWithoutClientInput = {
+  export type ClientSatisfactionCreateWithoutAccountRepInput = {
     id?: string
-    title: string
-    description?: string | null
-    isStarred?: boolean
+    rating: number
+    feedback?: string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutConversationsInput
-    queries?: QueryCreateNestedManyWithoutConversationInput
-    gaAccount?: GaAccountCreateNestedOneWithoutConversationsInput
-    gaProperty?: GaPropertyCreateNestedOneWithoutConversationsInput
+    user: UserCreateNestedOneWithoutGivenRatingsInput
   }
 
-  export type ConversationUncheckedCreateWithoutClientInput = {
+  export type ClientSatisfactionUncheckedCreateWithoutAccountRepInput = {
     id?: string
-    title: string
-    description?: string | null
-    isStarred?: boolean
+    rating: number
+    feedback?: string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-    gaAccountId?: string | null
-    gaPropertyId?: string | null
     userId: string
-    queries?: QueryUncheckedCreateNestedManyWithoutConversationInput
   }
 
-  export type ConversationCreateOrConnectWithoutClientInput = {
-    where: ConversationWhereUniqueInput
-    create: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput>
+  export type ClientSatisfactionCreateOrConnectWithoutAccountRepInput = {
+    where: ClientSatisfactionWhereUniqueInput
+    create: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput>
   }
 
-  export type ConversationCreateManyClientInputEnvelope = {
-    data: ConversationCreateManyClientInput | ConversationCreateManyClientInput[]
+  export type ClientSatisfactionCreateManyAccountRepInputEnvelope = {
+    data: ClientSatisfactionCreateManyAccountRepInput | ClientSatisfactionCreateManyAccountRepInput[]
     skipDuplicates?: boolean
   }
 
@@ -78631,71 +80473,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MessageCreateWithoutRecipientInput = {
+  export type SessionCreateWithoutUserInput = {
     id?: string
-    content: string
-    isRead?: boolean
-    archived?: boolean
-    isThreadStart?: boolean
-    threadId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    sender: UserCreateNestedOneWithoutSentMessagesInput
-    parent?: MessageCreateNestedOneWithoutRepliesInput
-    replies?: MessageCreateNestedManyWithoutParentInput
-    attachments?: MessageAttachmentCreateNestedManyWithoutMessageInput
+    sessionToken: string
+    expires: Date | string
   }
 
-  export type MessageUncheckedCreateWithoutRecipientInput = {
+  export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
-    content: string
-    isRead?: boolean
-    archived?: boolean
-    isThreadStart?: boolean
-    threadId?: string | null
-    parentId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    senderId: string
-    replies?: MessageUncheckedCreateNestedManyWithoutParentInput
-    attachments?: MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
+    sessionToken: string
+    expires: Date | string
   }
 
-  export type MessageCreateOrConnectWithoutRecipientInput = {
-    where: MessageWhereUniqueInput
-    create: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput>
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type MessageCreateManyRecipientInputEnvelope = {
-    data: MessageCreateManyRecipientInput | MessageCreateManyRecipientInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NotificationCreateWithoutUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    content: string
-    isRead?: boolean
-    createdAt?: Date | string
-  }
-
-  export type NotificationUncheckedCreateWithoutUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    content: string
-    isRead?: boolean
-    createdAt?: Date | string
-  }
-
-  export type NotificationCreateOrConnectWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type NotificationCreateManyUserInputEnvelope = {
-    data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -78724,131 +80520,27 @@ export namespace Prisma {
     create: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
   }
 
-  export type ClientSatisfactionCreateWithoutUserInput = {
+  export type UserToSproutSocialAccountCreateWithoutUserInput = {
     id?: string
-    rating: number
-    feedback?: string | null
-    createdAt?: Date | string
-    accountRep: UserCreateNestedOneWithoutReceivedRatingsInput
-  }
-
-  export type ClientSatisfactionUncheckedCreateWithoutUserInput = {
-    id?: string
-    rating: number
-    feedback?: string | null
-    createdAt?: Date | string
-    accountRepId: string
-  }
-
-  export type ClientSatisfactionCreateOrConnectWithoutUserInput = {
-    where: ClientSatisfactionWhereUniqueInput
-    create: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput>
-  }
-
-  export type ClientSatisfactionCreateManyUserInputEnvelope = {
-    data: ClientSatisfactionCreateManyUserInput | ClientSatisfactionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ClientSatisfactionCreateWithoutAccountRepInput = {
-    id?: string
-    rating: number
-    feedback?: string | null
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutGivenRatingsInput
-  }
-
-  export type ClientSatisfactionUncheckedCreateWithoutAccountRepInput = {
-    id?: string
-    rating: number
-    feedback?: string | null
-    createdAt?: Date | string
-    userId: string
-  }
-
-  export type ClientSatisfactionCreateOrConnectWithoutAccountRepInput = {
-    where: ClientSatisfactionWhereUniqueInput
-    create: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput>
-  }
-
-  export type ClientSatisfactionCreateManyAccountRepInputEnvelope = {
-    data: ClientSatisfactionCreateManyAccountRepInput | ClientSatisfactionCreateManyAccountRepInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TicketCreateWithoutAssignedToInput = {
-    id?: string
-    title: string
-    description: string
-    status?: $Enums.TicketStatus
-    priority?: $Enums.TicketPriority
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: UserCreateNestedOneWithoutClientTicketsInput
-    attachments?: TicketAttachmentCreateNestedManyWithoutTicketInput
-    comments?: TicketCommentCreateNestedManyWithoutTicketInput
-    tags?: TicketTagCreateNestedManyWithoutTicketsInput
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutUsersInput
   }
 
-  export type TicketUncheckedCreateWithoutAssignedToInput = {
+  export type UserToSproutSocialAccountUncheckedCreateWithoutUserInput = {
     id?: string
-    title: string
-    description: string
-    status?: $Enums.TicketStatus
-    priority?: $Enums.TicketPriority
+    sproutSocialAccountId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    clientId: string
-    attachments?: TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
-    comments?: TicketCommentUncheckedCreateNestedManyWithoutTicketInput
-    tags?: TicketTagUncheckedCreateNestedManyWithoutTicketsInput
   }
 
-  export type TicketCreateOrConnectWithoutAssignedToInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutAssignedToInput, TicketUncheckedCreateWithoutAssignedToInput>
+  export type UserToSproutSocialAccountCreateOrConnectWithoutUserInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    create: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput>
   }
 
-  export type TicketCreateManyAssignedToInputEnvelope = {
-    data: TicketCreateManyAssignedToInput | TicketCreateManyAssignedToInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TicketCreateWithoutClientInput = {
-    id?: string
-    title: string
-    description: string
-    status?: $Enums.TicketStatus
-    priority?: $Enums.TicketPriority
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedTo?: UserCreateNestedOneWithoutAssignedTicketsInput
-    attachments?: TicketAttachmentCreateNestedManyWithoutTicketInput
-    comments?: TicketCommentCreateNestedManyWithoutTicketInput
-    tags?: TicketTagCreateNestedManyWithoutTicketsInput
-  }
-
-  export type TicketUncheckedCreateWithoutClientInput = {
-    id?: string
-    title: string
-    description: string
-    status?: $Enums.TicketStatus
-    priority?: $Enums.TicketPriority
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedToId?: string | null
-    attachments?: TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
-    comments?: TicketCommentUncheckedCreateNestedManyWithoutTicketInput
-    tags?: TicketTagUncheckedCreateNestedManyWithoutTicketsInput
-  }
-
-  export type TicketCreateOrConnectWithoutClientInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutClientInput, TicketUncheckedCreateWithoutClientInput>
-  }
-
-  export type TicketCreateManyClientInputEnvelope = {
-    data: TicketCreateManyClientInput | TicketCreateManyClientInput[]
+  export type UserToSproutSocialAccountCreateManyUserInputEnvelope = {
+    data: UserToSproutSocialAccountCreateManyUserInput | UserToSproutSocialAccountCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -78878,36 +80570,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ClientActivityCreateWithoutUserInput = {
-    id?: string
-    type: string
-    description: string
-    status?: $Enums.ActivityStatus
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ClientActivityUncheckedCreateWithoutUserInput = {
-    id?: string
-    type: string
-    description: string
-    status?: $Enums.ActivityStatus
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ClientActivityCreateOrConnectWithoutUserInput = {
-    where: ClientActivityWhereUniqueInput
-    create: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput>
-  }
-
-  export type ClientActivityCreateManyUserInputEnvelope = {
-    data: ClientActivityCreateManyUserInput | ClientActivityCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserToGaAccountCreateWithoutUserInput = {
     id?: string
     createdAt?: Date | string
@@ -78929,62 +80591,6 @@ export namespace Prisma {
 
   export type UserToGaAccountCreateManyUserInputEnvelope = {
     data: UserToGaAccountCreateManyUserInput | UserToGaAccountCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type GaImportRunCreateWithoutRequestedByInput = {
-    id?: string
-    dateStart: Date | string
-    dateEnd: Date | string
-    status?: $Enums.ImportStatus
-    errorMessage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    gaProperty: GaPropertyCreateNestedOneWithoutImportsInput
-  }
-
-  export type GaImportRunUncheckedCreateWithoutRequestedByInput = {
-    id?: string
-    gaPropertyId: string
-    dateStart: Date | string
-    dateEnd: Date | string
-    status?: $Enums.ImportStatus
-    errorMessage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type GaImportRunCreateOrConnectWithoutRequestedByInput = {
-    where: GaImportRunWhereUniqueInput
-    create: XOR<GaImportRunCreateWithoutRequestedByInput, GaImportRunUncheckedCreateWithoutRequestedByInput>
-  }
-
-  export type GaImportRunCreateManyRequestedByInputEnvelope = {
-    data: GaImportRunCreateManyRequestedByInput | GaImportRunCreateManyRequestedByInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserToSproutSocialAccountCreateWithoutUserInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutUsersInput
-  }
-
-  export type UserToSproutSocialAccountUncheckedCreateWithoutUserInput = {
-    id?: string
-    sproutSocialAccountId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserToSproutSocialAccountCreateOrConnectWithoutUserInput = {
-    where: UserToSproutSocialAccountWhereUniqueInput
-    create: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserToSproutSocialAccountCreateManyUserInputEnvelope = {
-    data: UserToSproutSocialAccountCreateManyUserInput | UserToSproutSocialAccountCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -79038,27 +80644,29 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79071,39 +80679,23 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUpsertWithWhereUniqueWithoutAccountRepInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutAccountRepInput, UserUncheckedUpdateWithoutAccountRepInput>
-    create: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutAccountRepInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutAccountRepInput, UserUncheckedUpdateWithoutAccountRepInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutAccountRepInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAccountRepInput>
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -79140,214 +80732,34 @@ export namespace Prisma {
     session_state?: StringNullableFilter<"Account"> | string | null
   }
 
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  export type ClientActivityUpsertWithWhereUniqueWithoutUserInput = {
+    where: ClientActivityWhereUniqueInput
+    update: XOR<ClientActivityUpdateWithoutUserInput, ClientActivityUncheckedUpdateWithoutUserInput>
+    create: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput>
   }
 
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  export type ClientActivityUpdateWithWhereUniqueWithoutUserInput = {
+    where: ClientActivityWhereUniqueInput
+    data: XOR<ClientActivityUpdateWithoutUserInput, ClientActivityUncheckedUpdateWithoutUserInput>
   }
 
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  export type ClientActivityUpdateManyWithWhereWithoutUserInput = {
+    where: ClientActivityScalarWhereInput
+    data: XOR<ClientActivityUpdateManyMutationInput, ClientActivityUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: StringFilter<"Session"> | string
-    sessionToken?: StringFilter<"Session"> | string
-    userId?: StringFilter<"Session"> | string
-    expires?: DateTimeFilter<"Session"> | Date | string
-  }
-
-  export type QueryUpsertWithWhereUniqueWithoutUserInput = {
-    where: QueryWhereUniqueInput
-    update: XOR<QueryUpdateWithoutUserInput, QueryUncheckedUpdateWithoutUserInput>
-    create: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput>
-  }
-
-  export type QueryUpdateWithWhereUniqueWithoutUserInput = {
-    where: QueryWhereUniqueInput
-    data: XOR<QueryUpdateWithoutUserInput, QueryUncheckedUpdateWithoutUserInput>
-  }
-
-  export type QueryUpdateManyWithWhereWithoutUserInput = {
-    where: QueryScalarWhereInput
-    data: XOR<QueryUpdateManyMutationInput, QueryUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ConversationUpsertWithWhereUniqueWithoutUserInput = {
-    where: ConversationWhereUniqueInput
-    update: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
-    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
-  }
-
-  export type ConversationUpdateWithWhereUniqueWithoutUserInput = {
-    where: ConversationWhereUniqueInput
-    data: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ConversationUpdateManyWithWhereWithoutUserInput = {
-    where: ConversationScalarWhereInput
-    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ConversationUpsertWithWhereUniqueWithoutClientInput = {
-    where: ConversationWhereUniqueInput
-    update: XOR<ConversationUpdateWithoutClientInput, ConversationUncheckedUpdateWithoutClientInput>
-    create: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput>
-  }
-
-  export type ConversationUpdateWithWhereUniqueWithoutClientInput = {
-    where: ConversationWhereUniqueInput
-    data: XOR<ConversationUpdateWithoutClientInput, ConversationUncheckedUpdateWithoutClientInput>
-  }
-
-  export type ConversationUpdateManyWithWhereWithoutClientInput = {
-    where: ConversationScalarWhereInput
-    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutClientInput>
-  }
-
-  export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
-    where: MessageWhereUniqueInput
-    update: XOR<MessageUpdateWithoutSenderInput, MessageUncheckedUpdateWithoutSenderInput>
-    create: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput>
-  }
-
-  export type MessageUpdateWithWhereUniqueWithoutSenderInput = {
-    where: MessageWhereUniqueInput
-    data: XOR<MessageUpdateWithoutSenderInput, MessageUncheckedUpdateWithoutSenderInput>
-  }
-
-  export type MessageUpdateManyWithWhereWithoutSenderInput = {
-    where: MessageScalarWhereInput
-    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutSenderInput>
-  }
-
-  export type MessageUpsertWithWhereUniqueWithoutRecipientInput = {
-    where: MessageWhereUniqueInput
-    update: XOR<MessageUpdateWithoutRecipientInput, MessageUncheckedUpdateWithoutRecipientInput>
-    create: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput>
-  }
-
-  export type MessageUpdateWithWhereUniqueWithoutRecipientInput = {
-    where: MessageWhereUniqueInput
-    data: XOR<MessageUpdateWithoutRecipientInput, MessageUncheckedUpdateWithoutRecipientInput>
-  }
-
-  export type MessageUpdateManyWithWhereWithoutRecipientInput = {
-    where: MessageScalarWhereInput
-    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutRecipientInput>
-  }
-
-  export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
-    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    data: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type NotificationUpdateManyWithWhereWithoutUserInput = {
-    where: NotificationScalarWhereInput
-    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type NotificationScalarWhereInput = {
-    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-    OR?: NotificationScalarWhereInput[]
-    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-    id?: StringFilter<"Notification"> | string
-    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
-    title?: StringFilter<"Notification"> | string
-    content?: StringFilter<"Notification"> | string
-    isRead?: BoolFilter<"Notification"> | boolean
-    createdAt?: DateTimeFilter<"Notification"> | Date | string
-    userId?: StringFilter<"Notification"> | string
-  }
-
-  export type UserSettingsUpsertWithoutUserInput = {
-    update: XOR<UserSettingsUpdateWithoutUserInput, UserSettingsUncheckedUpdateWithoutUserInput>
-    create: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    where?: UserSettingsWhereInput
-  }
-
-  export type UserSettingsUpdateToOneWithWhereWithoutUserInput = {
-    where?: UserSettingsWhereInput
-    data: XOR<UserSettingsUpdateWithoutUserInput, UserSettingsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserSettingsUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
-    theme?: NullableStringFieldUpdateOperationsInput | string | null
-    apiCredits?: IntFieldUpdateOperationsInput | number
-    apiCreditsLimit?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserSettingsUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
-    theme?: NullableStringFieldUpdateOperationsInput | string | null
-    apiCredits?: IntFieldUpdateOperationsInput | number
-    apiCreditsLimit?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput = {
-    where: ClientSatisfactionWhereUniqueInput
-    update: XOR<ClientSatisfactionUpdateWithoutUserInput, ClientSatisfactionUncheckedUpdateWithoutUserInput>
-    create: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput>
-  }
-
-  export type ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput = {
-    where: ClientSatisfactionWhereUniqueInput
-    data: XOR<ClientSatisfactionUpdateWithoutUserInput, ClientSatisfactionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ClientSatisfactionUpdateManyWithWhereWithoutUserInput = {
-    where: ClientSatisfactionScalarWhereInput
-    data: XOR<ClientSatisfactionUpdateManyMutationInput, ClientSatisfactionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ClientSatisfactionScalarWhereInput = {
-    AND?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
-    OR?: ClientSatisfactionScalarWhereInput[]
-    NOT?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
-    id?: StringFilter<"ClientSatisfaction"> | string
-    rating?: FloatFilter<"ClientSatisfaction"> | number
-    feedback?: StringNullableFilter<"ClientSatisfaction"> | string | null
-    createdAt?: DateTimeFilter<"ClientSatisfaction"> | Date | string
-    userId?: StringFilter<"ClientSatisfaction"> | string
-    accountRepId?: StringFilter<"ClientSatisfaction"> | string
-  }
-
-  export type ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput = {
-    where: ClientSatisfactionWhereUniqueInput
-    update: XOR<ClientSatisfactionUpdateWithoutAccountRepInput, ClientSatisfactionUncheckedUpdateWithoutAccountRepInput>
-    create: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput>
-  }
-
-  export type ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput = {
-    where: ClientSatisfactionWhereUniqueInput
-    data: XOR<ClientSatisfactionUpdateWithoutAccountRepInput, ClientSatisfactionUncheckedUpdateWithoutAccountRepInput>
-  }
-
-  export type ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput = {
-    where: ClientSatisfactionScalarWhereInput
-    data: XOR<ClientSatisfactionUpdateManyMutationInput, ClientSatisfactionUncheckedUpdateManyWithoutAccountRepInput>
+  export type ClientActivityScalarWhereInput = {
+    AND?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
+    OR?: ClientActivityScalarWhereInput[]
+    NOT?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
+    id?: StringFilter<"ClientActivity"> | string
+    type?: StringFilter<"ClientActivity"> | string
+    description?: StringFilter<"ClientActivity"> | string
+    status?: EnumActivityStatusFilter<"ClientActivity"> | $Enums.ActivityStatus
+    metadata?: JsonNullableFilter<"ClientActivity">
+    createdAt?: DateTimeFilter<"ClientActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientActivity"> | Date | string
+    userId?: StringFilter<"ClientActivity"> | string
   }
 
   export type TicketUpsertWithWhereUniqueWithoutAssignedToInput = {
@@ -79381,6 +80793,38 @@ export namespace Prisma {
     clientId?: StringFilter<"Ticket"> | string
   }
 
+  export type ConversationUpsertWithWhereUniqueWithoutClientInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutClientInput, ConversationUncheckedUpdateWithoutClientInput>
+    create: XOR<ConversationCreateWithoutClientInput, ConversationUncheckedCreateWithoutClientInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutClientInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutClientInput, ConversationUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutClientInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutAccountRepInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutAccountRepInput, UserUncheckedUpdateWithoutAccountRepInput>
+    create: XOR<UserCreateWithoutAccountRepInput, UserUncheckedCreateWithoutAccountRepInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutAccountRepInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutAccountRepInput, UserUncheckedUpdateWithoutAccountRepInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutAccountRepInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAccountRepInput>
+  }
+
   export type TicketUpsertWithWhereUniqueWithoutClientInput = {
     where: TicketWhereUniqueInput
     update: XOR<TicketUpdateWithoutClientInput, TicketUncheckedUpdateWithoutClientInput>
@@ -79395,6 +80839,257 @@ export namespace Prisma {
   export type TicketUpdateManyWithWhereWithoutClientInput = {
     where: TicketScalarWhereInput
     data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type CompanyUpsertWithoutUsersInput = {
+    update: XOR<CompanyUpdateWithoutUsersInput, CompanyUncheckedUpdateWithoutUsersInput>
+    create: XOR<CompanyCreateWithoutUsersInput, CompanyUncheckedCreateWithoutUsersInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutUsersInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutUsersInput, CompanyUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type CompanyUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompanyUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
+    create: XOR<ConversationCreateWithoutUserInput, ConversationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutUserInput, ConversationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutUserInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type GaImportRunUpsertWithWhereUniqueWithoutRequestedByInput = {
+    where: GaImportRunWhereUniqueInput
+    update: XOR<GaImportRunUpdateWithoutRequestedByInput, GaImportRunUncheckedUpdateWithoutRequestedByInput>
+    create: XOR<GaImportRunCreateWithoutRequestedByInput, GaImportRunUncheckedCreateWithoutRequestedByInput>
+  }
+
+  export type GaImportRunUpdateWithWhereUniqueWithoutRequestedByInput = {
+    where: GaImportRunWhereUniqueInput
+    data: XOR<GaImportRunUpdateWithoutRequestedByInput, GaImportRunUncheckedUpdateWithoutRequestedByInput>
+  }
+
+  export type GaImportRunUpdateManyWithWhereWithoutRequestedByInput = {
+    where: GaImportRunScalarWhereInput
+    data: XOR<GaImportRunUpdateManyMutationInput, GaImportRunUncheckedUpdateManyWithoutRequestedByInput>
+  }
+
+  export type ClientSatisfactionUpsertWithWhereUniqueWithoutUserInput = {
+    where: ClientSatisfactionWhereUniqueInput
+    update: XOR<ClientSatisfactionUpdateWithoutUserInput, ClientSatisfactionUncheckedUpdateWithoutUserInput>
+    create: XOR<ClientSatisfactionCreateWithoutUserInput, ClientSatisfactionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ClientSatisfactionUpdateWithWhereUniqueWithoutUserInput = {
+    where: ClientSatisfactionWhereUniqueInput
+    data: XOR<ClientSatisfactionUpdateWithoutUserInput, ClientSatisfactionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ClientSatisfactionUpdateManyWithWhereWithoutUserInput = {
+    where: ClientSatisfactionScalarWhereInput
+    data: XOR<ClientSatisfactionUpdateManyMutationInput, ClientSatisfactionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ClientSatisfactionScalarWhereInput = {
+    AND?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+    OR?: ClientSatisfactionScalarWhereInput[]
+    NOT?: ClientSatisfactionScalarWhereInput | ClientSatisfactionScalarWhereInput[]
+    id?: StringFilter<"ClientSatisfaction"> | string
+    rating?: FloatFilter<"ClientSatisfaction"> | number
+    feedback?: StringNullableFilter<"ClientSatisfaction"> | string | null
+    createdAt?: DateTimeFilter<"ClientSatisfaction"> | Date | string
+    userId?: StringFilter<"ClientSatisfaction"> | string
+    accountRepId?: StringFilter<"ClientSatisfaction"> | string
+  }
+
+  export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    id?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    title?: StringFilter<"Notification"> | string
+    content?: StringFilter<"Notification"> | string
+    isRead?: BoolFilter<"Notification"> | boolean
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    userId?: StringFilter<"Notification"> | string
+  }
+
+  export type QueryUpsertWithWhereUniqueWithoutUserInput = {
+    where: QueryWhereUniqueInput
+    update: XOR<QueryUpdateWithoutUserInput, QueryUncheckedUpdateWithoutUserInput>
+    create: XOR<QueryCreateWithoutUserInput, QueryUncheckedCreateWithoutUserInput>
+  }
+
+  export type QueryUpdateWithWhereUniqueWithoutUserInput = {
+    where: QueryWhereUniqueInput
+    data: XOR<QueryUpdateWithoutUserInput, QueryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type QueryUpdateManyWithWhereWithoutUserInput = {
+    where: QueryScalarWhereInput
+    data: XOR<QueryUpdateManyMutationInput, QueryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutRecipientInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutRecipientInput, MessageUncheckedUpdateWithoutRecipientInput>
+    create: XOR<MessageCreateWithoutRecipientInput, MessageUncheckedCreateWithoutRecipientInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutRecipientInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutRecipientInput, MessageUncheckedUpdateWithoutRecipientInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutRecipientInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutRecipientInput>
+  }
+
+  export type ClientSatisfactionUpsertWithWhereUniqueWithoutAccountRepInput = {
+    where: ClientSatisfactionWhereUniqueInput
+    update: XOR<ClientSatisfactionUpdateWithoutAccountRepInput, ClientSatisfactionUncheckedUpdateWithoutAccountRepInput>
+    create: XOR<ClientSatisfactionCreateWithoutAccountRepInput, ClientSatisfactionUncheckedCreateWithoutAccountRepInput>
+  }
+
+  export type ClientSatisfactionUpdateWithWhereUniqueWithoutAccountRepInput = {
+    where: ClientSatisfactionWhereUniqueInput
+    data: XOR<ClientSatisfactionUpdateWithoutAccountRepInput, ClientSatisfactionUncheckedUpdateWithoutAccountRepInput>
+  }
+
+  export type ClientSatisfactionUpdateManyWithWhereWithoutAccountRepInput = {
+    where: ClientSatisfactionScalarWhereInput
+    data: XOR<ClientSatisfactionUpdateManyMutationInput, ClientSatisfactionUncheckedUpdateManyWithoutAccountRepInput>
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutSenderInput, MessageUncheckedUpdateWithoutSenderInput>
+    create: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutSenderInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutSenderInput, MessageUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutSenderInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    sessionToken?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    expires?: DateTimeFilter<"Session"> | Date | string
+  }
+
+  export type UserSettingsUpsertWithoutUserInput = {
+    update: XOR<UserSettingsUpdateWithoutUserInput, UserSettingsUncheckedUpdateWithoutUserInput>
+    create: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    where?: UserSettingsWhereInput
+  }
+
+  export type UserSettingsUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserSettingsWhereInput
+    data: XOR<UserSettingsUpdateWithoutUserInput, UserSettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserSettingsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    apiCredits?: IntFieldUpdateOperationsInput | number
+    apiCreditsLimit?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSettingsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emailNotifications?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    apiCredits?: IntFieldUpdateOperationsInput | number
+    apiCreditsLimit?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    update: XOR<UserToSproutSocialAccountUpdateWithoutUserInput, UserToSproutSocialAccountUncheckedUpdateWithoutUserInput>
+    create: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserToSproutSocialAccountWhereUniqueInput
+    data: XOR<UserToSproutSocialAccountUpdateWithoutUserInput, UserToSproutSocialAccountUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput = {
+    where: UserToSproutSocialAccountScalarWhereInput
+    data: XOR<UserToSproutSocialAccountUpdateManyMutationInput, UserToSproutSocialAccountUncheckedUpdateManyWithoutUserInput>
   }
 
   export type TicketCommentUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -79425,36 +81120,6 @@ export namespace Prisma {
     authorId?: StringFilter<"TicketComment"> | string
   }
 
-  export type ClientActivityUpsertWithWhereUniqueWithoutUserInput = {
-    where: ClientActivityWhereUniqueInput
-    update: XOR<ClientActivityUpdateWithoutUserInput, ClientActivityUncheckedUpdateWithoutUserInput>
-    create: XOR<ClientActivityCreateWithoutUserInput, ClientActivityUncheckedCreateWithoutUserInput>
-  }
-
-  export type ClientActivityUpdateWithWhereUniqueWithoutUserInput = {
-    where: ClientActivityWhereUniqueInput
-    data: XOR<ClientActivityUpdateWithoutUserInput, ClientActivityUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ClientActivityUpdateManyWithWhereWithoutUserInput = {
-    where: ClientActivityScalarWhereInput
-    data: XOR<ClientActivityUpdateManyMutationInput, ClientActivityUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ClientActivityScalarWhereInput = {
-    AND?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
-    OR?: ClientActivityScalarWhereInput[]
-    NOT?: ClientActivityScalarWhereInput | ClientActivityScalarWhereInput[]
-    id?: StringFilter<"ClientActivity"> | string
-    type?: StringFilter<"ClientActivity"> | string
-    description?: StringFilter<"ClientActivity"> | string
-    status?: EnumActivityStatusFilter<"ClientActivity"> | $Enums.ActivityStatus
-    metadata?: JsonNullableFilter<"ClientActivity">
-    createdAt?: DateTimeFilter<"ClientActivity"> | Date | string
-    updatedAt?: DateTimeFilter<"ClientActivity"> | Date | string
-    userId?: StringFilter<"ClientActivity"> | string
-  }
-
   export type UserToGaAccountUpsertWithWhereUniqueWithoutUserInput = {
     where: UserToGaAccountWhereUniqueInput
     update: XOR<UserToGaAccountUpdateWithoutUserInput, UserToGaAccountUncheckedUpdateWithoutUserInput>
@@ -79471,38 +81136,6 @@ export namespace Prisma {
     data: XOR<UserToGaAccountUpdateManyMutationInput, UserToGaAccountUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type GaImportRunUpsertWithWhereUniqueWithoutRequestedByInput = {
-    where: GaImportRunWhereUniqueInput
-    update: XOR<GaImportRunUpdateWithoutRequestedByInput, GaImportRunUncheckedUpdateWithoutRequestedByInput>
-    create: XOR<GaImportRunCreateWithoutRequestedByInput, GaImportRunUncheckedCreateWithoutRequestedByInput>
-  }
-
-  export type GaImportRunUpdateWithWhereUniqueWithoutRequestedByInput = {
-    where: GaImportRunWhereUniqueInput
-    data: XOR<GaImportRunUpdateWithoutRequestedByInput, GaImportRunUncheckedUpdateWithoutRequestedByInput>
-  }
-
-  export type GaImportRunUpdateManyWithWhereWithoutRequestedByInput = {
-    where: GaImportRunScalarWhereInput
-    data: XOR<GaImportRunUpdateManyMutationInput, GaImportRunUncheckedUpdateManyWithoutRequestedByInput>
-  }
-
-  export type UserToSproutSocialAccountUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserToSproutSocialAccountWhereUniqueInput
-    update: XOR<UserToSproutSocialAccountUpdateWithoutUserInput, UserToSproutSocialAccountUncheckedUpdateWithoutUserInput>
-    create: XOR<UserToSproutSocialAccountCreateWithoutUserInput, UserToSproutSocialAccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserToSproutSocialAccountUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserToSproutSocialAccountWhereUniqueInput
-    data: XOR<UserToSproutSocialAccountUpdateWithoutUserInput, UserToSproutSocialAccountUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserToSproutSocialAccountUpdateManyWithWhereWithoutUserInput = {
-    where: UserToSproutSocialAccountScalarWhereInput
-    data: XOR<UserToSproutSocialAccountUpdateManyMutationInput, UserToSproutSocialAccountUncheckedUpdateManyWithoutUserInput>
-  }
-
   export type UserCreateWithoutSettingsInput = {
     id?: string
     name?: string | null
@@ -79516,28 +81149,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSettingsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -79549,24 +81184,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSettingsInput = {
@@ -79598,28 +81233,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSettingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79631,24 +81268,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAssignedTicketsInput = {
@@ -79664,28 +81301,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedTicketsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -79697,24 +81336,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedTicketsInput = {
@@ -79735,28 +81374,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientTicketsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -79768,24 +81409,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientTicketsInput = {
@@ -79884,28 +81525,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedTicketsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79917,24 +81560,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutClientTicketsInput = {
@@ -79961,28 +81604,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientTicketsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79994,24 +81639,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TicketAttachmentUpsertWithWhereUniqueWithoutTicketInput = {
@@ -80200,28 +81845,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketCreateNestedManyWithoutClientInput
     activities?: ClientActivityCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTicketCommentsInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -80233,24 +81880,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
-    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
-    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
-    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTicketCommentsInput = {
@@ -80321,28 +81968,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTicketCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80354,24 +82003,24 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TicketCreateWithoutTagsInput = {
@@ -80512,28 +82161,30 @@ export namespace Prisma {
     updatedAt?: Date | string
     role: RoleCreateNestedOneWithoutUsersInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
-    clients?: UserCreateNestedManyWithoutAccountRepInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    queries?: QueryCreateNestedManyWithoutUserInput
-    conversations?: ConversationCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationCreateNestedManyWithoutClientInput
-    sentMessages?: MessageCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
     userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
-    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
-    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivitiesInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -80545,24 +82196,24 @@ export namespace Prisma {
     accountRepId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
-    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
-    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
-    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
-    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
-    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -80594,27 +82245,111 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
-    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateManyCompanyInput = {
+    id?: string
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    accountRepId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    accountRep?: UserUpdateOneWithoutClientsNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -80627,24 +82362,40 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
-    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QueryCreateManyConversationInput = {
@@ -81599,6 +83350,7 @@ export namespace Prisma {
 
   export type UserCreateManyRoleInput = {
     id?: string
+    companyId?: string | null
     name?: string | null
     deleted?: boolean
     email?: string | null
@@ -81623,29 +83375,31 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountRep?: UserUpdateOneWithoutClientsNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -81656,29 +83410,30 @@ export namespace Prisma {
     accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
     activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
     id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     deleted?: BoolFieldUpdateOperationsInput | boolean
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82523,20 +84278,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCreateManyAccountRepInput = {
-    id?: string
-    name?: string | null
-    deleted?: boolean
-    email?: string | null
-    password?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    roleId: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -82551,10 +84292,103 @@ export namespace Prisma {
     session_state?: string | null
   }
 
-  export type SessionCreateManyUserInput = {
+  export type ClientActivityCreateManyUserInput = {
     id?: string
-    sessionToken: string
-    expires: Date | string
+    type: string
+    description: string
+    status?: $Enums.ActivityStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TicketCreateManyAssignedToInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clientId: string
+  }
+
+  export type ConversationCreateManyClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccountId?: string | null
+    gaPropertyId?: string | null
+    userId: string
+  }
+
+  export type UserCreateManyAccountRepInput = {
+    id?: string
+    companyId?: string | null
+    name?: string | null
+    deleted?: boolean
+    email?: string | null
+    password?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    roleId: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TicketCreateManyClientInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedToId?: string | null
+  }
+
+  export type ConversationCreateManyUserInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isStarred?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gaAccountId?: string | null
+    gaPropertyId?: string | null
+    clientId?: string | null
+  }
+
+  export type GaImportRunCreateManyRequestedByInput = {
+    id?: string
+    gaPropertyId: string
+    dateStart: Date | string
+    dateEnd: Date | string
+    status?: $Enums.ImportStatus
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientSatisfactionCreateManyUserInput = {
+    id?: string
+    rating: number
+    feedback?: string | null
+    createdAt?: Date | string
+    accountRepId: string
+  }
+
+  export type NotificationCreateManyUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    content: string
+    isRead?: boolean
+    createdAt?: Date | string
   }
 
   export type QueryCreateManyUserInput = {
@@ -82571,27 +84405,24 @@ export namespace Prisma {
     conversationId?: string | null
   }
 
-  export type ConversationCreateManyUserInput = {
+  export type MessageCreateManyRecipientInput = {
     id?: string
-    title: string
-    description?: string | null
-    isStarred?: boolean
+    content: string
+    isRead?: boolean
+    archived?: boolean
+    isThreadStart?: boolean
+    threadId?: string | null
+    parentId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    gaAccountId?: string | null
-    gaPropertyId?: string | null
-    clientId?: string | null
+    senderId: string
   }
 
-  export type ConversationCreateManyClientInput = {
+  export type ClientSatisfactionCreateManyAccountRepInput = {
     id?: string
-    title: string
-    description?: string | null
-    isStarred?: boolean
+    rating: number
+    feedback?: string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-    gaAccountId?: string | null
-    gaPropertyId?: string | null
     userId: string
   }
 
@@ -82608,64 +84439,17 @@ export namespace Prisma {
     recipientId: string
   }
 
-  export type MessageCreateManyRecipientInput = {
+  export type SessionCreateManyUserInput = {
     id?: string
-    content: string
-    isRead?: boolean
-    archived?: boolean
-    isThreadStart?: boolean
-    threadId?: string | null
-    parentId?: string | null
+    sessionToken: string
+    expires: Date | string
+  }
+
+  export type UserToSproutSocialAccountCreateManyUserInput = {
+    id?: string
+    sproutSocialAccountId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    senderId: string
-  }
-
-  export type NotificationCreateManyUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    content: string
-    isRead?: boolean
-    createdAt?: Date | string
-  }
-
-  export type ClientSatisfactionCreateManyUserInput = {
-    id?: string
-    rating: number
-    feedback?: string | null
-    createdAt?: Date | string
-    accountRepId: string
-  }
-
-  export type ClientSatisfactionCreateManyAccountRepInput = {
-    id?: string
-    rating: number
-    feedback?: string | null
-    createdAt?: Date | string
-    userId: string
-  }
-
-  export type TicketCreateManyAssignedToInput = {
-    id?: string
-    title: string
-    description: string
-    status?: $Enums.TicketStatus
-    priority?: $Enums.TicketPriority
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    clientId: string
-  }
-
-  export type TicketCreateManyClientInput = {
-    id?: string
-    title: string
-    description: string
-    status?: $Enums.TicketStatus
-    priority?: $Enums.TicketPriority
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedToId?: string | null
   }
 
   export type TicketCommentCreateManyAuthorInput = {
@@ -82676,119 +84460,11 @@ export namespace Prisma {
     ticketId: string
   }
 
-  export type ClientActivityCreateManyUserInput = {
-    id?: string
-    type: string
-    description: string
-    status?: $Enums.ActivityStatus
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type UserToGaAccountCreateManyUserInput = {
     id?: string
     gaAccountId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type GaImportRunCreateManyRequestedByInput = {
-    id?: string
-    gaPropertyId: string
-    dateStart: Date | string
-    dateEnd: Date | string
-    status?: $Enums.ImportStatus
-    errorMessage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserToSproutSocialAccountCreateManyUserInput = {
-    id?: string
-    sproutSocialAccountId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserUpdateWithoutAccountRepInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
-    clients?: UserUpdateManyWithoutAccountRepNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    queries?: QueryUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
-    activities?: ClientActivityUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
-    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAccountRepInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    roleId?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
-    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
-    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
-    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
-    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
-    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
-    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
-    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
-    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
-    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
-    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
-    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutAccountRepInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    roleId?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -82833,22 +84509,355 @@ export namespace Prisma {
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SessionUpdateWithoutUserInput = {
+  export type ClientActivityUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionUncheckedUpdateWithoutUserInput = {
+  export type ClientActivityUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
+  export type ClientActivityUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TicketUpdateWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UserUpdateOneRequiredWithoutClientTicketsNestedInput
+    attachments?: TicketAttachmentUpdateManyWithoutTicketNestedInput
+    comments?: TicketCommentUpdateManyWithoutTicketNestedInput
+    tags?: TicketTagUpdateManyWithoutTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    attachments?: TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
+    comments?: TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
+    tags?: TicketTagUncheckedUpdateManyWithoutTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateManyWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clientId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConversationUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    queries?: QueryUpdateManyWithoutConversationNestedInput
+    gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
+    gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUpdateWithoutAccountRepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAccountRepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutAccountRepInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TicketUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedTo?: UserUpdateOneWithoutAssignedTicketsNestedInput
+    attachments?: TicketAttachmentUpdateManyWithoutTicketNestedInput
+    comments?: TicketCommentUpdateManyWithoutTicketNestedInput
+    tags?: TicketTagUpdateManyWithoutTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    attachments?: TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
+    comments?: TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
+    tags?: TicketTagUncheckedUpdateManyWithoutTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConversationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UserUpdateOneWithoutClientConversationsNestedInput
+    queries?: QueryUpdateManyWithoutConversationNestedInput
+    gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
+    gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type GaImportRunUpdateWithoutRequestedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gaProperty?: GaPropertyUpdateOneRequiredWithoutImportsNestedInput
+  }
+
+  export type GaImportRunUncheckedUpdateWithoutRequestedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    gaPropertyId?: StringFieldUpdateOperationsInput | string
+    dateStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GaImportRunUncheckedUpdateManyWithoutRequestedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    gaPropertyId?: StringFieldUpdateOperationsInput | string
+    dateStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientSatisfactionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountRep?: UserUpdateOneRequiredWithoutReceivedRatingsNestedInput
+  }
+
+  export type ClientSatisfactionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountRepId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ClientSatisfactionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountRepId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NotificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QueryUpdateWithoutUserInput = {
@@ -82899,79 +84908,70 @@ export namespace Prisma {
     conversationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ConversationUpdateWithoutUserInput = {
+  export type MessageUpdateWithoutRecipientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    archived?: BoolFieldUpdateOperationsInput | boolean
+    isThreadStart?: BoolFieldUpdateOperationsInput | boolean
+    threadId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: UserUpdateOneWithoutClientConversationsNestedInput
-    queries?: QueryUpdateManyWithoutConversationNestedInput
-    gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
-    gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
+    sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
+    parent?: MessageUpdateOneWithoutRepliesNestedInput
+    replies?: MessageUpdateManyWithoutParentNestedInput
+    attachments?: MessageAttachmentUpdateManyWithoutMessageNestedInput
   }
 
-  export type ConversationUncheckedUpdateWithoutUserInput = {
+  export type MessageUncheckedUpdateWithoutRecipientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    archived?: BoolFieldUpdateOperationsInput | boolean
+    isThreadStart?: BoolFieldUpdateOperationsInput | boolean
+    threadId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
-    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
-    clientId?: NullableStringFieldUpdateOperationsInput | string | null
-    queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
+    senderId?: StringFieldUpdateOperationsInput | string
+    replies?: MessageUncheckedUpdateManyWithoutParentNestedInput
+    attachments?: MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
-  export type ConversationUncheckedUpdateManyWithoutUserInput = {
+  export type MessageUncheckedUpdateManyWithoutRecipientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    archived?: BoolFieldUpdateOperationsInput | boolean
+    isThreadStart?: BoolFieldUpdateOperationsInput | boolean
+    threadId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
-    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
-    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    senderId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ConversationUpdateWithoutClientInput = {
+  export type ClientSatisfactionUpdateWithoutAccountRepInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    rating?: FloatFieldUpdateOperationsInput | number
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutConversationsNestedInput
-    queries?: QueryUpdateManyWithoutConversationNestedInput
-    gaAccount?: GaAccountUpdateOneWithoutConversationsNestedInput
-    gaProperty?: GaPropertyUpdateOneWithoutConversationsNestedInput
+    user?: UserUpdateOneRequiredWithoutGivenRatingsNestedInput
   }
 
-  export type ConversationUncheckedUpdateWithoutClientInput = {
+  export type ClientSatisfactionUncheckedUpdateWithoutAccountRepInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    rating?: FloatFieldUpdateOperationsInput | number
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
-    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
-    queries?: QueryUncheckedUpdateManyWithoutConversationNestedInput
   }
 
-  export type ConversationUncheckedUpdateManyWithoutClientInput = {
+  export type ClientSatisfactionUncheckedUpdateManyWithoutAccountRepInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    isStarred?: BoolFieldUpdateOperationsInput | boolean
+    rating?: FloatFieldUpdateOperationsInput | number
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    gaAccountId?: NullableStringFieldUpdateOperationsInput | string | null
-    gaPropertyId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -83018,200 +85018,43 @@ export namespace Prisma {
     recipientId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type MessageUpdateWithoutRecipientInput = {
+  export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    archived?: BoolFieldUpdateOperationsInput | boolean
-    isThreadStart?: BoolFieldUpdateOperationsInput | boolean
-    threadId?: NullableStringFieldUpdateOperationsInput | string | null
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserToSproutSocialAccountUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
-    parent?: MessageUpdateOneWithoutRepliesNestedInput
-    replies?: MessageUpdateManyWithoutParentNestedInput
-    attachments?: MessageAttachmentUpdateManyWithoutMessageNestedInput
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutUsersNestedInput
   }
 
-  export type MessageUncheckedUpdateWithoutRecipientInput = {
+  export type UserToSproutSocialAccountUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    archived?: BoolFieldUpdateOperationsInput | boolean
-    isThreadStart?: BoolFieldUpdateOperationsInput | boolean
-    threadId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    senderId?: StringFieldUpdateOperationsInput | string
-    replies?: MessageUncheckedUpdateManyWithoutParentNestedInput
-    attachments?: MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
-  export type MessageUncheckedUpdateManyWithoutRecipientInput = {
+  export type UserToSproutSocialAccountUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    archived?: BoolFieldUpdateOperationsInput | boolean
-    isThreadStart?: BoolFieldUpdateOperationsInput | boolean
-    threadId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    senderId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type NotificationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NotificationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NotificationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClientSatisfactionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accountRep?: UserUpdateOneRequiredWithoutReceivedRatingsNestedInput
-  }
-
-  export type ClientSatisfactionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accountRepId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ClientSatisfactionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accountRepId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ClientSatisfactionUpdateWithoutAccountRepInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutGivenRatingsNestedInput
-  }
-
-  export type ClientSatisfactionUncheckedUpdateWithoutAccountRepInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ClientSatisfactionUncheckedUpdateManyWithoutAccountRepInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: FloatFieldUpdateOperationsInput | number
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TicketUpdateWithoutAssignedToInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
-    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: UserUpdateOneRequiredWithoutClientTicketsNestedInput
-    attachments?: TicketAttachmentUpdateManyWithoutTicketNestedInput
-    comments?: TicketCommentUpdateManyWithoutTicketNestedInput
-    tags?: TicketTagUpdateManyWithoutTicketsNestedInput
-  }
-
-  export type TicketUncheckedUpdateWithoutAssignedToInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
-    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    attachments?: TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
-    comments?: TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
-    tags?: TicketTagUncheckedUpdateManyWithoutTicketsNestedInput
-  }
-
-  export type TicketUncheckedUpdateManyWithoutAssignedToInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
-    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clientId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TicketUpdateWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
-    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedTo?: UserUpdateOneWithoutAssignedTicketsNestedInput
-    attachments?: TicketAttachmentUpdateManyWithoutTicketNestedInput
-    comments?: TicketCommentUpdateManyWithoutTicketNestedInput
-    tags?: TicketTagUpdateManyWithoutTicketsNestedInput
-  }
-
-  export type TicketUncheckedUpdateWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
-    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    attachments?: TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
-    comments?: TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
-    tags?: TicketTagUncheckedUpdateManyWithoutTicketsNestedInput
-  }
-
-  export type TicketUncheckedUpdateManyWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
-    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketCommentUpdateWithoutAuthorInput = {
@@ -83238,36 +85081,6 @@ export namespace Prisma {
     ticketId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ClientActivityUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClientActivityUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClientActivityUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    status?: EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
-    metadata?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type UserToGaAccountUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83285,60 +85098,6 @@ export namespace Prisma {
   export type UserToGaAccountUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type GaImportRunUpdateWithoutRequestedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dateStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    gaProperty?: GaPropertyUpdateOneRequiredWithoutImportsNestedInput
-  }
-
-  export type GaImportRunUncheckedUpdateWithoutRequestedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    gaPropertyId?: StringFieldUpdateOperationsInput | string
-    dateStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type GaImportRunUncheckedUpdateManyWithoutRequestedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    gaPropertyId?: StringFieldUpdateOperationsInput | string
-    dateStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    dateEnd?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumImportStatusFieldUpdateOperationsInput | $Enums.ImportStatus
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserToSproutSocialAccountUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutUsersNestedInput
-  }
-
-  export type UserToSproutSocialAccountUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserToSproutSocialAccountUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

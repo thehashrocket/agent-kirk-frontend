@@ -74,6 +74,16 @@ model ClientSatisfaction {
   @@index([accountRepId])
 }
 
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  users User[]
+}
+
 model Conversation {
   id           String   @id @default(cuid())
   title        String
@@ -183,11 +193,10 @@ model EmailClient {
   updatedAt   DateTime @updatedAt
 
   // Relations
-  emailCampaigns         EmailCampaign[]
-  emailClientCredentials EmailClientCredentials[]
-  emailGlobalDailyStats  EmailGlobalDailyStats[]
+  emailCampaigns          EmailCampaign[]
+  emailClientCredentials  EmailClientCredentials[]
+  emailGlobalDailyStats   EmailGlobalDailyStats[]
   emailCampaignDailyStats EmailCampaignDailyStats[]
-  
 }
 
 model EmailClientCredentials {
@@ -210,7 +219,7 @@ model EmailGlobalDailyStats {
   updatedAt       DateTime @updatedAt
 
   // Relations
-  email_client   EmailClient               @relation(fields: [email_client_id], references: [id])
+  email_client EmailClient @relation(fields: [email_client_id], references: [id])
 }
 
 model GaAccount {
@@ -691,6 +700,7 @@ model UserToGaAccount {
 
 model User {
   id            String    @id @default(cuid())
+  companyId     String?
   name          String?
   deleted       Boolean   @default(false)
   email         String?   @unique
@@ -702,29 +712,30 @@ model User {
   isActive      Boolean   @default(true)
   accountRepId  String?
   accountRep    User?     @relation("AccountRepToClient", fields: [accountRepId], references: [id])
-  clients       User[]    @relation("AccountRepToClient")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   // Relations
   accounts             Account[]
-  sessions             Session[]
-  queries              Query[]
-  conversations        Conversation[]
-  clientConversations  Conversation[]              @relation("ClientConversations")
-  sentMessages         Message[]                   @relation("SentMessages")
-  receivedMessages     Message[]                   @relation("ReceivedMessages")
-  notifications        Notification[]
-  settings             UserSettings?
-  givenRatings         ClientSatisfaction[]        @relation("ClientRatings")
-  receivedRatings      ClientSatisfaction[]        @relation("RepRatings")
-  assignedTickets      Ticket[]                    @relation("AssignedTickets")
-  clientTickets        Ticket[]                    @relation("ClientTickets")
-  ticketComments       TicketComment[]
   activities           ClientActivity[]
-  userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
+  assignedTickets      Ticket[]                    @relation("AssignedTickets")
+  clientConversations  Conversation[]              @relation("ClientConversations")
+  clients              User[]                      @relation("AccountRepToClient")
+  clientTickets        Ticket[]                    @relation("ClientTickets")
+  company              Company?                    @relation(fields: [companyId], references: [id])
+  conversations        Conversation[]
   gaImportRuns         GaImportRun[]               @relation("UserToGaImportRuns")
+  givenRatings         ClientSatisfaction[]        @relation("ClientRatings")
+  notifications        Notification[]
+  queries              Query[]
+  receivedMessages     Message[]                   @relation("ReceivedMessages")
+  receivedRatings      ClientSatisfaction[]        @relation("RepRatings")
+  sentMessages         Message[]                   @relation("SentMessages")
+  sessions             Session[]
+  settings             UserSettings?
   sproutSocialAccounts UserToSproutSocialAccount[]
+  ticketComments       TicketComment[]
+  userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
 }
 
 model UserSettings {

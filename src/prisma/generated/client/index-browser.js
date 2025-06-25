@@ -144,6 +144,13 @@ exports.Prisma.ClientSatisfactionScalarFieldEnum = {
   accountRepId: 'accountRepId'
 };
 
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ConversationScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -605,6 +612,7 @@ exports.Prisma.UserToGaAccountScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  companyId: 'companyId',
   name: 'name',
   deleted: 'deleted',
   email: 'email',
@@ -751,6 +759,7 @@ exports.ActivityStatus = exports.$Enums.ActivityStatus = {
 exports.Prisma.ModelName = {
   Account: 'Account',
   ClientSatisfaction: 'ClientSatisfaction',
+  Company: 'Company',
   Conversation: 'Conversation',
   EmailCampaignContent: 'EmailCampaignContent',
   EmailCampaign: 'EmailCampaign',

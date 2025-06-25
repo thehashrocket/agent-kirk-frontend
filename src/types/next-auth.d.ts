@@ -5,7 +5,7 @@
  */
 
 import "next-auth";
-import { Role, Account } from "@prisma/client";
+import { Role, Account, Company } from "@prisma/client";
 
 /**
  * NextAuth.js module augmentation.
@@ -22,6 +22,8 @@ declare module "next-auth" {
    * @property {string} [user.name] - Optional user's display name
    * @property {string} [user.image] - Optional user's profile image URL
    * @property {string} user.role - User's role (e.g., "ADMIN", "CLIENT", "ACCOUNT_REP")
+   * @property {string} [user.companyId] - Optional user's company ID
+   * @property {Company} [user.company] - Optional user's company data
    */
   interface Session {
     user: {
@@ -30,6 +32,8 @@ declare module "next-auth" {
       name?: string;
       image?: string;
       role: string;
+      companyId: string | null;
+      company: Company | null;
     };
   }
 
@@ -42,7 +46,10 @@ declare module "next-auth" {
    * @property {string} [name] - Optional user's display name
    * @property {string} [image] - Optional user's profile image URL
    * @property {Role} role - User's role from Prisma Role enum
+   * @property {string} [roleId] - Optional reference to role record ID
    * @property {Account[]} accounts - Associated OAuth accounts
+   * @property {string} [companyId] - Optional user's company ID
+   * @property {Company} [company] - Optional user's company data
    */
   interface User {
     id: string;
@@ -50,6 +57,9 @@ declare module "next-auth" {
     name?: string;
     image?: string;
     role: Role;
+    roleId?: string;
     accounts: Account[];
+    companyId?: string | null;
+    company?: Company | null;
   }
 } 

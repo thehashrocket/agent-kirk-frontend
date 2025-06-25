@@ -1,7 +1,7 @@
 /**
  * @file src/app/auth/layout.tsx
  * Layout for authentication pages (sign-in, etc.)
- * Includes public header for consistency with the main site
+ * Provides a clean layout for authentication flows without navigation
  */
 
 import { PublicHeader } from "@/components/layout/PublicHeader";

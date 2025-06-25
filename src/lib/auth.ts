@@ -16,10 +16,10 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
-import { prisma, Role } from "./prisma";
+import { Company, prisma, Role } from "./prisma";
 
 /**
- * Extended types for NextAuth.js session and user.
+ * Extended types for NextAuth.js session.
  * Adds custom fields for role-based authentication.
  */
 declare module "next-auth" {
@@ -28,41 +28,29 @@ declare module "next-auth" {
    * @property {object} user - User information in the session
    * @property {string} user.id - Unique identifier for the user
    * @property {string} user.role - User's role in the system
+   * @property {string} user.companyId - User's company ID
+   * @property {Company} user.company - User's company
    */
   interface Session {
     user: {
       id: string;
       role: string;
+      companyId: string | null;
+      company: Company | null;
     } & DefaultSession["user"];
-  }
-
-  /**
-   * Extends the default user type with custom fields.
-   * @property {string} id - Unique identifier for the user
-   * @property {Role} role - User's role enum value
-   * @property {string} [roleId] - Optional reference to role record
-   * @property {string} email - User's email address
-   * @property {string} [name] - Optional user's display name
-   * @property {string} [image] - Optional user's profile image URL
-   */
-  interface User {
-    id: string;
-    role: Role;
-    roleId?: string;
-    email: string;
-    name?: string | null;
-    image?: string | null;
   }
 }
 
 /**
  * Extends the JWT type with custom fields.
  * @property {string} [role] - User's role stored in the JWT
+ * @property {string} [companyId] - User's company ID stored in the JWT
  * @property {string} sub - Subject identifier (user ID)
  */
 declare module "next-auth/jwt" {
   interface JWT {
     role?: string;
+    companyId?: string | null;
     sub: string;
   }
 }
@@ -108,7 +96,8 @@ export const authOptions: AuthOptions = {
             where: { email: user.email! },
             include: { 
               role: true,
-              accounts: true 
+              accounts: true,
+              company: true
             },
           });
 
@@ -154,6 +143,8 @@ export const authOptions: AuthOptions = {
                 id: newUser.id,
                 roleId: newUser.roleId,
                 role: newUser.role,
+                companyId: newUser.companyId,
+                company: null, // Will be loaded in session callback
               });
             } else {
               // If no manual user exists, create with CLIENT role (default behavior)
@@ -195,6 +186,8 @@ export const authOptions: AuthOptions = {
                 id: newUser.id,
                 roleId: newUser.roleId,
                 role: newUser.role,
+                companyId: newUser.companyId,
+                company: null, // Will be loaded in session callback
               });
             }
           } else {
@@ -231,11 +224,13 @@ export const authOptions: AuthOptions = {
               });
             }
 
-            // Update the user object with existing user's role
+            // Update the user object with existing user's role and company
             Object.assign(user, {
               id: existingUser.id,
               roleId: existingUser.roleId,
               role: existingUser.role,
+              companyId: existingUser.companyId,
+              company: existingUser.company,
             });
           }
           console.log("Updated user:", user);
@@ -249,39 +244,40 @@ export const authOptions: AuthOptions = {
     },
     /**
      * Customizes the JWT token creation.
-     * Adds user role and other custom claims to the token.
+     * Adds user role, companyId and other custom claims to the token.
      * 
      * @param {object} params - JWT callback parameters
      * @param {JWT} params.token - Current JWT token
      * @param {User} params.user - User object (only on sign in)
      * @returns {Promise<JWT>} Modified JWT token
      */
-    async jwt({ token, user }) {
-      // console.log("JWT Callback - Input:", { token, user });
+    async jwt({ token, user, trigger }) {
+      // console.log("JWT Callback - Input:", { token, user, trigger });
       
+      // Always fetch fresh user data on update trigger or if no role/company in token
+      if (trigger === 'update' || !token.role || token.companyId === undefined) {
+        const userWithRoleAndCompany = await prisma.user.findUnique({
+          where: { id: token.sub },
+          include: { role: true, company: true },
+        });
+        
+        if (userWithRoleAndCompany?.role) {
+          token.role = userWithRoleAndCompany.role.name;
+        }
+        if (userWithRoleAndCompany?.companyId !== undefined) {
+          token.companyId = userWithRoleAndCompany.companyId;
+        }
+        
+        // console.log("Refreshed user data in JWT:", userWithRoleAndCompany);
+      }
+      
+      // On initial sign in, set role and company from user object
       if (user?.roleId) {
-        // Fetch role if not present in user object
-        if (!user.role) {
-          const userWithRole = await prisma.user.findUnique({
-            where: { id: user.id },
-            include: { role: true },
-          });
-          if (userWithRole?.role) {
-            token.role = userWithRole.role.name;
-          }
-        } else {
+        if (user.role) {
           token.role = user.role.name;
         }
-      }
-
-      // Ensure role persists in token
-      if (!token.role && user?.id) {
-        const userWithRole = await prisma.user.findUnique({
-          where: { id: user.id },
-          include: { role: true },
-        });
-        if (userWithRole?.role) {
-          token.role = userWithRole.role.name;
+        if (user.companyId !== undefined) {
+          token.companyId = user.companyId;
         }
       }
       
@@ -290,7 +286,7 @@ export const authOptions: AuthOptions = {
     },
     /**
      * Customizes the session object available to the client.
-     * Adds user role and ID from the JWT token.
+     * Adds user role, company data and ID from the JWT token.
      * 
      * @param {object} params - Session callback parameters
      * @param {Session} params.session - Current session
@@ -302,20 +298,17 @@ export const authOptions: AuthOptions = {
       
       if (session.user) {
         session.user.id = token.sub;
-        if (token.role) {
-          session.user.role = token.role;
-          // console.log("Setting role in session:", token.role);
-        } else {
-          // console.log("No role found in token");
-          // Attempt to fetch role from database
-          const user = await prisma.user.findUnique({
-            where: { id: token.sub },
-            include: { role: true },
+        session.user.role = token.role || 'CLIENT';
+        session.user.companyId = token.companyId ?? null;
+        
+        // Always fetch fresh company data if companyId exists
+        if (session.user.companyId) {
+          const company = await prisma.company.findUnique({
+            where: { id: session.user.companyId },
           });
-          if (user?.role) {
-            session.user.role = user.role.name;
-            // console.log("Retrieved role from database:", user.role.name);
-          }
+          session.user.company = company;
+        } else {
+          session.user.company = null;
         }
       }
       

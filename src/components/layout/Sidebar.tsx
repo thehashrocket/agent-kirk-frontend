@@ -220,7 +220,7 @@ export function Sidebar() {
   const navItems = getNavItems();
 
   return (
-    <aside className="hidden lg:block fixed left-0 top-14 w-64 h-[calc(100vh-3.5rem)] border-r bg-gradient-to-b from-background to-primary/5">
+    <aside className="hidden lg:block w-64 h-full border-r bg-gradient-to-b from-background to-primary/5">
       <ScrollArea className="h-full py-6">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">

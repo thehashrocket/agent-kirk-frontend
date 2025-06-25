@@ -20,7 +20,7 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Header />
-            <div className="flex-1 flex">
+            <div className="flex flex-1">
               <Sidebar />
               <main className="flex-1">
                   {children}

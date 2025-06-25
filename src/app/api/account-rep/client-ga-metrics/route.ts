@@ -246,15 +246,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     let queryDateFrom: Date;
     let queryDateTo: Date = new Date(); // Always use today as the end date
     
-    if (needsHistoricalData) {
-      console.log('Account Rep GA Metrics API - No data found, will fetch 5 years of historical data');
-      queryDateFrom = new Date();
-      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 5);
-    } else {
-      console.log('Account Rep GA Metrics API - Data exists, fetching selected range + previous year');
-      queryDateFrom = new Date(dateFrom);
-      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
-    }
+    console.log('Account Rep GA Metrics API - Data exists, fetching selected range + previous year');
+    queryDateFrom = new Date(dateFrom);
+    queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
 
     // Fetch existing data from the database
     console.log('Account Rep GA Metrics API - Fetching data from database');
