@@ -240,11 +240,14 @@ export default function ChatPage() {
     queryFn: async () => {
       if (!selectedConversation) return [];
       
+      console.log('[Debug] Fetching messages for conversation:', selectedConversation);
       const response = await fetch(`/api/conversations/${selectedConversation}/queries`);
       if (!response.ok) {
         throw new Error('Failed to fetch messages');
       }
-      return response.json();
+      const fetchedMessages = await response.json();
+      console.log('[Debug] Fetched messages from server:', fetchedMessages.length);
+      return fetchedMessages;
     },
     enabled: !!selectedConversation,
   });
@@ -341,8 +344,13 @@ export default function ChatPage() {
 
       // Optimistically update the UI
       queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
-        console.log('[Debug] Current messages before update:', old?.length);
-        return [...old, tempMessage, tempAssistantMessage];
+        console.log('[Debug] Current messages before adding temps:', old?.length);
+        const newMessages = [...old, tempMessage, tempAssistantMessage];
+        console.log('[Debug] New messages after adding temps:', newMessages.length, {
+          tempUserId: tempMessage.id,
+          tempAssistantId: tempAssistantMessage.id
+        });
+        return newMessages;
       });
 
       // Send the actual request
@@ -445,8 +453,14 @@ export default function ChatPage() {
         status: data.status,
         queryId: data.queryId
       });
-      queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
-      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+      // Don't invalidate queries immediately for async responses
+      // Let the polling handle the updates when the response is ready
+      if (data.status === 'COMPLETED') {
+        // Only invalidate if we got an immediate response
+        queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
+        queryClient.invalidateQueries({ queryKey: ['conversations'] });
+      }
+      // For IN_PROGRESS status, the polling will handle the invalidation when complete
     },
   });
 
@@ -462,24 +476,34 @@ export default function ChatPage() {
       try {
         console.log('[Debug] Polling status for queryId:', queryId);
         const response = await fetch(`/api/llm/chat/status?queryId=${queryId}`);
-        const data = await response.json();
+        
+        if (!response.ok) {
+          console.error('[Debug] Status polling failed:', response.status, response.statusText);
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Failed to fetch status');
+        }
 
+        const data = await response.json();
         console.log('[Debug] Poll response:', {
           queryId,
           status: data.status,
-          hasResponse: !!data.response
+          hasResponse: !!data.response,
+          responseLength: data.response?.length || 0,
+          fullData: data
         });
 
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch status');
-        }
-
-        if (data.status === API_STATUS.COMPLETED && data.response) {
+        // Check if the query is completed (webhook has processed it)
+        if (data.status === 'COMPLETED' && data.response) {
           console.log('[Debug] Query completed, updating message');
           
           // Update the messages by replacing the processing message with the completed one
           queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
             console.log('[Debug] Current messages before completion update:', oldData?.length);
+            console.log('[Debug] Looking for message with id:', `${queryId}-response`);
+            console.log('[Debug] Current message IDs:', oldData.map(m => m.id));
+            
+            const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
+            console.log('[Debug] Found processing message:', !!foundMessage, foundMessage?.status);
             
             const updatedMessages = oldData.map(msg => {
               // Replace the processing message with the completed response
@@ -488,7 +512,7 @@ export default function ChatPage() {
                 return {
                   id: `${queryId}-response`,
                   content: data.response,
-                  role: 'assistant',
+                  role: 'assistant' as const,
                   timestamp: new Date().toLocaleString(),
                   status: MESSAGE_STATUS.COMPLETED
                 };
@@ -504,9 +528,9 @@ export default function ChatPage() {
           queryClient.invalidateQueries({ queryKey: ['conversation-messages', conversationId] });
           queryClient.invalidateQueries({ queryKey: ['conversations'] });
           
-          console.log('[Debug] Clearing poll interval');
+          console.log('[Debug] Clearing poll interval - query completed');
           clearInterval(pollInterval);
-        } else if (data.status === API_STATUS.FAILED) {
+        } else if (data.status === 'FAILED') {
           console.log('[Debug] Query failed, updating error message');
           
           // Update the processing message to show the error
@@ -515,17 +539,37 @@ export default function ChatPage() {
               if (msg.id === `${queryId}-response`) {
                 return {
                   ...msg,
-                  content: data.error || 'An error occurred while processing your request.',
+                  content: data.response || 'An error occurred while processing your request.',
                   status: MESSAGE_STATUS.ERROR
                 };
               }
               return msg;
             });
           });
-          throw new Error(data.error || 'Query processing failed');
+          
+          console.log('[Debug] Clearing poll interval - query failed');
+          clearInterval(pollInterval);
+        } else {
+          console.log('[Debug] Query still processing, status:', data.status);
         }
       } catch (error) {
         console.error('[Debug] Status polling error:', error);
+        
+        // Update the processing message to show the error
+        queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
+          return oldData.map(msg => {
+            if (msg.id === `${queryId}-response`) {
+              return {
+                ...msg,
+                content: 'Error checking status. Please refresh the page.',
+                status: MESSAGE_STATUS.ERROR
+              };
+            }
+            return msg;
+          });
+        });
+        
+        console.log('[Debug] Clearing poll interval due to error');
         clearInterval(pollInterval);
       }
     }, 2000); // Poll every 2 seconds
@@ -534,6 +578,20 @@ export default function ChatPage() {
     setTimeout(() => {
       console.log('[Debug] Clearing poll interval due to timeout');
       clearInterval(pollInterval);
+      
+      // Update the processing message to show timeout
+      queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
+        return oldData.map(msg => {
+          if (msg.id === `${queryId}-response`) {
+            return {
+              ...msg,
+              content: 'Request timed out. Please try again or check notifications.',
+              status: MESSAGE_STATUS.ERROR
+            };
+          }
+          return msg;
+        });
+      });
     }, 5 * 60 * 1000);
   };
 

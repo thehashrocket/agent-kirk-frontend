@@ -91,9 +91,9 @@ export function Message({
         <MessageContent content={content} />
         
         {status === MESSAGE_STATUS.PROCESSING && (
-          <div className="flex items-center space-x-2 text-xs opacity-70">
+          <div className="flex items-center space-x-2 text-xs opacity-70 mt-2">
             <span className="transition-opacity duration-300">
-              {currentProcessingMessage}
+              {content || currentProcessingMessage}
             </span>
             <LoadingDots />
           </div>
