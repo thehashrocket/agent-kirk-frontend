@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { EmailMetricsOverview } from './email-metrics-overview';
 import { EmailCampaignActivity } from './email-campaign-activity';
 import { EmailWebsiteActivity } from './email-website-activity';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
 import { fetcher } from '@/lib/utils';
 import type { EmailChannelData } from './types';
@@ -86,10 +86,36 @@ export function EmailDashboard() {
       />
 
       {/* Website Activity Table */}
-      <EmailWebsiteActivity 
-        activities={data?.websiteActivity || []} 
-        isLoading={isLoading} 
-      />
+      {data?.websiteActivity && data.websiteActivity.length > 0 ? (
+        <EmailWebsiteActivity 
+          activities={data.websiteActivity} 
+          isLoading={isLoading} 
+        />
+      ) : (
+        !isLoading && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Email Campaign Website Activity</CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Google Analytics integration coming soon
+              </p>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-center py-8">
+                <div className="text-center">
+                  <div className="text-2xl text-muted-foreground mb-2">📊</div>
+                  <h3 className="text-lg font-semibold mb-1">
+                    Website Activity Data
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Website traffic data from email campaigns will be displayed here once Google Analytics integration is configured.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )
+      )}
     </div>
   );
 } 

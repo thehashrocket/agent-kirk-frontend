@@ -1,198 +1,90 @@
 import { NextResponse } from 'next/server';
+import { EmailAnalyticsService } from '@/lib/services/email-analytics';
+import type { EmailChannelData } from '@/components/channels/email/types';
 
-// Mock data types
-interface EmailMetrics {
-  totalDeliveries: number;
-  uniqueOpens: number;
-  avgOpenRate: number;
-  uniqueClicks: number;
-  avgCTR: number;
-  totalUnsubscribes: number;
-  totalBounces: number;
-}
 
-interface EmailCampaignActivity {
-  id: string;
-  delivered: string;
-  weekDay: string;
-  subject: string;
-  link: string;
-  successfulDeliveries: number;
-  opens: number;
-  openRate: number;
-  clicks: number;
-  ctr: number;
-  unsubscribes: number;
-  bounces: number;
-}
 
-interface EmailWebsiteActivity {
-  id: string;
-  campaign: string;
-  source: string;
-  medium: string;
-  adContent: string;
-  users: number;
-  newUsers: number;
-  sessions: number;
-  avgSessionDuration: string;
-}
-
-interface EmailChannelData {
-  dateRange: {
-    start: string;
-    end: string;
-  };
-  metrics: EmailMetrics;
-  campaignActivity: EmailCampaignActivity[];
-  websiteActivity: EmailWebsiteActivity[];
-}
-
-// Mock data
-const mockEmailData: EmailChannelData = {
-  dateRange: {
-    start: '2025-04-03',
-    end: '2025-04-30'
-  },
-  metrics: {
-    totalDeliveries: 7484,
-    uniqueOpens: 2955,
-    avgOpenRate: 39.48,
-    uniqueClicks: 230,
-    avgCTR: 3.07,
-    totalUnsubscribes: 5,
-    totalBounces: 46
-  },
-  campaignActivity: [
-    {
-      id: '1',
-      delivered: 'Apr 17, 2025',
-      weekDay: 'Friday',
-      subject: 'Old Someone Say Brunch This Weekend? 🍳',
-      link: 'https://sequin.com/12345',
-      successfulDeliveries: 7484,
-      opens: 2955,
-      openRate: 39.48,
-      clicks: 230,
-      ctr: 3.07,
-      unsubscribes: 5,
-      bounces: 46
-    },
-    {
-      id: '2',
-      delivered: 'Apr 15, 2025',
-      weekDay: 'Thursday',
-      subject: 'A Spring Biggest Moments are Worth Watching for 🌸',
-      link: 'https://sequin.com/67890',
-      successfulDeliveries: 7484,
-      opens: 2700,
-      openRate: 36.06,
-      clicks: 212,
-      ctr: 2.86,
-      unsubscribes: 18,
-      bounces: 35
-    },
-    {
-      id: '3',
-      delivered: 'Feb 13, 2025',
-      weekDay: 'Thursday',
-      subject: 'February Fun & Valentine\'s Specials this Weekend',
-      link: 'https://sequin.com/valentine',
-      successfulDeliveries: 7396,
-      opens: 2636,
-      openRate: 35.64,
-      clicks: 133,
-      ctr: 1.83,
-      unsubscribes: 6,
-      bounces: 42
-    },
-    {
-      id: '4',
-      delivered: 'Jan 31, 2025',
-      weekDay: 'Friday',
-      subject: 'Kickstart your fitness goals at The Meadows',
-      link: 'https://sequin.com/fitness',
-      successfulDeliveries: 7421,
-      opens: 3043,
-      openRate: 41.02,
-      clicks: 128,
-      ctr: 1.73,
-      unsubscribes: 22,
-      bounces: 48
-    },
-    {
-      id: '5',
-      delivered: 'Dec 12, 2024',
-      weekDay: 'Thursday',
-      subject: 'Holiday Magic Starts Here 🎄',
-      link: 'https://sequin.com/holiday',
-      successfulDeliveries: 7404,
-      opens: 3061,
-      openRate: 41.34,
-      clicks: 164,
-      ctr: 2.27,
-      unsubscribes: 7,
-      bounces: 44
-    }
-  ],
-  websiteActivity: [
-    {
-      id: '1',
-      campaign: 'march2025',
-      source: 'mailchimp',
-      medium: 'email',
-      adContent: 'header+garagepage',
-      users: 4,
-      newUsers: 4,
-      sessions: 4,
-      avgSessionDuration: '00:00:49'
-    },
-    {
-      id: '2',
-      campaign: 'feb2025-3',
-      source: 'mailchimp',
-      medium: 'email',
-      adContent: 'scarn+recipe',
-      users: 1,
-      newUsers: 0,
-      sessions: 3,
-      avgSessionDuration: '00:01:57'
-    },
-    {
-      id: '3',
-      campaign: 'feb2025-1',
-      source: 'mailchimp',
-      medium: 'email',
-      adContent: 'starry+linkage',
-      users: 5,
-      newUsers: 5,
-      sessions: 6,
-      avgSessionDuration: '00:01:33'
-    },
-    {
-      id: '4',
-      campaign: 'feb2025-1',
-      source: 'mailchimp',
-      medium: 'email',
-      adContent: 'subscollection+image',
-      users: 1,
-      newUsers: 1,
-      sessions: 1,
-      avgSessionDuration: '00:00:00'
-    }
-  ]
-};
-
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Parse query parameters for date filtering
+    const { searchParams } = new URL(request.url);
+    const startDate = searchParams.get('start');
+    const endDate = searchParams.get('end');
     
-    return NextResponse.json(mockEmailData);
+    // Use provided date range or default to last 30 days
+    const dateRange = EmailAnalyticsService.parseDateRange(startDate || undefined, endDate || undefined) 
+      || EmailAnalyticsService.getDefaultDateRange();
+    
+    // Fetch data using our service layer
+    const [metrics, campaignActivity] = await Promise.all([
+      EmailAnalyticsService.getGlobalMetrics(dateRange),
+      EmailAnalyticsService.getCampaignActivity(dateRange),
+    ]);
+
+    // Transform data to match existing component interface
+    const response: EmailChannelData = {
+      dateRange: {
+        start: dateRange.start.toISOString().split('T')[0],
+        end: dateRange.end.toISOString().split('T')[0],
+      },
+      metrics: {
+        totalDeliveries: metrics.totalDeliveries,
+        uniqueOpens: metrics.uniqueOpens,
+        avgOpenRate: metrics.avgOpenRate,
+        uniqueClicks: metrics.uniqueClicks,
+        avgCTR: metrics.avgCTR,
+        totalUnsubscribes: metrics.totalUnsubscribes,
+        totalBounces: metrics.totalBounces,
+      },
+      campaignActivity: campaignActivity.map(campaign => ({
+        id: campaign.id,
+        delivered: campaign.delivered,
+        weekDay: campaign.weekDay,
+        subject: campaign.subject,
+        link: campaign.link,
+        successfulDeliveries: campaign.successfulDeliveries,
+        opens: campaign.opens,
+        openRate: campaign.openRate,
+        clicks: campaign.clicks,
+        ctr: campaign.ctr,
+        unsubscribes: campaign.unsubscribes,
+        bounces: campaign.bounces,
+      })),
+      // Website activity is kept as empty array for now
+      // This can be populated later when Google Analytics integration is available
+      websiteActivity: [],
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error('Error fetching email channel data:', error);
+    
+    // Return meaningful error response
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    
     return NextResponse.json(
-      { error: 'Failed to fetch email data' },
+      { 
+        error: 'Failed to fetch email data',
+        details: errorMessage,
+        // Provide fallback empty structure to prevent UI crashes
+        fallback: {
+          dateRange: {
+            start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            end: new Date().toISOString().split('T')[0],
+          },
+          metrics: {
+            totalDeliveries: 0,
+            uniqueOpens: 0,
+            avgOpenRate: 0,
+            uniqueClicks: 0,
+            avgCTR: 0,
+            totalUnsubscribes: 0,
+            totalBounces: 0,
+          },
+          campaignActivity: [],
+          websiteActivity: [],
+        }
+      },
       { status: 500 }
     );
   }

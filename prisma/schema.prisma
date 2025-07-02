@@ -109,88 +109,88 @@ model Conversation {
 }
 
 model EmailCampaignContent {
-  id                String   @id @default(cuid())
-  email_campaign_id String
-  subject           String
-  html_content      String   @db.Text
-  plain_content     String   @db.Text
-  web_id            Int
-  type              String
-  content_type      String
-  recipients        Int      @default(0)
-  create_time       DateTime
-  send_time         DateTime
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  // Relations
-  emailCampaign EmailCampaign @relation(fields: [email_campaign_id], references: [id])
-}
-
-model EmailCampaign {
   id              String   @id @default(cuid())
-  campaign_id     String   @unique
-  campaign_name   String
-  email_client_id String
+  emailCampaignId String
+  subject         String
+  htmlContent     String   @db.Text
+  plainContent    String   @db.Text
+  webId           String
+  type            String
+  contentType     String
+  recipients      Int      @default(0)
+  createTime      DateTime
+  sendTime        DateTime
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   // Relations
-  email_client            EmailClient               @relation(fields: [email_client_id], references: [id])
+  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [id])
+}
+
+model EmailCampaign {
+  id            String   @id @default(cuid())
+  campaignId    String   @unique
+  campaignName  String
+  emailClientId String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
   emailCampaignContents   EmailCampaignContent[]
   emailCampaignDailyStats EmailCampaignDailyStats[]
 }
 
 model EmailCampaignDailyStats {
-  id                              String   @id @default(cuid())
-  email_campaign_id               String
-  date                            DateTime @db.Date
-  email_client_id                 String
-  opens                           Int      @default(0)
-  clicks                          Int      @default(0)
-  bounces                         Int      @default(0)
-  unsubscribes                    Int      @default(0)
-  total_opens                     Int      @default(0)
-  daily_total_open_rate           Int      @default(0)
-  cumulative_total_open_rate      Int      @default(0)
-  unique_opens                    Int      @default(0)
-  daily_unique_open_rate          Int      @default(0)
-  cumulative_unique_open_rate     Int      @default(0)
-  total_clicks                    Int      @default(0)
-  daily_total_click_rate          Int      @default(0)
-  cumulative_total_click_rate     Int      @default(0)
-  unique_clicks                   Int      @default(0)
-  daily_unique_click_rate         Int      @default(0)
-  cumulative_unique_click_rate    Int      @default(0)
-  daily_unique_click_to_open_rate Int      @default(0)
-  daily_total_click_to_open_rate  Int      @default(0)
-  spam_reports                    Int      @default(0)
-  daily_spam_reports_rate         Int      @default(0)
-  cumulative_spam_reports_rate    Int      @default(0)
-  spam_report_drops               Int      @default(0)
-  daily_unsubscribe_rate          Int      @default(0)
-  cumulative_unsubscribe_rate     Int      @default(0)
-  single_send_name                String
-  variation                       String
-  phase                           String
-  requests                        Int      @default(0)
-  delivered                       Int      @default(0)
-  daily_bounce_rate               Int      @default(0)
-  cumulative_bounce_rate          Int      @default(0)
-  bounce_drops                    Int      @default(0)
-  createdAt                       DateTime @default(now())
-  updatedAt                       DateTime @updatedAt
+  id                         String   @id @default(cuid())
+  bounceDrops                Int      @default(0)
+  bounces                    Int      @default(0)
+  clicks                     Int      @default(0)
+  cumulativeBounceRate       Int      @default(0)
+  cumulativeSpamReportsRate  Int      @default(0)
+  cumulativeTotalClickRate   Int      @default(0)
+  cumulativeTotalOpenRate    Int      @default(0)
+  cumulativeUniqueClickRate  Int      @default(0)
+  cumulativeUniqueOpenRate   Int      @default(0)
+  cumulativeUnsubscribeRate  Int      @default(0)
+  dailyBounceRate            Int      @default(0)
+  dailySpamReportsRate       Int      @default(0)
+  dailyTotalClickRate        Int      @default(0)
+  dailyTotalClickToOpenRate  Int      @default(0)
+  dailyTotalOpenRate         Int      @default(0)
+  dailyUniqueClickRate       Int      @default(0)
+  dailyUniqueClickToOpenRate Int      @default(0)
+  dailyUniqueOpenRate        Int      @default(0)
+  dailyUnsubscribeRate       Int      @default(0)
+  date                       DateTime @db.Date
+  delivered                  Int      @default(0)
+  emailCampaignId            String
+  emailClientId              String
+  opens                      Int      @default(0)
+  phase                      String
+  requests                   Int      @default(0)
+  singleSendName             String
+  spamReportDrops            Int      @default(0)
+  spamReports                Int      @default(0)
+  totalClicks                Int      @default(0)
+  totalOpens                 Int      @default(0)
+  uniqueClicks               Int      @default(0)
+  uniqueOpens                Int      @default(0)
+  unsubscribes               Int      @default(0)
+  variation                  String
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
 
   // Relations
-  email_client  EmailClient   @relation(fields: [email_client_id], references: [id])
-  emailCampaign EmailCampaign @relation(fields: [email_campaign_id], references: [id])
+  emailClient   EmailClient   @relation(fields: [emailClientId], references: [id])
+  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [id])
 }
 
 model EmailClient {
-  id          String   @id @default(cuid())
-  client_name String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  clientName String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   // Relations
   emailCampaigns          EmailCampaign[]
@@ -200,26 +200,31 @@ model EmailClient {
 }
 
 model EmailClientCredentials {
-  id              String   @id @default(cuid())
-  email_client_id String
-  platform_name   String
-  api_key         String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String   @id @default(cuid())
+  emailClientId String
+  platformName  String
+  apiKey        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   // Relations
-  emailClient EmailClient @relation(fields: [email_client_id], references: [id])
+  emailClient EmailClient @relation(fields: [emailClientId], references: [id])
 }
 
 model EmailGlobalDailyStats {
-  id              String   @id @default(cuid())
-  email_client_id String
-  date            DateTime @db.Date
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String @id @default(cuid())
+  emailClientId String
+  opens         Int    @default(0)
+  clicks        Int    @default(0)
+  bounces       Int    @default(0)
+  unsubs        Int    @default(0)
+
+  date      DateTime @db.Date
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  email_client EmailClient @relation(fields: [email_client_id], references: [id])
+  emailClient EmailClient @relation(fields: [emailClientId], references: [id])
 }
 
 model GaAccount {

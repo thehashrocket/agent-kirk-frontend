@@ -941,8 +941,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.10.1
-   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
+   * Prisma Client JS version: 6.11.0
+   * Query Engine version: 9c30299f5a0ea26a96790e13f796dc6094db3173
    */
   export type PrismaVersion = {
     client: string
@@ -10251,59 +10251,57 @@ export namespace Prisma {
   }
 
   export type EmailCampaignContentAvgAggregateOutputType = {
-    web_id: number | null
     recipients: number | null
   }
 
   export type EmailCampaignContentSumAggregateOutputType = {
-    web_id: number | null
     recipients: number | null
   }
 
   export type EmailCampaignContentMinAggregateOutputType = {
     id: string | null
-    email_campaign_id: string | null
+    emailCampaignId: string | null
     subject: string | null
-    html_content: string | null
-    plain_content: string | null
-    web_id: number | null
+    htmlContent: string | null
+    plainContent: string | null
+    webId: string | null
     type: string | null
-    content_type: string | null
+    contentType: string | null
     recipients: number | null
-    create_time: Date | null
-    send_time: Date | null
+    createTime: Date | null
+    sendTime: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailCampaignContentMaxAggregateOutputType = {
     id: string | null
-    email_campaign_id: string | null
+    emailCampaignId: string | null
     subject: string | null
-    html_content: string | null
-    plain_content: string | null
-    web_id: number | null
+    htmlContent: string | null
+    plainContent: string | null
+    webId: string | null
     type: string | null
-    content_type: string | null
+    contentType: string | null
     recipients: number | null
-    create_time: Date | null
-    send_time: Date | null
+    createTime: Date | null
+    sendTime: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailCampaignContentCountAggregateOutputType = {
     id: number
-    email_campaign_id: number
+    emailCampaignId: number
     subject: number
-    html_content: number
-    plain_content: number
-    web_id: number
+    htmlContent: number
+    plainContent: number
+    webId: number
     type: number
-    content_type: number
+    contentType: number
     recipients: number
-    create_time: number
-    send_time: number
+    createTime: number
+    sendTime: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10311,59 +10309,57 @@ export namespace Prisma {
 
 
   export type EmailCampaignContentAvgAggregateInputType = {
-    web_id?: true
     recipients?: true
   }
 
   export type EmailCampaignContentSumAggregateInputType = {
-    web_id?: true
     recipients?: true
   }
 
   export type EmailCampaignContentMinAggregateInputType = {
     id?: true
-    email_campaign_id?: true
+    emailCampaignId?: true
     subject?: true
-    html_content?: true
-    plain_content?: true
-    web_id?: true
+    htmlContent?: true
+    plainContent?: true
+    webId?: true
     type?: true
-    content_type?: true
+    contentType?: true
     recipients?: true
-    create_time?: true
-    send_time?: true
+    createTime?: true
+    sendTime?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailCampaignContentMaxAggregateInputType = {
     id?: true
-    email_campaign_id?: true
+    emailCampaignId?: true
     subject?: true
-    html_content?: true
-    plain_content?: true
-    web_id?: true
+    htmlContent?: true
+    plainContent?: true
+    webId?: true
     type?: true
-    content_type?: true
+    contentType?: true
     recipients?: true
-    create_time?: true
-    send_time?: true
+    createTime?: true
+    sendTime?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailCampaignContentCountAggregateInputType = {
     id?: true
-    email_campaign_id?: true
+    emailCampaignId?: true
     subject?: true
-    html_content?: true
-    plain_content?: true
-    web_id?: true
+    htmlContent?: true
+    plainContent?: true
+    webId?: true
     type?: true
-    content_type?: true
+    contentType?: true
     recipients?: true
-    create_time?: true
-    send_time?: true
+    createTime?: true
+    sendTime?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10457,16 +10453,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentGroupByOutputType = {
     id: string
-    email_campaign_id: string
+    emailCampaignId: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients: number
-    create_time: Date
-    send_time: Date
+    createTime: Date
+    sendTime: Date
     createdAt: Date
     updatedAt: Date
     _count: EmailCampaignContentCountAggregateOutputType | null
@@ -10492,16 +10488,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_campaign_id?: boolean
+    emailCampaignId?: boolean
     subject?: boolean
-    html_content?: boolean
-    plain_content?: boolean
-    web_id?: boolean
+    htmlContent?: boolean
+    plainContent?: boolean
+    webId?: boolean
     type?: boolean
-    content_type?: boolean
+    contentType?: boolean
     recipients?: boolean
-    create_time?: boolean
-    send_time?: boolean
+    createTime?: boolean
+    sendTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
@@ -10509,16 +10505,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_campaign_id?: boolean
+    emailCampaignId?: boolean
     subject?: boolean
-    html_content?: boolean
-    plain_content?: boolean
-    web_id?: boolean
+    htmlContent?: boolean
+    plainContent?: boolean
+    webId?: boolean
     type?: boolean
-    content_type?: boolean
+    contentType?: boolean
     recipients?: boolean
-    create_time?: boolean
-    send_time?: boolean
+    createTime?: boolean
+    sendTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
@@ -10526,16 +10522,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_campaign_id?: boolean
+    emailCampaignId?: boolean
     subject?: boolean
-    html_content?: boolean
-    plain_content?: boolean
-    web_id?: boolean
+    htmlContent?: boolean
+    plainContent?: boolean
+    webId?: boolean
     type?: boolean
-    content_type?: boolean
+    contentType?: boolean
     recipients?: boolean
-    create_time?: boolean
-    send_time?: boolean
+    createTime?: boolean
+    sendTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
@@ -10543,21 +10539,21 @@ export namespace Prisma {
 
   export type EmailCampaignContentSelectScalar = {
     id?: boolean
-    email_campaign_id?: boolean
+    emailCampaignId?: boolean
     subject?: boolean
-    html_content?: boolean
-    plain_content?: boolean
-    web_id?: boolean
+    htmlContent?: boolean
+    plainContent?: boolean
+    webId?: boolean
     type?: boolean
-    content_type?: boolean
+    contentType?: boolean
     recipients?: boolean
-    create_time?: boolean
-    send_time?: boolean
+    createTime?: boolean
+    sendTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmailCampaignContentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_campaign_id" | "subject" | "html_content" | "plain_content" | "web_id" | "type" | "content_type" | "recipients" | "create_time" | "send_time" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignContent"]>
+  export type EmailCampaignContentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "emailCampaignId" | "subject" | "htmlContent" | "plainContent" | "webId" | "type" | "contentType" | "recipients" | "createTime" | "sendTime" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignContent"]>
   export type EmailCampaignContentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }
@@ -10575,16 +10571,16 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email_campaign_id: string
+      emailCampaignId: string
       subject: string
-      html_content: string
-      plain_content: string
-      web_id: number
+      htmlContent: string
+      plainContent: string
+      webId: string
       type: string
-      content_type: string
+      contentType: string
       recipients: number
-      create_time: Date
-      send_time: Date
+      createTime: Date
+      sendTime: Date
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emailCampaignContent"]>
@@ -11012,16 +11008,16 @@ export namespace Prisma {
    */
   interface EmailCampaignContentFieldRefs {
     readonly id: FieldRef<"EmailCampaignContent", 'String'>
-    readonly email_campaign_id: FieldRef<"EmailCampaignContent", 'String'>
+    readonly emailCampaignId: FieldRef<"EmailCampaignContent", 'String'>
     readonly subject: FieldRef<"EmailCampaignContent", 'String'>
-    readonly html_content: FieldRef<"EmailCampaignContent", 'String'>
-    readonly plain_content: FieldRef<"EmailCampaignContent", 'String'>
-    readonly web_id: FieldRef<"EmailCampaignContent", 'Int'>
+    readonly htmlContent: FieldRef<"EmailCampaignContent", 'String'>
+    readonly plainContent: FieldRef<"EmailCampaignContent", 'String'>
+    readonly webId: FieldRef<"EmailCampaignContent", 'String'>
     readonly type: FieldRef<"EmailCampaignContent", 'String'>
-    readonly content_type: FieldRef<"EmailCampaignContent", 'String'>
+    readonly contentType: FieldRef<"EmailCampaignContent", 'String'>
     readonly recipients: FieldRef<"EmailCampaignContent", 'Int'>
-    readonly create_time: FieldRef<"EmailCampaignContent", 'DateTime'>
-    readonly send_time: FieldRef<"EmailCampaignContent", 'DateTime'>
+    readonly createTime: FieldRef<"EmailCampaignContent", 'DateTime'>
+    readonly sendTime: FieldRef<"EmailCampaignContent", 'DateTime'>
     readonly createdAt: FieldRef<"EmailCampaignContent", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailCampaignContent", 'DateTime'>
   }
@@ -11450,27 +11446,27 @@ export namespace Prisma {
 
   export type EmailCampaignMinAggregateOutputType = {
     id: string | null
-    campaign_id: string | null
-    campaign_name: string | null
-    email_client_id: string | null
+    campaignId: string | null
+    campaignName: string | null
+    emailClientId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailCampaignMaxAggregateOutputType = {
     id: string | null
-    campaign_id: string | null
-    campaign_name: string | null
-    email_client_id: string | null
+    campaignId: string | null
+    campaignName: string | null
+    emailClientId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailCampaignCountAggregateOutputType = {
     id: number
-    campaign_id: number
-    campaign_name: number
-    email_client_id: number
+    campaignId: number
+    campaignName: number
+    emailClientId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -11479,27 +11475,27 @@ export namespace Prisma {
 
   export type EmailCampaignMinAggregateInputType = {
     id?: true
-    campaign_id?: true
-    campaign_name?: true
-    email_client_id?: true
+    campaignId?: true
+    campaignName?: true
+    emailClientId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailCampaignMaxAggregateInputType = {
     id?: true
-    campaign_id?: true
-    campaign_name?: true
-    email_client_id?: true
+    campaignId?: true
+    campaignName?: true
+    emailClientId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailCampaignCountAggregateInputType = {
     id?: true
-    campaign_id?: true
-    campaign_name?: true
-    email_client_id?: true
+    campaignId?: true
+    campaignName?: true
+    emailClientId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -11579,9 +11575,9 @@ export namespace Prisma {
 
   export type EmailCampaignGroupByOutputType = {
     id: string
-    campaign_id: string
-    campaign_name: string
-    email_client_id: string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
     createdAt: Date
     updatedAt: Date
     _count: EmailCampaignCountAggregateOutputType | null
@@ -11605,12 +11601,12 @@ export namespace Prisma {
 
   export type EmailCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    campaign_id?: boolean
-    campaign_name?: boolean
-    email_client_id?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
     emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
     _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
@@ -11618,59 +11614,59 @@ export namespace Prisma {
 
   export type EmailCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    campaign_id?: boolean
-    campaign_name?: boolean
-    email_client_id?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaign"]>
 
   export type EmailCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    campaign_id?: boolean
-    campaign_name?: boolean
-    email_client_id?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaign"]>
 
   export type EmailCampaignSelectScalar = {
     id?: boolean
-    campaign_id?: boolean
-    campaign_name?: boolean
-    email_client_id?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmailCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "campaign_id" | "campaign_name" | "email_client_id" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaign"]>
+  export type EmailCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "campaignId" | "campaignName" | "emailClientId" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaign"]>
   export type EmailCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
     emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
     _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EmailCampaignIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }
   export type EmailCampaignIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }
 
   export type $EmailCampaignPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EmailCampaign"
     objects: {
-      email_client: Prisma.$EmailClientPayload<ExtArgs>
+      emailClient: Prisma.$EmailClientPayload<ExtArgs>
       emailCampaignContents: Prisma.$EmailCampaignContentPayload<ExtArgs>[]
       emailCampaignDailyStats: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      campaign_id: string
-      campaign_name: string
-      email_client_id: string
+      campaignId: string
+      campaignName: string
+      emailClientId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emailCampaign"]>
@@ -12067,7 +12063,7 @@ export namespace Prisma {
    */
   export interface Prisma__EmailCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    email_client<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     emailCampaignContents<T extends EmailCampaign$emailCampaignContentsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignContentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     emailCampaignDailyStats<T extends EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -12100,9 +12096,9 @@ export namespace Prisma {
    */
   interface EmailCampaignFieldRefs {
     readonly id: FieldRef<"EmailCampaign", 'String'>
-    readonly campaign_id: FieldRef<"EmailCampaign", 'String'>
-    readonly campaign_name: FieldRef<"EmailCampaign", 'String'>
-    readonly email_client_id: FieldRef<"EmailCampaign", 'String'>
+    readonly campaignId: FieldRef<"EmailCampaign", 'String'>
+    readonly campaignName: FieldRef<"EmailCampaign", 'String'>
+    readonly emailClientId: FieldRef<"EmailCampaign", 'String'>
     readonly createdAt: FieldRef<"EmailCampaign", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailCampaign", 'DateTime'>
   }
@@ -12580,188 +12576,188 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsAvgAggregateOutputType = {
-    opens: number | null
-    clicks: number | null
+    bounceDrops: number | null
     bounces: number | null
-    unsubscribes: number | null
-    total_opens: number | null
-    daily_total_open_rate: number | null
-    cumulative_total_open_rate: number | null
-    unique_opens: number | null
-    daily_unique_open_rate: number | null
-    cumulative_unique_open_rate: number | null
-    total_clicks: number | null
-    daily_total_click_rate: number | null
-    cumulative_total_click_rate: number | null
-    unique_clicks: number | null
-    daily_unique_click_rate: number | null
-    cumulative_unique_click_rate: number | null
-    daily_unique_click_to_open_rate: number | null
-    daily_total_click_to_open_rate: number | null
-    spam_reports: number | null
-    daily_spam_reports_rate: number | null
-    cumulative_spam_reports_rate: number | null
-    spam_report_drops: number | null
-    daily_unsubscribe_rate: number | null
-    cumulative_unsubscribe_rate: number | null
-    requests: number | null
+    clicks: number | null
+    cumulativeBounceRate: number | null
+    cumulativeSpamReportsRate: number | null
+    cumulativeTotalClickRate: number | null
+    cumulativeTotalOpenRate: number | null
+    cumulativeUniqueClickRate: number | null
+    cumulativeUniqueOpenRate: number | null
+    cumulativeUnsubscribeRate: number | null
+    dailyBounceRate: number | null
+    dailySpamReportsRate: number | null
+    dailyTotalClickRate: number | null
+    dailyTotalClickToOpenRate: number | null
+    dailyTotalOpenRate: number | null
+    dailyUniqueClickRate: number | null
+    dailyUniqueClickToOpenRate: number | null
+    dailyUniqueOpenRate: number | null
+    dailyUnsubscribeRate: number | null
     delivered: number | null
-    daily_bounce_rate: number | null
-    cumulative_bounce_rate: number | null
-    bounce_drops: number | null
+    opens: number | null
+    requests: number | null
+    spamReportDrops: number | null
+    spamReports: number | null
+    totalClicks: number | null
+    totalOpens: number | null
+    uniqueClicks: number | null
+    uniqueOpens: number | null
+    unsubscribes: number | null
   }
 
   export type EmailCampaignDailyStatsSumAggregateOutputType = {
-    opens: number | null
-    clicks: number | null
+    bounceDrops: number | null
     bounces: number | null
-    unsubscribes: number | null
-    total_opens: number | null
-    daily_total_open_rate: number | null
-    cumulative_total_open_rate: number | null
-    unique_opens: number | null
-    daily_unique_open_rate: number | null
-    cumulative_unique_open_rate: number | null
-    total_clicks: number | null
-    daily_total_click_rate: number | null
-    cumulative_total_click_rate: number | null
-    unique_clicks: number | null
-    daily_unique_click_rate: number | null
-    cumulative_unique_click_rate: number | null
-    daily_unique_click_to_open_rate: number | null
-    daily_total_click_to_open_rate: number | null
-    spam_reports: number | null
-    daily_spam_reports_rate: number | null
-    cumulative_spam_reports_rate: number | null
-    spam_report_drops: number | null
-    daily_unsubscribe_rate: number | null
-    cumulative_unsubscribe_rate: number | null
-    requests: number | null
+    clicks: number | null
+    cumulativeBounceRate: number | null
+    cumulativeSpamReportsRate: number | null
+    cumulativeTotalClickRate: number | null
+    cumulativeTotalOpenRate: number | null
+    cumulativeUniqueClickRate: number | null
+    cumulativeUniqueOpenRate: number | null
+    cumulativeUnsubscribeRate: number | null
+    dailyBounceRate: number | null
+    dailySpamReportsRate: number | null
+    dailyTotalClickRate: number | null
+    dailyTotalClickToOpenRate: number | null
+    dailyTotalOpenRate: number | null
+    dailyUniqueClickRate: number | null
+    dailyUniqueClickToOpenRate: number | null
+    dailyUniqueOpenRate: number | null
+    dailyUnsubscribeRate: number | null
     delivered: number | null
-    daily_bounce_rate: number | null
-    cumulative_bounce_rate: number | null
-    bounce_drops: number | null
+    opens: number | null
+    requests: number | null
+    spamReportDrops: number | null
+    spamReports: number | null
+    totalClicks: number | null
+    totalOpens: number | null
+    uniqueClicks: number | null
+    uniqueOpens: number | null
+    unsubscribes: number | null
   }
 
   export type EmailCampaignDailyStatsMinAggregateOutputType = {
     id: string | null
-    email_campaign_id: string | null
-    date: Date | null
-    email_client_id: string | null
-    opens: number | null
-    clicks: number | null
+    bounceDrops: number | null
     bounces: number | null
-    unsubscribes: number | null
-    total_opens: number | null
-    daily_total_open_rate: number | null
-    cumulative_total_open_rate: number | null
-    unique_opens: number | null
-    daily_unique_open_rate: number | null
-    cumulative_unique_open_rate: number | null
-    total_clicks: number | null
-    daily_total_click_rate: number | null
-    cumulative_total_click_rate: number | null
-    unique_clicks: number | null
-    daily_unique_click_rate: number | null
-    cumulative_unique_click_rate: number | null
-    daily_unique_click_to_open_rate: number | null
-    daily_total_click_to_open_rate: number | null
-    spam_reports: number | null
-    daily_spam_reports_rate: number | null
-    cumulative_spam_reports_rate: number | null
-    spam_report_drops: number | null
-    daily_unsubscribe_rate: number | null
-    cumulative_unsubscribe_rate: number | null
-    single_send_name: string | null
-    variation: string | null
+    clicks: number | null
+    cumulativeBounceRate: number | null
+    cumulativeSpamReportsRate: number | null
+    cumulativeTotalClickRate: number | null
+    cumulativeTotalOpenRate: number | null
+    cumulativeUniqueClickRate: number | null
+    cumulativeUniqueOpenRate: number | null
+    cumulativeUnsubscribeRate: number | null
+    dailyBounceRate: number | null
+    dailySpamReportsRate: number | null
+    dailyTotalClickRate: number | null
+    dailyTotalClickToOpenRate: number | null
+    dailyTotalOpenRate: number | null
+    dailyUniqueClickRate: number | null
+    dailyUniqueClickToOpenRate: number | null
+    dailyUniqueOpenRate: number | null
+    dailyUnsubscribeRate: number | null
+    date: Date | null
+    delivered: number | null
+    emailCampaignId: string | null
+    emailClientId: string | null
+    opens: number | null
     phase: string | null
     requests: number | null
-    delivered: number | null
-    daily_bounce_rate: number | null
-    cumulative_bounce_rate: number | null
-    bounce_drops: number | null
+    singleSendName: string | null
+    spamReportDrops: number | null
+    spamReports: number | null
+    totalClicks: number | null
+    totalOpens: number | null
+    uniqueClicks: number | null
+    uniqueOpens: number | null
+    unsubscribes: number | null
+    variation: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailCampaignDailyStatsMaxAggregateOutputType = {
     id: string | null
-    email_campaign_id: string | null
-    date: Date | null
-    email_client_id: string | null
-    opens: number | null
-    clicks: number | null
+    bounceDrops: number | null
     bounces: number | null
-    unsubscribes: number | null
-    total_opens: number | null
-    daily_total_open_rate: number | null
-    cumulative_total_open_rate: number | null
-    unique_opens: number | null
-    daily_unique_open_rate: number | null
-    cumulative_unique_open_rate: number | null
-    total_clicks: number | null
-    daily_total_click_rate: number | null
-    cumulative_total_click_rate: number | null
-    unique_clicks: number | null
-    daily_unique_click_rate: number | null
-    cumulative_unique_click_rate: number | null
-    daily_unique_click_to_open_rate: number | null
-    daily_total_click_to_open_rate: number | null
-    spam_reports: number | null
-    daily_spam_reports_rate: number | null
-    cumulative_spam_reports_rate: number | null
-    spam_report_drops: number | null
-    daily_unsubscribe_rate: number | null
-    cumulative_unsubscribe_rate: number | null
-    single_send_name: string | null
-    variation: string | null
+    clicks: number | null
+    cumulativeBounceRate: number | null
+    cumulativeSpamReportsRate: number | null
+    cumulativeTotalClickRate: number | null
+    cumulativeTotalOpenRate: number | null
+    cumulativeUniqueClickRate: number | null
+    cumulativeUniqueOpenRate: number | null
+    cumulativeUnsubscribeRate: number | null
+    dailyBounceRate: number | null
+    dailySpamReportsRate: number | null
+    dailyTotalClickRate: number | null
+    dailyTotalClickToOpenRate: number | null
+    dailyTotalOpenRate: number | null
+    dailyUniqueClickRate: number | null
+    dailyUniqueClickToOpenRate: number | null
+    dailyUniqueOpenRate: number | null
+    dailyUnsubscribeRate: number | null
+    date: Date | null
+    delivered: number | null
+    emailCampaignId: string | null
+    emailClientId: string | null
+    opens: number | null
     phase: string | null
     requests: number | null
-    delivered: number | null
-    daily_bounce_rate: number | null
-    cumulative_bounce_rate: number | null
-    bounce_drops: number | null
+    singleSendName: string | null
+    spamReportDrops: number | null
+    spamReports: number | null
+    totalClicks: number | null
+    totalOpens: number | null
+    uniqueClicks: number | null
+    uniqueOpens: number | null
+    unsubscribes: number | null
+    variation: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailCampaignDailyStatsCountAggregateOutputType = {
     id: number
-    email_campaign_id: number
-    date: number
-    email_client_id: number
-    opens: number
-    clicks: number
+    bounceDrops: number
     bounces: number
-    unsubscribes: number
-    total_opens: number
-    daily_total_open_rate: number
-    cumulative_total_open_rate: number
-    unique_opens: number
-    daily_unique_open_rate: number
-    cumulative_unique_open_rate: number
-    total_clicks: number
-    daily_total_click_rate: number
-    cumulative_total_click_rate: number
-    unique_clicks: number
-    daily_unique_click_rate: number
-    cumulative_unique_click_rate: number
-    daily_unique_click_to_open_rate: number
-    daily_total_click_to_open_rate: number
-    spam_reports: number
-    daily_spam_reports_rate: number
-    cumulative_spam_reports_rate: number
-    spam_report_drops: number
-    daily_unsubscribe_rate: number
-    cumulative_unsubscribe_rate: number
-    single_send_name: number
-    variation: number
+    clicks: number
+    cumulativeBounceRate: number
+    cumulativeSpamReportsRate: number
+    cumulativeTotalClickRate: number
+    cumulativeTotalOpenRate: number
+    cumulativeUniqueClickRate: number
+    cumulativeUniqueOpenRate: number
+    cumulativeUnsubscribeRate: number
+    dailyBounceRate: number
+    dailySpamReportsRate: number
+    dailyTotalClickRate: number
+    dailyTotalClickToOpenRate: number
+    dailyTotalOpenRate: number
+    dailyUniqueClickRate: number
+    dailyUniqueClickToOpenRate: number
+    dailyUniqueOpenRate: number
+    dailyUnsubscribeRate: number
+    date: number
+    delivered: number
+    emailCampaignId: number
+    emailClientId: number
+    opens: number
     phase: number
     requests: number
-    delivered: number
-    daily_bounce_rate: number
-    cumulative_bounce_rate: number
-    bounce_drops: number
+    singleSendName: number
+    spamReportDrops: number
+    spamReports: number
+    totalClicks: number
+    totalOpens: number
+    uniqueClicks: number
+    uniqueOpens: number
+    unsubscribes: number
+    variation: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12769,188 +12765,188 @@ export namespace Prisma {
 
 
   export type EmailCampaignDailyStatsAvgAggregateInputType = {
-    opens?: true
-    clicks?: true
+    bounceDrops?: true
     bounces?: true
-    unsubscribes?: true
-    total_opens?: true
-    daily_total_open_rate?: true
-    cumulative_total_open_rate?: true
-    unique_opens?: true
-    daily_unique_open_rate?: true
-    cumulative_unique_open_rate?: true
-    total_clicks?: true
-    daily_total_click_rate?: true
-    cumulative_total_click_rate?: true
-    unique_clicks?: true
-    daily_unique_click_rate?: true
-    cumulative_unique_click_rate?: true
-    daily_unique_click_to_open_rate?: true
-    daily_total_click_to_open_rate?: true
-    spam_reports?: true
-    daily_spam_reports_rate?: true
-    cumulative_spam_reports_rate?: true
-    spam_report_drops?: true
-    daily_unsubscribe_rate?: true
-    cumulative_unsubscribe_rate?: true
-    requests?: true
+    clicks?: true
+    cumulativeBounceRate?: true
+    cumulativeSpamReportsRate?: true
+    cumulativeTotalClickRate?: true
+    cumulativeTotalOpenRate?: true
+    cumulativeUniqueClickRate?: true
+    cumulativeUniqueOpenRate?: true
+    cumulativeUnsubscribeRate?: true
+    dailyBounceRate?: true
+    dailySpamReportsRate?: true
+    dailyTotalClickRate?: true
+    dailyTotalClickToOpenRate?: true
+    dailyTotalOpenRate?: true
+    dailyUniqueClickRate?: true
+    dailyUniqueClickToOpenRate?: true
+    dailyUniqueOpenRate?: true
+    dailyUnsubscribeRate?: true
     delivered?: true
-    daily_bounce_rate?: true
-    cumulative_bounce_rate?: true
-    bounce_drops?: true
+    opens?: true
+    requests?: true
+    spamReportDrops?: true
+    spamReports?: true
+    totalClicks?: true
+    totalOpens?: true
+    uniqueClicks?: true
+    uniqueOpens?: true
+    unsubscribes?: true
   }
 
   export type EmailCampaignDailyStatsSumAggregateInputType = {
-    opens?: true
-    clicks?: true
+    bounceDrops?: true
     bounces?: true
-    unsubscribes?: true
-    total_opens?: true
-    daily_total_open_rate?: true
-    cumulative_total_open_rate?: true
-    unique_opens?: true
-    daily_unique_open_rate?: true
-    cumulative_unique_open_rate?: true
-    total_clicks?: true
-    daily_total_click_rate?: true
-    cumulative_total_click_rate?: true
-    unique_clicks?: true
-    daily_unique_click_rate?: true
-    cumulative_unique_click_rate?: true
-    daily_unique_click_to_open_rate?: true
-    daily_total_click_to_open_rate?: true
-    spam_reports?: true
-    daily_spam_reports_rate?: true
-    cumulative_spam_reports_rate?: true
-    spam_report_drops?: true
-    daily_unsubscribe_rate?: true
-    cumulative_unsubscribe_rate?: true
-    requests?: true
+    clicks?: true
+    cumulativeBounceRate?: true
+    cumulativeSpamReportsRate?: true
+    cumulativeTotalClickRate?: true
+    cumulativeTotalOpenRate?: true
+    cumulativeUniqueClickRate?: true
+    cumulativeUniqueOpenRate?: true
+    cumulativeUnsubscribeRate?: true
+    dailyBounceRate?: true
+    dailySpamReportsRate?: true
+    dailyTotalClickRate?: true
+    dailyTotalClickToOpenRate?: true
+    dailyTotalOpenRate?: true
+    dailyUniqueClickRate?: true
+    dailyUniqueClickToOpenRate?: true
+    dailyUniqueOpenRate?: true
+    dailyUnsubscribeRate?: true
     delivered?: true
-    daily_bounce_rate?: true
-    cumulative_bounce_rate?: true
-    bounce_drops?: true
+    opens?: true
+    requests?: true
+    spamReportDrops?: true
+    spamReports?: true
+    totalClicks?: true
+    totalOpens?: true
+    uniqueClicks?: true
+    uniqueOpens?: true
+    unsubscribes?: true
   }
 
   export type EmailCampaignDailyStatsMinAggregateInputType = {
     id?: true
-    email_campaign_id?: true
-    date?: true
-    email_client_id?: true
-    opens?: true
-    clicks?: true
+    bounceDrops?: true
     bounces?: true
-    unsubscribes?: true
-    total_opens?: true
-    daily_total_open_rate?: true
-    cumulative_total_open_rate?: true
-    unique_opens?: true
-    daily_unique_open_rate?: true
-    cumulative_unique_open_rate?: true
-    total_clicks?: true
-    daily_total_click_rate?: true
-    cumulative_total_click_rate?: true
-    unique_clicks?: true
-    daily_unique_click_rate?: true
-    cumulative_unique_click_rate?: true
-    daily_unique_click_to_open_rate?: true
-    daily_total_click_to_open_rate?: true
-    spam_reports?: true
-    daily_spam_reports_rate?: true
-    cumulative_spam_reports_rate?: true
-    spam_report_drops?: true
-    daily_unsubscribe_rate?: true
-    cumulative_unsubscribe_rate?: true
-    single_send_name?: true
-    variation?: true
+    clicks?: true
+    cumulativeBounceRate?: true
+    cumulativeSpamReportsRate?: true
+    cumulativeTotalClickRate?: true
+    cumulativeTotalOpenRate?: true
+    cumulativeUniqueClickRate?: true
+    cumulativeUniqueOpenRate?: true
+    cumulativeUnsubscribeRate?: true
+    dailyBounceRate?: true
+    dailySpamReportsRate?: true
+    dailyTotalClickRate?: true
+    dailyTotalClickToOpenRate?: true
+    dailyTotalOpenRate?: true
+    dailyUniqueClickRate?: true
+    dailyUniqueClickToOpenRate?: true
+    dailyUniqueOpenRate?: true
+    dailyUnsubscribeRate?: true
+    date?: true
+    delivered?: true
+    emailCampaignId?: true
+    emailClientId?: true
+    opens?: true
     phase?: true
     requests?: true
-    delivered?: true
-    daily_bounce_rate?: true
-    cumulative_bounce_rate?: true
-    bounce_drops?: true
+    singleSendName?: true
+    spamReportDrops?: true
+    spamReports?: true
+    totalClicks?: true
+    totalOpens?: true
+    uniqueClicks?: true
+    uniqueOpens?: true
+    unsubscribes?: true
+    variation?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailCampaignDailyStatsMaxAggregateInputType = {
     id?: true
-    email_campaign_id?: true
-    date?: true
-    email_client_id?: true
-    opens?: true
-    clicks?: true
+    bounceDrops?: true
     bounces?: true
-    unsubscribes?: true
-    total_opens?: true
-    daily_total_open_rate?: true
-    cumulative_total_open_rate?: true
-    unique_opens?: true
-    daily_unique_open_rate?: true
-    cumulative_unique_open_rate?: true
-    total_clicks?: true
-    daily_total_click_rate?: true
-    cumulative_total_click_rate?: true
-    unique_clicks?: true
-    daily_unique_click_rate?: true
-    cumulative_unique_click_rate?: true
-    daily_unique_click_to_open_rate?: true
-    daily_total_click_to_open_rate?: true
-    spam_reports?: true
-    daily_spam_reports_rate?: true
-    cumulative_spam_reports_rate?: true
-    spam_report_drops?: true
-    daily_unsubscribe_rate?: true
-    cumulative_unsubscribe_rate?: true
-    single_send_name?: true
-    variation?: true
+    clicks?: true
+    cumulativeBounceRate?: true
+    cumulativeSpamReportsRate?: true
+    cumulativeTotalClickRate?: true
+    cumulativeTotalOpenRate?: true
+    cumulativeUniqueClickRate?: true
+    cumulativeUniqueOpenRate?: true
+    cumulativeUnsubscribeRate?: true
+    dailyBounceRate?: true
+    dailySpamReportsRate?: true
+    dailyTotalClickRate?: true
+    dailyTotalClickToOpenRate?: true
+    dailyTotalOpenRate?: true
+    dailyUniqueClickRate?: true
+    dailyUniqueClickToOpenRate?: true
+    dailyUniqueOpenRate?: true
+    dailyUnsubscribeRate?: true
+    date?: true
+    delivered?: true
+    emailCampaignId?: true
+    emailClientId?: true
+    opens?: true
     phase?: true
     requests?: true
-    delivered?: true
-    daily_bounce_rate?: true
-    cumulative_bounce_rate?: true
-    bounce_drops?: true
+    singleSendName?: true
+    spamReportDrops?: true
+    spamReports?: true
+    totalClicks?: true
+    totalOpens?: true
+    uniqueClicks?: true
+    uniqueOpens?: true
+    unsubscribes?: true
+    variation?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailCampaignDailyStatsCountAggregateInputType = {
     id?: true
-    email_campaign_id?: true
-    date?: true
-    email_client_id?: true
-    opens?: true
-    clicks?: true
+    bounceDrops?: true
     bounces?: true
-    unsubscribes?: true
-    total_opens?: true
-    daily_total_open_rate?: true
-    cumulative_total_open_rate?: true
-    unique_opens?: true
-    daily_unique_open_rate?: true
-    cumulative_unique_open_rate?: true
-    total_clicks?: true
-    daily_total_click_rate?: true
-    cumulative_total_click_rate?: true
-    unique_clicks?: true
-    daily_unique_click_rate?: true
-    cumulative_unique_click_rate?: true
-    daily_unique_click_to_open_rate?: true
-    daily_total_click_to_open_rate?: true
-    spam_reports?: true
-    daily_spam_reports_rate?: true
-    cumulative_spam_reports_rate?: true
-    spam_report_drops?: true
-    daily_unsubscribe_rate?: true
-    cumulative_unsubscribe_rate?: true
-    single_send_name?: true
-    variation?: true
+    clicks?: true
+    cumulativeBounceRate?: true
+    cumulativeSpamReportsRate?: true
+    cumulativeTotalClickRate?: true
+    cumulativeTotalOpenRate?: true
+    cumulativeUniqueClickRate?: true
+    cumulativeUniqueOpenRate?: true
+    cumulativeUnsubscribeRate?: true
+    dailyBounceRate?: true
+    dailySpamReportsRate?: true
+    dailyTotalClickRate?: true
+    dailyTotalClickToOpenRate?: true
+    dailyTotalOpenRate?: true
+    dailyUniqueClickRate?: true
+    dailyUniqueClickToOpenRate?: true
+    dailyUniqueOpenRate?: true
+    dailyUnsubscribeRate?: true
+    date?: true
+    delivered?: true
+    emailCampaignId?: true
+    emailClientId?: true
+    opens?: true
     phase?: true
     requests?: true
-    delivered?: true
-    daily_bounce_rate?: true
-    cumulative_bounce_rate?: true
-    bounce_drops?: true
+    singleSendName?: true
+    spamReportDrops?: true
+    spamReports?: true
+    totalClicks?: true
+    totalOpens?: true
+    uniqueClicks?: true
+    uniqueOpens?: true
+    unsubscribes?: true
+    variation?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -13044,41 +13040,41 @@ export namespace Prisma {
 
   export type EmailCampaignDailyStatsGroupByOutputType = {
     id: string
-    email_campaign_id: string
-    date: Date
-    email_client_id: string
-    opens: number
-    clicks: number
+    bounceDrops: number
     bounces: number
-    unsubscribes: number
-    total_opens: number
-    daily_total_open_rate: number
-    cumulative_total_open_rate: number
-    unique_opens: number
-    daily_unique_open_rate: number
-    cumulative_unique_open_rate: number
-    total_clicks: number
-    daily_total_click_rate: number
-    cumulative_total_click_rate: number
-    unique_clicks: number
-    daily_unique_click_rate: number
-    cumulative_unique_click_rate: number
-    daily_unique_click_to_open_rate: number
-    daily_total_click_to_open_rate: number
-    spam_reports: number
-    daily_spam_reports_rate: number
-    cumulative_spam_reports_rate: number
-    spam_report_drops: number
-    daily_unsubscribe_rate: number
-    cumulative_unsubscribe_rate: number
-    single_send_name: string
-    variation: string
+    clicks: number
+    cumulativeBounceRate: number
+    cumulativeSpamReportsRate: number
+    cumulativeTotalClickRate: number
+    cumulativeTotalOpenRate: number
+    cumulativeUniqueClickRate: number
+    cumulativeUniqueOpenRate: number
+    cumulativeUnsubscribeRate: number
+    dailyBounceRate: number
+    dailySpamReportsRate: number
+    dailyTotalClickRate: number
+    dailyTotalClickToOpenRate: number
+    dailyTotalOpenRate: number
+    dailyUniqueClickRate: number
+    dailyUniqueClickToOpenRate: number
+    dailyUniqueOpenRate: number
+    dailyUnsubscribeRate: number
+    date: Date
+    delivered: number
+    emailCampaignId: string
+    emailClientId: string
+    opens: number
     phase: string
     requests: number
-    delivered: number
-    daily_bounce_rate: number
-    cumulative_bounce_rate: number
-    bounce_drops: number
+    singleSendName: string
+    spamReportDrops: number
+    spamReports: number
+    totalClicks: number
+    totalOpens: number
+    uniqueClicks: number
+    uniqueOpens: number
+    unsubscribes: number
+    variation: string
     createdAt: Date
     updatedAt: Date
     _count: EmailCampaignDailyStatsCountAggregateOutputType | null
@@ -13104,231 +13100,231 @@ export namespace Prisma {
 
   export type EmailCampaignDailyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_campaign_id?: boolean
-    date?: boolean
-    email_client_id?: boolean
-    opens?: boolean
-    clicks?: boolean
+    bounceDrops?: boolean
     bounces?: boolean
-    unsubscribes?: boolean
-    total_opens?: boolean
-    daily_total_open_rate?: boolean
-    cumulative_total_open_rate?: boolean
-    unique_opens?: boolean
-    daily_unique_open_rate?: boolean
-    cumulative_unique_open_rate?: boolean
-    total_clicks?: boolean
-    daily_total_click_rate?: boolean
-    cumulative_total_click_rate?: boolean
-    unique_clicks?: boolean
-    daily_unique_click_rate?: boolean
-    cumulative_unique_click_rate?: boolean
-    daily_unique_click_to_open_rate?: boolean
-    daily_total_click_to_open_rate?: boolean
-    spam_reports?: boolean
-    daily_spam_reports_rate?: boolean
-    cumulative_spam_reports_rate?: boolean
-    spam_report_drops?: boolean
-    daily_unsubscribe_rate?: boolean
-    cumulative_unsubscribe_rate?: boolean
-    single_send_name?: boolean
-    variation?: boolean
+    clicks?: boolean
+    cumulativeBounceRate?: boolean
+    cumulativeSpamReportsRate?: boolean
+    cumulativeTotalClickRate?: boolean
+    cumulativeTotalOpenRate?: boolean
+    cumulativeUniqueClickRate?: boolean
+    cumulativeUniqueOpenRate?: boolean
+    cumulativeUnsubscribeRate?: boolean
+    dailyBounceRate?: boolean
+    dailySpamReportsRate?: boolean
+    dailyTotalClickRate?: boolean
+    dailyTotalClickToOpenRate?: boolean
+    dailyTotalOpenRate?: boolean
+    dailyUniqueClickRate?: boolean
+    dailyUniqueClickToOpenRate?: boolean
+    dailyUniqueOpenRate?: boolean
+    dailyUnsubscribeRate?: boolean
+    date?: boolean
+    delivered?: boolean
+    emailCampaignId?: boolean
+    emailClientId?: boolean
+    opens?: boolean
     phase?: boolean
     requests?: boolean
-    delivered?: boolean
-    daily_bounce_rate?: boolean
-    cumulative_bounce_rate?: boolean
-    bounce_drops?: boolean
+    singleSendName?: boolean
+    spamReportDrops?: boolean
+    spamReports?: boolean
+    totalClicks?: boolean
+    totalOpens?: boolean
+    uniqueClicks?: boolean
+    uniqueOpens?: boolean
+    unsubscribes?: boolean
+    variation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaignDailyStats"]>
 
   export type EmailCampaignDailyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_campaign_id?: boolean
-    date?: boolean
-    email_client_id?: boolean
-    opens?: boolean
-    clicks?: boolean
+    bounceDrops?: boolean
     bounces?: boolean
-    unsubscribes?: boolean
-    total_opens?: boolean
-    daily_total_open_rate?: boolean
-    cumulative_total_open_rate?: boolean
-    unique_opens?: boolean
-    daily_unique_open_rate?: boolean
-    cumulative_unique_open_rate?: boolean
-    total_clicks?: boolean
-    daily_total_click_rate?: boolean
-    cumulative_total_click_rate?: boolean
-    unique_clicks?: boolean
-    daily_unique_click_rate?: boolean
-    cumulative_unique_click_rate?: boolean
-    daily_unique_click_to_open_rate?: boolean
-    daily_total_click_to_open_rate?: boolean
-    spam_reports?: boolean
-    daily_spam_reports_rate?: boolean
-    cumulative_spam_reports_rate?: boolean
-    spam_report_drops?: boolean
-    daily_unsubscribe_rate?: boolean
-    cumulative_unsubscribe_rate?: boolean
-    single_send_name?: boolean
-    variation?: boolean
+    clicks?: boolean
+    cumulativeBounceRate?: boolean
+    cumulativeSpamReportsRate?: boolean
+    cumulativeTotalClickRate?: boolean
+    cumulativeTotalOpenRate?: boolean
+    cumulativeUniqueClickRate?: boolean
+    cumulativeUniqueOpenRate?: boolean
+    cumulativeUnsubscribeRate?: boolean
+    dailyBounceRate?: boolean
+    dailySpamReportsRate?: boolean
+    dailyTotalClickRate?: boolean
+    dailyTotalClickToOpenRate?: boolean
+    dailyTotalOpenRate?: boolean
+    dailyUniqueClickRate?: boolean
+    dailyUniqueClickToOpenRate?: boolean
+    dailyUniqueOpenRate?: boolean
+    dailyUnsubscribeRate?: boolean
+    date?: boolean
+    delivered?: boolean
+    emailCampaignId?: boolean
+    emailClientId?: boolean
+    opens?: boolean
     phase?: boolean
     requests?: boolean
-    delivered?: boolean
-    daily_bounce_rate?: boolean
-    cumulative_bounce_rate?: boolean
-    bounce_drops?: boolean
+    singleSendName?: boolean
+    spamReportDrops?: boolean
+    spamReports?: boolean
+    totalClicks?: boolean
+    totalOpens?: boolean
+    uniqueClicks?: boolean
+    uniqueOpens?: boolean
+    unsubscribes?: boolean
+    variation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaignDailyStats"]>
 
   export type EmailCampaignDailyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_campaign_id?: boolean
-    date?: boolean
-    email_client_id?: boolean
-    opens?: boolean
-    clicks?: boolean
+    bounceDrops?: boolean
     bounces?: boolean
-    unsubscribes?: boolean
-    total_opens?: boolean
-    daily_total_open_rate?: boolean
-    cumulative_total_open_rate?: boolean
-    unique_opens?: boolean
-    daily_unique_open_rate?: boolean
-    cumulative_unique_open_rate?: boolean
-    total_clicks?: boolean
-    daily_total_click_rate?: boolean
-    cumulative_total_click_rate?: boolean
-    unique_clicks?: boolean
-    daily_unique_click_rate?: boolean
-    cumulative_unique_click_rate?: boolean
-    daily_unique_click_to_open_rate?: boolean
-    daily_total_click_to_open_rate?: boolean
-    spam_reports?: boolean
-    daily_spam_reports_rate?: boolean
-    cumulative_spam_reports_rate?: boolean
-    spam_report_drops?: boolean
-    daily_unsubscribe_rate?: boolean
-    cumulative_unsubscribe_rate?: boolean
-    single_send_name?: boolean
-    variation?: boolean
+    clicks?: boolean
+    cumulativeBounceRate?: boolean
+    cumulativeSpamReportsRate?: boolean
+    cumulativeTotalClickRate?: boolean
+    cumulativeTotalOpenRate?: boolean
+    cumulativeUniqueClickRate?: boolean
+    cumulativeUniqueOpenRate?: boolean
+    cumulativeUnsubscribeRate?: boolean
+    dailyBounceRate?: boolean
+    dailySpamReportsRate?: boolean
+    dailyTotalClickRate?: boolean
+    dailyTotalClickToOpenRate?: boolean
+    dailyTotalOpenRate?: boolean
+    dailyUniqueClickRate?: boolean
+    dailyUniqueClickToOpenRate?: boolean
+    dailyUniqueOpenRate?: boolean
+    dailyUnsubscribeRate?: boolean
+    date?: boolean
+    delivered?: boolean
+    emailCampaignId?: boolean
+    emailClientId?: boolean
+    opens?: boolean
     phase?: boolean
     requests?: boolean
-    delivered?: boolean
-    daily_bounce_rate?: boolean
-    cumulative_bounce_rate?: boolean
-    bounce_drops?: boolean
+    singleSendName?: boolean
+    spamReportDrops?: boolean
+    spamReports?: boolean
+    totalClicks?: boolean
+    totalOpens?: boolean
+    uniqueClicks?: boolean
+    uniqueOpens?: boolean
+    unsubscribes?: boolean
+    variation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaignDailyStats"]>
 
   export type EmailCampaignDailyStatsSelectScalar = {
     id?: boolean
-    email_campaign_id?: boolean
-    date?: boolean
-    email_client_id?: boolean
-    opens?: boolean
-    clicks?: boolean
+    bounceDrops?: boolean
     bounces?: boolean
-    unsubscribes?: boolean
-    total_opens?: boolean
-    daily_total_open_rate?: boolean
-    cumulative_total_open_rate?: boolean
-    unique_opens?: boolean
-    daily_unique_open_rate?: boolean
-    cumulative_unique_open_rate?: boolean
-    total_clicks?: boolean
-    daily_total_click_rate?: boolean
-    cumulative_total_click_rate?: boolean
-    unique_clicks?: boolean
-    daily_unique_click_rate?: boolean
-    cumulative_unique_click_rate?: boolean
-    daily_unique_click_to_open_rate?: boolean
-    daily_total_click_to_open_rate?: boolean
-    spam_reports?: boolean
-    daily_spam_reports_rate?: boolean
-    cumulative_spam_reports_rate?: boolean
-    spam_report_drops?: boolean
-    daily_unsubscribe_rate?: boolean
-    cumulative_unsubscribe_rate?: boolean
-    single_send_name?: boolean
-    variation?: boolean
+    clicks?: boolean
+    cumulativeBounceRate?: boolean
+    cumulativeSpamReportsRate?: boolean
+    cumulativeTotalClickRate?: boolean
+    cumulativeTotalOpenRate?: boolean
+    cumulativeUniqueClickRate?: boolean
+    cumulativeUniqueOpenRate?: boolean
+    cumulativeUnsubscribeRate?: boolean
+    dailyBounceRate?: boolean
+    dailySpamReportsRate?: boolean
+    dailyTotalClickRate?: boolean
+    dailyTotalClickToOpenRate?: boolean
+    dailyTotalOpenRate?: boolean
+    dailyUniqueClickRate?: boolean
+    dailyUniqueClickToOpenRate?: boolean
+    dailyUniqueOpenRate?: boolean
+    dailyUnsubscribeRate?: boolean
+    date?: boolean
+    delivered?: boolean
+    emailCampaignId?: boolean
+    emailClientId?: boolean
+    opens?: boolean
     phase?: boolean
     requests?: boolean
-    delivered?: boolean
-    daily_bounce_rate?: boolean
-    cumulative_bounce_rate?: boolean
-    bounce_drops?: boolean
+    singleSendName?: boolean
+    spamReportDrops?: boolean
+    spamReports?: boolean
+    totalClicks?: boolean
+    totalOpens?: boolean
+    uniqueClicks?: boolean
+    uniqueOpens?: boolean
+    unsubscribes?: boolean
+    variation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmailCampaignDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_campaign_id" | "date" | "email_client_id" | "opens" | "clicks" | "bounces" | "unsubscribes" | "total_opens" | "daily_total_open_rate" | "cumulative_total_open_rate" | "unique_opens" | "daily_unique_open_rate" | "cumulative_unique_open_rate" | "total_clicks" | "daily_total_click_rate" | "cumulative_total_click_rate" | "unique_clicks" | "daily_unique_click_rate" | "cumulative_unique_click_rate" | "daily_unique_click_to_open_rate" | "daily_total_click_to_open_rate" | "spam_reports" | "daily_spam_reports_rate" | "cumulative_spam_reports_rate" | "spam_report_drops" | "daily_unsubscribe_rate" | "cumulative_unsubscribe_rate" | "single_send_name" | "variation" | "phase" | "requests" | "delivered" | "daily_bounce_rate" | "cumulative_bounce_rate" | "bounce_drops" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignDailyStats"]>
+  export type EmailCampaignDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bounceDrops" | "bounces" | "clicks" | "cumulativeBounceRate" | "cumulativeSpamReportsRate" | "cumulativeTotalClickRate" | "cumulativeTotalOpenRate" | "cumulativeUniqueClickRate" | "cumulativeUniqueOpenRate" | "cumulativeUnsubscribeRate" | "dailyBounceRate" | "dailySpamReportsRate" | "dailyTotalClickRate" | "dailyTotalClickToOpenRate" | "dailyTotalOpenRate" | "dailyUniqueClickRate" | "dailyUniqueClickToOpenRate" | "dailyUniqueOpenRate" | "dailyUnsubscribeRate" | "date" | "delivered" | "emailCampaignId" | "emailClientId" | "opens" | "phase" | "requests" | "singleSendName" | "spamReportDrops" | "spamReports" | "totalClicks" | "totalOpens" | "uniqueClicks" | "uniqueOpens" | "unsubscribes" | "variation" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignDailyStats"]>
   export type EmailCampaignDailyStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }
   export type EmailCampaignDailyStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }
   export type EmailCampaignDailyStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }
 
   export type $EmailCampaignDailyStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EmailCampaignDailyStats"
     objects: {
-      email_client: Prisma.$EmailClientPayload<ExtArgs>
+      emailClient: Prisma.$EmailClientPayload<ExtArgs>
       emailCampaign: Prisma.$EmailCampaignPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email_campaign_id: string
-      date: Date
-      email_client_id: string
-      opens: number
-      clicks: number
+      bounceDrops: number
       bounces: number
-      unsubscribes: number
-      total_opens: number
-      daily_total_open_rate: number
-      cumulative_total_open_rate: number
-      unique_opens: number
-      daily_unique_open_rate: number
-      cumulative_unique_open_rate: number
-      total_clicks: number
-      daily_total_click_rate: number
-      cumulative_total_click_rate: number
-      unique_clicks: number
-      daily_unique_click_rate: number
-      cumulative_unique_click_rate: number
-      daily_unique_click_to_open_rate: number
-      daily_total_click_to_open_rate: number
-      spam_reports: number
-      daily_spam_reports_rate: number
-      cumulative_spam_reports_rate: number
-      spam_report_drops: number
-      daily_unsubscribe_rate: number
-      cumulative_unsubscribe_rate: number
-      single_send_name: string
-      variation: string
+      clicks: number
+      cumulativeBounceRate: number
+      cumulativeSpamReportsRate: number
+      cumulativeTotalClickRate: number
+      cumulativeTotalOpenRate: number
+      cumulativeUniqueClickRate: number
+      cumulativeUniqueOpenRate: number
+      cumulativeUnsubscribeRate: number
+      dailyBounceRate: number
+      dailySpamReportsRate: number
+      dailyTotalClickRate: number
+      dailyTotalClickToOpenRate: number
+      dailyTotalOpenRate: number
+      dailyUniqueClickRate: number
+      dailyUniqueClickToOpenRate: number
+      dailyUniqueOpenRate: number
+      dailyUnsubscribeRate: number
+      date: Date
+      delivered: number
+      emailCampaignId: string
+      emailClientId: string
+      opens: number
       phase: string
       requests: number
-      delivered: number
-      daily_bounce_rate: number
-      cumulative_bounce_rate: number
-      bounce_drops: number
+      singleSendName: string
+      spamReportDrops: number
+      spamReports: number
+      totalClicks: number
+      totalOpens: number
+      uniqueClicks: number
+      uniqueOpens: number
+      unsubscribes: number
+      variation: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emailCampaignDailyStats"]>
@@ -13725,7 +13721,7 @@ export namespace Prisma {
    */
   export interface Prisma__EmailCampaignDailyStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    email_client<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     emailCampaign<T extends EmailCampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaignDefaultArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13757,41 +13753,41 @@ export namespace Prisma {
    */
   interface EmailCampaignDailyStatsFieldRefs {
     readonly id: FieldRef<"EmailCampaignDailyStats", 'String'>
-    readonly email_campaign_id: FieldRef<"EmailCampaignDailyStats", 'String'>
-    readonly date: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
-    readonly email_client_id: FieldRef<"EmailCampaignDailyStats", 'String'>
-    readonly opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly bounceDrops: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly bounces: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly unsubscribes: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly total_opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_total_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_total_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly unique_opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_unique_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_unique_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly total_clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_total_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_total_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly unique_clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_unique_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_unique_click_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_unique_click_to_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_total_click_to_open_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly spam_reports: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_spam_reports_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_spam_reports_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly spam_report_drops: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_unsubscribe_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_unsubscribe_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly single_send_name: FieldRef<"EmailCampaignDailyStats", 'String'>
-    readonly variation: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeBounceRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeSpamReportsRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeTotalClickRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeTotalOpenRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeUniqueClickRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeUniqueOpenRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly cumulativeUnsubscribeRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyBounceRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailySpamReportsRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyTotalClickRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyTotalClickToOpenRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyTotalOpenRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyUniqueClickRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyUniqueClickToOpenRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyUniqueOpenRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly dailyUnsubscribeRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly date: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
+    readonly delivered: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly emailCampaignId: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly emailClientId: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly phase: FieldRef<"EmailCampaignDailyStats", 'String'>
     readonly requests: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly delivered: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly daily_bounce_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly cumulative_bounce_rate: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly bounce_drops: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly singleSendName: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly spamReportDrops: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly spamReports: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly totalClicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly totalOpens: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly uniqueClicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly uniqueOpens: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly unsubscribes: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly variation: FieldRef<"EmailCampaignDailyStats", 'String'>
     readonly createdAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
   }
@@ -14220,21 +14216,21 @@ export namespace Prisma {
 
   export type EmailClientMinAggregateOutputType = {
     id: string | null
-    client_name: string | null
+    clientName: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailClientMaxAggregateOutputType = {
     id: string | null
-    client_name: string | null
+    clientName: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailClientCountAggregateOutputType = {
     id: number
-    client_name: number
+    clientName: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -14243,21 +14239,21 @@ export namespace Prisma {
 
   export type EmailClientMinAggregateInputType = {
     id?: true
-    client_name?: true
+    clientName?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailClientMaxAggregateInputType = {
     id?: true
-    client_name?: true
+    clientName?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailClientCountAggregateInputType = {
     id?: true
-    client_name?: true
+    clientName?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -14337,7 +14333,7 @@ export namespace Prisma {
 
   export type EmailClientGroupByOutputType = {
     id: string
-    client_name: string
+    clientName: string
     createdAt: Date
     updatedAt: Date
     _count: EmailClientCountAggregateOutputType | null
@@ -14361,7 +14357,7 @@ export namespace Prisma {
 
   export type EmailClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client_name?: boolean
+    clientName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailCampaigns?: boolean | EmailClient$emailCampaignsArgs<ExtArgs>
@@ -14373,26 +14369,26 @@ export namespace Prisma {
 
   export type EmailClientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client_name?: boolean
+    clientName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["emailClient"]>
 
   export type EmailClientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client_name?: boolean
+    clientName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["emailClient"]>
 
   export type EmailClientSelectScalar = {
     id?: boolean
-    client_name?: boolean
+    clientName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmailClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_name" | "createdAt" | "updatedAt", ExtArgs["result"]["emailClient"]>
+  export type EmailClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientName" | "createdAt" | "updatedAt", ExtArgs["result"]["emailClient"]>
   export type EmailClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     emailCampaigns?: boolean | EmailClient$emailCampaignsArgs<ExtArgs>
     emailClientCredentials?: boolean | EmailClient$emailClientCredentialsArgs<ExtArgs>
@@ -14413,7 +14409,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      client_name: string
+      clientName: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emailClient"]>
@@ -14844,7 +14840,7 @@ export namespace Prisma {
    */
   interface EmailClientFieldRefs {
     readonly id: FieldRef<"EmailClient", 'String'>
-    readonly client_name: FieldRef<"EmailClient", 'String'>
+    readonly clientName: FieldRef<"EmailClient", 'String'>
     readonly createdAt: FieldRef<"EmailClient", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailClient", 'DateTime'>
   }
@@ -15361,27 +15357,27 @@ export namespace Prisma {
 
   export type EmailClientCredentialsMinAggregateOutputType = {
     id: string | null
-    email_client_id: string | null
-    platform_name: string | null
-    api_key: string | null
+    emailClientId: string | null
+    platformName: string | null
+    apiKey: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailClientCredentialsMaxAggregateOutputType = {
     id: string | null
-    email_client_id: string | null
-    platform_name: string | null
-    api_key: string | null
+    emailClientId: string | null
+    platformName: string | null
+    apiKey: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type EmailClientCredentialsCountAggregateOutputType = {
     id: number
-    email_client_id: number
-    platform_name: number
-    api_key: number
+    emailClientId: number
+    platformName: number
+    apiKey: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -15390,27 +15386,27 @@ export namespace Prisma {
 
   export type EmailClientCredentialsMinAggregateInputType = {
     id?: true
-    email_client_id?: true
-    platform_name?: true
-    api_key?: true
+    emailClientId?: true
+    platformName?: true
+    apiKey?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailClientCredentialsMaxAggregateInputType = {
     id?: true
-    email_client_id?: true
-    platform_name?: true
-    api_key?: true
+    emailClientId?: true
+    platformName?: true
+    apiKey?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type EmailClientCredentialsCountAggregateInputType = {
     id?: true
-    email_client_id?: true
-    platform_name?: true
-    api_key?: true
+    emailClientId?: true
+    platformName?: true
+    apiKey?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -15490,9 +15486,9 @@ export namespace Prisma {
 
   export type EmailClientCredentialsGroupByOutputType = {
     id: string
-    email_client_id: string
-    platform_name: string
-    api_key: string
+    emailClientId: string
+    platformName: string
+    apiKey: string
     createdAt: Date
     updatedAt: Date
     _count: EmailClientCredentialsCountAggregateOutputType | null
@@ -15516,9 +15512,9 @@ export namespace Prisma {
 
   export type EmailClientCredentialsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_client_id?: boolean
-    platform_name?: boolean
-    api_key?: boolean
+    emailClientId?: boolean
+    platformName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
@@ -15526,9 +15522,9 @@ export namespace Prisma {
 
   export type EmailClientCredentialsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_client_id?: boolean
-    platform_name?: boolean
-    api_key?: boolean
+    emailClientId?: boolean
+    platformName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
@@ -15536,9 +15532,9 @@ export namespace Prisma {
 
   export type EmailClientCredentialsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_client_id?: boolean
-    platform_name?: boolean
-    api_key?: boolean
+    emailClientId?: boolean
+    platformName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
@@ -15546,14 +15542,14 @@ export namespace Prisma {
 
   export type EmailClientCredentialsSelectScalar = {
     id?: boolean
-    email_client_id?: boolean
-    platform_name?: boolean
-    api_key?: boolean
+    emailClientId?: boolean
+    platformName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmailClientCredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_client_id" | "platform_name" | "api_key" | "createdAt" | "updatedAt", ExtArgs["result"]["emailClientCredentials"]>
+  export type EmailClientCredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "emailClientId" | "platformName" | "apiKey" | "createdAt" | "updatedAt", ExtArgs["result"]["emailClientCredentials"]>
   export type EmailClientCredentialsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }
@@ -15571,9 +15567,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email_client_id: string
-      platform_name: string
-      api_key: string
+      emailClientId: string
+      platformName: string
+      apiKey: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emailClientCredentials"]>
@@ -16001,9 +15997,9 @@ export namespace Prisma {
    */
   interface EmailClientCredentialsFieldRefs {
     readonly id: FieldRef<"EmailClientCredentials", 'String'>
-    readonly email_client_id: FieldRef<"EmailClientCredentials", 'String'>
-    readonly platform_name: FieldRef<"EmailClientCredentials", 'String'>
-    readonly api_key: FieldRef<"EmailClientCredentials", 'String'>
+    readonly emailClientId: FieldRef<"EmailClientCredentials", 'String'>
+    readonly platformName: FieldRef<"EmailClientCredentials", 'String'>
+    readonly apiKey: FieldRef<"EmailClientCredentials", 'String'>
     readonly createdAt: FieldRef<"EmailClientCredentials", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailClientCredentials", 'DateTime'>
   }
@@ -16426,13 +16422,33 @@ export namespace Prisma {
 
   export type AggregateEmailGlobalDailyStats = {
     _count: EmailGlobalDailyStatsCountAggregateOutputType | null
+    _avg: EmailGlobalDailyStatsAvgAggregateOutputType | null
+    _sum: EmailGlobalDailyStatsSumAggregateOutputType | null
     _min: EmailGlobalDailyStatsMinAggregateOutputType | null
     _max: EmailGlobalDailyStatsMaxAggregateOutputType | null
   }
 
+  export type EmailGlobalDailyStatsAvgAggregateOutputType = {
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubs: number | null
+  }
+
+  export type EmailGlobalDailyStatsSumAggregateOutputType = {
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubs: number | null
+  }
+
   export type EmailGlobalDailyStatsMinAggregateOutputType = {
     id: string | null
-    email_client_id: string | null
+    emailClientId: string | null
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubs: number | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -16440,7 +16456,11 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsMaxAggregateOutputType = {
     id: string | null
-    email_client_id: string | null
+    emailClientId: string | null
+    opens: number | null
+    clicks: number | null
+    bounces: number | null
+    unsubs: number | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -16448,7 +16468,11 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsCountAggregateOutputType = {
     id: number
-    email_client_id: number
+    emailClientId: number
+    opens: number
+    clicks: number
+    bounces: number
+    unsubs: number
     date: number
     createdAt: number
     updatedAt: number
@@ -16456,9 +16480,27 @@ export namespace Prisma {
   }
 
 
+  export type EmailGlobalDailyStatsAvgAggregateInputType = {
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubs?: true
+  }
+
+  export type EmailGlobalDailyStatsSumAggregateInputType = {
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubs?: true
+  }
+
   export type EmailGlobalDailyStatsMinAggregateInputType = {
     id?: true
-    email_client_id?: true
+    emailClientId?: true
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubs?: true
     date?: true
     createdAt?: true
     updatedAt?: true
@@ -16466,7 +16508,11 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsMaxAggregateInputType = {
     id?: true
-    email_client_id?: true
+    emailClientId?: true
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubs?: true
     date?: true
     createdAt?: true
     updatedAt?: true
@@ -16474,7 +16520,11 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsCountAggregateInputType = {
     id?: true
-    email_client_id?: true
+    emailClientId?: true
+    opens?: true
+    clicks?: true
+    bounces?: true
+    unsubs?: true
     date?: true
     createdAt?: true
     updatedAt?: true
@@ -16519,6 +16569,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: EmailGlobalDailyStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmailGlobalDailyStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: EmailGlobalDailyStatsMinAggregateInputType
@@ -16549,17 +16611,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: EmailGlobalDailyStatsCountAggregateInputType | true
+    _avg?: EmailGlobalDailyStatsAvgAggregateInputType
+    _sum?: EmailGlobalDailyStatsSumAggregateInputType
     _min?: EmailGlobalDailyStatsMinAggregateInputType
     _max?: EmailGlobalDailyStatsMaxAggregateInputType
   }
 
   export type EmailGlobalDailyStatsGroupByOutputType = {
     id: string
-    email_client_id: string
+    emailClientId: string
+    opens: number
+    clicks: number
+    bounces: number
+    unsubs: number
     date: Date
     createdAt: Date
     updatedAt: Date
     _count: EmailGlobalDailyStatsCountAggregateOutputType | null
+    _avg: EmailGlobalDailyStatsAvgAggregateOutputType | null
+    _sum: EmailGlobalDailyStatsSumAggregateOutputType | null
     _min: EmailGlobalDailyStatsMinAggregateOutputType | null
     _max: EmailGlobalDailyStatsMaxAggregateOutputType | null
   }
@@ -16580,58 +16650,78 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_client_id?: boolean
+    emailClientId?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubs?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailGlobalDailyStats"]>
 
   export type EmailGlobalDailyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_client_id?: boolean
+    emailClientId?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubs?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailGlobalDailyStats"]>
 
   export type EmailGlobalDailyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email_client_id?: boolean
+    emailClientId?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubs?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailGlobalDailyStats"]>
 
   export type EmailGlobalDailyStatsSelectScalar = {
     id?: boolean
-    email_client_id?: boolean
+    emailClientId?: boolean
+    opens?: boolean
+    clicks?: boolean
+    bounces?: boolean
+    unsubs?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EmailGlobalDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_client_id" | "date" | "createdAt" | "updatedAt", ExtArgs["result"]["emailGlobalDailyStats"]>
+  export type EmailGlobalDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "emailClientId" | "opens" | "clicks" | "bounces" | "unsubs" | "date" | "createdAt" | "updatedAt", ExtArgs["result"]["emailGlobalDailyStats"]>
   export type EmailGlobalDailyStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }
   export type EmailGlobalDailyStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }
   export type EmailGlobalDailyStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    email_client?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
   }
 
   export type $EmailGlobalDailyStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EmailGlobalDailyStats"
     objects: {
-      email_client: Prisma.$EmailClientPayload<ExtArgs>
+      emailClient: Prisma.$EmailClientPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email_client_id: string
+      emailClientId: string
+      opens: number
+      clicks: number
+      bounces: number
+      unsubs: number
       date: Date
       createdAt: Date
       updatedAt: Date
@@ -17029,7 +17119,7 @@ export namespace Prisma {
    */
   export interface Prisma__EmailGlobalDailyStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    email_client<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17060,7 +17150,11 @@ export namespace Prisma {
    */
   interface EmailGlobalDailyStatsFieldRefs {
     readonly id: FieldRef<"EmailGlobalDailyStats", 'String'>
-    readonly email_client_id: FieldRef<"EmailGlobalDailyStats", 'String'>
+    readonly emailClientId: FieldRef<"EmailGlobalDailyStats", 'String'>
+    readonly opens: FieldRef<"EmailGlobalDailyStats", 'Int'>
+    readonly clicks: FieldRef<"EmailGlobalDailyStats", 'Int'>
+    readonly bounces: FieldRef<"EmailGlobalDailyStats", 'Int'>
+    readonly unsubs: FieldRef<"EmailGlobalDailyStats", 'Int'>
     readonly date: FieldRef<"EmailGlobalDailyStats", 'DateTime'>
     readonly createdAt: FieldRef<"EmailGlobalDailyStats", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailGlobalDailyStats", 'DateTime'>
@@ -58084,16 +58178,16 @@ export namespace Prisma {
 
   export const EmailCampaignContentScalarFieldEnum: {
     id: 'id',
-    email_campaign_id: 'email_campaign_id',
+    emailCampaignId: 'emailCampaignId',
     subject: 'subject',
-    html_content: 'html_content',
-    plain_content: 'plain_content',
-    web_id: 'web_id',
+    htmlContent: 'htmlContent',
+    plainContent: 'plainContent',
+    webId: 'webId',
     type: 'type',
-    content_type: 'content_type',
+    contentType: 'contentType',
     recipients: 'recipients',
-    create_time: 'create_time',
-    send_time: 'send_time',
+    createTime: 'createTime',
+    sendTime: 'sendTime',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -58103,9 +58197,9 @@ export namespace Prisma {
 
   export const EmailCampaignScalarFieldEnum: {
     id: 'id',
-    campaign_id: 'campaign_id',
-    campaign_name: 'campaign_name',
-    email_client_id: 'email_client_id',
+    campaignId: 'campaignId',
+    campaignName: 'campaignName',
+    emailClientId: 'emailClientId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -58115,41 +58209,41 @@ export namespace Prisma {
 
   export const EmailCampaignDailyStatsScalarFieldEnum: {
     id: 'id',
-    email_campaign_id: 'email_campaign_id',
-    date: 'date',
-    email_client_id: 'email_client_id',
-    opens: 'opens',
-    clicks: 'clicks',
+    bounceDrops: 'bounceDrops',
     bounces: 'bounces',
-    unsubscribes: 'unsubscribes',
-    total_opens: 'total_opens',
-    daily_total_open_rate: 'daily_total_open_rate',
-    cumulative_total_open_rate: 'cumulative_total_open_rate',
-    unique_opens: 'unique_opens',
-    daily_unique_open_rate: 'daily_unique_open_rate',
-    cumulative_unique_open_rate: 'cumulative_unique_open_rate',
-    total_clicks: 'total_clicks',
-    daily_total_click_rate: 'daily_total_click_rate',
-    cumulative_total_click_rate: 'cumulative_total_click_rate',
-    unique_clicks: 'unique_clicks',
-    daily_unique_click_rate: 'daily_unique_click_rate',
-    cumulative_unique_click_rate: 'cumulative_unique_click_rate',
-    daily_unique_click_to_open_rate: 'daily_unique_click_to_open_rate',
-    daily_total_click_to_open_rate: 'daily_total_click_to_open_rate',
-    spam_reports: 'spam_reports',
-    daily_spam_reports_rate: 'daily_spam_reports_rate',
-    cumulative_spam_reports_rate: 'cumulative_spam_reports_rate',
-    spam_report_drops: 'spam_report_drops',
-    daily_unsubscribe_rate: 'daily_unsubscribe_rate',
-    cumulative_unsubscribe_rate: 'cumulative_unsubscribe_rate',
-    single_send_name: 'single_send_name',
-    variation: 'variation',
+    clicks: 'clicks',
+    cumulativeBounceRate: 'cumulativeBounceRate',
+    cumulativeSpamReportsRate: 'cumulativeSpamReportsRate',
+    cumulativeTotalClickRate: 'cumulativeTotalClickRate',
+    cumulativeTotalOpenRate: 'cumulativeTotalOpenRate',
+    cumulativeUniqueClickRate: 'cumulativeUniqueClickRate',
+    cumulativeUniqueOpenRate: 'cumulativeUniqueOpenRate',
+    cumulativeUnsubscribeRate: 'cumulativeUnsubscribeRate',
+    dailyBounceRate: 'dailyBounceRate',
+    dailySpamReportsRate: 'dailySpamReportsRate',
+    dailyTotalClickRate: 'dailyTotalClickRate',
+    dailyTotalClickToOpenRate: 'dailyTotalClickToOpenRate',
+    dailyTotalOpenRate: 'dailyTotalOpenRate',
+    dailyUniqueClickRate: 'dailyUniqueClickRate',
+    dailyUniqueClickToOpenRate: 'dailyUniqueClickToOpenRate',
+    dailyUniqueOpenRate: 'dailyUniqueOpenRate',
+    dailyUnsubscribeRate: 'dailyUnsubscribeRate',
+    date: 'date',
+    delivered: 'delivered',
+    emailCampaignId: 'emailCampaignId',
+    emailClientId: 'emailClientId',
+    opens: 'opens',
     phase: 'phase',
     requests: 'requests',
-    delivered: 'delivered',
-    daily_bounce_rate: 'daily_bounce_rate',
-    cumulative_bounce_rate: 'cumulative_bounce_rate',
-    bounce_drops: 'bounce_drops',
+    singleSendName: 'singleSendName',
+    spamReportDrops: 'spamReportDrops',
+    spamReports: 'spamReports',
+    totalClicks: 'totalClicks',
+    totalOpens: 'totalOpens',
+    uniqueClicks: 'uniqueClicks',
+    uniqueOpens: 'uniqueOpens',
+    unsubscribes: 'unsubscribes',
+    variation: 'variation',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -58159,7 +58253,7 @@ export namespace Prisma {
 
   export const EmailClientScalarFieldEnum: {
     id: 'id',
-    client_name: 'client_name',
+    clientName: 'clientName',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -58169,9 +58263,9 @@ export namespace Prisma {
 
   export const EmailClientCredentialsScalarFieldEnum: {
     id: 'id',
-    email_client_id: 'email_client_id',
-    platform_name: 'platform_name',
-    api_key: 'api_key',
+    emailClientId: 'emailClientId',
+    platformName: 'platformName',
+    apiKey: 'apiKey',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -58181,7 +58275,11 @@ export namespace Prisma {
 
   export const EmailGlobalDailyStatsScalarFieldEnum: {
     id: 'id',
-    email_client_id: 'email_client_id',
+    emailClientId: 'emailClientId',
+    opens: 'opens',
+    clicks: 'clicks',
+    bounces: 'bounces',
+    unsubs: 'unsubs',
     date: 'date',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -59246,16 +59344,16 @@ export namespace Prisma {
     OR?: EmailCampaignContentWhereInput[]
     NOT?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
     id?: StringFilter<"EmailCampaignContent"> | string
-    email_campaign_id?: StringFilter<"EmailCampaignContent"> | string
+    emailCampaignId?: StringFilter<"EmailCampaignContent"> | string
     subject?: StringFilter<"EmailCampaignContent"> | string
-    html_content?: StringFilter<"EmailCampaignContent"> | string
-    plain_content?: StringFilter<"EmailCampaignContent"> | string
-    web_id?: IntFilter<"EmailCampaignContent"> | number
+    htmlContent?: StringFilter<"EmailCampaignContent"> | string
+    plainContent?: StringFilter<"EmailCampaignContent"> | string
+    webId?: StringFilter<"EmailCampaignContent"> | string
     type?: StringFilter<"EmailCampaignContent"> | string
-    content_type?: StringFilter<"EmailCampaignContent"> | string
+    contentType?: StringFilter<"EmailCampaignContent"> | string
     recipients?: IntFilter<"EmailCampaignContent"> | number
-    create_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    send_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    createTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    sendTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
@@ -59263,16 +59361,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentOrderByWithRelationInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
+    emailCampaignId?: SortOrder
     subject?: SortOrder
-    html_content?: SortOrder
-    plain_content?: SortOrder
-    web_id?: SortOrder
+    htmlContent?: SortOrder
+    plainContent?: SortOrder
+    webId?: SortOrder
     type?: SortOrder
-    content_type?: SortOrder
+    contentType?: SortOrder
     recipients?: SortOrder
-    create_time?: SortOrder
-    send_time?: SortOrder
+    createTime?: SortOrder
+    sendTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     emailCampaign?: EmailCampaignOrderByWithRelationInput
@@ -59283,16 +59381,16 @@ export namespace Prisma {
     AND?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
     OR?: EmailCampaignContentWhereInput[]
     NOT?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
-    email_campaign_id?: StringFilter<"EmailCampaignContent"> | string
+    emailCampaignId?: StringFilter<"EmailCampaignContent"> | string
     subject?: StringFilter<"EmailCampaignContent"> | string
-    html_content?: StringFilter<"EmailCampaignContent"> | string
-    plain_content?: StringFilter<"EmailCampaignContent"> | string
-    web_id?: IntFilter<"EmailCampaignContent"> | number
+    htmlContent?: StringFilter<"EmailCampaignContent"> | string
+    plainContent?: StringFilter<"EmailCampaignContent"> | string
+    webId?: StringFilter<"EmailCampaignContent"> | string
     type?: StringFilter<"EmailCampaignContent"> | string
-    content_type?: StringFilter<"EmailCampaignContent"> | string
+    contentType?: StringFilter<"EmailCampaignContent"> | string
     recipients?: IntFilter<"EmailCampaignContent"> | number
-    create_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    send_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    createTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    sendTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
@@ -59300,16 +59398,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentOrderByWithAggregationInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
+    emailCampaignId?: SortOrder
     subject?: SortOrder
-    html_content?: SortOrder
-    plain_content?: SortOrder
-    web_id?: SortOrder
+    htmlContent?: SortOrder
+    plainContent?: SortOrder
+    webId?: SortOrder
     type?: SortOrder
-    content_type?: SortOrder
+    contentType?: SortOrder
     recipients?: SortOrder
-    create_time?: SortOrder
-    send_time?: SortOrder
+    createTime?: SortOrder
+    sendTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmailCampaignContentCountOrderByAggregateInput
@@ -59324,16 +59422,16 @@ export namespace Prisma {
     OR?: EmailCampaignContentScalarWhereWithAggregatesInput[]
     NOT?: EmailCampaignContentScalarWhereWithAggregatesInput | EmailCampaignContentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
-    email_campaign_id?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    emailCampaignId?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
     subject?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
-    html_content?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
-    plain_content?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
-    web_id?: IntWithAggregatesFilter<"EmailCampaignContent"> | number
+    htmlContent?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    plainContent?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    webId?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
     type?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
-    content_type?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
+    contentType?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
     recipients?: IntWithAggregatesFilter<"EmailCampaignContent"> | number
-    create_time?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
-    send_time?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
+    createTime?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
+    sendTime?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
   }
@@ -59343,48 +59441,48 @@ export namespace Prisma {
     OR?: EmailCampaignWhereInput[]
     NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
     id?: StringFilter<"EmailCampaign"> | string
-    campaign_id?: StringFilter<"EmailCampaign"> | string
-    campaign_name?: StringFilter<"EmailCampaign"> | string
-    email_client_id?: StringFilter<"EmailCampaign"> | string
+    campaignId?: StringFilter<"EmailCampaign"> | string
+    campaignName?: StringFilter<"EmailCampaign"> | string
+    emailClientId?: StringFilter<"EmailCampaign"> | string
     createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
-    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
     emailCampaignContents?: EmailCampaignContentListRelationFilter
     emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
   }
 
   export type EmailCampaignOrderByWithRelationInput = {
     id?: SortOrder
-    campaign_id?: SortOrder
-    campaign_name?: SortOrder
-    email_client_id?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    email_client?: EmailClientOrderByWithRelationInput
+    emailClient?: EmailClientOrderByWithRelationInput
     emailCampaignContents?: EmailCampaignContentOrderByRelationAggregateInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsOrderByRelationAggregateInput
   }
 
   export type EmailCampaignWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    campaign_id?: string
+    campaignId?: string
     AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
     OR?: EmailCampaignWhereInput[]
     NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
-    campaign_name?: StringFilter<"EmailCampaign"> | string
-    email_client_id?: StringFilter<"EmailCampaign"> | string
+    campaignName?: StringFilter<"EmailCampaign"> | string
+    emailClientId?: StringFilter<"EmailCampaign"> | string
     createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
-    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
     emailCampaignContents?: EmailCampaignContentListRelationFilter
     emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
-  }, "id" | "campaign_id">
+  }, "id" | "campaignId">
 
   export type EmailCampaignOrderByWithAggregationInput = {
     id?: SortOrder
-    campaign_id?: SortOrder
-    campaign_name?: SortOrder
-    email_client_id?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmailCampaignCountOrderByAggregateInput
@@ -59397,9 +59495,9 @@ export namespace Prisma {
     OR?: EmailCampaignScalarWhereWithAggregatesInput[]
     NOT?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmailCampaign"> | string
-    campaign_id?: StringWithAggregatesFilter<"EmailCampaign"> | string
-    campaign_name?: StringWithAggregatesFilter<"EmailCampaign"> | string
-    email_client_id?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    campaignId?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    campaignName?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    emailClientId?: StringWithAggregatesFilter<"EmailCampaign"> | string
     createdAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
   }
@@ -59409,87 +59507,87 @@ export namespace Prisma {
     OR?: EmailCampaignDailyStatsWhereInput[]
     NOT?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
     id?: StringFilter<"EmailCampaignDailyStats"> | string
-    email_campaign_id?: StringFilter<"EmailCampaignDailyStats"> | string
-    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
-    email_client_id?: StringFilter<"EmailCampaignDailyStats"> | string
-    opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounceDrops?: IntFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntFilter<"EmailCampaignDailyStats"> | number
-    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
-    total_opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    unique_opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    total_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    unique_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    spam_reports?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    spam_report_drops?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    single_send_name?: StringFilter<"EmailCampaignDailyStats"> | string
-    variation?: StringFilter<"EmailCampaignDailyStats"> | string
+    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeSpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUnsubscribeRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailySpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickToOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickToOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUnsubscribeRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
+    emailCampaignId?: StringFilter<"EmailCampaignDailyStats"> | string
+    emailClientId?: StringFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntFilter<"EmailCampaignDailyStats"> | number
     phase?: StringFilter<"EmailCampaignDailyStats"> | string
     requests?: IntFilter<"EmailCampaignDailyStats"> | number
-    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    bounce_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    singleSendName?: StringFilter<"EmailCampaignDailyStats"> | string
+    spamReportDrops?: IntFilter<"EmailCampaignDailyStats"> | number
+    spamReports?: IntFilter<"EmailCampaignDailyStats"> | number
+    totalClicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    totalOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+    uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
     createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
-    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
   }
 
   export type EmailCampaignDailyStatsOrderByWithRelationInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
-    date?: SortOrder
-    email_client_id?: SortOrder
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    single_send_name?: SortOrder
-    variation?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
+    date?: SortOrder
+    delivered?: SortOrder
+    emailCampaignId?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
-    delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    singleSendName?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
+    variation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    email_client?: EmailClientOrderByWithRelationInput
+    emailClient?: EmailClientOrderByWithRelationInput
     emailCampaign?: EmailCampaignOrderByWithRelationInput
   }
 
@@ -59498,84 +59596,84 @@ export namespace Prisma {
     AND?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
     OR?: EmailCampaignDailyStatsWhereInput[]
     NOT?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
-    email_campaign_id?: StringFilter<"EmailCampaignDailyStats"> | string
-    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
-    email_client_id?: StringFilter<"EmailCampaignDailyStats"> | string
-    opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounceDrops?: IntFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntFilter<"EmailCampaignDailyStats"> | number
-    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
-    total_opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    unique_opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    total_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    unique_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    spam_reports?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    spam_report_drops?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    single_send_name?: StringFilter<"EmailCampaignDailyStats"> | string
-    variation?: StringFilter<"EmailCampaignDailyStats"> | string
+    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeSpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUnsubscribeRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailySpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickToOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickToOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUnsubscribeRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
+    emailCampaignId?: StringFilter<"EmailCampaignDailyStats"> | string
+    emailClientId?: StringFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntFilter<"EmailCampaignDailyStats"> | number
     phase?: StringFilter<"EmailCampaignDailyStats"> | string
     requests?: IntFilter<"EmailCampaignDailyStats"> | number
-    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    bounce_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    singleSendName?: StringFilter<"EmailCampaignDailyStats"> | string
+    spamReportDrops?: IntFilter<"EmailCampaignDailyStats"> | number
+    spamReports?: IntFilter<"EmailCampaignDailyStats"> | number
+    totalClicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    totalOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+    uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
     createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
-    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
   }, "id">
 
   export type EmailCampaignDailyStatsOrderByWithAggregationInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
-    date?: SortOrder
-    email_client_id?: SortOrder
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    single_send_name?: SortOrder
-    variation?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
+    date?: SortOrder
+    delivered?: SortOrder
+    emailCampaignId?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
-    delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    singleSendName?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
+    variation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmailCampaignDailyStatsCountOrderByAggregateInput
@@ -59590,41 +59688,41 @@ export namespace Prisma {
     OR?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
     NOT?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput | EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
-    email_campaign_id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
-    date?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
-    email_client_id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
-    opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    bounceDrops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    unsubscribes?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    total_opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_total_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    unique_opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    total_clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    unique_clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_click_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_to_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_to_open_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    spam_reports?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_spam_reports_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_spam_reports_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    spam_report_drops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_unsubscribe_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unsubscribe_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    single_send_name?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
-    variation?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeBounceRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeSpamReportsRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalClickRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalOpenRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueClickRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueOpenRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUnsubscribeRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyBounceRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailySpamReportsRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickToOpenRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalOpenRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickToOpenRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueOpenRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    dailyUnsubscribeRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    date?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
+    delivered?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    emailCampaignId?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    emailClientId?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     phase?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
     requests?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    delivered?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    daily_bounce_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    cumulative_bounce_rate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    bounce_drops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    singleSendName?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    spamReportDrops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    spamReports?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    totalClicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    totalOpens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    uniqueClicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    uniqueOpens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    variation?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
     createdAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
   }
@@ -59634,7 +59732,7 @@ export namespace Prisma {
     OR?: EmailClientWhereInput[]
     NOT?: EmailClientWhereInput | EmailClientWhereInput[]
     id?: StringFilter<"EmailClient"> | string
-    client_name?: StringFilter<"EmailClient"> | string
+    clientName?: StringFilter<"EmailClient"> | string
     createdAt?: DateTimeFilter<"EmailClient"> | Date | string
     updatedAt?: DateTimeFilter<"EmailClient"> | Date | string
     emailCampaigns?: EmailCampaignListRelationFilter
@@ -59645,7 +59743,7 @@ export namespace Prisma {
 
   export type EmailClientOrderByWithRelationInput = {
     id?: SortOrder
-    client_name?: SortOrder
+    clientName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     emailCampaigns?: EmailCampaignOrderByRelationAggregateInput
@@ -59659,7 +59757,7 @@ export namespace Prisma {
     AND?: EmailClientWhereInput | EmailClientWhereInput[]
     OR?: EmailClientWhereInput[]
     NOT?: EmailClientWhereInput | EmailClientWhereInput[]
-    client_name?: StringFilter<"EmailClient"> | string
+    clientName?: StringFilter<"EmailClient"> | string
     createdAt?: DateTimeFilter<"EmailClient"> | Date | string
     updatedAt?: DateTimeFilter<"EmailClient"> | Date | string
     emailCampaigns?: EmailCampaignListRelationFilter
@@ -59670,7 +59768,7 @@ export namespace Prisma {
 
   export type EmailClientOrderByWithAggregationInput = {
     id?: SortOrder
-    client_name?: SortOrder
+    clientName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmailClientCountOrderByAggregateInput
@@ -59683,7 +59781,7 @@ export namespace Prisma {
     OR?: EmailClientScalarWhereWithAggregatesInput[]
     NOT?: EmailClientScalarWhereWithAggregatesInput | EmailClientScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmailClient"> | string
-    client_name?: StringWithAggregatesFilter<"EmailClient"> | string
+    clientName?: StringWithAggregatesFilter<"EmailClient"> | string
     createdAt?: DateTimeWithAggregatesFilter<"EmailClient"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailClient"> | Date | string
   }
@@ -59693,9 +59791,9 @@ export namespace Prisma {
     OR?: EmailClientCredentialsWhereInput[]
     NOT?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
     id?: StringFilter<"EmailClientCredentials"> | string
-    email_client_id?: StringFilter<"EmailClientCredentials"> | string
-    platform_name?: StringFilter<"EmailClientCredentials"> | string
-    api_key?: StringFilter<"EmailClientCredentials"> | string
+    emailClientId?: StringFilter<"EmailClientCredentials"> | string
+    platformName?: StringFilter<"EmailClientCredentials"> | string
+    apiKey?: StringFilter<"EmailClientCredentials"> | string
     createdAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
     updatedAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
@@ -59703,9 +59801,9 @@ export namespace Prisma {
 
   export type EmailClientCredentialsOrderByWithRelationInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
-    platform_name?: SortOrder
-    api_key?: SortOrder
+    emailClientId?: SortOrder
+    platformName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     emailClient?: EmailClientOrderByWithRelationInput
@@ -59716,9 +59814,9 @@ export namespace Prisma {
     AND?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
     OR?: EmailClientCredentialsWhereInput[]
     NOT?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
-    email_client_id?: StringFilter<"EmailClientCredentials"> | string
-    platform_name?: StringFilter<"EmailClientCredentials"> | string
-    api_key?: StringFilter<"EmailClientCredentials"> | string
+    emailClientId?: StringFilter<"EmailClientCredentials"> | string
+    platformName?: StringFilter<"EmailClientCredentials"> | string
+    apiKey?: StringFilter<"EmailClientCredentials"> | string
     createdAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
     updatedAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
@@ -59726,9 +59824,9 @@ export namespace Prisma {
 
   export type EmailClientCredentialsOrderByWithAggregationInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
-    platform_name?: SortOrder
-    api_key?: SortOrder
+    emailClientId?: SortOrder
+    platformName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmailClientCredentialsCountOrderByAggregateInput
@@ -59741,9 +59839,9 @@ export namespace Prisma {
     OR?: EmailClientCredentialsScalarWhereWithAggregatesInput[]
     NOT?: EmailClientCredentialsScalarWhereWithAggregatesInput | EmailClientCredentialsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
-    email_client_id?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
-    platform_name?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
-    api_key?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    emailClientId?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    platformName?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
+    apiKey?: StringWithAggregatesFilter<"EmailClientCredentials"> | string
     createdAt?: DateTimeWithAggregatesFilter<"EmailClientCredentials"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailClientCredentials"> | Date | string
   }
@@ -59753,20 +59851,28 @@ export namespace Prisma {
     OR?: EmailGlobalDailyStatsWhereInput[]
     NOT?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
     id?: StringFilter<"EmailGlobalDailyStats"> | string
-    email_client_id?: StringFilter<"EmailGlobalDailyStats"> | string
+    emailClientId?: StringFilter<"EmailGlobalDailyStats"> | string
+    opens?: IntFilter<"EmailGlobalDailyStats"> | number
+    clicks?: IntFilter<"EmailGlobalDailyStats"> | number
+    bounces?: IntFilter<"EmailGlobalDailyStats"> | number
+    unsubs?: IntFilter<"EmailGlobalDailyStats"> | number
     date?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
     createdAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
-    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
   }
 
   export type EmailGlobalDailyStatsOrderByWithRelationInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    email_client?: EmailClientOrderByWithRelationInput
+    emailClient?: EmailClientOrderByWithRelationInput
   }
 
   export type EmailGlobalDailyStatsWhereUniqueInput = Prisma.AtLeast<{
@@ -59774,22 +59880,32 @@ export namespace Prisma {
     AND?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
     OR?: EmailGlobalDailyStatsWhereInput[]
     NOT?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
-    email_client_id?: StringFilter<"EmailGlobalDailyStats"> | string
+    emailClientId?: StringFilter<"EmailGlobalDailyStats"> | string
+    opens?: IntFilter<"EmailGlobalDailyStats"> | number
+    clicks?: IntFilter<"EmailGlobalDailyStats"> | number
+    bounces?: IntFilter<"EmailGlobalDailyStats"> | number
+    unsubs?: IntFilter<"EmailGlobalDailyStats"> | number
     date?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
     createdAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
-    email_client?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
   }, "id">
 
   export type EmailGlobalDailyStatsOrderByWithAggregationInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmailGlobalDailyStatsCountOrderByAggregateInput
+    _avg?: EmailGlobalDailyStatsAvgOrderByAggregateInput
     _max?: EmailGlobalDailyStatsMaxOrderByAggregateInput
     _min?: EmailGlobalDailyStatsMinOrderByAggregateInput
+    _sum?: EmailGlobalDailyStatsSumOrderByAggregateInput
   }
 
   export type EmailGlobalDailyStatsScalarWhereWithAggregatesInput = {
@@ -59797,7 +59913,11 @@ export namespace Prisma {
     OR?: EmailGlobalDailyStatsScalarWhereWithAggregatesInput[]
     NOT?: EmailGlobalDailyStatsScalarWhereWithAggregatesInput | EmailGlobalDailyStatsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"EmailGlobalDailyStats"> | string
-    email_client_id?: StringWithAggregatesFilter<"EmailGlobalDailyStats"> | string
+    emailClientId?: StringWithAggregatesFilter<"EmailGlobalDailyStats"> | string
+    opens?: IntWithAggregatesFilter<"EmailGlobalDailyStats"> | number
+    clicks?: IntWithAggregatesFilter<"EmailGlobalDailyStats"> | number
+    bounces?: IntWithAggregatesFilter<"EmailGlobalDailyStats"> | number
+    unsubs?: IntWithAggregatesFilter<"EmailGlobalDailyStats"> | number
     date?: DateTimeWithAggregatesFilter<"EmailGlobalDailyStats"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"EmailGlobalDailyStats"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailGlobalDailyStats"> | Date | string
@@ -63022,14 +63142,14 @@ export namespace Prisma {
   export type EmailCampaignContentCreateInput = {
     id?: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients?: number
-    create_time: Date | string
-    send_time: Date | string
+    createTime: Date | string
+    sendTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignContentsInput
@@ -63037,16 +63157,16 @@ export namespace Prisma {
 
   export type EmailCampaignContentUncheckedCreateInput = {
     id?: string
-    email_campaign_id: string
+    emailCampaignId: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients?: number
-    create_time: Date | string
-    send_time: Date | string
+    createTime: Date | string
+    sendTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63054,14 +63174,14 @@ export namespace Prisma {
   export type EmailCampaignContentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignContentsNestedInput
@@ -63069,32 +63189,32 @@ export namespace Prisma {
 
   export type EmailCampaignContentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    emailCampaignId?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignContentCreateManyInput = {
     id?: string
-    email_campaign_id: string
+    emailCampaignId: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients?: number
-    create_time: Date | string
-    send_time: Date | string
+    createTime: Date | string
+    sendTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63102,50 +63222,50 @@ export namespace Prisma {
   export type EmailCampaignContentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignContentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_campaign_id?: StringFieldUpdateOperationsInput | string
+    emailCampaignId?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignCreateInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
+    campaignId: string
+    campaignName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email_client: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
     emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
   }
 
   export type EmailCampaignUncheckedCreateInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
-    email_client_id: string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
@@ -63154,20 +63274,20 @@ export namespace Prisma {
 
   export type EmailCampaignUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
     emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
   }
 
   export type EmailCampaignUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
@@ -63176,384 +63296,384 @@ export namespace Prisma {
 
   export type EmailCampaignCreateManyInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
-    email_client_id: string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailCampaignUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignDailyStatsCreateInput = {
     id?: string
-    date: Date | string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email_client: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
     emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput
   }
 
   export type EmailCampaignDailyStatsUncheckedCreateInput = {
     id?: string
-    email_campaign_id: string
-    date: Date | string
-    email_client_id: string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    emailCampaignId: string
+    emailClientId: string
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailCampaignDailyStatsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
     emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_campaign_id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    emailCampaignId?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignDailyStatsCreateManyInput = {
     id?: string
-    email_campaign_id: string
-    date: Date | string
-    email_client_id: string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    emailCampaignId: string
+    emailClientId: string
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailCampaignDailyStatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_campaign_id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    emailCampaignId?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCreateInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmailClientInput
     emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientUncheckedCreateInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmailClientInput
     emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmailClientNestedInput
     emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmailClientNestedInput
     emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientCreateManyInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailClientUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCredentialsCreateInput = {
     id?: string
-    platform_name: string
-    api_key: string
+    platformName: string
+    apiKey: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailClient: EmailClientCreateNestedOneWithoutEmailClientCredentialsInput
@@ -63561,17 +63681,17 @@ export namespace Prisma {
 
   export type EmailClientCredentialsUncheckedCreateInput = {
     id?: string
-    email_client_id: string
-    platform_name: string
-    api_key: string
+    emailClientId: string
+    platformName: string
+    apiKey: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailClientCredentialsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailClient?: EmailClientUpdateOneRequiredWithoutEmailClientCredentialsNestedInput
@@ -63579,50 +63699,58 @@ export namespace Prisma {
 
   export type EmailClientCredentialsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCredentialsCreateManyInput = {
     id?: string
-    email_client_id: string
-    platform_name: string
-    api_key: string
+    emailClientId: string
+    platformName: string
+    apiKey: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailClientCredentialsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCredentialsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailGlobalDailyStatsCreateInput = {
     id?: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubs?: number
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email_client: EmailClientCreateNestedOneWithoutEmailGlobalDailyStatsInput
+    emailClient: EmailClientCreateNestedOneWithoutEmailGlobalDailyStatsInput
   }
 
   export type EmailGlobalDailyStatsUncheckedCreateInput = {
     id?: string
-    email_client_id: string
+    emailClientId: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubs?: number
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -63630,15 +63758,23 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubs?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client?: EmailClientUpdateOneRequiredWithoutEmailGlobalDailyStatsNestedInput
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailGlobalDailyStatsNestedInput
   }
 
   export type EmailGlobalDailyStatsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubs?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63646,7 +63782,11 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsCreateManyInput = {
     id?: string
-    email_client_id: string
+    emailClientId: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubs?: number
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -63654,6 +63794,10 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubs?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63661,7 +63805,11 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubs?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -67259,59 +67407,57 @@ export namespace Prisma {
 
   export type EmailCampaignContentCountOrderByAggregateInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
+    emailCampaignId?: SortOrder
     subject?: SortOrder
-    html_content?: SortOrder
-    plain_content?: SortOrder
-    web_id?: SortOrder
+    htmlContent?: SortOrder
+    plainContent?: SortOrder
+    webId?: SortOrder
     type?: SortOrder
-    content_type?: SortOrder
+    contentType?: SortOrder
     recipients?: SortOrder
-    create_time?: SortOrder
-    send_time?: SortOrder
+    createTime?: SortOrder
+    sendTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignContentAvgOrderByAggregateInput = {
-    web_id?: SortOrder
     recipients?: SortOrder
   }
 
   export type EmailCampaignContentMaxOrderByAggregateInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
+    emailCampaignId?: SortOrder
     subject?: SortOrder
-    html_content?: SortOrder
-    plain_content?: SortOrder
-    web_id?: SortOrder
+    htmlContent?: SortOrder
+    plainContent?: SortOrder
+    webId?: SortOrder
     type?: SortOrder
-    content_type?: SortOrder
+    contentType?: SortOrder
     recipients?: SortOrder
-    create_time?: SortOrder
-    send_time?: SortOrder
+    createTime?: SortOrder
+    sendTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignContentMinOrderByAggregateInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
+    emailCampaignId?: SortOrder
     subject?: SortOrder
-    html_content?: SortOrder
-    plain_content?: SortOrder
-    web_id?: SortOrder
+    htmlContent?: SortOrder
+    plainContent?: SortOrder
+    webId?: SortOrder
     type?: SortOrder
-    content_type?: SortOrder
+    contentType?: SortOrder
     recipients?: SortOrder
-    create_time?: SortOrder
-    send_time?: SortOrder
+    createTime?: SortOrder
+    sendTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignContentSumOrderByAggregateInput = {
-    web_id?: SortOrder
     recipients?: SortOrder
   }
 
@@ -67358,216 +67504,216 @@ export namespace Prisma {
 
   export type EmailCampaignCountOrderByAggregateInput = {
     id?: SortOrder
-    campaign_id?: SortOrder
-    campaign_name?: SortOrder
-    email_client_id?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignMaxOrderByAggregateInput = {
     id?: SortOrder
-    campaign_id?: SortOrder
-    campaign_name?: SortOrder
-    email_client_id?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignMinOrderByAggregateInput = {
     id?: SortOrder
-    campaign_id?: SortOrder
-    campaign_name?: SortOrder
-    email_client_id?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignDailyStatsCountOrderByAggregateInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
-    date?: SortOrder
-    email_client_id?: SortOrder
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    single_send_name?: SortOrder
-    variation?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
+    date?: SortOrder
+    delivered?: SortOrder
+    emailCampaignId?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
-    delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    singleSendName?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
+    variation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignDailyStatsAvgOrderByAggregateInput = {
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    requests?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
     delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    opens?: SortOrder
+    requests?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
   }
 
   export type EmailCampaignDailyStatsMaxOrderByAggregateInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
-    date?: SortOrder
-    email_client_id?: SortOrder
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    single_send_name?: SortOrder
-    variation?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
+    date?: SortOrder
+    delivered?: SortOrder
+    emailCampaignId?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
-    delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    singleSendName?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
+    variation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignDailyStatsMinOrderByAggregateInput = {
     id?: SortOrder
-    email_campaign_id?: SortOrder
-    date?: SortOrder
-    email_client_id?: SortOrder
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    single_send_name?: SortOrder
-    variation?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
+    date?: SortOrder
+    delivered?: SortOrder
+    emailCampaignId?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
-    delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    singleSendName?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
+    variation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailCampaignDailyStatsSumOrderByAggregateInput = {
-    opens?: SortOrder
-    clicks?: SortOrder
+    bounceDrops?: SortOrder
     bounces?: SortOrder
-    unsubscribes?: SortOrder
-    total_opens?: SortOrder
-    daily_total_open_rate?: SortOrder
-    cumulative_total_open_rate?: SortOrder
-    unique_opens?: SortOrder
-    daily_unique_open_rate?: SortOrder
-    cumulative_unique_open_rate?: SortOrder
-    total_clicks?: SortOrder
-    daily_total_click_rate?: SortOrder
-    cumulative_total_click_rate?: SortOrder
-    unique_clicks?: SortOrder
-    daily_unique_click_rate?: SortOrder
-    cumulative_unique_click_rate?: SortOrder
-    daily_unique_click_to_open_rate?: SortOrder
-    daily_total_click_to_open_rate?: SortOrder
-    spam_reports?: SortOrder
-    daily_spam_reports_rate?: SortOrder
-    cumulative_spam_reports_rate?: SortOrder
-    spam_report_drops?: SortOrder
-    daily_unsubscribe_rate?: SortOrder
-    cumulative_unsubscribe_rate?: SortOrder
-    requests?: SortOrder
+    clicks?: SortOrder
+    cumulativeBounceRate?: SortOrder
+    cumulativeSpamReportsRate?: SortOrder
+    cumulativeTotalClickRate?: SortOrder
+    cumulativeTotalOpenRate?: SortOrder
+    cumulativeUniqueClickRate?: SortOrder
+    cumulativeUniqueOpenRate?: SortOrder
+    cumulativeUnsubscribeRate?: SortOrder
+    dailyBounceRate?: SortOrder
+    dailySpamReportsRate?: SortOrder
+    dailyTotalClickRate?: SortOrder
+    dailyTotalClickToOpenRate?: SortOrder
+    dailyTotalOpenRate?: SortOrder
+    dailyUniqueClickRate?: SortOrder
+    dailyUniqueClickToOpenRate?: SortOrder
+    dailyUniqueOpenRate?: SortOrder
+    dailyUnsubscribeRate?: SortOrder
     delivered?: SortOrder
-    daily_bounce_rate?: SortOrder
-    cumulative_bounce_rate?: SortOrder
-    bounce_drops?: SortOrder
+    opens?: SortOrder
+    requests?: SortOrder
+    spamReportDrops?: SortOrder
+    spamReports?: SortOrder
+    totalClicks?: SortOrder
+    totalOpens?: SortOrder
+    uniqueClicks?: SortOrder
+    uniqueOpens?: SortOrder
+    unsubscribes?: SortOrder
   }
 
   export type EmailCampaignListRelationFilter = {
@@ -67602,63 +67748,78 @@ export namespace Prisma {
 
   export type EmailClientCountOrderByAggregateInput = {
     id?: SortOrder
-    client_name?: SortOrder
+    clientName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailClientMaxOrderByAggregateInput = {
     id?: SortOrder
-    client_name?: SortOrder
+    clientName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailClientMinOrderByAggregateInput = {
     id?: SortOrder
-    client_name?: SortOrder
+    clientName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailClientCredentialsCountOrderByAggregateInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
-    platform_name?: SortOrder
-    api_key?: SortOrder
+    emailClientId?: SortOrder
+    platformName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailClientCredentialsMaxOrderByAggregateInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
-    platform_name?: SortOrder
-    api_key?: SortOrder
+    emailClientId?: SortOrder
+    platformName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailClientCredentialsMinOrderByAggregateInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
-    platform_name?: SortOrder
-    api_key?: SortOrder
+    emailClientId?: SortOrder
+    platformName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type EmailGlobalDailyStatsCountOrderByAggregateInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
+  export type EmailGlobalDailyStatsAvgOrderByAggregateInput = {
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
+  }
+
   export type EmailGlobalDailyStatsMaxOrderByAggregateInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -67666,10 +67827,21 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsMinOrderByAggregateInput = {
     id?: SortOrder
-    email_client_id?: SortOrder
+    emailClientId?: SortOrder
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EmailGlobalDailyStatsSumOrderByAggregateInput = {
+    opens?: SortOrder
+    clicks?: SortOrder
+    bounces?: SortOrder
+    unsubs?: SortOrder
   }
 
   export type GaPropertyListRelationFilter = {
@@ -70357,10 +70529,10 @@ export namespace Prisma {
     update?: XOR<XOR<EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignDailyStatsInput, EmailCampaignUpdateWithoutEmailCampaignDailyStatsInput>, EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput>
   }
 
-  export type EmailCampaignCreateNestedManyWithoutEmail_clientInput = {
-    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
-    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailClientInput, EmailCampaignUncheckedCreateWithoutEmailClientInput> | EmailCampaignCreateWithoutEmailClientInput[] | EmailCampaignUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailClientInput | EmailCampaignCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailCampaignCreateManyEmailClientInputEnvelope
     connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
   }
 
@@ -70371,24 +70543,24 @@ export namespace Prisma {
     connect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
   }
 
-  export type EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput = {
-    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailGlobalDailyStatsCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailGlobalDailyStatsCreateWithoutEmailClientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmailClientInputEnvelope
     connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
   }
 
-  export type EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput = {
-    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignDailyStatsCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailCampaignDailyStatsCreateWithoutEmailClientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailClientInputEnvelope
     connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
   }
 
-  export type EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput = {
-    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
-    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignUncheckedCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailClientInput, EmailCampaignUncheckedCreateWithoutEmailClientInput> | EmailCampaignCreateWithoutEmailClientInput[] | EmailCampaignUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailClientInput | EmailCampaignCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailCampaignCreateManyEmailClientInputEnvelope
     connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
   }
 
@@ -70399,31 +70571,31 @@ export namespace Prisma {
     connect?: EmailClientCredentialsWhereUniqueInput | EmailClientCredentialsWhereUniqueInput[]
   }
 
-  export type EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput = {
-    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailGlobalDailyStatsCreateWithoutEmailClientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmailClientInputEnvelope
     connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
   }
 
-  export type EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput = {
-    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailCampaignDailyStatsCreateWithoutEmailClientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailClientInputEnvelope
     connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
   }
 
-  export type EmailCampaignUpdateManyWithoutEmail_clientNestedInput = {
-    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
-    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput[]
-    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailClientInput, EmailCampaignUncheckedCreateWithoutEmailClientInput> | EmailCampaignCreateWithoutEmailClientInput[] | EmailCampaignUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailClientInput | EmailCampaignCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutEmailClientInput | EmailCampaignUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailCampaignCreateManyEmailClientInputEnvelope
     set?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
     disconnect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
     delete?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
     connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
-    update?: EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput[]
-    updateMany?: EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput[]
+    update?: EmailCampaignUpdateWithWhereUniqueWithoutEmailClientInput | EmailCampaignUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailCampaignUpdateManyWithWhereWithoutEmailClientInput | EmailCampaignUpdateManyWithWhereWithoutEmailClientInput[]
     deleteMany?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
   }
 
@@ -70441,45 +70613,45 @@ export namespace Prisma {
     deleteMany?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
   }
 
-  export type EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput = {
-    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    upsert?: EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
-    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailGlobalDailyStatsUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailGlobalDailyStatsCreateWithoutEmailClientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput | EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmailClientInputEnvelope
     set?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
     disconnect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
     delete?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
     connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
-    update?: EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
-    updateMany?: EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    update?: EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput | EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmailClientInput | EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmailClientInput[]
     deleteMany?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
   }
 
-  export type EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput = {
-    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
-    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignDailyStatsUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailCampaignDailyStatsCreateWithoutEmailClientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailClientInputEnvelope
     set?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
     disconnect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
     delete?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
     connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
-    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
-    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailClientInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailClientInput[]
     deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
   }
 
-  export type EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput = {
-    create?: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput> | EmailCampaignCreateWithoutEmail_clientInput[] | EmailCampaignUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmail_clientInput | EmailCampaignCreateOrConnectWithoutEmail_clientInput[]
-    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput[]
-    createMany?: EmailCampaignCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignUncheckedUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailClientInput, EmailCampaignUncheckedCreateWithoutEmailClientInput> | EmailCampaignCreateWithoutEmailClientInput[] | EmailCampaignUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailClientInput | EmailCampaignCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailCampaignUpsertWithWhereUniqueWithoutEmailClientInput | EmailCampaignUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailCampaignCreateManyEmailClientInputEnvelope
     set?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
     disconnect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
     delete?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
     connect?: EmailCampaignWhereUniqueInput | EmailCampaignWhereUniqueInput[]
-    update?: EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput[]
-    updateMany?: EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput[]
+    update?: EmailCampaignUpdateWithWhereUniqueWithoutEmailClientInput | EmailCampaignUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailCampaignUpdateManyWithWhereWithoutEmailClientInput | EmailCampaignUpdateManyWithWhereWithoutEmailClientInput[]
     deleteMany?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
   }
 
@@ -70497,31 +70669,31 @@ export namespace Prisma {
     deleteMany?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
   }
 
-  export type EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput = {
-    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailGlobalDailyStatsCreateWithoutEmail_clientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    upsert?: EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
-    createMany?: EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailGlobalDailyStatsCreateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailGlobalDailyStatsCreateWithoutEmailClientInput[] | EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput | EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput | EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailGlobalDailyStatsCreateManyEmailClientInputEnvelope
     set?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
     disconnect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
     delete?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
     connect?: EmailGlobalDailyStatsWhereUniqueInput | EmailGlobalDailyStatsWhereUniqueInput[]
-    update?: EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
-    updateMany?: EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    update?: EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput | EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmailClientInput | EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmailClientInput[]
     deleteMany?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
   }
 
-  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput = {
-    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput> | EmailCampaignDailyStatsCreateWithoutEmail_clientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput[]
-    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput[]
-    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput[]
-    createMany?: EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope
+  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput = {
+    create?: XOR<EmailCampaignDailyStatsCreateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput> | EmailCampaignDailyStatsCreateWithoutEmailClientInput[] | EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput[]
+    connectOrCreate?: EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput | EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput[]
+    upsert?: EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput | EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput[]
+    createMany?: EmailCampaignDailyStatsCreateManyEmailClientInputEnvelope
     set?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
     disconnect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
     delete?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
     connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
-    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput[]
-    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput[]
+    update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput[]
+    updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailClientInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailClientInput[]
     deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
   }
 
@@ -74499,19 +74671,19 @@ export namespace Prisma {
 
   export type EmailCampaignCreateWithoutEmailCampaignContentsInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
+    campaignId: string
+    campaignName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email_client: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
   }
 
   export type EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
-    email_client_id: string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
@@ -74535,19 +74707,19 @@ export namespace Prisma {
 
   export type EmailCampaignUpdateWithoutEmailCampaignContentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
   }
 
   export type EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
@@ -74555,22 +74727,22 @@ export namespace Prisma {
 
   export type EmailClientCreateWithoutEmailCampaignsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientUncheckedCreateWithoutEmailCampaignsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientCreateOrConnectWithoutEmailCampaignsInput = {
@@ -74581,14 +74753,14 @@ export namespace Prisma {
   export type EmailCampaignContentCreateWithoutEmailCampaignInput = {
     id?: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients?: number
-    create_time: Date | string
-    send_time: Date | string
+    createTime: Date | string
+    sendTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -74596,14 +74768,14 @@ export namespace Prisma {
   export type EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput = {
     id?: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients?: number
-    create_time: Date | string
-    send_time: Date | string
+    createTime: Date | string
+    sendTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -74620,80 +74792,80 @@ export namespace Prisma {
 
   export type EmailCampaignDailyStatsCreateWithoutEmailCampaignInput = {
     id?: string
-    date: Date | string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email_client: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
   }
 
   export type EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput = {
     id?: string
-    date: Date | string
-    email_client_id: string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    emailClientId: string
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -74721,22 +74893,22 @@ export namespace Prisma {
 
   export type EmailClientUpdateWithoutEmailCampaignsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientUncheckedUpdateWithoutEmailCampaignsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput = {
@@ -74760,16 +74932,16 @@ export namespace Prisma {
     OR?: EmailCampaignContentScalarWhereInput[]
     NOT?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
     id?: StringFilter<"EmailCampaignContent"> | string
-    email_campaign_id?: StringFilter<"EmailCampaignContent"> | string
+    emailCampaignId?: StringFilter<"EmailCampaignContent"> | string
     subject?: StringFilter<"EmailCampaignContent"> | string
-    html_content?: StringFilter<"EmailCampaignContent"> | string
-    plain_content?: StringFilter<"EmailCampaignContent"> | string
-    web_id?: IntFilter<"EmailCampaignContent"> | number
+    htmlContent?: StringFilter<"EmailCampaignContent"> | string
+    plainContent?: StringFilter<"EmailCampaignContent"> | string
+    webId?: StringFilter<"EmailCampaignContent"> | string
     type?: StringFilter<"EmailCampaignContent"> | string
-    content_type?: StringFilter<"EmailCampaignContent"> | string
+    contentType?: StringFilter<"EmailCampaignContent"> | string
     recipients?: IntFilter<"EmailCampaignContent"> | number
-    create_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    send_time?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    createTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
+    sendTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
   }
@@ -74795,63 +74967,63 @@ export namespace Prisma {
     OR?: EmailCampaignDailyStatsScalarWhereInput[]
     NOT?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
     id?: StringFilter<"EmailCampaignDailyStats"> | string
-    email_campaign_id?: StringFilter<"EmailCampaignDailyStats"> | string
-    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
-    email_client_id?: StringFilter<"EmailCampaignDailyStats"> | string
-    opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    bounceDrops?: IntFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntFilter<"EmailCampaignDailyStats"> | number
-    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
-    total_opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    unique_opens?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    total_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_total_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    unique_clicks?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unique_click_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unique_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_total_click_to_open_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    spam_reports?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_spam_reports_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    spam_report_drops?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_unsubscribe_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    single_send_name?: StringFilter<"EmailCampaignDailyStats"> | string
-    variation?: StringFilter<"EmailCampaignDailyStats"> | string
+    clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeSpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeTotalOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUniqueOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    cumulativeUnsubscribeRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailySpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalClickToOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyTotalOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueClickToOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUniqueOpenRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    dailyUnsubscribeRate?: IntFilter<"EmailCampaignDailyStats"> | number
+    date?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
+    emailCampaignId?: StringFilter<"EmailCampaignDailyStats"> | string
+    emailClientId?: StringFilter<"EmailCampaignDailyStats"> | string
+    opens?: IntFilter<"EmailCampaignDailyStats"> | number
     phase?: StringFilter<"EmailCampaignDailyStats"> | string
     requests?: IntFilter<"EmailCampaignDailyStats"> | number
-    delivered?: IntFilter<"EmailCampaignDailyStats"> | number
-    daily_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    cumulative_bounce_rate?: IntFilter<"EmailCampaignDailyStats"> | number
-    bounce_drops?: IntFilter<"EmailCampaignDailyStats"> | number
+    singleSendName?: StringFilter<"EmailCampaignDailyStats"> | string
+    spamReportDrops?: IntFilter<"EmailCampaignDailyStats"> | number
+    spamReports?: IntFilter<"EmailCampaignDailyStats"> | number
+    totalClicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    totalOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+    uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+    unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
     createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
   }
 
   export type EmailClientCreateWithoutEmailCampaignDailyStatsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmailClientInput
     emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientUncheckedCreateWithoutEmailCampaignDailyStatsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmailClientInput
     emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientCreateOrConnectWithoutEmailCampaignDailyStatsInput = {
@@ -74861,19 +75033,19 @@ export namespace Prisma {
 
   export type EmailCampaignCreateWithoutEmailCampaignDailyStatsInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
+    campaignId: string
+    campaignName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email_client: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
     emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
   }
 
   export type EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
-    email_client_id: string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
@@ -74897,22 +75069,22 @@ export namespace Prisma {
 
   export type EmailClientUpdateWithoutEmailCampaignDailyStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmailClientNestedInput
     emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientUncheckedUpdateWithoutEmailCampaignDailyStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmailClientNestedInput
     emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailCampaignUpsertWithoutEmailCampaignDailyStatsInput = {
@@ -74928,66 +75100,66 @@ export namespace Prisma {
 
   export type EmailCampaignUpdateWithoutEmailCampaignDailyStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
     emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
   }
 
   export type EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
   }
 
-  export type EmailCampaignCreateWithoutEmail_clientInput = {
+  export type EmailCampaignCreateWithoutEmailClientInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
+    campaignId: string
+    campaignName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
   }
 
-  export type EmailCampaignUncheckedCreateWithoutEmail_clientInput = {
+  export type EmailCampaignUncheckedCreateWithoutEmailClientInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
+    campaignId: string
+    campaignName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
   }
 
-  export type EmailCampaignCreateOrConnectWithoutEmail_clientInput = {
+  export type EmailCampaignCreateOrConnectWithoutEmailClientInput = {
     where: EmailCampaignWhereUniqueInput
-    create: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput>
+    create: XOR<EmailCampaignCreateWithoutEmailClientInput, EmailCampaignUncheckedCreateWithoutEmailClientInput>
   }
 
-  export type EmailCampaignCreateManyEmail_clientInputEnvelope = {
-    data: EmailCampaignCreateManyEmail_clientInput | EmailCampaignCreateManyEmail_clientInput[]
+  export type EmailCampaignCreateManyEmailClientInputEnvelope = {
+    data: EmailCampaignCreateManyEmailClientInput | EmailCampaignCreateManyEmailClientInput[]
     skipDuplicates?: boolean
   }
 
   export type EmailClientCredentialsCreateWithoutEmailClientInput = {
     id?: string
-    platform_name: string
-    api_key: string
+    platformName: string
+    apiKey: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailClientCredentialsUncheckedCreateWithoutEmailClientInput = {
     id?: string
-    platform_name: string
-    api_key: string
+    platformName: string
+    apiKey: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -75002,134 +75174,142 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EmailGlobalDailyStatsCreateWithoutEmail_clientInput = {
+  export type EmailGlobalDailyStatsCreateWithoutEmailClientInput = {
     id?: string
-    date: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput = {
-    id?: string
-    date: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EmailGlobalDailyStatsCreateOrConnectWithoutEmail_clientInput = {
-    where: EmailGlobalDailyStatsWhereUniqueInput
-    create: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput>
-  }
-
-  export type EmailGlobalDailyStatsCreateManyEmail_clientInputEnvelope = {
-    data: EmailGlobalDailyStatsCreateManyEmail_clientInput | EmailGlobalDailyStatsCreateManyEmail_clientInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EmailCampaignDailyStatsCreateWithoutEmail_clientInput = {
-    id?: string
-    date: Date | string
     opens?: number
     clicks?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    unsubs?: number
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput = {
+    id?: string
+    opens?: number
+    clicks?: number
+    bounces?: number
+    unsubs?: number
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailGlobalDailyStatsCreateOrConnectWithoutEmailClientInput = {
+    where: EmailGlobalDailyStatsWhereUniqueInput
+    create: XOR<EmailGlobalDailyStatsCreateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput>
+  }
+
+  export type EmailGlobalDailyStatsCreateManyEmailClientInputEnvelope = {
+    data: EmailGlobalDailyStatsCreateManyEmailClientInput | EmailGlobalDailyStatsCreateManyEmailClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailCampaignDailyStatsCreateWithoutEmailClientInput = {
+    id?: string
+    bounceDrops?: number
+    bounces?: number
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
     emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput
   }
 
-  export type EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput = {
     id?: string
-    email_campaign_id: string
-    date: Date | string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    emailCampaignId: string
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type EmailCampaignDailyStatsCreateOrConnectWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput = {
     where: EmailCampaignDailyStatsWhereUniqueInput
-    create: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput>
+    create: XOR<EmailCampaignDailyStatsCreateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput>
   }
 
-  export type EmailCampaignDailyStatsCreateManyEmail_clientInputEnvelope = {
-    data: EmailCampaignDailyStatsCreateManyEmail_clientInput | EmailCampaignDailyStatsCreateManyEmail_clientInput[]
+  export type EmailCampaignDailyStatsCreateManyEmailClientInputEnvelope = {
+    data: EmailCampaignDailyStatsCreateManyEmailClientInput | EmailCampaignDailyStatsCreateManyEmailClientInput[]
     skipDuplicates?: boolean
   }
 
-  export type EmailCampaignUpsertWithWhereUniqueWithoutEmail_clientInput = {
+  export type EmailCampaignUpsertWithWhereUniqueWithoutEmailClientInput = {
     where: EmailCampaignWhereUniqueInput
-    update: XOR<EmailCampaignUpdateWithoutEmail_clientInput, EmailCampaignUncheckedUpdateWithoutEmail_clientInput>
-    create: XOR<EmailCampaignCreateWithoutEmail_clientInput, EmailCampaignUncheckedCreateWithoutEmail_clientInput>
+    update: XOR<EmailCampaignUpdateWithoutEmailClientInput, EmailCampaignUncheckedUpdateWithoutEmailClientInput>
+    create: XOR<EmailCampaignCreateWithoutEmailClientInput, EmailCampaignUncheckedCreateWithoutEmailClientInput>
   }
 
-  export type EmailCampaignUpdateWithWhereUniqueWithoutEmail_clientInput = {
+  export type EmailCampaignUpdateWithWhereUniqueWithoutEmailClientInput = {
     where: EmailCampaignWhereUniqueInput
-    data: XOR<EmailCampaignUpdateWithoutEmail_clientInput, EmailCampaignUncheckedUpdateWithoutEmail_clientInput>
+    data: XOR<EmailCampaignUpdateWithoutEmailClientInput, EmailCampaignUncheckedUpdateWithoutEmailClientInput>
   }
 
-  export type EmailCampaignUpdateManyWithWhereWithoutEmail_clientInput = {
+  export type EmailCampaignUpdateManyWithWhereWithoutEmailClientInput = {
     where: EmailCampaignScalarWhereInput
-    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyWithoutEmail_clientInput>
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyWithoutEmailClientInput>
   }
 
   export type EmailCampaignScalarWhereInput = {
@@ -75137,9 +75317,9 @@ export namespace Prisma {
     OR?: EmailCampaignScalarWhereInput[]
     NOT?: EmailCampaignScalarWhereInput | EmailCampaignScalarWhereInput[]
     id?: StringFilter<"EmailCampaign"> | string
-    campaign_id?: StringFilter<"EmailCampaign"> | string
-    campaign_name?: StringFilter<"EmailCampaign"> | string
-    email_client_id?: StringFilter<"EmailCampaign"> | string
+    campaignId?: StringFilter<"EmailCampaign"> | string
+    campaignName?: StringFilter<"EmailCampaign"> | string
+    emailClientId?: StringFilter<"EmailCampaign"> | string
     createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
   }
@@ -75165,27 +75345,27 @@ export namespace Prisma {
     OR?: EmailClientCredentialsScalarWhereInput[]
     NOT?: EmailClientCredentialsScalarWhereInput | EmailClientCredentialsScalarWhereInput[]
     id?: StringFilter<"EmailClientCredentials"> | string
-    email_client_id?: StringFilter<"EmailClientCredentials"> | string
-    platform_name?: StringFilter<"EmailClientCredentials"> | string
-    api_key?: StringFilter<"EmailClientCredentials"> | string
+    emailClientId?: StringFilter<"EmailClientCredentials"> | string
+    platformName?: StringFilter<"EmailClientCredentials"> | string
+    apiKey?: StringFilter<"EmailClientCredentials"> | string
     createdAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
     updatedAt?: DateTimeFilter<"EmailClientCredentials"> | Date | string
   }
 
-  export type EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput = {
+  export type EmailGlobalDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput = {
     where: EmailGlobalDailyStatsWhereUniqueInput
-    update: XOR<EmailGlobalDailyStatsUpdateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedUpdateWithoutEmail_clientInput>
-    create: XOR<EmailGlobalDailyStatsCreateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmail_clientInput>
+    update: XOR<EmailGlobalDailyStatsUpdateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedUpdateWithoutEmailClientInput>
+    create: XOR<EmailGlobalDailyStatsCreateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedCreateWithoutEmailClientInput>
   }
 
-  export type EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput = {
+  export type EmailGlobalDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput = {
     where: EmailGlobalDailyStatsWhereUniqueInput
-    data: XOR<EmailGlobalDailyStatsUpdateWithoutEmail_clientInput, EmailGlobalDailyStatsUncheckedUpdateWithoutEmail_clientInput>
+    data: XOR<EmailGlobalDailyStatsUpdateWithoutEmailClientInput, EmailGlobalDailyStatsUncheckedUpdateWithoutEmailClientInput>
   }
 
-  export type EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmail_clientInput = {
+  export type EmailGlobalDailyStatsUpdateManyWithWhereWithoutEmailClientInput = {
     where: EmailGlobalDailyStatsScalarWhereInput
-    data: XOR<EmailGlobalDailyStatsUpdateManyMutationInput, EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientInput>
+    data: XOR<EmailGlobalDailyStatsUpdateManyMutationInput, EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientInput>
   }
 
   export type EmailGlobalDailyStatsScalarWhereInput = {
@@ -75193,46 +75373,50 @@ export namespace Prisma {
     OR?: EmailGlobalDailyStatsScalarWhereInput[]
     NOT?: EmailGlobalDailyStatsScalarWhereInput | EmailGlobalDailyStatsScalarWhereInput[]
     id?: StringFilter<"EmailGlobalDailyStats"> | string
-    email_client_id?: StringFilter<"EmailGlobalDailyStats"> | string
+    emailClientId?: StringFilter<"EmailGlobalDailyStats"> | string
+    opens?: IntFilter<"EmailGlobalDailyStats"> | number
+    clicks?: IntFilter<"EmailGlobalDailyStats"> | number
+    bounces?: IntFilter<"EmailGlobalDailyStats"> | number
+    unsubs?: IntFilter<"EmailGlobalDailyStats"> | number
     date?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
     createdAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailGlobalDailyStats"> | Date | string
   }
 
-  export type EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailClientInput = {
     where: EmailCampaignDailyStatsWhereUniqueInput
-    update: XOR<EmailCampaignDailyStatsUpdateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmail_clientInput>
-    create: XOR<EmailCampaignDailyStatsCreateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmail_clientInput>
+    update: XOR<EmailCampaignDailyStatsUpdateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmailClientInput>
+    create: XOR<EmailCampaignDailyStatsCreateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput>
   }
 
-  export type EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailClientInput = {
     where: EmailCampaignDailyStatsWhereUniqueInput
-    data: XOR<EmailCampaignDailyStatsUpdateWithoutEmail_clientInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmail_clientInput>
+    data: XOR<EmailCampaignDailyStatsUpdateWithoutEmailClientInput, EmailCampaignDailyStatsUncheckedUpdateWithoutEmailClientInput>
   }
 
-  export type EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailClientInput = {
     where: EmailCampaignDailyStatsScalarWhereInput
-    data: XOR<EmailCampaignDailyStatsUpdateManyMutationInput, EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientInput>
+    data: XOR<EmailCampaignDailyStatsUpdateManyMutationInput, EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientInput>
   }
 
   export type EmailClientCreateWithoutEmailClientCredentialsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmail_clientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientUncheckedCreateWithoutEmailClientCredentialsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmailClientInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientCreateOrConnectWithoutEmailClientCredentialsInput = {
@@ -75253,42 +75437,42 @@ export namespace Prisma {
 
   export type EmailClientUpdateWithoutEmailClientCredentialsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmail_clientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientUncheckedUpdateWithoutEmailClientCredentialsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
-    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailGlobalDailyStats?: EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientCreateWithoutEmailGlobalDailyStatsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignCreateNestedManyWithoutEmailClientInput
     emailClientCredentials?: EmailClientCredentialsCreateNestedManyWithoutEmailClientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientUncheckedCreateWithoutEmailGlobalDailyStatsInput = {
     id?: string
-    client_name: string
+    clientName: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaigns?: EmailCampaignUncheckedCreateNestedManyWithoutEmailClientInput
     emailClientCredentials?: EmailClientCredentialsUncheckedCreateNestedManyWithoutEmailClientInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmail_clientInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailClientInput
   }
 
   export type EmailClientCreateOrConnectWithoutEmailGlobalDailyStatsInput = {
@@ -75309,22 +75493,22 @@ export namespace Prisma {
 
   export type EmailClientUpdateWithoutEmailGlobalDailyStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUpdateManyWithoutEmailClientNestedInput
     emailClientCredentials?: EmailClientCredentialsUpdateManyWithoutEmailClientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailClientNestedInput
   }
 
   export type EmailClientUncheckedUpdateWithoutEmailGlobalDailyStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_name?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaigns?: EmailCampaignUncheckedUpdateManyWithoutEmailClientNestedInput
     emailClientCredentials?: EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientNestedInput
   }
 
   export type GaPropertyCreateWithoutGaAccountInput = {
@@ -82499,54 +82683,54 @@ export namespace Prisma {
   export type EmailCampaignContentCreateManyEmailCampaignInput = {
     id?: string
     subject: string
-    html_content: string
-    plain_content: string
-    web_id: number
+    htmlContent: string
+    plainContent: string
+    webId: string
     type: string
-    content_type: string
+    contentType: string
     recipients?: number
-    create_time: Date | string
-    send_time: Date | string
+    createTime: Date | string
+    sendTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailCampaignDailyStatsCreateManyEmailCampaignInput = {
     id?: string
-    date: Date | string
-    email_client_id: string
-    opens?: number
-    clicks?: number
+    bounceDrops?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    emailClientId: string
+    opens?: number
     phase: string
     requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -82554,14 +82738,14 @@ export namespace Prisma {
   export type EmailCampaignContentUpdateWithoutEmailCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -82569,14 +82753,14 @@ export namespace Prisma {
   export type EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -82584,390 +82768,406 @@ export namespace Prisma {
   export type EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     subject?: StringFieldUpdateOperationsInput | string
-    html_content?: StringFieldUpdateOperationsInput | string
-    plain_content?: StringFieldUpdateOperationsInput | string
-    web_id?: IntFieldUpdateOperationsInput | number
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    webId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    content_type?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
     recipients?: IntFieldUpdateOperationsInput | number
-    create_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    send_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignDailyStatsUpdateWithoutEmailCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmailCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    email_client_id?: StringFieldUpdateOperationsInput | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmailCampaignCreateManyEmail_clientInput = {
+  export type EmailCampaignCreateManyEmailClientInput = {
     id?: string
-    campaign_id: string
-    campaign_name: string
+    campaignId: string
+    campaignName: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmailClientCredentialsCreateManyEmailClientInput = {
     id?: string
-    platform_name: string
-    api_key: string
+    platformName: string
+    apiKey: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type EmailGlobalDailyStatsCreateManyEmail_clientInput = {
+  export type EmailGlobalDailyStatsCreateManyEmailClientInput = {
     id?: string
-    date: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EmailCampaignDailyStatsCreateManyEmail_clientInput = {
-    id?: string
-    email_campaign_id: string
-    date: Date | string
     opens?: number
     clicks?: number
     bounces?: number
-    unsubscribes?: number
-    total_opens?: number
-    daily_total_open_rate?: number
-    cumulative_total_open_rate?: number
-    unique_opens?: number
-    daily_unique_open_rate?: number
-    cumulative_unique_open_rate?: number
-    total_clicks?: number
-    daily_total_click_rate?: number
-    cumulative_total_click_rate?: number
-    unique_clicks?: number
-    daily_unique_click_rate?: number
-    cumulative_unique_click_rate?: number
-    daily_unique_click_to_open_rate?: number
-    daily_total_click_to_open_rate?: number
-    spam_reports?: number
-    daily_spam_reports_rate?: number
-    cumulative_spam_reports_rate?: number
-    spam_report_drops?: number
-    daily_unsubscribe_rate?: number
-    cumulative_unsubscribe_rate?: number
-    single_send_name: string
-    variation: string
-    phase: string
-    requests?: number
-    delivered?: number
-    daily_bounce_rate?: number
-    cumulative_bounce_rate?: number
-    bounce_drops?: number
+    unsubs?: number
+    date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type EmailCampaignUpdateWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsCreateManyEmailClientInput = {
+    id?: string
+    bounceDrops?: number
+    bounces?: number
+    clicks?: number
+    cumulativeBounceRate?: number
+    cumulativeSpamReportsRate?: number
+    cumulativeTotalClickRate?: number
+    cumulativeTotalOpenRate?: number
+    cumulativeUniqueClickRate?: number
+    cumulativeUniqueOpenRate?: number
+    cumulativeUnsubscribeRate?: number
+    dailyBounceRate?: number
+    dailySpamReportsRate?: number
+    dailyTotalClickRate?: number
+    dailyTotalClickToOpenRate?: number
+    dailyTotalOpenRate?: number
+    dailyUniqueClickRate?: number
+    dailyUniqueClickToOpenRate?: number
+    dailyUniqueOpenRate?: number
+    dailyUnsubscribeRate?: number
+    date: Date | string
+    delivered?: number
+    emailCampaignId: string
+    opens?: number
+    phase: string
+    requests?: number
+    singleSendName: string
+    spamReportDrops?: number
+    spamReports?: number
+    totalClicks?: number
+    totalOpens?: number
+    uniqueClicks?: number
+    uniqueOpens?: number
+    unsubscribes?: number
+    variation: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmailCampaignUpdateWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
   }
 
-  export type EmailCampaignUncheckedUpdateWithoutEmail_clientInput = {
+  export type EmailCampaignUncheckedUpdateWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
   }
 
-  export type EmailCampaignUncheckedUpdateManyWithoutEmail_clientInput = {
+  export type EmailCampaignUncheckedUpdateManyWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    campaign_id?: StringFieldUpdateOperationsInput | string
-    campaign_name?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCredentialsUpdateWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCredentialsUncheckedUpdateWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailClientCredentialsUncheckedUpdateManyWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    platform_name?: StringFieldUpdateOperationsInput | string
-    api_key?: StringFieldUpdateOperationsInput | string
+    platformName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmailGlobalDailyStatsUpdateWithoutEmail_clientInput = {
+  export type EmailGlobalDailyStatsUpdateWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EmailGlobalDailyStatsUncheckedUpdateWithoutEmail_clientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmail_clientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EmailCampaignDailyStatsUpdateWithoutEmail_clientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     opens?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    unsubs?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateWithoutEmailClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubs?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailGlobalDailyStatsUncheckedUpdateManyWithoutEmailClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    unsubs?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailCampaignDailyStatsUpdateWithoutEmailClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bounceDrops?: IntFieldUpdateOperationsInput | number
+    bounces?: IntFieldUpdateOperationsInput | number
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
   }
 
-  export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_campaign_id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    emailCampaignId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmail_clientInput = {
+  export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email_campaign_id?: StringFieldUpdateOperationsInput | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    opens?: IntFieldUpdateOperationsInput | number
-    clicks?: IntFieldUpdateOperationsInput | number
+    bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
-    unsubscribes?: IntFieldUpdateOperationsInput | number
-    total_opens?: IntFieldUpdateOperationsInput | number
-    daily_total_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_open_rate?: IntFieldUpdateOperationsInput | number
-    unique_opens?: IntFieldUpdateOperationsInput | number
-    daily_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_open_rate?: IntFieldUpdateOperationsInput | number
-    total_clicks?: IntFieldUpdateOperationsInput | number
-    daily_total_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_total_click_rate?: IntFieldUpdateOperationsInput | number
-    unique_clicks?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unique_click_rate?: IntFieldUpdateOperationsInput | number
-    daily_unique_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    daily_total_click_to_open_rate?: IntFieldUpdateOperationsInput | number
-    spam_reports?: IntFieldUpdateOperationsInput | number
-    daily_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_spam_reports_rate?: IntFieldUpdateOperationsInput | number
-    spam_report_drops?: IntFieldUpdateOperationsInput | number
-    daily_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_unsubscribe_rate?: IntFieldUpdateOperationsInput | number
-    single_send_name?: StringFieldUpdateOperationsInput | string
-    variation?: StringFieldUpdateOperationsInput | string
+    clicks?: IntFieldUpdateOperationsInput | number
+    cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
+    cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    cumulativeUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    dailyBounceRate?: IntFieldUpdateOperationsInput | number
+    dailySpamReportsRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyTotalOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueClickToOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUniqueOpenRate?: IntFieldUpdateOperationsInput | number
+    dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivered?: IntFieldUpdateOperationsInput | number
+    emailCampaignId?: StringFieldUpdateOperationsInput | string
+    opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
-    delivered?: IntFieldUpdateOperationsInput | number
-    daily_bounce_rate?: IntFieldUpdateOperationsInput | number
-    cumulative_bounce_rate?: IntFieldUpdateOperationsInput | number
-    bounce_drops?: IntFieldUpdateOperationsInput | number
+    singleSendName?: StringFieldUpdateOperationsInput | string
+    spamReportDrops?: IntFieldUpdateOperationsInput | number
+    spamReports?: IntFieldUpdateOperationsInput | number
+    totalClicks?: IntFieldUpdateOperationsInput | number
+    totalOpens?: IntFieldUpdateOperationsInput | number
+    uniqueClicks?: IntFieldUpdateOperationsInput | number
+    uniqueOpens?: IntFieldUpdateOperationsInput | number
+    unsubscribes?: IntFieldUpdateOperationsInput | number
+    variation?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
