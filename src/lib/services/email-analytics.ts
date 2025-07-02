@@ -62,21 +62,21 @@ export class EmailAnalyticsService {
       where: whereClause,
       _sum: {
         delivered: true,
-        unique_opens: true,
-        unique_clicks: true,
+        uniqueOpens: true,
+        uniqueClicks: true,
         unsubscribes: true,
         bounces: true,
-        total_opens: true,
+        totalOpens: true,
       },
       _avg: {
-        daily_unique_open_rate: true,
-        daily_unique_click_rate: true,
+        dailyUniqueOpenRate: true,
+        dailyUniqueClickRate: true,
       }
     });
 
     const totalDeliveries = aggregatedData._sum.delivered || 0;
-    const uniqueOpens = aggregatedData._sum.unique_opens || 0;
-    const uniqueClicks = aggregatedData._sum.unique_clicks || 0;
+    const uniqueOpens = aggregatedData._sum.uniqueOpens || 0;
+    const uniqueClicks = aggregatedData._sum.uniqueClicks || 0;
 
     return {
       totalDeliveries,
@@ -108,7 +108,7 @@ export class EmailAnalyticsService {
       where: whereClause,
       include: {
         emailCampaignContents: {
-          orderBy: { send_time: 'desc' },
+          orderBy: { sendTime: 'desc' },
           take: 1, // Get the most recent content
         },
         emailCampaignDailyStats: {
@@ -130,8 +130,8 @@ export class EmailAnalyticsService {
       const stats = campaign.emailCampaignDailyStats.reduce(
         (acc, stat) => ({
           delivered: acc.delivered + stat.delivered,
-          opens: acc.opens + stat.unique_opens,
-          clicks: acc.clicks + stat.unique_clicks,
+          opens: acc.opens + stat.uniqueOpens,
+          clicks: acc.clicks + stat.uniqueClicks,
           unsubscribes: acc.unsubscribes + stat.unsubscribes,
           bounces: acc.bounces + stat.bounces,
         }),
@@ -139,7 +139,7 @@ export class EmailAnalyticsService {
       );
 
       const latestContent = campaign.emailCampaignContents[0];
-      const sendDate = latestContent?.send_time || campaign.createdAt;
+      const sendDate = latestContent?.sendTime || campaign.createdAt;
       
       return {
         id: campaign.id,
@@ -149,8 +149,8 @@ export class EmailAnalyticsService {
           day: 'numeric' 
         }),
         weekDay: sendDate.toLocaleDateString('en-US', { weekday: 'long' }),
-        subject: latestContent?.subject || campaign.campaign_name,
-        link: `https://campaign.link/${campaign.campaign_id}`, // Placeholder URL structure
+        subject: latestContent?.subject || campaign.campaignName,
+        link: `https://campaign.link/${campaign.campaignId}`, // Placeholder URL structure
         successfulDeliveries: stats.delivered,
         opens: stats.opens,
         openRate: stats.delivered > 0 ? (stats.opens / stats.delivered) * 100 : 0,
