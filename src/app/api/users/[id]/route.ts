@@ -78,6 +78,11 @@ export async function GET(
             },
           },
         },
+        sproutSocialAccounts: {
+          include: {
+            sproutSocialAccount: true,
+          },
+        },
         company: true,
       },
     });

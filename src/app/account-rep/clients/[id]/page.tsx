@@ -44,6 +44,18 @@ interface User {
       gaProperties: GaProperty[];
     };
   }[];
+  sproutSocialAccounts: {
+    sproutSocialAccount: {
+      id: string;
+      customerProfileId: number;
+      networkType: string;
+      name: string;
+      nativeName: string;
+      link: string;
+      nativeId: string;
+      groups: number[];
+    };
+  }[];
 }
 
 interface GaAccount {
@@ -59,9 +71,21 @@ interface GaProperty {
   gaPropertyName: string;
 }
 
+interface SproutSocialAccount {
+  id: string;
+  customerProfileId: number;
+  networkType: string;
+  name: string;
+  nativeName: string;
+  link: string;
+  nativeId: string;
+  groups: number[];
+}
+
 // Interface for the transformed user data that our component uses
-interface TransformedUser extends Omit<User, 'userToGaAccounts'> {
+interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts'> {
   gaAccounts: GaAccount[];
+  sproutSocialAccounts: SproutSocialAccount[];
 }
 
 export default function ClientDetailsPage() {
@@ -78,6 +102,12 @@ export default function ClientDetailsPage() {
     gaPropertyId: '',
     gaPropertyName: '',
   });
+
+  // Sprout Social Account states
+  const [isSproutSocialAccountDialogOpen, setIsSproutSocialAccountDialogOpen] = useState(false);
+  const [availableSproutSocialAccounts, setAvailableSproutSocialAccounts] = useState<SproutSocialAccount[]>([]);
+  const [selectedSproutSocialAccounts, setSelectedSproutSocialAccounts] = useState<string[]>([]);
+  const [isLoadingSproutSocialAccounts, setIsLoadingSproutSocialAccounts] = useState(false);
 
   // Fetch client data when the component mounts or the id changes
   useEffect(() => {
@@ -96,6 +126,16 @@ export default function ClientDetailsPage() {
             gaAccountId: gaAccount.gaAccountId,
             gaAccountName: gaAccount.gaAccountName,
             gaProperties: gaAccount.gaProperties
+          })) || [],
+          sproutSocialAccounts: data.sproutSocialAccounts?.map(({ sproutSocialAccount }) => ({
+            id: sproutSocialAccount.id,
+            customerProfileId: sproutSocialAccount.customerProfileId,
+            networkType: sproutSocialAccount.networkType,
+            name: sproutSocialAccount.name,
+            nativeName: sproutSocialAccount.nativeName,
+            link: sproutSocialAccount.link,
+            nativeId: sproutSocialAccount.nativeId,
+            groups: sproutSocialAccount.groups
           })) || []
         };
         setClient(transformedData);
@@ -138,6 +178,35 @@ export default function ClientDetailsPage() {
 
     fetchAvailableAccounts();
   }, [isGaAccountDialogOpen, client]);
+
+  // Fetch available Sprout Social accounts when dialog opens
+  useEffect(() => {
+    const fetchAvailableSproutSocialAccounts = async () => {
+      if (!isSproutSocialAccountDialogOpen) return;
+
+      setIsLoadingSproutSocialAccounts(true);
+      try {
+        const response = await fetch('/api/admin/available-sprout-social-accounts');
+        if (!response.ok) {
+          throw new Error('Failed to fetch available Sprout Social accounts');
+        }
+        const data = await response.json();
+        setAvailableSproutSocialAccounts(data);
+
+        // Pre-select accounts that the client already has access to
+        if (client) {
+          const existingAccountIds = client.sproutSocialAccounts.map(account => account.id);
+          setSelectedSproutSocialAccounts(existingAccountIds);
+        }
+      } catch (error) {
+        toast.error('Failed to fetch available Sprout Social accounts');
+      } finally {
+        setIsLoadingSproutSocialAccounts(false);
+      }
+    };
+
+    fetchAvailableSproutSocialAccounts();
+  }, [isSproutSocialAccountDialogOpen, client]);
 
   const handleAddGaAccounts = async () => {
     if (selectedAccounts.length === 0) {
@@ -262,6 +331,87 @@ export default function ClientDetailsPage() {
     } catch (error) {
       console.error('Error disassociating GA account:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to disassociate Google Analytics account');
+    }
+  };
+
+  const handleAddSproutSocialAccounts = async () => {
+    if (selectedSproutSocialAccounts.length === 0) {
+      toast.error('Please select at least one Sprout Social account');
+      return;
+    }
+
+    try {
+      // Get the current account IDs
+      const currentAccountIds = client?.sproutSocialAccounts.map(account => account.id) || [];
+
+      // Find accounts to add (selected but not currently associated)
+      const accountsToAdd = selectedSproutSocialAccounts.filter(id => !currentAccountIds.includes(id));
+
+      // Find accounts to remove (currently associated but not selected)
+      const accountsToRemove = currentAccountIds.filter(id => !selectedSproutSocialAccounts.includes(id));
+
+      // Handle removals first
+      await Promise.all(
+        accountsToRemove.map(async (accountId) => {
+          const response = await fetch(
+            `/api/users/${params.id}/associate-sprout-social-account?sproutSocialAccountId=${accountId}`,
+            { method: 'DELETE' }
+          );
+          if (!response.ok) {
+            throw new Error('Failed to disassociate Sprout Social account');
+          }
+        })
+      );
+
+      // Then handle additions
+      await Promise.all(
+        accountsToAdd.map(async (accountId) => {
+          const response = await fetch(`/api/users/${params.id}/associate-sprout-social-account`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ sproutSocialAccountId: accountId }),
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to associate Sprout Social account');
+          }
+        })
+      );
+
+      toast.success('Sprout Social accounts updated successfully');
+      setIsSproutSocialAccountDialogOpen(false);
+      setSelectedSproutSocialAccounts([]);
+      // Refresh user data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating Sprout Social accounts:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to update Sprout Social accounts');
+    }
+  };
+
+  const handleDisassociateSproutSocialAccount = async (accountId: string) => {
+    try {
+      const response = await fetch(
+        `/api/users/${params.id}/associate-sprout-social-account?sproutSocialAccountId=${accountId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to disassociate Sprout Social account');
+      }
+
+      toast.success('Sprout Social account disassociated successfully');
+      // Refresh user data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error disassociating Sprout Social account:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to disassociate Sprout Social account');
     }
   };
 
@@ -467,6 +617,117 @@ export default function ClientDetailsPage() {
                             </div>
                           ))
                         )}
+                      </div>
+                    </div>
+                  </Card>
+                ))
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Sprout Social Accounts */}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle>Sprout Social Accounts</CardTitle>
+            {/* Add Sprout Social Account Dialog */}
+            <Dialog open={isSproutSocialAccountDialogOpen} onOpenChange={setIsSproutSocialAccountDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>Add Sprout Social Account</Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Add Sprout Social Accounts</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  {isLoadingSproutSocialAccounts ? (
+                    <div className="flex justify-center py-4">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+                    </div>
+                  ) : (
+                    <div className="max-h-[400px] overflow-y-auto space-y-2">
+                      {availableSproutSocialAccounts.map((account) => (
+                        <div
+                          key={account.id}
+                          className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${selectedSproutSocialAccounts.includes(account.id)
+                              ? 'bg-primary-50 border-primary-200'
+                              : 'hover:bg-gray-50'
+                            }`}
+                          onClick={() => {
+                            setSelectedSproutSocialAccounts((prev) =>
+                              prev.includes(account.id)
+                                ? prev.filter((id) => id !== account.id)
+                                : [...prev, account.id]
+                            );
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedSproutSocialAccounts.includes(account.id)}
+                            onChange={() => { }}
+                            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                          />
+                          <div>
+                            <p className="font-medium">{account.name}</p>
+                            <p className="text-sm text-gray-500">Platform: {account.networkType}</p>
+                            <p className="text-sm text-gray-500">Native Name: {account.nativeName}</p>
+                            <p className="text-sm text-gray-500">Profile ID: {account.customerProfileId}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex justify-end space-x-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setIsSproutSocialAccountDialogOpen(false);
+                        setSelectedSproutSocialAccounts([]);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button onClick={handleAddSproutSocialAccounts}>
+                      Add Selected Accounts
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {client.sproutSocialAccounts.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  No Sprout Social accounts associated with this client.
+                </div>
+              ) : (
+                client.sproutSocialAccounts.map((account: SproutSocialAccount) => (
+                  <Card key={account.id} className="p-4">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-semibold">{account.name}</h3>
+                        <p className="text-sm text-gray-500">Platform: {account.networkType}</p>
+                        <p className="text-sm text-gray-500">Native Name: {account.nativeName}</p>
+                        <p className="text-sm text-gray-500">Profile ID: {account.customerProfileId}</p>
+                        {account.link && (
+                          <a 
+                            href={account.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sm text-blue-500 hover:text-blue-700 underline"
+                          >
+                            View Profile
+                          </a>
+                        )}
+                      </div>
+                      <div className="flex flex-row items-center gap-2">
+                        <Button
+                          variant="destructive"
+                          onClick={() => handleDisassociateSproutSocialAccount(account.id)}
+                        >
+                          Disassociate Account
+                        </Button>
                       </div>
                     </div>
                   </Card>
