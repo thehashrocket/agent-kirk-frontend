@@ -121,6 +121,7 @@ function normalizePlatformType(platformType: string): string {
     facebook_page: 'facebook',
     instagram: 'instagram',
     instagram_business: 'instagram',
+    fb_instagram_account: 'instagram',
     linkedin: 'linkedin',
     linkedin_company: 'linkedin',
     pinterest: 'pinterest',

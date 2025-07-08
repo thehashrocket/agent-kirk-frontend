@@ -34,37 +34,6 @@ interface SproutSocialEnhancedDashboardProps {
   onDateRangeChange?: (dateRange: { from: Date; to: Date }) => void;
 }
 
-// Mock demographic data for demonstration (would come from API in real implementation)
-const generateMockDemographics = (platformType: string): {
-  ageData: DemographicData[];
-  locationData: DemographicData[];
-} => {
-  // This would typically come from the API response
-  const mockAgeData: DemographicData[] = [
-    { category: '65+', value: 24 },
-    { category: '55-64', value: 89 },
-    { category: '45-54', value: 156 },
-    { category: '35-44', value: 234 },
-    { category: '25-34', value: 187 },
-    { category: '18-24', value: 98 },
-  ];
-
-  const mockLocationData: DemographicData[] = [
-    { category: 'San Francisco, CA', value: 445 },
-    { category: 'New York, NY', value: 387 },
-    { category: 'Los Angeles, CA', value: 334 },
-    { category: 'Chicago, IL', value: 256 },
-    { category: 'Austin, TX', value: 189 },
-    { category: 'Seattle, WA', value: 156 },
-    { category: 'Denver, CO', value: 134 },
-    { category: 'Miami, FL', value: 98 },
-    { category: 'Boston, MA', value: 87 },
-    { category: 'Atlanta, GA', value: 76 },
-  ];
-
-  return { ageData: mockAgeData, locationData: mockLocationData };
-};
-
 export function SproutSocialEnhancedDashboard({ 
   data, 
   onDateRangeChange 

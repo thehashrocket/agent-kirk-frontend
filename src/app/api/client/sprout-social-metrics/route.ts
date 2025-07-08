@@ -156,6 +156,7 @@ async function fetchPlatformMetrics(
         orderBy: { reportingDate: 'asc' },
       });
     case 'instagram':
+    case 'fb_instagram_account':
       return await prisma.sproutInstagramAnalytics.findMany({
         where: whereClause,
         orderBy: { reportingDate: 'asc' },
