@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
 import type { SproutSocialAccount, SproutSocialAccountSelectorProps } from './types';
+import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
 
 /**
  * @component SproutSocialAccountSelector
@@ -129,7 +130,7 @@ export function SproutSocialAccountSelector({
                   <div className="flex items-center gap-2">
                     <span className="font-medium">{account.name}</span>
                     <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">
-                      {account.networkType}
+                      {normalizeSocialNetworkName(account.networkType)}
                     </span>
                   </div>
                 </SelectItem>

@@ -13,6 +13,9 @@ import {
   transformDemographicData,
   type DemographicData,
 } from './components';
+import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+
+
 
 /**
  * @component SproutSocialEnhancedDashboard
@@ -38,8 +41,6 @@ export function SproutSocialEnhancedDashboard({
   data, 
   onDateRangeChange 
 }: SproutSocialEnhancedDashboardProps) {
-  // Move useState to the top level
-  const [showDebug, setShowDebug] = useState(false);
 
   if (!data) {
     return (
@@ -74,36 +75,6 @@ export function SproutSocialEnhancedDashboard({
 
   return (
     <div className="space-y-8">
-      {/* Debug Panel for LinkedIn */}
-      {data.platformType.toLowerCase() === 'linkedin' && (
-        <div className="mb-6 border rounded-lg bg-gray-50 p-4">
-          <button
-            className="mb-2 text-xs text-blue-600 underline"
-            onClick={() => setShowDebug((v) => !v)}
-          >
-            {showDebug ? 'Hide' : 'Show'} Debug: Raw LinkedIn Metrics
-          </button>
-          {showDebug && (
-            <div className="overflow-x-auto text-xs bg-white border rounded p-2 max-h-96">
-              <div className="mb-2 font-semibold">Current Period Metrics:</div>
-              <pre className="mb-4 whitespace-pre-wrap break-all">
-                {JSON.stringify(data.metrics, null, 2)}
-              </pre>
-              <div className="mb-2 font-semibold">Comparison Period Metrics:</div>
-              <pre className="whitespace-pre-wrap break-all">
-                {JSON.stringify(data.comparisonMetrics, null, 2)}
-              </pre>
-              {(!data.metrics || data.metrics.length === 0) && (
-                <div className="text-red-600 mt-2">No LinkedIn metrics data returned from API.</div>
-              )}
-              {data.metrics && data.metrics.length > 0 && data.metrics.every(m => Object.values(m).every(v => v === 0 || v === null)) && (
-                <div className="text-yellow-600 mt-2">All LinkedIn metric values are zero or null.</div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Header Section */}
       <div className="flex items-start justify-between">
         <div>
@@ -112,7 +83,7 @@ export function SproutSocialEnhancedDashboard({
           </h1>
           <div className="flex items-center gap-3">
             <Badge variant="outline" className="capitalize text-sm">
-              {data.platformType}
+              {normalizeSocialNetworkName(data.platformType)}
             </Badge>
             <span className="text-sm text-muted-foreground">
               {format(parseISO(data.dateRange.start), 'MMM d, yyyy')} - {format(parseISO(data.dateRange.end), 'MMM d, yyyy')}
@@ -165,7 +136,7 @@ export function SproutSocialEnhancedDashboard({
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 text-sm">
           <div>
             <span className="text-muted-foreground">Platform:</span>
-            <p className="font-medium capitalize">{data.platformType}</p>
+            <p className="font-medium capitalize">{normalizeSocialNetworkName(data.platformType)}</p>
           </div>
           <div>
             <span className="text-muted-foreground">Account:</span>

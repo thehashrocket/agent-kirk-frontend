@@ -23,20 +23,23 @@ export default async function ChannelPage({ params, searchParams }: ChannelPageP
   const channel = resolvedParams?.channel ? decodeURIComponent(resolvedParams.channel) : null;
   if (!channel) return notFound();
 
+  // if the channel name is found, format it to capitalize the first letter of each word and replace dashes with spaces
+  const formattedChannel = channel.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+
   return (
     <main className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Channel: <span className="text-primary-600">{channel}</span></h1>
+      <h1 className="text-3xl font-bold mb-4">Channel: <span className="text-primary-600">{formattedChannel}</span></h1>
       <p className="text-gray-600 mb-8">This page will show more data and insights about the <b>{channel}</b> channel.</p>
-      {channel === 'Audience Data' && <AudienceData />}
-      {channel === 'Direct' && <Direct />}
-      {channel === 'Email' && <Email />}
-      {channel === 'Organic Search' && <OrganicSearch />}
-      {channel === 'Organic Social' && <OrganicSocial />}
-      {channel === 'Paid Search' && <PaidSearch />}
-      {channel === 'Paid Social' && <PaidSocial />}
-      {channel === 'Referral' && <Referral />}
-      {channel === 'Unassigned' && <Unassigned />}
-      {channel === 'Visitor Behavior' && <VisitorBehavior />}
+      {channel === 'audience-data' && <AudienceData />}
+      {channel === 'direct' && <Direct />}
+      {channel === 'email' && <Email />}
+      {channel === 'organic-search' && <OrganicSearch />}
+      {channel === 'organic-social' && <OrganicSocial />}
+      {channel === 'paid-search' && <PaidSearch />}
+      {channel === 'paidsocial' && <PaidSocial />}
+      {channel === 'referral' && <Referral />}
+      {channel === 'unassigned' && <Unassigned />}
+      {channel === 'visitorbehavior' && <VisitorBehavior />}
     </main>
   );
 } 

@@ -5,9 +5,9 @@ import { format } from 'date-fns';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
 import { SproutSocialAccountSelector } from './sprout-social-account-selector';
-import { SproutSocialDashboard } from './sprout-social-dashboard';
 import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboard';
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
+import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
 
 /**
  * @component SproutSocialMetrics
@@ -125,7 +125,7 @@ export default function SproutSocialMetrics() {
       {/* Dynamic Title */}
       {selectedAccount && (
         <h2 className="text-xl font-semibold text-primary-700 mb-2">
-          {selectedAccount.name} – {selectedAccount.networkType} Analytics
+          {selectedAccount.name} – {normalizeSocialNetworkName(selectedAccount.networkType)} Analytics
         </h2>
       )}
       

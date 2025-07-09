@@ -3,7 +3,6 @@ import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { ArrowUpRight, ArrowDownRight, ArrowRight } from 'lucide-react';
 import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
 import React, { useEffect, useId, useRef, useState } from 'react';
-import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 
 interface GaChannelSessionsTableProps {
@@ -159,7 +158,9 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
   // Handler for row click
   const handleRowClick = (row: typeof allRows[0]) => {
     if (!row.channel) return;
-    const encoded = encodeURIComponent(row.channel);
+    // format the channel name to lowercase and replace spaces with dashes
+    const formattedChannel = row.channel.toLowerCase().replace(/\s+/g, '-');
+    const encoded = encodeURIComponent(formattedChannel);
     router.push(`/analytics/channel/${encoded}`);
   };
 
