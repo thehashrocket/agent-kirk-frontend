@@ -190,10 +190,10 @@ exports.Prisma.EmailCampaignScalarFieldEnum = {
 };
 
 exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
-  id: 'id',
   bounceDrops: 'bounceDrops',
   bounces: 'bounces',
   clicks: 'clicks',
+  createdAt: 'createdAt',
   cumulativeBounceRate: 'cumulativeBounceRate',
   cumulativeSpamReportsRate: 'cumulativeSpamReportsRate',
   cumulativeTotalClickRate: 'cumulativeTotalClickRate',
@@ -214,6 +214,7 @@ exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
   delivered: 'delivered',
   emailCampaignId: 'emailCampaignId',
   emailClientId: 'emailClientId',
+  id: 'id',
   opens: 'opens',
   phase: 'phase',
   requests: 'requests',
@@ -225,9 +226,8 @@ exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
   uniqueClicks: 'uniqueClicks',
   uniqueOpens: 'uniqueOpens',
   unsubscribes: 'unsubscribes',
-  variation: 'variation',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  variation: 'variation'
 };
 
 exports.Prisma.EmailClientScalarFieldEnum = {

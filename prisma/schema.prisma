@@ -183,7 +183,7 @@ model EmailCampaignDailyStats {
 
   // Relations
   emailClient   EmailClient   @relation(fields: [emailClientId], references: [id])
-  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [id])
+  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
 }
 
 model EmailClient {

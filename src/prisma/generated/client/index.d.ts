@@ -12640,10 +12640,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsMinAggregateOutputType = {
-    id: string | null
     bounceDrops: number | null
     bounces: number | null
     clicks: number | null
+    createdAt: Date | null
     cumulativeBounceRate: number | null
     cumulativeSpamReportsRate: number | null
     cumulativeTotalClickRate: number | null
@@ -12664,6 +12664,7 @@ export namespace Prisma {
     delivered: number | null
     emailCampaignId: string | null
     emailClientId: string | null
+    id: string | null
     opens: number | null
     phase: string | null
     requests: number | null
@@ -12675,16 +12676,15 @@ export namespace Prisma {
     uniqueClicks: number | null
     uniqueOpens: number | null
     unsubscribes: number | null
-    variation: string | null
-    createdAt: Date | null
     updatedAt: Date | null
+    variation: string | null
   }
 
   export type EmailCampaignDailyStatsMaxAggregateOutputType = {
-    id: string | null
     bounceDrops: number | null
     bounces: number | null
     clicks: number | null
+    createdAt: Date | null
     cumulativeBounceRate: number | null
     cumulativeSpamReportsRate: number | null
     cumulativeTotalClickRate: number | null
@@ -12705,6 +12705,7 @@ export namespace Prisma {
     delivered: number | null
     emailCampaignId: string | null
     emailClientId: string | null
+    id: string | null
     opens: number | null
     phase: string | null
     requests: number | null
@@ -12716,16 +12717,15 @@ export namespace Prisma {
     uniqueClicks: number | null
     uniqueOpens: number | null
     unsubscribes: number | null
-    variation: string | null
-    createdAt: Date | null
     updatedAt: Date | null
+    variation: string | null
   }
 
   export type EmailCampaignDailyStatsCountAggregateOutputType = {
-    id: number
     bounceDrops: number
     bounces: number
     clicks: number
+    createdAt: number
     cumulativeBounceRate: number
     cumulativeSpamReportsRate: number
     cumulativeTotalClickRate: number
@@ -12746,6 +12746,7 @@ export namespace Prisma {
     delivered: number
     emailCampaignId: number
     emailClientId: number
+    id: number
     opens: number
     phase: number
     requests: number
@@ -12757,9 +12758,8 @@ export namespace Prisma {
     uniqueClicks: number
     uniqueOpens: number
     unsubscribes: number
-    variation: number
-    createdAt: number
     updatedAt: number
+    variation: number
     _all: number
   }
 
@@ -12829,10 +12829,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsMinAggregateInputType = {
-    id?: true
     bounceDrops?: true
     bounces?: true
     clicks?: true
+    createdAt?: true
     cumulativeBounceRate?: true
     cumulativeSpamReportsRate?: true
     cumulativeTotalClickRate?: true
@@ -12853,6 +12853,7 @@ export namespace Prisma {
     delivered?: true
     emailCampaignId?: true
     emailClientId?: true
+    id?: true
     opens?: true
     phase?: true
     requests?: true
@@ -12864,16 +12865,15 @@ export namespace Prisma {
     uniqueClicks?: true
     uniqueOpens?: true
     unsubscribes?: true
-    variation?: true
-    createdAt?: true
     updatedAt?: true
+    variation?: true
   }
 
   export type EmailCampaignDailyStatsMaxAggregateInputType = {
-    id?: true
     bounceDrops?: true
     bounces?: true
     clicks?: true
+    createdAt?: true
     cumulativeBounceRate?: true
     cumulativeSpamReportsRate?: true
     cumulativeTotalClickRate?: true
@@ -12894,6 +12894,7 @@ export namespace Prisma {
     delivered?: true
     emailCampaignId?: true
     emailClientId?: true
+    id?: true
     opens?: true
     phase?: true
     requests?: true
@@ -12905,16 +12906,15 @@ export namespace Prisma {
     uniqueClicks?: true
     uniqueOpens?: true
     unsubscribes?: true
-    variation?: true
-    createdAt?: true
     updatedAt?: true
+    variation?: true
   }
 
   export type EmailCampaignDailyStatsCountAggregateInputType = {
-    id?: true
     bounceDrops?: true
     bounces?: true
     clicks?: true
+    createdAt?: true
     cumulativeBounceRate?: true
     cumulativeSpamReportsRate?: true
     cumulativeTotalClickRate?: true
@@ -12935,6 +12935,7 @@ export namespace Prisma {
     delivered?: true
     emailCampaignId?: true
     emailClientId?: true
+    id?: true
     opens?: true
     phase?: true
     requests?: true
@@ -12946,9 +12947,8 @@ export namespace Prisma {
     uniqueClicks?: true
     uniqueOpens?: true
     unsubscribes?: true
-    variation?: true
-    createdAt?: true
     updatedAt?: true
+    variation?: true
     _all?: true
   }
 
@@ -13039,10 +13039,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsGroupByOutputType = {
-    id: string
     bounceDrops: number
     bounces: number
     clicks: number
+    createdAt: Date
     cumulativeBounceRate: number
     cumulativeSpamReportsRate: number
     cumulativeTotalClickRate: number
@@ -13063,6 +13063,7 @@ export namespace Prisma {
     delivered: number
     emailCampaignId: string
     emailClientId: string
+    id: string
     opens: number
     phase: string
     requests: number
@@ -13074,9 +13075,8 @@ export namespace Prisma {
     uniqueClicks: number
     uniqueOpens: number
     unsubscribes: number
-    variation: string
-    createdAt: Date
     updatedAt: Date
+    variation: string
     _count: EmailCampaignDailyStatsCountAggregateOutputType | null
     _avg: EmailCampaignDailyStatsAvgAggregateOutputType | null
     _sum: EmailCampaignDailyStatsSumAggregateOutputType | null
@@ -13099,10 +13099,10 @@ export namespace Prisma {
 
 
   export type EmailCampaignDailyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     bounceDrops?: boolean
     bounces?: boolean
     clicks?: boolean
+    createdAt?: boolean
     cumulativeBounceRate?: boolean
     cumulativeSpamReportsRate?: boolean
     cumulativeTotalClickRate?: boolean
@@ -13123,6 +13123,7 @@ export namespace Prisma {
     delivered?: boolean
     emailCampaignId?: boolean
     emailClientId?: boolean
+    id?: boolean
     opens?: boolean
     phase?: boolean
     requests?: boolean
@@ -13134,18 +13135,17 @@ export namespace Prisma {
     uniqueClicks?: boolean
     uniqueOpens?: boolean
     unsubscribes?: boolean
-    variation?: boolean
-    createdAt?: boolean
     updatedAt?: boolean
+    variation?: boolean
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaignDailyStats"]>
 
   export type EmailCampaignDailyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     bounceDrops?: boolean
     bounces?: boolean
     clicks?: boolean
+    createdAt?: boolean
     cumulativeBounceRate?: boolean
     cumulativeSpamReportsRate?: boolean
     cumulativeTotalClickRate?: boolean
@@ -13166,6 +13166,7 @@ export namespace Prisma {
     delivered?: boolean
     emailCampaignId?: boolean
     emailClientId?: boolean
+    id?: boolean
     opens?: boolean
     phase?: boolean
     requests?: boolean
@@ -13177,18 +13178,17 @@ export namespace Prisma {
     uniqueClicks?: boolean
     uniqueOpens?: boolean
     unsubscribes?: boolean
-    variation?: boolean
-    createdAt?: boolean
     updatedAt?: boolean
+    variation?: boolean
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaignDailyStats"]>
 
   export type EmailCampaignDailyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     bounceDrops?: boolean
     bounces?: boolean
     clicks?: boolean
+    createdAt?: boolean
     cumulativeBounceRate?: boolean
     cumulativeSpamReportsRate?: boolean
     cumulativeTotalClickRate?: boolean
@@ -13209,6 +13209,7 @@ export namespace Prisma {
     delivered?: boolean
     emailCampaignId?: boolean
     emailClientId?: boolean
+    id?: boolean
     opens?: boolean
     phase?: boolean
     requests?: boolean
@@ -13220,18 +13221,17 @@ export namespace Prisma {
     uniqueClicks?: boolean
     uniqueOpens?: boolean
     unsubscribes?: boolean
-    variation?: boolean
-    createdAt?: boolean
     updatedAt?: boolean
+    variation?: boolean
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emailCampaignDailyStats"]>
 
   export type EmailCampaignDailyStatsSelectScalar = {
-    id?: boolean
     bounceDrops?: boolean
     bounces?: boolean
     clicks?: boolean
+    createdAt?: boolean
     cumulativeBounceRate?: boolean
     cumulativeSpamReportsRate?: boolean
     cumulativeTotalClickRate?: boolean
@@ -13252,6 +13252,7 @@ export namespace Prisma {
     delivered?: boolean
     emailCampaignId?: boolean
     emailClientId?: boolean
+    id?: boolean
     opens?: boolean
     phase?: boolean
     requests?: boolean
@@ -13263,12 +13264,11 @@ export namespace Prisma {
     uniqueClicks?: boolean
     uniqueOpens?: boolean
     unsubscribes?: boolean
-    variation?: boolean
-    createdAt?: boolean
     updatedAt?: boolean
+    variation?: boolean
   }
 
-  export type EmailCampaignDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bounceDrops" | "bounces" | "clicks" | "cumulativeBounceRate" | "cumulativeSpamReportsRate" | "cumulativeTotalClickRate" | "cumulativeTotalOpenRate" | "cumulativeUniqueClickRate" | "cumulativeUniqueOpenRate" | "cumulativeUnsubscribeRate" | "dailyBounceRate" | "dailySpamReportsRate" | "dailyTotalClickRate" | "dailyTotalClickToOpenRate" | "dailyTotalOpenRate" | "dailyUniqueClickRate" | "dailyUniqueClickToOpenRate" | "dailyUniqueOpenRate" | "dailyUnsubscribeRate" | "date" | "delivered" | "emailCampaignId" | "emailClientId" | "opens" | "phase" | "requests" | "singleSendName" | "spamReportDrops" | "spamReports" | "totalClicks" | "totalOpens" | "uniqueClicks" | "uniqueOpens" | "unsubscribes" | "variation" | "createdAt" | "updatedAt", ExtArgs["result"]["emailCampaignDailyStats"]>
+  export type EmailCampaignDailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"bounceDrops" | "bounces" | "clicks" | "createdAt" | "cumulativeBounceRate" | "cumulativeSpamReportsRate" | "cumulativeTotalClickRate" | "cumulativeTotalOpenRate" | "cumulativeUniqueClickRate" | "cumulativeUniqueOpenRate" | "cumulativeUnsubscribeRate" | "dailyBounceRate" | "dailySpamReportsRate" | "dailyTotalClickRate" | "dailyTotalClickToOpenRate" | "dailyTotalOpenRate" | "dailyUniqueClickRate" | "dailyUniqueClickToOpenRate" | "dailyUniqueOpenRate" | "dailyUnsubscribeRate" | "date" | "delivered" | "emailCampaignId" | "emailClientId" | "id" | "opens" | "phase" | "requests" | "singleSendName" | "spamReportDrops" | "spamReports" | "totalClicks" | "totalOpens" | "uniqueClicks" | "uniqueOpens" | "unsubscribes" | "updatedAt" | "variation", ExtArgs["result"]["emailCampaignDailyStats"]>
   export type EmailCampaignDailyStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
     emailCampaign?: boolean | EmailCampaignDefaultArgs<ExtArgs>
@@ -13289,10 +13289,10 @@ export namespace Prisma {
       emailCampaign: Prisma.$EmailCampaignPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
       bounceDrops: number
       bounces: number
       clicks: number
+      createdAt: Date
       cumulativeBounceRate: number
       cumulativeSpamReportsRate: number
       cumulativeTotalClickRate: number
@@ -13313,6 +13313,7 @@ export namespace Prisma {
       delivered: number
       emailCampaignId: string
       emailClientId: string
+      id: string
       opens: number
       phase: string
       requests: number
@@ -13324,9 +13325,8 @@ export namespace Prisma {
       uniqueClicks: number
       uniqueOpens: number
       unsubscribes: number
-      variation: string
-      createdAt: Date
       updatedAt: Date
+      variation: string
     }, ExtArgs["result"]["emailCampaignDailyStats"]>
     composites: {}
   }
@@ -13410,8 +13410,8 @@ export namespace Prisma {
      * // Get first 10 EmailCampaignDailyStats
      * const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const emailCampaignDailyStatsWithIdOnly = await prisma.emailCampaignDailyStats.findMany({ select: { id: true } })
+     * // Only select the `bounceDrops`
+     * const emailCampaignDailyStatsWithBounceDropsOnly = await prisma.emailCampaignDailyStats.findMany({ select: { bounceDrops: true } })
      * 
      */
     findMany<T extends EmailCampaignDailyStatsFindManyArgs>(args?: SelectSubset<T, EmailCampaignDailyStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -13455,9 +13455,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many EmailCampaignDailyStats and only return the `id`
-     * const emailCampaignDailyStatsWithIdOnly = await prisma.emailCampaignDailyStats.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many EmailCampaignDailyStats and only return the `bounceDrops`
+     * const emailCampaignDailyStatsWithBounceDropsOnly = await prisma.emailCampaignDailyStats.createManyAndReturn({
+     *   select: { bounceDrops: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -13546,9 +13546,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more EmailCampaignDailyStats and only return the `id`
-     * const emailCampaignDailyStatsWithIdOnly = await prisma.emailCampaignDailyStats.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more EmailCampaignDailyStats and only return the `bounceDrops`
+     * const emailCampaignDailyStatsWithBounceDropsOnly = await prisma.emailCampaignDailyStats.updateManyAndReturn({
+     *   select: { bounceDrops: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13752,10 +13752,10 @@ export namespace Prisma {
    * Fields of the EmailCampaignDailyStats model
    */
   interface EmailCampaignDailyStatsFieldRefs {
-    readonly id: FieldRef<"EmailCampaignDailyStats", 'String'>
     readonly bounceDrops: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly bounces: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly clicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
+    readonly createdAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
     readonly cumulativeBounceRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly cumulativeSpamReportsRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly cumulativeTotalClickRate: FieldRef<"EmailCampaignDailyStats", 'Int'>
@@ -13776,6 +13776,7 @@ export namespace Prisma {
     readonly delivered: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly emailCampaignId: FieldRef<"EmailCampaignDailyStats", 'String'>
     readonly emailClientId: FieldRef<"EmailCampaignDailyStats", 'String'>
+    readonly id: FieldRef<"EmailCampaignDailyStats", 'String'>
     readonly opens: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly phase: FieldRef<"EmailCampaignDailyStats", 'String'>
     readonly requests: FieldRef<"EmailCampaignDailyStats", 'Int'>
@@ -13787,9 +13788,8 @@ export namespace Prisma {
     readonly uniqueClicks: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly uniqueOpens: FieldRef<"EmailCampaignDailyStats", 'Int'>
     readonly unsubscribes: FieldRef<"EmailCampaignDailyStats", 'Int'>
-    readonly variation: FieldRef<"EmailCampaignDailyStats", 'String'>
-    readonly createdAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
     readonly updatedAt: FieldRef<"EmailCampaignDailyStats", 'DateTime'>
+    readonly variation: FieldRef<"EmailCampaignDailyStats", 'String'>
   }
     
 
@@ -58208,10 +58208,10 @@ export namespace Prisma {
 
 
   export const EmailCampaignDailyStatsScalarFieldEnum: {
-    id: 'id',
     bounceDrops: 'bounceDrops',
     bounces: 'bounces',
     clicks: 'clicks',
+    createdAt: 'createdAt',
     cumulativeBounceRate: 'cumulativeBounceRate',
     cumulativeSpamReportsRate: 'cumulativeSpamReportsRate',
     cumulativeTotalClickRate: 'cumulativeTotalClickRate',
@@ -58232,6 +58232,7 @@ export namespace Prisma {
     delivered: 'delivered',
     emailCampaignId: 'emailCampaignId',
     emailClientId: 'emailClientId',
+    id: 'id',
     opens: 'opens',
     phase: 'phase',
     requests: 'requests',
@@ -58243,9 +58244,8 @@ export namespace Prisma {
     uniqueClicks: 'uniqueClicks',
     uniqueOpens: 'uniqueOpens',
     unsubscribes: 'unsubscribes',
-    variation: 'variation',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    variation: 'variation'
   };
 
   export type EmailCampaignDailyStatsScalarFieldEnum = (typeof EmailCampaignDailyStatsScalarFieldEnum)[keyof typeof EmailCampaignDailyStatsScalarFieldEnum]
@@ -59506,10 +59506,10 @@ export namespace Prisma {
     AND?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
     OR?: EmailCampaignDailyStatsWhereInput[]
     NOT?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
-    id?: StringFilter<"EmailCampaignDailyStats"> | string
     bounceDrops?: IntFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntFilter<"EmailCampaignDailyStats"> | number
     clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     cumulativeBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
     cumulativeSpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
     cumulativeTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
@@ -59530,6 +59530,7 @@ export namespace Prisma {
     delivered?: IntFilter<"EmailCampaignDailyStats"> | number
     emailCampaignId?: StringFilter<"EmailCampaignDailyStats"> | string
     emailClientId?: StringFilter<"EmailCampaignDailyStats"> | string
+    id?: StringFilter<"EmailCampaignDailyStats"> | string
     opens?: IntFilter<"EmailCampaignDailyStats"> | number
     phase?: StringFilter<"EmailCampaignDailyStats"> | string
     requests?: IntFilter<"EmailCampaignDailyStats"> | number
@@ -59541,18 +59542,17 @@ export namespace Prisma {
     uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
     uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
     unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
-    variation?: StringFilter<"EmailCampaignDailyStats"> | string
-    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
   }
 
   export type EmailCampaignDailyStatsOrderByWithRelationInput = {
-    id?: SortOrder
     bounceDrops?: SortOrder
     bounces?: SortOrder
     clicks?: SortOrder
+    createdAt?: SortOrder
     cumulativeBounceRate?: SortOrder
     cumulativeSpamReportsRate?: SortOrder
     cumulativeTotalClickRate?: SortOrder
@@ -59573,6 +59573,7 @@ export namespace Prisma {
     delivered?: SortOrder
     emailCampaignId?: SortOrder
     emailClientId?: SortOrder
+    id?: SortOrder
     opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
@@ -59584,9 +59585,8 @@ export namespace Prisma {
     uniqueClicks?: SortOrder
     uniqueOpens?: SortOrder
     unsubscribes?: SortOrder
-    variation?: SortOrder
-    createdAt?: SortOrder
     updatedAt?: SortOrder
+    variation?: SortOrder
     emailClient?: EmailClientOrderByWithRelationInput
     emailCampaign?: EmailCampaignOrderByWithRelationInput
   }
@@ -59599,6 +59599,7 @@ export namespace Prisma {
     bounceDrops?: IntFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntFilter<"EmailCampaignDailyStats"> | number
     clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     cumulativeBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
     cumulativeSpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
     cumulativeTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
@@ -59630,18 +59631,17 @@ export namespace Prisma {
     uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
     uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
     unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
-    variation?: StringFilter<"EmailCampaignDailyStats"> | string
-    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
   }, "id">
 
   export type EmailCampaignDailyStatsOrderByWithAggregationInput = {
-    id?: SortOrder
     bounceDrops?: SortOrder
     bounces?: SortOrder
     clicks?: SortOrder
+    createdAt?: SortOrder
     cumulativeBounceRate?: SortOrder
     cumulativeSpamReportsRate?: SortOrder
     cumulativeTotalClickRate?: SortOrder
@@ -59662,6 +59662,7 @@ export namespace Prisma {
     delivered?: SortOrder
     emailCampaignId?: SortOrder
     emailClientId?: SortOrder
+    id?: SortOrder
     opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
@@ -59673,9 +59674,8 @@ export namespace Prisma {
     uniqueClicks?: SortOrder
     uniqueOpens?: SortOrder
     unsubscribes?: SortOrder
-    variation?: SortOrder
-    createdAt?: SortOrder
     updatedAt?: SortOrder
+    variation?: SortOrder
     _count?: EmailCampaignDailyStatsCountOrderByAggregateInput
     _avg?: EmailCampaignDailyStatsAvgOrderByAggregateInput
     _max?: EmailCampaignDailyStatsMaxOrderByAggregateInput
@@ -59687,10 +59687,10 @@ export namespace Prisma {
     AND?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput | EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
     OR?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
     NOT?: EmailCampaignDailyStatsScalarWhereWithAggregatesInput | EmailCampaignDailyStatsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
     bounceDrops?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     clicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
     cumulativeBounceRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     cumulativeSpamReportsRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     cumulativeTotalClickRate?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
@@ -59711,6 +59711,7 @@ export namespace Prisma {
     delivered?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     emailCampaignId?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
     emailClientId?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
+    id?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
     opens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     phase?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
     requests?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
@@ -59722,9 +59723,8 @@ export namespace Prisma {
     uniqueClicks?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     uniqueOpens?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
     unsubscribes?: IntWithAggregatesFilter<"EmailCampaignDailyStats"> | number
-    variation?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaignDailyStats"> | Date | string
+    variation?: StringWithAggregatesFilter<"EmailCampaignDailyStats"> | string
   }
 
   export type EmailClientWhereInput = {
@@ -63321,10 +63321,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsCreateInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -63343,6 +63343,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: number
     date: Date | string
     delivered?: number
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -63354,18 +63355,17 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
     emailClient: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
     emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput
   }
 
   export type EmailCampaignDailyStatsUncheckedCreateInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -63386,6 +63386,7 @@ export namespace Prisma {
     delivered?: number
     emailCampaignId: string
     emailClientId: string
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -63397,16 +63398,15 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
   }
 
   export type EmailCampaignDailyStatsUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -63425,6 +63425,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -63436,18 +63437,17 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
     emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
     emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -63468,6 +63468,7 @@ export namespace Prisma {
     delivered?: IntFieldUpdateOperationsInput | number
     emailCampaignId?: StringFieldUpdateOperationsInput | string
     emailClientId?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -63479,16 +63480,15 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsCreateManyInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -63509,6 +63509,7 @@ export namespace Prisma {
     delivered?: number
     emailCampaignId: string
     emailClientId: string
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -63520,16 +63521,15 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
   }
 
   export type EmailCampaignDailyStatsUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -63548,6 +63548,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -63559,16 +63560,15 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -63589,6 +63589,7 @@ export namespace Prisma {
     delivered?: IntFieldUpdateOperationsInput | number
     emailCampaignId?: StringFieldUpdateOperationsInput | string
     emailClientId?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -63600,9 +63601,8 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailClientCreateInput = {
@@ -67530,10 +67530,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsCountOrderByAggregateInput = {
-    id?: SortOrder
     bounceDrops?: SortOrder
     bounces?: SortOrder
     clicks?: SortOrder
+    createdAt?: SortOrder
     cumulativeBounceRate?: SortOrder
     cumulativeSpamReportsRate?: SortOrder
     cumulativeTotalClickRate?: SortOrder
@@ -67554,6 +67554,7 @@ export namespace Prisma {
     delivered?: SortOrder
     emailCampaignId?: SortOrder
     emailClientId?: SortOrder
+    id?: SortOrder
     opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
@@ -67565,9 +67566,8 @@ export namespace Prisma {
     uniqueClicks?: SortOrder
     uniqueOpens?: SortOrder
     unsubscribes?: SortOrder
-    variation?: SortOrder
-    createdAt?: SortOrder
     updatedAt?: SortOrder
+    variation?: SortOrder
   }
 
   export type EmailCampaignDailyStatsAvgOrderByAggregateInput = {
@@ -67603,10 +67603,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsMaxOrderByAggregateInput = {
-    id?: SortOrder
     bounceDrops?: SortOrder
     bounces?: SortOrder
     clicks?: SortOrder
+    createdAt?: SortOrder
     cumulativeBounceRate?: SortOrder
     cumulativeSpamReportsRate?: SortOrder
     cumulativeTotalClickRate?: SortOrder
@@ -67627,6 +67627,7 @@ export namespace Prisma {
     delivered?: SortOrder
     emailCampaignId?: SortOrder
     emailClientId?: SortOrder
+    id?: SortOrder
     opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
@@ -67638,16 +67639,15 @@ export namespace Prisma {
     uniqueClicks?: SortOrder
     uniqueOpens?: SortOrder
     unsubscribes?: SortOrder
-    variation?: SortOrder
-    createdAt?: SortOrder
     updatedAt?: SortOrder
+    variation?: SortOrder
   }
 
   export type EmailCampaignDailyStatsMinOrderByAggregateInput = {
-    id?: SortOrder
     bounceDrops?: SortOrder
     bounces?: SortOrder
     clicks?: SortOrder
+    createdAt?: SortOrder
     cumulativeBounceRate?: SortOrder
     cumulativeSpamReportsRate?: SortOrder
     cumulativeTotalClickRate?: SortOrder
@@ -67668,6 +67668,7 @@ export namespace Prisma {
     delivered?: SortOrder
     emailCampaignId?: SortOrder
     emailClientId?: SortOrder
+    id?: SortOrder
     opens?: SortOrder
     phase?: SortOrder
     requests?: SortOrder
@@ -67679,9 +67680,8 @@ export namespace Prisma {
     uniqueClicks?: SortOrder
     uniqueOpens?: SortOrder
     unsubscribes?: SortOrder
-    variation?: SortOrder
-    createdAt?: SortOrder
     updatedAt?: SortOrder
+    variation?: SortOrder
   }
 
   export type EmailCampaignDailyStatsSumOrderByAggregateInput = {
@@ -74791,10 +74791,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsCreateWithoutEmailCampaignInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -74813,6 +74813,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: number
     date: Date | string
     delivered?: number
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -74824,17 +74825,16 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
     emailClient: EmailClientCreateNestedOneWithoutEmailCampaignDailyStatsInput
   }
 
   export type EmailCampaignDailyStatsUncheckedCreateWithoutEmailCampaignInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -74854,6 +74854,7 @@ export namespace Prisma {
     date: Date | string
     delivered?: number
     emailClientId: string
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -74865,9 +74866,8 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
   }
 
   export type EmailCampaignDailyStatsCreateOrConnectWithoutEmailCampaignInput = {
@@ -74966,10 +74966,10 @@ export namespace Prisma {
     AND?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
     OR?: EmailCampaignDailyStatsScalarWhereInput[]
     NOT?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
-    id?: StringFilter<"EmailCampaignDailyStats"> | string
     bounceDrops?: IntFilter<"EmailCampaignDailyStats"> | number
     bounces?: IntFilter<"EmailCampaignDailyStats"> | number
     clicks?: IntFilter<"EmailCampaignDailyStats"> | number
+    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     cumulativeBounceRate?: IntFilter<"EmailCampaignDailyStats"> | number
     cumulativeSpamReportsRate?: IntFilter<"EmailCampaignDailyStats"> | number
     cumulativeTotalClickRate?: IntFilter<"EmailCampaignDailyStats"> | number
@@ -74990,6 +74990,7 @@ export namespace Prisma {
     delivered?: IntFilter<"EmailCampaignDailyStats"> | number
     emailCampaignId?: StringFilter<"EmailCampaignDailyStats"> | string
     emailClientId?: StringFilter<"EmailCampaignDailyStats"> | string
+    id?: StringFilter<"EmailCampaignDailyStats"> | string
     opens?: IntFilter<"EmailCampaignDailyStats"> | number
     phase?: StringFilter<"EmailCampaignDailyStats"> | string
     requests?: IntFilter<"EmailCampaignDailyStats"> | number
@@ -75001,9 +75002,8 @@ export namespace Prisma {
     uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
     uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
     unsubscribes?: IntFilter<"EmailCampaignDailyStats"> | number
-    variation?: StringFilter<"EmailCampaignDailyStats"> | string
-    createdAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
     updatedAt?: DateTimeFilter<"EmailCampaignDailyStats"> | Date | string
+    variation?: StringFilter<"EmailCampaignDailyStats"> | string
   }
 
   export type EmailClientCreateWithoutEmailCampaignDailyStatsInput = {
@@ -75207,10 +75207,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsCreateWithoutEmailClientInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -75229,6 +75229,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: number
     date: Date | string
     delivered?: number
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -75240,17 +75241,16 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
     emailCampaign: EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput
   }
 
   export type EmailCampaignDailyStatsUncheckedCreateWithoutEmailClientInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -75270,6 +75270,7 @@ export namespace Prisma {
     date: Date | string
     delivered?: number
     emailCampaignId: string
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -75281,9 +75282,8 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
   }
 
   export type EmailCampaignDailyStatsCreateOrConnectWithoutEmailClientInput = {
@@ -82696,10 +82696,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsCreateManyEmailCampaignInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -82719,6 +82719,7 @@ export namespace Prisma {
     date: Date | string
     delivered?: number
     emailClientId: string
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -82730,9 +82731,8 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
   }
 
   export type EmailCampaignContentUpdateWithoutEmailCampaignInput = {
@@ -82781,10 +82781,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsUpdateWithoutEmailCampaignInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -82803,6 +82803,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -82814,17 +82815,16 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
     emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmailCampaignInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -82844,6 +82844,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
     emailClientId?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -82855,16 +82856,15 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -82884,6 +82884,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
     emailClientId?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -82895,9 +82896,8 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignCreateManyEmailClientInput = {
@@ -82928,10 +82928,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsCreateManyEmailClientInput = {
-    id?: string
     bounceDrops?: number
     bounces?: number
     clicks?: number
+    createdAt?: Date | string
     cumulativeBounceRate?: number
     cumulativeSpamReportsRate?: number
     cumulativeTotalClickRate?: number
@@ -82951,6 +82951,7 @@ export namespace Prisma {
     date: Date | string
     delivered?: number
     emailCampaignId: string
+    id?: string
     opens?: number
     phase: string
     requests?: number
@@ -82962,9 +82963,8 @@ export namespace Prisma {
     uniqueClicks?: number
     uniqueOpens?: number
     unsubscribes?: number
-    variation: string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    variation: string
   }
 
   export type EmailCampaignUpdateWithoutEmailClientInput = {
@@ -83053,10 +83053,10 @@ export namespace Prisma {
   }
 
   export type EmailCampaignDailyStatsUpdateWithoutEmailClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -83075,6 +83075,7 @@ export namespace Prisma {
     dailyUnsubscribeRate?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -83086,17 +83087,16 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
     emailCampaign?: EmailCampaignUpdateOneRequiredWithoutEmailCampaignDailyStatsNestedInput
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateWithoutEmailClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -83116,6 +83116,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
     emailCampaignId?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -83127,16 +83128,15 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
     bounceDrops?: IntFieldUpdateOperationsInput | number
     bounces?: IntFieldUpdateOperationsInput | number
     clicks?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cumulativeBounceRate?: IntFieldUpdateOperationsInput | number
     cumulativeSpamReportsRate?: IntFieldUpdateOperationsInput | number
     cumulativeTotalClickRate?: IntFieldUpdateOperationsInput | number
@@ -83156,6 +83156,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     delivered?: IntFieldUpdateOperationsInput | number
     emailCampaignId?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
     opens?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     requests?: IntFieldUpdateOperationsInput | number
@@ -83167,9 +83168,8 @@ export namespace Prisma {
     uniqueClicks?: IntFieldUpdateOperationsInput | number
     uniqueOpens?: IntFieldUpdateOperationsInput | number
     unsubscribes?: IntFieldUpdateOperationsInput | number
-    variation?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variation?: StringFieldUpdateOperationsInput | string
   }
 
   export type GaPropertyCreateManyGaAccountInput = {

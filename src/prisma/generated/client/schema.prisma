@@ -142,10 +142,10 @@ model EmailCampaign {
 }
 
 model EmailCampaignDailyStats {
-  id                         String   @id @default(cuid())
   bounceDrops                Int      @default(0)
   bounces                    Int      @default(0)
   clicks                     Int      @default(0)
+  createdAt                  DateTime @default(now())
   cumulativeBounceRate       Int      @default(0)
   cumulativeSpamReportsRate  Int      @default(0)
   cumulativeTotalClickRate   Int      @default(0)
@@ -166,6 +166,7 @@ model EmailCampaignDailyStats {
   delivered                  Int      @default(0)
   emailCampaignId            String
   emailClientId              String
+  id                         String   @id @default(cuid())
   opens                      Int      @default(0)
   phase                      String
   requests                   Int      @default(0)
@@ -177,13 +178,12 @@ model EmailCampaignDailyStats {
   uniqueClicks               Int      @default(0)
   uniqueOpens                Int      @default(0)
   unsubscribes               Int      @default(0)
-  variation                  String
-  createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
+  variation                  String
 
   // Relations
   emailClient   EmailClient   @relation(fields: [emailClientId], references: [id])
-  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [id])
+  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
 }
 
 model EmailClient {
