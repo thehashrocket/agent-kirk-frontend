@@ -8,10 +8,10 @@ import { EmailWebsiteActivity } from './email-website-activity';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
 import { fetcher } from '@/lib/utils';
-import type { EmailChannelData } from './types';
+// import type { EmailChannelData } from './types';
 
 export function EmailDashboard() {
-  const { data, error, isLoading } = useSWR<EmailChannelData>(
+  const { data, error, isLoading } = useSWR<any>(
     '/api/channels/email',
     fetcher,
     {

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { EmailAnalyticsService } from '@/lib/services/email-analytics';
-import type { EmailChannelData } from '@/components/channels/email/types';
 
 
 
@@ -22,7 +21,7 @@ export async function GET(request: Request) {
     ]);
 
     // Transform data to match existing component interface
-    const response: EmailChannelData = {
+    const response = {
       dateRange: {
         start: dateRange.start.toISOString().split('T')[0],
         end: dateRange.end.toISOString().split('T')[0],

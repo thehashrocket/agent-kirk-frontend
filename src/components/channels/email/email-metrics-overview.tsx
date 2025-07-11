@@ -6,49 +6,52 @@ import type { EmailMetricsOverviewProps } from './types';
 export function EmailMetricsOverview({ metrics, isLoading = false }: EmailMetricsOverviewProps) {
   const formatPercentage = (value: number) => `${value.toFixed(2)}%`;
 
+  // Defensive: metrics may be undefined, and metrics.metrics may be undefined
+  const current = metrics?.metrics?.current;
+
   const metricsData = [
     {
-      title: 'Total Deliveries',
-      value: metrics?.totalDeliveries || 0,
-      icon: <Mail className="h-5 w-5" />,
+      title: 'Total Delivered',
+      value: current?.totalDelivered || 0,
+      icon: <Mail className="h-5 w-5" />, 
       variant: 'primary' as const
     },
     {
-      title: 'Unique Opens',
-      value: metrics?.uniqueOpens || 0,
-      icon: <Users className="h-5 w-5" />,
+      title: 'Total Opens',
+      value: current?.totalOpens || 0,
+      icon: <Users className="h-5 w-5" />, 
       variant: 'default' as const
     },
     {
       title: 'Avg Open Rate',
-      value: metrics ? formatPercentage(metrics.avgOpenRate) : '0%',
-      subtitle: `${metrics?.uniqueOpens || 0} of ${metrics?.totalDeliveries || 0}`,
-      icon: <Zap className="h-5 w-5" />,
+      value: current ? formatPercentage((current.averageOpenRate || 0) * 100) : '0%',
+      subtitle: `${current?.totalOpens || 0} of ${current?.totalDelivered || 0}`,
+      icon: <Zap className="h-5 w-5" />, 
       variant: 'secondary' as const
     },
     {
-      title: 'Unique Clicks',
-      value: metrics?.uniqueClicks || 0,
-      icon: <MousePointer className="h-5 w-5" />,
+      title: 'Total Clicks',
+      value: current?.totalClicks || 0,
+      icon: <MousePointer className="h-5 w-5" />, 
       variant: 'default' as const
     },
     {
-      title: 'Avg CTR',
-      value: metrics ? formatPercentage(metrics.avgCTR) : '0%',
-      subtitle: `${metrics?.uniqueClicks || 0} of ${metrics?.uniqueOpens || 0}`,
-      icon: <MousePointer className="h-5 w-5" />,
+      title: 'Avg Click Rate',
+      value: current ? formatPercentage((current.averageClickRate || 0) * 100) : '0%',
+      subtitle: `${current?.totalClicks || 0} of ${current?.totalOpens || 0}`,
+      icon: <MousePointer className="h-5 w-5" />, 
       variant: 'default' as const
     },
     {
       title: 'Total Unsubscribes',
-      value: metrics?.totalUnsubscribes || 0,
-      icon: <UserX className="h-5 w-5" />,
+      value: current?.totalUnsubscribes || 0,
+      icon: <UserX className="h-5 w-5" />, 
       variant: 'default' as const
     },
     {
       title: 'Total Bounces',
-      value: metrics?.totalBounces || 0,
-      icon: <Mail className="h-5 w-5" />,
+      value: current?.totalBounces || 0,
+      icon: <Mail className="h-5 w-5" />, 
       variant: 'default' as const
     }
   ];

@@ -60,65 +60,23 @@ export function EmailCampaignActivity({ campaigns, isLoading = false }: EmailCam
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-24">Delivered</TableHead>
-                <TableHead className="w-20">Week Day</TableHead>
-                <TableHead className="min-w-[300px]">Campaign Subject Line</TableHead>
-                <TableHead className="w-32">Link</TableHead>
-                <TableHead className="w-24 text-right">Successful Deliveries</TableHead>
+                <TableHead className="min-w-[200px]">Campaign Name</TableHead>
+                <TableHead className="w-24 text-right">Delivered</TableHead>
                 <TableHead className="w-16 text-right">Opens</TableHead>
-                <TableHead className="w-20 text-right">Open Rate</TableHead>
                 <TableHead className="w-16 text-right">Clicks</TableHead>
-                <TableHead className="w-16 text-right">CTR%</TableHead>
-                <TableHead className="w-20 text-right">Unsubscribes</TableHead>
                 <TableHead className="w-16 text-right">Bounces</TableHead>
+                <TableHead className="w-20 text-right">Unsubscribes</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {campaigns.map((campaign) => (
-                <TableRow key={campaign.id}>
-                  <TableCell className="font-medium">
-                    {campaign.delivered}
-                  </TableCell>
-                  <TableCell>{campaign.weekDay}</TableCell>
-                  <TableCell className="max-w-[300px]">
-                    <div className="truncate" title={campaign.subject}>
-                      {campaign.subject}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <a
-                      href={campaign.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-blue-600 hover:text-blue-800 text-sm"
-                    >
-                      <span className="truncate max-w-[100px]">
-                        {campaign.link.replace('https://', '')}
-                      </span>
-                      <ExternalLink className="h-3 w-3 ml-1 flex-shrink-0" />
-                    </a>
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {campaign.successfulDeliveries.toLocaleString()}
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {campaign.opens.toLocaleString()}
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {formatPercentage(campaign.openRate)}
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {campaign.clicks.toLocaleString()}
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {formatPercentage(campaign.ctr)}
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {campaign.unsubscribes}
-                  </TableCell>
-                  <TableCell className="text-right font-mono">
-                    {campaign.bounces}
-                  </TableCell>
+                <TableRow key={campaign.campaignId}>
+                  <TableCell className="font-medium max-w-[200px] truncate">{campaign.campaignName}</TableCell>
+                  <TableCell className="text-right font-mono">{campaign.delivered.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono">{campaign.opens.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono">{campaign.clicks.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono">{campaign.bounces.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono">{campaign.unsubscribes.toLocaleString()}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
