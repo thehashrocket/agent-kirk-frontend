@@ -139,9 +139,9 @@ exports.Prisma.ClientSatisfactionScalarFieldEnum = {
   id: 'id',
   rating: 'rating',
   feedback: 'feedback',
-  createdAt: 'createdAt',
   userId: 'userId',
-  accountRepId: 'accountRepId'
+  accountRepId: 'accountRepId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.CompanyScalarFieldEnum = {
@@ -154,46 +154,55 @@ exports.Prisma.CompanyScalarFieldEnum = {
 exports.Prisma.ConversationScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  description: 'description',
   isStarred: 'isStarred',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  userId: 'userId',
+  description: 'description',
   gaAccountId: 'gaAccountId',
   gaPropertyId: 'gaPropertyId',
-  clientId: 'clientId',
-  userId: 'userId'
+  clientId: 'clientId'
 };
 
 exports.Prisma.EmailCampaignContentScalarFieldEnum = {
   id: 'id',
-  emailCampaignId: 'emailCampaignId',
   subject: 'subject',
+  type: 'type',
+  recipients: 'recipients',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  contentType: 'contentType',
+  createTime: 'createTime',
+  emailCampaignId: 'emailCampaignId',
   htmlContent: 'htmlContent',
   plainContent: 'plainContent',
-  webId: 'webId',
-  type: 'type',
-  contentType: 'contentType',
-  recipients: 'recipients',
-  createTime: 'createTime',
   sendTime: 'sendTime',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  webId: 'webId'
 };
 
 exports.Prisma.EmailCampaignScalarFieldEnum = {
   id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   campaignId: 'campaignId',
   campaignName: 'campaignName',
-  emailClientId: 'emailClientId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  emailClientId: 'emailClientId'
 };
 
 exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
-  bounceDrops: 'bounceDrops',
-  bounces: 'bounces',
+  id: 'id',
+  date: 'date',
+  opens: 'opens',
   clicks: 'clicks',
+  bounces: 'bounces',
+  unsubscribes: 'unsubscribes',
+  variation: 'variation',
+  phase: 'phase',
+  requests: 'requests',
+  delivered: 'delivered',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  bounceDrops: 'bounceDrops',
   cumulativeBounceRate: 'cumulativeBounceRate',
   cumulativeSpamReportsRate: 'cumulativeSpamReportsRate',
   cumulativeTotalClickRate: 'cumulativeTotalClickRate',
@@ -210,52 +219,43 @@ exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
   dailyUniqueClickToOpenRate: 'dailyUniqueClickToOpenRate',
   dailyUniqueOpenRate: 'dailyUniqueOpenRate',
   dailyUnsubscribeRate: 'dailyUnsubscribeRate',
-  date: 'date',
-  delivered: 'delivered',
   emailCampaignId: 'emailCampaignId',
   emailClientId: 'emailClientId',
-  id: 'id',
-  opens: 'opens',
-  phase: 'phase',
-  requests: 'requests',
   singleSendName: 'singleSendName',
   spamReportDrops: 'spamReportDrops',
   spamReports: 'spamReports',
   totalClicks: 'totalClicks',
   totalOpens: 'totalOpens',
   uniqueClicks: 'uniqueClicks',
-  uniqueOpens: 'uniqueOpens',
-  unsubscribes: 'unsubscribes',
-  updatedAt: 'updatedAt',
-  variation: 'variation'
+  uniqueOpens: 'uniqueOpens'
 };
 
 exports.Prisma.EmailClientScalarFieldEnum = {
   id: 'id',
-  clientName: 'clientName',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  clientName: 'clientName'
 };
 
 exports.Prisma.EmailClientCredentialsScalarFieldEnum = {
   id: 'id',
-  emailClientId: 'emailClientId',
-  platformName: 'platformName',
-  apiKey: 'apiKey',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  apiKey: 'apiKey',
+  emailClientId: 'emailClientId',
+  platformName: 'platformName'
 };
 
 exports.Prisma.EmailGlobalDailyStatsScalarFieldEnum = {
   id: 'id',
-  emailClientId: 'emailClientId',
-  opens: 'opens',
-  clicks: 'clicks',
-  bounces: 'bounces',
-  unsubs: 'unsubs',
   date: 'date',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  bounces: 'bounces',
+  clicks: 'clicks',
+  emailClientId: 'emailClientId',
+  opens: 'opens',
+  unsubs: 'unsubs'
 };
 
 exports.Prisma.GaAccountScalarFieldEnum = {
@@ -341,9 +341,9 @@ exports.Prisma.GaSourceDailyScalarFieldEnum = {
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  sessionToken: 'sessionToken',
   userId: 'userId',
-  expires: 'expires'
+  expires: 'expires',
+  sessionToken: 'sessionToken'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -362,25 +362,25 @@ exports.Prisma.RoleScalarFieldEnum = {
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  senderId: 'senderId',
+  recipientId: 'recipientId',
   isRead: 'isRead',
-  archived: 'archived',
-  isThreadStart: 'isThreadStart',
-  threadId: 'threadId',
-  parentId: 'parentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  senderId: 'senderId',
-  recipientId: 'recipientId'
+  archived: 'archived',
+  isThreadStart: 'isThreadStart',
+  parentId: 'parentId',
+  threadId: 'threadId'
 };
 
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   type: 'type',
   title: 'title',
   content: 'content',
   isRead: 'isRead',
-  createdAt: 'createdAt',
-  userId: 'userId'
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.ParsedPieGraphDataScalarFieldEnum = {
@@ -414,8 +414,8 @@ exports.Prisma.ParsedQueryDataScalarFieldEnum = {
   conversions: 'conversions',
   bounces: 'bounces',
   createdAt: 'createdAt',
-  engagedSessions: 'engagedSessions',
   bounceRate: 'bounceRate',
+  engagedSessions: 'engagedSessions',
   newUsers: 'newUsers'
 };
 
@@ -432,41 +432,41 @@ exports.Prisma.ParsedQuerySummaryScalarFieldEnum = {
 
 exports.Prisma.QueryScalarFieldEnum = {
   id: 'id',
-  content: 'content',
+  userId: 'userId',
   response: 'response',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  content: 'content',
   status: 'status',
+  conversationId: 'conversationId',
   rating: 'rating',
   metadata: 'metadata',
   lineGraphData: 'lineGraphData',
-  pieGraphData: 'pieGraphData',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId',
-  conversationId: 'conversationId'
+  pieGraphData: 'pieGraphData'
 };
 
 exports.Prisma.SproutFacebookAnalyticsScalarFieldEnum = {
-  createdAt: 'createdAt',
-  customerProfileId: 'customerProfileId',
-  engagements: 'engagements',
-  followersCount: 'followersCount',
   id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  engagements: 'engagements',
   impressions: 'impressions',
   impressionsUnique: 'impressionsUnique',
-  netFollowerGrowth: 'netFollowerGrowth',
+  followersCount: 'followersCount',
   postContentClicks: 'postContentClicks',
   postContentClicksOther: 'postContentClicksOther',
   postLinkClicks: 'postLinkClicks',
   postPhotoViewClicks: 'postPhotoViewClicks',
-  reportingDate: 'reportingDate',
-  sproutSocialAccountId: 'sproutSocialAccountId',
   tabViews: 'tabViews',
-  updatedAt: 'updatedAt',
   videoViews: 'videoViews',
   videoViews10s: 'videoViews10s',
   videoViewsOrganic: 'videoViewsOrganic',
   videoViewsPaid: 'videoViewsPaid',
-  videoViewsUnique: 'videoViewsUnique'
+  videoViewsUnique: 'videoViewsUnique',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  netFollowerGrowth: 'netFollowerGrowth'
 };
 
 exports.Prisma.SproutFacebookPostAnalyticsScalarFieldEnum = {
@@ -513,17 +513,22 @@ exports.Prisma.SproutFacebookPostAnalyticsScalarFieldEnum = {
 };
 
 exports.Prisma.SproutInstagramAnalyticsScalarFieldEnum = {
-  commentsCount: 'commentsCount',
-  createdAt: 'createdAt',
-  customerProfileId: 'customerProfileId',
-  emailContacts: 'emailContacts',
-  engagements: 'engagements',
-  followersCount: 'followersCount',
-  getDirectionsClicks: 'getDirectionsClicks',
   id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  commentsCount: 'commentsCount',
+  engagements: 'engagements',
   impressions: 'impressions',
   impressionsUnique: 'impressionsUnique',
+  followersCount: 'followersCount',
   likes: 'likes',
+  saves: 'saves',
+  videoViews: 'videoViews',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  emailContacts: 'emailContacts',
+  getDirectionsClicks: 'getDirectionsClicks',
   phoneCallClicks: 'phoneCallClicks',
   postsSendByContentType: 'postsSendByContentType',
   postsSentByPostType: 'postsSentByPostType',
@@ -534,11 +539,6 @@ exports.Prisma.SproutInstagramAnalyticsScalarFieldEnum = {
   profileReachUnique: 'profileReachUnique',
   profileViews: 'profileViews',
   profileViewsUnique: 'profileViewsUnique',
-  reportingDate: 'reportingDate',
-  saves: 'saves',
-  sproutSocialAccountId: 'sproutSocialAccountId',
-  updatedAt: 'updatedAt',
-  videoViews: 'videoViews',
   websiteClicks: 'websiteClicks'
 };
 
@@ -561,16 +561,16 @@ exports.Prisma.SproutInstagramFollowersByCountryScalarFieldEnum = {
 };
 
 exports.Prisma.SproutLinkedInAnalyticsScalarFieldEnum = {
-  createdAt: 'createdAt',
-  customerProfileId: 'customerProfileId',
-  engagements: 'engagements',
-  followersCount: 'followersCount',
   id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  customerProfileId: 'customerProfileId',
+  reportingDate: 'reportingDate',
+  engagements: 'engagements',
   impressions: 'impressions',
   impressionsUnique: 'impressionsUnique',
+  followersCount: 'followersCount',
   reactions: 'reactions',
-  reportingDate: 'reportingDate',
-  sproutSocialAccountId: 'sproutSocialAccountId',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
@@ -616,29 +616,29 @@ exports.Prisma.UserToGaAccountScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  companyId: 'companyId',
-  name: 'name',
-  deleted: 'deleted',
   email: 'email',
-  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roleId: 'roleId',
   emailVerified: 'emailVerified',
   image: 'image',
-  roleId: 'roleId',
-  isActive: 'isActive',
+  name: 'name',
   accountRepId: 'accountRepId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  isActive: 'isActive',
+  password: 'password',
+  deleted: 'deleted',
+  companyId: 'companyId'
 };
 
 exports.Prisma.UserSettingsScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   emailNotifications: 'emailNotifications',
-  theme: 'theme',
-  apiCredits: 'apiCredits',
-  apiCreditsLimit: 'apiCreditsLimit',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  theme: 'theme',
+  apiCredits: 'apiCredits',
+  apiCreditsLimit: 'apiCreditsLimit'
 };
 
 exports.Prisma.TicketScalarFieldEnum = {
@@ -695,6 +695,14 @@ exports.Prisma.ClientActivityScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
+};
+
+exports.Prisma.UserToEmailClientScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  emailClientId: 'emailClientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -804,7 +812,8 @@ exports.Prisma.ModelName = {
   TicketComment: 'TicketComment',
   TicketTag: 'TicketTag',
   MessageAttachment: 'MessageAttachment',
-  ClientActivity: 'ClientActivity'
+  ClientActivity: 'ClientActivity',
+  UserToEmailClient: 'UserToEmailClient'
 };
 
 /**

@@ -83,6 +83,11 @@ export async function GET(
             sproutSocialAccount: true,
           },
         },
+        emailClients: {
+          include: {
+            emailClient: true,
+          },
+        },
         company: true,
       },
     });

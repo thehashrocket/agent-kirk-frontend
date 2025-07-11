@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider      = "prisma-client-js"
   output        = "../src/prisma/generated/client"
@@ -15,60 +9,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ImportStatus {
-  queued
-  ok
-  error
-}
-
-enum TicketStatus {
-  OPEN
-  IN_PROGRESS
-  RESOLVED
-}
-
-enum TicketPriority {
-  LOW
-  MEDIUM
-  HIGH
-}
-
-enum ActivityStatus {
-  SUCCESS
-  ERROR
-  PENDING
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model ClientSatisfaction {
-  id        String   @id @default(cuid())
-  rating    Float
-  feedback  String?  @db.Text
-  createdAt DateTime @default(now())
-
-  // Relations
+  id           String   @id @default(cuid())
+  rating       Float
+  feedback     String?
   userId       String
-  user         User   @relation("ClientRatings", fields: [userId], references: [id])
   accountRepId String
-  accountRep   User   @relation("RepRatings", fields: [accountRepId], references: [id])
+  createdAt    DateTime @default(now())
+  accountRep   User     @relation("RepRatings", fields: [accountRepId], references: [id])
+  user         User     @relation("ClientRatings", fields: [userId], references: [id])
 
   @@index([userId])
   @@index([accountRepId])
@@ -79,29 +46,25 @@ model Company {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  // Relations
-  users User[]
+  users     User[]
 }
 
 model Conversation {
-  id           String   @id @default(cuid())
+  id           String      @id @default(cuid())
   title        String
-  description  String?  @db.Text
-  isStarred    Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  isStarred    Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  userId       String
+  description  String?
   gaAccountId  String?
   gaPropertyId String?
   clientId     String?
-
-  // Relations
-  userId     String
-  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  client     User?       @relation("ClientConversations", fields: [clientId], references: [id])
-  queries    Query[]
-  gaAccount  GaAccount?  @relation(fields: [gaAccountId], references: [id])
-  gaProperty GaProperty? @relation(fields: [gaPropertyId], references: [id])
+  client       User?       @relation("ClientConversations", fields: [clientId], references: [id])
+  gaAccount    GaAccount?  @relation(fields: [gaAccountId], references: [id])
+  gaProperty   GaProperty? @relation(fields: [gaPropertyId], references: [id])
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  queries      Query[]
 
   @@index([userId])
   @@index([isStarred])
@@ -109,122 +72,110 @@ model Conversation {
 }
 
 model EmailCampaignContent {
-  id              String   @id @default(cuid())
-  emailCampaignId String
+  id              String        @id @default(cuid())
   subject         String
-  htmlContent     String   @db.Text
-  plainContent    String   @db.Text
-  webId           String
   type            String
+  recipients      Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
   contentType     String
-  recipients      Int      @default(0)
   createTime      DateTime
+  emailCampaignId String
+  htmlContent     String
+  plainContent    String
   sendTime        DateTime
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  // Relations
-  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [id])
+  webId           String
+  emailCampaign   EmailCampaign @relation(fields: [emailCampaignId], references: [id])
 }
 
 model EmailCampaign {
-  id            String   @id @default(cuid())
-  campaignId    String   @unique
-  campaignName  String
-  emailClientId String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Relations
+  id                      String                    @id @default(cuid())
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  campaignId              String                    @unique
+  campaignName            String
+  emailClientId           String
   emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
   emailCampaignContents   EmailCampaignContent[]
   emailCampaignDailyStats EmailCampaignDailyStats[]
 }
 
 model EmailCampaignDailyStats {
-  bounceDrops                Int      @default(0)
-  bounces                    Int      @default(0)
-  clicks                     Int      @default(0)
-  createdAt                  DateTime @default(now())
-  cumulativeBounceRate       Int      @default(0)
-  cumulativeSpamReportsRate  Int      @default(0)
-  cumulativeTotalClickRate   Int      @default(0)
-  cumulativeTotalOpenRate    Int      @default(0)
-  cumulativeUniqueClickRate  Int      @default(0)
-  cumulativeUniqueOpenRate   Int      @default(0)
-  cumulativeUnsubscribeRate  Int      @default(0)
-  dailyBounceRate            Int      @default(0)
-  dailySpamReportsRate       Int      @default(0)
-  dailyTotalClickRate        Int      @default(0)
-  dailyTotalClickToOpenRate  Int      @default(0)
-  dailyTotalOpenRate         Int      @default(0)
-  dailyUniqueClickRate       Int      @default(0)
-  dailyUniqueClickToOpenRate Int      @default(0)
-  dailyUniqueOpenRate        Int      @default(0)
-  dailyUnsubscribeRate       Int      @default(0)
-  date                       DateTime @db.Date
-  delivered                  Int      @default(0)
+  id                         String        @id @default(cuid())
+  date                       DateTime      @db.Date
+  opens                      Int           @default(0)
+  clicks                     Int           @default(0)
+  bounces                    Int           @default(0)
+  unsubscribes               Int           @default(0)
+  variation                  String
+  phase                      String
+  requests                   Int           @default(0)
+  delivered                  Int           @default(0)
+  createdAt                  DateTime      @default(now())
+  updatedAt                  DateTime      @updatedAt
+  bounceDrops                Int           @default(0)
+  cumulativeBounceRate       Int           @default(0)
+  cumulativeSpamReportsRate  Int           @default(0)
+  cumulativeTotalClickRate   Int           @default(0)
+  cumulativeTotalOpenRate    Int           @default(0)
+  cumulativeUniqueClickRate  Int           @default(0)
+  cumulativeUniqueOpenRate   Int           @default(0)
+  cumulativeUnsubscribeRate  Int           @default(0)
+  dailyBounceRate            Int           @default(0)
+  dailySpamReportsRate       Int           @default(0)
+  dailyTotalClickRate        Int           @default(0)
+  dailyTotalClickToOpenRate  Int           @default(0)
+  dailyTotalOpenRate         Int           @default(0)
+  dailyUniqueClickRate       Int           @default(0)
+  dailyUniqueClickToOpenRate Int           @default(0)
+  dailyUniqueOpenRate        Int           @default(0)
+  dailyUnsubscribeRate       Int           @default(0)
   emailCampaignId            String
   emailClientId              String
-  id                         String   @id @default(cuid())
-  opens                      Int      @default(0)
-  phase                      String
-  requests                   Int      @default(0)
   singleSendName             String
-  spamReportDrops            Int      @default(0)
-  spamReports                Int      @default(0)
-  totalClicks                Int      @default(0)
-  totalOpens                 Int      @default(0)
-  uniqueClicks               Int      @default(0)
-  uniqueOpens                Int      @default(0)
-  unsubscribes               Int      @default(0)
-  updatedAt                  DateTime @updatedAt
-  variation                  String
-
-  // Relations
-  emailClient   EmailClient   @relation(fields: [emailClientId], references: [id])
-  emailCampaign EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
+  spamReportDrops            Int           @default(0)
+  spamReports                Int           @default(0)
+  totalClicks                Int           @default(0)
+  totalOpens                 Int           @default(0)
+  uniqueClicks               Int           @default(0)
+  uniqueOpens                Int           @default(0)
+  emailCampaign              EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
+  emailClient                EmailClient   @relation(fields: [emailClientId], references: [id])
 }
 
 model EmailClient {
-  id         String   @id @default(cuid())
-  clientName String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  // Relations
+  id                      String                    @id @default(cuid())
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  clientName              String
   emailCampaigns          EmailCampaign[]
+  emailCampaignDailyStats EmailCampaignDailyStats[]
   emailClientCredentials  EmailClientCredentials[]
   emailGlobalDailyStats   EmailGlobalDailyStats[]
-  emailCampaignDailyStats EmailCampaignDailyStats[]
+  users                   UserToEmailClient[]
 }
 
 model EmailClientCredentials {
-  id            String   @id @default(cuid())
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  apiKey        String
   emailClientId String
   platformName  String
-  apiKey        String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Relations
-  emailClient EmailClient @relation(fields: [emailClientId], references: [id])
+  emailClient   EmailClient @relation(fields: [emailClientId], references: [id])
 }
 
 model EmailGlobalDailyStats {
-  id            String @id @default(cuid())
+  id            String      @id @default(cuid())
+  date          DateTime    @db.Date
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  bounces       Int         @default(0)
+  clicks        Int         @default(0)
   emailClientId String
-  opens         Int    @default(0)
-  clicks        Int    @default(0)
-  bounces       Int    @default(0)
-  unsubs        Int    @default(0)
-
-  date      DateTime @db.Date
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  emailClient EmailClient @relation(fields: [emailClientId], references: [id])
+  opens         Int         @default(0)
+  unsubs        Int         @default(0)
+  emailClient   EmailClient @relation(fields: [emailClientId], references: [id])
 }
 
 model GaAccount {
@@ -232,8 +183,8 @@ model GaAccount {
   gaAccountId      String
   gaAccountName    String
   deleted          Boolean           @default(false)
-  gaProperties     GaProperty[]      @relation("AccountToProperty")
   conversations    Conversation[]
+  gaProperties     GaProperty[]      @relation("AccountToProperty")
   userToGaAccounts UserToGaAccount[] @relation("GaAccountToUserAccounts")
 }
 
@@ -242,44 +193,42 @@ model GaProperty {
   gaPropertyId   String
   gaPropertyName String
   gaAccountId    String
-  gaAccount      GaAccount        @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
   deleted        Boolean          @default(false)
-  // relations
   conversations  Conversation[]
+  channelDaily   GaChannelDaily[]
   imports        GaImportRun[]
   kpiDaily       GaKpiDaily[]
   kpiMonthly     GaKpiMonthly[]
-  channelDaily   GaChannelDaily[]
+  gaAccount      GaAccount        @relation("AccountToProperty", fields: [gaAccountId], references: [id], onDelete: Cascade)
   sourceDaily    GaSourceDaily[]
 }
 
 model GaImportRun {
   id                String       @id @default(cuid())
-  gaProperty        GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
   gaPropertyId      String
   dateStart         DateTime
   dateEnd           DateTime
   status            ImportStatus @default(queued)
   errorMessage      String?
-  requestedBy       User         @relation("UserToGaImportRuns", fields: [requestedByUserId], references: [id])
   requestedByUserId String
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
+  gaProperty        GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
+  requestedBy       User         @relation("UserToGaImportRuns", fields: [requestedByUserId], references: [id])
 }
 
 model GaKpiDaily {
   id                        String     @id @default(cuid())
-  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
   gaPropertyId              String
   date                      DateTime   @db.Date
-  // metrics
   sessions                  Int
   screenPageViewsPerSession Float
-  engagementRate            Float // 0–1
+  engagementRate            Float
   avgSessionDurationSec     Int
   goalCompletions           Int
-  goalCompletionRate        Float // 0–1
+  goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date])
   @@index([date])
@@ -287,10 +236,8 @@ model GaKpiDaily {
 
 model GaKpiMonthly {
   id                        String     @id @default(cuid())
-  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
   gaPropertyId              String
-  month                     Int // YYYYMM, e.g. 202503
-  // metrics
+  month                     Int
   sessions                  Int
   screenPageViewsPerSession Float
   engagementRate            Float
@@ -298,6 +245,7 @@ model GaKpiMonthly {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, month])
   @@index([month])
@@ -305,11 +253,9 @@ model GaKpiMonthly {
 
 model GaChannelDaily {
   id                        String     @id @default(cuid())
-  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
   gaPropertyId              String
   date                      DateTime   @db.Date
   channelGroup              String     @db.VarChar(64)
-  // metrics
   sessions                  Int
   screenPageViewsPerSession Float
   engagementRate            Float
@@ -317,6 +263,7 @@ model GaChannelDaily {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date, channelGroup])
   @@index([date])
@@ -325,11 +272,9 @@ model GaChannelDaily {
 
 model GaSourceDaily {
   id                        String     @id @default(cuid())
-  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
   gaPropertyId              String
   date                      DateTime   @db.Date
   trafficSource             String     @db.VarChar(64)
-  // metrics
   sessions                  Int
   screenPageViewsPerSession Float
   engagementRate            Float
@@ -337,6 +282,7 @@ model GaSourceDaily {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date, trafficSource])
   @@index([date])
@@ -345,9 +291,9 @@ model GaSourceDaily {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
   userId       String
   expires      DateTime
+  sessionToken String   @unique
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -362,30 +308,28 @@ model VerificationToken {
 model Role {
   id        String   @id @default(cuid())
   name      String   @unique
-  users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  users     User[]
 }
 
 model Message {
-  id            String   @id @default(cuid())
-  content       String   @db.Text
-  isRead        Boolean  @default(false)
-  archived      Boolean  @default(false)
-  isThreadStart Boolean  @default(false)
-  threadId      String?
+  id            String              @id @default(cuid())
+  content       String
+  senderId      String
+  recipientId   String
+  isRead        Boolean             @default(false)
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  archived      Boolean             @default(false)
+  isThreadStart Boolean             @default(false)
   parentId      String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Relations
-  senderId    String
-  sender      User                @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
-  recipientId String
-  recipient   User                @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
-  parent      Message?            @relation("ThreadReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies     Message[]           @relation("ThreadReplies")
-  attachments MessageAttachment[]
+  threadId      String?
+  parent        Message?            @relation("ThreadReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       Message[]           @relation("ThreadReplies")
+  recipient     User                @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+  sender        User                @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  attachments   MessageAttachment[]
 
   @@index([senderId])
   @@index([recipientId])
@@ -395,50 +339,42 @@ model Message {
 
 model Notification {
   id        String           @id @default(cuid())
+  userId    String
   type      NotificationType
   title     String
   content   String
   isRead    Boolean          @default(false)
   createdAt DateTime         @default(now())
-
-  // Relations
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user      User             @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([type])
 }
 
 model ParsedPieGraphData {
-  id      String @id @default(cuid())
-  queryId String
-  query   Query  @relation(fields: [queryId], references: [id])
-
-  channel String
-  source  String
-
-  sessions       Int
-  conversionRate Float
-  conversions    Int
-  bounces        Int
-
+  id                     String   @id @default(cuid())
+  queryId                String
+  channel                String
+  source                 String
+  sessions               Int
+  conversionRate         Float
+  conversions            Int
+  bounces                Int
   prevSessionsDiff       Float
   prevConversionRateDiff Float
   prevConversionsDiff    Float
   prevBouncesDiff        Float
-
   yearSessionsDiff       Float
   yearConversionRateDiff Float
   yearConversionsDiff    Float
   yearBouncesDiff        Float
-
-  createdAt DateTime @default(now())
+  createdAt              DateTime @default(now())
+  query                  Query    @relation(fields: [queryId], references: [id])
 }
 
 model ParsedQueryData {
   id              String   @id @default(cuid())
   queryId         String
-  query           Query    @relation(fields: [queryId], references: [id])
   date            DateTime
   channel         String
   source          String
@@ -447,9 +383,10 @@ model ParsedQueryData {
   conversions     Int
   bounces         Int
   createdAt       DateTime @default(now())
-  engagedSessions Int?
   bounceRate      Float?
+  engagedSessions Int?
   newUsers        Int?
+  query           Query    @relation(fields: [queryId], references: [id])
 }
 
 model ParsedQuerySummary {
@@ -461,32 +398,29 @@ model ParsedQuerySummary {
   totalNewUsers        Int
   totalConversions     Int
   createdAt            DateTime @default(now())
-
-  query Query @relation(fields: [queryId], references: [id], onDelete: Cascade)
+  query                Query    @relation(fields: [queryId], references: [id], onDelete: Cascade)
 
   @@index([queryId, date])
 }
 
 model Query {
-  id            String               @id @default(cuid())
-  content       String               @default("") @db.Text
-  response      String?              @db.Text
-  status        QueryStatus          @default(PENDING)
-  rating        Int                  @default(0)
-  metadata      Json?                @db.JsonB
-  lineGraphData Json?                @db.JsonB
-  pieGraphData  Json?                @db.JsonB
-  parsedData    ParsedQueryData[]
-  parsedPieData ParsedPieGraphData[]
-  parsedSummary ParsedQuerySummary[]
-  createdAt     DateTime             @default(now())
-  updatedAt     DateTime             @default(now())
-
-  // Relations
+  id             String               @id @default(cuid())
   userId         String
-  user           User          @relation(fields: [userId], references: [id])
+  response       String?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @default(now())
+  content        String               @default("")
+  status         QueryStatus          @default(PENDING)
   conversationId String?
-  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  rating         Int                  @default(0)
+  metadata       Json?
+  lineGraphData  Json?
+  pieGraphData   Json?
+  parsedPieData  ParsedPieGraphData[]
+  parsedData     ParsedQueryData[]
+  parsedSummary  ParsedQuerySummary[]
+  conversation   Conversation?        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User                 @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([status])
@@ -494,28 +428,28 @@ model Query {
 }
 
 model SproutFacebookAnalytics {
-  createdAt              DateTime            @default(now())
-  customerProfileId      Int
-  engagements            Int?                @default(0)
-  followersCount         Int?                @default(0)
   id                     String              @id @default(cuid())
+  sproutSocialAccountId  String
+  customerProfileId      Int
+  reportingDate          DateTime            @db.Date
+  engagements            Int?                @default(0)
   impressions            Int?                @default(0)
   impressionsUnique      Int?                @default(0)
-  netFollowerGrowth      Int?                @default(0)
+  followersCount         Int?                @default(0)
   postContentClicks      Int?                @default(0)
   postContentClicksOther Int?                @default(0)
   postLinkClicks         Int?                @default(0)
   postPhotoViewClicks    Int?                @default(0)
-  reportingDate          DateTime            @db.Date
-  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
-  sproutSocialAccountId  String
   tabViews               Int?                @default(0)
-  updatedAt              DateTime            @updatedAt
   videoViews             Int?                @default(0)
   videoViews10s          Int?                @default(0)
   videoViewsOrganic      Int?                @default(0)
   videoViewsPaid         Int?                @default(0)
   videoViewsUnique       Int?                @default(0)
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  netFollowerGrowth      Int?                @default(0)
+  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
 
   @@unique([customerProfileId, reportingDate])
   @@index([sproutSocialAccountId])
@@ -560,28 +494,31 @@ model SproutFacebookPostAnalytics {
   videoViewsOrganic      Int?                @default(0)
   videoViewsPaid         Int?                @default(0)
   wowReactions           Int?                @default(0)
-  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   createdAt              DateTime            @default(now())
   updatedAt              DateTime            @updatedAt
+  sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
 
   @@unique([postNativeId, reportingDate])
   @@index([sproutSocialAccountId])
 }
 
 model SproutInstagramAnalytics {
-  commentsCount            Int?                                @default(0)
-  createdAt                DateTime                            @default(now())
-  customerProfileId        Int
-  emailContacts            Int?                                @default(0)
-  engagements              Int?                                @default(0)
-  followersByCity          SproutInstagramFollowersByCity[]
-  followersByCountry       SproutInstagramFollowersByCountry[]
-  followersCount           Int?                                @default(0)
-  getDirectionsClicks      Int?                                @default(0)
   id                       String                              @id @default(cuid())
+  sproutSocialAccountId    String
+  customerProfileId        Int
+  reportingDate            DateTime                            @db.Date
+  commentsCount            Int?                                @default(0)
+  engagements              Int?                                @default(0)
   impressions              Int?                                @default(0)
   impressionsUnique        Int?                                @default(0)
+  followersCount           Int?                                @default(0)
   likes                    Int?                                @default(0)
+  saves                    Int?                                @default(0)
+  videoViews               Int?                                @default(0)
+  createdAt                DateTime                            @default(now())
+  updatedAt                DateTime                            @updatedAt
+  emailContacts            Int?                                @default(0)
+  getDirectionsClicks      Int?                                @default(0)
   phoneCallClicks          Int?                                @default(0)
   postsSendByContentType   Json?
   postsSentByPostType      Json?
@@ -592,13 +529,10 @@ model SproutInstagramAnalytics {
   profileReachUnique       Int?                                @default(0)
   profileViews             Int?                                @default(0)
   profileViewsUnique       Int?                                @default(0)
-  reportingDate            DateTime                            @db.Date
-  saves                    Int?                                @default(0)
-  sproutSocialAccount      SproutSocialAccount                 @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
-  sproutSocialAccountId    String
-  updatedAt                DateTime                            @updatedAt
-  videoViews               Int?                                @default(0)
   websiteClicks            Int?                                @default(0)
+  sproutSocialAccount      SproutSocialAccount                 @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  followersByCity          SproutInstagramFollowersByCity[]
+  followersByCountry       SproutInstagramFollowersByCountry[]
 
   @@unique([customerProfileId, reportingDate])
   @@index([sproutSocialAccountId])
@@ -607,11 +541,11 @@ model SproutInstagramAnalytics {
 model SproutInstagramFollowersByCity {
   id                         String                   @id @default(cuid())
   sproutInstagramAnalyticsId String
-  sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
   city                       String
   count                      Int                      @default(0)
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
+  sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
 
   @@unique([sproutInstagramAnalyticsId, city])
   @@index([sproutInstagramAnalyticsId])
@@ -620,29 +554,29 @@ model SproutInstagramFollowersByCity {
 model SproutInstagramFollowersByCountry {
   id                         String                   @id @default(cuid())
   sproutInstagramAnalyticsId String
-  sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
   country                    String
   count                      Int                      @default(0)
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
+  sproutInstagramAnalytics   SproutInstagramAnalytics @relation(fields: [sproutInstagramAnalyticsId], references: [id], onDelete: Cascade)
 
   @@unique([sproutInstagramAnalyticsId, country])
   @@index([sproutInstagramAnalyticsId])
 }
 
 model SproutLinkedInAnalytics {
-  createdAt             DateTime            @default(now())
-  customerProfileId     Int
-  engagements           Int?                @default(0)
-  followersCount        Int?                @default(0)
   id                    String              @id @default(cuid())
+  sproutSocialAccountId String
+  customerProfileId     Int
+  reportingDate         DateTime            @db.Date
+  engagements           Int?                @default(0)
   impressions           Int?                @default(0)
   impressionsUnique     Int?                @default(0)
+  followersCount        Int?                @default(0)
   reactions             Int?                @default(0)
-  reportingDate         DateTime            @db.Date
-  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
-  sproutSocialAccountId String
+  createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
 
   @@unique([customerProfileId, reportingDate])
   @@index([sproutSocialAccountId])
@@ -651,13 +585,13 @@ model SproutLinkedInAnalytics {
 model SproutPinterestAnalytics {
   id                    String              @id @default(cuid())
   sproutSocialAccountId String
-  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   customerProfileId     Int
   reportingDate         DateTime            @db.Date
   followersCount        Int?                @default(0)
   followingCount        Int?                @default(0)
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
 
   @@index([sproutSocialAccountId])
 }
@@ -674,21 +608,21 @@ model SproutSocialAccount {
   createdAt             DateTime                      @default(now())
   updatedAt             DateTime                      @updatedAt
   facebookAnalytics     SproutFacebookAnalytics[]
-  linkedInAnalytics     SproutLinkedInAnalytics[]
+  facebookPostAnalytics SproutFacebookPostAnalytics[]
   instagramAnalytics    SproutInstagramAnalytics[]
+  linkedInAnalytics     SproutLinkedInAnalytics[]
   pinterestAnalytics    SproutPinterestAnalytics[]
   users                 UserToSproutSocialAccount[]
-  facebookPostAnalytics SproutFacebookPostAnalytics[]
 }
 
 model UserToSproutSocialAccount {
   id                    String              @id @default(cuid())
   userId                String
-  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   sproutSocialAccountId String
-  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
+  sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, sproutSocialAccountId])
   @@index([userId])
@@ -699,9 +633,9 @@ model UserToGaAccount {
   id          String    @id @default(cuid())
   userId      String
   gaAccountId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   gaAccount   GaAccount @relation("GaAccountToUserAccounts", fields: [gaAccountId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now()) @db.Timestamp(3)
-  updatedAt   DateTime  @updatedAt @db.Timestamp(3)
   user        User      @relation("UserToGaAccounts", fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, gaAccountId])
@@ -710,76 +644,71 @@ model UserToGaAccount {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  companyId     String?
-  name          String?
-  deleted       Boolean   @default(false)
-  email         String?   @unique
-  password      String? // Adding password field as optional since we support both OAuth and password auth
-  emailVerified DateTime?
-  image         String?
-  roleId        String
-  role          Role      @relation(fields: [roleId], references: [id])
-  isActive      Boolean   @default(true)
-  accountRepId  String?
-  accountRep    User?     @relation("AccountRepToClient", fields: [accountRepId], references: [id])
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  // Relations
+  id                   String                      @id @default(cuid())
+  email                String?                     @unique
+  createdAt            DateTime                    @default(now())
+  updatedAt            DateTime                    @updatedAt
+  roleId               String
+  emailVerified        DateTime?
+  image                String?
+  name                 String?
+  accountRepId         String?
+  isActive             Boolean                     @default(true)
+  password             String?
+  deleted              Boolean                     @default(false)
+  companyId            String?
   accounts             Account[]
   activities           ClientActivity[]
-  assignedTickets      Ticket[]                    @relation("AssignedTickets")
+  receivedRatings      ClientSatisfaction[]        @relation("RepRatings")
+  givenRatings         ClientSatisfaction[]        @relation("ClientRatings")
   clientConversations  Conversation[]              @relation("ClientConversations")
-  clients              User[]                      @relation("AccountRepToClient")
-  clientTickets        Ticket[]                    @relation("ClientTickets")
-  company              Company?                    @relation(fields: [companyId], references: [id])
   conversations        Conversation[]
   gaImportRuns         GaImportRun[]               @relation("UserToGaImportRuns")
-  givenRatings         ClientSatisfaction[]        @relation("ClientRatings")
+  receivedMessages     Message[]                   @relation("ReceivedMessages")
+  sentMessages         Message[]                   @relation("SentMessages")
   notifications        Notification[]
   queries              Query[]
-  receivedMessages     Message[]                   @relation("ReceivedMessages")
-  receivedRatings      ClientSatisfaction[]        @relation("RepRatings")
-  sentMessages         Message[]                   @relation("SentMessages")
   sessions             Session[]
-  settings             UserSettings?
-  sproutSocialAccounts UserToSproutSocialAccount[]
+  assignedTickets      Ticket[]                    @relation("AssignedTickets")
+  clientTickets        Ticket[]                    @relation("ClientTickets")
   ticketComments       TicketComment[]
+  accountRep           User?                       @relation("AccountRepToClient", fields: [accountRepId], references: [id])
+  clients              User[]                      @relation("AccountRepToClient")
+  company              Company?                    @relation(fields: [companyId], references: [id])
+  role                 Role                        @relation(fields: [roleId], references: [id])
+  settings             UserSettings?
+  emailClients         UserToEmailClient[]
   userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
+  sproutSocialAccounts UserToSproutSocialAccount[]
 }
 
 model UserSettings {
   id                 String   @id @default(cuid())
+  userId             String   @unique
   emailNotifications Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
   theme              String?
   apiCredits         Int      @default(0)
   apiCreditsLimit    Int      @default(1000)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  // Relations
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
+  user               User     @relation(fields: [userId], references: [id])
 }
 
 model Ticket {
-  id          String         @id @default(cuid())
-  title       String
-  description String         @db.Text
-  status      TicketStatus   @default(OPEN)
-  priority    TicketPriority @default(MEDIUM)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-
-  // Relations
+  id           String             @id @default(cuid())
+  title        String
+  description  String
+  status       TicketStatus       @default(OPEN)
+  priority     TicketPriority     @default(MEDIUM)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
   assignedToId String?
-  assignedTo   User?              @relation("AssignedTickets", fields: [assignedToId], references: [id])
   clientId     String
+  assignedTo   User?              @relation("AssignedTickets", fields: [assignedToId], references: [id])
   client       User               @relation("ClientTickets", fields: [clientId], references: [id])
   attachments  TicketAttachment[]
   comments     TicketComment[]
-  tags         TicketTag[]
+  tags         TicketTag[]        @relation("TicketToTicketTag")
 
   @@index([status])
   @@index([priority])
@@ -792,32 +721,26 @@ model TicketAttachment {
   name      String
   url       String
   createdAt DateTime @default(now())
-
-  // Relations
-  ticketId String
-  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 }
 
 model TicketComment {
   id        String   @id @default(cuid())
-  content   String   @db.Text
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  // Relations
-  ticketId String
-  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-  authorId String
-  author   User   @relation(fields: [authorId], references: [id])
+  ticketId  String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 }
 
 model TicketTag {
   id        String   @id @default(cuid())
   name      String   @unique
   createdAt DateTime @default(now())
-
-  // Relations
-  tickets Ticket[]
+  tickets   Ticket[] @relation("TicketToTicketTag")
 }
 
 model MessageAttachment {
@@ -827,10 +750,8 @@ model MessageAttachment {
   mimeType  String
   url       String
   createdAt DateTime @default(now())
-
-  // Relations
   messageId String
-  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
 
   @@index([messageId])
 }
@@ -838,19 +759,55 @@ model MessageAttachment {
 model ClientActivity {
   id          String         @id @default(cuid())
   type        String
-  description String         @db.Text
+  description String
   status      ActivityStatus @default(SUCCESS)
   metadata    Json?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
-
-  // Relations
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId      String
+  user        User           @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([type])
   @@index([createdAt])
+}
+
+model UserToEmailClient {
+  id            String      @id @default(cuid())
+  userId        String
+  emailClientId String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  emailClient   EmailClient @relation(fields: [emailClientId], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, emailClientId])
+  @@index([userId])
+  @@index([emailClientId])
+}
+
+enum ImportStatus {
+  queued
+  ok
+  error
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum ActivityStatus {
+  SUCCESS
+  ERROR
+  PENDING
 }
 
 enum QueryStatus {

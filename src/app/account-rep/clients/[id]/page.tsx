@@ -11,6 +11,7 @@ import { useParams } from 'next/navigation';
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -56,6 +57,14 @@ interface User {
       groups: number[];
     };
   }[];
+  emailClients: {
+    emailClient: {
+      id: string;
+      clientName: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  }[];
 }
 
 interface GaAccount {
@@ -82,10 +91,18 @@ interface SproutSocialAccount {
   groups: number[];
 }
 
+interface EmailClient {
+  id: string;
+  clientName: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Interface for the transformed user data that our component uses
-interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts'> {
+interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts' | 'emailClients'> {
   gaAccounts: GaAccount[];
   sproutSocialAccounts: SproutSocialAccount[];
+  emailClients: EmailClient[];
 }
 
 export default function ClientDetailsPage() {
@@ -108,6 +125,12 @@ export default function ClientDetailsPage() {
   const [availableSproutSocialAccounts, setAvailableSproutSocialAccounts] = useState<SproutSocialAccount[]>([]);
   const [selectedSproutSocialAccounts, setSelectedSproutSocialAccounts] = useState<string[]>([]);
   const [isLoadingSproutSocialAccounts, setIsLoadingSproutSocialAccounts] = useState(false);
+
+  // Email Client states
+  const [isEmailClientDialogOpen, setIsEmailClientDialogOpen] = useState(false);
+  const [availableEmailClients, setAvailableEmailClients] = useState<EmailClient[]>([]);
+  const [selectedEmailClients, setSelectedEmailClients] = useState<string[]>([]);
+  const [isLoadingEmailClients, setIsLoadingEmailClients] = useState(false);
 
   // Fetch client data when the component mounts or the id changes
   useEffect(() => {
@@ -136,6 +159,12 @@ export default function ClientDetailsPage() {
             link: sproutSocialAccount.link,
             nativeId: sproutSocialAccount.nativeId,
             groups: sproutSocialAccount.groups
+          })) || [],
+          emailClients: data.emailClients?.map(({ emailClient }) => ({
+            id: emailClient.id,
+            clientName: emailClient.clientName,
+            createdAt: emailClient.createdAt,
+            updatedAt: emailClient.updatedAt
           })) || []
         };
         setClient(transformedData);
@@ -207,6 +236,35 @@ export default function ClientDetailsPage() {
 
     fetchAvailableSproutSocialAccounts();
   }, [isSproutSocialAccountDialogOpen, client]);
+
+  // Fetch available Email Clients when dialog opens
+  useEffect(() => {
+    const fetchAvailableEmailClients = async () => {
+      if (!isEmailClientDialogOpen) return;
+
+      setIsLoadingEmailClients(true);
+      try {
+        const response = await fetch('/api/admin/available-email-clients');
+        if (!response.ok) {
+          throw new Error('Failed to fetch available Email Clients');
+        }
+        const data = await response.json();
+        setAvailableEmailClients(data);
+
+        // Pre-select clients that the user already has access to
+        if (client) {
+          const existingClientIds = client.emailClients.map(emailClient => emailClient.id);
+          setSelectedEmailClients(existingClientIds);
+        }
+      } catch (error) {
+        toast.error('Failed to fetch available Email Clients');
+      } finally {
+        setIsLoadingEmailClients(false);
+      }
+    };
+
+    fetchAvailableEmailClients();
+  }, [isEmailClientDialogOpen, client]);
 
   const handleAddGaAccounts = async () => {
     if (selectedAccounts.length === 0) {
@@ -415,6 +473,87 @@ export default function ClientDetailsPage() {
     }
   };
 
+  const handleAddEmailClients = async () => {
+    if (selectedEmailClients.length === 0) {
+      toast.error('Please select at least one Email Client');
+      return;
+    }
+
+    try {
+      // Get the current client IDs
+      const currentClientIds = client?.emailClients.map(emailClient => emailClient.id) || [];
+
+      // Find clients to add (selected but not currently associated)
+      const clientsToAdd = selectedEmailClients.filter(id => !currentClientIds.includes(id));
+
+      // Find clients to remove (currently associated but not selected)
+      const clientsToRemove = currentClientIds.filter(id => !selectedEmailClients.includes(id));
+
+      // Handle removals first
+      await Promise.all(
+        clientsToRemove.map(async (clientId) => {
+          const response = await fetch(
+            `/api/users/${params.id}/associate-email-client?emailClientId=${clientId}`,
+            { method: 'DELETE' }
+          );
+          if (!response.ok) {
+            throw new Error('Failed to disassociate Email Client');
+          }
+        })
+      );
+
+      // Then handle additions
+      await Promise.all(
+        clientsToAdd.map(async (clientId) => {
+          const response = await fetch(`/api/users/${params.id}/associate-email-client`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ emailClientId: clientId }),
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to associate Email Client');
+          }
+        })
+      );
+
+      toast.success('Email Clients updated successfully');
+      setIsEmailClientDialogOpen(false);
+      setSelectedEmailClients([]);
+      // Refresh user data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating Email Clients:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to update Email Clients');
+    }
+  };
+
+  const handleDisassociateEmailClient = async (clientId: string) => {
+    try {
+      const response = await fetch(
+        `/api/users/${params.id}/associate-email-client?emailClientId=${clientId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to disassociate Email Client');
+      }
+
+      toast.success('Email Client disassociated successfully');
+      // Refresh user data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error disassociating Email Client:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to disassociate Email Client');
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -486,8 +625,8 @@ export default function ClientDetailsPage() {
                         <div
                           key={account.id}
                           className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${selectedAccounts.includes(account.id)
-                              ? 'bg-primary-50 border-primary-200'
-                              : 'hover:bg-gray-50'
+                            ? 'bg-primary-50 border-primary-200'
+                            : 'hover:bg-gray-50'
                             }`}
                           onClick={() => {
                             setSelectedAccounts((prev) =>
@@ -650,8 +789,8 @@ export default function ClientDetailsPage() {
                         <div
                           key={account.id}
                           className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${selectedSproutSocialAccounts.includes(account.id)
-                              ? 'bg-primary-50 border-primary-200'
-                              : 'hover:bg-gray-50'
+                            ? 'bg-primary-50 border-primary-200'
+                            : 'hover:bg-gray-50'
                             }`}
                           onClick={() => {
                             setSelectedSproutSocialAccounts((prev) =>
@@ -711,9 +850,9 @@ export default function ClientDetailsPage() {
                         <p className="text-sm text-gray-500">Native Name: {account.nativeName}</p>
                         <p className="text-sm text-gray-500">Profile ID: {account.customerProfileId}</p>
                         {account.link && (
-                          <a 
-                            href={account.link} 
-                            target="_blank" 
+                          <a
+                            href={account.link}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm text-blue-500 hover:text-blue-700 underline"
                           >
@@ -727,6 +866,104 @@ export default function ClientDetailsPage() {
                           onClick={() => handleDisassociateSproutSocialAccount(account.id)}
                         >
                           Disassociate Account
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                ))
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Email Clients */}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle>Email Clients</CardTitle>
+            {/* Add Email Client Dialog */}
+            <Dialog open={isEmailClientDialogOpen} onOpenChange={setIsEmailClientDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>Add Email Client</Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Add Email Clients</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  {isLoadingEmailClients ? (
+                    <div className="flex justify-center py-4">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+                    </div>
+                  ) : (
+                    <div className="max-h-[400px] overflow-y-auto space-y-2">
+                      {availableEmailClients.map((emailClient) => (
+                        <div
+                          key={emailClient.id}
+                          className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${selectedEmailClients.includes(emailClient.id)
+                            ? 'bg-primary-50 border-primary-200'
+                            : 'hover:bg-gray-50'
+                            }`}
+                          onClick={() => {
+                            setSelectedEmailClients((prev) =>
+                              prev.includes(emailClient.id)
+                                ? prev.filter((id) => id !== emailClient.id)
+                                : [...prev, emailClient.id]
+                            );
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedEmailClients.includes(emailClient.id)}
+                            onChange={() => { }}
+                            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                          />
+                          <div>
+                            <p className="font-medium">{emailClient.clientName}</p>
+                            <p className="text-sm text-gray-500">Created: {new Date(emailClient.createdAt).toLocaleDateString()}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex justify-end space-x-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setIsEmailClientDialogOpen(false);
+                        setSelectedEmailClients([]);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button onClick={handleAddEmailClients}>
+                      Add Selected Clients
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {client.emailClients.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  No Email Clients associated with this client.
+                </div>
+              ) : (
+                client.emailClients.map((emailClient: EmailClient) => (
+                  <Card key={emailClient.id} className="p-4">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-semibold">{emailClient.clientName}</h3>
+                        <p className="text-sm text-gray-500">Created: {new Date(emailClient.createdAt).toLocaleDateString()}</p>
+                        <p className="text-sm text-gray-500">Last Updated: {new Date(emailClient.updatedAt).toLocaleDateString()}</p>
+                      </div>
+                      <div className="flex flex-row items-center gap-2">
+                        <Button
+                          variant="destructive"
+                          onClick={() => handleDisassociateEmailClient(emailClient.id)}
+                        >
+                          Disassociate Client
                         </Button>
                       </div>
                     </div>
