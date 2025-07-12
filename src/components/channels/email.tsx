@@ -1,8 +1,8 @@
 // src/components/channels/email.tsx
 
 import React from 'react';
-import { EmailDashboard } from './email/email-dashboard';
+import EmailMetrics from './email/email-metrics';
 
 export default function Email() {
-  return <EmailDashboard />;
+  return <EmailMetrics />;
 }
