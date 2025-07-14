@@ -6,6 +6,8 @@
  * Features:
  * - Client selection dropdown (only account rep's clients)
  * - Google Analytics account and property selection for the chosen client
+ * - SproutSocial analytics for the chosen client
+ * - Email analytics for the chosen client
  * - Analytics data display matching the admin dashboard experience
  * - Print functionality for reports
  */
@@ -25,6 +27,8 @@ import {
 } from '@/components/ui/select';
 import { PrintButton } from '@/components/dashboard/PrintButton';
 import { AccountRepGaMetrics } from '@/components/account-rep/account-rep-ga-metrics';
+import { AccountRepSproutSocialMetrics } from '@/components/channels/sprout-social/AccountRepSproutSocialMetrics';
+import { AccountRepEmailMetrics } from '@/components/channels/email/AccountRepEmailMetrics';
 
 interface GaProperty {
   id: string;
@@ -175,16 +179,45 @@ export function AccountRepClientAnalytics({
 
       {/* Analytics Display */}
       {selectedClient ? (
-        <div>
-          <div className="mb-4">
-            <h2 className="text-xl font-semibold mb-2">
-              Analytics Overview - {selectedClient.name || selectedClient.email}
-            </h2>
-            <p className="text-gray-600">
-              Google Analytics data and insights for this client
-            </p>
+        <div className="space-y-8">
+          {/* Google Analytics Section */}
+          <div>
+            <div className="mb-4">
+              <h2 className="text-xl font-semibold mb-2">
+                Google Analytics - {selectedClient.name || selectedClient.email}
+              </h2>
+              <p className="text-gray-600">
+                Google Analytics data and insights for this client
+              </p>
+            </div>
+            <AccountRepGaMetrics clientId={selectedClient.id} />
           </div>
-          <AccountRepGaMetrics clientId={selectedClient.id} />
+
+          {/* SproutSocial Analytics Section */}
+          <div>
+            <div className="mb-4">
+              <h2 className="text-xl font-semibold mb-2">
+                Social Media Analytics - {selectedClient.name || selectedClient.email}
+              </h2>
+              <p className="text-gray-600">
+                SproutSocial analytics data and insights for this client
+              </p>
+            </div>
+            <AccountRepSproutSocialMetrics clientId={selectedClient.id} />
+          </div>
+
+          {/* Email Analytics Section */}
+          <div>
+            <div className="mb-4">
+              <h2 className="text-xl font-semibold mb-2">
+                Email Analytics - {selectedClient.name || selectedClient.email}
+              </h2>
+              <p className="text-gray-600">
+                Email campaign analytics data and insights for this client
+              </p>
+            </div>
+            <AccountRepEmailMetrics clientId={selectedClient.id} />
+          </div>
         </div>
       ) : (
         <Card>
