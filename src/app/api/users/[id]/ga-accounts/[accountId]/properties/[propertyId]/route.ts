@@ -90,11 +90,16 @@ export async function DELETE(
     if (currentUser.role.name === 'ADMIN') {
       canDelete = true;
     } else if (currentUser.role.name === 'ACCOUNT_REP') {
-      const userAccount = gaProperty.gaAccount.userToGaAccounts[0]?.user;
-      if (userAccount?.accountRepId === currentUser.id) {
+      // Account reps can delete GA properties for any of their clients
+      // Check if any user associated with this GA account has this account rep
+      const hasClientWithThisAccountRep = gaProperty.gaAccount.userToGaAccounts.some(
+        userToGaAccount => userToGaAccount.user.accountRepId === currentUser.id
+      );
+      if (hasClientWithThisAccountRep) {
         canDelete = true;
       }
     } else if (currentUser.role.name === 'CLIENT') {
+      // Clients can only delete their own GA properties
       const userAccount = gaProperty.gaAccount.userToGaAccounts[0]?.user;
       if (userAccount?.id === currentUser.id) {
         canDelete = true;
@@ -105,8 +110,11 @@ export async function DELETE(
       console.log('Delete GA Property - Access denied:', {
         currentUserRole: currentUser.role.name,
         currentUserId: currentUser.id,
-        propertyOwnerId: gaProperty.gaAccount.userToGaAccounts[0]?.user?.id,
-        propertyOwnerAccountRepId: gaProperty.gaAccount.userToGaAccounts[0]?.user?.accountRepId,
+        requestedUserId: id,
+        gaAccountUsers: gaProperty.gaAccount.userToGaAccounts.map(uta => ({
+          userId: uta.user.id,
+          accountRepId: uta.user.accountRepId
+        }))
       });
       return new NextResponse('Forbidden - Insufficient permissions', { status: 403 });
     }
