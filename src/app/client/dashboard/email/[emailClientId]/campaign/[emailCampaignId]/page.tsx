@@ -3,10 +3,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Suspense } from 'react';
 
 interface CampaignReportPageProps {
-  params: {
+  params: Promise<{
     emailClientId: string;
     emailCampaignId: string;
-  };
+  }>;
 }
 
 async function fetchCampaignData(emailClientId: string, emailCampaignId: string) {
@@ -25,7 +25,7 @@ async function fetchCampaignData(emailClientId: string, emailCampaignId: string)
 }
 
 export default async function CampaignReportPage({ params }: CampaignReportPageProps) {
-  const { emailClientId, emailCampaignId } = params;
+  const { emailClientId, emailCampaignId } = await params;
 
   let campaign = null;
   let error = null;
