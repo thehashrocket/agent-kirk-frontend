@@ -8,11 +8,12 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, TrendingDown, Mail, MousePointer, AlertTriangle, UserMinus } from 'lucide-react';
+import { TrendingUp, TrendingDown, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
 interface EmailEnhancedDashboardProps {
   data: EmailMetricsResponse;
@@ -223,7 +224,13 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                       {index + 1}
                     </div>
                     <div>
-                      <p className="font-medium">{campaign.campaignName}</p>
+                      <Link
+                        href={`/client/dashboard/email/${data.emailClient.id}/campaign/${campaign.campaignId}`}
+                        className="inline-flex items-center font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      >
+                        {campaign.campaignName}
+                        <ExternalLink className="ml-1 h-4 w-4 text-muted-foreground" aria-label="View campaign report" />
+                      </Link>
                       <p className="text-sm text-muted-foreground">Campaign ID: {campaign.campaignId}</p>
                     </div>
                   </div>
