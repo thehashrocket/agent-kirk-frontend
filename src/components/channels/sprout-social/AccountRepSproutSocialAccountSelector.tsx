@@ -71,7 +71,7 @@ export function AccountRepSproutSocialAccountSelector({
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to fetch SproutSocial accounts');
+          throw new Error(errorData.error || 'Failed to fetch Social Media accounts');
         }
 
         const accountsData = await response.json();
@@ -85,8 +85,8 @@ export function AccountRepSproutSocialAccountSelector({
           onAccountObjectChange(firstAccount);
         }
       } catch (error) {
-        console.error('Error fetching SproutSocial accounts:', error);
-        setError(error instanceof Error ? error.message : 'Failed to fetch SproutSocial accounts');
+        console.error('Error fetching Social Media accounts:', error);
+        setError(error instanceof Error ? error.message : 'Failed to fetch Social Media accounts');
       } finally {
         setIsLoading(false);
       }
@@ -108,7 +108,7 @@ export function AccountRepSproutSocialAccountSelector({
     return (
       <div className="flex items-center justify-center p-4">
         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-        <span className="ml-2 text-sm text-muted-foreground">Loading SproutSocial accounts...</span>
+        <span className="ml-2 text-sm text-muted-foreground">Loading Social Media accounts...</span>
       </div>
     );
   }
@@ -124,7 +124,7 @@ export function AccountRepSproutSocialAccountSelector({
   if (accounts.length === 0) {
     return (
       <div className="p-4 text-center text-muted-foreground text-sm">
-        No SproutSocial accounts found for this client
+        No Social Media accounts found for this client
       </div>
     );
   }
@@ -133,11 +133,11 @@ export function AccountRepSproutSocialAccountSelector({
     <div className="space-y-4">
       <div>
         <label className="text-sm font-medium text-gray-700 mb-2 block">
-          Select SproutSocial Account
+          Select Social Media Account
         </label>
         <Select value={selectedAccountId || ''} onValueChange={handleAccountSelect}>
           <SelectTrigger>
-            <SelectValue placeholder="Choose a SproutSocial account" />
+            <SelectValue placeholder="Choose a Social Media account" />
           </SelectTrigger>
           <SelectContent>
             {accounts.map((account) => (

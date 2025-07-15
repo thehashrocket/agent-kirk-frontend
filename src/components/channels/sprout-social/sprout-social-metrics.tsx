@@ -81,19 +81,19 @@ export default function SproutSocialMetrics() {
       
       const response = await fetch(url);
 
-      console.log('SproutSocial Metrics API - Response:', response);
+      console.log('Social Media Metrics API - Response:', response);
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to fetch SproutSocial analytics data');
+        throw new Error(errorData.error || 'Failed to fetch Social Media analytics data');
       }
       
       const metricsData = await response.json();
       setData(metricsData);
       return metricsData;
     } catch (error) {
-      console.error('Error fetching SproutSocial metrics:', error);
-      setError(error instanceof Error ? error.message : 'Failed to fetch SproutSocial analytics data');
+      console.error('Error fetching Social Media metrics:', error);
+      setError(error instanceof Error ? error.message : 'Failed to fetch Social Media analytics data');
       throw error;
     } finally {
       setIsLoading(false);
@@ -105,7 +105,7 @@ export default function SproutSocialMetrics() {
     if (selectedAccountId) {
       fetchSproutSocialMetrics()
         .catch(err => {
-          console.error('Failed to load initial SproutSocial metrics:', err);
+          console.error('Failed to load initial Social Media metrics:', err);
         });
     }
   }, [selectedAccountId, fetchSproutSocialMetrics]);
@@ -141,7 +141,7 @@ export default function SproutSocialMetrics() {
           <CardContent className="py-6">
             <div className="flex items-center justify-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-              <p className="text-center text-muted-foreground">Loading SproutSocial analytics data...</p>
+              <p className="text-center text-muted-foreground">Loading Social Media analytics data...</p>
             </div>
           </CardContent>
         </Card>
@@ -154,7 +154,7 @@ export default function SproutSocialMetrics() {
         <Card>
           <CardContent className="py-6">
             <p className="text-center text-muted-foreground">
-              {selectedAccountId ? 'No SproutSocial analytics data available' : 'Select an account to view analytics'}
+              {selectedAccountId ? 'No Social Media analytics data available' : 'Select an account to view analytics'}
             </p>
           </CardContent>
         </Card>

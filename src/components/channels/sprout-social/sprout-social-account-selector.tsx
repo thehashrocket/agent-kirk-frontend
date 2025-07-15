@@ -10,10 +10,10 @@ import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network
 /**
  * @component SproutSocialAccountSelector
  * @path src/components/channels/sprout-social/sprout-social-account-selector.tsx
- * Account selector for SproutSocial accounts associated with the current user.
+ * Account selector for Social Media accounts associated with the current user.
  * 
  * Features:
- * - Fetches user's SproutSocial accounts from API
+ * - Fetches user's Social Media accounts from API
  * - Dropdown selection interface
  * - Loading and error states
  * - Platform type display
@@ -31,7 +31,7 @@ export function SproutSocialAccountSelector({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch user's SproutSocial accounts
+  // Fetch user's Social Media accounts
   useEffect(() => {
     const fetchAccounts = async () => {
       setIsLoading(true);
@@ -42,7 +42,7 @@ export function SproutSocialAccountSelector({
         
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to fetch SproutSocial accounts');
+          throw new Error(errorData.error || 'Failed to fetch Social Media accounts');
         }
 
         const accountsData = await response.json();
@@ -59,7 +59,7 @@ export function SproutSocialAccountSelector({
           onAccountObjectChange(null);
         }
       } catch (error) {
-        console.error('Error fetching SproutSocial accounts:', error);
+        console.error('Error fetching Social Media accounts:', error);
         setError(error instanceof Error ? error.message : 'Failed to fetch accounts');
         onAccountChange(null);
         onAccountObjectChange(null);
@@ -94,7 +94,7 @@ export function SproutSocialAccountSelector({
         <CardContent className="py-6">
           <div className="flex items-center justify-center gap-2">
             <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-            <p className="text-center text-muted-foreground">Loading SproutSocial accounts...</p>
+            <p className="text-center text-muted-foreground">Loading Social Media accounts...</p>
           </div>
         </CardContent>
       </Card>
@@ -106,7 +106,7 @@ export function SproutSocialAccountSelector({
       <Card>
         <CardContent className="py-6">
           <p className="text-center text-muted-foreground">
-            No SproutSocial accounts found. Please contact your account representative to set up access.
+            No Social Media accounts found. Please contact your account representative to set up access.
           </p>
         </CardContent>
       </Card>
@@ -122,11 +122,11 @@ export function SproutSocialAccountSelector({
       <div className="flex items-center gap-4">
         <div className="flex-1">
           <label htmlFor="sprout-social-account-select" className="block text-sm font-medium mb-2">
-            Select SproutSocial Account
+            Select Social Media Account
           </label>
           <Select value={selectedAccountId || ''} onValueChange={handleAccountChange}>
             <SelectTrigger id="sprout-social-account-select">
-              <SelectValue placeholder="Choose a SproutSocial account" />
+              <SelectValue placeholder="Choose a Social Media account" />
             </SelectTrigger>
             <SelectContent>
               {accounts.map((account) => (

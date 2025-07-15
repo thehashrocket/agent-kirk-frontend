@@ -47,7 +47,7 @@ export function SproutSocialEnhancedDashboard({
       <div className="space-y-6">
         <div className="text-center py-12">
           <h2 className="text-xl font-semibold text-muted-foreground mb-2">
-            No SproutSocial Account Selected
+            No Social Media Account Selected
           </h2>
           <p className="text-muted-foreground">
             Please select an account to view comprehensive analytics

@@ -59,7 +59,7 @@ export async function GET(): Promise<NextResponse> {
 
     return NextResponse.json(sproutSocialAccounts);
   } catch (error) {
-    console.error('Error fetching client SproutSocial accounts:', error);
+    console.error('Error fetching client Social Media accounts:', error);
     return NextResponse.json(
       { error: 'Internal server error' }, 
       { status: 500 }

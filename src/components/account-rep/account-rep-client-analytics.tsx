@@ -200,7 +200,7 @@ export function AccountRepClientAnalytics({
                 Social Media Analytics - {selectedClient.name || selectedClient.email}
               </h2>
               <p className="text-gray-600">
-                SproutSocial analytics data and insights for this client
+                Social Media analytics data and insights for this client
               </p>
             </div>
             <AccountRepSproutSocialMetrics clientId={selectedClient.id} />

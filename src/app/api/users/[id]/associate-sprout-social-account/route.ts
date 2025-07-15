@@ -1,6 +1,6 @@
 /**
  * @file src/app/api/users/[id]/associate-sprout-social-account/route.ts
- * API endpoint for associating and disassociating users with Sprout Social accounts.
+ * API endpoint for associating and disassociating users with Social Media accounts.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -10,10 +10,10 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 /**
- * Validation schema for Sprout Social account association
+ * Validation schema for Social Media account association
  */
 const associateSproutSocialAccountSchema = z.object({
-  sproutSocialAccountId: z.string().min(1, 'Sprout Social Account ID is required'),
+  sproutSocialAccountId: z.string().min(1, 'Social Media Account ID is required'),
 });
 
 type AssociateSproutSocialAccountInput = z.infer<typeof associateSproutSocialAccountSchema>;
@@ -21,22 +21,22 @@ type AssociateSproutSocialAccountInput = z.infer<typeof associateSproutSocialAcc
 /**
  * POST /api/users/[id]/associate-sprout-social-account
  * 
- * Associates a user with a Sprout Social account.
+ * Associates a user with a Social Media account.
  * 
  * Request Body:
  * {
- *   "sproutSocialAccountId": "string" // The ID of the Sprout Social account to associate
+ *   "sproutSocialAccountId": "string" // The ID of the Social Media account to associate
  * }
  * 
  * Authentication:
  * - Requires valid session with ADMIN or ACCOUNT_REP role
  * 
  * Response:
- * - 201: Successfully associated Sprout Social account
+ * - 201: Successfully associated Social Media account
  * - 400: Invalid request body
  * - 401: Unauthorized
  * - 403: Forbidden (not admin/account rep role)
- * - 404: User or Sprout Social account not found
+ * - 404: User or Social Media account not found
  * - 500: Server error
  */
 export async function POST(
@@ -86,7 +86,7 @@ export async function POST(
       );
     }
 
-    // Verify the Sprout Social account exists
+    // Verify the Social Media account exists
     const sproutSocialAccount = await prisma.sproutSocialAccount.findFirst({
       where: {
         id: validatedData.sproutSocialAccountId,
@@ -94,7 +94,7 @@ export async function POST(
     });
 
     if (!sproutSocialAccount) {
-      return NextResponse.json({ error: 'Sprout Social Account not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Social Media Account not found' }, { status: 404 });
     }
 
     // Check if the association already exists
@@ -106,7 +106,7 @@ export async function POST(
     });
 
     if (existingAssociation) {
-      return NextResponse.json({ error: 'Sprout Social Account already associated with user' }, { status: 400 });
+      return NextResponse.json({ error: 'Social Media Account already associated with user' }, { status: 400 });
     }
 
     // Create the association
@@ -129,7 +129,7 @@ export async function POST(
       );
     }
 
-    console.error('Error associating Sprout Social account:', error);
+    console.error('Error associating Social Media account:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -140,20 +140,20 @@ export async function POST(
 /**
  * DELETE /api/users/[id]/associate-sprout-social-account
  * 
- * Unassociates a user from a Sprout Social account.
+ * Unassociates a user from a Social Media account.
  * 
  * Query Parameters:
- * - sproutSocialAccountId: The ID of the Sprout Social account to unassociate
+ * - sproutSocialAccountId: The ID of the Social Media account to unassociate
  * 
  * Authentication:
  * - Requires valid session with ADMIN or ACCOUNT_REP role
  * 
  * Response:
- * - 204: Successfully unassociated Sprout Social account
+ * - 204: Successfully unassociated Social Media account
  * - 400: Invalid request parameters
  * - 401: Unauthorized
  * - 403: Forbidden (not admin/account rep role)
- * - 404: User or Sprout Social account not found
+ * - 404: User or Social Media account not found
  * - 500: Server error
  */
 export async function DELETE(
@@ -183,12 +183,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Forbidden: Admin/Account Rep access required' }, { status: 403 });
     }
 
-    // Get Sprout Social account ID from query parameters
+    // Get Social Media account ID from query parameters
     const { searchParams } = new URL(request.url);
     const sproutSocialAccountId = searchParams.get('sproutSocialAccountId');
 
     if (!sproutSocialAccountId) {
-      return NextResponse.json({ error: 'Sprout Social Account ID is required' }, { status: 400 });
+      return NextResponse.json({ error: 'Social Media Account ID is required' }, { status: 400 });
     }
 
     // Verify the target user exists
@@ -210,7 +210,7 @@ export async function DELETE(
     });
 
     if (!association) {
-      return NextResponse.json({ error: 'Sprout Social Account not associated with user' }, { status: 404 });
+      return NextResponse.json({ error: 'Social Media Account not associated with user' }, { status: 404 });
     }
 
     // Delete the association
@@ -222,7 +222,7 @@ export async function DELETE(
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {
-    console.error('Error unassociating Sprout Social account:', error);
+    console.error('Error unassociating Social Media account:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

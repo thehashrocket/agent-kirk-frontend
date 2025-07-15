@@ -37,7 +37,7 @@ import { format, subDays, startOfMonth, endOfMonth, subMonths } from 'date-fns';
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    console.log('Account Rep SproutSocial Metrics API - Starting request');
+    console.log('Account Rep Social Media Metrics API - Starting request');
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -126,7 +126,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // Verify the client is assigned to this account rep
     if (client.accountRepId !== currentUser.id) {
-      console.log('Account Rep SproutSocial Metrics API - Access denied:', {
+      console.log('Account Rep Social Media Metrics API - Access denied:', {
         clientAccountRepId: client.accountRepId,
         currentUserId: currentUser.id,
         clientId: client.id
@@ -151,7 +151,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     if (!sproutSocialAccount) {
       return NextResponse.json(
-        { error: 'SproutSocial account not found or not associated with client', code: 'ACCOUNT_NOT_FOUND' },
+        { error: 'Social Media account not found or not associated with client', code: 'ACCOUNT_NOT_FOUND' },
         { status: 404 }
       );
     }
@@ -196,12 +196,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       platformType: sproutSocialAccount.networkType,
     };
 
-    console.log('Account Rep SproutSocial Metrics API - Returning response for account:', sproutSocialAccount.name);
+    console.log('Account Rep Social Media Metrics API - Returning response for account:', sproutSocialAccount.name);
 
     return NextResponse.json(response);
 
   } catch (error) {
-    console.error('Account Rep SproutSocial Metrics API - Error:', error);
+    console.error('Account Rep Social Media Metrics API - Error:', error);
     return NextResponse.json(
       { error: 'Internal server error', code: 'INTERNAL_ERROR' }, 
       { status: 500 }

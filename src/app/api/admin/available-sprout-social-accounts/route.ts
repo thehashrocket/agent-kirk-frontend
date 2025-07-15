@@ -1,6 +1,6 @@
 /**
  * @file src/app/api/admin/available-sprout-social-accounts/route.ts
- * API endpoint for fetching available Sprout Social accounts that can be assigned to clients.
+ * API endpoint for fetching available Social Media accounts that can be assigned to clients.
  */
 
 import { NextResponse } from 'next/server';
@@ -11,13 +11,13 @@ import { prisma } from '@/lib/prisma';
 /**
  * GET /api/admin/available-sprout-social-accounts
  * 
- * Fetches all available Sprout Social accounts that can be assigned to clients.
+ * Fetches all available Social Media accounts that can be assigned to clients.
  * 
  * Authentication:
  * - Requires valid session with ADMIN or ACCOUNT_REP role
  * 
  * Response:
- * - 200: Returns array of available Sprout Social accounts
+ * - 200: Returns array of available Social Media accounts
  * - 401: Unauthorized (not logged in)
  * - 403: Forbidden (not admin/account rep role)
  * - 500: Server error
@@ -36,7 +36,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       return NextResponse.json({ error: 'Forbidden: Admin/Account Rep access required' }, { status: 403 });
     }
 
-    // Fetch all Sprout Social accounts
+    // Fetch all Social Media accounts
     const sproutSocialAccounts = await prisma.sproutSocialAccount.findMany({
       orderBy: [
         { networkType: 'asc' },
@@ -46,7 +46,7 @@ export async function GET(request: Request): Promise<NextResponse> {
 
     return NextResponse.json(sproutSocialAccounts);
   } catch (error) {
-    console.error('Error fetching available Sprout Social accounts:', error);
+    console.error('Error fetching available Social Media accounts:', error);
     return NextResponse.json(
       { error: 'Internal server error' }, 
       { status: 500 }

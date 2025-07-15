@@ -124,7 +124,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json(response);
   } catch (error) {
-    console.error('Error fetching SproutSocial metrics:', error);
+    console.error('Error fetching Social Media metrics:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

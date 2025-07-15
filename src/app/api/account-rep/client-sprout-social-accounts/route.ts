@@ -1,7 +1,7 @@
 /**
  * @file src/app/api/account-rep/client-sprout-social-accounts/route.ts
- * Account Rep API endpoint for fetching SproutSocial accounts for their assigned clients.
- * Based on the client SproutSocial accounts API but with account rep-level access controls.
+ * Account Rep API endpoint for fetching Social Media accounts for their assigned clients.
+ * Based on the client Social Media accounts API but with account rep-level access controls.
  */
 
 import { NextResponse } from 'next/server';
@@ -12,18 +12,18 @@ import { prisma } from '@/lib/prisma';
 /**
  * GET /api/account-rep/client-sprout-social-accounts
  * 
- * Fetches SproutSocial accounts for a specific client.
+ * Fetches Social Media accounts for a specific client.
  * Account reps can only access accounts for their assigned clients.
  * 
  * Query Parameters:
- * - clientId: The ID of the client whose SproutSocial accounts to fetch (must be assigned to this account rep)
+ * - clientId: The ID of the client whose Social Media accounts to fetch (must be assigned to this account rep)
  * 
  * Authentication:
  * - Requires valid session with ACCOUNT_REP role
  * - Client must be assigned to the authenticated account rep
  * 
  * Response:
- * - 200: Returns SproutSocial accounts data
+ * - 200: Returns Social Media accounts data
  * - 400: Bad request (missing parameters)
  * - 401: Unauthorized (not logged in)
  * - 403: Forbidden (not account rep role or client not assigned)
@@ -32,7 +32,7 @@ import { prisma } from '@/lib/prisma';
  */
 export async function GET(request: Request): Promise<NextResponse> {
   try {
-    console.log('Account Rep SproutSocial Accounts API - Starting request');
+    console.log('Account Rep Social Media Accounts API - Starting request');
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -113,7 +113,7 @@ export async function GET(request: Request): Promise<NextResponse> {
 
     // Verify the client is assigned to this account rep
     if (client.accountRepId !== currentUser.id) {
-      console.log('Account Rep SproutSocial Accounts API - Access denied:', {
+      console.log('Account Rep Social Media Accounts API - Access denied:', {
         clientAccountRepId: client.accountRepId,
         currentUserId: currentUser.id,
         clientId: client.id
@@ -124,7 +124,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Fetch SproutSocial accounts for the client
+    // Fetch Social Media accounts for the client
     const sproutSocialAccounts = await prisma.sproutSocialAccount.findMany({
       where: {
         users: {
@@ -143,12 +143,12 @@ export async function GET(request: Request): Promise<NextResponse> {
       }
     });
 
-    console.log('Account Rep SproutSocial Accounts API - Found accounts:', sproutSocialAccounts.length);
+    console.log('Account Rep Social Media Accounts API - Found accounts:', sproutSocialAccounts.length);
 
     return NextResponse.json(sproutSocialAccounts);
 
   } catch (error) {
-    console.error('Account Rep SproutSocial Accounts API - Error:', error);
+    console.error('Account Rep Social Media Accounts API - Error:', error);
     return NextResponse.json(
       { error: 'Internal server error', code: 'INTERNAL_ERROR' }, 
       { status: 500 }

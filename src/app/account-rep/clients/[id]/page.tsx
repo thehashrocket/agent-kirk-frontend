@@ -120,7 +120,7 @@ export default function ClientDetailsPage() {
     gaPropertyName: '',
   });
 
-  // Sprout Social Account states
+  // Social Media Account states
   const [isSproutSocialAccountDialogOpen, setIsSproutSocialAccountDialogOpen] = useState(false);
   const [availableSproutSocialAccounts, setAvailableSproutSocialAccounts] = useState<SproutSocialAccount[]>([]);
   const [selectedSproutSocialAccounts, setSelectedSproutSocialAccounts] = useState<string[]>([]);
@@ -208,7 +208,7 @@ export default function ClientDetailsPage() {
     fetchAvailableAccounts();
   }, [isGaAccountDialogOpen, client]);
 
-  // Fetch available Sprout Social accounts when dialog opens
+  // Fetch available Social Media accounts when dialog opens
   useEffect(() => {
     const fetchAvailableSproutSocialAccounts = async () => {
       if (!isSproutSocialAccountDialogOpen) return;
@@ -217,7 +217,7 @@ export default function ClientDetailsPage() {
       try {
         const response = await fetch('/api/admin/available-sprout-social-accounts');
         if (!response.ok) {
-          throw new Error('Failed to fetch available Sprout Social accounts');
+          throw new Error('Failed to fetch available Social Media accounts');
         }
         const data = await response.json();
         setAvailableSproutSocialAccounts(data);
@@ -228,7 +228,7 @@ export default function ClientDetailsPage() {
           setSelectedSproutSocialAccounts(existingAccountIds);
         }
       } catch (error) {
-        toast.error('Failed to fetch available Sprout Social accounts');
+        toast.error('Failed to fetch available Social Media accounts');
       } finally {
         setIsLoadingSproutSocialAccounts(false);
       }
@@ -394,7 +394,7 @@ export default function ClientDetailsPage() {
 
   const handleAddSproutSocialAccounts = async () => {
     if (selectedSproutSocialAccounts.length === 0) {
-      toast.error('Please select at least one Sprout Social account');
+      toast.error('Please select at least one Social Media account');
       return;
     }
 
@@ -416,7 +416,7 @@ export default function ClientDetailsPage() {
             { method: 'DELETE' }
           );
           if (!response.ok) {
-            throw new Error('Failed to disassociate Sprout Social account');
+            throw new Error('Failed to disassociate Social Media account');
           }
         })
       );
@@ -434,19 +434,19 @@ export default function ClientDetailsPage() {
 
           if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.error || 'Failed to associate Sprout Social account');
+            throw new Error(error.error || 'Failed to associate Social Media account');
           }
         })
       );
 
-      toast.success('Sprout Social accounts updated successfully');
+      toast.success('Social Media accounts updated successfully');
       setIsSproutSocialAccountDialogOpen(false);
       setSelectedSproutSocialAccounts([]);
       // Refresh user data
       window.location.reload();
     } catch (error) {
-      console.error('Error updating Sprout Social accounts:', error);
-      toast.error(error instanceof Error ? error.message : 'Failed to update Sprout Social accounts');
+      console.error('Error updating Social Media accounts:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to update Social Media accounts');
     }
   };
 
@@ -461,15 +461,15 @@ export default function ClientDetailsPage() {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || 'Failed to disassociate Sprout Social account');
+        throw new Error(error.error || 'Failed to disassociate Social Media account');
       }
 
-      toast.success('Sprout Social account disassociated successfully');
+      toast.success('Social Media account disassociated successfully');
       // Refresh user data
       window.location.reload();
     } catch (error) {
-      console.error('Error disassociating Sprout Social account:', error);
-      toast.error(error instanceof Error ? error.message : 'Failed to disassociate Sprout Social account');
+      console.error('Error disassociating Social Media account:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to disassociate Social Media account');
     }
   };
 
@@ -765,18 +765,18 @@ export default function ClientDetailsPage() {
           </CardContent>
         </Card>
 
-        {/* Sprout Social Accounts */}
+        {/* Social Media Accounts */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Sprout Social Accounts</CardTitle>
-            {/* Add Sprout Social Account Dialog */}
+            <CardTitle>Social Media Accounts</CardTitle>
+            {/* Add Social Media Account Dialog */}
             <Dialog open={isSproutSocialAccountDialogOpen} onOpenChange={setIsSproutSocialAccountDialogOpen}>
               <DialogTrigger asChild>
-                <Button>Add Sprout Social Account</Button>
+                <Button>Add Social Media Account</Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl">
                 <DialogHeader>
-                  <DialogTitle>Add Sprout Social Accounts</DialogTitle>
+                  <DialogTitle>Add Social Media Accounts</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                   {isLoadingSproutSocialAccounts ? (
@@ -838,7 +838,7 @@ export default function ClientDetailsPage() {
             <div className="space-y-4">
               {client.sproutSocialAccounts.length === 0 ? (
                 <div className="text-center py-8 text-gray-500">
-                  No Sprout Social accounts associated with this client.
+                  No Social Media accounts associated with this client.
                 </div>
               ) : (
                 client.sproutSocialAccounts.map((account: SproutSocialAccount) => (
