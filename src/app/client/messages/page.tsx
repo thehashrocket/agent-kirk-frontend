@@ -16,6 +16,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import MessagesPage from "@/components/messages/MessagesPage";
 import ComposeMessage from "@/components/messages/ComposeMessage";
+import BreadCrumbs from "@/components/layout/BreadCrumbs";
 
 /**
  * @component ClientMessages
@@ -50,6 +51,7 @@ export default async function ClientMessages() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Messages", href: "/client/messages" }]} />
       <h1 className="text-2xl font-bold mb-6">Messages</h1>
       <div className="grid gap-6 md:grid-cols-3">
         {/* Messages list panel - takes up 2/3 of the grid on medium+ screens */}

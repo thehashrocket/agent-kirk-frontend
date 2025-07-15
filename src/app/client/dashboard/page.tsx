@@ -20,6 +20,7 @@ import GaMetrics from "@/components/analytics/GaMetrics";
 import { SproutSocialMetrics } from "@/components/channels/sprout-social";
 import EmailMetrics from "@/components/channels/email/email-metrics";
 import { PrintButton } from "@/components/dashboard/PrintButton";
+import BreadCrumbs from "@/components/layout/BreadCrumbs";
 
 /**
  * @component ClientDashboard
@@ -60,6 +61,7 @@ export default async function ClientDashboard() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex justify-between items-start">
         <div>
+          <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dashboard", href: "/client/dashboard" }]} />
           <h1 className="text-2xl font-bold mb-2">
             Welcome back, {session.user.name || session.user.email}
           </h1>

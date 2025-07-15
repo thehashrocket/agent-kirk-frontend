@@ -10,6 +10,7 @@ import PaidSearch from '@/components/channels/paid_search';
 import PaidSocial from '@/components/channels/paid_social';
 import VisitorBehavior from '@/components/channels/visitor_behavior';
 import AudienceData from '@/components/channels/audience_data';
+import BreadCrumbs from '@/components/layout/BreadCrumbs';
 
 interface ChannelPageProps {
   params: Promise<{
@@ -28,6 +29,7 @@ export default async function ChannelPage({ params, searchParams }: ChannelPageP
 
   return (
     <main className="container mx-auto p-6">
+      <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dashboard", href: "/client/dashboard" }, { label: "Channel: " + formattedChannel, href: `/analytics/channel/${channel}` }]} />
       <h1 className="text-3xl font-bold mb-4">Channel: <span className="text-primary-600">{formattedChannel}</span></h1>
       {channel === 'audience-data' && <AudienceData />}
       {channel === 'direct' && <Direct />}

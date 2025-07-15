@@ -33,6 +33,7 @@ import {
 } from '@/components/ui/dialog';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/utils';
+import BreadCrumbs from '@/components/layout/BreadCrumbs';
 
 interface GaProperty {
   id: string;
@@ -147,6 +148,7 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Profile", href: "/client/profile" }]} />
       <h1 className="text-3xl font-bold mb-6">My Profile</h1>
 
       <div className="max-w-3xl space-y-6">
