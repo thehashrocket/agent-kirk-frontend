@@ -75,19 +75,6 @@ export default async function ClientDashboard() {
         </Suspense>
       </div>
 
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Social Media Analytics</h2>
-        <Suspense fallback={<div>Loading SproutSocial analytics...</div>}>
-          <SproutSocialMetrics />
-        </Suspense>
-      </div>
-
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Email Analytics</h2>
-        <Suspense fallback={<div>Loading Email analytics...</div>}>
-          <EmailMetrics />
-        </Suspense>
-      </div>
     </div>
   );
 } 

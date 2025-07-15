@@ -103,7 +103,7 @@ export function Header() {
               )}
             >
               <MessageSquare className="h-4 w-4" />
-              <span>Chat</span>
+              <span>Chat with Agent Kirk</span>
             </Link>
           )}
           

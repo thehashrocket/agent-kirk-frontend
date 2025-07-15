@@ -1,6 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
-import { ArrowUpRight, ArrowDownRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, ExternalLink } from 'lucide-react';
 import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -117,32 +117,62 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
     return { current: totalSessions, prev: totalPrev, diff: totalDiff, percent: totalPercent };
   }, [allRows]);
 
+  // Helper function to check if a channel is clickable
+  const isClickableChannel = (channel: string): boolean => {
+    const clickableChannels = ['Email', 'Direct', 'Organic Social'];
+    return clickableChannels.includes(channel);
+  };
+
   // Table columns
-  const columns = React.useMemo<TableColumn<typeof allRows[0]>[]>(() => [
+  type RowWithNumber = { channel: string; sessions: number; prev: number; diff: number; percent: number | null; rowNumber: number };
+  const columns: TableColumn<RowWithNumber>[] = React.useMemo(() => [
+    {
+      header: '',
+      accessor: 'rowNumber',
+      sortable: false,
+      render: (value: number) => (
+        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-base font-semibold text-primary">
+          {value}
+        </div>
+      ),
+    },
     {
       header: 'Channel',
       accessor: 'channel',
       sortable: true,
-      render: (value, row) => (
-        <div className="flex items-center w-full">
-          <span>{value}</span>
-          <ArrowRight className="ml-2 text-gray-400 group-hover:text-gray-600 transition-colors" size={16} />
-        </div>
-      ),
+      render: (value: string, row: RowWithNumber) => {
+        const clickable = isClickableChannel(value);
+        return (
+          <div className="flex items-center w-full">
+            <span
+              className={
+                clickable
+                  ? 'text-primary underline cursor-pointer inline-flex items-center font-medium hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary/50'
+                  : 'text-black'
+              }
+            >
+              {value}
+              {clickable && (
+                <ExternalLink className="ml-1 h-4 w-4 text-muted-foreground" aria-label="View Sessions report" size={16} />
+              )}
+            </span>
+          </div>
+        );
+      },
     },
     {
       header: 'Sessions',
       accessor: 'sessions',
       align: 'right',
       sortable: true,
-      render: (value) => value.toLocaleString(),
+      render: (value: number) => value.toLocaleString(),
     },
     {
       header: '% Δ',
       accessor: 'percent',
       align: 'right',
       sortable: true,
-      render: (value, row) =>
+      render: (value: number | null, row: RowWithNumber) =>
         value === null ? (
           <span className="text-gray-400">—</span>
         ) : (
@@ -155,24 +185,13 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
     },
   ], []);
 
-  // Handler for row click
-  const handleRowClick = (row: typeof allRows[0]) => {
-    if (!row.channel) return;
-    // format the channel name to lowercase and replace spaces with dashes
-    const formattedChannel = row.channel.toLowerCase().replace(/\s+/g, '-');
-    const encoded = encodeURIComponent(formattedChannel);
-    router.push(`/analytics/channel/${encoded}`);
-  };
-
-  // Styling for clickable rows
-  const rowClassName = () => 'group';
-
+  // Calculate sorted rows and slice for top 6
   const sortedRows = React.useMemo(() => {
-    const col = columns.find(c => c.accessor === sort.accessor);
+    const col = columns.find((c: TableColumn<RowWithNumber>) => c.accessor === sort.accessor);
     if (!col || !col.sortable) return allRows;
     return [...allRows].sort((a, b) => {
-      const aVal = (a as any)[col.accessor];
-      const bVal = (b as any)[col.accessor];
+      const aVal = (a as any)[col.accessor as string];
+      const bVal = (b as any)[col.accessor as string];
       if (aVal === undefined || bVal === undefined) return 0;
       if (typeof aVal === 'number' && typeof bVal === 'number') {
         return sort.direction === 'asc' ? aVal - bVal : bVal - aVal;
@@ -185,8 +204,25 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
       return 0;
     });
   }, [allRows, sort, columns]);
-  
-  const topRows = sortedRows.slice(0, 6);
+
+  const topRows: Array<{ channel: string; sessions: number; prev: number; diff: number; percent: number | null }> = sortedRows.slice(0, 6);
+
+  // Add row numbers to the rows for display
+  const topRowsWithNumbers: RowWithNumber[] = topRows.map((row: typeof topRows[0], idx: number) => ({ ...row, rowNumber: idx + 1 }));
+
+  // Handler for row click
+  const handleRowClick = (row: typeof allRows[0]) => {
+    if (!row.channel || !isClickableChannel(row.channel)) return;
+    // format the channel name to lowercase and replace spaces with dashes
+    const formattedChannel = row.channel.toLowerCase().replace(/\s+/g, '-');
+    const encoded = encodeURIComponent(formattedChannel);
+    router.push(`/analytics/channel/${encoded}`);
+  };
+
+  // Styling for clickable rows
+  const rowClassName = (row: typeof allRows[0]) => {
+    return isClickableChannel(row.channel) ? 'group cursor-pointer hover:bg-muted/50' : '';
+  };
 
   if (!channelDaily || channelDaily.length === 0) {
     return (
@@ -206,7 +242,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
           <p className="text-gray-500 mb-4 text-sm">Year-Over-Year Comparison</p>
           <TableSortable
             columns={columns}
-            data={topRows}
+            data={topRowsWithNumbers}
             initialSort={sort}
             rowKey={row => row.channel}
             onRowClick={handleRowClick}

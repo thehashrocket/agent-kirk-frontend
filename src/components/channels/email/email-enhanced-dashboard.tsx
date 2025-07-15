@@ -127,7 +127,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       {/* Date Range Selector */}
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-semibold">Email Analytics</h3>
           <p className="text-sm text-muted-foreground">
             {dayjs(data.selectedRange.from).format('MMM D, YYYY')} - {dayjs(data.selectedRange.to).format('MMM D, YYYY')}
           </p>
@@ -216,11 +215,11 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
             <CardTitle>Top Performing Campaigns</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-4 max-h-96 overflow-y-auto">
               {data.topCampaigns.map((campaign, index) => (
-                <div key={campaign.campaignId} className="flex items-center justify-between p-3 border rounded-lg">
+                <div key={campaign.campaignId} className="flex items-center justify-between p-3 border rounded-lg bg-white">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-sm font-medium">
+                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-base font-semibold text-primary">
                       {index + 1}
                     </div>
                     <div>
@@ -234,8 +233,8 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                       <p className="text-sm text-muted-foreground">Campaign ID: {campaign.campaignId}</p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatNumber(campaign.opens)} opens</p>
+                  <div className="text-right min-w-[90px]">
+                    <p className="font-semibold text-gray-900">{formatNumber(campaign.opens)} opens</p>
                     <p className="text-sm text-muted-foreground">
                       {campaign.delivered > 0 ? `${((campaign.opens / campaign.delivered) * 100).toFixed(1)}%` : '0%'} open rate
                     </p>

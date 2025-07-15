@@ -159,9 +159,15 @@ export function GaAccountSelector({
 
   return (
     <div className="space-y-4">
-      <Select value={selectedAccountId || ''} onValueChange={handleAccountChange}>
-        <SelectTrigger>
-          <SelectValue placeholder="Select Google Analytics Account" />
+      {/* if there is only one account, don't show the select */}
+      {accounts.length === 1 ? (
+        <p className="text-sm text-muted-foreground">
+          Account: {accounts[0].gaAccountName}
+        </p>
+      ) : (
+        <Select value={selectedAccountId || ''} onValueChange={handleAccountChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select Google Analytics Account" />
         </SelectTrigger>
         <SelectContent>
           {accounts.map((account) => (
@@ -171,7 +177,7 @@ export function GaAccountSelector({
           ))}
         </SelectContent>
       </Select>
-
+      )}
       {selectedAccount && (
         <Select value={selectedPropertyId || ''} onValueChange={handlePropertyChange}>
           <SelectTrigger>

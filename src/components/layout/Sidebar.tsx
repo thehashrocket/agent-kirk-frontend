@@ -143,7 +143,7 @@ const clientNavItems: NavItem[] = [
     description: "Your overview"
   },
   { 
-    title: "Messages", 
+    title: "Message Your Account Manager", 
     href: "/client/messages", 
     icon: <MessageSquare />,
     description: "Your conversations"

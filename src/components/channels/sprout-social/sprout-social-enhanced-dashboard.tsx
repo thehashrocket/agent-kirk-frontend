@@ -78,13 +78,7 @@ export function SproutSocialEnhancedDashboard({
       {/* Header Section */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">
-            {data.account.name} Performance
-          </h1>
           <div className="flex items-center gap-3">
-            <Badge variant="outline" className="capitalize text-sm">
-              {normalizeSocialNetworkName(data.platformType)}
-            </Badge>
             <span className="text-sm text-muted-foreground">
               {format(parseISO(data.dateRange.start), 'MMM d, yyyy')} - {format(parseISO(data.dateRange.end), 'MMM d, yyyy')}
             </span>

@@ -29,7 +29,6 @@ export default async function ChannelPage({ params, searchParams }: ChannelPageP
   return (
     <main className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">Channel: <span className="text-primary-600">{formattedChannel}</span></h1>
-      <p className="text-gray-600 mb-8">This page will show more data and insights about the <b>{channel}</b> channel.</p>
       {channel === 'audience-data' && <AudienceData />}
       {channel === 'direct' && <Direct />}
       {channel === 'email' && <Email />}

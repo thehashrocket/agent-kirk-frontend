@@ -109,6 +109,10 @@ export function EmailClientSelector({
     );
   }
 
+  if (clients.length === 1) {
+    return null
+  };
+
   return (
     <Card>
       <CardContent className="py-4">

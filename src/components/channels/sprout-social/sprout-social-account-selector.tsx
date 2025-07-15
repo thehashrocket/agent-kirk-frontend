@@ -113,6 +113,10 @@ export function SproutSocialAccountSelector({
     );
   }
 
+  if (accounts.length === 1) {
+    return null;
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
@@ -139,16 +143,6 @@ export function SproutSocialAccountSelector({
           </Select>
         </div>
       </div>
-
-      {selectedAccountId && (
-        <div className="text-sm text-muted-foreground">
-          {accounts.find(account => account.id === selectedAccountId)?.nativeName && (
-            <p>
-              Native Name: {accounts.find(account => account.id === selectedAccountId)?.nativeName}
-            </p>
-          )}
-        </div>
-      )}
     </div>
   );
 } 
