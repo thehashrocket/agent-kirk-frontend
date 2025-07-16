@@ -80,7 +80,7 @@ model EmailCampaignContent {
   updatedAt       DateTime      @updatedAt
   contentType     String
   createTime      DateTime
-  emailCampaignId String
+  emailCampaignId String        @unique
   htmlContent     String
   plainContent    String
   sendTime        DateTime
@@ -141,6 +141,8 @@ model EmailCampaignDailyStats {
   uniqueOpens                Int           @default(0)
   emailCampaign              EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
   emailClient                EmailClient   @relation(fields: [emailClientId], references: [id])
+
+  @@unique([emailCampaignId, date])
 }
 
 model EmailClient {

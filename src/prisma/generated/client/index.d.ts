@@ -60620,6 +60620,7 @@ export namespace Prisma {
 
   export type EmailCampaignContentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    emailCampaignId?: string
     AND?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
     OR?: EmailCampaignContentWhereInput[]
     NOT?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
@@ -60630,13 +60631,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     contentType?: StringFilter<"EmailCampaignContent"> | string
     createTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    emailCampaignId?: StringFilter<"EmailCampaignContent"> | string
     htmlContent?: StringFilter<"EmailCampaignContent"> | string
     plainContent?: StringFilter<"EmailCampaignContent"> | string
     sendTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
     webId?: StringFilter<"EmailCampaignContent"> | string
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
-  }, "id">
+  }, "id" | "emailCampaignId">
 
   export type EmailCampaignContentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -60835,6 +60835,7 @@ export namespace Prisma {
 
   export type EmailCampaignDailyStatsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    emailCampaignId_date?: EmailCampaignDailyStatsEmailCampaignIdDateCompoundUniqueInput
     AND?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
     OR?: EmailCampaignDailyStatsWhereInput[]
     NOT?: EmailCampaignDailyStatsWhereInput | EmailCampaignDailyStatsWhereInput[]
@@ -60877,7 +60878,7 @@ export namespace Prisma {
     uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
     emailCampaign?: XOR<EmailCampaignScalarRelationFilter, EmailCampaignWhereInput>
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-  }, "id">
+  }, "id" | "emailCampaignId_date">
 
   export type EmailCampaignDailyStatsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -68896,6 +68897,11 @@ export namespace Prisma {
     campaignId?: SortOrder
     campaignName?: SortOrder
     emailClientId?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsEmailCampaignIdDateCompoundUniqueInput = {
+    emailCampaignId: string
+    date: Date | string
   }
 
   export type EmailCampaignDailyStatsCountOrderByAggregateInput = {
