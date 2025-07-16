@@ -180,6 +180,8 @@ model EmailGlobalDailyStats {
   opens         Int         @default(0)
   unsubs        Int         @default(0)
   emailClient   EmailClient @relation(fields: [emailClientId], references: [id])
+
+  @@unique([emailClientId, date])
 }
 
 model GaAccount {

@@ -61124,6 +61124,7 @@ export namespace Prisma {
 
   export type EmailGlobalDailyStatsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    emailClientId_date?: EmailGlobalDailyStatsEmailClientIdDateCompoundUniqueInput
     AND?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
     OR?: EmailGlobalDailyStatsWhereInput[]
     NOT?: EmailGlobalDailyStatsWhereInput | EmailGlobalDailyStatsWhereInput[]
@@ -61136,7 +61137,7 @@ export namespace Prisma {
     opens?: IntFilter<"EmailGlobalDailyStats"> | number
     unsubs?: IntFilter<"EmailGlobalDailyStats"> | number
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-  }, "id">
+  }, "id" | "emailClientId_date">
 
   export type EmailGlobalDailyStatsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -69183,6 +69184,11 @@ export namespace Prisma {
     apiKey?: SortOrder
     emailClientId?: SortOrder
     platformName?: SortOrder
+  }
+
+  export type EmailGlobalDailyStatsEmailClientIdDateCompoundUniqueInput = {
+    emailClientId: string
+    date: Date | string
   }
 
   export type EmailGlobalDailyStatsCountOrderByAggregateInput = {
