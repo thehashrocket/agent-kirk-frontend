@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Account {
-  id                String  @id @default(cuid())
+  id                String   @id @default(cuid())
   userId            String
   type              String
   provider          String
@@ -22,7 +22,9 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now()) @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -189,6 +191,8 @@ model GaAccount {
   gaAccountId      String
   gaAccountName    String
   deleted          Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @default(now()) @updatedAt
   conversations    Conversation[]
   gaProperties     GaProperty[]      @relation("AccountToProperty")
   userToGaAccounts UserToGaAccount[] @relation("GaAccountToUserAccounts")
@@ -200,6 +204,8 @@ model GaProperty {
   gaPropertyName String
   gaAccountId    String
   deleted        Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now()) @updatedAt
   conversations  Conversation[]
   channelDaily   GaChannelDaily[]
   imports        GaImportRun[]
@@ -218,7 +224,7 @@ model GaImportRun {
   errorMessage      String?
   requestedByUserId String
   createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
+  updatedAt         DateTime     @default(now()) @updatedAt
   gaProperty        GaProperty   @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
   requestedBy       User         @relation("UserToGaImportRuns", fields: [requestedByUserId], references: [id])
 }
@@ -234,6 +240,7 @@ model GaKpiDaily {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  updatedAt                 DateTime   @default(now()) @updatedAt
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date])
@@ -251,6 +258,7 @@ model GaKpiMonthly {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  updatedAt                 DateTime   @default(now()) @updatedAt
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, month])
@@ -269,6 +277,7 @@ model GaChannelDaily {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  updatedAt                 DateTime   @default(now()) @updatedAt
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date, channelGroup])
@@ -288,6 +297,7 @@ model GaSourceDaily {
   goalCompletions           Int
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
+  updatedAt                 DateTime   @default(now()) @updatedAt
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date, trafficSource])
@@ -351,6 +361,7 @@ model Notification {
   content   String
   isRead    Boolean          @default(false)
   createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now()) @updatedAt
   user      User             @relation(fields: [userId], references: [id])
 
   @@index([userId])
@@ -375,6 +386,7 @@ model ParsedPieGraphData {
   yearConversionsDiff    Float
   yearBouncesDiff        Float
   createdAt              DateTime @default(now())
+  updatedAt              DateTime @default(now()) @updatedAt
   query                  Query    @relation(fields: [queryId], references: [id])
 }
 
@@ -414,7 +426,7 @@ model Query {
   userId         String
   response       String?
   createdAt      DateTime             @default(now())
-  updatedAt      DateTime             @default(now())
+  updatedAt      DateTime             @default(now()) @updatedAt
   content        String               @default("")
   status         QueryStatus          @default(PENDING)
   conversationId String?
@@ -453,7 +465,7 @@ model SproutFacebookAnalytics {
   videoViewsPaid         Int?                @default(0)
   videoViewsUnique       Int?                @default(0)
   createdAt              DateTime            @default(now())
-  updatedAt              DateTime            @updatedAt
+  updatedAt              DateTime            @default(now()) @updatedAt
   netFollowerGrowth      Int?                @default(0)
   sproutSocialAccount    SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
 
@@ -472,8 +484,8 @@ model SproutFacebookPost {
   postCreatedTime       DateTime
   postSentTime          DateTime
   postLastUpdated       DateTime
-  createdAt             DateTime
-  updatedAt             DateTime
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @default(now()) @updatedAt
   sproutSocialAccount   SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
 
   @@unique([sproutSocialAccountId, postNativeId])

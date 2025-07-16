@@ -5893,6 +5893,8 @@ export namespace Prisma {
     scope: string | null
     id_token: string | null
     session_state: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type AccountMaxAggregateOutputType = {
@@ -5908,6 +5910,8 @@ export namespace Prisma {
     scope: string | null
     id_token: string | null
     session_state: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type AccountCountAggregateOutputType = {
@@ -5923,6 +5927,8 @@ export namespace Prisma {
     scope: number
     id_token: number
     session_state: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5948,6 +5954,8 @@ export namespace Prisma {
     scope?: true
     id_token?: true
     session_state?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type AccountMaxAggregateInputType = {
@@ -5963,6 +5971,8 @@ export namespace Prisma {
     scope?: true
     id_token?: true
     session_state?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type AccountCountAggregateInputType = {
@@ -5978,6 +5988,8 @@ export namespace Prisma {
     scope?: true
     id_token?: true
     session_state?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6080,6 +6092,8 @@ export namespace Prisma {
     scope: string | null
     id_token: string | null
     session_state: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: AccountCountAggregateOutputType | null
     _avg: AccountAvgAggregateOutputType | null
     _sum: AccountSumAggregateOutputType | null
@@ -6114,6 +6128,8 @@ export namespace Prisma {
     scope?: boolean
     id_token?: boolean
     session_state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -6130,6 +6146,8 @@ export namespace Prisma {
     scope?: boolean
     id_token?: boolean
     session_state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -6146,6 +6164,8 @@ export namespace Prisma {
     scope?: boolean
     id_token?: boolean
     session_state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -6162,9 +6182,11 @@ export namespace Prisma {
     scope?: boolean
     id_token?: boolean
     session_state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "provider" | "providerAccountId" | "refresh_token" | "access_token" | "expires_at" | "token_type" | "scope" | "id_token" | "session_state", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "provider" | "providerAccountId" | "refresh_token" | "access_token" | "expires_at" | "token_type" | "scope" | "id_token" | "session_state" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6193,6 +6215,8 @@ export namespace Prisma {
       scope: string | null
       id_token: string | null
       session_state: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["account"]>
     composites: {}
   }
@@ -6629,6 +6653,8 @@ export namespace Prisma {
     readonly scope: FieldRef<"Account", 'String'>
     readonly id_token: FieldRef<"Account", 'String'>
     readonly session_state: FieldRef<"Account", 'String'>
+    readonly createdAt: FieldRef<"Account", 'DateTime'>
+    readonly updatedAt: FieldRef<"Account", 'DateTime'>
   }
     
 
@@ -17824,6 +17850,8 @@ export namespace Prisma {
     gaAccountId: string | null
     gaAccountName: string | null
     deleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaAccountMaxAggregateOutputType = {
@@ -17831,6 +17859,8 @@ export namespace Prisma {
     gaAccountId: string | null
     gaAccountName: string | null
     deleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaAccountCountAggregateOutputType = {
@@ -17838,6 +17868,8 @@ export namespace Prisma {
     gaAccountId: number
     gaAccountName: number
     deleted: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -17847,6 +17879,8 @@ export namespace Prisma {
     gaAccountId?: true
     gaAccountName?: true
     deleted?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type GaAccountMaxAggregateInputType = {
@@ -17854,6 +17888,8 @@ export namespace Prisma {
     gaAccountId?: true
     gaAccountName?: true
     deleted?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type GaAccountCountAggregateInputType = {
@@ -17861,6 +17897,8 @@ export namespace Prisma {
     gaAccountId?: true
     gaAccountName?: true
     deleted?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -17941,6 +17979,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted: boolean
+    createdAt: Date
+    updatedAt: Date
     _count: GaAccountCountAggregateOutputType | null
     _min: GaAccountMinAggregateOutputType | null
     _max: GaAccountMaxAggregateOutputType | null
@@ -17965,6 +18005,8 @@ export namespace Prisma {
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     conversations?: boolean | GaAccount$conversationsArgs<ExtArgs>
     gaProperties?: boolean | GaAccount$gaPropertiesArgs<ExtArgs>
     userToGaAccounts?: boolean | GaAccount$userToGaAccountsArgs<ExtArgs>
@@ -17976,6 +18018,8 @@ export namespace Prisma {
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["gaAccount"]>
 
   export type GaAccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -17983,6 +18027,8 @@ export namespace Prisma {
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["gaAccount"]>
 
   export type GaAccountSelectScalar = {
@@ -17990,9 +18036,11 @@ export namespace Prisma {
     gaAccountId?: boolean
     gaAccountName?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaAccountId" | "gaAccountName" | "deleted", ExtArgs["result"]["gaAccount"]>
+  export type GaAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaAccountId" | "gaAccountName" | "deleted" | "createdAt" | "updatedAt", ExtArgs["result"]["gaAccount"]>
   export type GaAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversations?: boolean | GaAccount$conversationsArgs<ExtArgs>
     gaProperties?: boolean | GaAccount$gaPropertiesArgs<ExtArgs>
@@ -18014,6 +18062,8 @@ export namespace Prisma {
       gaAccountId: string
       gaAccountName: string
       deleted: boolean
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["gaAccount"]>
     composites: {}
   }
@@ -18444,6 +18494,8 @@ export namespace Prisma {
     readonly gaAccountId: FieldRef<"GaAccount", 'String'>
     readonly gaAccountName: FieldRef<"GaAccount", 'String'>
     readonly deleted: FieldRef<"GaAccount", 'Boolean'>
+    readonly createdAt: FieldRef<"GaAccount", 'DateTime'>
+    readonly updatedAt: FieldRef<"GaAccount", 'DateTime'>
   }
     
 
@@ -18938,6 +18990,8 @@ export namespace Prisma {
     gaPropertyName: string | null
     gaAccountId: string | null
     deleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaPropertyMaxAggregateOutputType = {
@@ -18946,6 +19000,8 @@ export namespace Prisma {
     gaPropertyName: string | null
     gaAccountId: string | null
     deleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaPropertyCountAggregateOutputType = {
@@ -18954,6 +19010,8 @@ export namespace Prisma {
     gaPropertyName: number
     gaAccountId: number
     deleted: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -18964,6 +19022,8 @@ export namespace Prisma {
     gaPropertyName?: true
     gaAccountId?: true
     deleted?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type GaPropertyMaxAggregateInputType = {
@@ -18972,6 +19032,8 @@ export namespace Prisma {
     gaPropertyName?: true
     gaAccountId?: true
     deleted?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type GaPropertyCountAggregateInputType = {
@@ -18980,6 +19042,8 @@ export namespace Prisma {
     gaPropertyName?: true
     gaAccountId?: true
     deleted?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -19061,6 +19125,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted: boolean
+    createdAt: Date
+    updatedAt: Date
     _count: GaPropertyCountAggregateOutputType | null
     _min: GaPropertyMinAggregateOutputType | null
     _max: GaPropertyMaxAggregateOutputType | null
@@ -19086,6 +19152,8 @@ export namespace Prisma {
     gaPropertyName?: boolean
     gaAccountId?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     conversations?: boolean | GaProperty$conversationsArgs<ExtArgs>
     channelDaily?: boolean | GaProperty$channelDailyArgs<ExtArgs>
     imports?: boolean | GaProperty$importsArgs<ExtArgs>
@@ -19102,6 +19170,8 @@ export namespace Prisma {
     gaPropertyName?: boolean
     gaAccountId?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaProperty"]>
 
@@ -19111,6 +19181,8 @@ export namespace Prisma {
     gaPropertyName?: boolean
     gaAccountId?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     gaAccount?: boolean | GaAccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaProperty"]>
 
@@ -19120,9 +19192,11 @@ export namespace Prisma {
     gaPropertyName?: boolean
     gaAccountId?: boolean
     deleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GaPropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "gaPropertyName" | "gaAccountId" | "deleted", ExtArgs["result"]["gaProperty"]>
+  export type GaPropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "gaPropertyName" | "gaAccountId" | "deleted" | "createdAt" | "updatedAt", ExtArgs["result"]["gaProperty"]>
   export type GaPropertyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversations?: boolean | GaProperty$conversationsArgs<ExtArgs>
     channelDaily?: boolean | GaProperty$channelDailyArgs<ExtArgs>
@@ -19157,6 +19231,8 @@ export namespace Prisma {
       gaPropertyName: string
       gaAccountId: string
       deleted: boolean
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["gaProperty"]>
     composites: {}
   }
@@ -19592,6 +19668,8 @@ export namespace Prisma {
     readonly gaPropertyName: FieldRef<"GaProperty", 'String'>
     readonly gaAccountId: FieldRef<"GaProperty", 'String'>
     readonly deleted: FieldRef<"GaProperty", 'Boolean'>
+    readonly createdAt: FieldRef<"GaProperty", 'DateTime'>
+    readonly updatedAt: FieldRef<"GaProperty", 'DateTime'>
   }
     
 
@@ -21309,6 +21387,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaKpiDailyMaxAggregateOutputType = {
@@ -21322,6 +21401,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaKpiDailyCountAggregateOutputType = {
@@ -21335,6 +21415,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -21368,6 +21449,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaKpiDailyMaxAggregateInputType = {
@@ -21381,6 +21463,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaKpiDailyCountAggregateInputType = {
@@ -21394,6 +21477,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -21494,6 +21578,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: Date
+    updatedAt: Date
     _count: GaKpiDailyCountAggregateOutputType | null
     _avg: GaKpiDailyAvgAggregateOutputType | null
     _sum: GaKpiDailySumAggregateOutputType | null
@@ -21526,6 +21611,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaKpiDaily"]>
 
@@ -21540,6 +21626,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaKpiDaily"]>
 
@@ -21554,6 +21641,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaKpiDaily"]>
 
@@ -21568,9 +21656,10 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GaKpiDailyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "date" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt", ExtArgs["result"]["gaKpiDaily"]>
+  export type GaKpiDailyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "date" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt" | "updatedAt", ExtArgs["result"]["gaKpiDaily"]>
   export type GaKpiDailyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }
@@ -21597,6 +21686,7 @@ export namespace Prisma {
       goalCompletions: number
       goalCompletionRate: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["gaKpiDaily"]>
     composites: {}
   }
@@ -22031,6 +22121,7 @@ export namespace Prisma {
     readonly goalCompletions: FieldRef<"GaKpiDaily", 'Int'>
     readonly goalCompletionRate: FieldRef<"GaKpiDaily", 'Float'>
     readonly createdAt: FieldRef<"GaKpiDaily", 'DateTime'>
+    readonly updatedAt: FieldRef<"GaKpiDaily", 'DateTime'>
   }
     
 
@@ -22488,6 +22579,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaKpiMonthlyMaxAggregateOutputType = {
@@ -22501,6 +22593,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaKpiMonthlyCountAggregateOutputType = {
@@ -22514,6 +22607,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -22549,6 +22643,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaKpiMonthlyMaxAggregateInputType = {
@@ -22562,6 +22657,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaKpiMonthlyCountAggregateInputType = {
@@ -22575,6 +22671,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -22675,6 +22772,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: Date
+    updatedAt: Date
     _count: GaKpiMonthlyCountAggregateOutputType | null
     _avg: GaKpiMonthlyAvgAggregateOutputType | null
     _sum: GaKpiMonthlySumAggregateOutputType | null
@@ -22707,6 +22805,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaKpiMonthly"]>
 
@@ -22721,6 +22820,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaKpiMonthly"]>
 
@@ -22735,6 +22835,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaKpiMonthly"]>
 
@@ -22749,9 +22850,10 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GaKpiMonthlyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "month" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt", ExtArgs["result"]["gaKpiMonthly"]>
+  export type GaKpiMonthlyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "month" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt" | "updatedAt", ExtArgs["result"]["gaKpiMonthly"]>
   export type GaKpiMonthlyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }
@@ -22778,6 +22880,7 @@ export namespace Prisma {
       goalCompletions: number
       goalCompletionRate: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["gaKpiMonthly"]>
     composites: {}
   }
@@ -23212,6 +23315,7 @@ export namespace Prisma {
     readonly goalCompletions: FieldRef<"GaKpiMonthly", 'Int'>
     readonly goalCompletionRate: FieldRef<"GaKpiMonthly", 'Float'>
     readonly createdAt: FieldRef<"GaKpiMonthly", 'DateTime'>
+    readonly updatedAt: FieldRef<"GaKpiMonthly", 'DateTime'>
   }
     
 
@@ -23668,6 +23772,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaChannelDailyMaxAggregateOutputType = {
@@ -23682,6 +23787,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaChannelDailyCountAggregateOutputType = {
@@ -23696,6 +23802,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -23730,6 +23837,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaChannelDailyMaxAggregateInputType = {
@@ -23744,6 +23852,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaChannelDailyCountAggregateInputType = {
@@ -23758,6 +23867,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -23859,6 +23969,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: Date
+    updatedAt: Date
     _count: GaChannelDailyCountAggregateOutputType | null
     _avg: GaChannelDailyAvgAggregateOutputType | null
     _sum: GaChannelDailySumAggregateOutputType | null
@@ -23892,6 +24003,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaChannelDaily"]>
 
@@ -23907,6 +24019,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaChannelDaily"]>
 
@@ -23922,6 +24035,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaChannelDaily"]>
 
@@ -23937,9 +24051,10 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GaChannelDailyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "date" | "channelGroup" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt", ExtArgs["result"]["gaChannelDaily"]>
+  export type GaChannelDailyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "date" | "channelGroup" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt" | "updatedAt", ExtArgs["result"]["gaChannelDaily"]>
   export type GaChannelDailyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }
@@ -23967,6 +24082,7 @@ export namespace Prisma {
       goalCompletions: number
       goalCompletionRate: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["gaChannelDaily"]>
     composites: {}
   }
@@ -24402,6 +24518,7 @@ export namespace Prisma {
     readonly goalCompletions: FieldRef<"GaChannelDaily", 'Int'>
     readonly goalCompletionRate: FieldRef<"GaChannelDaily", 'Float'>
     readonly createdAt: FieldRef<"GaChannelDaily", 'DateTime'>
+    readonly updatedAt: FieldRef<"GaChannelDaily", 'DateTime'>
   }
     
 
@@ -24858,6 +24975,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaSourceDailyMaxAggregateOutputType = {
@@ -24872,6 +24990,7 @@ export namespace Prisma {
     goalCompletions: number | null
     goalCompletionRate: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type GaSourceDailyCountAggregateOutputType = {
@@ -24886,6 +25005,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -24920,6 +25040,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaSourceDailyMaxAggregateInputType = {
@@ -24934,6 +25055,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type GaSourceDailyCountAggregateInputType = {
@@ -24948,6 +25070,7 @@ export namespace Prisma {
     goalCompletions?: true
     goalCompletionRate?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -25049,6 +25172,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt: Date
+    updatedAt: Date
     _count: GaSourceDailyCountAggregateOutputType | null
     _avg: GaSourceDailyAvgAggregateOutputType | null
     _sum: GaSourceDailySumAggregateOutputType | null
@@ -25082,6 +25206,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaSourceDaily"]>
 
@@ -25097,6 +25222,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaSourceDaily"]>
 
@@ -25112,6 +25238,7 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gaSourceDaily"]>
 
@@ -25127,9 +25254,10 @@ export namespace Prisma {
     goalCompletions?: boolean
     goalCompletionRate?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type GaSourceDailyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "date" | "trafficSource" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt", ExtArgs["result"]["gaSourceDaily"]>
+  export type GaSourceDailyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gaPropertyId" | "date" | "trafficSource" | "sessions" | "screenPageViewsPerSession" | "engagementRate" | "avgSessionDurationSec" | "goalCompletions" | "goalCompletionRate" | "createdAt" | "updatedAt", ExtArgs["result"]["gaSourceDaily"]>
   export type GaSourceDailyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     gaProperty?: boolean | GaPropertyDefaultArgs<ExtArgs>
   }
@@ -25157,6 +25285,7 @@ export namespace Prisma {
       goalCompletions: number
       goalCompletionRate: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["gaSourceDaily"]>
     composites: {}
   }
@@ -25592,6 +25721,7 @@ export namespace Prisma {
     readonly goalCompletions: FieldRef<"GaSourceDaily", 'Int'>
     readonly goalCompletionRate: FieldRef<"GaSourceDaily", 'Float'>
     readonly createdAt: FieldRef<"GaSourceDaily", 'DateTime'>
+    readonly updatedAt: FieldRef<"GaSourceDaily", 'DateTime'>
   }
     
 
@@ -30324,6 +30454,7 @@ export namespace Prisma {
     content: string | null
     isRead: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type NotificationMaxAggregateOutputType = {
@@ -30334,6 +30465,7 @@ export namespace Prisma {
     content: string | null
     isRead: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type NotificationCountAggregateOutputType = {
@@ -30344,6 +30476,7 @@ export namespace Prisma {
     content: number
     isRead: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -30356,6 +30489,7 @@ export namespace Prisma {
     content?: true
     isRead?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type NotificationMaxAggregateInputType = {
@@ -30366,6 +30500,7 @@ export namespace Prisma {
     content?: true
     isRead?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type NotificationCountAggregateInputType = {
@@ -30376,6 +30511,7 @@ export namespace Prisma {
     content?: true
     isRead?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -30459,6 +30595,7 @@ export namespace Prisma {
     content: string
     isRead: boolean
     createdAt: Date
+    updatedAt: Date
     _count: NotificationCountAggregateOutputType | null
     _min: NotificationMinAggregateOutputType | null
     _max: NotificationMaxAggregateOutputType | null
@@ -30486,6 +30623,7 @@ export namespace Prisma {
     content?: boolean
     isRead?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
 
@@ -30497,6 +30635,7 @@ export namespace Prisma {
     content?: boolean
     isRead?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
 
@@ -30508,6 +30647,7 @@ export namespace Prisma {
     content?: boolean
     isRead?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notification"]>
 
@@ -30519,9 +30659,10 @@ export namespace Prisma {
     content?: boolean
     isRead?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "title" | "content" | "isRead" | "createdAt", ExtArgs["result"]["notification"]>
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "title" | "content" | "isRead" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
   export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -30545,6 +30686,7 @@ export namespace Prisma {
       content: string
       isRead: boolean
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["notification"]>
     composites: {}
   }
@@ -30976,6 +31118,7 @@ export namespace Prisma {
     readonly content: FieldRef<"Notification", 'String'>
     readonly isRead: FieldRef<"Notification", 'Boolean'>
     readonly createdAt: FieldRef<"Notification", 'DateTime'>
+    readonly updatedAt: FieldRef<"Notification", 'DateTime'>
   }
     
 
@@ -31450,6 +31593,7 @@ export namespace Prisma {
     yearConversionsDiff: number | null
     yearBouncesDiff: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ParsedPieGraphDataMaxAggregateOutputType = {
@@ -31470,6 +31614,7 @@ export namespace Prisma {
     yearConversionsDiff: number | null
     yearBouncesDiff: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ParsedPieGraphDataCountAggregateOutputType = {
@@ -31490,6 +31635,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -31542,6 +31688,7 @@ export namespace Prisma {
     yearConversionsDiff?: true
     yearBouncesDiff?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ParsedPieGraphDataMaxAggregateInputType = {
@@ -31562,6 +31709,7 @@ export namespace Prisma {
     yearConversionsDiff?: true
     yearBouncesDiff?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ParsedPieGraphDataCountAggregateInputType = {
@@ -31582,6 +31730,7 @@ export namespace Prisma {
     yearConversionsDiff?: true
     yearBouncesDiff?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -31689,6 +31838,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt: Date
+    updatedAt: Date
     _count: ParsedPieGraphDataCountAggregateOutputType | null
     _avg: ParsedPieGraphDataAvgAggregateOutputType | null
     _sum: ParsedPieGraphDataSumAggregateOutputType | null
@@ -31728,6 +31878,7 @@ export namespace Prisma {
     yearConversionsDiff?: boolean
     yearBouncesDiff?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     query?: boolean | QueryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parsedPieGraphData"]>
 
@@ -31749,6 +31900,7 @@ export namespace Prisma {
     yearConversionsDiff?: boolean
     yearBouncesDiff?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     query?: boolean | QueryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parsedPieGraphData"]>
 
@@ -31770,6 +31922,7 @@ export namespace Prisma {
     yearConversionsDiff?: boolean
     yearBouncesDiff?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     query?: boolean | QueryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parsedPieGraphData"]>
 
@@ -31791,9 +31944,10 @@ export namespace Prisma {
     yearConversionsDiff?: boolean
     yearBouncesDiff?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ParsedPieGraphDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "queryId" | "channel" | "source" | "sessions" | "conversionRate" | "conversions" | "bounces" | "prevSessionsDiff" | "prevConversionRateDiff" | "prevConversionsDiff" | "prevBouncesDiff" | "yearSessionsDiff" | "yearConversionRateDiff" | "yearConversionsDiff" | "yearBouncesDiff" | "createdAt", ExtArgs["result"]["parsedPieGraphData"]>
+  export type ParsedPieGraphDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "queryId" | "channel" | "source" | "sessions" | "conversionRate" | "conversions" | "bounces" | "prevSessionsDiff" | "prevConversionRateDiff" | "prevConversionsDiff" | "prevBouncesDiff" | "yearSessionsDiff" | "yearConversionRateDiff" | "yearConversionsDiff" | "yearBouncesDiff" | "createdAt" | "updatedAt", ExtArgs["result"]["parsedPieGraphData"]>
   export type ParsedPieGraphDataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     query?: boolean | QueryDefaultArgs<ExtArgs>
   }
@@ -31827,6 +31981,7 @@ export namespace Prisma {
       yearConversionsDiff: number
       yearBouncesDiff: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["parsedPieGraphData"]>
     composites: {}
   }
@@ -32268,6 +32423,7 @@ export namespace Prisma {
     readonly yearConversionsDiff: FieldRef<"ParsedPieGraphData", 'Float'>
     readonly yearBouncesDiff: FieldRef<"ParsedPieGraphData", 'Float'>
     readonly createdAt: FieldRef<"ParsedPieGraphData", 'DateTime'>
+    readonly updatedAt: FieldRef<"ParsedPieGraphData", 'DateTime'>
   }
     
 
@@ -60640,7 +60796,9 @@ export namespace Prisma {
     token_type: 'token_type',
     scope: 'scope',
     id_token: 'id_token',
-    session_state: 'session_state'
+    session_state: 'session_state',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -60800,7 +60958,9 @@ export namespace Prisma {
     id: 'id',
     gaAccountId: 'gaAccountId',
     gaAccountName: 'gaAccountName',
-    deleted: 'deleted'
+    deleted: 'deleted',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GaAccountScalarFieldEnum = (typeof GaAccountScalarFieldEnum)[keyof typeof GaAccountScalarFieldEnum]
@@ -60811,7 +60971,9 @@ export namespace Prisma {
     gaPropertyId: 'gaPropertyId',
     gaPropertyName: 'gaPropertyName',
     gaAccountId: 'gaAccountId',
-    deleted: 'deleted'
+    deleted: 'deleted',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GaPropertyScalarFieldEnum = (typeof GaPropertyScalarFieldEnum)[keyof typeof GaPropertyScalarFieldEnum]
@@ -60842,7 +61004,8 @@ export namespace Prisma {
     avgSessionDurationSec: 'avgSessionDurationSec',
     goalCompletions: 'goalCompletions',
     goalCompletionRate: 'goalCompletionRate',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GaKpiDailyScalarFieldEnum = (typeof GaKpiDailyScalarFieldEnum)[keyof typeof GaKpiDailyScalarFieldEnum]
@@ -60858,7 +61021,8 @@ export namespace Prisma {
     avgSessionDurationSec: 'avgSessionDurationSec',
     goalCompletions: 'goalCompletions',
     goalCompletionRate: 'goalCompletionRate',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GaKpiMonthlyScalarFieldEnum = (typeof GaKpiMonthlyScalarFieldEnum)[keyof typeof GaKpiMonthlyScalarFieldEnum]
@@ -60875,7 +61039,8 @@ export namespace Prisma {
     avgSessionDurationSec: 'avgSessionDurationSec',
     goalCompletions: 'goalCompletions',
     goalCompletionRate: 'goalCompletionRate',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GaChannelDailyScalarFieldEnum = (typeof GaChannelDailyScalarFieldEnum)[keyof typeof GaChannelDailyScalarFieldEnum]
@@ -60892,7 +61057,8 @@ export namespace Prisma {
     avgSessionDurationSec: 'avgSessionDurationSec',
     goalCompletions: 'goalCompletions',
     goalCompletionRate: 'goalCompletionRate',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type GaSourceDailyScalarFieldEnum = (typeof GaSourceDailyScalarFieldEnum)[keyof typeof GaSourceDailyScalarFieldEnum]
@@ -60951,7 +61117,8 @@ export namespace Prisma {
     title: 'title',
     content: 'content',
     isRead: 'isRead',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
@@ -60974,7 +61141,8 @@ export namespace Prisma {
     yearConversionRateDiff: 'yearConversionRateDiff',
     yearConversionsDiff: 'yearConversionsDiff',
     yearBouncesDiff: 'yearBouncesDiff',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ParsedPieGraphDataScalarFieldEnum = (typeof ParsedPieGraphDataScalarFieldEnum)[keyof typeof ParsedPieGraphDataScalarFieldEnum]
@@ -61441,20 +61609,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -61465,6 +61619,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -61592,6 +61760,8 @@ export namespace Prisma {
     scope?: StringNullableFilter<"Account"> | string | null
     id_token?: StringNullableFilter<"Account"> | string | null
     session_state?: StringNullableFilter<"Account"> | string | null
+    createdAt?: DateTimeFilter<"Account"> | Date | string
+    updatedAt?: DateTimeFilter<"Account"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -61608,6 +61778,8 @@ export namespace Prisma {
     scope?: SortOrderInput | SortOrder
     id_token?: SortOrderInput | SortOrder
     session_state?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -61628,6 +61800,8 @@ export namespace Prisma {
     scope?: StringNullableFilter<"Account"> | string | null
     id_token?: StringNullableFilter<"Account"> | string | null
     session_state?: StringNullableFilter<"Account"> | string | null
+    createdAt?: DateTimeFilter<"Account"> | Date | string
+    updatedAt?: DateTimeFilter<"Account"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "provider_providerAccountId">
 
@@ -61644,6 +61818,8 @@ export namespace Prisma {
     scope?: SortOrderInput | SortOrder
     id_token?: SortOrderInput | SortOrder
     session_state?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: AccountCountOrderByAggregateInput
     _avg?: AccountAvgOrderByAggregateInput
     _max?: AccountMaxOrderByAggregateInput
@@ -61667,6 +61843,8 @@ export namespace Prisma {
     scope?: StringNullableWithAggregatesFilter<"Account"> | string | null
     id_token?: StringNullableWithAggregatesFilter<"Account"> | string | null
     session_state?: StringNullableWithAggregatesFilter<"Account"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
   }
 
   export type ClientSatisfactionWhereInput = {
@@ -62474,6 +62652,8 @@ export namespace Prisma {
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
     deleted?: BoolFilter<"GaAccount"> | boolean
+    createdAt?: DateTimeFilter<"GaAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"GaAccount"> | Date | string
     conversations?: ConversationListRelationFilter
     gaProperties?: GaPropertyListRelationFilter
     userToGaAccounts?: UserToGaAccountListRelationFilter
@@ -62484,6 +62664,8 @@ export namespace Prisma {
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     conversations?: ConversationOrderByRelationAggregateInput
     gaProperties?: GaPropertyOrderByRelationAggregateInput
     userToGaAccounts?: UserToGaAccountOrderByRelationAggregateInput
@@ -62497,6 +62679,8 @@ export namespace Prisma {
     gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
     deleted?: BoolFilter<"GaAccount"> | boolean
+    createdAt?: DateTimeFilter<"GaAccount"> | Date | string
+    updatedAt?: DateTimeFilter<"GaAccount"> | Date | string
     conversations?: ConversationListRelationFilter
     gaProperties?: GaPropertyListRelationFilter
     userToGaAccounts?: UserToGaAccountListRelationFilter
@@ -62507,6 +62691,8 @@ export namespace Prisma {
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GaAccountCountOrderByAggregateInput
     _max?: GaAccountMaxOrderByAggregateInput
     _min?: GaAccountMinOrderByAggregateInput
@@ -62520,6 +62706,8 @@ export namespace Prisma {
     gaAccountId?: StringWithAggregatesFilter<"GaAccount"> | string
     gaAccountName?: StringWithAggregatesFilter<"GaAccount"> | string
     deleted?: BoolWithAggregatesFilter<"GaAccount"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"GaAccount"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GaAccount"> | Date | string
   }
 
   export type GaPropertyWhereInput = {
@@ -62531,6 +62719,8 @@ export namespace Prisma {
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
     deleted?: BoolFilter<"GaProperty"> | boolean
+    createdAt?: DateTimeFilter<"GaProperty"> | Date | string
+    updatedAt?: DateTimeFilter<"GaProperty"> | Date | string
     conversations?: ConversationListRelationFilter
     channelDaily?: GaChannelDailyListRelationFilter
     imports?: GaImportRunListRelationFilter
@@ -62546,6 +62736,8 @@ export namespace Prisma {
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     conversations?: ConversationOrderByRelationAggregateInput
     channelDaily?: GaChannelDailyOrderByRelationAggregateInput
     imports?: GaImportRunOrderByRelationAggregateInput
@@ -62564,6 +62756,8 @@ export namespace Prisma {
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
     deleted?: BoolFilter<"GaProperty"> | boolean
+    createdAt?: DateTimeFilter<"GaProperty"> | Date | string
+    updatedAt?: DateTimeFilter<"GaProperty"> | Date | string
     conversations?: ConversationListRelationFilter
     channelDaily?: GaChannelDailyListRelationFilter
     imports?: GaImportRunListRelationFilter
@@ -62579,6 +62773,8 @@ export namespace Prisma {
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GaPropertyCountOrderByAggregateInput
     _max?: GaPropertyMaxOrderByAggregateInput
     _min?: GaPropertyMinOrderByAggregateInput
@@ -62593,6 +62789,8 @@ export namespace Prisma {
     gaPropertyName?: StringWithAggregatesFilter<"GaProperty"> | string
     gaAccountId?: StringWithAggregatesFilter<"GaProperty"> | string
     deleted?: BoolWithAggregatesFilter<"GaProperty"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"GaProperty"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GaProperty"> | Date | string
   }
 
   export type GaImportRunWhereInput = {
@@ -62687,6 +62885,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaKpiDaily"> | number
     goalCompletionRate?: FloatFilter<"GaKpiDaily"> | number
     createdAt?: DateTimeFilter<"GaKpiDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaKpiDaily"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }
 
@@ -62701,6 +62900,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     gaProperty?: GaPropertyOrderByWithRelationInput
   }
 
@@ -62719,6 +62919,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaKpiDaily"> | number
     goalCompletionRate?: FloatFilter<"GaKpiDaily"> | number
     createdAt?: DateTimeFilter<"GaKpiDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaKpiDaily"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }, "id" | "gaPropertyId_date">
 
@@ -62733,6 +62934,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GaKpiDailyCountOrderByAggregateInput
     _avg?: GaKpiDailyAvgOrderByAggregateInput
     _max?: GaKpiDailyMaxOrderByAggregateInput
@@ -62754,6 +62956,7 @@ export namespace Prisma {
     goalCompletions?: IntWithAggregatesFilter<"GaKpiDaily"> | number
     goalCompletionRate?: FloatWithAggregatesFilter<"GaKpiDaily"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GaKpiDaily"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GaKpiDaily"> | Date | string
   }
 
   export type GaKpiMonthlyWhereInput = {
@@ -62770,6 +62973,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaKpiMonthly"> | number
     goalCompletionRate?: FloatFilter<"GaKpiMonthly"> | number
     createdAt?: DateTimeFilter<"GaKpiMonthly"> | Date | string
+    updatedAt?: DateTimeFilter<"GaKpiMonthly"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }
 
@@ -62784,6 +62988,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     gaProperty?: GaPropertyOrderByWithRelationInput
   }
 
@@ -62802,6 +63007,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaKpiMonthly"> | number
     goalCompletionRate?: FloatFilter<"GaKpiMonthly"> | number
     createdAt?: DateTimeFilter<"GaKpiMonthly"> | Date | string
+    updatedAt?: DateTimeFilter<"GaKpiMonthly"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }, "id" | "gaPropertyId_month">
 
@@ -62816,6 +63022,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GaKpiMonthlyCountOrderByAggregateInput
     _avg?: GaKpiMonthlyAvgOrderByAggregateInput
     _max?: GaKpiMonthlyMaxOrderByAggregateInput
@@ -62837,6 +63044,7 @@ export namespace Prisma {
     goalCompletions?: IntWithAggregatesFilter<"GaKpiMonthly"> | number
     goalCompletionRate?: FloatWithAggregatesFilter<"GaKpiMonthly"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GaKpiMonthly"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GaKpiMonthly"> | Date | string
   }
 
   export type GaChannelDailyWhereInput = {
@@ -62854,6 +63062,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaChannelDaily"> | number
     goalCompletionRate?: FloatFilter<"GaChannelDaily"> | number
     createdAt?: DateTimeFilter<"GaChannelDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaChannelDaily"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }
 
@@ -62869,6 +63078,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     gaProperty?: GaPropertyOrderByWithRelationInput
   }
 
@@ -62888,6 +63098,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaChannelDaily"> | number
     goalCompletionRate?: FloatFilter<"GaChannelDaily"> | number
     createdAt?: DateTimeFilter<"GaChannelDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaChannelDaily"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }, "id" | "gaPropertyId_date_channelGroup">
 
@@ -62903,6 +63114,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GaChannelDailyCountOrderByAggregateInput
     _avg?: GaChannelDailyAvgOrderByAggregateInput
     _max?: GaChannelDailyMaxOrderByAggregateInput
@@ -62925,6 +63137,7 @@ export namespace Prisma {
     goalCompletions?: IntWithAggregatesFilter<"GaChannelDaily"> | number
     goalCompletionRate?: FloatWithAggregatesFilter<"GaChannelDaily"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GaChannelDaily"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GaChannelDaily"> | Date | string
   }
 
   export type GaSourceDailyWhereInput = {
@@ -62942,6 +63155,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaSourceDaily"> | number
     goalCompletionRate?: FloatFilter<"GaSourceDaily"> | number
     createdAt?: DateTimeFilter<"GaSourceDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaSourceDaily"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }
 
@@ -62957,6 +63171,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     gaProperty?: GaPropertyOrderByWithRelationInput
   }
 
@@ -62976,6 +63191,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaSourceDaily"> | number
     goalCompletionRate?: FloatFilter<"GaSourceDaily"> | number
     createdAt?: DateTimeFilter<"GaSourceDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaSourceDaily"> | Date | string
     gaProperty?: XOR<GaPropertyScalarRelationFilter, GaPropertyWhereInput>
   }, "id" | "gaPropertyId_date_trafficSource">
 
@@ -62991,6 +63207,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: GaSourceDailyCountOrderByAggregateInput
     _avg?: GaSourceDailyAvgOrderByAggregateInput
     _max?: GaSourceDailyMaxOrderByAggregateInput
@@ -63013,6 +63230,7 @@ export namespace Prisma {
     goalCompletions?: IntWithAggregatesFilter<"GaSourceDaily"> | number
     goalCompletionRate?: FloatWithAggregatesFilter<"GaSourceDaily"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GaSourceDaily"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GaSourceDaily"> | Date | string
   }
 
   export type SessionWhereInput = {
@@ -63266,6 +63484,7 @@ export namespace Prisma {
     content?: StringFilter<"Notification"> | string
     isRead?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -63277,6 +63496,7 @@ export namespace Prisma {
     content?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -63291,6 +63511,7 @@ export namespace Prisma {
     content?: StringFilter<"Notification"> | string
     isRead?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -63302,6 +63523,7 @@ export namespace Prisma {
     content?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: NotificationCountOrderByAggregateInput
     _max?: NotificationMaxOrderByAggregateInput
     _min?: NotificationMinOrderByAggregateInput
@@ -63318,6 +63540,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Notification"> | string
     isRead?: BoolWithAggregatesFilter<"Notification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
   }
 
   export type ParsedPieGraphDataWhereInput = {
@@ -63341,6 +63564,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFilter<"ParsedPieGraphData"> | number
     yearBouncesDiff?: FloatFilter<"ParsedPieGraphData"> | number
     createdAt?: DateTimeFilter<"ParsedPieGraphData"> | Date | string
+    updatedAt?: DateTimeFilter<"ParsedPieGraphData"> | Date | string
     query?: XOR<QueryScalarRelationFilter, QueryWhereInput>
   }
 
@@ -63362,6 +63586,7 @@ export namespace Prisma {
     yearConversionsDiff?: SortOrder
     yearBouncesDiff?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     query?: QueryOrderByWithRelationInput
   }
 
@@ -63386,6 +63611,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFilter<"ParsedPieGraphData"> | number
     yearBouncesDiff?: FloatFilter<"ParsedPieGraphData"> | number
     createdAt?: DateTimeFilter<"ParsedPieGraphData"> | Date | string
+    updatedAt?: DateTimeFilter<"ParsedPieGraphData"> | Date | string
     query?: XOR<QueryScalarRelationFilter, QueryWhereInput>
   }, "id">
 
@@ -63407,6 +63633,7 @@ export namespace Prisma {
     yearConversionsDiff?: SortOrder
     yearBouncesDiff?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ParsedPieGraphDataCountOrderByAggregateInput
     _avg?: ParsedPieGraphDataAvgOrderByAggregateInput
     _max?: ParsedPieGraphDataMaxOrderByAggregateInput
@@ -63435,6 +63662,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatWithAggregatesFilter<"ParsedPieGraphData"> | number
     yearBouncesDiff?: FloatWithAggregatesFilter<"ParsedPieGraphData"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ParsedPieGraphData"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ParsedPieGraphData"> | Date | string
   }
 
   export type ParsedQueryDataWhereInput = {
@@ -65541,6 +65769,8 @@ export namespace Prisma {
     scope?: string | null
     id_token?: string | null
     session_state?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAccountsInput
   }
 
@@ -65557,6 +65787,8 @@ export namespace Prisma {
     scope?: string | null
     id_token?: string | null
     session_state?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountUpdateInput = {
@@ -65571,6 +65803,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAccountsNestedInput
   }
 
@@ -65587,6 +65821,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateManyInput = {
@@ -65602,6 +65838,8 @@ export namespace Prisma {
     scope?: string | null
     id_token?: string | null
     session_state?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountUpdateManyMutationInput = {
@@ -65616,6 +65854,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -65631,6 +65871,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientSatisfactionCreateInput = {
@@ -66523,6 +66765,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
     userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutGaAccountInput
@@ -66533,6 +66777,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput
@@ -66543,6 +66789,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
     userToGaAccounts?: UserToGaAccountUpdateManyWithoutGaAccountNestedInput
@@ -66553,6 +66801,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput
@@ -66563,6 +66813,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaAccountUpdateManyMutationInput = {
@@ -66570,6 +66822,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaAccountUncheckedUpdateManyInput = {
@@ -66577,6 +66831,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaPropertyCreateInput = {
@@ -66584,6 +66840,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -66599,6 +66857,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -66612,6 +66872,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -66627,6 +66889,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -66641,6 +66905,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaPropertyUpdateManyMutationInput = {
@@ -66648,6 +66914,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaPropertyUncheckedUpdateManyInput = {
@@ -66656,6 +66924,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaImportRunCreateInput = {
@@ -66750,6 +67020,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
     gaProperty: GaPropertyCreateNestedOneWithoutKpiDailyInput
   }
 
@@ -66764,6 +67035,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiDailyUpdateInput = {
@@ -66776,6 +67048,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaProperty?: GaPropertyUpdateOneRequiredWithoutKpiDailyNestedInput
   }
 
@@ -66790,6 +67063,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiDailyCreateManyInput = {
@@ -66803,6 +67077,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiDailyUpdateManyMutationInput = {
@@ -66815,6 +67090,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiDailyUncheckedUpdateManyInput = {
@@ -66828,6 +67104,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiMonthlyCreateInput = {
@@ -66840,6 +67117,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
     gaProperty: GaPropertyCreateNestedOneWithoutKpiMonthlyInput
   }
 
@@ -66854,6 +67132,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiMonthlyUpdateInput = {
@@ -66866,6 +67145,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaProperty?: GaPropertyUpdateOneRequiredWithoutKpiMonthlyNestedInput
   }
 
@@ -66880,6 +67160,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiMonthlyCreateManyInput = {
@@ -66893,6 +67174,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiMonthlyUpdateManyMutationInput = {
@@ -66905,6 +67187,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiMonthlyUncheckedUpdateManyInput = {
@@ -66918,6 +67201,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaChannelDailyCreateInput = {
@@ -66931,6 +67215,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
     gaProperty: GaPropertyCreateNestedOneWithoutChannelDailyInput
   }
 
@@ -66946,6 +67231,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaChannelDailyUpdateInput = {
@@ -66959,6 +67245,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaProperty?: GaPropertyUpdateOneRequiredWithoutChannelDailyNestedInput
   }
 
@@ -66974,6 +67261,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaChannelDailyCreateManyInput = {
@@ -66988,6 +67276,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaChannelDailyUpdateManyMutationInput = {
@@ -67001,6 +67290,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaChannelDailyUncheckedUpdateManyInput = {
@@ -67015,6 +67305,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaSourceDailyCreateInput = {
@@ -67028,6 +67319,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
     gaProperty: GaPropertyCreateNestedOneWithoutSourceDailyInput
   }
 
@@ -67043,6 +67335,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaSourceDailyUpdateInput = {
@@ -67056,6 +67349,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaProperty?: GaPropertyUpdateOneRequiredWithoutSourceDailyNestedInput
   }
 
@@ -67071,6 +67365,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaSourceDailyCreateManyInput = {
@@ -67085,6 +67380,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaSourceDailyUpdateManyMutationInput = {
@@ -67098,6 +67394,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaSourceDailyUncheckedUpdateManyInput = {
@@ -67112,6 +67409,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateInput = {
@@ -67367,6 +67665,7 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutNotificationsInput
   }
 
@@ -67378,6 +67677,7 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationUpdateInput = {
@@ -67387,6 +67687,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
   }
 
@@ -67398,6 +67699,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationCreateManyInput = {
@@ -67408,6 +67710,7 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationUpdateManyMutationInput = {
@@ -67417,6 +67720,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateManyInput = {
@@ -67427,6 +67731,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedPieGraphDataCreateInput = {
@@ -67446,6 +67751,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt?: Date | string
+    updatedAt?: Date | string
     query: QueryCreateNestedOneWithoutParsedPieDataInput
   }
 
@@ -67467,6 +67773,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ParsedPieGraphDataUpdateInput = {
@@ -67486,6 +67793,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     query?: QueryUpdateOneRequiredWithoutParsedPieDataNestedInput
   }
 
@@ -67507,6 +67815,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedPieGraphDataCreateManyInput = {
@@ -67527,6 +67836,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ParsedPieGraphDataUpdateManyMutationInput = {
@@ -67546,6 +67856,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedPieGraphDataUncheckedUpdateManyInput = {
@@ -67566,6 +67877,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedQueryDataCreateInput = {
@@ -68047,8 +68359,8 @@ export namespace Prisma {
     postCreatedTime: Date | string
     postSentTime: Date | string
     postLastUpdated: Date | string
-    createdAt: Date | string
-    updatedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutFacebookPostsInput
   }
 
@@ -68063,8 +68375,8 @@ export namespace Prisma {
     postCreatedTime: Date | string
     postSentTime: Date | string
     postLastUpdated: Date | string
-    createdAt: Date | string
-    updatedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SproutFacebookPostUpdateInput = {
@@ -68108,8 +68420,8 @@ export namespace Prisma {
     postCreatedTime: Date | string
     postSentTime: Date | string
     postLastUpdated: Date | string
-    createdAt: Date | string
-    updatedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SproutFacebookPostUpdateManyMutationInput = {
@@ -69943,6 +70255,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -69971,6 +70294,8 @@ export namespace Prisma {
     scope?: SortOrder
     id_token?: SortOrder
     session_state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AccountAvgOrderByAggregateInput = {
@@ -69990,6 +70315,8 @@ export namespace Prisma {
     scope?: SortOrder
     id_token?: SortOrder
     session_state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AccountMinOrderByAggregateInput = {
@@ -70005,6 +70332,8 @@ export namespace Prisma {
     scope?: SortOrder
     id_token?: SortOrder
     session_state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AccountSumOrderByAggregateInput = {
@@ -70063,6 +70392,20 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -70072,17 +70415,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type ClientSatisfactionCountOrderByAggregateInput = {
@@ -70134,20 +70466,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type UserListRelationFilter = {
@@ -70773,6 +71091,8 @@ export namespace Prisma {
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaAccountMaxOrderByAggregateInput = {
@@ -70780,6 +71100,8 @@ export namespace Prisma {
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaAccountMinOrderByAggregateInput = {
@@ -70787,6 +71109,8 @@ export namespace Prisma {
     gaAccountId?: SortOrder
     gaAccountName?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaChannelDailyListRelationFilter = {
@@ -70850,6 +71174,8 @@ export namespace Prisma {
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaPropertyMaxOrderByAggregateInput = {
@@ -70858,6 +71184,8 @@ export namespace Prisma {
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaPropertyMinOrderByAggregateInput = {
@@ -70866,6 +71194,8 @@ export namespace Prisma {
     gaPropertyName?: SortOrder
     gaAccountId?: SortOrder
     deleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumImportStatusFilter<$PrismaModel = never> = {
@@ -70942,6 +71272,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaKpiDailyAvgOrderByAggregateInput = {
@@ -70964,6 +71295,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaKpiDailyMinOrderByAggregateInput = {
@@ -70977,6 +71309,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaKpiDailySumOrderByAggregateInput = {
@@ -71004,6 +71337,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaKpiMonthlyAvgOrderByAggregateInput = {
@@ -71027,6 +71361,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaKpiMonthlyMinOrderByAggregateInput = {
@@ -71040,6 +71375,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaKpiMonthlySumOrderByAggregateInput = {
@@ -71070,6 +71406,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaChannelDailyAvgOrderByAggregateInput = {
@@ -71093,6 +71430,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaChannelDailyMinOrderByAggregateInput = {
@@ -71107,6 +71445,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaChannelDailySumOrderByAggregateInput = {
@@ -71136,6 +71475,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaSourceDailyAvgOrderByAggregateInput = {
@@ -71159,6 +71499,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaSourceDailyMinOrderByAggregateInput = {
@@ -71173,6 +71514,7 @@ export namespace Prisma {
     goalCompletions?: SortOrder
     goalCompletionRate?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type GaSourceDailySumOrderByAggregateInput = {
@@ -71331,6 +71673,7 @@ export namespace Prisma {
     content?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotificationMaxOrderByAggregateInput = {
@@ -71341,6 +71684,7 @@ export namespace Prisma {
     content?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type NotificationMinOrderByAggregateInput = {
@@ -71351,6 +71695,7 @@ export namespace Prisma {
     content?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -71386,6 +71731,7 @@ export namespace Prisma {
     yearConversionsDiff?: SortOrder
     yearBouncesDiff?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ParsedPieGraphDataAvgOrderByAggregateInput = {
@@ -71421,6 +71767,7 @@ export namespace Prisma {
     yearConversionsDiff?: SortOrder
     yearBouncesDiff?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ParsedPieGraphDataMinOrderByAggregateInput = {
@@ -71441,6 +71788,7 @@ export namespace Prisma {
     yearConversionsDiff?: SortOrder
     yearBouncesDiff?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ParsedPieGraphDataSumOrderByAggregateInput = {
@@ -73166,6 +73514,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -73192,10 +73544,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserUpdateOneRequiredWithoutReceivedRatingsNestedInput = {
@@ -76430,6 +76778,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -76502,6 +76861,20 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -76511,17 +76884,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -76538,20 +76900,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -77412,6 +77760,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
     userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutGaAccountInput
   }
@@ -77421,6 +77771,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput
   }
@@ -77435,6 +77787,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyCreateNestedManyWithoutGaPropertyInput
@@ -77449,6 +77803,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -77677,6 +78033,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
     userToGaAccounts?: UserToGaAccountUpdateManyWithoutGaAccountNestedInput
   }
@@ -77686,6 +78044,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput
   }
@@ -77706,6 +78066,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUpdateManyWithoutGaPropertyNestedInput
@@ -77720,6 +78082,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -78792,6 +79156,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -78805,6 +79171,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -78904,6 +79272,8 @@ export namespace Prisma {
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
     deleted?: BoolFilter<"GaProperty"> | boolean
+    createdAt?: DateTimeFilter<"GaProperty"> | Date | string
+    updatedAt?: DateTimeFilter<"GaProperty"> | Date | string
   }
 
   export type UserToGaAccountUpsertWithWhereUniqueWithoutGaAccountInput = {
@@ -78980,6 +79350,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaChannelDailyUncheckedCreateWithoutGaPropertyInput = {
@@ -78993,6 +79364,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaChannelDailyCreateOrConnectWithoutGaPropertyInput = {
@@ -79047,6 +79419,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiDailyUncheckedCreateWithoutGaPropertyInput = {
@@ -79059,6 +79432,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiDailyCreateOrConnectWithoutGaPropertyInput = {
@@ -79081,6 +79455,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiMonthlyUncheckedCreateWithoutGaPropertyInput = {
@@ -79093,6 +79468,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiMonthlyCreateOrConnectWithoutGaPropertyInput = {
@@ -79110,6 +79486,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
     userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutGaAccountInput
   }
@@ -79119,6 +79497,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutGaAccountInput
   }
@@ -79139,6 +79519,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaSourceDailyUncheckedCreateWithoutGaPropertyInput = {
@@ -79152,6 +79533,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaSourceDailyCreateOrConnectWithoutGaPropertyInput = {
@@ -79211,6 +79593,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaChannelDaily"> | number
     goalCompletionRate?: FloatFilter<"GaChannelDaily"> | number
     createdAt?: DateTimeFilter<"GaChannelDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaChannelDaily"> | Date | string
   }
 
   export type GaImportRunUpsertWithWhereUniqueWithoutGaPropertyInput = {
@@ -79274,6 +79657,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaKpiDaily"> | number
     goalCompletionRate?: FloatFilter<"GaKpiDaily"> | number
     createdAt?: DateTimeFilter<"GaKpiDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaKpiDaily"> | Date | string
   }
 
   export type GaKpiMonthlyUpsertWithWhereUniqueWithoutGaPropertyInput = {
@@ -79306,6 +79690,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaKpiMonthly"> | number
     goalCompletionRate?: FloatFilter<"GaKpiMonthly"> | number
     createdAt?: DateTimeFilter<"GaKpiMonthly"> | Date | string
+    updatedAt?: DateTimeFilter<"GaKpiMonthly"> | Date | string
   }
 
   export type GaAccountUpsertWithoutGaPropertiesInput = {
@@ -79324,6 +79709,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
     userToGaAccounts?: UserToGaAccountUpdateManyWithoutGaAccountNestedInput
   }
@@ -79333,6 +79720,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutGaAccountNestedInput
   }
@@ -79368,6 +79757,7 @@ export namespace Prisma {
     goalCompletions?: IntFilter<"GaSourceDaily"> | number
     goalCompletionRate?: FloatFilter<"GaSourceDaily"> | number
     createdAt?: DateTimeFilter<"GaSourceDaily"> | Date | string
+    updatedAt?: DateTimeFilter<"GaSourceDaily"> | Date | string
   }
 
   export type GaPropertyCreateWithoutImportsInput = {
@@ -79375,6 +79765,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyCreateNestedManyWithoutGaPropertyInput
@@ -79389,6 +79781,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -79492,6 +79886,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUpdateManyWithoutGaPropertyNestedInput
@@ -79506,6 +79902,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -79599,6 +79997,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -79613,6 +80013,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -79641,6 +80043,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -79655,6 +80059,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -79667,6 +80073,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -79681,6 +80089,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -79709,6 +80119,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -79723,6 +80135,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -79735,6 +80149,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyCreateNestedManyWithoutGaPropertyInput
@@ -79749,6 +80165,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
     kpiDaily?: GaKpiDailyUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -79777,6 +80195,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUpdateManyWithoutGaPropertyNestedInput
@@ -79791,6 +80211,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
     kpiDaily?: GaKpiDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -79803,6 +80225,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunCreateNestedManyWithoutGaPropertyInput
@@ -79817,6 +80241,8 @@ export namespace Prisma {
     gaPropertyName: string
     gaAccountId: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaPropertyInput
     channelDaily?: GaChannelDailyUncheckedCreateNestedManyWithoutGaPropertyInput
     imports?: GaImportRunUncheckedCreateNestedManyWithoutGaPropertyInput
@@ -79845,6 +80271,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -79859,6 +80287,8 @@ export namespace Prisma {
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     gaAccountId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -81061,6 +81491,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ParsedPieGraphDataUncheckedCreateWithoutQueryInput = {
@@ -81080,6 +81511,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ParsedPieGraphDataCreateOrConnectWithoutQueryInput = {
@@ -81305,6 +81737,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFilter<"ParsedPieGraphData"> | number
     yearBouncesDiff?: FloatFilter<"ParsedPieGraphData"> | number
     createdAt?: DateTimeFilter<"ParsedPieGraphData"> | Date | string
+    updatedAt?: DateTimeFilter<"ParsedPieGraphData"> | Date | string
   }
 
   export type ParsedQueryDataUpsertWithWhereUniqueWithoutQueryInput = {
@@ -82752,8 +83185,8 @@ export namespace Prisma {
     postCreatedTime: Date | string
     postSentTime: Date | string
     postLastUpdated: Date | string
-    createdAt: Date | string
-    updatedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput = {
@@ -82766,8 +83199,8 @@ export namespace Prisma {
     postCreatedTime: Date | string
     postSentTime: Date | string
     postLastUpdated: Date | string
-    createdAt: Date | string
-    updatedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput = {
@@ -83311,6 +83744,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutGaAccountInput
     gaProperties?: GaPropertyCreateNestedManyWithoutGaAccountInput
   }
@@ -83320,6 +83755,8 @@ export namespace Prisma {
     gaAccountId: string
     gaAccountName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutGaAccountInput
     gaProperties?: GaPropertyUncheckedCreateNestedManyWithoutGaAccountInput
   }
@@ -83420,6 +83857,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaAccountNestedInput
     gaProperties?: GaPropertyUpdateManyWithoutGaAccountNestedInput
   }
@@ -83429,6 +83868,8 @@ export namespace Prisma {
     gaAccountId?: StringFieldUpdateOperationsInput | string
     gaAccountName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaAccountNestedInput
     gaProperties?: GaPropertyUncheckedUpdateManyWithoutGaAccountNestedInput
   }
@@ -83526,6 +83967,8 @@ export namespace Prisma {
     scope?: string | null
     id_token?: string | null
     session_state?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountUncheckedCreateWithoutUserInput = {
@@ -83540,6 +83983,8 @@ export namespace Prisma {
     scope?: string | null
     id_token?: string | null
     session_state?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountCreateOrConnectWithoutUserInput = {
@@ -83825,6 +84270,7 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationUncheckedCreateWithoutUserInput = {
@@ -83834,6 +84280,7 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationCreateOrConnectWithoutUserInput = {
@@ -84336,6 +84783,8 @@ export namespace Prisma {
     scope?: StringNullableFilter<"Account"> | string | null
     id_token?: StringNullableFilter<"Account"> | string | null
     session_state?: StringNullableFilter<"Account"> | string | null
+    createdAt?: DateTimeFilter<"Account"> | Date | string
+    updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
   export type ClientActivityUpsertWithWhereUniqueWithoutUserInput = {
@@ -84519,6 +84968,7 @@ export namespace Prisma {
     content?: StringFilter<"Notification"> | string
     isRead?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
+    updatedAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
   export type QueryUpsertWithWhereUniqueWithoutUserInput = {
@@ -86963,6 +87413,8 @@ export namespace Prisma {
     gaPropertyId: string
     gaPropertyName: string
     deleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserToGaAccountCreateManyGaAccountInput = {
@@ -87015,6 +87467,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUpdateManyWithoutGaPropertyNestedInput
@@ -87028,6 +87482,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutGaPropertyNestedInput
     channelDaily?: GaChannelDailyUncheckedUpdateManyWithoutGaPropertyNestedInput
     imports?: GaImportRunUncheckedUpdateManyWithoutGaPropertyNestedInput
@@ -87041,6 +87497,8 @@ export namespace Prisma {
     gaPropertyId?: StringFieldUpdateOperationsInput | string
     gaPropertyName?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserToGaAccountUpdateWithoutGaAccountInput = {
@@ -87087,6 +87545,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaImportRunCreateManyGaPropertyInput = {
@@ -87110,6 +87569,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaKpiMonthlyCreateManyGaPropertyInput = {
@@ -87122,6 +87582,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GaSourceDailyCreateManyGaPropertyInput = {
@@ -87135,6 +87596,7 @@ export namespace Prisma {
     goalCompletions: number
     goalCompletionRate: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ConversationUpdateWithoutGaPropertyInput = {
@@ -87186,6 +87648,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaChannelDailyUncheckedUpdateWithoutGaPropertyInput = {
@@ -87199,6 +87662,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaChannelDailyUncheckedUpdateManyWithoutGaPropertyInput = {
@@ -87212,6 +87676,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaImportRunUpdateWithoutGaPropertyInput = {
@@ -87257,6 +87722,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiDailyUncheckedUpdateWithoutGaPropertyInput = {
@@ -87269,6 +87735,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiDailyUncheckedUpdateManyWithoutGaPropertyInput = {
@@ -87281,6 +87748,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiMonthlyUpdateWithoutGaPropertyInput = {
@@ -87293,6 +87761,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiMonthlyUncheckedUpdateWithoutGaPropertyInput = {
@@ -87305,6 +87774,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaKpiMonthlyUncheckedUpdateManyWithoutGaPropertyInput = {
@@ -87317,6 +87787,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaSourceDailyUpdateWithoutGaPropertyInput = {
@@ -87330,6 +87801,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaSourceDailyUncheckedUpdateWithoutGaPropertyInput = {
@@ -87343,6 +87815,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GaSourceDailyUncheckedUpdateManyWithoutGaPropertyInput = {
@@ -87356,6 +87829,7 @@ export namespace Prisma {
     goalCompletions?: IntFieldUpdateOperationsInput | number
     goalCompletionRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyRoleInput = {
@@ -87567,6 +88041,7 @@ export namespace Prisma {
     yearConversionsDiff: number
     yearBouncesDiff: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ParsedQueryDataCreateManyQueryInput = {
@@ -87611,6 +88086,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedPieGraphDataUncheckedUpdateWithoutQueryInput = {
@@ -87630,6 +88106,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedPieGraphDataUncheckedUpdateManyWithoutQueryInput = {
@@ -87649,6 +88126,7 @@ export namespace Prisma {
     yearConversionsDiff?: FloatFieldUpdateOperationsInput | number
     yearBouncesDiff?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParsedQueryDataUpdateWithoutQueryInput = {
@@ -87924,8 +88402,8 @@ export namespace Prisma {
     postCreatedTime: Date | string
     postSentTime: Date | string
     postLastUpdated: Date | string
-    createdAt: Date | string
-    updatedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput = {
@@ -88358,6 +88836,8 @@ export namespace Prisma {
     scope?: string | null
     id_token?: string | null
     session_state?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ClientActivityCreateManyUserInput = {
@@ -88454,6 +88934,7 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QueryCreateManyUserInput = {
@@ -88554,6 +89035,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountUncheckedUpdateWithoutUserInput = {
@@ -88568,6 +89051,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountUncheckedUpdateManyWithoutUserInput = {
@@ -88582,6 +89067,8 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientActivityUpdateWithoutUserInput = {
@@ -88864,6 +89351,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateWithoutUserInput = {
@@ -88873,6 +89361,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUncheckedUpdateManyWithoutUserInput = {
@@ -88882,6 +89371,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QueryUpdateWithoutUserInput = {

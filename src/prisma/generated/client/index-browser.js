@@ -132,7 +132,9 @@ exports.Prisma.AccountScalarFieldEnum = {
   token_type: 'token_type',
   scope: 'scope',
   id_token: 'id_token',
-  session_state: 'session_state'
+  session_state: 'session_state',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ClientSatisfactionScalarFieldEnum = {
@@ -262,7 +264,9 @@ exports.Prisma.GaAccountScalarFieldEnum = {
   id: 'id',
   gaAccountId: 'gaAccountId',
   gaAccountName: 'gaAccountName',
-  deleted: 'deleted'
+  deleted: 'deleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GaPropertyScalarFieldEnum = {
@@ -270,7 +274,9 @@ exports.Prisma.GaPropertyScalarFieldEnum = {
   gaPropertyId: 'gaPropertyId',
   gaPropertyName: 'gaPropertyName',
   gaAccountId: 'gaAccountId',
-  deleted: 'deleted'
+  deleted: 'deleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GaImportRunScalarFieldEnum = {
@@ -295,7 +301,8 @@ exports.Prisma.GaKpiDailyScalarFieldEnum = {
   avgSessionDurationSec: 'avgSessionDurationSec',
   goalCompletions: 'goalCompletions',
   goalCompletionRate: 'goalCompletionRate',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GaKpiMonthlyScalarFieldEnum = {
@@ -308,7 +315,8 @@ exports.Prisma.GaKpiMonthlyScalarFieldEnum = {
   avgSessionDurationSec: 'avgSessionDurationSec',
   goalCompletions: 'goalCompletions',
   goalCompletionRate: 'goalCompletionRate',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GaChannelDailyScalarFieldEnum = {
@@ -322,7 +330,8 @@ exports.Prisma.GaChannelDailyScalarFieldEnum = {
   avgSessionDurationSec: 'avgSessionDurationSec',
   goalCompletions: 'goalCompletions',
   goalCompletionRate: 'goalCompletionRate',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GaSourceDailyScalarFieldEnum = {
@@ -336,7 +345,8 @@ exports.Prisma.GaSourceDailyScalarFieldEnum = {
   avgSessionDurationSec: 'avgSessionDurationSec',
   goalCompletions: 'goalCompletions',
   goalCompletionRate: 'goalCompletionRate',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -380,7 +390,8 @@ exports.Prisma.NotificationScalarFieldEnum = {
   title: 'title',
   content: 'content',
   isRead: 'isRead',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ParsedPieGraphDataScalarFieldEnum = {
@@ -400,7 +411,8 @@ exports.Prisma.ParsedPieGraphDataScalarFieldEnum = {
   yearConversionRateDiff: 'yearConversionRateDiff',
   yearConversionsDiff: 'yearConversionsDiff',
   yearBouncesDiff: 'yearBouncesDiff',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ParsedQueryDataScalarFieldEnum = {
