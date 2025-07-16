@@ -1,6 +1,6 @@
 import { ParsedPieGraphData } from "@/prisma/generated/client";
 
-export type ParsedPieDataInput = Omit<ParsedPieGraphData, "id" | "queryId" | "createdAt">;
+export type ParsedPieDataInput = Omit<ParsedPieGraphData, "id" | "queryId" | "createdAt" | "updatedAt">;
 
 interface PieGraphDataEntry {
   dimensions: [string, string?];
