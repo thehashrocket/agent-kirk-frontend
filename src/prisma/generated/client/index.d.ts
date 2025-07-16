@@ -62673,10 +62673,10 @@ export namespace Prisma {
 
   export type GaAccountWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    gaAccountId?: string
     AND?: GaAccountWhereInput | GaAccountWhereInput[]
     OR?: GaAccountWhereInput[]
     NOT?: GaAccountWhereInput | GaAccountWhereInput[]
-    gaAccountId?: StringFilter<"GaAccount"> | string
     gaAccountName?: StringFilter<"GaAccount"> | string
     deleted?: BoolFilter<"GaAccount"> | boolean
     createdAt?: DateTimeFilter<"GaAccount"> | Date | string
@@ -62684,7 +62684,7 @@ export namespace Prisma {
     conversations?: ConversationListRelationFilter
     gaProperties?: GaPropertyListRelationFilter
     userToGaAccounts?: UserToGaAccountListRelationFilter
-  }, "id">
+  }, "id" | "gaAccountId">
 
   export type GaAccountOrderByWithAggregationInput = {
     id?: SortOrder
@@ -62749,10 +62749,10 @@ export namespace Prisma {
 
   export type GaPropertyWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    gaPropertyId?: string
     AND?: GaPropertyWhereInput | GaPropertyWhereInput[]
     OR?: GaPropertyWhereInput[]
     NOT?: GaPropertyWhereInput | GaPropertyWhereInput[]
-    gaPropertyId?: StringFilter<"GaProperty"> | string
     gaPropertyName?: StringFilter<"GaProperty"> | string
     gaAccountId?: StringFilter<"GaProperty"> | string
     deleted?: BoolFilter<"GaProperty"> | boolean
@@ -62765,7 +62765,7 @@ export namespace Prisma {
     kpiMonthly?: GaKpiMonthlyListRelationFilter
     gaAccount?: XOR<GaAccountScalarRelationFilter, GaAccountWhereInput>
     sourceDaily?: GaSourceDailyListRelationFilter
-  }, "id">
+  }, "id" | "gaPropertyId">
 
   export type GaPropertyOrderByWithAggregationInput = {
     id?: SortOrder

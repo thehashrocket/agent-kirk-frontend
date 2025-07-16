@@ -188,7 +188,7 @@ model EmailGlobalDailyStats {
 
 model GaAccount {
   id               String            @id @default(cuid())
-  gaAccountId      String
+  gaAccountId      String            @unique
   gaAccountName    String
   deleted          Boolean           @default(false)
   createdAt        DateTime          @default(now())
@@ -200,7 +200,7 @@ model GaAccount {
 
 model GaProperty {
   id             String           @id @default(cuid())
-  gaPropertyId   String
+  gaPropertyId   String @unique
   gaPropertyName String
   gaAccountId    String
   deleted        Boolean          @default(false)
