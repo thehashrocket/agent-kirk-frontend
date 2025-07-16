@@ -61057,6 +61057,7 @@ export namespace Prisma {
 
   export type EmailClientCredentialsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    emailClientId_platformName?: EmailClientCredentialsEmailClientIdPlatformNameCompoundUniqueInput
     AND?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
     OR?: EmailClientCredentialsWhereInput[]
     NOT?: EmailClientCredentialsWhereInput | EmailClientCredentialsWhereInput[]
@@ -61066,7 +61067,7 @@ export namespace Prisma {
     emailClientId?: StringFilter<"EmailClientCredentials"> | string
     platformName?: StringFilter<"EmailClientCredentials"> | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-  }, "id">
+  }, "id" | "emailClientId_platformName">
 
   export type EmailClientCredentialsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -69150,6 +69151,11 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     clientName?: SortOrder
+  }
+
+  export type EmailClientCredentialsEmailClientIdPlatformNameCompoundUniqueInput = {
+    emailClientId: string
+    platformName: string
   }
 
   export type EmailClientCredentialsCountOrderByAggregateInput = {

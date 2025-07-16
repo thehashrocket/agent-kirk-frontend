@@ -165,6 +165,8 @@ model EmailClientCredentials {
   emailClientId String
   platformName  String
   emailClient   EmailClient @relation(fields: [emailClientId], references: [id])
+
+  @@unique([emailClientId, platformName])
 }
 
 model EmailGlobalDailyStats {
