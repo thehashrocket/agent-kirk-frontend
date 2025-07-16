@@ -71,6 +71,18 @@ model Conversation {
   @@index([clientId])
 }
 
+model EmailCampaign {
+  id                      String                    @id @default(cuid())
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  campaignId              String                    @unique
+  campaignName            String
+  emailClientId           String
+  emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
+  emailCampaignContents   EmailCampaignContent[]
+  emailCampaignDailyStats EmailCampaignDailyStats[]
+}
+
 model EmailCampaignContent {
   id              String        @id @default(cuid())
   subject         String
@@ -86,18 +98,6 @@ model EmailCampaignContent {
   sendTime        DateTime
   webId           String
   emailCampaign   EmailCampaign @relation(fields: [emailCampaignId], references: [id])
-}
-
-model EmailCampaign {
-  id                      String                    @id @default(cuid())
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  campaignId              String                    @unique
-  campaignName            String
-  emailClientId           String
-  emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
-  emailCampaignContents   EmailCampaignContent[]
-  emailCampaignDailyStats EmailCampaignDailyStats[]
 }
 
 model EmailCampaignDailyStats {
@@ -461,6 +461,25 @@ model SproutFacebookAnalytics {
   @@index([sproutSocialAccountId])
 }
 
+model SproutFacebookPost {
+  id String @id @default(cuid())
+  sproutSocialAccountId String
+  postType String
+  postStatus String
+  postLink String
+  postText String
+  postNativeId String
+  postCreatedTime DateTime
+  postSentTime DateTime
+  postLastUpdated DateTime
+  createdAt DateTime
+  updatedAt DateTime
+  sproutSocialAccount SproutSocialAccount @relation(fields: [sproutSocialAccountId], references: [id], onDelete: Cascade)
+  
+  @@unique([sproutSocialAccountId, postNativeId])
+  @@index([sproutSocialAccountId])
+}
+
 model SproutFacebookPostAnalytics {
   id                     String              @id @default(cuid())
   angryReactions         Int?                @default(0)
@@ -619,6 +638,7 @@ model SproutSocialAccount {
   linkedInAnalytics     SproutLinkedInAnalytics[]
   pinterestAnalytics    SproutPinterestAnalytics[]
   users                 UserToSproutSocialAccount[]
+  facebookPosts         SproutFacebookPost[]
 }
 
 model UserToSproutSocialAccount {

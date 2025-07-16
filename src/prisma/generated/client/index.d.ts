@@ -34,15 +34,15 @@ export type Company = $Result.DefaultSelection<Prisma.$CompanyPayload>
  */
 export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
 /**
- * Model EmailCampaignContent
- * 
- */
-export type EmailCampaignContent = $Result.DefaultSelection<Prisma.$EmailCampaignContentPayload>
-/**
  * Model EmailCampaign
  * 
  */
 export type EmailCampaign = $Result.DefaultSelection<Prisma.$EmailCampaignPayload>
+/**
+ * Model EmailCampaignContent
+ * 
+ */
+export type EmailCampaignContent = $Result.DefaultSelection<Prisma.$EmailCampaignContentPayload>
 /**
  * Model EmailCampaignDailyStats
  * 
@@ -148,6 +148,11 @@ export type Query = $Result.DefaultSelection<Prisma.$QueryPayload>
  * 
  */
 export type SproutFacebookAnalytics = $Result.DefaultSelection<Prisma.$SproutFacebookAnalyticsPayload>
+/**
+ * Model SproutFacebookPost
+ * 
+ */
+export type SproutFacebookPost = $Result.DefaultSelection<Prisma.$SproutFacebookPostPayload>
 /**
  * Model SproutFacebookPostAnalytics
  * 
@@ -490,16 +495,6 @@ export class PrismaClient<
   get conversation(): Prisma.ConversationDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.emailCampaignContent`: Exposes CRUD operations for the **EmailCampaignContent** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more EmailCampaignContents
-    * const emailCampaignContents = await prisma.emailCampaignContent.findMany()
-    * ```
-    */
-  get emailCampaignContent(): Prisma.EmailCampaignContentDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.emailCampaign`: Exposes CRUD operations for the **EmailCampaign** model.
     * Example usage:
     * ```ts
@@ -508,6 +503,16 @@ export class PrismaClient<
     * ```
     */
   get emailCampaign(): Prisma.EmailCampaignDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailCampaignContent`: Exposes CRUD operations for the **EmailCampaignContent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailCampaignContents
+    * const emailCampaignContents = await prisma.emailCampaignContent.findMany()
+    * ```
+    */
+  get emailCampaignContent(): Prisma.EmailCampaignContentDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.emailCampaignDailyStats`: Exposes CRUD operations for the **EmailCampaignDailyStats** model.
@@ -718,6 +723,16 @@ export class PrismaClient<
     * ```
     */
   get sproutFacebookAnalytics(): Prisma.SproutFacebookAnalyticsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sproutFacebookPost`: Exposes CRUD operations for the **SproutFacebookPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SproutFacebookPosts
+    * const sproutFacebookPosts = await prisma.sproutFacebookPost.findMany()
+    * ```
+    */
+  get sproutFacebookPost(): Prisma.SproutFacebookPostDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.sproutFacebookPostAnalytics`: Exposes CRUD operations for the **SproutFacebookPostAnalytics** model.
@@ -1342,8 +1357,8 @@ export namespace Prisma {
     ClientSatisfaction: 'ClientSatisfaction',
     Company: 'Company',
     Conversation: 'Conversation',
-    EmailCampaignContent: 'EmailCampaignContent',
     EmailCampaign: 'EmailCampaign',
+    EmailCampaignContent: 'EmailCampaignContent',
     EmailCampaignDailyStats: 'EmailCampaignDailyStats',
     EmailClient: 'EmailClient',
     EmailClientCredentials: 'EmailClientCredentials',
@@ -1365,6 +1380,7 @@ export namespace Prisma {
     ParsedQuerySummary: 'ParsedQuerySummary',
     Query: 'Query',
     SproutFacebookAnalytics: 'SproutFacebookAnalytics',
+    SproutFacebookPost: 'SproutFacebookPost',
     SproutFacebookPostAnalytics: 'SproutFacebookPostAnalytics',
     SproutInstagramAnalytics: 'SproutInstagramAnalytics',
     SproutInstagramFollowersByCity: 'SproutInstagramFollowersByCity',
@@ -1401,7 +1417,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientSatisfaction" | "company" | "conversation" | "emailCampaignContent" | "emailCampaign" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity" | "userToEmailClient"
+      modelProps: "account" | "clientSatisfaction" | "company" | "conversation" | "emailCampaign" | "emailCampaignContent" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "session" | "verificationToken" | "role" | "message" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "sproutFacebookAnalytics" | "sproutFacebookPost" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "messageAttachment" | "clientActivity" | "userToEmailClient"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1701,80 +1717,6 @@ export namespace Prisma {
           }
         }
       }
-      EmailCampaignContent: {
-        payload: Prisma.$EmailCampaignContentPayload<ExtArgs>
-        fields: Prisma.EmailCampaignContentFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.EmailCampaignContentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.EmailCampaignContentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
-          }
-          findFirst: {
-            args: Prisma.EmailCampaignContentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.EmailCampaignContentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
-          }
-          findMany: {
-            args: Prisma.EmailCampaignContentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
-          }
-          create: {
-            args: Prisma.EmailCampaignContentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
-          }
-          createMany: {
-            args: Prisma.EmailCampaignContentCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.EmailCampaignContentCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
-          }
-          delete: {
-            args: Prisma.EmailCampaignContentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
-          }
-          update: {
-            args: Prisma.EmailCampaignContentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
-          }
-          deleteMany: {
-            args: Prisma.EmailCampaignContentDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.EmailCampaignContentUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.EmailCampaignContentUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
-          }
-          upsert: {
-            args: Prisma.EmailCampaignContentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
-          }
-          aggregate: {
-            args: Prisma.EmailCampaignContentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEmailCampaignContent>
-          }
-          groupBy: {
-            args: Prisma.EmailCampaignContentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EmailCampaignContentGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.EmailCampaignContentCountArgs<ExtArgs>
-            result: $Utils.Optional<EmailCampaignContentCountAggregateOutputType> | number
-          }
-        }
-      }
       EmailCampaign: {
         payload: Prisma.$EmailCampaignPayload<ExtArgs>
         fields: Prisma.EmailCampaignFieldRefs
@@ -1846,6 +1788,80 @@ export namespace Prisma {
           count: {
             args: Prisma.EmailCampaignCountArgs<ExtArgs>
             result: $Utils.Optional<EmailCampaignCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailCampaignContent: {
+        payload: Prisma.$EmailCampaignContentPayload<ExtArgs>
+        fields: Prisma.EmailCampaignContentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailCampaignContentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailCampaignContentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailCampaignContentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailCampaignContentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          findMany: {
+            args: Prisma.EmailCampaignContentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
+          }
+          create: {
+            args: Prisma.EmailCampaignContentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          createMany: {
+            args: Prisma.EmailCampaignContentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailCampaignContentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailCampaignContentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          update: {
+            args: Prisma.EmailCampaignContentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailCampaignContentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailCampaignContentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailCampaignContentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailCampaignContentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailCampaignContentPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailCampaignContentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailCampaignContent>
+          }
+          groupBy: {
+            args: Prisma.EmailCampaignContentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignContentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailCampaignContentCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailCampaignContentCountAggregateOutputType> | number
           }
         }
       }
@@ -3403,6 +3419,80 @@ export namespace Prisma {
           }
         }
       }
+      SproutFacebookPost: {
+        payload: Prisma.$SproutFacebookPostPayload<ExtArgs>
+        fields: Prisma.SproutFacebookPostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SproutFacebookPostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SproutFacebookPostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>
+          }
+          findFirst: {
+            args: Prisma.SproutFacebookPostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SproutFacebookPostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>
+          }
+          findMany: {
+            args: Prisma.SproutFacebookPostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>[]
+          }
+          create: {
+            args: Prisma.SproutFacebookPostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>
+          }
+          createMany: {
+            args: Prisma.SproutFacebookPostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SproutFacebookPostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>[]
+          }
+          delete: {
+            args: Prisma.SproutFacebookPostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>
+          }
+          update: {
+            args: Prisma.SproutFacebookPostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>
+          }
+          deleteMany: {
+            args: Prisma.SproutFacebookPostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SproutFacebookPostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SproutFacebookPostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>[]
+          }
+          upsert: {
+            args: Prisma.SproutFacebookPostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SproutFacebookPostPayload>
+          }
+          aggregate: {
+            args: Prisma.SproutFacebookPostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSproutFacebookPost>
+          }
+          groupBy: {
+            args: Prisma.SproutFacebookPostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SproutFacebookPostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SproutFacebookPostCountArgs<ExtArgs>
+            result: $Utils.Optional<SproutFacebookPostCountAggregateOutputType> | number
+          }
+        }
+      }
       SproutFacebookPostAnalytics: {
         payload: Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>
         fields: Prisma.SproutFacebookPostAnalyticsFieldRefs
@@ -4823,8 +4913,8 @@ export namespace Prisma {
     clientSatisfaction?: ClientSatisfactionOmit
     company?: CompanyOmit
     conversation?: ConversationOmit
-    emailCampaignContent?: EmailCampaignContentOmit
     emailCampaign?: EmailCampaignOmit
+    emailCampaignContent?: EmailCampaignContentOmit
     emailCampaignDailyStats?: EmailCampaignDailyStatsOmit
     emailClient?: EmailClientOmit
     emailClientCredentials?: EmailClientCredentialsOmit
@@ -4846,6 +4936,7 @@ export namespace Prisma {
     parsedQuerySummary?: ParsedQuerySummaryOmit
     query?: QueryOmit
     sproutFacebookAnalytics?: SproutFacebookAnalyticsOmit
+    sproutFacebookPost?: SproutFacebookPostOmit
     sproutFacebookPostAnalytics?: SproutFacebookPostAnalyticsOmit
     sproutInstagramAnalytics?: SproutInstagramAnalyticsOmit
     sproutInstagramFollowersByCity?: SproutInstagramFollowersByCityOmit
@@ -5418,6 +5509,7 @@ export namespace Prisma {
     linkedInAnalytics: number
     pinterestAnalytics: number
     users: number
+    facebookPosts: number
   }
 
   export type SproutSocialAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5427,6 +5519,7 @@ export namespace Prisma {
     linkedInAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountLinkedInAnalyticsArgs
     pinterestAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountPinterestAnalyticsArgs
     users?: boolean | SproutSocialAccountCountOutputTypeCountUsersArgs
+    facebookPosts?: boolean | SproutSocialAccountCountOutputTypeCountFacebookPostsArgs
   }
 
   // Custom InputTypes
@@ -5480,6 +5573,13 @@ export namespace Prisma {
    */
   export type SproutSocialAccountCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserToSproutSocialAccountWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountFacebookPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookPostWhereInput
   }
 
 
@@ -10348,6 +10448,1135 @@ export namespace Prisma {
 
 
   /**
+   * Model EmailCampaign
+   */
+
+  export type AggregateEmailCampaign = {
+    _count: EmailCampaignCountAggregateOutputType | null
+    _min: EmailCampaignMinAggregateOutputType | null
+    _max: EmailCampaignMaxAggregateOutputType | null
+  }
+
+  export type EmailCampaignMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    campaignId: string | null
+    campaignName: string | null
+    emailClientId: string | null
+  }
+
+  export type EmailCampaignMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    campaignId: string | null
+    campaignName: string | null
+    emailClientId: string | null
+  }
+
+  export type EmailCampaignCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    campaignId: number
+    campaignName: number
+    emailClientId: number
+    _all: number
+  }
+
+
+  export type EmailCampaignMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    campaignId?: true
+    campaignName?: true
+    emailClientId?: true
+  }
+
+  export type EmailCampaignMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    campaignId?: true
+    campaignName?: true
+    emailClientId?: true
+  }
+
+  export type EmailCampaignCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    campaignId?: true
+    campaignName?: true
+    emailClientId?: true
+    _all?: true
+  }
+
+  export type EmailCampaignAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaign to aggregate.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailCampaigns
+    **/
+    _count?: true | EmailCampaignCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailCampaignMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailCampaignMaxAggregateInputType
+  }
+
+  export type GetEmailCampaignAggregateType<T extends EmailCampaignAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailCampaign]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailCampaign[P]>
+      : GetScalarType<T[P], AggregateEmailCampaign[P]>
+  }
+
+
+
+
+  export type EmailCampaignGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailCampaignWhereInput
+    orderBy?: EmailCampaignOrderByWithAggregationInput | EmailCampaignOrderByWithAggregationInput[]
+    by: EmailCampaignScalarFieldEnum[] | EmailCampaignScalarFieldEnum
+    having?: EmailCampaignScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailCampaignCountAggregateInputType | true
+    _min?: EmailCampaignMinAggregateInputType
+    _max?: EmailCampaignMaxAggregateInputType
+  }
+
+  export type EmailCampaignGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    campaignId: string
+    campaignName: string
+    emailClientId: string
+    _count: EmailCampaignCountAggregateOutputType | null
+    _min: EmailCampaignMinAggregateOutputType | null
+    _max: EmailCampaignMaxAggregateOutputType | null
+  }
+
+  type GetEmailCampaignGroupByPayload<T extends EmailCampaignGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailCampaignGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailCampaignGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
+    emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
+    _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailCampaign"]>
+
+  export type EmailCampaignSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    campaignId?: boolean
+    campaignName?: boolean
+    emailClientId?: boolean
+  }
+
+  export type EmailCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "campaignId" | "campaignName" | "emailClientId", ExtArgs["result"]["emailCampaign"]>
+  export type EmailCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+    emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
+    emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
+    _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+  export type EmailCampaignIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailCampaignPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailCampaign"
+    objects: {
+      emailClient: Prisma.$EmailClientPayload<ExtArgs>
+      emailCampaignContents: Prisma.$EmailCampaignContentPayload<ExtArgs>[]
+      emailCampaignDailyStats: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      campaignId: string
+      campaignName: string
+      emailClientId: string
+    }, ExtArgs["result"]["emailCampaign"]>
+    composites: {}
+  }
+
+  type EmailCampaignGetPayload<S extends boolean | null | undefined | EmailCampaignDefaultArgs> = $Result.GetResult<Prisma.$EmailCampaignPayload, S>
+
+  type EmailCampaignCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailCampaignFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailCampaignCountAggregateInputType | true
+    }
+
+  export interface EmailCampaignDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailCampaign'], meta: { name: 'EmailCampaign' } }
+    /**
+     * Find zero or one EmailCampaign that matches the filter.
+     * @param {EmailCampaignFindUniqueArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailCampaignFindUniqueArgs>(args: SelectSubset<T, EmailCampaignFindUniqueArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailCampaign that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailCampaignFindUniqueOrThrowArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailCampaignFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailCampaignFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaign that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindFirstArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailCampaignFindFirstArgs>(args?: SelectSubset<T, EmailCampaignFindFirstArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailCampaign that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindFirstOrThrowArgs} args - Arguments to find a EmailCampaign
+     * @example
+     * // Get one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailCampaignFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailCampaignFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailCampaigns that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailCampaigns
+     * const emailCampaigns = await prisma.emailCampaign.findMany()
+     * 
+     * // Get first 10 EmailCampaigns
+     * const emailCampaigns = await prisma.emailCampaign.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailCampaignFindManyArgs>(args?: SelectSubset<T, EmailCampaignFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailCampaign.
+     * @param {EmailCampaignCreateArgs} args - Arguments to create a EmailCampaign.
+     * @example
+     * // Create one EmailCampaign
+     * const EmailCampaign = await prisma.emailCampaign.create({
+     *   data: {
+     *     // ... data to create a EmailCampaign
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailCampaignCreateArgs>(args: SelectSubset<T, EmailCampaignCreateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailCampaigns.
+     * @param {EmailCampaignCreateManyArgs} args - Arguments to create many EmailCampaigns.
+     * @example
+     * // Create many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailCampaignCreateManyArgs>(args?: SelectSubset<T, EmailCampaignCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailCampaigns and returns the data saved in the database.
+     * @param {EmailCampaignCreateManyAndReturnArgs} args - Arguments to create many EmailCampaigns.
+     * @example
+     * // Create many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailCampaigns and only return the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailCampaignCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailCampaignCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailCampaign.
+     * @param {EmailCampaignDeleteArgs} args - Arguments to delete one EmailCampaign.
+     * @example
+     * // Delete one EmailCampaign
+     * const EmailCampaign = await prisma.emailCampaign.delete({
+     *   where: {
+     *     // ... filter to delete one EmailCampaign
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailCampaignDeleteArgs>(args: SelectSubset<T, EmailCampaignDeleteArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailCampaign.
+     * @param {EmailCampaignUpdateArgs} args - Arguments to update one EmailCampaign.
+     * @example
+     * // Update one EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailCampaignUpdateArgs>(args: SelectSubset<T, EmailCampaignUpdateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailCampaigns.
+     * @param {EmailCampaignDeleteManyArgs} args - Arguments to filter EmailCampaigns to delete.
+     * @example
+     * // Delete a few EmailCampaigns
+     * const { count } = await prisma.emailCampaign.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailCampaignDeleteManyArgs>(args?: SelectSubset<T, EmailCampaignDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailCampaignUpdateManyArgs>(args: SelectSubset<T, EmailCampaignUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailCampaigns and returns the data updated in the database.
+     * @param {EmailCampaignUpdateManyAndReturnArgs} args - Arguments to update many EmailCampaigns.
+     * @example
+     * // Update many EmailCampaigns
+     * const emailCampaign = await prisma.emailCampaign.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailCampaigns and only return the `id`
+     * const emailCampaignWithIdOnly = await prisma.emailCampaign.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailCampaignUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailCampaignUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailCampaign.
+     * @param {EmailCampaignUpsertArgs} args - Arguments to update or create a EmailCampaign.
+     * @example
+     * // Update or create a EmailCampaign
+     * const emailCampaign = await prisma.emailCampaign.upsert({
+     *   create: {
+     *     // ... data to create a EmailCampaign
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailCampaign we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailCampaignUpsertArgs>(args: SelectSubset<T, EmailCampaignUpsertArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailCampaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignCountArgs} args - Arguments to filter EmailCampaigns to count.
+     * @example
+     * // Count the number of EmailCampaigns
+     * const count = await prisma.emailCampaign.count({
+     *   where: {
+     *     // ... the filter for the EmailCampaigns we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailCampaignCountArgs>(
+      args?: Subset<T, EmailCampaignCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailCampaignCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailCampaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailCampaignAggregateArgs>(args: Subset<T, EmailCampaignAggregateArgs>): Prisma.PrismaPromise<GetEmailCampaignAggregateType<T>>
+
+    /**
+     * Group by EmailCampaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailCampaignGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailCampaignGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailCampaignGroupByArgs['orderBy'] }
+        : { orderBy?: EmailCampaignGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailCampaignGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailCampaignGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailCampaign model
+   */
+  readonly fields: EmailCampaignFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailCampaign.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    emailCampaignContents<T extends EmailCampaign$emailCampaignContentsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignContentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailCampaignDailyStats<T extends EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailCampaign model
+   */
+  interface EmailCampaignFieldRefs {
+    readonly id: FieldRef<"EmailCampaign", 'String'>
+    readonly createdAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmailCampaign", 'DateTime'>
+    readonly campaignId: FieldRef<"EmailCampaign", 'String'>
+    readonly campaignName: FieldRef<"EmailCampaign", 'String'>
+    readonly emailClientId: FieldRef<"EmailCampaign", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailCampaign findUnique
+   */
+  export type EmailCampaignFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign findUniqueOrThrow
+   */
+  export type EmailCampaignFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign findFirst
+   */
+  export type EmailCampaignFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaigns.
+     */
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign findFirstOrThrow
+   */
+  export type EmailCampaignFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaign to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailCampaigns.
+     */
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign findMany
+   */
+  export type EmailCampaignFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailCampaigns to fetch.
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailCampaigns to fetch.
+     */
+    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailCampaigns.
+     */
+    cursor?: EmailCampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailCampaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailCampaigns.
+     */
+    skip?: number
+    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign create
+   */
+  export type EmailCampaignCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailCampaign.
+     */
+    data: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
+  }
+
+  /**
+   * EmailCampaign createMany
+   */
+  export type EmailCampaignCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailCampaigns.
+     */
+    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailCampaign createManyAndReturn
+   */
+  export type EmailCampaignCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailCampaigns.
+     */
+    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaign update
+   */
+  export type EmailCampaignUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailCampaign.
+     */
+    data: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
+    /**
+     * Choose, which EmailCampaign to update.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign updateMany
+   */
+  export type EmailCampaignUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailCampaigns.
+     */
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaigns to update
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaign updateManyAndReturn
+   */
+  export type EmailCampaignUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailCampaigns.
+     */
+    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailCampaigns to update
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailCampaign upsert
+   */
+  export type EmailCampaignUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailCampaign to update in case it exists.
+     */
+    where: EmailCampaignWhereUniqueInput
+    /**
+     * In case the EmailCampaign found by the `where` argument doesn't exist, create a new EmailCampaign with this data.
+     */
+    create: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
+    /**
+     * In case the EmailCampaign was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailCampaign delete
+   */
+  export type EmailCampaignDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+    /**
+     * Filter which EmailCampaign to delete.
+     */
+    where: EmailCampaignWhereUniqueInput
+  }
+
+  /**
+   * EmailCampaign deleteMany
+   */
+  export type EmailCampaignDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailCampaigns to delete
+     */
+    where?: EmailCampaignWhereInput
+    /**
+     * Limit how many EmailCampaigns to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailCampaign.emailCampaignContents
+   */
+  export type EmailCampaign$emailCampaignContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignContent
+     */
+    select?: EmailCampaignContentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignContent
+     */
+    omit?: EmailCampaignContentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignContentInclude<ExtArgs> | null
+    where?: EmailCampaignContentWhereInput
+    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
+    cursor?: EmailCampaignContentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign.emailCampaignDailyStats
+   */
+  export type EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaignDailyStats
+     */
+    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaignDailyStats
+     */
+    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
+    where?: EmailCampaignDailyStatsWhereInput
+    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
+    cursor?: EmailCampaignDailyStatsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * EmailCampaign without action
+   */
+  export type EmailCampaignDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailCampaign
+     */
+    select?: EmailCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailCampaign
+     */
+    omit?: EmailCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailCampaignInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model EmailCampaignContent
    */
 
@@ -11540,1135 +12769,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EmailCampaignContentInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model EmailCampaign
-   */
-
-  export type AggregateEmailCampaign = {
-    _count: EmailCampaignCountAggregateOutputType | null
-    _min: EmailCampaignMinAggregateOutputType | null
-    _max: EmailCampaignMaxAggregateOutputType | null
-  }
-
-  export type EmailCampaignMinAggregateOutputType = {
-    id: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    campaignId: string | null
-    campaignName: string | null
-    emailClientId: string | null
-  }
-
-  export type EmailCampaignMaxAggregateOutputType = {
-    id: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    campaignId: string | null
-    campaignName: string | null
-    emailClientId: string | null
-  }
-
-  export type EmailCampaignCountAggregateOutputType = {
-    id: number
-    createdAt: number
-    updatedAt: number
-    campaignId: number
-    campaignName: number
-    emailClientId: number
-    _all: number
-  }
-
-
-  export type EmailCampaignMinAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    campaignId?: true
-    campaignName?: true
-    emailClientId?: true
-  }
-
-  export type EmailCampaignMaxAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    campaignId?: true
-    campaignName?: true
-    emailClientId?: true
-  }
-
-  export type EmailCampaignCountAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    campaignId?: true
-    campaignName?: true
-    emailClientId?: true
-    _all?: true
-  }
-
-  export type EmailCampaignAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EmailCampaign to aggregate.
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EmailCampaigns to fetch.
-     */
-    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EmailCampaignWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EmailCampaigns from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EmailCampaigns.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned EmailCampaigns
-    **/
-    _count?: true | EmailCampaignCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EmailCampaignMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EmailCampaignMaxAggregateInputType
-  }
-
-  export type GetEmailCampaignAggregateType<T extends EmailCampaignAggregateArgs> = {
-        [P in keyof T & keyof AggregateEmailCampaign]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEmailCampaign[P]>
-      : GetScalarType<T[P], AggregateEmailCampaign[P]>
-  }
-
-
-
-
-  export type EmailCampaignGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmailCampaignWhereInput
-    orderBy?: EmailCampaignOrderByWithAggregationInput | EmailCampaignOrderByWithAggregationInput[]
-    by: EmailCampaignScalarFieldEnum[] | EmailCampaignScalarFieldEnum
-    having?: EmailCampaignScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EmailCampaignCountAggregateInputType | true
-    _min?: EmailCampaignMinAggregateInputType
-    _max?: EmailCampaignMaxAggregateInputType
-  }
-
-  export type EmailCampaignGroupByOutputType = {
-    id: string
-    createdAt: Date
-    updatedAt: Date
-    campaignId: string
-    campaignName: string
-    emailClientId: string
-    _count: EmailCampaignCountAggregateOutputType | null
-    _min: EmailCampaignMinAggregateOutputType | null
-    _max: EmailCampaignMaxAggregateOutputType | null
-  }
-
-  type GetEmailCampaignGroupByPayload<T extends EmailCampaignGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EmailCampaignGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EmailCampaignGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
-            : GetScalarType<T[P], EmailCampaignGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EmailCampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    campaignId?: boolean
-    campaignName?: boolean
-    emailClientId?: boolean
-    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
-    emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
-    emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
-    _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["emailCampaign"]>
-
-  export type EmailCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    campaignId?: boolean
-    campaignName?: boolean
-    emailClientId?: boolean
-    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["emailCampaign"]>
-
-  export type EmailCampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    campaignId?: boolean
-    campaignName?: boolean
-    emailClientId?: boolean
-    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["emailCampaign"]>
-
-  export type EmailCampaignSelectScalar = {
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    campaignId?: boolean
-    campaignName?: boolean
-    emailClientId?: boolean
-  }
-
-  export type EmailCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "campaignId" | "campaignName" | "emailClientId", ExtArgs["result"]["emailCampaign"]>
-  export type EmailCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
-    emailCampaignContents?: boolean | EmailCampaign$emailCampaignContentsArgs<ExtArgs>
-    emailCampaignDailyStats?: boolean | EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>
-    _count?: boolean | EmailCampaignCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type EmailCampaignIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
-  }
-  export type EmailCampaignIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    emailClient?: boolean | EmailClientDefaultArgs<ExtArgs>
-  }
-
-  export type $EmailCampaignPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "EmailCampaign"
-    objects: {
-      emailClient: Prisma.$EmailClientPayload<ExtArgs>
-      emailCampaignContents: Prisma.$EmailCampaignContentPayload<ExtArgs>[]
-      emailCampaignDailyStats: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      createdAt: Date
-      updatedAt: Date
-      campaignId: string
-      campaignName: string
-      emailClientId: string
-    }, ExtArgs["result"]["emailCampaign"]>
-    composites: {}
-  }
-
-  type EmailCampaignGetPayload<S extends boolean | null | undefined | EmailCampaignDefaultArgs> = $Result.GetResult<Prisma.$EmailCampaignPayload, S>
-
-  type EmailCampaignCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EmailCampaignFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EmailCampaignCountAggregateInputType | true
-    }
-
-  export interface EmailCampaignDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailCampaign'], meta: { name: 'EmailCampaign' } }
-    /**
-     * Find zero or one EmailCampaign that matches the filter.
-     * @param {EmailCampaignFindUniqueArgs} args - Arguments to find a EmailCampaign
-     * @example
-     * // Get one EmailCampaign
-     * const emailCampaign = await prisma.emailCampaign.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EmailCampaignFindUniqueArgs>(args: SelectSubset<T, EmailCampaignFindUniqueArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one EmailCampaign that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EmailCampaignFindUniqueOrThrowArgs} args - Arguments to find a EmailCampaign
-     * @example
-     * // Get one EmailCampaign
-     * const emailCampaign = await prisma.emailCampaign.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EmailCampaignFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailCampaignFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EmailCampaign that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignFindFirstArgs} args - Arguments to find a EmailCampaign
-     * @example
-     * // Get one EmailCampaign
-     * const emailCampaign = await prisma.emailCampaign.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EmailCampaignFindFirstArgs>(args?: SelectSubset<T, EmailCampaignFindFirstArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EmailCampaign that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignFindFirstOrThrowArgs} args - Arguments to find a EmailCampaign
-     * @example
-     * // Get one EmailCampaign
-     * const emailCampaign = await prisma.emailCampaign.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EmailCampaignFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailCampaignFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more EmailCampaigns that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all EmailCampaigns
-     * const emailCampaigns = await prisma.emailCampaign.findMany()
-     * 
-     * // Get first 10 EmailCampaigns
-     * const emailCampaigns = await prisma.emailCampaign.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const emailCampaignWithIdOnly = await prisma.emailCampaign.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends EmailCampaignFindManyArgs>(args?: SelectSubset<T, EmailCampaignFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a EmailCampaign.
-     * @param {EmailCampaignCreateArgs} args - Arguments to create a EmailCampaign.
-     * @example
-     * // Create one EmailCampaign
-     * const EmailCampaign = await prisma.emailCampaign.create({
-     *   data: {
-     *     // ... data to create a EmailCampaign
-     *   }
-     * })
-     * 
-     */
-    create<T extends EmailCampaignCreateArgs>(args: SelectSubset<T, EmailCampaignCreateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many EmailCampaigns.
-     * @param {EmailCampaignCreateManyArgs} args - Arguments to create many EmailCampaigns.
-     * @example
-     * // Create many EmailCampaigns
-     * const emailCampaign = await prisma.emailCampaign.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EmailCampaignCreateManyArgs>(args?: SelectSubset<T, EmailCampaignCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many EmailCampaigns and returns the data saved in the database.
-     * @param {EmailCampaignCreateManyAndReturnArgs} args - Arguments to create many EmailCampaigns.
-     * @example
-     * // Create many EmailCampaigns
-     * const emailCampaign = await prisma.emailCampaign.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many EmailCampaigns and only return the `id`
-     * const emailCampaignWithIdOnly = await prisma.emailCampaign.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends EmailCampaignCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailCampaignCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a EmailCampaign.
-     * @param {EmailCampaignDeleteArgs} args - Arguments to delete one EmailCampaign.
-     * @example
-     * // Delete one EmailCampaign
-     * const EmailCampaign = await prisma.emailCampaign.delete({
-     *   where: {
-     *     // ... filter to delete one EmailCampaign
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EmailCampaignDeleteArgs>(args: SelectSubset<T, EmailCampaignDeleteArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one EmailCampaign.
-     * @param {EmailCampaignUpdateArgs} args - Arguments to update one EmailCampaign.
-     * @example
-     * // Update one EmailCampaign
-     * const emailCampaign = await prisma.emailCampaign.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EmailCampaignUpdateArgs>(args: SelectSubset<T, EmailCampaignUpdateArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more EmailCampaigns.
-     * @param {EmailCampaignDeleteManyArgs} args - Arguments to filter EmailCampaigns to delete.
-     * @example
-     * // Delete a few EmailCampaigns
-     * const { count } = await prisma.emailCampaign.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EmailCampaignDeleteManyArgs>(args?: SelectSubset<T, EmailCampaignDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EmailCampaigns.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many EmailCampaigns
-     * const emailCampaign = await prisma.emailCampaign.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EmailCampaignUpdateManyArgs>(args: SelectSubset<T, EmailCampaignUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EmailCampaigns and returns the data updated in the database.
-     * @param {EmailCampaignUpdateManyAndReturnArgs} args - Arguments to update many EmailCampaigns.
-     * @example
-     * // Update many EmailCampaigns
-     * const emailCampaign = await prisma.emailCampaign.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more EmailCampaigns and only return the `id`
-     * const emailCampaignWithIdOnly = await prisma.emailCampaign.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends EmailCampaignUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailCampaignUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one EmailCampaign.
-     * @param {EmailCampaignUpsertArgs} args - Arguments to update or create a EmailCampaign.
-     * @example
-     * // Update or create a EmailCampaign
-     * const emailCampaign = await prisma.emailCampaign.upsert({
-     *   create: {
-     *     // ... data to create a EmailCampaign
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the EmailCampaign we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EmailCampaignUpsertArgs>(args: SelectSubset<T, EmailCampaignUpsertArgs<ExtArgs>>): Prisma__EmailCampaignClient<$Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of EmailCampaigns.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignCountArgs} args - Arguments to filter EmailCampaigns to count.
-     * @example
-     * // Count the number of EmailCampaigns
-     * const count = await prisma.emailCampaign.count({
-     *   where: {
-     *     // ... the filter for the EmailCampaigns we want to count
-     *   }
-     * })
-    **/
-    count<T extends EmailCampaignCountArgs>(
-      args?: Subset<T, EmailCampaignCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EmailCampaignCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a EmailCampaign.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EmailCampaignAggregateArgs>(args: Subset<T, EmailCampaignAggregateArgs>): Prisma.PrismaPromise<GetEmailCampaignAggregateType<T>>
-
-    /**
-     * Group by EmailCampaign.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmailCampaignGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EmailCampaignGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EmailCampaignGroupByArgs['orderBy'] }
-        : { orderBy?: EmailCampaignGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EmailCampaignGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailCampaignGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the EmailCampaign model
-   */
-  readonly fields: EmailCampaignFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for EmailCampaign.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EmailCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    emailCampaignContents<T extends EmailCampaign$emailCampaignContentsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignContentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    emailCampaignDailyStats<T extends EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the EmailCampaign model
-   */
-  interface EmailCampaignFieldRefs {
-    readonly id: FieldRef<"EmailCampaign", 'String'>
-    readonly createdAt: FieldRef<"EmailCampaign", 'DateTime'>
-    readonly updatedAt: FieldRef<"EmailCampaign", 'DateTime'>
-    readonly campaignId: FieldRef<"EmailCampaign", 'String'>
-    readonly campaignName: FieldRef<"EmailCampaign", 'String'>
-    readonly emailClientId: FieldRef<"EmailCampaign", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * EmailCampaign findUnique
-   */
-  export type EmailCampaignFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * Filter, which EmailCampaign to fetch.
-     */
-    where: EmailCampaignWhereUniqueInput
-  }
-
-  /**
-   * EmailCampaign findUniqueOrThrow
-   */
-  export type EmailCampaignFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * Filter, which EmailCampaign to fetch.
-     */
-    where: EmailCampaignWhereUniqueInput
-  }
-
-  /**
-   * EmailCampaign findFirst
-   */
-  export type EmailCampaignFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * Filter, which EmailCampaign to fetch.
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EmailCampaigns to fetch.
-     */
-    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EmailCampaigns.
-     */
-    cursor?: EmailCampaignWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EmailCampaigns from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EmailCampaigns.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EmailCampaigns.
-     */
-    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
-  }
-
-  /**
-   * EmailCampaign findFirstOrThrow
-   */
-  export type EmailCampaignFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * Filter, which EmailCampaign to fetch.
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EmailCampaigns to fetch.
-     */
-    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EmailCampaigns.
-     */
-    cursor?: EmailCampaignWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EmailCampaigns from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EmailCampaigns.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EmailCampaigns.
-     */
-    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
-  }
-
-  /**
-   * EmailCampaign findMany
-   */
-  export type EmailCampaignFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * Filter, which EmailCampaigns to fetch.
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EmailCampaigns to fetch.
-     */
-    orderBy?: EmailCampaignOrderByWithRelationInput | EmailCampaignOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing EmailCampaigns.
-     */
-    cursor?: EmailCampaignWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EmailCampaigns from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EmailCampaigns.
-     */
-    skip?: number
-    distinct?: EmailCampaignScalarFieldEnum | EmailCampaignScalarFieldEnum[]
-  }
-
-  /**
-   * EmailCampaign create
-   */
-  export type EmailCampaignCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * The data needed to create a EmailCampaign.
-     */
-    data: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
-  }
-
-  /**
-   * EmailCampaign createMany
-   */
-  export type EmailCampaignCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many EmailCampaigns.
-     */
-    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * EmailCampaign createManyAndReturn
-   */
-  export type EmailCampaignCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * The data used to create many EmailCampaigns.
-     */
-    data: EmailCampaignCreateManyInput | EmailCampaignCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * EmailCampaign update
-   */
-  export type EmailCampaignUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * The data needed to update a EmailCampaign.
-     */
-    data: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
-    /**
-     * Choose, which EmailCampaign to update.
-     */
-    where: EmailCampaignWhereUniqueInput
-  }
-
-  /**
-   * EmailCampaign updateMany
-   */
-  export type EmailCampaignUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update EmailCampaigns.
-     */
-    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
-    /**
-     * Filter which EmailCampaigns to update
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * Limit how many EmailCampaigns to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * EmailCampaign updateManyAndReturn
-   */
-  export type EmailCampaignUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * The data used to update EmailCampaigns.
-     */
-    data: XOR<EmailCampaignUpdateManyMutationInput, EmailCampaignUncheckedUpdateManyInput>
-    /**
-     * Filter which EmailCampaigns to update
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * Limit how many EmailCampaigns to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * EmailCampaign upsert
-   */
-  export type EmailCampaignUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * The filter to search for the EmailCampaign to update in case it exists.
-     */
-    where: EmailCampaignWhereUniqueInput
-    /**
-     * In case the EmailCampaign found by the `where` argument doesn't exist, create a new EmailCampaign with this data.
-     */
-    create: XOR<EmailCampaignCreateInput, EmailCampaignUncheckedCreateInput>
-    /**
-     * In case the EmailCampaign was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EmailCampaignUpdateInput, EmailCampaignUncheckedUpdateInput>
-  }
-
-  /**
-   * EmailCampaign delete
-   */
-  export type EmailCampaignDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
-    /**
-     * Filter which EmailCampaign to delete.
-     */
-    where: EmailCampaignWhereUniqueInput
-  }
-
-  /**
-   * EmailCampaign deleteMany
-   */
-  export type EmailCampaignDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EmailCampaigns to delete
-     */
-    where?: EmailCampaignWhereInput
-    /**
-     * Limit how many EmailCampaigns to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * EmailCampaign.emailCampaignContents
-   */
-  export type EmailCampaign$emailCampaignContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaignContent
-     */
-    select?: EmailCampaignContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaignContent
-     */
-    omit?: EmailCampaignContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignContentInclude<ExtArgs> | null
-    where?: EmailCampaignContentWhereInput
-    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
-    cursor?: EmailCampaignContentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
-  }
-
-  /**
-   * EmailCampaign.emailCampaignDailyStats
-   */
-  export type EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaignDailyStats
-     */
-    select?: EmailCampaignDailyStatsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaignDailyStats
-     */
-    omit?: EmailCampaignDailyStatsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignDailyStatsInclude<ExtArgs> | null
-    where?: EmailCampaignDailyStatsWhereInput
-    orderBy?: EmailCampaignDailyStatsOrderByWithRelationInput | EmailCampaignDailyStatsOrderByWithRelationInput[]
-    cursor?: EmailCampaignDailyStatsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EmailCampaignDailyStatsScalarFieldEnum | EmailCampaignDailyStatsScalarFieldEnum[]
-  }
-
-  /**
-   * EmailCampaign without action
-   */
-  export type EmailCampaignDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmailCampaign
-     */
-    select?: EmailCampaignSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EmailCampaign
-     */
-    omit?: EmailCampaignOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmailCampaignInclude<ExtArgs> | null
   }
 
 
@@ -37590,6 +37690,1155 @@ export namespace Prisma {
 
 
   /**
+   * Model SproutFacebookPost
+   */
+
+  export type AggregateSproutFacebookPost = {
+    _count: SproutFacebookPostCountAggregateOutputType | null
+    _min: SproutFacebookPostMinAggregateOutputType | null
+    _max: SproutFacebookPostMaxAggregateOutputType | null
+  }
+
+  export type SproutFacebookPostMinAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    postType: string | null
+    postStatus: string | null
+    postLink: string | null
+    postText: string | null
+    postNativeId: string | null
+    postCreatedTime: Date | null
+    postSentTime: Date | null
+    postLastUpdated: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutFacebookPostMaxAggregateOutputType = {
+    id: string | null
+    sproutSocialAccountId: string | null
+    postType: string | null
+    postStatus: string | null
+    postLink: string | null
+    postText: string | null
+    postNativeId: string | null
+    postCreatedTime: Date | null
+    postSentTime: Date | null
+    postLastUpdated: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SproutFacebookPostCountAggregateOutputType = {
+    id: number
+    sproutSocialAccountId: number
+    postType: number
+    postStatus: number
+    postLink: number
+    postText: number
+    postNativeId: number
+    postCreatedTime: number
+    postSentTime: number
+    postLastUpdated: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SproutFacebookPostMinAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    postType?: true
+    postStatus?: true
+    postLink?: true
+    postText?: true
+    postNativeId?: true
+    postCreatedTime?: true
+    postSentTime?: true
+    postLastUpdated?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutFacebookPostMaxAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    postType?: true
+    postStatus?: true
+    postLink?: true
+    postText?: true
+    postNativeId?: true
+    postCreatedTime?: true
+    postSentTime?: true
+    postLastUpdated?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SproutFacebookPostCountAggregateInputType = {
+    id?: true
+    sproutSocialAccountId?: true
+    postType?: true
+    postStatus?: true
+    postLink?: true
+    postText?: true
+    postNativeId?: true
+    postCreatedTime?: true
+    postSentTime?: true
+    postLastUpdated?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SproutFacebookPostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutFacebookPost to aggregate.
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPosts to fetch.
+     */
+    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SproutFacebookPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SproutFacebookPosts
+    **/
+    _count?: true | SproutFacebookPostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SproutFacebookPostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SproutFacebookPostMaxAggregateInputType
+  }
+
+  export type GetSproutFacebookPostAggregateType<T extends SproutFacebookPostAggregateArgs> = {
+        [P in keyof T & keyof AggregateSproutFacebookPost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSproutFacebookPost[P]>
+      : GetScalarType<T[P], AggregateSproutFacebookPost[P]>
+  }
+
+
+
+
+  export type SproutFacebookPostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookPostWhereInput
+    orderBy?: SproutFacebookPostOrderByWithAggregationInput | SproutFacebookPostOrderByWithAggregationInput[]
+    by: SproutFacebookPostScalarFieldEnum[] | SproutFacebookPostScalarFieldEnum
+    having?: SproutFacebookPostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SproutFacebookPostCountAggregateInputType | true
+    _min?: SproutFacebookPostMinAggregateInputType
+    _max?: SproutFacebookPostMaxAggregateInputType
+  }
+
+  export type SproutFacebookPostGroupByOutputType = {
+    id: string
+    sproutSocialAccountId: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date
+    postSentTime: Date
+    postLastUpdated: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: SproutFacebookPostCountAggregateOutputType | null
+    _min: SproutFacebookPostMinAggregateOutputType | null
+    _max: SproutFacebookPostMaxAggregateOutputType | null
+  }
+
+  type GetSproutFacebookPostGroupByPayload<T extends SproutFacebookPostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SproutFacebookPostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SproutFacebookPostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SproutFacebookPostGroupByOutputType[P]>
+            : GetScalarType<T[P], SproutFacebookPostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SproutFacebookPostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    postType?: boolean
+    postStatus?: boolean
+    postLink?: boolean
+    postText?: boolean
+    postNativeId?: boolean
+    postCreatedTime?: boolean
+    postSentTime?: boolean
+    postLastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookPost"]>
+
+  export type SproutFacebookPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    postType?: boolean
+    postStatus?: boolean
+    postLink?: boolean
+    postText?: boolean
+    postNativeId?: boolean
+    postCreatedTime?: boolean
+    postSentTime?: boolean
+    postLastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookPost"]>
+
+  export type SproutFacebookPostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    postType?: boolean
+    postStatus?: boolean
+    postLink?: boolean
+    postText?: boolean
+    postNativeId?: boolean
+    postCreatedTime?: boolean
+    postSentTime?: boolean
+    postLastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sproutFacebookPost"]>
+
+  export type SproutFacebookPostSelectScalar = {
+    id?: boolean
+    sproutSocialAccountId?: boolean
+    postType?: boolean
+    postStatus?: boolean
+    postLink?: boolean
+    postText?: boolean
+    postNativeId?: boolean
+    postCreatedTime?: boolean
+    postSentTime?: boolean
+    postLastUpdated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SproutFacebookPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sproutSocialAccountId" | "postType" | "postStatus" | "postLink" | "postText" | "postNativeId" | "postCreatedTime" | "postSentTime" | "postLastUpdated" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutFacebookPost"]>
+  export type SproutFacebookPostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutFacebookPostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+  export type SproutFacebookPostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sproutSocialAccount?: boolean | SproutSocialAccountDefaultArgs<ExtArgs>
+  }
+
+  export type $SproutFacebookPostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SproutFacebookPost"
+    objects: {
+      sproutSocialAccount: Prisma.$SproutSocialAccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sproutSocialAccountId: string
+      postType: string
+      postStatus: string
+      postLink: string
+      postText: string
+      postNativeId: string
+      postCreatedTime: Date
+      postSentTime: Date
+      postLastUpdated: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sproutFacebookPost"]>
+    composites: {}
+  }
+
+  type SproutFacebookPostGetPayload<S extends boolean | null | undefined | SproutFacebookPostDefaultArgs> = $Result.GetResult<Prisma.$SproutFacebookPostPayload, S>
+
+  type SproutFacebookPostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SproutFacebookPostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SproutFacebookPostCountAggregateInputType | true
+    }
+
+  export interface SproutFacebookPostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SproutFacebookPost'], meta: { name: 'SproutFacebookPost' } }
+    /**
+     * Find zero or one SproutFacebookPost that matches the filter.
+     * @param {SproutFacebookPostFindUniqueArgs} args - Arguments to find a SproutFacebookPost
+     * @example
+     * // Get one SproutFacebookPost
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SproutFacebookPostFindUniqueArgs>(args: SelectSubset<T, SproutFacebookPostFindUniqueArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SproutFacebookPost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SproutFacebookPostFindUniqueOrThrowArgs} args - Arguments to find a SproutFacebookPost
+     * @example
+     * // Get one SproutFacebookPost
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SproutFacebookPostFindUniqueOrThrowArgs>(args: SelectSubset<T, SproutFacebookPostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutFacebookPost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostFindFirstArgs} args - Arguments to find a SproutFacebookPost
+     * @example
+     * // Get one SproutFacebookPost
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SproutFacebookPostFindFirstArgs>(args?: SelectSubset<T, SproutFacebookPostFindFirstArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SproutFacebookPost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostFindFirstOrThrowArgs} args - Arguments to find a SproutFacebookPost
+     * @example
+     * // Get one SproutFacebookPost
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SproutFacebookPostFindFirstOrThrowArgs>(args?: SelectSubset<T, SproutFacebookPostFindFirstOrThrowArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SproutFacebookPosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SproutFacebookPosts
+     * const sproutFacebookPosts = await prisma.sproutFacebookPost.findMany()
+     * 
+     * // Get first 10 SproutFacebookPosts
+     * const sproutFacebookPosts = await prisma.sproutFacebookPost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sproutFacebookPostWithIdOnly = await prisma.sproutFacebookPost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SproutFacebookPostFindManyArgs>(args?: SelectSubset<T, SproutFacebookPostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SproutFacebookPost.
+     * @param {SproutFacebookPostCreateArgs} args - Arguments to create a SproutFacebookPost.
+     * @example
+     * // Create one SproutFacebookPost
+     * const SproutFacebookPost = await prisma.sproutFacebookPost.create({
+     *   data: {
+     *     // ... data to create a SproutFacebookPost
+     *   }
+     * })
+     * 
+     */
+    create<T extends SproutFacebookPostCreateArgs>(args: SelectSubset<T, SproutFacebookPostCreateArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SproutFacebookPosts.
+     * @param {SproutFacebookPostCreateManyArgs} args - Arguments to create many SproutFacebookPosts.
+     * @example
+     * // Create many SproutFacebookPosts
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SproutFacebookPostCreateManyArgs>(args?: SelectSubset<T, SproutFacebookPostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SproutFacebookPosts and returns the data saved in the database.
+     * @param {SproutFacebookPostCreateManyAndReturnArgs} args - Arguments to create many SproutFacebookPosts.
+     * @example
+     * // Create many SproutFacebookPosts
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SproutFacebookPosts and only return the `id`
+     * const sproutFacebookPostWithIdOnly = await prisma.sproutFacebookPost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SproutFacebookPostCreateManyAndReturnArgs>(args?: SelectSubset<T, SproutFacebookPostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SproutFacebookPost.
+     * @param {SproutFacebookPostDeleteArgs} args - Arguments to delete one SproutFacebookPost.
+     * @example
+     * // Delete one SproutFacebookPost
+     * const SproutFacebookPost = await prisma.sproutFacebookPost.delete({
+     *   where: {
+     *     // ... filter to delete one SproutFacebookPost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SproutFacebookPostDeleteArgs>(args: SelectSubset<T, SproutFacebookPostDeleteArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SproutFacebookPost.
+     * @param {SproutFacebookPostUpdateArgs} args - Arguments to update one SproutFacebookPost.
+     * @example
+     * // Update one SproutFacebookPost
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SproutFacebookPostUpdateArgs>(args: SelectSubset<T, SproutFacebookPostUpdateArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SproutFacebookPosts.
+     * @param {SproutFacebookPostDeleteManyArgs} args - Arguments to filter SproutFacebookPosts to delete.
+     * @example
+     * // Delete a few SproutFacebookPosts
+     * const { count } = await prisma.sproutFacebookPost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SproutFacebookPostDeleteManyArgs>(args?: SelectSubset<T, SproutFacebookPostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutFacebookPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SproutFacebookPosts
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SproutFacebookPostUpdateManyArgs>(args: SelectSubset<T, SproutFacebookPostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SproutFacebookPosts and returns the data updated in the database.
+     * @param {SproutFacebookPostUpdateManyAndReturnArgs} args - Arguments to update many SproutFacebookPosts.
+     * @example
+     * // Update many SproutFacebookPosts
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SproutFacebookPosts and only return the `id`
+     * const sproutFacebookPostWithIdOnly = await prisma.sproutFacebookPost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SproutFacebookPostUpdateManyAndReturnArgs>(args: SelectSubset<T, SproutFacebookPostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SproutFacebookPost.
+     * @param {SproutFacebookPostUpsertArgs} args - Arguments to update or create a SproutFacebookPost.
+     * @example
+     * // Update or create a SproutFacebookPost
+     * const sproutFacebookPost = await prisma.sproutFacebookPost.upsert({
+     *   create: {
+     *     // ... data to create a SproutFacebookPost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SproutFacebookPost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SproutFacebookPostUpsertArgs>(args: SelectSubset<T, SproutFacebookPostUpsertArgs<ExtArgs>>): Prisma__SproutFacebookPostClient<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SproutFacebookPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostCountArgs} args - Arguments to filter SproutFacebookPosts to count.
+     * @example
+     * // Count the number of SproutFacebookPosts
+     * const count = await prisma.sproutFacebookPost.count({
+     *   where: {
+     *     // ... the filter for the SproutFacebookPosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends SproutFacebookPostCountArgs>(
+      args?: Subset<T, SproutFacebookPostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SproutFacebookPostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SproutFacebookPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SproutFacebookPostAggregateArgs>(args: Subset<T, SproutFacebookPostAggregateArgs>): Prisma.PrismaPromise<GetSproutFacebookPostAggregateType<T>>
+
+    /**
+     * Group by SproutFacebookPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SproutFacebookPostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SproutFacebookPostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SproutFacebookPostGroupByArgs['orderBy'] }
+        : { orderBy?: SproutFacebookPostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SproutFacebookPostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSproutFacebookPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SproutFacebookPost model
+   */
+  readonly fields: SproutFacebookPostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SproutFacebookPost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SproutFacebookPostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sproutSocialAccount<T extends SproutSocialAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccountDefaultArgs<ExtArgs>>): Prisma__SproutSocialAccountClient<$Result.GetResult<Prisma.$SproutSocialAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SproutFacebookPost model
+   */
+  interface SproutFacebookPostFieldRefs {
+    readonly id: FieldRef<"SproutFacebookPost", 'String'>
+    readonly sproutSocialAccountId: FieldRef<"SproutFacebookPost", 'String'>
+    readonly postType: FieldRef<"SproutFacebookPost", 'String'>
+    readonly postStatus: FieldRef<"SproutFacebookPost", 'String'>
+    readonly postLink: FieldRef<"SproutFacebookPost", 'String'>
+    readonly postText: FieldRef<"SproutFacebookPost", 'String'>
+    readonly postNativeId: FieldRef<"SproutFacebookPost", 'String'>
+    readonly postCreatedTime: FieldRef<"SproutFacebookPost", 'DateTime'>
+    readonly postSentTime: FieldRef<"SproutFacebookPost", 'DateTime'>
+    readonly postLastUpdated: FieldRef<"SproutFacebookPost", 'DateTime'>
+    readonly createdAt: FieldRef<"SproutFacebookPost", 'DateTime'>
+    readonly updatedAt: FieldRef<"SproutFacebookPost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SproutFacebookPost findUnique
+   */
+  export type SproutFacebookPostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPost to fetch.
+     */
+    where: SproutFacebookPostWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPost findUniqueOrThrow
+   */
+  export type SproutFacebookPostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPost to fetch.
+     */
+    where: SproutFacebookPostWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPost findFirst
+   */
+  export type SproutFacebookPostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPost to fetch.
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPosts to fetch.
+     */
+    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutFacebookPosts.
+     */
+    cursor?: SproutFacebookPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutFacebookPosts.
+     */
+    distinct?: SproutFacebookPostScalarFieldEnum | SproutFacebookPostScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookPost findFirstOrThrow
+   */
+  export type SproutFacebookPostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPost to fetch.
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPosts to fetch.
+     */
+    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SproutFacebookPosts.
+     */
+    cursor?: SproutFacebookPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SproutFacebookPosts.
+     */
+    distinct?: SproutFacebookPostScalarFieldEnum | SproutFacebookPostScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookPost findMany
+   */
+  export type SproutFacebookPostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * Filter, which SproutFacebookPosts to fetch.
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SproutFacebookPosts to fetch.
+     */
+    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SproutFacebookPosts.
+     */
+    cursor?: SproutFacebookPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SproutFacebookPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SproutFacebookPosts.
+     */
+    skip?: number
+    distinct?: SproutFacebookPostScalarFieldEnum | SproutFacebookPostScalarFieldEnum[]
+  }
+
+  /**
+   * SproutFacebookPost create
+   */
+  export type SproutFacebookPostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SproutFacebookPost.
+     */
+    data: XOR<SproutFacebookPostCreateInput, SproutFacebookPostUncheckedCreateInput>
+  }
+
+  /**
+   * SproutFacebookPost createMany
+   */
+  export type SproutFacebookPostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SproutFacebookPosts.
+     */
+    data: SproutFacebookPostCreateManyInput | SproutFacebookPostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SproutFacebookPost createManyAndReturn
+   */
+  export type SproutFacebookPostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * The data used to create many SproutFacebookPosts.
+     */
+    data: SproutFacebookPostCreateManyInput | SproutFacebookPostCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutFacebookPost update
+   */
+  export type SproutFacebookPostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SproutFacebookPost.
+     */
+    data: XOR<SproutFacebookPostUpdateInput, SproutFacebookPostUncheckedUpdateInput>
+    /**
+     * Choose, which SproutFacebookPost to update.
+     */
+    where: SproutFacebookPostWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPost updateMany
+   */
+  export type SproutFacebookPostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SproutFacebookPosts.
+     */
+    data: XOR<SproutFacebookPostUpdateManyMutationInput, SproutFacebookPostUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutFacebookPosts to update
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * Limit how many SproutFacebookPosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutFacebookPost updateManyAndReturn
+   */
+  export type SproutFacebookPostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * The data used to update SproutFacebookPosts.
+     */
+    data: XOR<SproutFacebookPostUpdateManyMutationInput, SproutFacebookPostUncheckedUpdateManyInput>
+    /**
+     * Filter which SproutFacebookPosts to update
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * Limit how many SproutFacebookPosts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SproutFacebookPost upsert
+   */
+  export type SproutFacebookPostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SproutFacebookPost to update in case it exists.
+     */
+    where: SproutFacebookPostWhereUniqueInput
+    /**
+     * In case the SproutFacebookPost found by the `where` argument doesn't exist, create a new SproutFacebookPost with this data.
+     */
+    create: XOR<SproutFacebookPostCreateInput, SproutFacebookPostUncheckedCreateInput>
+    /**
+     * In case the SproutFacebookPost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SproutFacebookPostUpdateInput, SproutFacebookPostUncheckedUpdateInput>
+  }
+
+  /**
+   * SproutFacebookPost delete
+   */
+  export type SproutFacebookPostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    /**
+     * Filter which SproutFacebookPost to delete.
+     */
+    where: SproutFacebookPostWhereUniqueInput
+  }
+
+  /**
+   * SproutFacebookPost deleteMany
+   */
+  export type SproutFacebookPostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SproutFacebookPosts to delete
+     */
+    where?: SproutFacebookPostWhereInput
+    /**
+     * Limit how many SproutFacebookPosts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SproutFacebookPost without action
+   */
+  export type SproutFacebookPostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model SproutFacebookPostAnalytics
    */
 
@@ -45551,6 +46800,7 @@ export namespace Prisma {
     linkedInAnalytics?: boolean | SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>
     pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
     users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
+    facebookPosts?: boolean | SproutSocialAccount$facebookPostsArgs<ExtArgs>
     _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutSocialAccount"]>
 
@@ -45601,6 +46851,7 @@ export namespace Prisma {
     linkedInAnalytics?: boolean | SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>
     pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
     users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
+    facebookPosts?: boolean | SproutSocialAccount$facebookPostsArgs<ExtArgs>
     _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SproutSocialAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -45615,6 +46866,7 @@ export namespace Prisma {
       linkedInAnalytics: Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>[]
       pinterestAnalytics: Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>[]
       users: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
+      facebookPosts: Prisma.$SproutFacebookPostPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -46027,6 +47279,7 @@ export namespace Prisma {
     linkedInAnalytics<T extends SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pinterestAnalytics<T extends SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends SproutSocialAccount$usersArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    facebookPosts<T extends SproutSocialAccount$facebookPostsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookPostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -46595,6 +47848,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
+  }
+
+  /**
+   * SproutSocialAccount.facebookPosts
+   */
+  export type SproutSocialAccount$facebookPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    where?: SproutFacebookPostWhereInput
+    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
+    cursor?: SproutFacebookPostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutFacebookPostScalarFieldEnum | SproutFacebookPostScalarFieldEnum[]
   }
 
   /**
@@ -59407,6 +60684,18 @@ export namespace Prisma {
   export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
 
 
+  export const EmailCampaignScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    campaignId: 'campaignId',
+    campaignName: 'campaignName',
+    emailClientId: 'emailClientId'
+  };
+
+  export type EmailCampaignScalarFieldEnum = (typeof EmailCampaignScalarFieldEnum)[keyof typeof EmailCampaignScalarFieldEnum]
+
+
   export const EmailCampaignContentScalarFieldEnum: {
     id: 'id',
     subject: 'subject',
@@ -59424,18 +60713,6 @@ export namespace Prisma {
   };
 
   export type EmailCampaignContentScalarFieldEnum = (typeof EmailCampaignContentScalarFieldEnum)[keyof typeof EmailCampaignContentScalarFieldEnum]
-
-
-  export const EmailCampaignScalarFieldEnum: {
-    id: 'id',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    campaignId: 'campaignId',
-    campaignName: 'campaignName',
-    emailClientId: 'emailClientId'
-  };
-
-  export type EmailCampaignScalarFieldEnum = (typeof EmailCampaignScalarFieldEnum)[keyof typeof EmailCampaignScalarFieldEnum]
 
 
   export const EmailCampaignDailyStatsScalarFieldEnum: {
@@ -59779,6 +61056,24 @@ export namespace Prisma {
   };
 
   export type SproutFacebookAnalyticsScalarFieldEnum = (typeof SproutFacebookAnalyticsScalarFieldEnum)[keyof typeof SproutFacebookAnalyticsScalarFieldEnum]
+
+
+  export const SproutFacebookPostScalarFieldEnum: {
+    id: 'id',
+    sproutSocialAccountId: 'sproutSocialAccountId',
+    postType: 'postType',
+    postStatus: 'postStatus',
+    postLink: 'postLink',
+    postText: 'postText',
+    postNativeId: 'postNativeId',
+    postCreatedTime: 'postCreatedTime',
+    postSentTime: 'postSentTime',
+    postLastUpdated: 'postLastUpdated',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SproutFacebookPostScalarFieldEnum = (typeof SproutFacebookPostScalarFieldEnum)[keyof typeof SproutFacebookPostScalarFieldEnum]
 
 
   export const SproutFacebookPostAnalyticsScalarFieldEnum: {
@@ -60581,6 +61876,72 @@ export namespace Prisma {
     clientId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
   }
 
+  export type EmailCampaignWhereInput = {
+    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    OR?: EmailCampaignWhereInput[]
+    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    id?: StringFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    campaignId?: StringFilter<"EmailCampaign"> | string
+    campaignName?: StringFilter<"EmailCampaign"> | string
+    emailClientId?: StringFilter<"EmailCampaign"> | string
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailCampaignContents?: EmailCampaignContentListRelationFilter
+    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
+  }
+
+  export type EmailCampaignOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
+    emailClient?: EmailClientOrderByWithRelationInput
+    emailCampaignContents?: EmailCampaignContentOrderByRelationAggregateInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsOrderByRelationAggregateInput
+  }
+
+  export type EmailCampaignWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    campaignId?: string
+    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    OR?: EmailCampaignWhereInput[]
+    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
+    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
+    campaignName?: StringFilter<"EmailCampaign"> | string
+    emailClientId?: StringFilter<"EmailCampaign"> | string
+    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
+    emailCampaignContents?: EmailCampaignContentListRelationFilter
+    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
+  }, "id" | "campaignId">
+
+  export type EmailCampaignOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
+    _count?: EmailCampaignCountOrderByAggregateInput
+    _max?: EmailCampaignMaxOrderByAggregateInput
+    _min?: EmailCampaignMinOrderByAggregateInput
+  }
+
+  export type EmailCampaignScalarWhereWithAggregatesInput = {
+    AND?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
+    OR?: EmailCampaignScalarWhereWithAggregatesInput[]
+    NOT?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
+    campaignId?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    campaignName?: StringWithAggregatesFilter<"EmailCampaign"> | string
+    emailClientId?: StringWithAggregatesFilter<"EmailCampaign"> | string
+  }
+
   export type EmailCampaignContentWhereInput = {
     AND?: EmailCampaignContentWhereInput | EmailCampaignContentWhereInput[]
     OR?: EmailCampaignContentWhereInput[]
@@ -60676,72 +62037,6 @@ export namespace Prisma {
     plainContent?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
     sendTime?: DateTimeWithAggregatesFilter<"EmailCampaignContent"> | Date | string
     webId?: StringWithAggregatesFilter<"EmailCampaignContent"> | string
-  }
-
-  export type EmailCampaignWhereInput = {
-    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
-    OR?: EmailCampaignWhereInput[]
-    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
-    id?: StringFilter<"EmailCampaign"> | string
-    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
-    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
-    campaignId?: StringFilter<"EmailCampaign"> | string
-    campaignName?: StringFilter<"EmailCampaign"> | string
-    emailClientId?: StringFilter<"EmailCampaign"> | string
-    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-    emailCampaignContents?: EmailCampaignContentListRelationFilter
-    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
-  }
-
-  export type EmailCampaignOrderByWithRelationInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    campaignId?: SortOrder
-    campaignName?: SortOrder
-    emailClientId?: SortOrder
-    emailClient?: EmailClientOrderByWithRelationInput
-    emailCampaignContents?: EmailCampaignContentOrderByRelationAggregateInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsOrderByRelationAggregateInput
-  }
-
-  export type EmailCampaignWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    campaignId?: string
-    AND?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
-    OR?: EmailCampaignWhereInput[]
-    NOT?: EmailCampaignWhereInput | EmailCampaignWhereInput[]
-    createdAt?: DateTimeFilter<"EmailCampaign"> | Date | string
-    updatedAt?: DateTimeFilter<"EmailCampaign"> | Date | string
-    campaignName?: StringFilter<"EmailCampaign"> | string
-    emailClientId?: StringFilter<"EmailCampaign"> | string
-    emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-    emailCampaignContents?: EmailCampaignContentListRelationFilter
-    emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
-  }, "id" | "campaignId">
-
-  export type EmailCampaignOrderByWithAggregationInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    campaignId?: SortOrder
-    campaignName?: SortOrder
-    emailClientId?: SortOrder
-    _count?: EmailCampaignCountOrderByAggregateInput
-    _max?: EmailCampaignMaxOrderByAggregateInput
-    _min?: EmailCampaignMinOrderByAggregateInput
-  }
-
-  export type EmailCampaignScalarWhereWithAggregatesInput = {
-    AND?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
-    OR?: EmailCampaignScalarWhereWithAggregatesInput[]
-    NOT?: EmailCampaignScalarWhereWithAggregatesInput | EmailCampaignScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"EmailCampaign"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"EmailCampaign"> | Date | string
-    campaignId?: StringWithAggregatesFilter<"EmailCampaign"> | string
-    campaignName?: StringWithAggregatesFilter<"EmailCampaign"> | string
-    emailClientId?: StringWithAggregatesFilter<"EmailCampaign"> | string
   }
 
   export type EmailCampaignDailyStatsWhereInput = {
@@ -62553,6 +63848,97 @@ export namespace Prisma {
     netFollowerGrowth?: IntNullableWithAggregatesFilter<"SproutFacebookAnalytics"> | number | null
   }
 
+  export type SproutFacebookPostWhereInput = {
+    AND?: SproutFacebookPostWhereInput | SproutFacebookPostWhereInput[]
+    OR?: SproutFacebookPostWhereInput[]
+    NOT?: SproutFacebookPostWhereInput | SproutFacebookPostWhereInput[]
+    id?: StringFilter<"SproutFacebookPost"> | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPost"> | string
+    postType?: StringFilter<"SproutFacebookPost"> | string
+    postStatus?: StringFilter<"SproutFacebookPost"> | string
+    postLink?: StringFilter<"SproutFacebookPost"> | string
+    postText?: StringFilter<"SproutFacebookPost"> | string
+    postNativeId?: StringFilter<"SproutFacebookPost"> | string
+    postCreatedTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postSentTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postLastUpdated?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    createdAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }
+
+  export type SproutFacebookPostOrderByWithRelationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    postType?: SortOrder
+    postStatus?: SortOrder
+    postLink?: SortOrder
+    postText?: SortOrder
+    postNativeId?: SortOrder
+    postCreatedTime?: SortOrder
+    postSentTime?: SortOrder
+    postLastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sproutSocialAccount?: SproutSocialAccountOrderByWithRelationInput
+  }
+
+  export type SproutFacebookPostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sproutSocialAccountId_postNativeId?: SproutFacebookPostSproutSocialAccountIdPostNativeIdCompoundUniqueInput
+    AND?: SproutFacebookPostWhereInput | SproutFacebookPostWhereInput[]
+    OR?: SproutFacebookPostWhereInput[]
+    NOT?: SproutFacebookPostWhereInput | SproutFacebookPostWhereInput[]
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPost"> | string
+    postType?: StringFilter<"SproutFacebookPost"> | string
+    postStatus?: StringFilter<"SproutFacebookPost"> | string
+    postLink?: StringFilter<"SproutFacebookPost"> | string
+    postText?: StringFilter<"SproutFacebookPost"> | string
+    postNativeId?: StringFilter<"SproutFacebookPost"> | string
+    postCreatedTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postSentTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postLastUpdated?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    createdAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    sproutSocialAccount?: XOR<SproutSocialAccountScalarRelationFilter, SproutSocialAccountWhereInput>
+  }, "id" | "sproutSocialAccountId_postNativeId">
+
+  export type SproutFacebookPostOrderByWithAggregationInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    postType?: SortOrder
+    postStatus?: SortOrder
+    postLink?: SortOrder
+    postText?: SortOrder
+    postNativeId?: SortOrder
+    postCreatedTime?: SortOrder
+    postSentTime?: SortOrder
+    postLastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SproutFacebookPostCountOrderByAggregateInput
+    _max?: SproutFacebookPostMaxOrderByAggregateInput
+    _min?: SproutFacebookPostMinOrderByAggregateInput
+  }
+
+  export type SproutFacebookPostScalarWhereWithAggregatesInput = {
+    AND?: SproutFacebookPostScalarWhereWithAggregatesInput | SproutFacebookPostScalarWhereWithAggregatesInput[]
+    OR?: SproutFacebookPostScalarWhereWithAggregatesInput[]
+    NOT?: SproutFacebookPostScalarWhereWithAggregatesInput | SproutFacebookPostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    sproutSocialAccountId?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    postType?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    postStatus?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    postLink?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    postText?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    postNativeId?: StringWithAggregatesFilter<"SproutFacebookPost"> | string
+    postCreatedTime?: DateTimeWithAggregatesFilter<"SproutFacebookPost"> | Date | string
+    postSentTime?: DateTimeWithAggregatesFilter<"SproutFacebookPost"> | Date | string
+    postLastUpdated?: DateTimeWithAggregatesFilter<"SproutFacebookPost"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"SproutFacebookPost"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SproutFacebookPost"> | Date | string
+  }
+
   export type SproutFacebookPostAnalyticsWhereInput = {
     AND?: SproutFacebookPostAnalyticsWhereInput | SproutFacebookPostAnalyticsWhereInput[]
     OR?: SproutFacebookPostAnalyticsWhereInput[]
@@ -63266,6 +64652,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsListRelationFilter
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
+    facebookPosts?: SproutFacebookPostListRelationFilter
   }
 
   export type SproutSocialAccountOrderByWithRelationInput = {
@@ -63285,6 +64672,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsOrderByRelationAggregateInput
     pinterestAnalytics?: SproutPinterestAnalyticsOrderByRelationAggregateInput
     users?: UserToSproutSocialAccountOrderByRelationAggregateInput
+    facebookPosts?: SproutFacebookPostOrderByRelationAggregateInput
   }
 
   export type SproutSocialAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -63307,6 +64695,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsListRelationFilter
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
+    facebookPosts?: SproutFacebookPostListRelationFilter
   }, "id" | "customerProfileId">
 
   export type SproutSocialAccountOrderByWithAggregationInput = {
@@ -64449,6 +65838,76 @@ export namespace Prisma {
     clientId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type EmailCampaignCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    campaignName: string
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
+  }
+
+  export type EmailCampaignUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EmailCampaignUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type EmailCampaignContentCreateInput = {
     id?: string
     subject: string
@@ -64558,76 +66017,6 @@ export namespace Prisma {
     plainContent?: StringFieldUpdateOperationsInput | string
     sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
     webId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EmailCampaignCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaignId: string
-    campaignName: string
-    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
-    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
-  }
-
-  export type EmailCampaignUncheckedCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaignId: string
-    campaignName: string
-    emailClientId: string
-    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
-  }
-
-  export type EmailCampaignUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
-    campaignName?: StringFieldUpdateOperationsInput | string
-    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
-    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
-  }
-
-  export type EmailCampaignUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
-    campaignName?: StringFieldUpdateOperationsInput | string
-    emailClientId?: StringFieldUpdateOperationsInput | string
-    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
-  }
-
-  export type EmailCampaignCreateManyInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaignId: string
-    campaignName: string
-    emailClientId: string
-  }
-
-  export type EmailCampaignUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
-    campaignName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EmailCampaignUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
-    campaignName?: StringFieldUpdateOperationsInput | string
-    emailClientId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsCreateInput = {
@@ -66648,6 +68037,110 @@ export namespace Prisma {
     netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type SproutFacebookPostCreateInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
+    sproutSocialAccount: SproutSocialAccountCreateNestedOneWithoutFacebookPostsInput
+  }
+
+  export type SproutFacebookPostUncheckedCreateInput = {
+    id?: string
+    sproutSocialAccountId: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
+  }
+
+  export type SproutFacebookPostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sproutSocialAccount?: SproutSocialAccountUpdateOneRequiredWithoutFacebookPostsNestedInput
+  }
+
+  export type SproutFacebookPostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostCreateManyInput = {
+    id?: string
+    sproutSocialAccountId: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
+  }
+
+  export type SproutFacebookPostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sproutSocialAccountId?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SproutFacebookPostAnalyticsCreateInput = {
     id?: string
     angryReactions?: number | null
@@ -67479,6 +68972,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateInput = {
@@ -67498,6 +68992,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUpdateInput = {
@@ -67517,6 +69012,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateInput = {
@@ -67536,6 +69032,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateManyInput = {
@@ -68761,6 +70258,58 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EmailClientScalarRelationFilter = {
+    is?: EmailClientWhereInput
+    isNot?: EmailClientWhereInput
+  }
+
+  export type EmailCampaignContentListRelationFilter = {
+    every?: EmailCampaignContentWhereInput
+    some?: EmailCampaignContentWhereInput
+    none?: EmailCampaignContentWhereInput
+  }
+
+  export type EmailCampaignDailyStatsListRelationFilter = {
+    every?: EmailCampaignDailyStatsWhereInput
+    some?: EmailCampaignDailyStatsWhereInput
+    none?: EmailCampaignDailyStatsWhereInput
+  }
+
+  export type EmailCampaignContentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailCampaignDailyStatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailCampaignCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
+  }
+
+  export type EmailCampaignMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
+  }
+
+  export type EmailCampaignMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    campaignId?: SortOrder
+    campaignName?: SortOrder
+    emailClientId?: SortOrder
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -68847,58 +70396,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type EmailClientScalarRelationFilter = {
-    is?: EmailClientWhereInput
-    isNot?: EmailClientWhereInput
-  }
-
-  export type EmailCampaignContentListRelationFilter = {
-    every?: EmailCampaignContentWhereInput
-    some?: EmailCampaignContentWhereInput
-    none?: EmailCampaignContentWhereInput
-  }
-
-  export type EmailCampaignDailyStatsListRelationFilter = {
-    every?: EmailCampaignDailyStatsWhereInput
-    some?: EmailCampaignDailyStatsWhereInput
-    none?: EmailCampaignDailyStatsWhereInput
-  }
-
-  export type EmailCampaignContentOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EmailCampaignDailyStatsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EmailCampaignCountOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    campaignId?: SortOrder
-    campaignName?: SortOrder
-    emailClientId?: SortOrder
-  }
-
-  export type EmailCampaignMaxOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    campaignId?: SortOrder
-    campaignName?: SortOrder
-    emailClientId?: SortOrder
-  }
-
-  export type EmailCampaignMinOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    campaignId?: SortOrder
-    campaignName?: SortOrder
-    emailClientId?: SortOrder
   }
 
   export type EmailCampaignDailyStatsEmailCampaignIdDateCompoundUniqueInput = {
@@ -70371,6 +71868,56 @@ export namespace Prisma {
     netFollowerGrowth?: SortOrder
   }
 
+  export type SproutFacebookPostSproutSocialAccountIdPostNativeIdCompoundUniqueInput = {
+    sproutSocialAccountId: string
+    postNativeId: string
+  }
+
+  export type SproutFacebookPostCountOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    postType?: SortOrder
+    postStatus?: SortOrder
+    postLink?: SortOrder
+    postText?: SortOrder
+    postNativeId?: SortOrder
+    postCreatedTime?: SortOrder
+    postSentTime?: SortOrder
+    postLastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookPostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    postType?: SortOrder
+    postStatus?: SortOrder
+    postLink?: SortOrder
+    postText?: SortOrder
+    postNativeId?: SortOrder
+    postCreatedTime?: SortOrder
+    postSentTime?: SortOrder
+    postLastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SproutFacebookPostMinOrderByAggregateInput = {
+    id?: SortOrder
+    sproutSocialAccountId?: SortOrder
+    postType?: SortOrder
+    postStatus?: SortOrder
+    postLink?: SortOrder
+    postText?: SortOrder
+    postNativeId?: SortOrder
+    postCreatedTime?: SortOrder
+    postSentTime?: SortOrder
+    postLastUpdated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type SproutFacebookPostAnalyticsPostNativeIdReportingDateCompoundUniqueInput = {
     postNativeId: string
     reportingDate: Date | string
@@ -70973,6 +72520,12 @@ export namespace Prisma {
     none?: UserToSproutSocialAccountWhereInput
   }
 
+  export type SproutFacebookPostListRelationFilter = {
+    every?: SproutFacebookPostWhereInput
+    some?: SproutFacebookPostWhereInput
+    none?: SproutFacebookPostWhereInput
+  }
+
   export type SproutFacebookAnalyticsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -70994,6 +72547,10 @@ export namespace Prisma {
   }
 
   export type UserToSproutSocialAccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SproutFacebookPostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -71807,28 +73364,6 @@ export namespace Prisma {
     deleteMany?: QueryScalarWhereInput | QueryScalarWhereInput[]
   }
 
-  export type EmailCampaignCreateNestedOneWithoutEmailCampaignContentsInput = {
-    create?: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
-    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput
-    connect?: EmailCampaignWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type EmailCampaignUpdateOneRequiredWithoutEmailCampaignContentsNestedInput = {
-    create?: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
-    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput
-    upsert?: EmailCampaignUpsertWithoutEmailCampaignContentsInput
-    connect?: EmailCampaignWhereUniqueInput
-    update?: XOR<XOR<EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignContentsInput, EmailCampaignUpdateWithoutEmailCampaignContentsInput>, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
-  }
-
   export type EmailClientCreateNestedOneWithoutEmailCampaignsInput = {
     create?: XOR<EmailClientCreateWithoutEmailCampaignsInput, EmailClientUncheckedCreateWithoutEmailCampaignsInput>
     connectOrCreate?: EmailClientCreateOrConnectWithoutEmailCampaignsInput
@@ -71925,6 +73460,28 @@ export namespace Prisma {
     update?: EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignDailyStatsUpdateWithWhereUniqueWithoutEmailCampaignInput[]
     updateMany?: EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignDailyStatsUpdateManyWithWhereWithoutEmailCampaignInput[]
     deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
+  }
+
+  export type EmailCampaignCreateNestedOneWithoutEmailCampaignContentsInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput
+    connect?: EmailCampaignWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EmailCampaignUpdateOneRequiredWithoutEmailCampaignContentsNestedInput = {
+    create?: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+    connectOrCreate?: EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput
+    upsert?: EmailCampaignUpsertWithoutEmailCampaignContentsInput
+    connect?: EmailCampaignWhereUniqueInput
+    update?: XOR<XOR<EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignContentsInput, EmailCampaignUpdateWithoutEmailCampaignContentsInput>, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
   }
 
   export type EmailCampaignCreateNestedOneWithoutEmailCampaignDailyStatsInput = {
@@ -73099,6 +74656,20 @@ export namespace Prisma {
     update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutFacebookAnalyticsInput, SproutSocialAccountUpdateWithoutFacebookAnalyticsInput>, SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput>
   }
 
+  export type SproutSocialAccountCreateNestedOneWithoutFacebookPostsInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutFacebookPostsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookPostsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+  }
+
+  export type SproutSocialAccountUpdateOneRequiredWithoutFacebookPostsNestedInput = {
+    create?: XOR<SproutSocialAccountCreateWithoutFacebookPostsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostsInput>
+    connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookPostsInput
+    upsert?: SproutSocialAccountUpsertWithoutFacebookPostsInput
+    connect?: SproutSocialAccountWhereUniqueInput
+    update?: XOR<XOR<SproutSocialAccountUpdateToOneWithWhereWithoutFacebookPostsInput, SproutSocialAccountUpdateWithoutFacebookPostsInput>, SproutSocialAccountUncheckedUpdateWithoutFacebookPostsInput>
+  }
+
   export type SproutSocialAccountCreateNestedOneWithoutFacebookPostAnalyticsInput = {
     create?: XOR<SproutSocialAccountCreateWithoutFacebookPostAnalyticsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput>
     connectOrCreate?: SproutSocialAccountCreateOrConnectWithoutFacebookPostAnalyticsInput
@@ -73313,6 +74884,13 @@ export namespace Prisma {
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
   }
 
+  export type SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+  }
+
   export type SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
     create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
@@ -73353,6 +74931,13 @@ export namespace Prisma {
     connectOrCreate?: UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput | UserToSproutSocialAccountCreateOrConnectWithoutSproutSocialAccountInput[]
     createMany?: UserToSproutSocialAccountCreateManySproutSocialAccountInputEnvelope
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
+  }
+
+  export type SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
   }
 
   export type SproutSocialAccountUpdategroupsInput = {
@@ -73444,6 +75029,20 @@ export namespace Prisma {
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
   }
 
+  export type SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    disconnect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    delete?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    update?: SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
+  }
+
   export type SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
     create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
@@ -73526,6 +75125,20 @@ export namespace Prisma {
     update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
     updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput[]
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
+  }
+
+  export type SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    disconnect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    delete?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    update?: SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
   }
 
   export type SproutSocialAccountCreateNestedOneWithoutUsersInput = {
@@ -76229,62 +77842,6 @@ export namespace Prisma {
     pieGraphData?: JsonNullableFilter<"Query">
   }
 
-  export type EmailCampaignCreateWithoutEmailCampaignContentsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaignId: string
-    campaignName: string
-    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
-  }
-
-  export type EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaignId: string
-    campaignName: string
-    emailClientId: string
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
-  }
-
-  export type EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput = {
-    where: EmailCampaignWhereUniqueInput
-    create: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
-  }
-
-  export type EmailCampaignUpsertWithoutEmailCampaignContentsInput = {
-    update: XOR<EmailCampaignUpdateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
-    create: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
-    where?: EmailCampaignWhereInput
-  }
-
-  export type EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignContentsInput = {
-    where?: EmailCampaignWhereInput
-    data: XOR<EmailCampaignUpdateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
-  }
-
-  export type EmailCampaignUpdateWithoutEmailCampaignContentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
-    campaignName?: StringFieldUpdateOperationsInput | string
-    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
-  }
-
-  export type EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
-    campaignName?: StringFieldUpdateOperationsInput | string
-    emailClientId?: StringFieldUpdateOperationsInput | string
-    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
-  }
-
   export type EmailClientCreateWithoutEmailCampaignsInput = {
     id?: string
     createdAt?: Date | string
@@ -76568,6 +78125,62 @@ export namespace Prisma {
     totalOpens?: IntFilter<"EmailCampaignDailyStats"> | number
     uniqueClicks?: IntFilter<"EmailCampaignDailyStats"> | number
     uniqueOpens?: IntFilter<"EmailCampaignDailyStats"> | number
+  }
+
+  export type EmailCampaignCreateWithoutEmailCampaignContentsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    campaignName: string
+    emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    campaignName: string
+    emailClientId: string
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
+  }
+
+  export type EmailCampaignCreateOrConnectWithoutEmailCampaignContentsInput = {
+    where: EmailCampaignWhereUniqueInput
+    create: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+  }
+
+  export type EmailCampaignUpsertWithoutEmailCampaignContentsInput = {
+    update: XOR<EmailCampaignUpdateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
+    create: XOR<EmailCampaignCreateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedCreateWithoutEmailCampaignContentsInput>
+    where?: EmailCampaignWhereInput
+  }
+
+  export type EmailCampaignUpdateToOneWithWhereWithoutEmailCampaignContentsInput = {
+    where?: EmailCampaignWhereInput
+    data: XOR<EmailCampaignUpdateWithoutEmailCampaignContentsInput, EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput>
+  }
+
+  export type EmailCampaignUpdateWithoutEmailCampaignContentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
+  }
+
+  export type EmailCampaignUncheckedUpdateWithoutEmailCampaignContentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    campaignName?: StringFieldUpdateOperationsInput | string
+    emailClientId?: StringFieldUpdateOperationsInput | string
+    emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
   }
 
   export type EmailCampaignCreateWithoutEmailCampaignDailyStatsInput = {
@@ -79893,6 +81506,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput = {
@@ -79911,6 +81525,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutFacebookAnalyticsInput = {
@@ -79945,6 +81560,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput = {
@@ -79958,6 +81574,99 @@ export namespace Prisma {
     groups?: SproutSocialAccountUpdategroupsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountCreateWithoutFacebookPostsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountUncheckedCreateWithoutFacebookPostsInput = {
+    id?: string
+    customerProfileId: number
+    networkType: string
+    name: string
+    nativeName: string
+    link: string
+    nativeId: string
+    groups?: SproutSocialAccountCreategroupsInput | number[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+  }
+
+  export type SproutSocialAccountCreateOrConnectWithoutFacebookPostsInput = {
+    where: SproutSocialAccountWhereUniqueInput
+    create: XOR<SproutSocialAccountCreateWithoutFacebookPostsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostsInput>
+  }
+
+  export type SproutSocialAccountUpsertWithoutFacebookPostsInput = {
+    update: XOR<SproutSocialAccountUpdateWithoutFacebookPostsInput, SproutSocialAccountUncheckedUpdateWithoutFacebookPostsInput>
+    create: XOR<SproutSocialAccountCreateWithoutFacebookPostsInput, SproutSocialAccountUncheckedCreateWithoutFacebookPostsInput>
+    where?: SproutSocialAccountWhereInput
+  }
+
+  export type SproutSocialAccountUpdateToOneWithWhereWithoutFacebookPostsInput = {
+    where?: SproutSocialAccountWhereInput
+    data: XOR<SproutSocialAccountUpdateWithoutFacebookPostsInput, SproutSocialAccountUncheckedUpdateWithoutFacebookPostsInput>
+  }
+
+  export type SproutSocialAccountUpdateWithoutFacebookPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+  }
+
+  export type SproutSocialAccountUncheckedUpdateWithoutFacebookPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerProfileId?: IntFieldUpdateOperationsInput | number
+    networkType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    nativeName?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    nativeId?: StringFieldUpdateOperationsInput | string
+    groups?: SproutSocialAccountUpdategroupsInput | number[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
@@ -79981,6 +81690,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput = {
@@ -79999,6 +81709,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutFacebookPostAnalyticsInput = {
@@ -80033,6 +81744,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutFacebookPostAnalyticsInput = {
@@ -80051,6 +81763,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateWithoutInstagramAnalyticsInput = {
@@ -80069,6 +81782,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput = {
@@ -80087,6 +81801,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput = {
@@ -80173,6 +81888,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput = {
@@ -80191,6 +81907,7 @@ export namespace Prisma {
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
@@ -80545,6 +82262,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput = {
@@ -80563,6 +82281,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutLinkedInAnalyticsInput = {
@@ -80597,6 +82316,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput = {
@@ -80615,6 +82335,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateWithoutPinterestAnalyticsInput = {
@@ -80633,6 +82354,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput = {
@@ -80651,6 +82373,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutPinterestAnalyticsInput = {
@@ -80685,6 +82408,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput = {
@@ -80703,6 +82427,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput = {
@@ -81017,6 +82742,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SproutFacebookPostCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
+  }
+
+  export type SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
+  }
+
+  export type SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostWhereUniqueInput
+    create: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutFacebookPostCreateManySproutSocialAccountInput | SproutFacebookPostCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
     where: SproutFacebookAnalyticsWhereUniqueInput
     update: XOR<SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
@@ -81261,6 +83024,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
   }
 
+  export type SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostWhereUniqueInput
+    update: XOR<SproutFacebookPostUpdateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostWhereUniqueInput
+    data: XOR<SproutFacebookPostUpdateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostScalarWhereInput
+    data: XOR<SproutFacebookPostUpdateManyMutationInput, SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostScalarWhereInput = {
+    AND?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
+    OR?: SproutFacebookPostScalarWhereInput[]
+    NOT?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
+    id?: StringFilter<"SproutFacebookPost"> | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPost"> | string
+    postType?: StringFilter<"SproutFacebookPost"> | string
+    postStatus?: StringFilter<"SproutFacebookPost"> | string
+    postLink?: StringFilter<"SproutFacebookPost"> | string
+    postText?: StringFilter<"SproutFacebookPost"> | string
+    postNativeId?: StringFilter<"SproutFacebookPost"> | string
+    postCreatedTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postSentTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postLastUpdated?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    createdAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+  }
+
   export type SproutSocialAccountCreateWithoutUsersInput = {
     id?: string
     customerProfileId: number
@@ -81277,6 +83074,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutUsersInput = {
@@ -81295,6 +83093,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutUsersInput = {
@@ -81404,6 +83203,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutUsersInput = {
@@ -81422,6 +83222,7 @@ export namespace Prisma {
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type UserUpsertWithoutSproutSocialAccountsInput = {
@@ -86113,6 +87914,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type SproutFacebookPostCreateManySproutSocialAccountInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
+  }
+
   export type SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
@@ -86485,6 +88300,48 @@ export namespace Prisma {
   export type UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

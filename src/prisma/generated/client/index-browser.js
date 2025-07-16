@@ -164,6 +164,15 @@ exports.Prisma.ConversationScalarFieldEnum = {
   clientId: 'clientId'
 };
 
+exports.Prisma.EmailCampaignScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  campaignId: 'campaignId',
+  campaignName: 'campaignName',
+  emailClientId: 'emailClientId'
+};
+
 exports.Prisma.EmailCampaignContentScalarFieldEnum = {
   id: 'id',
   subject: 'subject',
@@ -178,15 +187,6 @@ exports.Prisma.EmailCampaignContentScalarFieldEnum = {
   plainContent: 'plainContent',
   sendTime: 'sendTime',
   webId: 'webId'
-};
-
-exports.Prisma.EmailCampaignScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  campaignId: 'campaignId',
-  campaignName: 'campaignName',
-  emailClientId: 'emailClientId'
 };
 
 exports.Prisma.EmailCampaignDailyStatsScalarFieldEnum = {
@@ -467,6 +467,21 @@ exports.Prisma.SproutFacebookAnalyticsScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   netFollowerGrowth: 'netFollowerGrowth'
+};
+
+exports.Prisma.SproutFacebookPostScalarFieldEnum = {
+  id: 'id',
+  sproutSocialAccountId: 'sproutSocialAccountId',
+  postType: 'postType',
+  postStatus: 'postStatus',
+  postLink: 'postLink',
+  postText: 'postText',
+  postNativeId: 'postNativeId',
+  postCreatedTime: 'postCreatedTime',
+  postSentTime: 'postSentTime',
+  postLastUpdated: 'postLastUpdated',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SproutFacebookPostAnalyticsScalarFieldEnum = {
@@ -773,8 +788,8 @@ exports.Prisma.ModelName = {
   ClientSatisfaction: 'ClientSatisfaction',
   Company: 'Company',
   Conversation: 'Conversation',
-  EmailCampaignContent: 'EmailCampaignContent',
   EmailCampaign: 'EmailCampaign',
+  EmailCampaignContent: 'EmailCampaignContent',
   EmailCampaignDailyStats: 'EmailCampaignDailyStats',
   EmailClient: 'EmailClient',
   EmailClientCredentials: 'EmailClientCredentials',
@@ -796,6 +811,7 @@ exports.Prisma.ModelName = {
   ParsedQuerySummary: 'ParsedQuerySummary',
   Query: 'Query',
   SproutFacebookAnalytics: 'SproutFacebookAnalytics',
+  SproutFacebookPost: 'SproutFacebookPost',
   SproutFacebookPostAnalytics: 'SproutFacebookPostAnalytics',
   SproutInstagramAnalytics: 'SproutInstagramAnalytics',
   SproutInstagramFollowersByCity: 'SproutInstagramFollowersByCity',
