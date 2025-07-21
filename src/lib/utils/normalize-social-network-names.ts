@@ -31,6 +31,10 @@ export const normalizeSocialNetworkName= (name: string) => {
   if (name === 'twitter') {
     return 'Twitter';
   }
+  // if the name is yelp, return "Yelp"
+  if (name === 'yelp') {
+    return 'Yelp';
+  }
   // if the name is youtube, return "YouTube"
   if (name === 'youtube') {
     return 'YouTube';
