@@ -236,8 +236,6 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
 
   return (
     <div className="mt-8">
-      <Card>
-        <CardContent className="p-6">
           <h2 className="text-lg font-bold mb-2">Sessions by Channel</h2>
           <p className="text-gray-500 mb-4 text-sm">Year-Over-Year Comparison</p>
           <TableSortable
@@ -261,8 +259,6 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
               )}
             </span>
           </div>
-        </CardContent>
-      </Card>
     </div>
   );
 } 

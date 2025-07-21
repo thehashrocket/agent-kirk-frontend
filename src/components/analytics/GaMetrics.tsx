@@ -82,8 +82,6 @@ export default function GaMetrics() {
       
       const response = await fetch(url);
 
-      console.log('GA Metrics API - Response:', response);
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch analytics data');
@@ -124,13 +122,6 @@ export default function GaMetrics() {
         onAccountObjectChange={setSelectedAccount}
         onPropertyObjectChange={setSelectedProperty}
       />
-      
-      {/* Dynamic Title */}
-      {selectedAccount && selectedProperty && (
-        <h2 className="text-xl font-semibold text-primary-700 mb-2">
-          {selectedAccount.gaAccountName} – {selectedProperty.gaPropertyName}
-        </h2>
-      )}
       
       {/* Metrics area: show error, loading, data, or empty state */}
       {error ? (

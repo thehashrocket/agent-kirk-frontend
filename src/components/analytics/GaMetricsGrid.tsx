@@ -302,7 +302,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       </div>
       <div className="flex-1 mt-8">
         <div className="flex flex-col items-start mb-4">
-          <h2 className="text-lg font-bold mb-2">Sessions</h2>
+          <h2 className="text-lg font-bold mb-2">Sessions by Day</h2>
           <p className="text-gray-500 text-sm">Current Period</p>
           {dateRange && (
             <p className="text-xs text-gray-400 mt-1">
@@ -321,7 +321,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
 
       <div className="flex-1 mt-10">
         <div className="flex flex-col items-start mb-4">
-          <h2 className="text-lg font-bold mb-2">Sessions</h2>
+          <h2 className="text-lg font-bold mb-2">Sessions by Month</h2>
           <p className="text-gray-500 text-sm">Last 12 Calendar Months; Year-Over-Year Comparison</p>
           <p className="text-xs text-gray-400 mt-1">
             {yoyLabel}
