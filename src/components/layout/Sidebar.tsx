@@ -81,7 +81,7 @@ const adminNavItems: NavItem[] = [
     description: "Generate system reports"
   },
   { 
-    title: "Messages", 
+    title: "Message with 1905", 
     href: "/admin/messages", 
     icon: <MessageSquare />,
     description: "System-wide communications"
@@ -112,16 +112,10 @@ const accountRepNavItems: NavItem[] = [
     description: "View client analytics"
   },
   { 
-    title: "Messages", 
+    title: "Message with 1905", 
     href: "/account-rep/messages", 
     icon: <MessageSquare />,
     description: "Client communications"
-  },
-  { 
-    title: "Reports", 
-    href: "/account-rep/reports", 
-    icon: <FileText />,
-    description: "Client activity reports"
   },
   {
     title: "Profile",
@@ -143,7 +137,7 @@ const clientNavItems: NavItem[] = [
     description: "Your overview"
   },
   { 
-    title: "Message Your Account Manager", 
+    title: "Message with 1905", 
     href: "/client/messages", 
     icon: <MessageSquare />,
     description: "Your conversations"
