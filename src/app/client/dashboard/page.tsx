@@ -71,7 +71,6 @@ export default async function ClientDashboard() {
       </div>
 
       <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Analytics Overview</h2>
         <Suspense fallback={<div>Loading analytics...</div>}>
           <GaMetrics />
         </Suspense>
