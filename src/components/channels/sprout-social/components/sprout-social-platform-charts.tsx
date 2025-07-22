@@ -265,7 +265,7 @@ export function SproutSocialPlatformCharts({
   if (validCharts.length === 0) {
     return (
       <div className="text-center py-8 text-muted-foreground">
-        <p>No chart data available for {platformType} platform</p>
+        <p>No chart data available for {normalizeSocialNetworkName(platformType)} platform</p>
         <p className="text-sm mt-2">Available data keys: {Object.keys(data[0] || {}).join(', ')}</p>
       </div>
     );

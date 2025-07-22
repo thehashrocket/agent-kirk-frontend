@@ -146,18 +146,6 @@ export function SproutSocialEnhancedDashboard({
             <p className="font-medium">{format(new Date(), 'MMM d, yyyy')}</p>
           </div>
         </div>
-        {data.account.link && (
-          <div className="mt-4">
-            <a 
-              href={data.account.link} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-blue-600 hover:text-blue-800 underline"
-            >
-              View Profile on {data.platformType} →
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );
