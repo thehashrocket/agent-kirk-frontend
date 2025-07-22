@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
 import { format, parseISO } from 'date-fns';
 import type { SproutSocialMetricsResponse } from './types';
 import { computeMetrics } from './types';
@@ -56,6 +55,8 @@ export function SproutSocialEnhancedDashboard({
       </div>
     );
   }
+
+  console.log('Sprout Social Enhanced Dashboard Data:', data);
 
   // Compute metrics using our helper function
   const { current: currentMetrics, comparison: comparisonMetrics } = computeMetrics(

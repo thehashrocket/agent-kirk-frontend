@@ -15,16 +15,6 @@ function getYearMonth(date: string) {
   return date.slice(0, 7).replace('-', '');
 }
 
-// Helper to extract year from YYYYMM
-function getYear(yearMonth: string): number {
-  return Math.floor(parseInt(yearMonth) / 100);
-}
-
-// Helper to extract month from YYYYMM
-function getMonth(yearMonth: string): number {
-  return parseInt(yearMonth) % 100;
-}
-
 type ChannelDailyItem = {
   channelGroup: string;
   sessions: number;
@@ -32,16 +22,7 @@ type ChannelDailyItem = {
   [key: string]: any;
 };
 
-// Create a unique identifier for a channel data item based on date+channel+sessions
-function getItemKey(item: ChannelDailyItem): string {
-  const date = item.date ? item.date.toString() : '';
-  const channel = item.channelGroup || 'unknown';
-  return `${date}|${channel}|${item.sessions}`;
-}
-
 export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSessionsTableProps) {
-  // Create a unique ID for this component instance for debugging
-  const instanceId = useId();
   
   // Move hooks to top-level
   const [sort, setSort] = React.useState<{ accessor: string; direction: 'asc' | 'desc' }>({ accessor: 'sessions', direction: 'desc' });

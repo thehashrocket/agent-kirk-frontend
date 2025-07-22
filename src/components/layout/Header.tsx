@@ -50,8 +50,6 @@ export function Header() {
 
   if (!session?.user) return null;
 
-  console.log('Session:', JSON.stringify(session, null, 2));
-
   /**
    * Determines the appropriate dashboard link based on user role.
    * @returns {string} URL path to role-specific dashboard
