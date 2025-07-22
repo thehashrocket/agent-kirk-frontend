@@ -32,7 +32,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
   let sourceDaily: any[] = [];
 
   try {
-    console.log('Transform LLM Data - Starting transformation');
 
     const defaultMetrics = {
       sessions: 0,
@@ -65,14 +64,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
       // Process each dataset from the LLM response
       normalizedResponse.datasets.forEach(processDataset);
     }
-
-    console.log('Transform LLM Data - Transformation complete');
-    console.log('Transform LLM Data - Results:', {
-      hasKpiDaily: !!kpiDaily,
-      hasKpiMonthly: !!kpiMonthly,
-      channelDailyCount: channelDaily.length,
-      sourceDailyCount: sourceDaily.length
-    });
 
     return {
       kpiDaily: kpiDaily.length > 0 ? kpiDaily : null,
@@ -215,7 +206,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
  */
 export async function GET(request: Request): Promise<NextResponse<GaMetricsResponse | GaMetricsError>> {
   try {
-    console.log('Admin GA Metrics API - Starting request');
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -272,13 +262,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     // Store selected range for reference (or default to same as full range)
     const displayDateFrom = selectedFromParam ? new Date(selectedFromParam) : dateFrom;
     const displayDateTo = selectedToParam ? new Date(selectedToParam) : dateTo;
-    
-    console.log('Admin GA Metrics API - Date parameters:', {
-      fullRangeFrom: dateFrom.toISOString(),
-      fullRangeTo: dateTo.toISOString(),
-      displayRangeFrom: displayDateFrom.toISOString(),
-      displayRangeTo: displayDateTo.toISOString()
-    });
 
     // Fetch the client and verify they have access to the requested property
     const client = await prisma.user.findUnique({
@@ -323,14 +306,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       .filter(uta => uta.gaAccount && !uta.gaAccount.deleted)
       .map(uta => uta.gaAccount);
 
-    console.log('Admin GA Metrics API - Found client:', client.id);
-    console.log('Admin GA Metrics API - Client data:', JSON.stringify({
-      id: client.id,
-      email: client.email,
-      gaAccountsCount: gaAccounts.length || 0,
-      hasProperties: Boolean(gaAccounts[0]?.gaProperties?.length)
-    }, null, 2));
-
     // Check if client has GA accounts
     if (!gaAccounts.length) {
       console.log('Admin GA Metrics API - No GA accounts found for client');
@@ -367,12 +342,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     const accountGA4 = parentAccount.gaAccountId;
     const propertyGA4 = requestedProperty.gaPropertyId;
 
-    console.log('Admin GA Metrics API - Using property:', {
-      gaPropertyId,
-      accountGA4,
-      propertyGA4
-    });
-
     // Check if data exists in tables (rest of the logic is similar to client API)
     const [kpiDailyCount, kpiMonthlyCount, channelDailyCount, sourceDailyCount] = await Promise.all([
       prisma.gaKpiDaily.count({ where: { gaPropertyId } }),
@@ -394,7 +363,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       queryDateFrom = new Date();
       queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 5);
     } else {
-      console.log('Admin GA Metrics API - Data exists, fetching selected range + previous year');
       queryDateFrom = new Date(dateFrom);
       queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
     }
@@ -402,7 +370,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     // Continue with the same logic as the client API for fetching/transforming data...
     // For now, let's return the existing data from the database
     
-    console.log('Admin GA Metrics API - Fetching data from database');
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([
       prisma.gaKpiDaily.findMany({
         where: {
@@ -490,13 +457,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         }
       }
     };
-
-    console.log('Admin GA Metrics API - Returning response with data counts:', {
-      kpiDaily: response.kpiDaily?.length || 0,
-      kpiMonthly: response.kpiMonthly?.length || 0,
-      channelDaily: response.channelDaily?.length || 0,
-      sourceDaily: response.sourceDaily?.length || 0
-    });
 
     return NextResponse.json(response);
 

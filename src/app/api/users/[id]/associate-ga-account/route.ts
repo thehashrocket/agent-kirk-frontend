@@ -50,9 +50,6 @@ export async function POST(
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    console.log('Session User:', session?.user);
-    console.log('Looking up user with ID:', session.user.id);
     
     // Get current user information including role
     const currentUser = await prisma.user.findUnique({
@@ -60,14 +57,9 @@ export async function POST(
       include: { role: true },
     });
 
-    console.log('Current User Query Result:', currentUser);
-
     if (!currentUser) {
-      console.log('Current user not found in database with ID:', session.user.id);
       return NextResponse.json({ error: 'Current user not found in database' }, { status: 404 });
     }
-
-    console.log('Current User:', currentUser);
 
     // Check admin/account rep role
     if (currentUser.role.name !== 'ADMIN' && currentUser.role.name !== 'ACCOUNT_REP') {
@@ -80,15 +72,12 @@ export async function POST(
 
     // Get the target user ID from params
     const targetUserId = (await params).id;
-    console.log('Target User ID:', targetUserId);
 
     // Verify the target user exists
     const targetUser = await prisma.user.findUnique({
       where: { id: targetUserId },
       include: { role: true },
     });
-
-    console.log('Target User Query Result:', targetUser);
 
     if (!targetUser) {
       return NextResponse.json(
@@ -104,8 +93,6 @@ export async function POST(
         deleted: false,
       },
     });
-
-    console.log('GA Account Query Result:', gaAccount);
 
     if (!gaAccount) {
       return NextResponse.json({ error: 'GA Account not found' }, { status: 404 });
@@ -151,7 +138,6 @@ export async function POST(
       );
     }
 
-    console.error('Error associating GA account:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

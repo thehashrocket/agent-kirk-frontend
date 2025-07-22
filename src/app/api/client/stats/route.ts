@@ -111,21 +111,17 @@ export async function GET(request: Request): Promise<NextResponse> {
   try {
     // Get the authenticated user
     let sessionUser = (await getServerSession(authOptions))?.user as SessionUser | undefined;
-    console.log('Stats API - Session:', JSON.stringify({ user: sessionUser }, null, 2));
     
     // Check Authorization header as fallback
     if (!sessionUser) {
       const authHeader = request.headers.get('authorization');
-      console.log('Stats API - Auth Header:', authHeader);
       
       if (!authHeader?.startsWith('Bearer ')) {
-        console.log('Stats API - No valid Authorization header');
         return NextResponse.json({ error: 'Unauthorized - No valid authorization' }, { status: 401 });
       }
       
       const userId = authHeader.split(' ')[1];
       if (!userId) {
-        console.log('Stats API - No user ID in Authorization header');
         return NextResponse.json({ error: 'Unauthorized - No user ID' }, { status: 401 });
       }
       
@@ -144,7 +140,6 @@ export async function GET(request: Request): Promise<NextResponse> {
       
       const roleName = user?.role?.name;
       if (!user || !roleName || !ALLOWED_ROLES.includes(roleName)) {
-        console.log('Stats API - Invalid user or role:', user);
         return NextResponse.json({ error: 'Unauthorized - Invalid user or role' }, { status: 401 });
       }
       
@@ -152,7 +147,6 @@ export async function GET(request: Request): Promise<NextResponse> {
     } else {
       const roleName = typeof sessionUser.role === 'object' ? sessionUser.role?.name : sessionUser.role;
       if (!ALLOWED_ROLES.includes(roleName)) {
-        console.log('Stats API - Unauthorized. Session user:', sessionUser);
         return NextResponse.json({ error: 'Unauthorized - Invalid session or role' }, { status: 401 });
       }
     }
@@ -304,7 +298,6 @@ export async function GET(request: Request): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    console.error('Error fetching client stats:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 } 

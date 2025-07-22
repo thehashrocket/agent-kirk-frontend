@@ -27,7 +27,6 @@ export interface ParsedLineGraphData {
 }
 
 export function parseLineGraphData(data: any): ParsedLineGraphData {
-  console.log('[ParseLineGraphData] Data:', data);
   const flat: ParsedLineGraphRow[] = [];
   const grouped: ParsedLineGraphData['grouped'] = {};
 

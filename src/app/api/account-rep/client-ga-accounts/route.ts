@@ -32,7 +32,6 @@ import { prisma } from '@/lib/prisma';
  */
 export async function GET(request: Request): Promise<NextResponse> {
   try {
-    console.log('Account Rep Client GA Accounts API - Starting request');
     
     const session = await getServerSession(authOptions);
 
@@ -63,9 +62,6 @@ export async function GET(request: Request): Promise<NextResponse> {
     if (!clientId) {
       return NextResponse.json({ error: 'Client ID is required' }, { status: 400 });
     }
-
-    console.log('Account Rep Client GA Accounts API - Fetching client:', clientId);
-    console.log('Account Rep Client GA Accounts API - Current user ID:', currentUser.id);
 
     // Fetch the client with their GA accounts and properties
     const client = await prisma.user.findUnique({

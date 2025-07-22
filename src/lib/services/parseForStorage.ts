@@ -13,7 +13,6 @@ type GroupedData = {
 };
 
 export function parseForStorage(data: any, queryId: string) {
-  console.log('[ParseForStorage] Data:', data);
   // Handle array of reports
   const allParsedData = data.map((report: any) => parseLineGraphData(report.body));
 

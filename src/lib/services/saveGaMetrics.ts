@@ -10,8 +10,6 @@ export async function saveGaMetrics(
   userId: string
 ) {
   try {
-    console.log('Saving GA Metrics - Starting');
-
     // Get current month in YYYYMM format
     const today = new Date();
     const currentMonth = parseInt(
@@ -29,11 +27,9 @@ export async function saveGaMetrics(
         status: 'ok'
       }
     });
-    console.log('Saving GA Metrics - Import run created:', importRun.id);
 
     // Save daily metrics if available
     if (metrics.kpiDaily?.length) {
-      console.log('Saving GA Metrics - Storing daily KPI metrics');
       await Promise.all(
         metrics.kpiDaily.map(day =>
           prisma.gaKpiDaily.upsert({
@@ -59,7 +55,6 @@ export async function saveGaMetrics(
 
     // Save monthly metrics if available
     if (metrics.kpiMonthly?.length) {
-      console.log('Saving GA Metrics - Storing monthly KPI metrics');
       await Promise.all(
         metrics.kpiMonthly.map(month =>
           prisma.gaKpiMonthly.upsert({
@@ -81,7 +76,6 @@ export async function saveGaMetrics(
 
     // Save channel metrics if available
     if (metrics.channelDaily?.length) {
-      console.log('Saving GA Metrics - Storing channel metrics');
       await Promise.all(
         metrics.channelDaily.map(channel =>
           prisma.gaChannelDaily.upsert({
@@ -119,7 +113,6 @@ export async function saveGaMetrics(
 
     // Save source metrics if available
     if (metrics.sourceDaily?.length) {
-      console.log('Saving GA Metrics - Storing source metrics');
       await Promise.all(
         metrics.sourceDaily.map(source =>
           prisma.gaSourceDaily.upsert({
@@ -154,11 +147,8 @@ export async function saveGaMetrics(
         )
       );
     }
-
-    console.log('Saving GA Metrics - Complete');
     return importRun;
   } catch (error) {
-    console.error('Error saving GA metrics:', error);
     throw error;
   }
 } 

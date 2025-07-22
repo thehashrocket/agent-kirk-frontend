@@ -43,8 +43,6 @@ export async function GET(
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    console.log('Session user:', session.user);
-
     const currentUser = await prisma.user.findUnique({
       where: { email: session.user.email! },
       include: { role: true },
@@ -53,12 +51,6 @@ export async function GET(
     if (!currentUser) {
       return new NextResponse('User not found', { status: 404 });
     }
-
-    console.log('Current user:', {
-      id: currentUser.id,
-      role: currentUser.role.name,
-      email: currentUser.email
-    });
 
     // Find the requested user
     const user = await prisma.user.findUnique({
@@ -96,12 +88,6 @@ export async function GET(
       return new NextResponse('User not found', { status: 404 });
     }
 
-    console.log('Requested user:', {
-      id: user.id,
-      role: user.role.name,
-      accountRepId: user.accountRepId
-    });
-
     // Allow users to access their own profile
     if (currentUser.id === user.id) {
       return NextResponse.json(user);
@@ -118,16 +104,8 @@ export async function GET(
     }
 
     // If none of the above conditions are met, return forbidden
-    console.log('Access denied:', {
-      currentUserRole: currentUser.role.name,
-      currentUserId: currentUser.id,
-      requestedUserId: user.id,
-      accountRepId: user.accountRepId
-    });
-
     return new NextResponse('Forbidden', { status: 403 });
   } catch (error) {
-    console.error('Error fetching user:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 } 
@@ -210,7 +188,6 @@ export async function DELETE(
 
     return new NextResponse('User deleted successfully', { status: 200 });
   } catch (error) {
-    console.error('Error deleting user:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

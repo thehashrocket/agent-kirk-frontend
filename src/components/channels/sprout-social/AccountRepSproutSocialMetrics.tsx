@@ -98,8 +98,6 @@ export function AccountRepSproutSocialMetrics({ clientId }: AccountRepSproutSoci
       
       const response = await fetch(url);
 
-      console.log('Account Rep Social Media Metrics API - Response:', response);
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch Social Media analytics data');

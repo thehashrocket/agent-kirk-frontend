@@ -47,7 +47,6 @@ export function SproutSocialAccountSelector({
 
         const accountsData = await response.json();
         setAccounts(accountsData);
-        console.log('Social Media accounts:', accountsData);
 
         // Auto-select first account if available
         if (accountsData.length > 0) {

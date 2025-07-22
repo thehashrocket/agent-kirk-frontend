@@ -38,7 +38,7 @@ import type { GaMetricsResponse, GaMetricsError } from '@/lib/types/ga-metrics';
  */
 export async function GET(request: Request): Promise<NextResponse<GaMetricsResponse | GaMetricsError>> {
   try {
-    console.log('Account Rep GA Metrics API - Starting request');
+
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -108,13 +108,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     // Store selected range for reference (or default to same as full range)
     const displayDateFrom = selectedFromParam ? new Date(selectedFromParam) : dateFrom;
     const displayDateTo = selectedToParam ? new Date(selectedToParam) : dateTo;
-    
-    console.log('Account Rep GA Metrics API - Date parameters:', {
-      fullRangeFrom: dateFrom.toISOString(),
-      fullRangeTo: dateTo.toISOString(),
-      displayRangeFrom: displayDateFrom.toISOString(),
-      displayRangeTo: displayDateTo.toISOString()
-    });
 
     // Fetch the client and verify they are assigned to this account rep
     const client = await prisma.user.findUnique({
@@ -179,15 +172,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       .filter(uta => uta.gaAccount && !uta.gaAccount.deleted)
       .map(uta => uta.gaAccount);
 
-    console.log('Account Rep GA Metrics API - Found client:', client.id);
-    console.log('Account Rep GA Metrics API - Client data:', JSON.stringify({
-      id: client.id,
-      email: client.email,
-      accountRepId: client.accountRepId,
-      gaAccountsCount: gaAccounts.length || 0,
-      hasProperties: Boolean(gaAccounts[0]?.gaProperties?.length)
-    }, null, 2));
-
     // Check if client has GA accounts
     if (!gaAccounts.length) {
       console.log('Account Rep GA Metrics API - No GA accounts found for client');
@@ -224,12 +208,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     const accountGA4 = parentAccount.gaAccountId;
     const propertyGA4 = requestedProperty.gaPropertyId;
 
-    console.log('Account Rep GA Metrics API - Using property:', {
-      gaPropertyId,
-      accountGA4,
-      propertyGA4
-    });
-
     // Check if data exists in tables
     const [kpiDailyCount, kpiMonthlyCount, channelDailyCount, sourceDailyCount] = await Promise.all([
       prisma.gaKpiDaily.count({ where: { gaPropertyId } }),
@@ -246,12 +224,10 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     let queryDateFrom: Date;
     let queryDateTo: Date = new Date(); // Always use today as the end date
     
-    console.log('Account Rep GA Metrics API - Data exists, fetching selected range + previous year');
     queryDateFrom = new Date(dateFrom);
     queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
 
     // Fetch existing data from the database
-    console.log('Account Rep GA Metrics API - Fetching data from database');
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([
       prisma.gaKpiDaily.findMany({
         where: {
@@ -339,13 +315,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         }
       }
     };
-
-    console.log('Account Rep GA Metrics API - Returning response with data counts:', {
-      kpiDaily: response.kpiDaily?.length || 0,
-      kpiMonthly: response.kpiMonthly?.length || 0,
-      channelDaily: response.channelDaily?.length || 0,
-      sourceDaily: response.sourceDaily?.length || 0
-    });
 
     return NextResponse.json(response);
 

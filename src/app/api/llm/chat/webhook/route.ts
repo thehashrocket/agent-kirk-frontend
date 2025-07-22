@@ -79,26 +79,11 @@ export async function POST(request: NextRequest) {
     // Parse and validate the webhook payload
     const body = await request.json();
 
-    console.log('[Webhook] Processing webhook request:', {
-      queryId: body.queryId,
-      hasResponse: !!body.response,
-      hasError: !!body.error,
-      hasMetadata: !!(body.line_graph_data || body.pie_graph_data || body.metric_headers)
-    });
-
     // Extract query ID from multiple possible sources for reliability
     let queryId = body.queryId || request.headers.get('x-query-id') || '';
     
-    // Log all potential sources of query ID for debugging
-    console.log('[Webhook] Query ID sources:', {
-      bodyQueryId: body.queryId,
-      headerQueryId: request.headers.get('x-query-id'),
-      finalQueryId: queryId
-    });
-
     // Return 400 if no query ID is found
     if (!queryId) {
-      console.error('[Webhook] Invalid webhook request: No query ID found');
       return NextResponse.json(
         { 
           error: 'Invalid request: No query ID found in body or headers',
@@ -160,17 +145,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('[Webhook] Found query in database:', {
-      queryId: query.id,
-      currentStatus: query.status
-    });
-
     // Prevent duplicate processing of completed queries
     if (query.status === 'COMPLETED' || query.status === 'FAILED') {
-      console.log('[Webhook] Query already processed, skipping:', {
-        queryId: query.id,
-        status: query.status
-      });
       return NextResponse.json({ 
         success: true,
         message: 'Query already processed'
@@ -179,7 +155,6 @@ export async function POST(request: NextRequest) {
 
     // Handle error case: Update query status and create notification
     if (validatedData.error) {
-      console.log('[Webhook] Processing error response');
       await prisma.query.update({
         where: { id: validatedData.queryId },
         data: {
@@ -200,7 +175,6 @@ export async function POST(request: NextRequest) {
     } 
     // Handle success case: Update query with response and create notification
     else if (validatedData.response) {
-      console.log('[Webhook] Processing success response');
       try {
         const parsedData = await parseLLMResponse({
           queryId: validatedData.queryId,
@@ -229,7 +203,6 @@ export async function POST(request: NextRequest) {
           });
 
           if (parsedData.line_graph_data) {
-            console.log('[Webhook] Parsing lineGraphData');
             try {
               await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/queries/${query.id}/chart-data`, {
                 method: 'POST',
@@ -238,9 +211,7 @@ export async function POST(request: NextRequest) {
                 },
                 body: JSON.stringify({ lineGraphData: parsedData.line_graph_data }),
               });
-              console.log(`[Webhook] Parsed lineGraphData successfully`);
             } catch (e) {
-              console.error(`[Webhook] Failed to parse lineGraphData`, e);
             }
           }
 
@@ -277,9 +248,7 @@ export async function POST(request: NextRequest) {
           });
         });
 
-        console.log('[Webhook] Successfully processed webhook data');
       } catch (error) {
-        console.error('[Webhook] Error processing webhook data:', error);
         
         // Update query status to failed
         await prisma.query.update({
@@ -307,10 +276,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log('[Webhook] Successfully processed webhook');
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('[Webhook] Unexpected error:', error);
 
     // Handle Zod validation errors
     if (error instanceof z.ZodError) {

@@ -56,7 +56,6 @@ export function MessageList({ recipientId, threadId, currentUserId, view = 'inbo
         throw new Error('Failed to fetch messages');
       }
       const data = await response.json();
-      console.log('Messages response:', data);  // Debug log
       return data;
     },
     getNextPageParam: (lastPage) => {

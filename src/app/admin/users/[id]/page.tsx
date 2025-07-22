@@ -155,10 +155,6 @@ export default function UserDetailsPage() {
             // Find accounts to remove (currently associated but not selected)
             const accountsToRemove = currentAccountIds.filter(id => !selectedAccounts.includes(id));
 
-            console.log('User ID from params:', params.id);
-            console.log('Accounts to add:', accountsToAdd);
-            console.log('Accounts to remove:', accountsToRemove);
-
             // Handle removals first
             await Promise.all(
                 accountsToRemove.map(async (accountId) => {

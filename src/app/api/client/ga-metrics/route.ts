@@ -26,8 +26,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
   let sourceDaily: any[] = [];
 
   try {
-    console.log('Transform LLM Data - Starting transformation');
-    // console.log('Transform LLM Data - Raw response:', JSON.stringify(llmResponse, null, 2));
 
     const defaultMetrics = {
       sessions: 0,
@@ -56,21 +54,11 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
     }
 
     if (!Array.isArray(normalizedResponse.datasets)) {
-      // console.error('Transform LLM Data - Invalid response format: datasets is not an array');
-      // console.log('Transform LLM Data - Available keys:', Object.keys(normalizedResponse));
       throw new Error('Invalid response format: datasets is not an array');
     } else {
       // Process each dataset from the LLM response
       normalizedResponse.datasets.forEach(processDataset);
     }
-
-    console.log('Transform LLM Data - Transformation complete');
-    console.log('Transform LLM Data - Results:', {
-      hasKpiDaily: !!kpiDaily,
-      hasKpiMonthly: !!kpiMonthly,
-      channelDailyCount: channelDaily.length,
-      sourceDailyCount: sourceDaily.length
-    });
 
     return {
       kpiDaily: kpiDaily.length > 0 ? kpiDaily : null,
@@ -95,25 +83,19 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         (k) => k.replace(/\s+/g, '').toLowerCase() === 'rows' || k.replace(/\s+/g, '').toLowerCase() === 'row'
       );
       if (!tableKey || !rowsKey) {
-        // console.log('Transform LLM Data - Could not find table or rows key in dataset:', Object.keys(dataset));
         return;
       }
       const tableName = (dataset[tableKey] || '').trim().toLowerCase();
       let rowsRaw = dataset[rowsKey];
-      // console.log('Transform LLM Data - Processing dataset:', tableName, '| rowsKey:', rowsKey);
-
       let rows: any[];
       try {
         rows = typeof rowsRaw === 'string' ? JSON.parse(rowsRaw) : rowsRaw;
-        // console.log('Transform LLM Data - Parsed rows count:', Array.isArray(rows) ? rows.length : 'not an array');
       } catch (e) {
         console.error('Transform LLM Data - Error parsing rows:', e);
-        // console.log('Transform LLM Data - Raw rows:', rowsRaw);
         return;
       }
 
       if (!Array.isArray(rows)) {
-        console.error('Transform LLM Data - Rows is not an array after parsing');
         return;
       }
 
@@ -154,7 +136,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         case 'channel_daily':
         case 'channel':
         case 'channeldaily':
-          // console.log('Transform LLM Data - Processing channel metrics, count:', rows.length);
           channelDaily = rows.map(row => ({
             date: row.date,
             channelGroup: row.channel || row.channelGroup || 'direct',
@@ -171,7 +152,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         case 'source_daily':
         case 'source':
         case 'sourcedaily':
-          // console.log('Transform LLM Data - Processing source metrics, count:', rows.length);
           sourceDaily = rows.map(row => ({
             date: row.date,
             trafficSource: row.source || row.trafficSource || 'direct',
@@ -195,7 +175,6 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
 
 export async function GET(request: Request): Promise<NextResponse<GaMetricsResponse | GaMetricsError>> {
   try {
-    console.log('GA Metrics API - Starting request');
     
     // Get user from session or auth header
     const session = await getServerSession(authOptions);
@@ -203,17 +182,13 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
 
     // If no session, try bearer token
     const authHeader = request.headers.get('authorization');
-    console.log('GA Metrics API - Auth Header:', authHeader);
 
     if (!userEmail) {
-      console.log('GA Metrics API - No user email found from session or token');
       return NextResponse.json(
         { error: 'Unauthorized', code: 'UNAUTHORIZED' },
         { status: 401 }
       );
     }
-
-    console.log('GA Metrics API - Looking up user:', userEmail);
     // Get user's GA property with accounts
     const user = await prisma.user.findUnique({
       where: { email: userEmail },
@@ -242,14 +217,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       );
     }
 
-    console.log('GA Metrics API - Found user:', user ? 'yes' : 'no');
-    console.log('GA Metrics API - User data:', JSON.stringify({
-      id: user.id,
-      email: user.email,
-      gaAccountsCount: user.userToGaAccounts.filter(uta => uta.gaAccount && !uta.gaAccount.deleted).length || 0,
-      hasProperties: Boolean(user.userToGaAccounts.filter(uta => uta.gaAccount && !uta.gaAccount.deleted)[0]?.gaAccount?.gaProperties?.length)
-    }, null, 2));
-
     // Get the URL query parameters
     const { searchParams } = new URL(request.url);
     
@@ -271,13 +238,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     // Store selected range for reference (or default to same as full range)
     const displayDateFrom = selectedFromParam ? new Date(selectedFromParam) : dateFrom;
     const displayDateTo = selectedToParam ? new Date(selectedToParam) : dateTo;
-    
-    console.log('GA Metrics API - Date parameters:', {
-      fullRangeFrom: dateFrom.toISOString(),
-      fullRangeTo: dateTo.toISOString(),
-      displayRangeFrom: displayDateFrom.toISOString(),
-      displayRangeTo: displayDateTo.toISOString()
-    });
 
     let gaPropertyId: string | undefined;
     let accountGA4: string | undefined;
@@ -328,13 +288,11 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
               gaAccountId: gaAccount.id
             }
           });
-          console.log('GA Metrics API - Created new GA property:', newProperty.id);
           gaPropertyId = newProperty.id;
           accountGA4 = gaAccount.gaAccountId;
           propertyGA4 = newProperty.gaPropertyId;
 
           // Clear any existing metrics for this property
-          console.log('GA Metrics API - Clearing any existing metrics for new property');
           await Promise.all([
             prisma.gaKpiDaily.deleteMany({
               where: { gaPropertyId: newProperty.id }
@@ -349,7 +307,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
               where: { gaPropertyId: newProperty.id }
             })
           ]);
-          console.log('GA Metrics API - Cleared existing metrics');
         } catch (error) {
           console.error('GA Metrics API - Error creating GA property:', error);
           return NextResponse.json(
@@ -382,10 +339,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     ]);
 
     // Ensure we have the selected period for display
-    console.log('GA Metrics API - Using display date range:', {
-      displayDateFrom: displayDateFrom.toISOString(),
-      displayDateTo: displayDateTo.toISOString()
-    });
     
     // Get current month in YYYYMM format for monthly data
     const currentMonth = parseInt(
@@ -405,19 +358,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     let queryDateFrom: Date;
     let queryDateTo: Date = new Date(); // Always use today as the end date
 
-    console.log('GA Metrics API - Data exists, fetching selected range + previous year');
       queryDateFrom = new Date(dateFrom);
       queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
-    
-    // Fetch metrics using our determined date ranges
-    console.log('GA Metrics API - Fetching metrics with date range:', {
-      queryDateFrom: queryDateFrom.toISOString(),
-      queryDateTo: queryDateTo.toISOString(),
-      displayDateFrom: displayDateFrom.toISOString(),
-      displayDateTo: displayDateTo.toISOString(),
-      oldestMonth,
-      currentMonth
-    });
     
     // Fetch all metrics in parallel with new date ranges
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([

@@ -48,7 +48,6 @@ export async function DELETE(
     }
 
     const { id, accountId, propertyId } = await params;
-    console.log('Delete GA Property - Params:', { id, accountId, propertyId });
 
     // Get current user information including role
     const currentUser = await prisma.user.findUnique({
@@ -107,15 +106,6 @@ export async function DELETE(
     }
 
     if (!canDelete) {
-      console.log('Delete GA Property - Access denied:', {
-        currentUserRole: currentUser.role.name,
-        currentUserId: currentUser.id,
-        requestedUserId: id,
-        gaAccountUsers: gaProperty.gaAccount.userToGaAccounts.map(uta => ({
-          userId: uta.user.id,
-          accountRepId: uta.user.accountRepId
-        }))
-      });
       return new NextResponse('Forbidden - Insufficient permissions', { status: 403 });
     }
 
@@ -125,10 +115,8 @@ export async function DELETE(
       data: { deleted: true },
     });
 
-    console.log('Delete GA Property - Successfully soft deleted property:', propertyId);
     return new NextResponse(null, { status: 204 });
   } catch (error) {
-    console.error('Error soft deleting GA property:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 } 

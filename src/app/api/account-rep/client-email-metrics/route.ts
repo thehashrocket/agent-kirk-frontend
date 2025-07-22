@@ -37,7 +37,6 @@ import { format, subDays, startOfMonth, endOfMonth, subMonths } from 'date-fns';
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    console.log('Account Rep Email Metrics API - Starting request');
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -228,8 +227,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       topCampaigns: [],
       totalCampaigns: 0,
     };
-
-    console.log('Account Rep Email Metrics API - Returning response for email client:', emailClient.clientName);
 
     return NextResponse.json(response);
 

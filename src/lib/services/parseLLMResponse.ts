@@ -23,8 +23,6 @@ interface DailyMetrics {
 
 export function parseLLMResponse(response: any): GaMetricsResponse {
   try {
-    console.log('Parsing LLM Response - Starting');
-    
     // Ensure response has required structure
     if (!response || !Array.isArray(response)) {
       throw new Error('Invalid response format: Response must be an array');
@@ -90,7 +88,6 @@ export function parseLLMResponse(response: any): GaMetricsResponse {
     const channelDaily = null;
     const sourceDaily = null;
 
-    console.log('Parsing LLM Response - Complete');
     return {
       kpiDaily: kpiDaily ? [kpiDaily] : null,
       kpiMonthly: kpiMonthly ? [kpiMonthly] : null,

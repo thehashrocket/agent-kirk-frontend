@@ -65,22 +65,15 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // Get the authenticated user
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
-      console.log('[Send] Unauthorized request');
       return NextResponse.json(
         { error: CHAT_CONSTANTS.ERROR_MESSAGES.UNAUTHORIZED },
         { status: 401 }
       );
     }
 
-    console.log('[Send] Processing request for user:', session.user.id);
-
     // Parse and validate the request body
     const body = await request.json();
     const validatedData = ChatRequestSchema.parse(body);
-
-    console.log('[Send] Validated data:', validatedData);
-
-    console.log('[Send] Request validated successfully');
 
     // Create a database record for the query
     query = await prisma.query.create({
@@ -90,11 +83,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
         userId: session.user.id,
         conversationId: validatedData.conversationId,
       },
-    });
-
-    console.log('[Send] Created query record:', {
-      queryId: query.id,
-      status: query.status
     });
 
     // Prepare request payload for LLM service
@@ -109,8 +97,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       website_url: process.env.WEBSITE_URL + '/api/llm/chat/webhook'
     };
 
-    console.log('[Send] Sending request to LLM service:', llmRequestPayload);
-
     // Send request to LLM service
     const llmResponse = await fetch(process.env.LLM_SERVICE_URL!, {
       method: 'POST',
@@ -123,13 +109,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
 
     // Log and parse the response
     const responseText = await llmResponse.text();
-    console.log('[Send] LLM service response status:', llmResponse.status);
-    console.log('[Send] LLM service response URL:', llmResponse.url);
-    console.log('[Send] LLM service headers:', llmResponse.headers);
 
     if (llmResponse.status === 404) {
-      console.log('[SEND] LLM URL:', process.env.LLM_SERVICE_URL);
-      console.log('[Send] LLM service returned 404 status');
       errorResponse = {
         status: 'FAILED',
         queryId: query.id,
@@ -140,17 +121,10 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     // If we get a 500 with "No item to return got found", this likely means
     // the request was accepted but will be processed asynchronously
     if (llmResponse.status === 500 && responseText.includes("No item to return got found")) {
-      console.log('[Send] Request accepted for async processing');
       
       // Check if the webhook has already processed this query
       const updatedQuery = await prisma.query.findUnique({
         where: { id: query.id }
-      });
-
-      console.log('[Send] Checking query status:', {
-        queryId: query.id,
-        originalStatus: query.status,
-        currentStatus: updatedQuery?.status
       });
 
       // If the webhook has already processed this query, return its status
@@ -285,7 +259,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     //   });
     // }
 
-    console.log('[Send] Request is in progress');
     // If no immediate response and no error, the request is in progress
     return NextResponse.json({
       status: 'IN_PROGRESS',
@@ -293,7 +266,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
     });
 
   } catch (error) {
-    console.error('[Send] Unexpected error:', error);
     return handleUnexpectedError(error, query?.id);
   }
 }
@@ -320,17 +292,8 @@ async function handleLLMError(responseText: string, status: number, queryId: str
       };
     }
   } catch (e) {
-    console.error('[Send] Failed to parse error response:', e);
     errorMessage = responseText || errorMessage;
   }
-
-  console.error('[Send] LLM service error:', {
-    status,
-    message: errorMessage,
-    details: errorDetails,
-    queryId,
-    hasMetadata: !!metadata
-  });
 
   // Get the query to find the user ID
   const query = await prisma.query.findUnique({
@@ -363,16 +326,9 @@ async function handleLLMError(responseText: string, status: number, queryId: str
  */
 async function parseLLMResponse(responseText: string) {
   try {
-    console.log('[Send] Attempting to parse LLM response');
     const parsed = JSON.parse(responseText);
-    console.log('[Send] Successfully parsed LLM response:', {
-      hasResponse: !!parsed.response,
-      hasError: !!parsed.error,
-      hasMetadata: !!(parsed.line_graph_data || parsed.pie_graph_data || parsed.metric_headers)
-    });
     return parsed;
   } catch (e) {
-    console.error('[Send] Failed to parse success response:', e);
     throw new Error(CHAT_CONSTANTS.ERROR_MESSAGES.INVALID_RESPONSE);
   }
 }
@@ -381,7 +337,6 @@ async function parseLLMResponse(responseText: string) {
  * Handles unexpected errors during request processing
  */
 async function handleUnexpectedError(error: unknown, queryId?: string): Promise<NextResponse<ErrorResponse>> {
-  console.error('Chat API Error:', error);
   
   // Update query status to failed if we have a query ID
   if (queryId) {

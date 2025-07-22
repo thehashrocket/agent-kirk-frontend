@@ -116,7 +116,6 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   // Set default date range on mount only, and only when metadata.displayDateRange.from is available
   React.useEffect(() => {
     if (metadata?.displayDateRange?.from) {
-      console.log('Setting dateRange from metadata.displayDateRange.from:', metadata.displayDateRange.from);
       setDateRange(setupDefaultDateRange());
     }
   }, [metadata?.displayDateRange?.from, setupDefaultDateRange]);

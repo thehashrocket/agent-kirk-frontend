@@ -32,7 +32,6 @@ import { prisma } from '@/lib/prisma';
  */
 export async function GET(request: Request): Promise<NextResponse> {
   try {
-    console.log('Account Rep Email Clients API - Starting request');
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -140,8 +139,6 @@ export async function GET(request: Request): Promise<NextResponse> {
         updatedAt: true
       }
     });
-
-    console.log('Account Rep Email Clients API - Found email clients:', emailClients.length);
 
     return NextResponse.json(emailClients);
 

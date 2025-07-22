@@ -221,7 +221,6 @@ export async function POST(
     });
 
     const data = await llmResponse.json();
-    console.log('LLM service response:', data);
 
     if (!llmResponse.ok) {
       // Update query status to FAILED

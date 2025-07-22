@@ -43,7 +43,7 @@ export const ChartPreviewModal = React.memo(function ChartPreviewModal({ queryId
   // Add debugging logs
 
   if (error) {
-    console.log('ChartPreviewModal - Error:', error);
+
   }
 
   // Check if all data arrays are empty - if so, don't render the component
@@ -60,8 +60,6 @@ export const ChartPreviewModal = React.memo(function ChartPreviewModal({ queryId
   if (error) {
     return null;
   }
-
-  console.log('[ChartPreviewModal] Data:', data);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

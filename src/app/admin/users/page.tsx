@@ -293,7 +293,6 @@ export default function UsersPage() {
         </TableHeader>
         <TableBody>
           {users?.map((user: User) => {
-            console.log('Rendering user row with ID:', user.id, 'Type:', typeof user.id);
             return (
             <TableRow key={user.id}>
               <TableCell>

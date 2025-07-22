@@ -66,7 +66,6 @@ export function ParsedQueryDataChart({ queryData }: LineChartProps) {
     // Sort formattedData by date
     formattedData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-    console.log('[ParsedQueryDataChart] Formatted data:', formattedData);
     return (
         <div className="flex flex-col gap-4">
             <ResponsiveContainer width="100%" height={400}>
