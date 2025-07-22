@@ -58,88 +58,86 @@ export function TableSortable<T>({ columns, data, initialSort, rowKey, onRowClic
   }, [data, sort, columns]);
 
   return (
-    <div className="overflow-x-auto">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            {columns.map(col => (
-              <TableHead
-                key={col.accessor as string}
-                className={
-                  col.align === 'right'
-                    ? 'text-right cursor-pointer select-none'
-                    : col.align === 'center'
+    <Table>
+      <TableHeader>
+        <TableRow>
+          {columns.map(col => (
+            <TableHead
+              key={col.accessor as string}
+              className={
+                col.align === 'right'
+                  ? 'text-right cursor-pointer select-none'
+                  : col.align === 'center'
                     ? 'text-center cursor-pointer select-none'
                     : 'text-left cursor-pointer select-none'
+              }
+              onClick={col.sortable ? () => handleSort(col.accessor) : undefined}
+              aria-sort={
+                col.sortable && sort.accessor === col.accessor
+                  ? sort.direction === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : undefined
+              }
+              tabIndex={col.sortable ? 0 : -1}
+              role={col.sortable ? 'button' : undefined}
+            >
+              <span className="inline-flex items-center gap-1">
+                {col.header}
+                {col.sortable && sort.accessor === col.accessor && (
+                  sort.direction === 'asc' ? (
+                    <ArrowUp size={14} />
+                  ) : (
+                    <ArrowDown size={14} />
+                  )
+                )}
+              </span>
+            </TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {sortedData.map(row => {
+          const clickable = !!onRowClick;
+          const rowClasses = [
+            rowClassName ? rowClassName(row) : '',
+            clickable ? 'cursor-pointer hover:bg-gray-50 focus:bg-gray-100 outline-none transition-colors' : '',
+          ].join(' ');
+          return (
+            <TableRow
+              key={rowKey(row)}
+              className={rowClasses}
+              tabIndex={clickable ? 0 : undefined}
+              role={clickable ? 'button' : undefined}
+              aria-label={clickable ? 'View details' : undefined}
+              onClick={clickable ? () => onRowClick!(row) : undefined}
+              onKeyDown={clickable ? (e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onRowClick!(row);
                 }
-                onClick={col.sortable ? () => handleSort(col.accessor) : undefined}
-                aria-sort={
-                  col.sortable && sort.accessor === col.accessor
-                    ? sort.direction === 'asc'
-                      ? 'ascending'
-                      : 'descending'
-                    : undefined
-                }
-                tabIndex={col.sortable ? 0 : -1}
-                role={col.sortable ? 'button' : undefined}
-              >
-                <span className="inline-flex items-center gap-1">
-                  {col.header}
-                  {col.sortable && sort.accessor === col.accessor && (
-                    sort.direction === 'asc' ? (
-                      <ArrowUp size={14} />
-                    ) : (
-                      <ArrowDown size={14} />
-                    )
-                  )}
-                </span>
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {sortedData.map(row => {
-            const clickable = !!onRowClick;
-            const rowClasses = [
-              rowClassName ? rowClassName(row) : '',
-              clickable ? 'cursor-pointer hover:bg-gray-50 focus:bg-gray-100 outline-none transition-colors' : '',
-            ].join(' ');
-            return (
-              <TableRow
-                key={rowKey(row)}
-                className={rowClasses}
-                tabIndex={clickable ? 0 : undefined}
-                role={clickable ? 'button' : undefined}
-                aria-label={clickable ? 'View details' : undefined}
-                onClick={clickable ? () => onRowClick!(row) : undefined}
-                onKeyDown={clickable ? (e => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    onRowClick!(row);
-                  }
-                }) : undefined}
-              >
-                {columns.map(col => (
-                  <TableCell
-                    key={col.accessor as string}
-                    className={
-                      col.align === 'right'
-                        ? 'text-right'
-                        : col.align === 'center'
+              }) : undefined}
+            >
+              {columns.map(col => (
+                <TableCell
+                  key={col.accessor as string}
+                  className={
+                    col.align === 'right'
+                      ? 'text-right'
+                      : col.align === 'center'
                         ? 'text-center'
                         : 'text-left'
-                    }
-                  >
-                    {col.render
-                      ? col.render((row as any)[col.accessor], row)
-                      : (row as any)[col.accessor]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
+                  }
+                >
+                  {col.render
+                    ? col.render((row as any)[col.accessor], row)
+                    : (row as any)[col.accessor]}
+                </TableCell>
+              ))}
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 } 

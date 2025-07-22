@@ -255,26 +255,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       <GaKpiSummaryGrid current={current} prevYear={prevYear} />
 
       <div className="flex flex-col md:flex-row md:items-start gap-8 mt-8">
-        {filteredChannelData && filteredChannelData.length > 0 && (
-          <div className="flex flex-col justify-center">
-            <div className="flex flex-col items-start">
-              <h2 className="text-lg font-bold mb-2">Sessions</h2>
-              <p className="text-gray-500 mb-4 text-sm">by Channel</p>
-              {dateRange && (
-                <p className="text-xs text-gray-400 mb-2">
-                  {formatDateRange(dateRange.from, dateRange.to)}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-row">
-              <PieChart 
-                data={filteredChannelData} 
-                dateRange={dateRange}
-                type="channel"
-              />
-            </div>
-          </div>
-        )}
+        
         {filteredSourceData && filteredSourceData.length > 0 && (
           <div className="flex flex-col justify-center">
             <div className="flex flex-col items-start">
@@ -296,8 +277,29 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
           </div>
         )}
       </div>
-      <div className="flex-1">
+      {/* Show in columns if larger than medium screen, show in rows if smaller */}
+      <div className="flex flex-col md:flex-row py-2">
         <GaChannelSessionsTable channelDaily={filteredChannelData} dateRange={dateRange} />
+        {filteredChannelData && filteredChannelData.length > 0 && (
+          <div className="w-1/3">
+            <div className="flex flex-col items-start">
+              <h2 className="text-lg font-bold mb-2">Sessions</h2>
+              <p className="text-gray-500 mb-4 text-sm">by Channel</p>
+              {dateRange && (
+                <p className="text-xs text-gray-400 mb-2">
+                  {formatDateRange(dateRange.from, dateRange.to)}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-row">
+              <PieChart 
+                data={filteredChannelData} 
+                dateRange={dateRange}
+                type="channel"
+              />
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex-1 mt-8">
         <div className="flex flex-col items-start mb-4">

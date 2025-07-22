@@ -23,12 +23,12 @@ type ChannelDailyItem = {
 };
 
 export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSessionsTableProps) {
-  
+
   // Move hooks to top-level
   const [sort, setSort] = React.useState<{ accessor: string; direction: 'asc' | 'desc' }>({ accessor: 'sessions', direction: 'desc' });
-  
+
   const router = useRouter();
-  
+
   const allRows = React.useMemo(() => {
     if (!channelDaily || channelDaily.length === 0) return [];
 
@@ -89,12 +89,12 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
   // For grand total
   const totals = React.useMemo(() => {
     if (allRows.length === 0) return { current: 0, prev: 0, percent: null };
-    
+
     const totalSessions = allRows.reduce((sum, r) => sum + r.sessions, 0);
     const totalPrev = allRows.reduce((sum, r) => sum + (r.prev || 0), 0);
     const totalDiff = totalSessions - totalPrev;
     const totalPercent = totalPrev > 0 ? (totalDiff / totalPrev) * 100 : null;
-    
+
     return { current: totalSessions, prev: totalPrev, diff: totalDiff, percent: totalPercent };
   }, [allRows]);
 
@@ -158,8 +158,8 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
           <span className="text-gray-400">—</span>
         ) : (
           <span className={`inline-flex items-center gap-1 ${value > 0 ? 'text-green-600' : value < 0 ? 'text-red-500' : ''}`}>
-            {value > 0 && <ArrowUpRight size={14} className="inline" />} 
-            {value < 0 && <ArrowDownRight size={14} className="inline" />} 
+            {value > 0 && <ArrowUpRight size={14} className="inline" />}
+            {value < 0 && <ArrowDownRight size={14} className="inline" />}
             {Math.abs(value).toFixed(1)}%
           </span>
         ),
@@ -216,30 +216,30 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
   }
 
   return (
-    <div className="mt-8">
-          <h2 className="text-lg font-bold mb-2">Sessions by Channel</h2>
-          <p className="text-gray-500 mb-4 text-sm">Year-Over-Year Comparison</p>
-          <TableSortable
-            columns={columns}
-            data={topRowsWithNumbers}
-            initialSort={sort}
-            rowKey={row => row.channel}
-            onRowClick={handleRowClick}
-            rowClassName={rowClassName}
-          />
-          <div className="flex justify-between items-center mt-4 px-2">
-            <span className="font-bold">Grand total</span>
-            <span className="font-bold">{totals.current.toLocaleString()}</span>
-            <span className={`font-bold ${totals.percent === null ? 'text-gray-400' : totals.percent > 0 ? 'text-green-600' : totals.percent < 0 ? 'text-red-500' : ''}`}>
-              {totals.percent === null ? '—' : (
-                <span className="inline-flex items-center gap-1">
-                  {totals.percent > 0 && <ArrowUpRight size={14} className="inline" />} 
-                  {totals.percent < 0 && <ArrowDownRight size={14} className="inline" />} 
-                  {Math.abs(totals.percent).toFixed(1)}%
-                </span>
-              )}
+    <div className="w-2/3">
+      <h2 className="text-lg font-bold mb-2">Sessions by Channel</h2>
+      <p className="text-gray-500 mb-4 text-sm">Year-Over-Year Comparison</p>
+      <TableSortable
+        columns={columns}
+        data={topRowsWithNumbers}
+        initialSort={sort}
+        rowKey={row => row.channel}
+        onRowClick={handleRowClick}
+        rowClassName={rowClassName}
+      />
+      <div className="flex justify-between items-center mt-4 px-2">
+        <span className="font-bold">Grand total</span>
+        <span className="font-bold">{totals.current.toLocaleString()}</span>
+        <span className={`font-bold ${totals.percent === null ? 'text-gray-400' : totals.percent > 0 ? 'text-green-600' : totals.percent < 0 ? 'text-red-500' : ''}`}>
+          {totals.percent === null ? '—' : (
+            <span className="inline-flex items-center gap-1">
+              {totals.percent > 0 && <ArrowUpRight size={14} className="inline" />}
+              {totals.percent < 0 && <ArrowDownRight size={14} className="inline" />}
+              {Math.abs(totals.percent).toFixed(1)}%
             </span>
-          </div>
+          )}
+        </span>
+      </div>
     </div>
   );
 } 

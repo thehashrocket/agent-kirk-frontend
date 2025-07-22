@@ -29,11 +29,6 @@ const metrics: Array<{
     tooltip: 'Total number of sessions for the month.'
   },
   {
-    key: 'screenPageViewsPerSession',
-    label: 'Pages / Session',
-    tooltip: 'Average number of pages viewed per session.'
-  },
-  {
     key: 'goalCompletions',
     label: 'Goal Completions',
     tooltip: 'Number of goal completions.'
