@@ -81,7 +81,7 @@ model EmailCampaign {
   campaignName            String
   emailClientId           String
   emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
-  emailCampaignContents   EmailCampaignContent[]
+  emailCampaignContents   EmailCampaignContent?
   emailCampaignDailyStats EmailCampaignDailyStats[]
 }
 
@@ -645,12 +645,12 @@ model SproutSocialAccount {
   createdAt             DateTime                      @default(now())
   updatedAt             DateTime                      @updatedAt
   facebookAnalytics     SproutFacebookAnalytics[]
+  facebookPosts         SproutFacebookPost[]
   facebookPostAnalytics SproutFacebookPostAnalytics[]
   instagramAnalytics    SproutInstagramAnalytics[]
   linkedInAnalytics     SproutLinkedInAnalytics[]
   pinterestAnalytics    SproutPinterestAnalytics[]
   users                 UserToSproutSocialAccount[]
-  facebookPosts         SproutFacebookPost[]
 }
 
 model UserToSproutSocialAccount {

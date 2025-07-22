@@ -5111,12 +5111,10 @@ export namespace Prisma {
    */
 
   export type EmailCampaignCountOutputType = {
-    emailCampaignContents: number
     emailCampaignDailyStats: number
   }
 
   export type EmailCampaignCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    emailCampaignContents?: boolean | EmailCampaignCountOutputTypeCountEmailCampaignContentsArgs
     emailCampaignDailyStats?: boolean | EmailCampaignCountOutputTypeCountEmailCampaignDailyStatsArgs
   }
 
@@ -5129,13 +5127,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the EmailCampaignCountOutputType
      */
     select?: EmailCampaignCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * EmailCampaignCountOutputType without action
-   */
-  export type EmailCampaignCountOutputTypeCountEmailCampaignContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmailCampaignContentWhereInput
   }
 
   /**
@@ -5504,22 +5495,22 @@ export namespace Prisma {
 
   export type SproutSocialAccountCountOutputType = {
     facebookAnalytics: number
+    facebookPosts: number
     facebookPostAnalytics: number
     instagramAnalytics: number
     linkedInAnalytics: number
     pinterestAnalytics: number
     users: number
-    facebookPosts: number
   }
 
   export type SproutSocialAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     facebookAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountFacebookAnalyticsArgs
+    facebookPosts?: boolean | SproutSocialAccountCountOutputTypeCountFacebookPostsArgs
     facebookPostAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountFacebookPostAnalyticsArgs
     instagramAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountInstagramAnalyticsArgs
     linkedInAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountLinkedInAnalyticsArgs
     pinterestAnalytics?: boolean | SproutSocialAccountCountOutputTypeCountPinterestAnalyticsArgs
     users?: boolean | SproutSocialAccountCountOutputTypeCountUsersArgs
-    facebookPosts?: boolean | SproutSocialAccountCountOutputTypeCountFacebookPostsArgs
   }
 
   // Custom InputTypes
@@ -5538,6 +5529,13 @@ export namespace Prisma {
    */
   export type SproutSocialAccountCountOutputTypeCountFacebookAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SproutFacebookAnalyticsWhereInput
+  }
+
+  /**
+   * SproutSocialAccountCountOutputType without action
+   */
+  export type SproutSocialAccountCountOutputTypeCountFacebookPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SproutFacebookPostWhereInput
   }
 
   /**
@@ -5573,13 +5571,6 @@ export namespace Prisma {
    */
   export type SproutSocialAccountCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserToSproutSocialAccountWhereInput
-  }
-
-  /**
-   * SproutSocialAccountCountOutputType without action
-   */
-  export type SproutSocialAccountCountOutputTypeCountFacebookPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SproutFacebookPostWhereInput
   }
 
 
@@ -10698,7 +10689,7 @@ export namespace Prisma {
     name: "EmailCampaign"
     objects: {
       emailClient: Prisma.$EmailClientPayload<ExtArgs>
-      emailCampaignContents: Prisma.$EmailCampaignContentPayload<ExtArgs>[]
+      emailCampaignContents: Prisma.$EmailCampaignContentPayload<ExtArgs> | null
       emailCampaignDailyStats: Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11103,7 +11094,7 @@ export namespace Prisma {
   export interface Prisma__EmailCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     emailClient<T extends EmailClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmailClientDefaultArgs<ExtArgs>>): Prisma__EmailClientClient<$Result.GetResult<Prisma.$EmailClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    emailCampaignContents<T extends EmailCampaign$emailCampaignContentsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignContentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailCampaignContents<T extends EmailCampaign$emailCampaignContentsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignContentsArgs<ExtArgs>>): Prisma__EmailCampaignContentClient<$Result.GetResult<Prisma.$EmailCampaignContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     emailCampaignDailyStats<T extends EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs> = {}>(args?: Subset<T, EmailCampaign$emailCampaignDailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailCampaignDailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11552,11 +11543,6 @@ export namespace Prisma {
      */
     include?: EmailCampaignContentInclude<ExtArgs> | null
     where?: EmailCampaignContentWhereInput
-    orderBy?: EmailCampaignContentOrderByWithRelationInput | EmailCampaignContentOrderByWithRelationInput[]
-    cursor?: EmailCampaignContentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EmailCampaignContentScalarFieldEnum | EmailCampaignContentScalarFieldEnum[]
   }
 
   /**
@@ -46951,12 +46937,12 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     facebookAnalytics?: boolean | SproutSocialAccount$facebookAnalyticsArgs<ExtArgs>
+    facebookPosts?: boolean | SproutSocialAccount$facebookPostsArgs<ExtArgs>
     facebookPostAnalytics?: boolean | SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs>
     instagramAnalytics?: boolean | SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>
     linkedInAnalytics?: boolean | SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>
     pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
     users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
-    facebookPosts?: boolean | SproutSocialAccount$facebookPostsArgs<ExtArgs>
     _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sproutSocialAccount"]>
 
@@ -47002,12 +46988,12 @@ export namespace Prisma {
   export type SproutSocialAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerProfileId" | "networkType" | "name" | "nativeName" | "link" | "nativeId" | "groups" | "createdAt" | "updatedAt", ExtArgs["result"]["sproutSocialAccount"]>
   export type SproutSocialAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     facebookAnalytics?: boolean | SproutSocialAccount$facebookAnalyticsArgs<ExtArgs>
+    facebookPosts?: boolean | SproutSocialAccount$facebookPostsArgs<ExtArgs>
     facebookPostAnalytics?: boolean | SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs>
     instagramAnalytics?: boolean | SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>
     linkedInAnalytics?: boolean | SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>
     pinterestAnalytics?: boolean | SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>
     users?: boolean | SproutSocialAccount$usersArgs<ExtArgs>
-    facebookPosts?: boolean | SproutSocialAccount$facebookPostsArgs<ExtArgs>
     _count?: boolean | SproutSocialAccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SproutSocialAccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -47017,12 +47003,12 @@ export namespace Prisma {
     name: "SproutSocialAccount"
     objects: {
       facebookAnalytics: Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>[]
+      facebookPosts: Prisma.$SproutFacebookPostPayload<ExtArgs>[]
       facebookPostAnalytics: Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>[]
       instagramAnalytics: Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>[]
       linkedInAnalytics: Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>[]
       pinterestAnalytics: Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>[]
       users: Prisma.$UserToSproutSocialAccountPayload<ExtArgs>[]
-      facebookPosts: Prisma.$SproutFacebookPostPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -47430,12 +47416,12 @@ export namespace Prisma {
   export interface Prisma__SproutSocialAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     facebookAnalytics<T extends SproutSocialAccount$facebookAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    facebookPosts<T extends SproutSocialAccount$facebookPostsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookPostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     facebookPostAnalytics<T extends SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     instagramAnalytics<T extends SproutSocialAccount$instagramAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$instagramAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutInstagramAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     linkedInAnalytics<T extends SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$linkedInAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutLinkedInAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pinterestAnalytics<T extends SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$pinterestAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutPinterestAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends SproutSocialAccount$usersArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserToSproutSocialAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    facebookPosts<T extends SproutSocialAccount$facebookPostsArgs<ExtArgs> = {}>(args?: Subset<T, SproutSocialAccount$facebookPostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SproutFacebookPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -47887,6 +47873,30 @@ export namespace Prisma {
   }
 
   /**
+   * SproutSocialAccount.facebookPosts
+   */
+  export type SproutSocialAccount$facebookPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SproutFacebookPost
+     */
+    select?: SproutFacebookPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SproutFacebookPost
+     */
+    omit?: SproutFacebookPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SproutFacebookPostInclude<ExtArgs> | null
+    where?: SproutFacebookPostWhereInput
+    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
+    cursor?: SproutFacebookPostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SproutFacebookPostScalarFieldEnum | SproutFacebookPostScalarFieldEnum[]
+  }
+
+  /**
    * SproutSocialAccount.facebookPostAnalytics
    */
   export type SproutSocialAccount$facebookPostAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -48004,30 +48014,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserToSproutSocialAccountScalarFieldEnum | UserToSproutSocialAccountScalarFieldEnum[]
-  }
-
-  /**
-   * SproutSocialAccount.facebookPosts
-   */
-  export type SproutSocialAccount$facebookPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SproutFacebookPost
-     */
-    select?: SproutFacebookPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SproutFacebookPost
-     */
-    omit?: SproutFacebookPostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SproutFacebookPostInclude<ExtArgs> | null
-    where?: SproutFacebookPostWhereInput
-    orderBy?: SproutFacebookPostOrderByWithRelationInput | SproutFacebookPostOrderByWithRelationInput[]
-    cursor?: SproutFacebookPostWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SproutFacebookPostScalarFieldEnum | SproutFacebookPostScalarFieldEnum[]
   }
 
   /**
@@ -62065,7 +62051,7 @@ export namespace Prisma {
     campaignName?: StringFilter<"EmailCampaign"> | string
     emailClientId?: StringFilter<"EmailCampaign"> | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-    emailCampaignContents?: EmailCampaignContentListRelationFilter
+    emailCampaignContents?: XOR<EmailCampaignContentNullableScalarRelationFilter, EmailCampaignContentWhereInput> | null
     emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
   }
 
@@ -62077,7 +62063,7 @@ export namespace Prisma {
     campaignName?: SortOrder
     emailClientId?: SortOrder
     emailClient?: EmailClientOrderByWithRelationInput
-    emailCampaignContents?: EmailCampaignContentOrderByRelationAggregateInput
+    emailCampaignContents?: EmailCampaignContentOrderByWithRelationInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsOrderByRelationAggregateInput
   }
 
@@ -62092,7 +62078,7 @@ export namespace Prisma {
     campaignName?: StringFilter<"EmailCampaign"> | string
     emailClientId?: StringFilter<"EmailCampaign"> | string
     emailClient?: XOR<EmailClientScalarRelationFilter, EmailClientWhereInput>
-    emailCampaignContents?: EmailCampaignContentListRelationFilter
+    emailCampaignContents?: XOR<EmailCampaignContentNullableScalarRelationFilter, EmailCampaignContentWhereInput> | null
     emailCampaignDailyStats?: EmailCampaignDailyStatsListRelationFilter
   }, "id" | "campaignId">
 
@@ -64875,12 +64861,12 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
     updatedAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsListRelationFilter
+    facebookPosts?: SproutFacebookPostListRelationFilter
     facebookPostAnalytics?: SproutFacebookPostAnalyticsListRelationFilter
     instagramAnalytics?: SproutInstagramAnalyticsListRelationFilter
     linkedInAnalytics?: SproutLinkedInAnalyticsListRelationFilter
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
-    facebookPosts?: SproutFacebookPostListRelationFilter
   }
 
   export type SproutSocialAccountOrderByWithRelationInput = {
@@ -64895,12 +64881,12 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     facebookAnalytics?: SproutFacebookAnalyticsOrderByRelationAggregateInput
+    facebookPosts?: SproutFacebookPostOrderByRelationAggregateInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsOrderByRelationAggregateInput
     instagramAnalytics?: SproutInstagramAnalyticsOrderByRelationAggregateInput
     linkedInAnalytics?: SproutLinkedInAnalyticsOrderByRelationAggregateInput
     pinterestAnalytics?: SproutPinterestAnalyticsOrderByRelationAggregateInput
     users?: UserToSproutSocialAccountOrderByRelationAggregateInput
-    facebookPosts?: SproutFacebookPostOrderByRelationAggregateInput
   }
 
   export type SproutSocialAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -64918,12 +64904,12 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
     updatedAt?: DateTimeFilter<"SproutSocialAccount"> | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsListRelationFilter
+    facebookPosts?: SproutFacebookPostListRelationFilter
     facebookPostAnalytics?: SproutFacebookPostAnalyticsListRelationFilter
     instagramAnalytics?: SproutInstagramAnalyticsListRelationFilter
     linkedInAnalytics?: SproutLinkedInAnalyticsListRelationFilter
     pinterestAnalytics?: SproutPinterestAnalyticsListRelationFilter
     users?: UserToSproutSocialAccountListRelationFilter
-    facebookPosts?: SproutFacebookPostListRelationFilter
   }, "id" | "customerProfileId">
 
   export type SproutSocialAccountOrderByWithAggregationInput = {
@@ -66087,7 +66073,7 @@ export namespace Prisma {
     campaignId: string
     campaignName: string
     emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
-    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignContents?: EmailCampaignContentCreateNestedOneWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
   }
 
@@ -66098,7 +66084,7 @@ export namespace Prisma {
     campaignId: string
     campaignName: string
     emailClientId: string
-    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedOneWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
   }
 
@@ -66109,7 +66095,7 @@ export namespace Prisma {
     campaignId?: StringFieldUpdateOperationsInput | string
     campaignName?: StringFieldUpdateOperationsInput | string
     emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
-    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignContents?: EmailCampaignContentUpdateOneWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
   }
 
@@ -66120,7 +66106,7 @@ export namespace Prisma {
     campaignId?: StringFieldUpdateOperationsInput | string
     campaignName?: StringFieldUpdateOperationsInput | string
     emailClientId?: StringFieldUpdateOperationsInput | string
-    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateOneWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
   }
 
@@ -69279,12 +69265,12 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateInput = {
@@ -69299,12 +69285,12 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUpdateInput = {
@@ -69319,12 +69305,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateInput = {
@@ -69339,12 +69325,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateManyInput = {
@@ -70581,20 +70567,15 @@ export namespace Prisma {
     isNot?: EmailClientWhereInput
   }
 
-  export type EmailCampaignContentListRelationFilter = {
-    every?: EmailCampaignContentWhereInput
-    some?: EmailCampaignContentWhereInput
-    none?: EmailCampaignContentWhereInput
+  export type EmailCampaignContentNullableScalarRelationFilter = {
+    is?: EmailCampaignContentWhereInput | null
+    isNot?: EmailCampaignContentWhereInput | null
   }
 
   export type EmailCampaignDailyStatsListRelationFilter = {
     every?: EmailCampaignDailyStatsWhereInput
     some?: EmailCampaignDailyStatsWhereInput
     none?: EmailCampaignDailyStatsWhereInput
-  }
-
-  export type EmailCampaignContentOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type EmailCampaignDailyStatsOrderByRelationAggregateInput = {
@@ -72838,6 +72819,12 @@ export namespace Prisma {
     none?: SproutFacebookAnalyticsWhereInput
   }
 
+  export type SproutFacebookPostListRelationFilter = {
+    every?: SproutFacebookPostWhereInput
+    some?: SproutFacebookPostWhereInput
+    none?: SproutFacebookPostWhereInput
+  }
+
   export type SproutFacebookPostAnalyticsListRelationFilter = {
     every?: SproutFacebookPostAnalyticsWhereInput
     some?: SproutFacebookPostAnalyticsWhereInput
@@ -72868,13 +72855,11 @@ export namespace Prisma {
     none?: UserToSproutSocialAccountWhereInput
   }
 
-  export type SproutFacebookPostListRelationFilter = {
-    every?: SproutFacebookPostWhereInput
-    some?: SproutFacebookPostWhereInput
-    none?: SproutFacebookPostWhereInput
+  export type SproutFacebookAnalyticsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type SproutFacebookAnalyticsOrderByRelationAggregateInput = {
+  export type SproutFacebookPostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -72895,10 +72880,6 @@ export namespace Prisma {
   }
 
   export type UserToSproutSocialAccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SproutFacebookPostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -73718,11 +73699,10 @@ export namespace Prisma {
     connect?: EmailClientWhereUniqueInput
   }
 
-  export type EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput = {
-    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
-    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
-    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
-    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+  export type EmailCampaignContentCreateNestedOneWithoutEmailCampaignInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput
+    connect?: EmailCampaignContentWhereUniqueInput
   }
 
   export type EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput = {
@@ -73732,11 +73712,10 @@ export namespace Prisma {
     connect?: EmailCampaignDailyStatsWhereUniqueInput | EmailCampaignDailyStatsWhereUniqueInput[]
   }
 
-  export type EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput = {
-    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
-    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
-    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
-    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
+  export type EmailCampaignContentUncheckedCreateNestedOneWithoutEmailCampaignInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput
+    connect?: EmailCampaignContentWhereUniqueInput
   }
 
   export type EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput = {
@@ -73754,18 +73733,14 @@ export namespace Prisma {
     update?: XOR<XOR<EmailClientUpdateToOneWithWhereWithoutEmailCampaignsInput, EmailClientUpdateWithoutEmailCampaignsInput>, EmailClientUncheckedUpdateWithoutEmailCampaignsInput>
   }
 
-  export type EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput = {
-    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
-    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
-    upsert?: EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput[]
-    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
-    set?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    disconnect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    delete?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    update?: EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput[]
-    updateMany?: EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput[]
-    deleteMany?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
+  export type EmailCampaignContentUpdateOneWithoutEmailCampaignNestedInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput
+    upsert?: EmailCampaignContentUpsertWithoutEmailCampaignInput
+    disconnect?: EmailCampaignContentWhereInput | boolean
+    delete?: EmailCampaignContentWhereInput | boolean
+    connect?: EmailCampaignContentWhereUniqueInput
+    update?: XOR<XOR<EmailCampaignContentUpdateToOneWithWhereWithoutEmailCampaignInput, EmailCampaignContentUpdateWithoutEmailCampaignInput>, EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput>
   }
 
   export type EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput = {
@@ -73782,18 +73757,14 @@ export namespace Prisma {
     deleteMany?: EmailCampaignDailyStatsScalarWhereInput | EmailCampaignDailyStatsScalarWhereInput[]
   }
 
-  export type EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput = {
-    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput> | EmailCampaignContentCreateWithoutEmailCampaignInput[] | EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput[]
-    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput | EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput[]
-    upsert?: EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput[]
-    createMany?: EmailCampaignContentCreateManyEmailCampaignInputEnvelope
-    set?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    disconnect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    delete?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    connect?: EmailCampaignContentWhereUniqueInput | EmailCampaignContentWhereUniqueInput[]
-    update?: EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput | EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput[]
-    updateMany?: EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput | EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput[]
-    deleteMany?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
+  export type EmailCampaignContentUncheckedUpdateOneWithoutEmailCampaignNestedInput = {
+    create?: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+    connectOrCreate?: EmailCampaignContentCreateOrConnectWithoutEmailCampaignInput
+    upsert?: EmailCampaignContentUpsertWithoutEmailCampaignInput
+    disconnect?: EmailCampaignContentWhereInput | boolean
+    delete?: EmailCampaignContentWhereInput | boolean
+    connect?: EmailCampaignContentWhereUniqueInput
+    update?: XOR<XOR<EmailCampaignContentUpdateToOneWithWhereWithoutEmailCampaignInput, EmailCampaignContentUpdateWithoutEmailCampaignInput>, EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput>
   }
 
   export type EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput = {
@@ -75197,6 +75168,13 @@ export namespace Prisma {
     connect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
   }
 
+  export type SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+  }
+
   export type SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput = {
     create?: XOR<SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
@@ -75232,18 +75210,18 @@ export namespace Prisma {
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
   }
 
-  export type SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput = {
-    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
-    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
-    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
-    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-  }
-
   export type SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
     create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
     createMany?: SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope
     connect?: SproutFacebookAnalyticsWhereUniqueInput | SproutFacebookAnalyticsWhereUniqueInput[]
+  }
+
+  export type SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
   }
 
   export type SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
@@ -75281,13 +75259,6 @@ export namespace Prisma {
     connect?: UserToSproutSocialAccountWhereUniqueInput | UserToSproutSocialAccountWhereUniqueInput[]
   }
 
-  export type SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput = {
-    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
-    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
-    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
-    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-  }
-
   export type SproutSocialAccountUpdategroupsInput = {
     set?: number[]
     push?: number | number[]
@@ -75305,6 +75276,20 @@ export namespace Prisma {
     update?: SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
     updateMany?: SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
     deleteMany?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    disconnect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    delete?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    update?: SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
   }
 
   export type SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput = {
@@ -75377,20 +75362,6 @@ export namespace Prisma {
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
   }
 
-  export type SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput = {
-    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
-    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
-    upsert?: SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
-    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
-    set?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    disconnect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    delete?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    update?: SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
-    updateMany?: SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput[]
-    deleteMany?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
-  }
-
   export type SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
     create?: XOR<SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput[] | SproutFacebookAnalyticsUncheckedCreateWithoutSproutSocialAccountInput[]
     connectOrCreate?: SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookAnalyticsCreateOrConnectWithoutSproutSocialAccountInput[]
@@ -75403,6 +75374,20 @@ export namespace Prisma {
     update?: SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
     updateMany?: SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookAnalyticsUpdateManyWithWhereWithoutSproutSocialAccountInput[]
     deleteMany?: SproutFacebookAnalyticsScalarWhereInput | SproutFacebookAnalyticsScalarWhereInput[]
+  }
+
+  export type SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
+    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
+    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
+    upsert?: SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
+    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
+    set?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    disconnect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    delete?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
+    update?: SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
+    updateMany?: SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput[]
+    deleteMany?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
   }
 
   export type SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
@@ -75473,20 +75458,6 @@ export namespace Prisma {
     update?: UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
     updateMany?: UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput | UserToSproutSocialAccountUpdateManyWithWhereWithoutSproutSocialAccountInput[]
     deleteMany?: UserToSproutSocialAccountScalarWhereInput | UserToSproutSocialAccountScalarWhereInput[]
-  }
-
-  export type SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput = {
-    create?: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput> | SproutFacebookPostCreateWithoutSproutSocialAccountInput[] | SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput[]
-    connectOrCreate?: SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput | SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput[]
-    upsert?: SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput[]
-    createMany?: SproutFacebookPostCreateManySproutSocialAccountInputEnvelope
-    set?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    disconnect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    delete?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    connect?: SproutFacebookPostWhereUniqueInput | SproutFacebookPostWhereUniqueInput[]
-    update?: SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput | SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput[]
-    updateMany?: SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput | SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput[]
-    deleteMany?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
   }
 
   export type SproutSocialAccountCreateNestedOneWithoutUsersInput = {
@@ -78268,11 +78239,6 @@ export namespace Prisma {
     create: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
   }
 
-  export type EmailCampaignContentCreateManyEmailCampaignInputEnvelope = {
-    data: EmailCampaignContentCreateManyEmailCampaignInput | EmailCampaignContentCreateManyEmailCampaignInput[]
-    skipDuplicates?: boolean
-  }
-
   export type EmailCampaignDailyStatsCreateWithoutEmailCampaignInput = {
     id?: string
     date: Date | string
@@ -78396,39 +78362,45 @@ export namespace Prisma {
     users?: UserToEmailClientUncheckedUpdateManyWithoutEmailClientNestedInput
   }
 
-  export type EmailCampaignContentUpsertWithWhereUniqueWithoutEmailCampaignInput = {
-    where: EmailCampaignContentWhereUniqueInput
+  export type EmailCampaignContentUpsertWithoutEmailCampaignInput = {
     update: XOR<EmailCampaignContentUpdateWithoutEmailCampaignInput, EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput>
     create: XOR<EmailCampaignContentCreateWithoutEmailCampaignInput, EmailCampaignContentUncheckedCreateWithoutEmailCampaignInput>
+    where?: EmailCampaignContentWhereInput
   }
 
-  export type EmailCampaignContentUpdateWithWhereUniqueWithoutEmailCampaignInput = {
-    where: EmailCampaignContentWhereUniqueInput
+  export type EmailCampaignContentUpdateToOneWithWhereWithoutEmailCampaignInput = {
+    where?: EmailCampaignContentWhereInput
     data: XOR<EmailCampaignContentUpdateWithoutEmailCampaignInput, EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput>
   }
 
-  export type EmailCampaignContentUpdateManyWithWhereWithoutEmailCampaignInput = {
-    where: EmailCampaignContentScalarWhereInput
-    data: XOR<EmailCampaignContentUpdateManyMutationInput, EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignInput>
+  export type EmailCampaignContentUpdateWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contentType?: StringFieldUpdateOperationsInput | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    webId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EmailCampaignContentScalarWhereInput = {
-    AND?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
-    OR?: EmailCampaignContentScalarWhereInput[]
-    NOT?: EmailCampaignContentScalarWhereInput | EmailCampaignContentScalarWhereInput[]
-    id?: StringFilter<"EmailCampaignContent"> | string
-    subject?: StringFilter<"EmailCampaignContent"> | string
-    type?: StringFilter<"EmailCampaignContent"> | string
-    recipients?: IntFilter<"EmailCampaignContent"> | number
-    createdAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    updatedAt?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    contentType?: StringFilter<"EmailCampaignContent"> | string
-    createTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    emailCampaignId?: StringFilter<"EmailCampaignContent"> | string
-    htmlContent?: StringFilter<"EmailCampaignContent"> | string
-    plainContent?: StringFilter<"EmailCampaignContent"> | string
-    sendTime?: DateTimeFilter<"EmailCampaignContent"> | Date | string
-    webId?: StringFilter<"EmailCampaignContent"> | string
+  export type EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    recipients?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contentType?: StringFieldUpdateOperationsInput | string
+    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    htmlContent?: StringFieldUpdateOperationsInput | string
+    plainContent?: StringFieldUpdateOperationsInput | string
+    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    webId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsUpsertWithWhereUniqueWithoutEmailCampaignInput = {
@@ -78554,7 +78526,7 @@ export namespace Prisma {
     campaignId: string
     campaignName: string
     emailClient: EmailClientCreateNestedOneWithoutEmailCampaignsInput
-    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignContents?: EmailCampaignContentCreateNestedOneWithoutEmailCampaignInput
   }
 
   export type EmailCampaignUncheckedCreateWithoutEmailCampaignDailyStatsInput = {
@@ -78564,7 +78536,7 @@ export namespace Prisma {
     campaignId: string
     campaignName: string
     emailClientId: string
-    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedOneWithoutEmailCampaignInput
   }
 
   export type EmailCampaignCreateOrConnectWithoutEmailCampaignDailyStatsInput = {
@@ -78617,7 +78589,7 @@ export namespace Prisma {
     campaignId?: StringFieldUpdateOperationsInput | string
     campaignName?: StringFieldUpdateOperationsInput | string
     emailClient?: EmailClientUpdateOneRequiredWithoutEmailCampaignsNestedInput
-    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignContents?: EmailCampaignContentUpdateOneWithoutEmailCampaignNestedInput
   }
 
   export type EmailCampaignUncheckedUpdateWithoutEmailCampaignDailyStatsInput = {
@@ -78627,7 +78599,7 @@ export namespace Prisma {
     campaignId?: StringFieldUpdateOperationsInput | string
     campaignName?: StringFieldUpdateOperationsInput | string
     emailClientId?: StringFieldUpdateOperationsInput | string
-    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateOneWithoutEmailCampaignNestedInput
   }
 
   export type EmailClientUpsertWithoutEmailCampaignDailyStatsInput = {
@@ -78669,7 +78641,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     campaignId: string
     campaignName: string
-    emailCampaignContents?: EmailCampaignContentCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignContents?: EmailCampaignContentCreateNestedOneWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsCreateNestedManyWithoutEmailCampaignInput
   }
 
@@ -78679,7 +78651,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     campaignId: string
     campaignName: string
-    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedManyWithoutEmailCampaignInput
+    emailCampaignContents?: EmailCampaignContentUncheckedCreateNestedOneWithoutEmailCampaignInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedCreateNestedManyWithoutEmailCampaignInput
   }
 
@@ -81934,12 +81906,12 @@ export namespace Prisma {
     groups?: SproutSocialAccountCreategroupsInput | number[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutFacebookAnalyticsInput = {
@@ -81953,12 +81925,12 @@ export namespace Prisma {
     groups?: SproutSocialAccountCreategroupsInput | number[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutFacebookAnalyticsInput = {
@@ -81988,12 +81960,12 @@ export namespace Prisma {
     groups?: SproutSocialAccountUpdategroupsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutFacebookAnalyticsInput = {
@@ -82007,12 +81979,12 @@ export namespace Prisma {
     groups?: SproutSocialAccountUpdategroupsInput | number[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateWithoutFacebookPostsInput = {
@@ -82119,11 +82091,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutFacebookPostAnalyticsInput = {
@@ -82138,11 +82110,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutFacebookPostAnalyticsInput = {
@@ -82173,11 +82145,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutFacebookPostAnalyticsInput = {
@@ -82192,11 +82164,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateWithoutInstagramAnalyticsInput = {
@@ -82211,11 +82183,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutInstagramAnalyticsInput = {
@@ -82230,11 +82202,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutInstagramAnalyticsInput = {
@@ -82317,11 +82289,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutInstagramAnalyticsInput = {
@@ -82336,11 +82308,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutInstagramFollowersByCityUpsertWithWhereUniqueWithoutSproutInstagramAnalyticsInput = {
@@ -82691,11 +82663,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutLinkedInAnalyticsInput = {
@@ -82710,11 +82682,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutLinkedInAnalyticsInput = {
@@ -82745,11 +82717,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutLinkedInAnalyticsInput = {
@@ -82764,11 +82736,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountCreateWithoutPinterestAnalyticsInput = {
@@ -82783,11 +82755,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutPinterestAnalyticsInput = {
@@ -82802,11 +82774,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     users?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutPinterestAnalyticsInput = {
@@ -82837,11 +82809,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutPinterestAnalyticsInput = {
@@ -82856,11 +82828,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     users?: UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutFacebookAnalyticsCreateWithoutSproutSocialAccountInput = {
@@ -82916,6 +82888,44 @@ export namespace Prisma {
 
   export type SproutFacebookAnalyticsCreateManySproutSocialAccountInputEnvelope = {
     data: SproutFacebookAnalyticsCreateManySproutSocialAccountInput | SproutFacebookAnalyticsCreateManySproutSocialAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SproutFacebookPostCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostWhereUniqueInput
+    create: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostCreateManySproutSocialAccountInputEnvelope = {
+    data: SproutFacebookPostCreateManySproutSocialAccountInput | SproutFacebookPostCreateManySproutSocialAccountInput[]
     skipDuplicates?: boolean
   }
 
@@ -83175,44 +83185,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SproutFacebookPostCreateWithoutSproutSocialAccountInput = {
-    id?: string
-    postType: string
-    postStatus: string
-    postLink: string
-    postText: string
-    postNativeId: string
-    postCreatedTime: Date | string
-    postSentTime: Date | string
-    postLastUpdated: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput = {
-    id?: string
-    postType: string
-    postStatus: string
-    postLink: string
-    postText: string
-    postNativeId: string
-    postCreatedTime: Date | string
-    postSentTime: Date | string
-    postLastUpdated: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SproutFacebookPostCreateOrConnectWithoutSproutSocialAccountInput = {
-    where: SproutFacebookPostWhereUniqueInput
-    create: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput>
-  }
-
-  export type SproutFacebookPostCreateManySproutSocialAccountInputEnvelope = {
-    data: SproutFacebookPostCreateManySproutSocialAccountInput | SproutFacebookPostCreateManySproutSocialAccountInput[]
-    skipDuplicates?: boolean
-  }
-
   export type SproutFacebookAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
     where: SproutFacebookAnalyticsWhereUniqueInput
     update: XOR<SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput, SproutFacebookAnalyticsUncheckedUpdateWithoutSproutSocialAccountInput>
@@ -83254,6 +83226,40 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     updatedAt?: DateTimeFilter<"SproutFacebookAnalytics"> | Date | string
     netFollowerGrowth?: IntNullableFilter<"SproutFacebookAnalytics"> | number | null
+  }
+
+  export type SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostWhereUniqueInput
+    update: XOR<SproutFacebookPostUpdateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput>
+    create: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostWhereUniqueInput
+    data: XOR<SproutFacebookPostUpdateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput = {
+    where: SproutFacebookPostScalarWhereInput
+    data: XOR<SproutFacebookPostUpdateManyMutationInput, SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountInput>
+  }
+
+  export type SproutFacebookPostScalarWhereInput = {
+    AND?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
+    OR?: SproutFacebookPostScalarWhereInput[]
+    NOT?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
+    id?: StringFilter<"SproutFacebookPost"> | string
+    sproutSocialAccountId?: StringFilter<"SproutFacebookPost"> | string
+    postType?: StringFilter<"SproutFacebookPost"> | string
+    postStatus?: StringFilter<"SproutFacebookPost"> | string
+    postLink?: StringFilter<"SproutFacebookPost"> | string
+    postText?: StringFilter<"SproutFacebookPost"> | string
+    postNativeId?: StringFilter<"SproutFacebookPost"> | string
+    postCreatedTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postSentTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    postLastUpdated?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    createdAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
+    updatedAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
   }
 
   export type SproutFacebookPostAnalyticsUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
@@ -83457,40 +83463,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserToSproutSocialAccount"> | Date | string
   }
 
-  export type SproutFacebookPostUpsertWithWhereUniqueWithoutSproutSocialAccountInput = {
-    where: SproutFacebookPostWhereUniqueInput
-    update: XOR<SproutFacebookPostUpdateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput>
-    create: XOR<SproutFacebookPostCreateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedCreateWithoutSproutSocialAccountInput>
-  }
-
-  export type SproutFacebookPostUpdateWithWhereUniqueWithoutSproutSocialAccountInput = {
-    where: SproutFacebookPostWhereUniqueInput
-    data: XOR<SproutFacebookPostUpdateWithoutSproutSocialAccountInput, SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput>
-  }
-
-  export type SproutFacebookPostUpdateManyWithWhereWithoutSproutSocialAccountInput = {
-    where: SproutFacebookPostScalarWhereInput
-    data: XOR<SproutFacebookPostUpdateManyMutationInput, SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountInput>
-  }
-
-  export type SproutFacebookPostScalarWhereInput = {
-    AND?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
-    OR?: SproutFacebookPostScalarWhereInput[]
-    NOT?: SproutFacebookPostScalarWhereInput | SproutFacebookPostScalarWhereInput[]
-    id?: StringFilter<"SproutFacebookPost"> | string
-    sproutSocialAccountId?: StringFilter<"SproutFacebookPost"> | string
-    postType?: StringFilter<"SproutFacebookPost"> | string
-    postStatus?: StringFilter<"SproutFacebookPost"> | string
-    postLink?: StringFilter<"SproutFacebookPost"> | string
-    postText?: StringFilter<"SproutFacebookPost"> | string
-    postNativeId?: StringFilter<"SproutFacebookPost"> | string
-    postCreatedTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
-    postSentTime?: DateTimeFilter<"SproutFacebookPost"> | Date | string
-    postLastUpdated?: DateTimeFilter<"SproutFacebookPost"> | Date | string
-    createdAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
-    updatedAt?: DateTimeFilter<"SproutFacebookPost"> | Date | string
-  }
-
   export type SproutSocialAccountCreateWithoutUsersInput = {
     id?: string
     customerProfileId: number
@@ -83503,11 +83475,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountUncheckedCreateWithoutUsersInput = {
@@ -83522,11 +83494,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
+    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedCreateNestedManyWithoutSproutSocialAccountInput
-    facebookPosts?: SproutFacebookPostUncheckedCreateNestedManyWithoutSproutSocialAccountInput
   }
 
   export type SproutSocialAccountCreateOrConnectWithoutUsersInput = {
@@ -83632,11 +83604,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type SproutSocialAccountUncheckedUpdateWithoutUsersInput = {
@@ -83651,11 +83623,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     facebookAnalytics?: SproutFacebookAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
+    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     facebookPostAnalytics?: SproutFacebookPostAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     instagramAnalytics?: SproutInstagramAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     linkedInAnalytics?: SproutLinkedInAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
     pinterestAnalytics?: SproutPinterestAnalyticsUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
-    facebookPosts?: SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountNestedInput
   }
 
   export type UserUpsertWithoutSproutSocialAccountsInput = {
@@ -86876,21 +86848,6 @@ export namespace Prisma {
     pieGraphData?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type EmailCampaignContentCreateManyEmailCampaignInput = {
-    id?: string
-    subject: string
-    type: string
-    recipients?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    contentType: string
-    createTime: Date | string
-    htmlContent: string
-    plainContent: string
-    sendTime: Date | string
-    webId: string
-  }
-
   export type EmailCampaignDailyStatsCreateManyEmailCampaignInput = {
     id?: string
     date: Date | string
@@ -86929,51 +86886,6 @@ export namespace Prisma {
     totalOpens?: number
     uniqueClicks?: number
     uniqueOpens?: number
-  }
-
-  export type EmailCampaignContentUpdateWithoutEmailCampaignInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    subject?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    recipients?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contentType?: StringFieldUpdateOperationsInput | string
-    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    htmlContent?: StringFieldUpdateOperationsInput | string
-    plainContent?: StringFieldUpdateOperationsInput | string
-    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    webId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EmailCampaignContentUncheckedUpdateWithoutEmailCampaignInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    subject?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    recipients?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contentType?: StringFieldUpdateOperationsInput | string
-    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    htmlContent?: StringFieldUpdateOperationsInput | string
-    plainContent?: StringFieldUpdateOperationsInput | string
-    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    webId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    subject?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    recipients?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contentType?: StringFieldUpdateOperationsInput | string
-    createTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    htmlContent?: StringFieldUpdateOperationsInput | string
-    plainContent?: StringFieldUpdateOperationsInput | string
-    sendTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    webId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailCampaignDailyStatsUpdateWithoutEmailCampaignInput = {
@@ -87176,7 +87088,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
     campaignName?: StringFieldUpdateOperationsInput | string
-    emailCampaignContents?: EmailCampaignContentUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignContents?: EmailCampaignContentUpdateOneWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUpdateManyWithoutEmailCampaignNestedInput
   }
 
@@ -87186,7 +87098,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
     campaignName?: StringFieldUpdateOperationsInput | string
-    emailCampaignContents?: EmailCampaignContentUncheckedUpdateManyWithoutEmailCampaignNestedInput
+    emailCampaignContents?: EmailCampaignContentUncheckedUpdateOneWithoutEmailCampaignNestedInput
     emailCampaignDailyStats?: EmailCampaignDailyStatsUncheckedUpdateManyWithoutEmailCampaignNestedInput
   }
 
@@ -88291,6 +88203,20 @@ export namespace Prisma {
     netFollowerGrowth?: number | null
   }
 
+  export type SproutFacebookPostCreateManySproutSocialAccountInput = {
+    id?: string
+    postType: string
+    postStatus: string
+    postLink: string
+    postText: string
+    postNativeId: string
+    postCreatedTime: Date | string
+    postSentTime: Date | string
+    postLastUpdated: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SproutFacebookPostAnalyticsCreateManySproutSocialAccountInput = {
     id?: string
     angryReactions?: number | null
@@ -88392,20 +88318,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type SproutFacebookPostCreateManySproutSocialAccountInput = {
-    id?: string
-    postType: string
-    postStatus: string
-    postLink: string
-    postText: string
-    postNativeId: string
-    postCreatedTime: Date | string
-    postSentTime: Date | string
-    postLastUpdated: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type SproutFacebookAnalyticsUpdateWithoutSproutSocialAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     customerProfileId?: IntFieldUpdateOperationsInput | number
@@ -88473,6 +88385,48 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     netFollowerGrowth?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type SproutFacebookPostUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postType?: StringFieldUpdateOperationsInput | string
+    postStatus?: StringFieldUpdateOperationsInput | string
+    postLink?: StringFieldUpdateOperationsInput | string
+    postText?: StringFieldUpdateOperationsInput | string
+    postNativeId?: StringFieldUpdateOperationsInput | string
+    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SproutFacebookPostAnalyticsUpdateWithoutSproutSocialAccountInput = {
@@ -88778,48 +88732,6 @@ export namespace Prisma {
   export type UserToSproutSocialAccountUncheckedUpdateManyWithoutSproutSocialAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SproutFacebookPostUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    postType?: StringFieldUpdateOperationsInput | string
-    postStatus?: StringFieldUpdateOperationsInput | string
-    postLink?: StringFieldUpdateOperationsInput | string
-    postText?: StringFieldUpdateOperationsInput | string
-    postNativeId?: StringFieldUpdateOperationsInput | string
-    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SproutFacebookPostUncheckedUpdateWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    postType?: StringFieldUpdateOperationsInput | string
-    postStatus?: StringFieldUpdateOperationsInput | string
-    postLink?: StringFieldUpdateOperationsInput | string
-    postText?: StringFieldUpdateOperationsInput | string
-    postNativeId?: StringFieldUpdateOperationsInput | string
-    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SproutFacebookPostUncheckedUpdateManyWithoutSproutSocialAccountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    postType?: StringFieldUpdateOperationsInput | string
-    postStatus?: StringFieldUpdateOperationsInput | string
-    postLink?: StringFieldUpdateOperationsInput | string
-    postText?: StringFieldUpdateOperationsInput | string
-    postNativeId?: StringFieldUpdateOperationsInput | string
-    postCreatedTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    postSentTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    postLastUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

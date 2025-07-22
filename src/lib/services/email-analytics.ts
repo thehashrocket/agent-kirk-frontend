@@ -10,7 +10,7 @@
  */
 
 import { prisma } from '@/lib/prisma';
-import type { EmailCampaignDailyStats, EmailCampaign, EmailCampaignContent } from '../../../src/prisma/generated/client';
+import type { EmailCampaignDailyStats, EmailCampaign, EmailCampaignContent } from '@/prisma/generated/client';
 
 // Types for the service layer
 export interface EmailMetricsAggregated {
@@ -107,10 +107,7 @@ export class EmailAnalyticsService {
     const campaigns = await prisma.emailCampaign.findMany({
       where: whereClause,
       include: {
-        emailCampaignContents: {
-          orderBy: { sendTime: 'desc' },
-          take: 1, // Get the most recent content
-        },
+        emailCampaignContents: true,
         emailCampaignDailyStats: {
           where: dateRange ? {
             date: {
@@ -138,8 +135,8 @@ export class EmailAnalyticsService {
         { delivered: 0, opens: 0, clicks: 0, unsubscribes: 0, bounces: 0 }
       );
 
-      const latestContent = campaign.emailCampaignContents[0];
-      const sendDate = latestContent?.sendTime || campaign.createdAt;
+      const content = campaign.emailCampaignContents;
+      const sendDate = content?.sendTime || campaign.createdAt;
       
       return {
         id: campaign.id,
@@ -149,7 +146,7 @@ export class EmailAnalyticsService {
           day: 'numeric' 
         }),
         weekDay: sendDate.toLocaleDateString('en-US', { weekday: 'long' }),
-        subject: latestContent?.subject || campaign.campaignName,
+        subject: content?.subject || campaign.campaignName,
         link: `https://campaign.link/${campaign.campaignId}`, // Placeholder URL structure
         successfulDeliveries: stats.delivered,
         opens: stats.opens,
