@@ -37,7 +37,6 @@ import { format, subDays, startOfMonth, endOfMonth, subMonths } from 'date-fns';
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    console.log('Account Rep Social Media Metrics API - Starting request');
     
     // Get authentication
     const session = await getServerSession(authOptions);
@@ -174,13 +173,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       displayEndDate = selectedToParam ? new Date(selectedToParam) : endDate;
     } else {
       const today = new Date();
-      const lastMonthStart = startOfMonth(subMonths(today, 1));
-      const lastMonthEnd = endOfMonth(subMonths(today, 1));
+      const currentMonthStart = startOfMonth(today);
+      const currentMonthEnd = endOfMonth(today);
       
-      startDate = subDays(lastMonthStart, 365); // Get a year of data for comparison
-      endDate = lastMonthEnd;
-      displayStartDate = lastMonthStart;
-      displayEndDate = lastMonthEnd;
+      startDate = subDays(currentMonthStart, 365); // Get a year of data for comparison
+      endDate = currentMonthEnd;
+      displayStartDate = currentMonthStart;
+      displayEndDate = currentMonthEnd;
     }
 
     // For now, return a mock response structure similar to the client API
@@ -188,15 +187,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const response = {
       account: sproutSocialAccount,
       dateRange: {
-        start: format(displayStartDate, 'yyyy-MM-dd'),
-        end: format(displayEndDate, 'yyyy-MM-dd'),
+        from: format(displayStartDate, 'yyyy-MM-dd'),
+        to: format(displayEndDate, 'yyyy-MM-dd'),
       },
       metrics: [], // This would be populated with actual metrics data
       comparisonMetrics: [], // This would be populated with comparison data
       platformType: sproutSocialAccount.networkType,
     };
 
-    console.log('Account Rep Social Media Metrics API - Returning response for account:', sproutSocialAccount.name);
 
     return NextResponse.json(response);
 

@@ -23,8 +23,8 @@ export interface SproutSocialMetrics {
 export interface SproutSocialChannelData {
   account: SproutSocialAccount;
   dateRange: {
-    start: string;
-    end: string;
+    from: string;
+    to: string;
   };
   metrics: SproutSocialMetrics;
   comparisonMetrics: SproutSocialMetrics;
@@ -116,8 +116,8 @@ export type SproutSocialAnalytics = FacebookAnalytics | InstagramAnalytics | Lin
 export interface SproutSocialMetricsResponse {
   account: SproutSocialAccount;
   dateRange: {
-    start: string;
-    end: string;
+    from: string;
+    to: string;
   };
   metrics: SproutSocialAnalytics[];
   comparisonMetrics: SproutSocialAnalytics[];

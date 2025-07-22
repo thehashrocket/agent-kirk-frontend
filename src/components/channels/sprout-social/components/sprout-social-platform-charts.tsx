@@ -22,7 +22,7 @@ interface SproutSocialPlatformChartsProps {
   comparisonData: SproutSocialAnalytics[];
   platformType: string;
   currentMetrics: SproutSocialComputedMetrics;
-  dateRange: { start: string; end: string };
+  dateRange: { from: string; to: string };
 }
 
 // Platform-specific chart configurations

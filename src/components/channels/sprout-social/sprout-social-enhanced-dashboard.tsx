@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
+import dayjs from 'dayjs';
 import type { SproutSocialMetricsResponse } from './types';
 import { computeMetrics } from './types';
 import {
@@ -13,6 +14,8 @@ import {
   type DemographicData,
 } from './components';
 import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { DatePickerWithRange } from '@/components/ui/date-range-picker';
+import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
 
 
 
@@ -33,13 +36,45 @@ import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network
 
 interface SproutSocialEnhancedDashboardProps {
   data?: SproutSocialMetricsResponse;
-  onDateRangeChange?: (dateRange: { from: Date; to: Date }) => void;
+  onDateRangeChange: (dateRange: { from: Date; to: Date }) => void;
+}
+
+// Utility to get first and last day of a month from any date
+function getFullMonthRange(date: Date | string) {
+  let year, month;
+  if (typeof date === 'string') {
+    // Parse as local date, not UTC, to avoid timezone issues
+    const parts = date.split('-');
+    year = parseInt(parts[0], 10);
+    month = parseInt(parts[1], 10) - 1; // JS months are 0-based
+  } else {
+    year = date.getFullYear();
+    month = date.getMonth();
+  }
+  const from = new Date(year, month, 1);
+  const to = new Date(year, month + 1, 0);
+  return { from, to };
 }
 
 export function SproutSocialEnhancedDashboard({ 
   data, 
   onDateRangeChange 
 }: SproutSocialEnhancedDashboardProps) {
+  // Add local state for date range
+  const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
+
+  // Set dateRange from data on mount, using getFullMonthRange for consistent parsing
+  useEffect(() => {
+    if (data?.dateRange?.from) {
+      setDateRange(getFullMonthRange(data.dateRange.from));
+    }
+  }, [data?.dateRange?.from, data?.dateRange?.to]);
+
+  // Handler that updates local state immediately, like EmailEnhancedDashboard
+  const handleDateRangeChange = (range: { from: Date; to: Date }) => {
+    setDateRange(range); // Update local state immediately
+    onDateRangeChange(range); 
+  };
 
   if (!data) {
     return (
@@ -55,8 +90,6 @@ export function SproutSocialEnhancedDashboard({
       </div>
     );
   }
-
-  console.log('Sprout Social Enhanced Dashboard Data:', data);
 
   // Compute metrics using our helper function
   const { current: currentMetrics, comparison: comparisonMetrics } = computeMetrics(
@@ -81,10 +114,19 @@ export function SproutSocialEnhancedDashboard({
         <div>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">
-              {format(parseISO(data.dateRange.start), 'MMM d, yyyy')} - {format(parseISO(data.dateRange.end), 'MMM d, yyyy')}
+              {dateRange 
+                ? `${dayjs(dateRange.from).format('MMM D, YYYY')} - ${dayjs(dateRange.to).format('MMM D, YYYY')}`
+                : `${dayjs(data.dateRange.from).format('MMM D, YYYY')} - ${dayjs(data.dateRange.to).format('MMM D, YYYY')}`
+              }
             </span>
           </div>
         </div>
+        {dateRange && (
+          <MonthRangePicker
+            onChange={handleDateRangeChange}
+            value={dateRange}
+          />
+        )}
       </div>
 
       {/* Page Activity Overview */}

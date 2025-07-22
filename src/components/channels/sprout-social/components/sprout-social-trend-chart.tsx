@@ -44,7 +44,7 @@ interface SproutSocialTrendChartProps {
   data: SproutSocialAnalytics[];
   comparisonData: SproutSocialAnalytics[];
   config: TrendChartConfig;
-  dateRange: { start: string; end: string };
+  dateRange: { from: string; to: string };
 }
 
 interface ChartDataPoint {
@@ -188,7 +188,7 @@ export function SproutSocialTrendChart({
         <CardTitle className="text-lg font-semibold">{config.title}</CardTitle>
         <p className="text-sm text-muted-foreground">{config.description}</p>
         <p className="text-xs text-muted-foreground">
-          {format(parseISO(dateRange.start), 'MMM d, yyyy')} - {format(parseISO(dateRange.end), 'MMM d, yyyy')}
+          {format(parseISO(dateRange.from), 'MMM d, yyyy')} - {format(parseISO(dateRange.to), 'MMM d, yyyy')}
         </p>
         <div className="flex gap-4 text-xs text-muted-foreground mt-2">
           <span>Total: {formatter(chartData.reduce((sum, d) => sum + d.currentValue, 0))}</span>

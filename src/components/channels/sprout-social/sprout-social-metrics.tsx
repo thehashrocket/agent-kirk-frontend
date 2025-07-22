@@ -32,7 +32,6 @@ export default function SproutSocialMetrics() {
   // Fetch SproutSocial metrics with optional date range
   const fetchSproutSocialMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
     if (!selectedAccountId) return;
-    
     setIsLoading(true);
     setError(null);
     
@@ -87,10 +86,10 @@ export default function SproutSocialMetrics() {
       }
       
       const metricsData = await response.json();
+
       setData(metricsData);
       return metricsData;
     } catch (error) {
-      console.error('Error fetching Social Media metrics:', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch Social Media analytics data');
       throw error;
     } finally {

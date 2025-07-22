@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { format, subDays, startOfMonth, endOfMonth, subMonths } from 'date-fns';
+import { format, subDays, startOfMonth, endOfMonth, subMonths, parseISO } from 'date-fns';
 
 /**
  * GET /api/client/sprout-social-metrics
@@ -73,49 +73,33 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const sproutSocialAccount = userAccountAssociation.sproutSocialAccount;
 
-    // Set default date range if not provided (previous month)
-    let startDate: Date;
-    let endDate: Date;
-    let displayStartDate: Date;
-    let displayEndDate: Date;
-
-    if (fromDate && toDate) {
-      startDate = new Date(fromDate);
-      endDate = new Date(toDate);
-      displayStartDate = selectedFrom ? new Date(selectedFrom) : startDate;
-      displayEndDate = selectedTo ? new Date(selectedTo) : endDate;
-    } else {
-      const today = new Date();
-      const lastMonthStart = startOfMonth(subMonths(today, 1));
-      const lastMonthEnd = endOfMonth(subMonths(today, 1));
-      
-      startDate = subDays(lastMonthStart, 365); // Get a year of data for comparison
-      endDate = lastMonthEnd;
-      displayStartDate = lastMonthStart;
-      displayEndDate = lastMonthEnd;
-    }
+    // Parse date parameters
+    const from = fromDate ? parseISO(fromDate) : new Date();
+    const to = toDate ? parseISO(toDate) : new Date();
+    const selectedFromDate = selectedFrom ? parseISO(selectedFrom) : from;
+    const selectedToDate = selectedTo ? parseISO(selectedTo) : to;
 
     // Fetch analytics data based on platform type
     const platformMetrics = await fetchPlatformMetrics(
       sproutSocialAccount.networkType,
       sproutSocialAccount.customerProfileId,
-      startDate,
-      endDate
+      from,
+      to
     );
 
     // Calculate metrics for the selected period and comparison period
-    const selectedPeriodMetrics = filterMetricsByPeriod(platformMetrics, displayStartDate, displayEndDate);
-    const comparisonStartDate = new Date(displayStartDate);
-    comparisonStartDate.setDate(comparisonStartDate.getDate() - (displayEndDate.getTime() - displayStartDate.getTime()) / (1000 * 60 * 60 * 24));
-    const comparisonEndDate = new Date(displayStartDate);
+    const selectedPeriodMetrics = filterMetricsByPeriod(platformMetrics, selectedFromDate, selectedToDate);
+    const comparisonStartDate = new Date(selectedFromDate);
+    comparisonStartDate.setDate(comparisonStartDate.getDate() - (selectedToDate.getTime() - selectedFromDate.getTime()) / (1000 * 60 * 60 * 24));
+    const comparisonEndDate = new Date(selectedToDate);
     comparisonEndDate.setDate(comparisonEndDate.getDate() - 1);
     const comparisonMetrics = filterMetricsByPeriod(platformMetrics, comparisonStartDate, comparisonEndDate);
 
     const response = {
       account: sproutSocialAccount,
       dateRange: {
-        start: format(displayStartDate, 'yyyy-MM-dd'),
-        end: format(displayEndDate, 'yyyy-MM-dd'),
+        from: format(selectedFromDate, 'yyyy-MM-dd'),
+        to: format(selectedToDate, 'yyyy-MM-dd'),
       },
       metrics: selectedPeriodMetrics,
       comparisonMetrics: comparisonMetrics,
