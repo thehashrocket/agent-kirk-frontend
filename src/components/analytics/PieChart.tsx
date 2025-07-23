@@ -170,7 +170,7 @@ export const PieChart: React.FC<PieChartProps> = ({ data, type, dateRange }) => 
 
   return (
     <div className="flex items-center justify-center">
-      <div className="w-full max-w-[460px] min-h-[260px]" style={{ aspectRatio: '460/260' }}>
+      <div className="w-full max-w-[460px] min-h-[260px] pr-10" style={{ aspectRatio: '460/260' }}>
         <ResponsiveContainer width="100%" height="100%">
           <RechartsPieChart>
             {/* Main Pie chart rendering */}

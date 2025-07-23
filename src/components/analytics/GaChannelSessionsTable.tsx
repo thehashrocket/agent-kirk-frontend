@@ -202,7 +202,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
 
   // Styling for clickable rows
   const rowClassName = (row: typeof allRows[0]) => {
-    return isClickableChannel(row.channel) ? 'group cursor-pointer hover:bg-muted/50' : '';
+    return isClickableChannel(row.channel) ? 'group cursor-pointer hover:bg-muted/50' : 'hover:bg-muted/50';
   };
 
   if (!channelDaily || channelDaily.length === 0) {
@@ -216,7 +216,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
   }
 
   return (
-    <div className="w-2/3">
+    <div className="w-2/3 pr-5">
       <h2 className="text-lg font-bold mb-2">Sessions by Channel</h2>
       <p className="text-gray-500 mb-4 text-sm">Year-Over-Year Comparison</p>
       <TableSortable
@@ -227,18 +227,20 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
         onRowClick={handleRowClick}
         rowClassName={rowClassName}
       />
-      <div className="flex justify-between items-center mt-4 px-2">
-        <span className="font-bold">Grand total</span>
-        <span className="font-bold">{totals.current.toLocaleString()}</span>
-        <span className={`font-bold ${totals.percent === null ? 'text-gray-400' : totals.percent > 0 ? 'text-green-600' : totals.percent < 0 ? 'text-red-500' : ''}`}>
-          {totals.percent === null ? '—' : (
-            <span className="inline-flex items-center gap-1">
-              {totals.percent > 0 && <ArrowUpRight size={14} className="inline" />}
-              {totals.percent < 0 && <ArrowDownRight size={14} className="inline" />}
-              {Math.abs(totals.percent).toFixed(1)}%
-            </span>
-          )}
-        </span>
+      <div className="flex mt-4">
+        <div className="font-bold w-2/3">Grand total</div>
+        <div className="flex items-center gap-5 ml-auto w-1/3">
+          <div className="font-bold flex justify-end w-1/2">{totals.current.toLocaleString()} sessions</div> 
+          <div className={`font-bold flex justify-end w-1/2 ${totals.percent === null ? 'text-gray-400' : totals.percent > 0 ? 'text-green-600' : totals.percent < 0 ? 'text-red-500' : ''}`}>
+            {totals.percent === null ? '—' : (
+              <span className="inline-flex items-center gap-1">
+                {totals.percent > 0 && <ArrowUpRight size={14} className="inline" />}
+                {totals.percent < 0 && <ArrowDownRight size={14} className="inline" />}
+                {Math.abs(totals.percent).toFixed(1)}%
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
