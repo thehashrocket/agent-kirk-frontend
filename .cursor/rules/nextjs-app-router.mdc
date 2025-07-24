@@ -238,6 +238,7 @@ export const fetchDashboardStats = cache(async () => {
 - Prefer server state over client state
 - Implement proper form validation
 - Handle loading and error states
+- Zustand for State Management
 
 ### Accessibility
 - Use semantic HTML elements
@@ -250,6 +251,7 @@ export const fetchDashboardStats = cache(async () => {
 - @Next.js Documentation https://nextjs.org/docs
 - @TypeScript Documentation https://www.typescriptlang.org/docs/
 - @Tailwind CSS https://tailwindcss.com/docs
+- Zustand Documentation: https://zustand.docs.pmnd.rs/guides/nextjs
 - Lucide-React for icons
 - @Shadcn UI - Use shadcn@latest instead of shadcn-ui@latest
 - @WCAG Guidelines

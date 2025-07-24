@@ -14,7 +14,7 @@
 'use client';
 
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { PrintOptimizedGaMetrics } from "@/components/analytics/PrintOptimizedGaMetrics";
 
@@ -27,6 +27,7 @@ import { PrintOptimizedGaMetrics } from "@/components/analytics/PrintOptimizedGa
  * - Full-width layout optimized for printing
  * - All dashboard data and charts
  * - Clean typography and spacing
+ * - Uses the specified property ID from URL parameters
  * 
  * Authentication:
  * - Requires valid session with CLIENT role
@@ -34,6 +35,8 @@ import { PrintOptimizedGaMetrics } from "@/components/analytics/PrintOptimizedGa
  */
 export default function PrintDashboard() {
   const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
+  const propertyId = searchParams.get('propertyId');
 
   if (status === "loading") {
     return (
@@ -77,7 +80,7 @@ export default function PrintDashboard() {
       <div className="space-y-8">
         <Suspense fallback={<div className="text-center p-8" data-testid="loading">Loading analytics data...</div>}>
           <div data-testid="analytics-content">
-            <PrintOptimizedGaMetrics />
+            <PrintOptimizedGaMetrics propertyId={propertyId} />
           </div>
         </Suspense>
       </div>

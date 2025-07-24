@@ -17,10 +17,9 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import GaMetrics from "@/components/analytics/GaMetrics";
-import { SproutSocialMetrics } from "@/components/channels/sprout-social";
-import EmailMetrics from "@/components/channels/email/email-metrics";
-import { PrintButton } from "@/components/dashboard/PrintButton";
 import BreadCrumbs from "@/components/layout/BreadCrumbs";
+import { PrintButton } from "@/components/dashboard/PrintButton";
+import { ClientDashboardContent } from "@/components/dashboard/ClientDashboardContent";
 
 /**
  * @component ClientDashboard
@@ -67,12 +66,11 @@ export default async function ClientDashboard() {
           </h1>
           <p className="text-gray-600">Here&apos;s an overview of your account activity</p>
         </div>
-        <PrintButton />
       </div>
 
       <div className="mt-8">
         <Suspense fallback={<div>Loading analytics...</div>}>
-          <GaMetrics />
+          <ClientDashboardContent />
         </Suspense>
       </div>
 

@@ -10,19 +10,29 @@ import { Button } from '@/components/ui/button';
 import { Printer } from 'lucide-react';
 import { useCallback } from 'react';
 
+interface PrintButtonProps {
+  selectedPropertyId?: string | null;
+}
+
 /**
  * @component PrintButton
  * Button that opens a print-optimized version of the dashboard.
  * 
  * Features:
- * - Opens print route in new window
+ * - Opens print route in new window with selected property ID
  * - Triggers browser print dialog automatically
  * - Handles window focus and cleanup
+ * - Passes current property selection to print page
  */
-export function PrintButton() {
+export function PrintButton({ selectedPropertyId }: PrintButtonProps) {
   const handlePrint = useCallback(() => {
+    // Build the print URL with the selected property ID
+    const printUrl = selectedPropertyId 
+      ? `/client/dashboard/print?propertyId=${selectedPropertyId}`
+      : '/client/dashboard/print';
+    
     // Open the print-optimized dashboard in a new window
-    const printWindow = window.open('/client/dashboard/print', '_blank', 'width=1200,height=800');
+    const printWindow = window.open(printUrl, '_blank', 'width=1200,height=800');
     
     if (printWindow) {
       // Wait for the content to load and data to be ready
@@ -56,7 +66,7 @@ export function PrintButton() {
         setTimeout(checkAndPrint, 3000); // Increased initial delay
       });
     }
-  }, []);
+  }, [selectedPropertyId]);
 
   return (
     <Button
@@ -64,6 +74,7 @@ export function PrintButton() {
       variant="secondary"
       size="sm"
       className="flex items-center gap-2"
+      disabled={!selectedPropertyId}
     >
       <Printer className="h-4 w-4" />
       Print Report

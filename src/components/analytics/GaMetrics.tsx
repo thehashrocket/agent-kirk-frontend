@@ -14,6 +14,11 @@ import { format } from 'date-fns';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { Loader2 } from 'lucide-react';
 
+interface GaMetricsProps {
+  selectedPropertyId?: string | null;
+  onPropertyChange?: (propertyId: string | null) => void;
+}
+
 /**
  * @component GaMetrics
  * Server component that fetches and displays Google Analytics metrics.
@@ -21,14 +26,20 @@ import { Loader2 } from 'lucide-react';
  *
  * @returns {Promise<JSX.Element>} GA metrics grid
  */
-export default function GaMetrics() {
+export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMetricsProps) {
   const [data, setData] = useState<GaMetricsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
   const [selectedAccount, setSelectedAccount] = useState<any | null>(null);
   const [selectedProperty, setSelectedProperty] = useState<any | null>(null);
+
+  // Handle property change - call parent callback if provided, otherwise manage locally
+  const handlePropertyChange = useCallback((propertyId: string | null) => {
+    if (onPropertyChange) {
+      onPropertyChange(propertyId);
+    }
+  }, [onPropertyChange]);
 
   // Fetch GA metrics with optional date range
   const fetchGaMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
@@ -74,7 +85,7 @@ export default function GaMetrics() {
       // Use the extended date range for the API request
       params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
-      params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd')); // Original date range for display
+      params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd'));
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
       params.append('propertyId', selectedPropertyId);                   // Add property ID
       
@@ -118,7 +129,7 @@ export default function GaMetrics() {
     <div className="space-y-6">
       <GaAccountSelector
         onAccountChange={setSelectedAccountId}
-        onPropertyChange={setSelectedPropertyId}
+        onPropertyChange={handlePropertyChange}
         onAccountObjectChange={setSelectedAccount}
         onPropertyObjectChange={setSelectedProperty}
       />

@@ -12,6 +12,10 @@ import { useState, useEffect, useCallback } from 'react';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { Loader2 } from 'lucide-react';
 
+interface PrintOptimizedGaMetricsProps {
+  propertyId?: string | null;
+}
+
 /**
  * @component PrintOptimizedGaMetrics
  * Print-optimized version of GA metrics component.
@@ -22,10 +26,11 @@ import { Loader2 } from 'lucide-react';
  * - Clean, print-friendly layout
  * - Includes account and property information
  * - Optimized typography and spacing
+ * - Uses specified property ID or falls back to first available property
  * 
  * @returns {JSX.Element} Print-optimized GA metrics grid
  */
-export function PrintOptimizedGaMetrics() {
+export function PrintOptimizedGaMetrics({ propertyId }: PrintOptimizedGaMetricsProps) {
   const [data, setData] = useState<GaMetricsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +39,7 @@ export function PrintOptimizedGaMetrics() {
     propertyName: string;
   } | null>(null);
 
-  // Fetch GA metrics for the most recent property
+  // Fetch GA metrics for the specified or first available property
   const fetchGaMetrics = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -47,22 +52,53 @@ export function PrintOptimizedGaMetrics() {
       }
       
       const userData = await userResponse.json();
-      if (!userData.gaAccounts || userData.gaAccounts.length === 0) {
+      
+      // Transform the nested userToGaAccounts data into the expected format (same as GaAccountSelector)
+      const fetchedAccounts = userData.userToGaAccounts?.map((userToGaAccount: any) => ({
+        id: userToGaAccount.gaAccount.id,
+        gaAccountId: userToGaAccount.gaAccount.gaAccountId,
+        gaAccountName: userToGaAccount.gaAccount.gaAccountName,
+        gaProperties: userToGaAccount.gaAccount.gaProperties.map((property: any) => ({
+          id: property.id,
+          gaPropertyId: property.gaPropertyId,
+          gaPropertyName: property.gaPropertyName
+        }))
+      })) || [];
+      
+      if (!fetchedAccounts || fetchedAccounts.length === 0) {
         throw new Error('No GA accounts found');
       }
       
-      // Get the first account and its first property
-      const firstAccount = userData.gaAccounts[0];
-      const firstProperty = firstAccount.gaProperties?.[0];
+      // Find the specified property or fall back to the first property
+      let targetProperty = null;
+      let targetAccount = null;
       
-      if (!firstProperty) {
+      if (propertyId) {
+        // Look for the specified property across all accounts
+        for (const account of fetchedAccounts) {
+          const property = account.gaProperties.find((prop: any) => prop.id === propertyId);
+          if (property) {
+            targetProperty = property;
+            targetAccount = account;
+            break;
+          }
+        }
+      }
+      
+      // If no specific property found or specified, use the first available property
+      if (!targetProperty) {
+        targetAccount = fetchedAccounts[0];
+        targetProperty = targetAccount.gaProperties?.[0];
+      }
+      
+      if (!targetProperty) {
         throw new Error('No GA properties found');
       }
       
       // Store account info for display
       setAccountInfo({
-        accountName: firstAccount.gaAccountName,
-        propertyName: firstProperty.gaPropertyName
+        accountName: targetAccount.gaAccountName,
+        propertyName: targetProperty.gaPropertyName
       });
       
       // Fetch metrics for this property
@@ -82,7 +118,7 @@ export function PrintOptimizedGaMetrics() {
         to: lastDayOfPreviousMonth.toISOString().split('T')[0],
         selectedFrom: firstDayOfPreviousMonth.toISOString().split('T')[0],
         selectedTo: lastDayOfPreviousMonth.toISOString().split('T')[0],
-        propertyId: firstProperty.gaPropertyId
+        propertyId: targetProperty.id  // Use the internal database ID, not gaPropertyId
       });
       
       const metricsResponse = await fetch(`/api/client/ga-metrics?${params.toString()}`);
@@ -99,7 +135,7 @@ export function PrintOptimizedGaMetrics() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [propertyId]);
 
   // Fetch data on mount
   useEffect(() => {
