@@ -119,12 +119,7 @@ export default function SproutSocialMetrics() {
         onAccountObjectChange={setSelectedAccount}
       />
       
-      {/* Dynamic Title */}
-      {selectedAccount && (
-        <h2 className="text-xl font-semibold text-primary-700 mb-2">
-          {selectedAccount.name} – {normalizeSocialNetworkName(selectedAccount.networkType)} Analytics
-        </h2>
-      )}
+     
       
       {/* Metrics area: show error, loading, data, or empty state */}
       {error ? (

@@ -149,12 +149,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{metric.value}</div>
-              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                {getTrendIcon(metric.change)}
-                <span className={cn(getTrendColor(metric.change))}>
-                  {formatPercentage(metric.change)} vs last year
-                </span>
-              </div>
               <p className="text-xs text-muted-foreground mt-1">{metric.description}</p>
             </CardContent>
           </Card>
