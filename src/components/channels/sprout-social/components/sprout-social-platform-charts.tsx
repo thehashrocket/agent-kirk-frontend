@@ -3,7 +3,7 @@
 import React from 'react';
 import { SproutSocialTrendChart, createChartConfig, type TrendChartConfig } from './sprout-social-trend-chart';
 import type { SproutSocialAnalytics, SproutSocialComputedMetrics } from '../types';
-import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
 /**
  * @component SproutSocialPlatformCharts
  * @path src/components/channels/sprout-social/components/sprout-social-platform-charts.tsx
@@ -265,7 +265,7 @@ export function SproutSocialPlatformCharts({
   if (validCharts.length === 0) {
     return (
       <div className="text-center py-8 text-muted-foreground">
-        <p>No chart data available for {normalizeSocialNetworkName(platformType)} platform</p>
+        <p>No chart data available for {normalizeNames(platformType)} platform</p>
         <p className="text-sm mt-2">Available data keys: {Object.keys(data[0] || {}).join(', ')}</p>
       </div>
     );

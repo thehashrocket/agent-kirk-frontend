@@ -13,7 +13,7 @@ import {
   transformDemographicData,
   type DemographicData,
 } from './components';
-import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
 
@@ -173,7 +173,7 @@ export function SproutSocialEnhancedDashboard({
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 text-sm">
           <div>
             <span className="text-muted-foreground">Platform:</span>
-            <p className="font-medium capitalize">{normalizeSocialNetworkName(data.platformType)}</p>
+            <p className="font-medium capitalize">{normalizeNames(data.platformType)}</p>
           </div>
           <div>
             <span className="text-muted-foreground">Account:</span>

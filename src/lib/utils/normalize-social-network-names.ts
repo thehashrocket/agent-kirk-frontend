@@ -6,7 +6,7 @@
 // - linkedin_company
 // - linkedin
 
-export const normalizeSocialNetworkName= (name: string) => {
+export const normalizeNames= (name: string) => {
   // if the name is facebook, return "Facebook"
   if (name === 'facebook') {
     return 'Facebook';

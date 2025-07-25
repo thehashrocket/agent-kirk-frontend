@@ -18,7 +18,7 @@ import {
   transformDemographicData,
   type DemographicData,
 } from './components';
-import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
 
 interface PrintOptimizedSproutSocialDashboardProps {
   data: SproutSocialMetricsResponse;
@@ -81,7 +81,7 @@ export function PrintOptimizedSproutSocialDashboard({ data }: PrintOptimizedSpro
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-blue-800 mb-4">Social Media Performance</h1>
         <h2 className="text-xl font-bold mb-2">
-          {normalizeSocialNetworkName(data.platformType)} Analytics Overview
+          {normalizeNames(data.platformType)} Analytics Overview
         </h2>
         <p className="text-gray-500 mb-2">
           {dateRange 
@@ -145,7 +145,7 @@ export function PrintOptimizedSproutSocialDashboard({ data }: PrintOptimizedSpro
         <div className="grid gap-4 md:grid-cols-2">
           <div className="p-4 bg-gray-50 rounded-lg">
             <h3 className="font-medium mb-2">Platform</h3>
-            <p className="text-sm text-gray-600">{normalizeSocialNetworkName(data.platformType)}</p>
+            <p className="text-sm text-gray-600">{normalizeNames(data.platformType)}</p>
           </div>
           
           <div className="p-4 bg-gray-50 rounded-lg">

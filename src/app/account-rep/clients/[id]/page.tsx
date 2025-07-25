@@ -26,7 +26,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
 
 interface User {
   id: string;
@@ -809,7 +809,7 @@ export default function ClientDetailsPage() {
                           />
                           <div>
                             <p className="font-medium">{account.name}</p>
-                            <p className="text-sm text-gray-500">Platform: {normalizeSocialNetworkName(account.networkType)}</p>
+                            <p className="text-sm text-gray-500">Platform: {normalizeNames(account.networkType)}</p>
                             <p className="text-sm text-gray-500">Native Name: {account.nativeName}</p>
                             <p className="text-sm text-gray-500">Profile ID: {account.customerProfileId}</p>
                           </div>
@@ -847,7 +847,7 @@ export default function ClientDetailsPage() {
                     <div className="flex justify-between items-start mb-4">
                       <div>
                         <h3 className="font-semibold">{account.name}</h3>
-                        <p className="text-sm text-gray-500">Platform: {normalizeSocialNetworkName(account.networkType)}</p>
+                        <p className="text-sm text-gray-500">Platform: {normalizeNames(account.networkType)}</p>
                         <p className="text-sm text-gray-500">Native Name: {account.nativeName}</p>
                         <p className="text-sm text-gray-500">Profile ID: {account.customerProfileId}</p>
                       </div>

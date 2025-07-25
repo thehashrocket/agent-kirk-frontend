@@ -24,7 +24,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Loader2 } from 'lucide-react';
 import type { SproutSocialAccount } from './types';
-import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
 
 interface AccountRepSproutSocialAccountSelectorProps {
   clientId: string;
@@ -145,7 +145,7 @@ export function AccountRepSproutSocialAccountSelector({
                 <div className="flex items-center justify-between w-full">
                   <span>{account.name}</span>
                   <Badge variant="outline" className="ml-2 text-xs">
-                    {normalizeSocialNetworkName(account.networkType)}
+                    {normalizeNames(account.networkType)}
                   </Badge>
                 </div>
               </SelectItem>
@@ -162,7 +162,7 @@ export function AccountRepSproutSocialAccountSelector({
                 {accounts.find(acc => acc.id === selectedAccountId)?.name}
               </h4>
               <p className="text-xs text-blue-700">
-                Network: {normalizeSocialNetworkName(accounts.find(acc => acc.id === selectedAccountId)?.networkType || '')}
+                Network: {normalizeNames(accounts.find(acc => acc.id === selectedAccountId)?.networkType || '')}
               </p>
             </div>
           </div>

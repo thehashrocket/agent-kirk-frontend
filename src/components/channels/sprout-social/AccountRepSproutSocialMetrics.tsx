@@ -20,7 +20,7 @@ import { Loader2 } from 'lucide-react';
 import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboard';
 import { AccountRepSproutSocialAccountSelector } from './AccountRepSproutSocialAccountSelector';
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
-import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
 
 interface AccountRepSproutSocialMetricsProps {
   clientId: string;
@@ -150,7 +150,7 @@ export function AccountRepSproutSocialMetrics({ clientId }: AccountRepSproutSoci
       {/* Dynamic Title */}
       {selectedAccount && (
         <h2 className="text-xl font-semibold text-primary-700 mb-2">
-          {selectedAccount.name} – {normalizeSocialNetworkName(selectedAccount.networkType)} Analytics
+          {selectedAccount.name} – {normalizeNames(selectedAccount.networkType)} Analytics
         </h2>
       )}
       
