@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
 import type { SproutSocialAccount, SproutSocialAccountSelectorProps } from './types';
-import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/nomalize-names';
 
 /**
  * @component SproutSocialAccountSelector

@@ -24,7 +24,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Loader2 } from 'lucide-react';
 import type { SproutSocialAccount } from './types';
-import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/nomalize-names';
 
 interface AccountRepSproutSocialAccountSelectorProps {
   clientId: string;

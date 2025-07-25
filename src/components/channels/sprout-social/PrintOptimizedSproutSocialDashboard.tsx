@@ -18,7 +18,7 @@ import {
   transformDemographicData,
   type DemographicData,
 } from './components';
-import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/nomalize-names';
 
 interface PrintOptimizedSproutSocialDashboardProps {
   data: SproutSocialMetricsResponse;

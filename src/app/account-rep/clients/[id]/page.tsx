@@ -26,7 +26,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/nomalize-names';
 
 interface User {
   id: string;

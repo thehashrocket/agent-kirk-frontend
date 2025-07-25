@@ -3,7 +3,7 @@
 import React from 'react';
 import { SproutSocialTrendChart, createChartConfig, type TrendChartConfig } from './sprout-social-trend-chart';
 import type { SproutSocialAnalytics, SproutSocialComputedMetrics } from '../types';
-import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/nomalize-names';
 /**
  * @component SproutSocialPlatformCharts
  * @path src/components/channels/sprout-social/components/sprout-social-platform-charts.tsx

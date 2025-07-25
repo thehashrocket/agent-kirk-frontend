@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react';
 import { SproutSocialAccountSelector } from './sprout-social-account-selector';
 import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboard';
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
-import { normalizeNames } from '@/lib/utils/normalize-social-network-names';
+import { normalizeNames } from '@/lib/utils/nomalize-names';
 
 interface SproutSocialMetricsProps {
   selectedAccountId?: string | null;
