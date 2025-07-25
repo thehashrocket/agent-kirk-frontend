@@ -20,7 +20,7 @@ import { Loader2 } from 'lucide-react';
 import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboard';
 import { AccountRepSproutSocialAccountSelector } from './AccountRepSproutSocialAccountSelector';
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
-import { normalizeNames } from '@/lib/utils/nomalize-names';
+import { normalizeNames } from '@/lib/utils/normalize-names';
 
 interface AccountRepSproutSocialMetricsProps {
   clientId: string;

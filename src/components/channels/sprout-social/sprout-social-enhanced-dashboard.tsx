@@ -13,7 +13,7 @@ import {
   transformDemographicData,
   type DemographicData,
 } from './components';
-import { normalizeNames } from '@/lib/utils/nomalize-names';
+import { normalizeNames } from '@/lib/utils/normalize-names';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
 

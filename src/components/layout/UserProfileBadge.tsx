@@ -4,6 +4,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
+import { normalizeNames } from "@/lib/utils/normalize-names";
 
 /**
  * UserProfileBadge Component
@@ -34,7 +35,7 @@ export function UserProfileBadge() {
             <div className="hidden md:flex flex-col items-end">
                 <span className="text-sm font-medium">{session.user.email}</span>
                 <span className="text-xs text-muted-foreground">
-                    {session.user.role || 'No Role'}
+                    {normalizeNames(session.user.role) || 'No Role'}
                 </span>
             </div>
         </div>
