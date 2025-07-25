@@ -179,16 +179,7 @@ export function PrintOptimizedGaMetrics({ propertyId }: PrintOptimizedGaMetricsP
   }
 
   return (
-    <div className="space-y-6">
-      {/* Account and Property Information */}
-      {accountInfo && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-primary-700 mb-2">
-            {accountInfo.accountName} – {accountInfo.propertyName}
-          </h2>
-        </div>
-      )}
-      
+    <div className="space-y-6">      
       {/* Print-optimized metrics grid */}
       <PrintOptimizedGaMetricsGrid data={data} />
     </div>

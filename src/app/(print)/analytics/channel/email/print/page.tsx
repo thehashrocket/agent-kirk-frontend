@@ -19,21 +19,10 @@ import { Suspense } from "react";
 import { PrintOptimizedEmailMetrics } from "@/components/channels/email/PrintOptimizedEmailMetrics";
 
 /**
- * @component PrintEmailDashboard
- * Print-optimized version of the email analytics dashboard.
- * 
- * Features:
- * - No header, sidebar, or navigation elements
- * - Full-width layout optimized for printing
- * - All email analytics data and charts
- * - Clean typography and spacing
- * - Uses the specified client ID from URL parameters
- * 
- * Authentication:
- * - Requires valid session with CLIENT role
- * - Redirects to sign-in if not authenticated
+ * @component PrintEmailDashboardContent
+ * Inner component that uses useSearchParams - must be wrapped in Suspense
  */
-export default function PrintEmailDashboard() {
+function PrintEmailDashboardContent() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
   const clientId = searchParams.get('clientId');
@@ -85,5 +74,18 @@ export default function PrintEmailDashboard() {
         </Suspense>
       </div>
     </div>
+  );
+}
+
+/**
+ * @component PrintEmailDashboard
+ * Print-optimized version of the email analytics dashboard.
+ * Wraps the content in Suspense to handle useSearchParams()
+ */
+export default function PrintEmailDashboard() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="text-center">Loading...</div></div>}>
+      <PrintEmailDashboardContent />
+    </Suspense>
   );
 } 

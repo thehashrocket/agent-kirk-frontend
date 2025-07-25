@@ -9,6 +9,11 @@ import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboar
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
 import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network-names';
 
+interface SproutSocialMetricsProps {
+  selectedAccountId?: string | null;
+  onAccountChange?: (accountId: string | null) => void;
+}
+
 /**
  * @component SproutSocialMetrics
  * @path src/components/channels/sprout-social/sprout-social-metrics.tsx
@@ -22,16 +27,22 @@ import { normalizeSocialNetworkName } from '@/lib/utils/normalize-social-network
  * - Automatic data refresh on account change
  * - Previous month default date range
  */
-export default function SproutSocialMetrics() {
+export default function SproutSocialMetrics({ selectedAccountId, onAccountChange }: SproutSocialMetricsProps) {
   const [data, setData] = useState<SproutSocialMetricsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
   const [selectedAccount, setSelectedAccount] = useState<SproutSocialAccount | null>(null);
+
+  // Handle account change - call parent callback if provided
+  const handleAccountChange = useCallback((accountId: string | null) => {
+    if (onAccountChange) {
+      onAccountChange(accountId);
+    }
+  }, [onAccountChange]);
 
   // Fetch SproutSocial metrics with optional date range
   const fetchSproutSocialMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
-    if (!selectedAccountId) return;
+    if (!selectedAccountId) return; // Don't fetch if no account is selected
     setIsLoading(true);
     setError(null);
     
@@ -39,21 +50,16 @@ export default function SproutSocialMetrics() {
       // Build URL with date parameters if provided
       let url = '/api/client/sprout-social-metrics';
       
-      // If no date range is provided, use previous full month as default
+      // Calculate default date range if not provided
       if (!dateRange) {
-        const today = new Date();
-        // Get first day of current month
-        const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        // Last day of previous month is one day before first day of current month
-        const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
-        lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
-        // First day of previous month
-        const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
-        
-        // Use previous month as default range
+        // Use a fixed reference date to ensure we don't get future dates
+        const referenceDate = new Date(2025, 5, 30); // June 30, 2025
+        const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
+        const lastDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth() + 1, 0);
+
         dateRange = {
-          from: firstDayOfPreviousMonth,
-          to: lastDayOfPreviousMonth
+          from: firstDayOfMonth,
+          to: lastDayOfMonth
         };
       }
       
@@ -90,6 +96,7 @@ export default function SproutSocialMetrics() {
       setData(metricsData);
       return metricsData;
     } catch (error) {
+      console.error('Error fetching SproutSocial metrics:', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch Social Media analytics data');
       throw error;
     } finally {
@@ -115,11 +122,9 @@ export default function SproutSocialMetrics() {
   return (
     <div className="space-y-6">
       <SproutSocialAccountSelector
-        onAccountChange={setSelectedAccountId}
+        onAccountChange={handleAccountChange}
         onAccountObjectChange={setSelectedAccount}
       />
-      
-     
       
       {/* Metrics area: show error, loading, data, or empty state */}
       {error ? (

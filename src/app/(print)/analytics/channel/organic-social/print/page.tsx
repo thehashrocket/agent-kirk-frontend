@@ -1,13 +1,13 @@
 /**
- * @file src/app/client/dashboard/print/page.tsx
- * Print-optimized version of the client dashboard.
- * This page displays the dashboard content without navigation elements,
+ * @file src/app/(print)/analytics/channel/organic-social/print/page.tsx
+ * Print-optimized version of the organic social analytics dashboard.
+ * This page displays the social analytics content without navigation elements,
  * optimized for printing and PDF generation.
  * 
  * Features:
  * - Clean layout without header/sidebar
- * - Google Analytics metrics and charts
- * - Account and property information
+ * - Social analytics metrics and charts
+ * - Account information
  * - Print-friendly styling
  */
 
@@ -16,16 +16,16 @@
 import { useSession } from "next-auth/react";
 import { redirect, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { PrintOptimizedGaMetrics } from "@/components/analytics/PrintOptimizedGaMetrics";
+import { PrintOptimizedSproutSocialMetrics } from "@/components/channels/sprout-social/PrintOptimizedSproutSocialMetrics";
 
 /**
- * @component PrintDashboardContent
+ * @component PrintSocialDashboardContent
  * Inner component that uses useSearchParams - must be wrapped in Suspense
  */
-function PrintDashboardContent() {
+function PrintSocialDashboardContent() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
-  const propertyId = searchParams.get('propertyId');
+  const accountId = searchParams.get('accountId');
 
   if (status === "loading") {
     return (
@@ -50,7 +50,7 @@ function PrintDashboardContent() {
       
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2 text-gray-900">
-          Analytics Dashboard Report
+          Social Media Analytics Report
         </h1>
         <p className="text-gray-600 mb-2">
           Generated for: {session.user.name || session.user.email}
@@ -67,9 +67,9 @@ function PrintDashboardContent() {
       </div>
 
       <div className="space-y-8">
-        <Suspense fallback={<div className="text-center p-8" data-testid="loading">Loading analytics data...</div>}>
-          <div data-testid="analytics-content">
-            <PrintOptimizedGaMetrics propertyId={propertyId} />
+        <Suspense fallback={<div className="text-center p-8" data-testid="loading">Loading social analytics data...</div>}>
+          <div data-testid="social-content">
+            <PrintOptimizedSproutSocialMetrics accountId={accountId} />
           </div>
         </Suspense>
       </div>
@@ -78,14 +78,14 @@ function PrintDashboardContent() {
 }
 
 /**
- * @component PrintDashboard
- * Print-optimized version of the client dashboard.
+ * @component PrintSocialDashboard
+ * Print-optimized version of the organic social analytics dashboard.
  * Wraps the content in Suspense to handle useSearchParams()
  */
-export default function PrintDashboard() {
+export default function PrintSocialDashboard() {
   return (
     <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="text-center">Loading...</div></div>}>
-      <PrintDashboardContent />
+      <PrintSocialDashboardContent />
     </Suspense>
   );
 } 

@@ -1,8 +1,8 @@
 // src/components/channels/organic_social.tsx
 
 import React from 'react';
-import SproutSocialMetrics from './sprout-social/sprout-social-metrics';
+import { SproutSocialDashboardContent } from './sprout-social/SproutSocialDashboardContent';
 
 export default function OrganicSocial() {
-  return <SproutSocialMetrics />;
+  return <SproutSocialDashboardContent />;
 }

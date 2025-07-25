@@ -252,6 +252,7 @@ export const fetchDashboardStats = cache(async () => {
 - @TypeScript Documentation https://www.typescriptlang.org/docs/
 - @Tailwind CSS https://tailwindcss.com/docs
 - Zustand Documentation: https://zustand.docs.pmnd.rs/guides/nextjs
+- tRPC Documentation: https://trpc.io/docs/client/tanstack-react-query
 - Lucide-React for icons
 - @Shadcn UI - Use shadcn@latest instead of shadcn-ui@latest
 - @WCAG Guidelines
