@@ -81,42 +81,42 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
     {
       title: 'Total Opens',
       value: formatNumber(data.metrics.current.totalOpens),
-      change: data.metrics.yearOverYear.opens,
+      // change: data.metrics.yearOverYear.opens,
       icon: Mail,
       description: 'Total email opens',
     },
     {
       title: 'Total Clicks',
       value: formatNumber(data.metrics.current.totalClicks),
-      change: data.metrics.yearOverYear.clicks,
+      // change: data.metrics.yearOverYear.clicks,
       icon: MousePointer,
       description: 'Total email clicks',
     },
     {
       title: 'Open Rate',
       value: `${(data.metrics.current.averageOpenRate * 100).toFixed(1)}%`,
-      change: data.metrics.yearOverYear.openRate,
+      // change: data.metrics.yearOverYear.openRate,
       icon: TrendingUp,
       description: 'Average open rate',
     },
     {
       title: 'Click Rate',
       value: `${(data.metrics.current.averageClickRate * 100).toFixed(1)}%`,
-      change: data.metrics.yearOverYear.clickRate,
+      // change: data.metrics.yearOverYear.clickRate,
       icon: TrendingUp,
       description: 'Average click rate',
     },
     {
       title: 'Bounces',
       value: formatNumber(data.metrics.current.totalBounces),
-      change: data.metrics.yearOverYear.bounces,
+      // change: data.metrics.yearOverYear.bounces,
       icon: AlertTriangle,
       description: 'Total bounces',
     },
     {
       title: 'Unsubscribes',
       value: formatNumber(data.metrics.current.totalUnsubscribes),
-      change: data.metrics.yearOverYear.unsubscribes,
+      // change: data.metrics.yearOverYear.unsubscribes,
       icon: UserMinus,
       description: 'Total unsubscribes',
     },
@@ -208,7 +208,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
           <CardHeader>
             <CardTitle>Top Performing Campaigns</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-5 py-2">
             <div className="space-y-4 max-h-96 overflow-y-auto">
               {data.topCampaigns.map((campaign, index) => (
                 <div key={campaign.campaignId} className="flex items-center justify-between p-3 border rounded-lg bg-white">
@@ -224,7 +224,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                         {campaign.campaignName}
                         <ExternalLink className="ml-1 h-4 w-4 text-muted-foreground" aria-label="View campaign report" />
                       </Link>
-                      <p className="text-sm text-muted-foreground">Campaign ID: {campaign.campaignId}</p>
                     </div>
                   </div>
                   <div className="text-right min-w-[90px]">

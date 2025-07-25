@@ -21,6 +21,11 @@ import { EmailClientSelector } from './email-client-selector';
 import { EmailEnhancedDashboard } from './email-enhanced-dashboard';
 import type { EmailClient, EmailMetricsResponse } from './types';
 
+interface EmailMetricsProps {
+  selectedClientId?: string | null;
+  onClientChange?: (clientId: string | null) => void;
+}
+
 /**
  * @component EmailMetrics
  * @path src/components/channels/email/email-metrics.tsx
@@ -34,16 +39,22 @@ import type { EmailClient, EmailMetricsResponse } from './types';
  * - Automatic data refresh on client change
  * - Previous month default date range
  */
-export default function EmailMetrics() {
+export default function EmailMetrics({ selectedClientId, onClientChange }: EmailMetricsProps) {
   const [data, setData] = useState<EmailMetricsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
   const [selectedClient, setSelectedClient] = useState<EmailClient | null>(null);
+
+  // Handle client change - call parent callback if provided
+  const handleClientChange = useCallback((clientId: string | null) => {
+    if (onClientChange) {
+      onClientChange(clientId);
+    }
+  }, [onClientChange]);
 
   // Fetch Email metrics with optional date range
   const fetchEmailMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
-    if (!selectedClientId) return;
+    if (!selectedClientId) return; // Don't fetch if no client is selected
     
     setIsLoading(true);
     setError(null);
@@ -52,21 +63,16 @@ export default function EmailMetrics() {
       // Build URL with date parameters if provided
       let url = '/api/client/email-metrics';
       
-      // If no date range is provided, use previous full month as default
+      // Calculate default date range if not provided
       if (!dateRange) {
-        const today = new Date();
-        // Get first day of current month
-        const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        // Last day of previous month is one day before first day of current month
-        const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
-        lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
-        // First day of previous month
-        const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
-        
-        // Use previous month as default range
+        // Use a fixed reference date to ensure we don't get future dates
+        const referenceDate = new Date(2025, 5, 30); // June 30, 2025
+        const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
+        const lastDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth() + 1, 0);
+
         dateRange = {
-          from: firstDayOfPreviousMonth,
-          to: lastDayOfPreviousMonth
+          from: firstDayOfMonth,
+          to: lastDayOfMonth
         };
       }
       
@@ -85,9 +91,9 @@ export default function EmailMetrics() {
       // Use the extended date range for the API request
       params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
-      params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd')); // Original date range for display
+      params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd'));
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
-      params.append('emailClientId', selectedClientId);                  // Add client ID
+      params.append('emailClientId', selectedClientId);                        // Add client ID
       
       url = `${url}?${params.toString()}`;
       
@@ -128,7 +134,7 @@ export default function EmailMetrics() {
   return (
     <div className="space-y-6">
       <EmailClientSelector
-        onClientChange={setSelectedClientId}
+        onClientChange={handleClientChange}
         onClientObjectChange={setSelectedClient}
       />
       

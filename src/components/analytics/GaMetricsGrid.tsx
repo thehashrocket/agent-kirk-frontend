@@ -257,7 +257,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       <div className="flex flex-col md:flex-row md:items-start gap-8 mt-8">
         
         {filteredSourceData && filteredSourceData.length > 0 && (
-          <div className="flex flex-col justify-center">
+          <div className="w-1/3">
             <div className="flex flex-col items-start">
               <h2 className="text-lg font-bold mb-2">Sessions</h2>
               <p className="text-gray-500 mb-4 text-sm">by Source</p>
