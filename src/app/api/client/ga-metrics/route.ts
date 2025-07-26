@@ -358,9 +358,15 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     let queryDateFrom: Date;
     let queryDateTo: Date = new Date(); // Always use today as the end date
 
-      queryDateFrom = new Date(dateFrom);
-      queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
-    
+    queryDateFrom = new Date(dateFrom);
+    queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
+
+    console.log('queryDateFrom', queryDateFrom);
+    console.log('queryDateTo', queryDateTo);
+    console.log('gaPropertyId being queried:', gaPropertyId);
+    console.log('oldestMonth:', oldestMonth);
+    console.log('currentMonth:', currentMonth);
+
     // Fetch all metrics in parallel with new date ranges
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([
       prisma.gaKpiDaily.findMany({
@@ -376,11 +382,27 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       prisma.gaKpiMonthly.findMany({
         where: {
           gaPropertyId,
-          month: {
-            gte: oldestMonth,
-            lte: currentMonth
-          }
+          OR: [
+            // Try YYYYMM format first
+            {
+              month: {
+                gte: oldestMonth,
+                lte: currentMonth
+              }
+            },
+            // Fallback: if months are stored as 1-12, get all records
+            {
+              month: {
+                gte: 1,
+                lte: 12
+              }
+            }
+          ]
         }
+      }).then(result => {
+        console.log(`kpiMonthly query - gaPropertyId: ${gaPropertyId}, month range: ${oldestMonth} to ${currentMonth}, found ${result.length} records`);
+        console.log('Found monthly records:', result.map(r => ({ month: r.month, sessions: r.sessions })));
+        return result;
       }),
       prisma.gaChannelDaily.findMany({
         where: {
@@ -403,6 +425,15 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         orderBy: { date: 'desc' }
       })
     ]);
+
+    console.log('kpiMonthly', kpiMonthly);
+
+    // Debug: Check if ANY monthly data exists for this property
+    const allMonthlyData = await prisma.gaKpiMonthly.findMany({
+      where: { gaPropertyId },
+      select: { month: true, sessions: true }
+    });
+    console.log('All monthly data for this property:', allMonthlyData);
 
     // Return the GA metrics data from database with metadata about the date ranges
     return NextResponse.json({

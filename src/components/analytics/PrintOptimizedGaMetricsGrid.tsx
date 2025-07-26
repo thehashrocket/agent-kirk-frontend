@@ -158,15 +158,15 @@ export function PrintOptimizedGaMetricsGrid({ data }: PrintOptimizedGaMetricsGri
     : "Year-Over-Year Comparison";
 
   // Check if we have valid data
-  if (!current) {
-    return (
-      <Card>
-        <CardContent className="py-6">
-          <p className="text-center text-muted-foreground">No analytics data available for selected period</p>
-        </CardContent>
-      </Card>
-    );
-  }
+  // if (!current) {
+  //   return (
+  //     <Card>
+  //       <CardContent className="py-6">
+  //         <p className="text-center text-muted-foreground">No analytics data available for selected period</p>
+  //       </CardContent>
+  //     </Card>
+  //   );
+  // }
 
   return (
     <div className="bg-white rounded-lg shadow p-6 print:shadow-none print:p-0">{/* Print styles are in globals.css */}

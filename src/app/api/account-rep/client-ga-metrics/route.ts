@@ -227,6 +227,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     queryDateFrom = new Date(dateFrom);
     queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
 
+    console.log('queryDateFrom', queryDateFrom);
+    console.log('queryDateTo', queryDateTo);
+
     // Fetch existing data from the database
     const [kpiDaily, kpiMonthly, channelDaily, sourceDaily] = await Promise.all([
       prisma.gaKpiDaily.findMany({
@@ -270,6 +273,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         orderBy: { date: 'asc' }
       })
     ]);
+
+    console.log('kpiMonthly', kpiMonthly);
 
     const response: GaMetricsResponse = {
       kpiDaily: kpiDaily.length > 0 ? kpiDaily.map(item => ({
