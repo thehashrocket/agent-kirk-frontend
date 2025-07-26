@@ -181,18 +181,24 @@ export function AccountRepGaAccountSelector({
 
   return (
     <div className="space-y-4">
-      <Select value={selectedAccountId || ''} onValueChange={handleAccountChange}>
-        <SelectTrigger>
-          <SelectValue placeholder="Select Google Analytics Account" />
-        </SelectTrigger>
-        <SelectContent>
-          {accounts.map((account) => (
-            <SelectItem key={account.id} value={account.id}>
-              {account.gaAccountName}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      {accounts.length === 1 ? (
+        <p className="text-sm text-muted-foreground">
+          Account: {accounts[0].gaAccountName}
+        </p>
+      ) : (
+        <Select value={selectedAccountId || ''} onValueChange={handleAccountChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select Google Analytics Account" />
+          </SelectTrigger>
+          <SelectContent>
+            {accounts.map((account) => (
+              <SelectItem key={account.id} value={account.id}>
+                {account.gaAccountName}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
 
       {selectedAccount && (
         <Select value={selectedPropertyId || ''} onValueChange={handlePropertyChange}>

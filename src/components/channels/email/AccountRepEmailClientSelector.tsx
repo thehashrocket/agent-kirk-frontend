@@ -98,7 +98,7 @@ export function AccountRepEmailClientSelector({
   const handleEmailClientSelect = (emailClientId: string) => {
     setSelectedClientId(emailClientId);
     onClientChange(emailClientId);
-    
+
     const selectedEmailClient = emailClients.find(client => client.id === emailClientId);
     onClientObjectChange(selectedEmailClient || null);
   };
@@ -134,20 +134,26 @@ export function AccountRepEmailClientSelector({
         <label className="text-sm font-medium text-gray-700 mb-2 block">
           Select Email Client
         </label>
-        <Select value={selectedClientId || ''} onValueChange={handleEmailClientSelect}>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose an email client" />
-          </SelectTrigger>
-          <SelectContent>
-            {emailClients.map((emailClient) => (
-              <SelectItem key={emailClient.id} value={emailClient.id}>
-                <div className="flex items-center justify-between w-full">
-                  <span>{emailClient.clientName}</span>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {emailClients.length === 1 ? (
+          <p className="text-sm text-muted-foreground">
+            Email Client: {emailClients[0].clientName}
+          </p>
+        ) : (
+          <Select value={selectedClientId || ''} onValueChange={handleEmailClientSelect}>
+            <SelectTrigger>
+              <SelectValue placeholder="Choose an email client" />
+            </SelectTrigger>
+            <SelectContent>
+              {emailClients.map((emailClient) => (
+                <SelectItem key={emailClient.id} value={emailClient.id}>
+                  <div className="flex items-center justify-between w-full">
+                    <span>{emailClient.clientName}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </div>
 
       {selectedClientId && (

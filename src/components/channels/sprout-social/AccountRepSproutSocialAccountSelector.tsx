@@ -99,7 +99,7 @@ export function AccountRepSproutSocialAccountSelector({
   const handleAccountSelect = (accountId: string) => {
     setSelectedAccountId(accountId);
     onAccountChange(accountId);
-    
+
     const selectedAccount = accounts.find(account => account.id === accountId);
     onAccountObjectChange(selectedAccount || null);
   };
@@ -135,23 +135,29 @@ export function AccountRepSproutSocialAccountSelector({
         <label className="text-sm font-medium text-gray-700 mb-2 block">
           Select Social Media Account
         </label>
-        <Select value={selectedAccountId || ''} onValueChange={handleAccountSelect}>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose a Social Media account" />
-          </SelectTrigger>
-          <SelectContent>
-            {accounts.map((account) => (
-              <SelectItem key={account.id} value={account.id}>
-                <div className="flex items-center justify-between w-full">
-                  <span>{account.name}</span>
-                  <Badge variant="outline" className="ml-2 text-xs">
-                    {normalizeNames(account.networkType)}
-                  </Badge>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {accounts.length === 1 ? (
+          <p className="text-sm text-muted-foreground">
+            Account: {accounts[0].name}
+          </p>
+        ) : (
+          <Select value={selectedAccountId || ''} onValueChange={handleAccountSelect}>
+            <SelectTrigger>
+              <SelectValue placeholder="Choose a Social Media account" />
+            </SelectTrigger>
+            <SelectContent>
+              {accounts.map((account) => (
+                <SelectItem key={account.id} value={account.id}>
+                  <div className="flex items-center justify-between w-full">
+                    <span>{account.name}</span>
+                    <Badge variant="outline" className="ml-2 text-xs">
+                      {normalizeNames(account.networkType)}
+                    </Badge>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </div>
 
       {selectedAccountId && (
