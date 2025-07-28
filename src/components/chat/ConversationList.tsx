@@ -23,9 +23,9 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus } from 'lucide-react';
-import { NewConversationButton } from './NewConversationButton';
+import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus, PencilLine } from 'lucide-react';
 import ConversationTitle from './ConversationTitle';
+import { Button } from '@/components/ui/button';
 
 /**
  * Interface for conversation data.
@@ -59,20 +59,6 @@ interface Conversation {
     gaPropertyId: string;
     gaPropertyName: string;
   };
-}
-
-/**
- * Interface for conversation creation data.
- * @property {string} title - Display title for the conversation
- * @property {string} gaAccountId - Google Analytics account ID
- * @property {string} gaPropertyId - Google Analytics property ID
- * @property {string} clientId - Client ID (for account reps)
- */
-interface ConversationCreateData {
-  title: string;
-  gaAccountId?: string;
-  gaPropertyId?: string;
-  clientId?: string;
 }
 
 /**
@@ -121,20 +107,20 @@ interface Client {
  * @property {string} selectedId - ID of the currently selected conversation
  * @property {function} onSelect - Callback when a conversation is selected
  * @property {function} onToggleStar - Callback when a conversation's star status is toggled
- * @property {function} onCreateConversation - Callback when a new conversation is created
  * @property {boolean} isLoading - Whether the conversation creation is in progress
  * @property {GaAccount[]} gaAccounts - Array of Google Analytics account items to display
  * @property {Client[]} clients - Array of client users (only used for account reps)
+ * @property {function} onNewChat - Callback when user wants to start a new chat
  */
 interface ConversationListProps {
   conversations: Conversation[];
   selectedId?: string;
   onSelect: (id: string) => void;
   onToggleStar: (id: string) => Promise<void>;
-  onCreateConversation: (data: ConversationCreateData) => Promise<void>;
   isLoading?: boolean;
   gaAccounts: GaAccount[];
   clients?: Client[];
+  onNewChat?: () => void;
 }
 
 /**
@@ -168,10 +154,10 @@ export function ConversationList({
   selectedId,
   onSelect,
   onToggleStar,
-  onCreateConversation,
   isLoading,
   gaAccounts,
   clients,
+  onNewChat,
 }: ConversationListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -183,12 +169,16 @@ export function ConversationList({
   return (
     <div className="flex h-full flex-col">
       <div className="shrink-0 space-y-2 p-4 border-b">
-        <NewConversationButton
-          onCreateConversation={onCreateConversation}
-          isLoading={isLoading}
-          gaAccounts={gaAccounts}
-          clients={clients}
-        />
+        {onNewChat && (
+          <Button
+            onClick={onNewChat}
+            className="w-full"
+            variant={!selectedId ? "default" : "outline"}
+          >
+            <PencilLine className="mr-2" />
+            New Chat
+          </Button>
+        )}
         <Input
           type="search"
           placeholder="Search conversations..."

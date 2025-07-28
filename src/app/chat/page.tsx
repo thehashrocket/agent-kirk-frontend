@@ -119,7 +119,7 @@ export default function ChatPage() {
   const { data: sessionData } = useSession();
   const session = sessionData as any; // Type assertion for custom session properties
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(false);
+  const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(true);
   const [selectedTags, setSelectedTags] = useState(mockTags);
   const queryClient = useQueryClient();
   
@@ -219,19 +219,47 @@ export default function ChatPage() {
     staleTime: 5000, // Add a staleTime to prevent unnecessary refetches
   });
 
-  // Initialize selected conversation
-  const [selectedConversation, setSelectedConversation] = useState<string | undefined>(
-    conversations[0]?.id
-  );
+  // Initialize selected conversation - start with no conversation selected
+  const [selectedConversation, setSelectedConversation] = useState<string | undefined>(undefined);
 
   /**
    * Effect to update selected conversation when conversations load
+   * Only auto-select if there are conversations and none is currently selected
    */
   useEffect(() => {
-    if (conversations.length > 0 && !selectedConversation) {
-      setSelectedConversation(conversations[0].id);
+    // Don't auto-select any conversation - let users start fresh
+    // They can manually select a conversation from the sidebar if they want to continue one
+  }, [conversations]);
+
+  /**
+   * Get default GA account and property for the current user
+   */
+  const getDefaultGaSettings = () => {
+    if (isAccountRep) {
+      // For account reps, get the first client's first GA account and property
+      const firstClient = clients[0];
+      if (firstClient?.gaAccounts?.[0]) {
+        const firstAccount = firstClient.gaAccounts[0];
+        const firstProperty = firstAccount.gaProperties?.[0];
+        return {
+          gaAccountId: firstAccount.id,
+          gaPropertyId: firstProperty?.id,
+          clientId: firstClient.id
+        };
+      }
+    } else {
+      // For regular users, get their first GA account and property
+      if (gaAccounts[0]) {
+        const firstAccount = gaAccounts[0];
+        const firstProperty = firstAccount.gaProperties?.[0];
+        return {
+          gaAccountId: firstAccount.id,
+          gaPropertyId: firstProperty?.id
+        };
+      }
     }
-  }, [conversations, selectedConversation]);
+    return {};
+  };
 
   /**
    * Fetch messages for currently selected conversation
@@ -312,12 +340,27 @@ export default function ChatPage() {
    * Mutation to send a message and handle both synchronous and asynchronous responses
    */
   const sendMessageMutation = useMutation({
-    mutationFn: async ({ conversationId, message }: { conversationId: string; message: string }) => {
+    mutationFn: async ({ 
+      conversationId, 
+      message, 
+      gaAccountId, 
+      gaPropertyId 
+    }: { 
+      conversationId: string; 
+      message: string;
+      gaAccountId?: string;
+      gaPropertyId?: string;
+    }) => {
       
-      // Get GA details from the selected conversation
-      const conversation = conversations.find(conv => conv.id === conversationId);
-      const gaAccountId = conversation?.gaAccountId;
-      const gaPropertyId = conversation?.gaPropertyId;
+      // Get GA details from the selected conversation if not provided directly
+      let finalGaAccountId = gaAccountId;
+      let finalGaPropertyId = gaPropertyId;
+      
+      if (!finalGaAccountId || !finalGaPropertyId) {
+        const conversation = conversations.find(conv => conv.id === conversationId);
+        finalGaAccountId = finalGaAccountId || conversation?.gaAccountId;
+        finalGaPropertyId = finalGaPropertyId || conversation?.gaPropertyId;
+      }
       
       // Create a temporary message object with processing status
       const tempMessage: Message = {
@@ -350,8 +393,8 @@ export default function ChatPage() {
         body: JSON.stringify({
           content: message,
           conversationId,
-          ...(gaAccountId && { gaAccountId }),
-          ...(gaPropertyId && { gaPropertyId }),
+          ...(finalGaAccountId && { gaAccountId: finalGaAccountId }),
+          ...(finalGaPropertyId && { gaPropertyId: finalGaPropertyId }),
         } as QueryRequest)
       });
 
@@ -603,23 +646,6 @@ export default function ChatPage() {
   });
 
   /**
-   * Creates a new conversation
-   * @param data - Data for the new conversation (title, GA account ID, GA property ID, client ID)
-   */
-  const handleCreateConversation = async (data: { 
-    title: string; 
-    gaAccountId?: string; 
-    gaPropertyId?: string;
-    clientId?: string; // New: client ID for account reps
-  }) => {
-    try {
-      await createConversationMutation.mutateAsync(data);
-    } catch (error) {
-      // You might want to add toast notification here
-    }
-  };
-
-  /**
    * Toggles starred status for a conversation
    * @param id - ID of the conversation to toggle
    */
@@ -647,12 +673,34 @@ export default function ChatPage() {
    * @param message - The message content to send
    */
   const handleSendMessage = async (message: string) => {
-    if (!selectedConversation) return;
-    
-    await sendMessageMutation.mutateAsync({
-      conversationId: selectedConversation,
-      message,
-    });
+    // If no conversation is selected, create a new one first
+    if (!selectedConversation) {
+      const defaultSettings = getDefaultGaSettings();
+      const placeholderTitle = `New Conversation ${new Date().toLocaleString()}`;
+      
+      try {
+        const newConversation = await createConversationMutation.mutateAsync({
+          title: placeholderTitle,
+          ...defaultSettings
+        });
+        
+        // Now send the message to the new conversation with GA details
+        await sendMessageMutation.mutateAsync({
+          conversationId: newConversation.id,
+          message,
+          gaAccountId: defaultSettings.gaAccountId,
+          gaPropertyId: defaultSettings.gaPropertyId,
+        });
+      } catch (error) {
+        console.error('Failed to create conversation or send message:', error);
+      }
+    } else {
+      // Send message to existing conversation
+      await sendMessageMutation.mutateAsync({
+        conversationId: selectedConversation,
+        message,
+      });
+    }
   };
 
   /**
@@ -679,10 +727,10 @@ export default function ChatPage() {
             selectedId={selectedConversation}
             onSelect={handleSelectConversation}
             onToggleStar={handleToggleStar}
-            onCreateConversation={handleCreateConversation}
             isLoading={createConversationMutation.isPending}
             gaAccounts={gaAccounts}
             clients={isAccountRep ? clients : []} // Pass clients data to ConversationList
+            onNewChat={() => setSelectedConversation(undefined)}
           />
         </SheetContent>
       </Sheet>
@@ -696,73 +744,124 @@ export default function ChatPage() {
           selectedId={selectedConversation}
           onSelect={handleSelectConversation}
           onToggleStar={handleToggleStar}
-          onCreateConversation={handleCreateConversation}
           isLoading={createConversationMutation.isPending}
           gaAccounts={gaAccounts}
           clients={isAccountRep ? clients : []} // Pass clients data to ConversationList
+          onNewChat={() => setSelectedConversation(undefined)}
         />
       </div>
 
       <div className="flex flex-1 flex-col h-full">
         {/* Mobile Header */}
         <div className="flex justify-between items-center border-b p-4 md:hidden">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <span className="sr-only">Open menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6"
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(true)}
             >
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </Button>
+              <span className="sr-only">Open menu</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-6 w-6"
+              >
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </Button>
+            {selectedConversation && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setSelectedConversation(undefined)}
+                className="flex items-center space-x-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 5v14" />
+                  <path d="M5 12h14" />
+                </svg>
+                <span>New</span>
+              </Button>
+            )}
+          </div>
           <h1 className="text-lg font-medium">Chat</h1>
           <div className="w-10" />
         </div>
 
         {/* Desktop Header with Sidebar Toggle */}
         <div className="hidden md:flex justify-between items-center border-b p-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setIsDesktopSidebarCollapsed(!isDesktopSidebarCollapsed)}
-            className="transition-transform duration-200 hover:scale-105"
-          >
-            <span className="sr-only">
-              {isDesktopSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            </span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className={`h-4 w-4 transition-transform duration-200 ${
-                isDesktopSidebarCollapsed ? 'rotate-180' : ''
-              }`}
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setIsDesktopSidebarCollapsed(!isDesktopSidebarCollapsed)}
+              className="transition-transform duration-200 hover:scale-105"
             >
-              <path d="M15 6l-6 6 6 6" />
-            </svg>
-          </Button>
+              <span className="sr-only">
+                {isDesktopSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  isDesktopSidebarCollapsed ? 'rotate-180' : ''
+                }`}
+              >
+                <path d="M15 6l-6 6 6 6" />
+              </svg>
+            </Button>
+            {selectedConversation && (
+              <Button
+                variant="outline"
+                onClick={() => setSelectedConversation(undefined)}
+                className="flex items-center space-x-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 5v14" />
+                  <path d="M5 12h14" />
+                </svg>
+                <span>New Chat</span>
+              </Button>
+            )}
+          </div>
           <h1 className="text-lg font-medium">
-            {selectedConversationDetails?.title || 'Chat'}
+            {selectedConversationDetails?.title || 'New Chat'}
           </h1>
           <div className="w-10" />
         </div>
@@ -802,39 +901,22 @@ export default function ChatPage() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-            <h2 className="text-2xl font-bold mb-2">No Conversation Selected</h2>
-            <p className="text-muted-foreground mb-4">
-              Select an existing conversation or create a new one to get started.
-            </p>
-            <Button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden"
-            >
-              Show Conversations
-            </Button>
-            {/* Desktop: Show expand sidebar button when collapsed and no conversation */}
-            <Button
-              onClick={() => setIsDesktopSidebarCollapsed(false)}
-              className="hidden md:inline-flex"
-              variant="outline"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-4 w-4 mr-2"
-              >
-                <path d="M9 6l6 6-6 6" />
-              </svg>
-              Show Conversations
-            </Button>
+          <div className="flex flex-col flex-1">
+            {/* New Chat Interface - Show when no conversation is selected */}
+            <div className="flex-1 overflow-y-auto p-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold mb-2">Welcome to Agent Kirk</h2>
+                  <p className="text-muted-foreground">
+                    Start a new conversation by typing your message below.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t p-4">
+              <ChatInput onSend={handleSendMessage} />
+            </div>
           </div>
         )}
       </div>

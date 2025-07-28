@@ -26,11 +26,13 @@ interface DataPoint {
  * @property data - Array of DataPoint objects to visualize
  * @property height - Height of the chart in pixels (default: 400)
  * @property dateRange - Optional date range to filter data
+ * @property useFallbackData - When true, ignores dateRange filtering and shows all data
  */
 interface LineChartProps {
   data: Array<DataPoint>;
   height?: number;
   dateRange?: { from: Date; to: Date } | null;
+  useFallbackData?: boolean;
 }
 
 /**
@@ -89,7 +91,7 @@ function getDataPointKey(item: DataPoint): string {
  * - height: Chart height in px (default 400)
  * - dateRange: Optional { from: Date, to: Date } to filter data
  */
-export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRange = null }) => {
+export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRange = null, useFallbackData = false }) => {
   const instanceId = useId();
   // Store accumulated data to handle multiple renders
   const [accumulatedData, setAccumulatedData] = useState<DataPoint[]>([]);
@@ -137,14 +139,13 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
       startDate = new Date(dateRange.from);
       endDate = new Date(dateRange.to);
     } else {
-      // Fallback: use the last 30 days if no date range is specified
-      endDate = new Date();
-      startDate = new Date();
-      startDate.setDate(startDate.getDate() - 30);
+      // If no date range is provided, use the data's own date range
+      const dates = dataToProcess.map(item => new Date(item.date)).sort((a, b) => a.getTime() - b.getTime());
+      startDate = dates[0];
+      endDate = dates[dates.length - 1];
     }
 
-    // 2. Deduplicate and filter data points within the date range
-    //    - Use a map to ensure only one entry per date (keep the highest sessions if duplicates)
+    // 2. Deduplicate data points (keep the highest sessions if duplicates)
     const uniqueDataMap = new Map<string, DataPoint>();
     dataToProcess.forEach(item => {
       const dateStr = item.date;
@@ -152,8 +153,10 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
         const date = new Date(dateStr);
         // Skip invalid dates
         if (isNaN(date.getTime())) return;
-        // Only include data within the date range
-        if (date >= startDate && date <= endDate) {
+        
+        // If we have a dateRange, only include data within that range
+        // Otherwise, include all data
+        if (useFallbackData || !dateRange || (date >= startDate && date <= endDate)) {
           // If multiple entries for the same date, keep the one with the highest sessions
           if (!uniqueDataMap.has(dateStr) || uniqueDataMap.get(dateStr)!.sessions < item.sessions) {
             uniqueDataMap.set(dateStr, item);
@@ -208,7 +211,7 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
 
     // 5. Return the processed, continuous data array
     return result;
-  }, [data, accumulatedData, dateRange]);
+  }, [data, accumulatedData, dateRange, useFallbackData]);
 
   // Format date for axis label (e.g., "April 1" instead of "Apr 1")
   const formatDate = (dateStr: string) => {

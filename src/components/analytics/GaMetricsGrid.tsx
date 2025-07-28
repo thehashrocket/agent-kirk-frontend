@@ -91,6 +91,17 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       // Snap to full month
       return getFullMonthRange(metadata.displayDateRange.from);
     }
+    
+    // If we have kpiDaily data, find the most recent month with data
+    if (kpiDaily && kpiDaily.length > 0) {
+      // Sort by date descending and get the most recent date
+      const sortedData = [...kpiDaily].sort((a, b) => 
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      const mostRecentDate = new Date(sortedData[0].date);
+      return getFullMonthRange(mostRecentDate);
+    }
+    
     // Fallback to full previous month logic
     const today = new Date();
     // Get the first day of the current month
@@ -103,7 +114,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
 
     // Snap to full previous month
     return getFullMonthRange(lastDayOfPreviousMonth);
-  }, [metadata]);
+  }, [metadata, kpiDaily]);
   
   // Helper function to format date ranges consistently for display
   const formatDateRange = React.useCallback((from: Date, to: Date) => {
@@ -113,12 +124,23 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   // State for selected date range, default to most recent full month
   const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date } | null>(null);
   
+  // Use a ref to track if we've already set the initial date range
+  const hasSetInitialDateRange = React.useRef(false);
+  
   // Set default date range on mount only, and only when metadata.displayDateRange.from is available
   React.useEffect(() => {
+    // Only set the initial date range once
+    if (hasSetInitialDateRange.current) return;
+    
     if (metadata?.displayDateRange?.from) {
       setDateRange(setupDefaultDateRange());
+      hasSetInitialDateRange.current = true;
+    } else if (kpiDaily && kpiDaily.length > 0) {
+      // If no metadata but we have data, set date range based on available data
+      setDateRange(setupDefaultDateRange());
+      hasSetInitialDateRange.current = true;
     }
-  }, [metadata?.displayDateRange?.from, setupDefaultDateRange]);
+  }, [metadata?.displayDateRange?.from, kpiDaily, setupDefaultDateRange]);
   
   // Update handleDateRangeChange to always snap to full month
   const handleDateRangeChange = async (range: { from: Date; to: Date }) => {
@@ -141,6 +163,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
   // Helper to check if a date string is within the selected range
   const isDateInRange = React.useCallback((dateStr: string) => {
     if (!dateRange) return true; // If no date range is selected, include all data
+    
     // Use full data range from metadata if available
     const filterFrom = metadata?.fullDateRange?.from 
       ? new Date(metadata.fullDateRange.from) 
@@ -148,33 +171,81 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     const filterTo = metadata?.fullDateRange?.to 
       ? new Date(metadata.fullDateRange.to) 
       : dateRange.to;
+    
     const date = new Date(dateStr);
     return date >= filterFrom && date <= filterTo;
   }, [dateRange, metadata]);
 
-  // Filter daily data based on selected date range
+  // Helper to check if we have any data for the selected date range
+  const hasDataForDateRange = React.useCallback((data: any[], dateRange: { from: Date; to: Date } | null) => {
+    if (!data || data.length === 0) return false;
+    if (!dateRange) return true; // If no date range, we have data
+    
+    return data.some(item => {
+      const date = new Date(item.date);
+      return date >= dateRange.from && date <= dateRange.to;
+    });
+  }, []);
+
+  // Filter daily data based on selected date range, with fallback to all data if no data in range
   const filteredDailyData = React.useMemo(() => {
     if (!kpiDaily) return null;
-    return dateRange 
-      ? kpiDaily.filter(day => isDateInRange(day.date))
-      : kpiDaily;
-  }, [kpiDaily, dateRange, isDateInRange]);
+    
+    // If no date range is selected, return all data
+    if (!dateRange) return kpiDaily;
+    
+    // Check if we have data for the selected date range
+    const hasDataInRange = hasDataForDateRange(kpiDaily, dateRange);
+    
+    // If no data in range, return all data instead of empty array
+    if (!hasDataInRange) {
+      console.log('No data available for selected date range, showing all available data');
+      return kpiDaily;
+    }
+    
+    // Otherwise, filter by date range
+    return kpiDaily.filter(day => isDateInRange(day.date));
+  }, [kpiDaily, dateRange, isDateInRange, hasDataForDateRange]);
   
-  // Filter channel data based on selected date range
+  // Filter channel data based on selected date range, with fallback to all data if no data in range
   const filteredChannelData = React.useMemo(() => {
     if (!channelDaily) return null;
-    return dateRange
-      ? channelDaily.filter((day: any) => isDateInRange(day.date))
-      : channelDaily;
-  }, [channelDaily, dateRange, isDateInRange]);
+    
+    // If no date range is selected, return all data
+    if (!dateRange) return channelDaily;
+    
+    // Check if we have data for the selected date range
+    const hasDataInRange = hasDataForDateRange(channelDaily, dateRange);
+    
+    // If no data in range, return all data instead of empty array
+    if (!hasDataInRange) {
+      console.log('No channel data available for selected date range, showing all available data');
+      return channelDaily;
+    }
+    
+    // Otherwise, filter by date range
+    return channelDaily.filter((day: any) => isDateInRange(day.date));
+  }, [channelDaily, dateRange, isDateInRange, hasDataForDateRange]);
   
-  // Filter source data based on selected date range
+  // Filter source data based on selected date range, with fallback to all data if no data in range
   const filteredSourceData = React.useMemo(() => {
     if (!sourceDaily) return null;
-    return dateRange
-      ? sourceDaily.filter((day: any) => isDateInRange(day.date))
-      : sourceDaily;
-  }, [sourceDaily, dateRange, isDateInRange]);
+    
+    // If no date range is selected, return all data
+    if (!dateRange) return sourceDaily;
+    
+    // Check if we have data for the selected date range
+    const hasDataInRange = hasDataForDateRange(sourceDaily, dateRange);
+    
+    // If no data in range, return all data instead of empty array
+    if (!hasDataInRange) {
+      console.log('No source data available for selected date range, showing all available data');
+      return sourceDaily;
+    }
+    
+    // Otherwise, filter by date range
+    return sourceDaily.filter((day: any) => isDateInRange(day.date));
+  }, [sourceDaily, dateRange, isDateInRange, hasDataForDateRange]);
   
   // Helper to get the current and previous year month objects from kpiMonthly
   // based on the selected date range. Returns { current, prevYear }.
@@ -214,6 +285,29 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     yoyLabel = `Data from ${format(minDate, "MMM d, yyyy")} to ${format(maxDate, "MMM d, yyyy")}`;
   }
 
+  // Helper to check if we're using fallback data (showing all data instead of filtered data)
+  const isUsingFallbackData = React.useCallback((data: any[], filteredData: any[], dateRange: { from: Date; to: Date } | null) => {
+    if (!dateRange || !data || data.length === 0) return false;
+    
+    // Check if there's any data for the selected date range
+    const hasDataForSelectedRange = data.some(item => {
+      const date = new Date(item.date);
+      return date >= dateRange.from && date <= dateRange.to;
+    });
+    
+    // If there's no data for the selected range, but we have filtered data, we're using fallback
+    if (!hasDataForSelectedRange && filteredData && filteredData.length > 0) {
+      return true;
+    }
+    
+    return false;
+  }, []);
+
+  // Check if we're using fallback data for each dataset
+  const isUsingFallbackDaily = isUsingFallbackData(kpiDaily || [], filteredDailyData || [], dateRange);
+  const isUsingFallbackChannel = isUsingFallbackData(channelDaily || [], filteredChannelData || [], dateRange);
+  const isUsingFallbackSource = isUsingFallbackData(sourceDaily || [], filteredSourceData || [], dateRange);
+
   // Display the date range being shown
   const displayRange = dateRange 
     ? formatDateRange(dateRange.from, dateRange.to)
@@ -249,6 +343,11 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       <p className="text-gray-500 mb-2">
         {displayRange}
       </p>
+      {(isUsingFallbackDaily || isUsingFallbackChannel || isUsingFallbackSource) && (
+        <p className="text-sm text-amber-600 mb-2">
+          ⚠️ No data available for selected date range.
+        </p>
+      )}
       <p className="text-sm text-gray-400 mb-6">
         {current ? "Showing metrics calculated from selected date range" : "Showing monthly summary data"}
       </p>
@@ -256,29 +355,6 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       {/* --- Metrics summary card grid --- */}
       <GaKpiSummaryGrid current={current} prevYear={prevYear} />
 
-      <div className="flex flex-col md:flex-row md:items-start gap-8 mt-8">
-        
-        {filteredSourceData && filteredSourceData.length > 0 && (
-          <div className="w-1/3">
-            <div className="flex flex-col items-start">
-              <h2 className="text-lg font-bold mb-2">Sessions</h2>
-              <p className="text-gray-500 mb-4 text-sm">by Source</p>
-              {dateRange && (
-                <p className="text-xs text-gray-400 mb-2">
-                  {formatDateRange(dateRange.from, dateRange.to)}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-row">
-              <PieChart 
-                data={filteredSourceData} 
-                dateRange={dateRange}
-                type="source"
-              />
-            </div>
-          </div>
-        )}
-      </div>
       {/* Show in columns if larger than medium screen, show in rows if smaller */}
       <div className="flex flex-col md:flex-row py-2">
         <GaChannelSessionsTable channelDaily={filteredChannelData} dateRange={dateRange} />
@@ -312,12 +388,18 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
               {formatDateRange(dateRange.from, dateRange.to)}
             </p>
           )}
+          {isUsingFallbackDaily && (
+            <p className="text-xs text-amber-600 mt-1">
+              ⚠️ Showing all available data (no data for selected period)
+            </p>
+          )}
         </div>
         {filteredDailyData && filteredDailyData.length > 0 && (
           <LineChart 
             data={filteredDailyData} 
             height={300}
             dateRange={dateRange}
+            useFallbackData={isUsingFallbackDaily}
           />
         )}
       </div>
