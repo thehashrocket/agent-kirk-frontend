@@ -14,14 +14,19 @@ import { ChatWindow } from '@/components/chat/ChatWindow';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
-import { 
-  Message, 
-  QueryRequest, 
-  apiStatusToMessageStatus, 
+import {
+  Message,
+  QueryRequest,
+  apiStatusToMessageStatus,
   MESSAGE_STATUS
 } from '@/types/chat';
 import { Button } from '@/components/ui/button';
 import ConversationTitle from '@/components/chat/ConversationTitle';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 /**
  * @interface Conversation
@@ -107,7 +112,7 @@ export default function ChatPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(true);
   const queryClient = useQueryClient();
-  
+
   const isAccountRep = session?.user?.role === 'ACCOUNT_REP';
 
   /**
@@ -141,7 +146,7 @@ export default function ChatPage() {
     },
     enabled: !!session?.user?.id && !isAccountRep, // Only enable for non-account reps
   });
-  
+
   /**
    * Fetch clients for account representatives
    */
@@ -154,7 +159,7 @@ export default function ChatPage() {
         throw new Error('Failed to fetch clients');
       }
       const users = await response.json();
-      
+
       // Transform the data to match the expected Client interface
       return users.map((user: any) => ({
         id: user.id,
@@ -213,7 +218,7 @@ export default function ChatPage() {
           });
         }
       });
-      
+
       const formattedConversations = Array.from(conversationMap.values());
       return formattedConversations;
     },
@@ -299,9 +304,9 @@ export default function ChatPage() {
    * Mutation to create a new conversation
    */
   const createConversationMutation = useMutation({
-    mutationFn: async (data: { 
-      title: string; 
-      gaAccountId?: string; 
+    mutationFn: async (data: {
+      title: string;
+      gaAccountId?: string;
       gaPropertyId?: string;
       clientId?: string; // New: client ID for account reps
     }) => {
@@ -351,16 +356,16 @@ export default function ChatPage() {
    * Mutation to send a message and handle both synchronous and asynchronous responses
    */
   const sendMessageMutation = useMutation({
-    mutationFn: async ({ 
-      conversationId, 
-      message, 
-      gaAccountId, 
+    mutationFn: async ({
+      conversationId,
+      message,
+      gaAccountId,
       gaPropertyId,
       gaPropertyIds,
       sproutSocialAccountIds,
       emailClientIds
-    }: { 
-      conversationId: string; 
+    }: {
+      conversationId: string;
       message: string;
       gaAccountId?: string;
       gaPropertyId?: string;
@@ -368,17 +373,17 @@ export default function ChatPage() {
       sproutSocialAccountIds?: string[];
       emailClientIds?: string[];
     }) => {
-      
+
       // Get GA details from the selected conversation if not provided directly
       let finalGaAccountId = gaAccountId;
       let finalGaPropertyId = gaPropertyId;
-      
+
       if (!finalGaAccountId || !finalGaPropertyId) {
         const conversation = conversations.find(conv => conv.id === conversationId);
         finalGaAccountId = finalGaAccountId || conversation?.gaAccountId;
         finalGaPropertyId = finalGaPropertyId || conversation?.gaPropertyId;
       }
-      
+
       // Create a temporary message object with processing status
       const tempMessage: Message = {
         id: crypto.randomUUID(),
@@ -426,15 +431,15 @@ export default function ChatPage() {
 
       // Handle async response case
       if (data.status === 'IN_PROGRESS' || data.status === 'PENDING') {
-        
+
         // Update the messages with the temporary messages but keep them in processing state
         queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
-          
+
           // Remove the temporary messages
-          const filteredMessages = old.filter(msg => 
+          const filteredMessages = old.filter(msg =>
             msg.id !== tempMessage.id && msg.id !== tempAssistantMessage.id
           );
-          
+
           // Add the user message and a processing message
           return [...filteredMessages, {
             id: data.queryId,
@@ -455,15 +460,15 @@ export default function ChatPage() {
         const cleanup = startStatusPolling(data.queryId, conversationId);
         return data;
       }
-      
+
       // Handle synchronous response case
       queryClient.setQueryData(['conversation-messages', conversationId], (old: Message[] = []) => {
-        
+
         // Remove the temporary messages
-        const filteredMessages = old.filter(msg => 
+        const filteredMessages = old.filter(msg =>
           msg.id !== tempMessage.id && msg.id !== tempAssistantMessage.id
         );
-        
+
         // Add the actual messages
         return [...filteredMessages, {
           id: data.userQuery.id,
@@ -503,14 +508,14 @@ export default function ChatPage() {
    * @param conversationId - ID of the conversation being updated
    */
   const startStatusPolling = async (queryId: string, conversationId: string) => {
-    
+
     // Create a unique identifier for this polling session to prevent interference
     const pollingSessionId = `${queryId}-${Date.now()}`;
-    
+
     const pollInterval = setInterval(async () => {
       try {
         const response = await fetch(`/api/llm/chat/status?queryId=${queryId}`);
-        
+
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
           throw new Error(errorData.error || 'Failed to fetch status');
@@ -520,21 +525,21 @@ export default function ChatPage() {
 
         // Check if the query is completed (webhook has processed it)
         if (data.status === 'COMPLETED' && data.response) {
-          
+
           // Update the messages by replacing the processing message with the completed one
           queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
-            
+
             const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
-            
+
             // Only update if we find the message and it's still in processing state
             if (!foundMessage) {
               return oldData;
             }
-            
+
             if (foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
               return oldData;
             }
-            
+
             const updatedMessages = oldData.map(msg => {
               // Replace the processing message with the completed response
               if (msg.id === `${queryId}-response`) {
@@ -548,24 +553,24 @@ export default function ChatPage() {
               }
               return msg;
             });
-            
+
             return updatedMessages;
           });
-          
+
           // Invalidate queries to ensure UI is up to date
           queryClient.invalidateQueries({ queryKey: ['conversation-messages', conversationId] });
           queryClient.invalidateQueries({ queryKey: ['conversations'] });
-          
+
           clearInterval(pollInterval);
         } else if (data.status === 'FAILED') {
-          
+
           // Update the processing message to show the error
           queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
             const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
             if (!foundMessage || foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
               return oldData;
             }
-            
+
             return oldData.map(msg => {
               if (msg.id === `${queryId}-response`) {
                 return {
@@ -577,19 +582,19 @@ export default function ChatPage() {
               return msg;
             });
           });
-          
+
           clearInterval(pollInterval);
         } else {
         }
       } catch (error) {
-        
+
         // Update the processing message to show the error
         queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
           const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
           if (!foundMessage || foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
             return oldData;
           }
-          
+
           return oldData.map(msg => {
             if (msg.id === `${queryId}-response`) {
               return {
@@ -601,7 +606,7 @@ export default function ChatPage() {
             return msg;
           });
         });
-        
+
         clearInterval(pollInterval);
       }
     }, 3000); // Poll every 3 seconds (reduced frequency)
@@ -609,14 +614,14 @@ export default function ChatPage() {
     // Clear polling after 5 minutes to prevent infinite polling
     const timeoutId = setTimeout(() => {
       clearInterval(pollInterval);
-      
+
       // Update the processing message to show timeout - but only if it's still processing
       queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
         const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
         if (!foundMessage || foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
           return oldData;
         }
-        
+
         return oldData.map(msg => {
           if (msg.id === `${queryId}-response`) {
             return {
@@ -629,7 +634,7 @@ export default function ChatPage() {
         });
       });
     }, 5 * 60 * 1000);
-    
+
     // Store the timeout ID so we can clear it if polling completes early
     return () => {
       clearInterval(pollInterval);
@@ -656,8 +661,8 @@ export default function ChatPage() {
     },
     onSuccess: () => {
       // Invalidate the messages query to refresh the UI
-      queryClient.invalidateQueries({ 
-        queryKey: ['conversation-messages', selectedConversation] 
+      queryClient.invalidateQueries({
+        queryKey: ['conversation-messages', selectedConversation]
       });
     },
     onError: (error: Error) => {
@@ -697,13 +702,13 @@ export default function ChatPage() {
     if (!selectedConversation) {
       const defaultSettings = getDefaultGaSettings();
       const placeholderTitle = `New Conversation ${new Date().toLocaleString()}`;
-      
+
       try {
         const newConversation = await createConversationMutation.mutateAsync({
           title: placeholderTitle,
           ...defaultSettings
         });
-        
+
         // Now send the message to the new conversation with all user associations
         await sendMessageMutation.mutateAsync({
           conversationId: newConversation.id,
@@ -758,9 +763,8 @@ export default function ChatPage() {
       </Sheet>
 
       {/* Desktop Sidebar - Collapsible */}
-      <div className={`hidden md:flex md:flex-col h-full border-r transition-all duration-300 ${
-        isDesktopSidebarCollapsed ? 'w-0 overflow-hidden' : 'w-110'
-      }`}>
+      <div className={`hidden md:flex md:flex-col h-full border-r transition-all duration-300 ${isDesktopSidebarCollapsed ? 'w-0 overflow-hidden' : 'w-110'
+        }`}>
         <ConversationList
           conversations={conversations}
           selectedId={selectedConversation}
@@ -832,32 +836,39 @@ export default function ChatPage() {
         {/* Desktop Header with Sidebar Toggle */}
         <div className="hidden md:flex justify-between items-center border-b p-4">
           <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setIsDesktopSidebarCollapsed(!isDesktopSidebarCollapsed)}
-              className="transition-transform duration-200 hover:scale-105"
-            >
-              <span className="sr-only">
-                {isDesktopSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  isDesktopSidebarCollapsed ? 'rotate-180' : ''
-                }`}
-              >
-                <path d="M15 6l-6 6 6 6" />
-              </svg>
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setIsDesktopSidebarCollapsed(!isDesktopSidebarCollapsed)}
+                  className="transition-transform duration-200 hover:scale-105"
+                >
+                  <span className="sr-only">
+                    {isDesktopSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`h-4 w-4 transition-transform duration-200 ${isDesktopSidebarCollapsed ? 'rotate-180' : ''
+                      }`}
+                  >
+                    <path d="M15 6l-6 6 6 6" />
+                  </svg>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Toggle sidebar</p>
+              </TooltipContent>
+            </Tooltip>
+
             {selectedConversation && (
               <Button
                 variant="outline"
