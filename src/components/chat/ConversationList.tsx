@@ -168,26 +168,6 @@ export function ConversationList({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="shrink-0 space-y-2 p-4 border-b">
-        {onNewChat && (
-          <Button
-            onClick={onNewChat}
-            className="w-full"
-            variant={!selectedId ? "default" : "outline"}
-          >
-            <PencilLine className="mr-2" />
-            New Chat
-          </Button>
-        )}
-        <Input
-          type="search"
-          placeholder="Search conversations..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full"
-          aria-label="Search conversations"
-        />
-      </div>
       <ScrollArea className="flex-1 overflow-y-auto">
         <div className="space-y-2 p-4" role="listbox" aria-label="Conversations">
           {filteredConversations.map((conversation) => (

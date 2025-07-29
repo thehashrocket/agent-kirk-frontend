@@ -13,6 +13,7 @@ import { MessageList } from './MessageList';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import type { Session } from 'next-auth';
 
 /**
  * Interface representing a message in the system.
@@ -122,9 +123,9 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
       )}
 
       <MessageList 
-        recipientId={view === 'inbox' ? session.user.id : undefined}
+        recipientId={view === 'inbox' ? (session as Session).user.id : undefined}
         threadId={threadId || undefined}
-        currentUserId={session.user.id}
+        currentUserId={(session as Session).user.id}
         view={view}
       />
     </div>

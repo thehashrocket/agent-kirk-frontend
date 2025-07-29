@@ -9,6 +9,8 @@
 import { useState, useRef } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useQuery } from '@tanstack/react-query';
+import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 
 /**
  * Props for the ComposeMessage component.
@@ -41,6 +43,7 @@ interface Recipient {
  * @param {ComposeMessageProps} props - Component props
  */
 export default function ComposeMessage({ onMessageSent, recipientId: initialRecipientId }: ComposeMessageProps) {
+  const router = useRouter();
   const [content, setContent] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [sending, setSending] = useState(false);
@@ -253,13 +256,17 @@ export default function ComposeMessage({ onMessageSent, recipientId: initialReci
       )}
 
       <div className="flex justify-end">
-        <button
-          type="submit"
-          disabled={sending || !content.trim() || (!initialRecipientId && !selectedRecipientId)}
-          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+        <Button
+          variant="secondary"
+          onClick={() => router.back()}
+          className="mr-2"
         >
+          Cancel
+        </Button>
+        <Button type="submit"
+          disabled={sending || !content.trim() || (!initialRecipientId && !selectedRecipientId)}>
           {sending ? 'Sending...' : 'Send message'}
-        </button>
+        </Button>
       </div>
     </form>
   );

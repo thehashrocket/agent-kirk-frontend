@@ -877,14 +877,6 @@ export default function ChatPage() {
               gaAccount={selectedConversationDetails?.gaAccount}
               gaProperty={selectedConversationDetails?.gaProperty}
             />
-            <div className="flex space-x-2 p-4 border-b">
-              <TagSelector 
-                selectedTags={selectedTags}
-                onAddTag={(tag) => setSelectedTags([...selectedTags, tag])}
-                onRemoveTag={(tagId) => setSelectedTags(selectedTags.filter(tag => tag.id !== tagId))}
-              />
-              <SourcesButton sources={mockSources} />
-            </div>
 
             <div className="flex-1 overflow-y-auto">
               <ChatWindow

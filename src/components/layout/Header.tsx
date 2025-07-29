@@ -77,15 +77,15 @@ export function Header() {
         <nav className="flex items-center space-x-6 ml-4">
           <Link
             href="/"
-            className="flex items-center space-x-2 font-medium text-primary hover:text-primary/90 transition-colors"
+            className="flex items-center space-x-2 font-medium text-gray-900 hover:text-primary/90 transition-colors"
           >
             <Image src="/images/Agent-Kirk-Primary-Horizontal-Logo_Color-CMYK.svg" alt="Agent Kirk" width={125} height={125} />
           </Link>
           <Link
             href={getDashboardLink()}
             className={cn(
-              "text-sm transition-colors hover:text-primary",
-              "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
+              "text-sm transition-colors text-gray-900 hover:text-primary/90",
+              "flex items-center space-x-1 py-1 px-2 rounded-md"
             )}
           >
             <LayoutDashboard className="h-4 w-4" />
@@ -96,8 +96,8 @@ export function Header() {
             <Link
               href="/chat"
               className={cn(
-                "text-sm transition-colors hover:text-primary",
-                "flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-primary/10"
+                "text-sm transition-colors text-gray-900 hover:text-primary/90",
+                "flex items-center space-x-1 py-1 px-2 rounded-md"
               )}
             >
               <MessageSquare className="h-4 w-4" />

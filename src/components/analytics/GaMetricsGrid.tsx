@@ -329,7 +329,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     <div className={`bg-white rounded-lg shadow p-6 ${isLoading ? 'opacity-70' : ''}`}>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-blue-800">Traffic and Usability</h1>
+          <h1 className="text-2xl font-bold text-primary">Traffic and Usability</h1>
         </div>
         {dateRange && (
           <MonthRangePicker 
