@@ -256,7 +256,6 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
       to: new Date()
     };
     const selectedMonth = selectedRange.from.getFullYear() * 100 + (selectedRange.from.getMonth() + 1);
-    console.log('selectedMonth', selectedMonth);
     const current = kpiMonthly.find(m => m.month === selectedMonth) || null;
     const prevYearMonth = selectedMonth - 100;
     const prevYear = kpiMonthly.find(m => m.month === prevYearMonth) || null;
@@ -313,23 +312,11 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange }: GaMetric
     ? formatDateRange(dateRange.from, dateRange.to)
     : "Year-Over-Year Comparison";
 
-  // Check if we have valid data
-  console.log('current', current);
-  // if (!current) {
-  //   return (
-  //     <Card>
-  //       <CardContent className="py-6">
-  //         <p className="text-center text-muted-foreground">No analytics data available for selected period</p>
-  //       </CardContent>
-  //     </Card>
-  //   );
-  // }
-
   return (
     <div className={`bg-white rounded-lg shadow p-6 ${isLoading ? 'opacity-70' : ''}`}>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-primary">Traffic and Usability</h1>
+          <h1 className="text-2xl font-bold text-primary uppercase">Traffic and Usability</h1>
         </div>
         {dateRange && (
           <MonthRangePicker 

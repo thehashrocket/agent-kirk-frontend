@@ -298,7 +298,7 @@ export default function ChatPage() {
   });
 
   // Fetch selected conversation details
-  const selectedConversationDetails = conversations.find(conv => conv.id === selectedConversation);
+  const selectedConversationDetails = conversations.find((conv: Conversation) => conv.id === selectedConversation);
 
   /**
    * Mutation to create a new conversation
@@ -323,7 +323,7 @@ export default function ChatPage() {
       const newConversation = await response.json();
       return newConversation;
     },
-    onSuccess: (newConversation) => {
+    onSuccess: (newConversation: any) => {
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
       setSelectedConversation(newConversation.id);
       setIsMobileMenuOpen(false);
@@ -379,7 +379,7 @@ export default function ChatPage() {
       let finalGaPropertyId = gaPropertyId;
 
       if (!finalGaAccountId || !finalGaPropertyId) {
-        const conversation = conversations.find(conv => conv.id === conversationId);
+        const conversation = conversations.find((conv: Conversation) => conv.id === conversationId);
         finalGaAccountId = finalGaAccountId || conversation?.gaAccountId;
         finalGaPropertyId = finalGaPropertyId || conversation?.gaPropertyId;
       }
@@ -490,7 +490,7 @@ export default function ChatPage() {
     onError: (error: Error) => {
       alert(error.message); // Temporary solution until toast is implemented
     },
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       // Don't invalidate queries immediately for async responses
       // Let the polling handle the updates when the response is ready
       if (data.status === 'COMPLETED') {
@@ -675,7 +675,7 @@ export default function ChatPage() {
    * @param id - ID of the conversation to toggle
    */
   const handleToggleStar = async (id: string) => {
-    const conversation = conversations.find(conv => conv.id === id);
+    const conversation = conversations.find((conv: Conversation) => conv.id === id);
     if (conversation) {
       starMutation.mutate({
         id,
