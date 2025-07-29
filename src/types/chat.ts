@@ -30,6 +30,9 @@ export interface QueryRequest {
   conversationId?: string;
   gaAccountId?: string;
   gaPropertyId?: string;
+  gaPropertyIds?: string[];
+  sproutSocialAccountIds?: string[];
+  emailClientIds?: string[];
 }
 
 export interface QueryResponse {

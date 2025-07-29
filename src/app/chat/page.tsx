@@ -12,16 +12,13 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { ConversationList } from '@/components/chat/ConversationList';
 import { ChatWindow } from '@/components/chat/ChatWindow';
 import { ChatInput } from '@/components/chat/ChatInput';
-import { TagSelector } from '@/components/chat/TagSelector';
-import { SourcesButton } from '@/components/chat/SourcesButton';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { 
   Message, 
   QueryRequest, 
   apiStatusToMessageStatus, 
-  MESSAGE_STATUS,
-  API_STATUS
+  MESSAGE_STATUS
 } from '@/types/chat';
 import { Button } from '@/components/ui/button';
 import ConversationTitle from '@/components/chat/ConversationTitle';
@@ -89,26 +86,15 @@ interface Client {
   gaAccounts: GaAccount[];
 }
 
-// Mock data for development
-const mockTags = [
-  { id: '1', name: 'Next.js' },
-  { id: '2', name: 'Setup' },
-];
-
-const mockSources = [
-  {
-    id: '1',
-    title: 'Next.js Documentation - Installation',
-    url: 'https://nextjs.org/docs/getting-started/installation',
-    relevance: 0.95,
-  },
-  {
-    id: '2',
-    title: 'Create Next App Documentation',
-    url: 'https://nextjs.org/docs/api-reference/create-next-app',
-    relevance: 0.85,
-  },
-];
+/**
+ * @interface UserAssociations
+ * @description All user associations for analytics and social media
+ */
+interface UserAssociations {
+  gaPropertyIds: string[];
+  sproutSocialAccountIds: string[];
+  emailClientIds: string[];
+}
 
 /**
  * @function ChatPage
@@ -120,10 +106,25 @@ export default function ChatPage() {
   const session = sessionData as any; // Type assertion for custom session properties
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(true);
-  const [selectedTags, setSelectedTags] = useState(mockTags);
   const queryClient = useQueryClient();
   
   const isAccountRep = session?.user?.role === 'ACCOUNT_REP';
+
+  /**
+   * Fetch all user associations (GA properties, Sprout Social accounts, Email clients)
+   */
+  const { data: userAssociations = { gaPropertyIds: [], sproutSocialAccountIds: [], emailClientIds: [] } } = useQuery<UserAssociations>({
+    queryKey: ['user-associations'],
+    queryFn: async () => {
+      if (!session?.user?.id) return { gaPropertyIds: [], sproutSocialAccountIds: [], emailClientIds: [] };
+      const response = await fetch('/api/users/me/associations');
+      if (!response.ok) {
+        throw new Error('Failed to fetch user associations');
+      }
+      return response.json();
+    },
+    enabled: !!session?.user?.id,
+  });
 
   /**
    * Fetch Google Analytics accounts for the current user
@@ -244,7 +245,10 @@ export default function ChatPage() {
         return {
           gaAccountId: firstAccount.id,
           gaPropertyId: firstProperty?.id,
-          clientId: firstClient.id
+          clientId: firstClient.id,
+          gaPropertyIds: userAssociations.gaPropertyIds,
+          sproutSocialAccountIds: userAssociations.sproutSocialAccountIds,
+          emailClientIds: userAssociations.emailClientIds,
         };
       }
     } else {
@@ -254,11 +258,18 @@ export default function ChatPage() {
         const firstProperty = firstAccount.gaProperties?.[0];
         return {
           gaAccountId: firstAccount.id,
-          gaPropertyId: firstProperty?.id
+          gaPropertyId: firstProperty?.id,
+          gaPropertyIds: userAssociations.gaPropertyIds,
+          sproutSocialAccountIds: userAssociations.sproutSocialAccountIds,
+          emailClientIds: userAssociations.emailClientIds,
         };
       }
     }
-    return {};
+    return {
+      gaPropertyIds: userAssociations.gaPropertyIds,
+      sproutSocialAccountIds: userAssociations.sproutSocialAccountIds,
+      emailClientIds: userAssociations.emailClientIds,
+    };
   };
 
   /**
@@ -344,12 +355,18 @@ export default function ChatPage() {
       conversationId, 
       message, 
       gaAccountId, 
-      gaPropertyId 
+      gaPropertyId,
+      gaPropertyIds,
+      sproutSocialAccountIds,
+      emailClientIds
     }: { 
       conversationId: string; 
       message: string;
       gaAccountId?: string;
       gaPropertyId?: string;
+      gaPropertyIds?: string[];
+      sproutSocialAccountIds?: string[];
+      emailClientIds?: string[];
     }) => {
       
       // Get GA details from the selected conversation if not provided directly
@@ -386,7 +403,7 @@ export default function ChatPage() {
         return newMessages;
       });
 
-      // Send the actual request
+      // Send the actual request with all user associations
       const response = await fetch('/api/llm/chat/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -395,6 +412,9 @@ export default function ChatPage() {
           conversationId,
           ...(finalGaAccountId && { gaAccountId: finalGaAccountId }),
           ...(finalGaPropertyId && { gaPropertyId: finalGaPropertyId }),
+          gaPropertyIds: gaPropertyIds || userAssociations.gaPropertyIds,
+          sproutSocialAccountIds: sproutSocialAccountIds || userAssociations.sproutSocialAccountIds,
+          emailClientIds: emailClientIds || userAssociations.emailClientIds,
         } as QueryRequest)
       });
 
@@ -684,18 +704,20 @@ export default function ChatPage() {
           ...defaultSettings
         });
         
-        // Now send the message to the new conversation with GA details
+        // Now send the message to the new conversation with all user associations
         await sendMessageMutation.mutateAsync({
           conversationId: newConversation.id,
           message,
           gaAccountId: defaultSettings.gaAccountId,
-          gaPropertyId: defaultSettings.gaPropertyId,
+          gaPropertyIds: defaultSettings.gaPropertyIds,
+          sproutSocialAccountIds: defaultSettings.sproutSocialAccountIds,
+          emailClientIds: defaultSettings.emailClientIds,
         });
       } catch (error) {
         console.error('Failed to create conversation or send message:', error);
       }
     } else {
-      // Send message to existing conversation
+      // Send message to existing conversation with all user associations
       await sendMessageMutation.mutateAsync({
         conversationId: selectedConversation,
         message,

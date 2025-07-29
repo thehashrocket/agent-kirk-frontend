@@ -40,7 +40,9 @@ const ChatRequestSchema = z.object({
   content: z.string().min(1, 'Content cannot be empty'),
   conversationId: z.string().optional(),
   gaAccountId: z.string().optional(),
-  gaPropertyId: z.string().optional(),
+  gaPropertyIds: z.array(z.string()).optional(),
+  sproutSocialAccountIds: z.array(z.string()).optional(),
+  emailClientIds: z.array(z.string()).optional(),
 });
 
 /**
@@ -92,10 +94,14 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       userId: session.user.id,
       conversationId: validatedData.conversationId,
       gaAccountId: validatedData.gaAccountId,
-      gaPropertyId: validatedData.gaPropertyId,
+      gaPropertyIds: validatedData.gaPropertyIds,
+      sproutSocialAccountIds: validatedData.sproutSocialAccountIds,
+      emailClientIds: validatedData.emailClientIds,
       dateToday: new Date().toISOString(),
       website_url: process.env.WEBSITE_URL + '/api/llm/chat/webhook'
     };
+
+    console.log('[Send] LLM request payload:', llmRequestPayload);
 
     // Send request to LLM service
     const llmResponse = await fetch(process.env.LLM_SERVICE_URL!, {
