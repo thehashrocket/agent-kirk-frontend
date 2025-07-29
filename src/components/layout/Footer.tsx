@@ -1,0 +1,58 @@
+/**
+ * @file src/components/layout/Footer.tsx
+ * Main footer component that provides branding and copyright information.
+ * Built as a Client Component using Next.js App Router and shadcn/ui components.
+ * 
+ * Features:
+ * - Kirk logo branding
+ * - Copyright information
+ * - Responsive design
+ * - Consistent styling with header
+ */
+
+'use client'
+import Link from "next/link";
+import Image from "next/image";
+
+/**
+ * @component Footer
+ * Client Component that renders the main footer.
+ * 
+ * Features:
+ * - Kirk logo branding
+ * - Copyright information
+ * - Responsive design
+ * - Consistent styling with header
+ * 
+ * Layout:
+ * - Full width with container constraints
+ * - Centered content
+ * - Proper spacing and typography
+ */
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="border-t bg-gradient-to-r from-primary/5 via-primary/10 to-background backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto py-6 px-4">
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 font-medium text-gray-900 hover:text-primary/90 transition-colors"
+          >
+            <Image 
+              src="/images/Agent-Kirk-Primary-Horizontal-Logo_Color-CMYK.svg" 
+              alt="Agent Kirk" 
+              width={100} 
+              height={100} 
+              className="h-8 w-auto"
+            />
+          </Link>
+          <p className="text-sm text-muted-foreground text-center">
+            © {currentYear} Agent Kirk. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
