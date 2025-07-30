@@ -98,7 +98,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       sproutSocialAccountIds: validatedData.sproutSocialAccountIds,
       emailClientIds: validatedData.emailClientIds,
       dateToday: new Date().toISOString(),
-      website_url: process.env.WEBSITE_URL + '/api/llm/chat/webhook',
+      responseUrl: process.env.WEBSITE_URL + '/api/llm/chat/webhook',
+      webhookUrl: process.env.WEBSITE_URL + '/api/llm/chat/webhook',
+      executionMode: (process.env.NODE_ENV === 'development') ? 'development' : 'production',
       logging: (process.env.NODE_ENV === 'development') ? false : true
     };
 
@@ -152,119 +154,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       });
     }
 
-    // Handle other error responses from LLM service
-    // if (!llmResponse.ok) {
-    //   console.log('[Send] LLM service returned error status');
-    //   // Keep the query in PENDING status by not updating it
-    //   const errorResponse = await handleLLMError(responseText, llmResponse.status, query.id);
-    //   console.log('[Send] Error response:', errorResponse);
-    //   // return NextResponse.json(errorResponse, { status: llmResponse.status });
-    // }
-
-    // console.log('[Send] LLM service response:', responseText);
-
-    // // Parse and handle successful response
-    // console.log('[Send] Parsing LLM service response');
-    // const responseData = await parseLLMResponse(responseText);
-
-    // Handle immediate response
-    // if (responseData.response) {
-    //   console.log('[Send] Processing immediate response');
-    //   try {
-        
-    //     if (responseData.line_graph_data) {
-    //       try {
-    //         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/queries/${query.id}/chart-data`, {
-    //           method: 'POST',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //           },
-    //           body: JSON.stringify({ lineGraphData: responseData.line_graph_data }),
-    //         });
-    //         console.log(`[Send] Parsed lineGraphData successfully`);
-    //       } catch (e) {
-    //         console.error(`[Send] Failed to parse lineGraphData`, e);
-    //       }
-    //     }
-
-    //     const updatedQuery = await prisma.query.update({
-    //       where: { id: query.id },
-    //       data: {
-    //         status: 'COMPLETED',
-    //         response: responseData.response,
-    //         lineGraphData: responseData.line_graph_data,
-    //         pieGraphData: responseData.pie_graph_data,
-    //         metadata: {
-    //           metric_headers: responseData.metric_headers
-    //         }
-    //       },
-    //     });
-
-    //     console.log('[Send] Query updated successfully:', {
-    //       queryId: updatedQuery.id,
-    //       status: updatedQuery.status,
-    //       hasLineData: responseData.line_graph_data.length > 0,
-    //       hasPieData: responseData.pie_graph_data.length > 0
-    //     });
-
-        
-
-    //     return NextResponse.json({
-    //       status: 'COMPLETED',
-    //       queryId: query.id,
-    //       response: responseData.response,
-    //       metadata: {
-    //         line_graph_data: responseData.line_graph_data,
-    //         pie_graph_data: responseData.pie_graph_data,
-    //         metric_headers: responseData.metric_headers
-    //       }
-    //     });
-    //   } catch (error) {
-    //     console.error('[Send] Error processing response data:', error);
-    //     // Update query status to failed
-    //     await prisma.query.update({
-    //       where: { id: query.id },
-    //       data: {
-    //         status: 'FAILED',
-    //         response: 'Error processing analytics data: ' + (error instanceof Error ? error.message : 'Unknown error'),
-    //       },
-    //     });
-
-    //     return NextResponse.json({
-    //       status: 'FAILED',
-    //       queryId: query.id,
-    //       error: 'Failed to process analytics data',
-    //     }, { status: 500 });
-    //   }
-    // }
-
-    // // Handle error in response
-    // if (responseData.error) {
-    //   console.log('[Send] Processing error in response');
-    //   await prisma.query.update({
-    //     where: { id: query.id },
-    //     data: {
-    //       status: 'FAILED',
-    //       response: responseData.error,
-    //       metadata: {
-    //         line_graph_data: responseData.line_graph_data,
-    //         pie_graph_data: responseData.pie_graph_data,
-    //         metric_headers: responseData.metric_headers
-    //       }
-    //     },
-    //   });
-
-    //   return NextResponse.json({
-    //     status: 'FAILED',
-    //     queryId: query.id,
-    //     error: responseData.error,
-    //     metadata: {
-    //       line_graph_data: responseData.line_graph_data,
-    //       pie_graph_data: responseData.pie_graph_data,
-    //       metric_headers: responseData.metric_headers
-    //     }
-    //   });
-    // }
+    
 
     // If no immediate response and no error, the request is in progress
     return NextResponse.json({
