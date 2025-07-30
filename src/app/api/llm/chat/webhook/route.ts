@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     const result = WebhookRequestSchema.safeParse(validatedData);
     if (!result.success) {
       console.error('[Webhook] Validation error:', {
-        error: result.error,
+        error: 'webhook validation error',
         receivedData: validatedData
       });
       return NextResponse.json(
