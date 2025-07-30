@@ -29,6 +29,22 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model ClientActivity {
+  id          String         @id @default(cuid())
+  type        String
+  description String
+  status      ActivityStatus @default(SUCCESS)
+  metadata    Json?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  userId      String
+  user        User           @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+}
+
 model ClientSatisfaction {
   id           String   @id @default(cuid())
   rating       Float
@@ -305,20 +321,72 @@ model GaSourceDaily {
   @@index([trafficSource])
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  userId       String
-  expires      DateTime
-  sessionToken String   @unique
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+model Log {
+  id               String   @id @default(cuid())
+  eventMessage     String?
+  eventType        String?
+  errorMessage     String?
+  errorStackTrace  String?
+  message          String?
+  metrics          Json?
+  nodeName         String?
+  payload          Json?
+  queryId          String?
+  query            Query?   @relation(fields: [queryId], references: [id])
+  sourceReferences Json?
+  userId           String?
+  user             User?    @relation(fields: [userId], references: [id])
+  workflowName     String?
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+  // Environment & Context Fields
+  environment      String?
+  serviceName      String?
+  version          String?
 
-  @@unique([identifier, token])
+  // Request/Response Tracking
+  requestId        String?
+  sessionId        String?
+  ipAddress        String?
+  userAgent        String?
+
+  // Performance & Monitoring
+  duration         Int?
+  memoryUsage      Int?
+  cpuUsage         Float?
+
+  // Security & Audit
+  severity         String?
+  isAuthenticated  Boolean?
+  permissions      Json?
+
+  // LLM-Specific Fields
+  modelName        String?
+  tokenUsage       Json?
+  temperature      Float?
+  maxTokens        Int?
+
+  // Client-Specific Fields
+  clientId         String?
+  pageUrl          String?
+  componentName    String?
+
+  // Enhanced Error Tracking
+  errorCode        String?
+  errorCategory    String?
+  retryCount       Int?
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([queryId])
+  @@index([createdAt])
+  @@index([environment])
+  @@index([serviceName])
+  @@index([severity])
+  @@index([requestId])
+  @@index([clientId])
+  @@index([errorCode])
 }
 
 model Role {
@@ -351,6 +419,19 @@ model Message {
   @@index([recipientId])
   @@index([threadId])
   @@index([parentId])
+}
+
+model MessageAttachment {
+  id        String   @id @default(cuid())
+  filename  String
+  fileSize  Int
+  mimeType  String
+  url       String
+  createdAt DateTime @default(now())
+  messageId String
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
 }
 
 model Notification {
@@ -439,10 +520,19 @@ model Query {
   parsedSummary  ParsedQuerySummary[]
   conversation   Conversation?        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   user           User                 @relation(fields: [userId], references: [id])
+  Log            Log[]
 
   @@index([userId])
   @@index([status])
   @@index([conversationId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model SproutFacebookAnalytics {
@@ -653,6 +743,55 @@ model SproutSocialAccount {
   users                 UserToSproutSocialAccount[]
 }
 
+model Ticket {
+  id           String             @id @default(cuid())
+  title        String
+  description  String
+  status       TicketStatus       @default(OPEN)
+  priority     TicketPriority     @default(MEDIUM)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  assignedToId String?
+  clientId     String
+  assignedTo   User?              @relation("AssignedTickets", fields: [assignedToId], references: [id])
+  client       User               @relation("ClientTickets", fields: [clientId], references: [id])
+  attachments  TicketAttachment[]
+  comments     TicketComment[]
+  tags         TicketTag[]        @relation("TicketToTicketTag")
+
+  @@index([status])
+  @@index([priority])
+  @@index([assignedToId])
+  @@index([clientId])
+}
+
+model TicketAttachment {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  createdAt DateTime @default(now())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
+
+model TicketComment {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ticketId  String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
+
+model TicketTag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  tickets   Ticket[] @relation("TicketToTicketTag")
+}
+
 model UserToSproutSocialAccount {
   id                    String              @id @default(cuid())
   userId                String
@@ -718,6 +857,7 @@ model User {
   emailClients         UserToEmailClient[]
   userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
   sproutSocialAccounts UserToSproutSocialAccount[]
+  Log                  Log[]
 }
 
 model UserSettings {
@@ -732,84 +872,6 @@ model UserSettings {
   user               User     @relation(fields: [userId], references: [id])
 }
 
-model Ticket {
-  id           String             @id @default(cuid())
-  title        String
-  description  String
-  status       TicketStatus       @default(OPEN)
-  priority     TicketPriority     @default(MEDIUM)
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-  assignedToId String?
-  clientId     String
-  assignedTo   User?              @relation("AssignedTickets", fields: [assignedToId], references: [id])
-  client       User               @relation("ClientTickets", fields: [clientId], references: [id])
-  attachments  TicketAttachment[]
-  comments     TicketComment[]
-  tags         TicketTag[]        @relation("TicketToTicketTag")
-
-  @@index([status])
-  @@index([priority])
-  @@index([assignedToId])
-  @@index([clientId])
-}
-
-model TicketAttachment {
-  id        String   @id @default(cuid())
-  name      String
-  url       String
-  createdAt DateTime @default(now())
-  ticketId  String
-  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-}
-
-model TicketComment {
-  id        String   @id @default(cuid())
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ticketId  String
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
-  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-}
-
-model TicketTag {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  tickets   Ticket[] @relation("TicketToTicketTag")
-}
-
-model MessageAttachment {
-  id        String   @id @default(cuid())
-  filename  String
-  fileSize  Int
-  mimeType  String
-  url       String
-  createdAt DateTime @default(now())
-  messageId String
-  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
-
-  @@index([messageId])
-}
-
-model ClientActivity {
-  id          String         @id @default(cuid())
-  type        String
-  description String
-  status      ActivityStatus @default(SUCCESS)
-  metadata    Json?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  userId      String
-  user        User           @relation(fields: [userId], references: [id])
-
-  @@index([userId])
-  @@index([type])
-  @@index([createdAt])
-}
-
 model UserToEmailClient {
   id            String      @id @default(cuid())
   userId        String
@@ -822,6 +884,14 @@ model UserToEmailClient {
   @@unique([userId, emailClientId])
   @@index([userId])
   @@index([emailClientId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 enum ImportStatus {

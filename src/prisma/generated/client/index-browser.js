@@ -137,6 +137,17 @@ exports.Prisma.AccountScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ClientActivityScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  description: 'description',
+  status: 'status',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
 exports.Prisma.ClientSatisfactionScalarFieldEnum = {
   id: 'id',
   rating: 'rating',
@@ -349,17 +360,45 @@ exports.Prisma.GaSourceDailyScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.SessionScalarFieldEnum = {
+exports.Prisma.LogScalarFieldEnum = {
   id: 'id',
+  eventMessage: 'eventMessage',
+  eventType: 'eventType',
+  errorMessage: 'errorMessage',
+  errorStackTrace: 'errorStackTrace',
+  message: 'message',
+  metrics: 'metrics',
+  nodeName: 'nodeName',
+  payload: 'payload',
+  queryId: 'queryId',
+  sourceReferences: 'sourceReferences',
   userId: 'userId',
-  expires: 'expires',
-  sessionToken: 'sessionToken'
-};
-
-exports.Prisma.VerificationTokenScalarFieldEnum = {
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
+  workflowName: 'workflowName',
+  environment: 'environment',
+  serviceName: 'serviceName',
+  version: 'version',
+  requestId: 'requestId',
+  sessionId: 'sessionId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  duration: 'duration',
+  memoryUsage: 'memoryUsage',
+  cpuUsage: 'cpuUsage',
+  severity: 'severity',
+  isAuthenticated: 'isAuthenticated',
+  permissions: 'permissions',
+  modelName: 'modelName',
+  tokenUsage: 'tokenUsage',
+  temperature: 'temperature',
+  maxTokens: 'maxTokens',
+  clientId: 'clientId',
+  pageUrl: 'pageUrl',
+  componentName: 'componentName',
+  errorCode: 'errorCode',
+  errorCategory: 'errorCategory',
+  retryCount: 'retryCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.RoleScalarFieldEnum = {
@@ -381,6 +420,16 @@ exports.Prisma.MessageScalarFieldEnum = {
   isThreadStart: 'isThreadStart',
   parentId: 'parentId',
   threadId: 'threadId'
+};
+
+exports.Prisma.MessageAttachmentScalarFieldEnum = {
+  id: 'id',
+  filename: 'filename',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  url: 'url',
+  createdAt: 'createdAt',
+  messageId: 'messageId'
 };
 
 exports.Prisma.NotificationScalarFieldEnum = {
@@ -455,6 +504,13 @@ exports.Prisma.QueryScalarFieldEnum = {
   metadata: 'metadata',
   lineGraphData: 'lineGraphData',
   pieGraphData: 'pieGraphData'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  expires: 'expires',
+  sessionToken: 'sessionToken'
 };
 
 exports.Prisma.SproutFacebookAnalyticsScalarFieldEnum = {
@@ -625,6 +681,41 @@ exports.Prisma.SproutSocialAccountScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TicketScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  assignedToId: 'assignedToId',
+  clientId: 'clientId'
+};
+
+exports.Prisma.TicketAttachmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  url: 'url',
+  createdAt: 'createdAt',
+  ticketId: 'ticketId'
+};
+
+exports.Prisma.TicketCommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ticketId: 'ticketId',
+  authorId: 'authorId'
+};
+
+exports.Prisma.TicketTagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.UserToSproutSocialAccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -668,68 +759,18 @@ exports.Prisma.UserSettingsScalarFieldEnum = {
   apiCreditsLimit: 'apiCreditsLimit'
 };
 
-exports.Prisma.TicketScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
-  status: 'status',
-  priority: 'priority',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  assignedToId: 'assignedToId',
-  clientId: 'clientId'
-};
-
-exports.Prisma.TicketAttachmentScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  url: 'url',
-  createdAt: 'createdAt',
-  ticketId: 'ticketId'
-};
-
-exports.Prisma.TicketCommentScalarFieldEnum = {
-  id: 'id',
-  content: 'content',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  ticketId: 'ticketId',
-  authorId: 'authorId'
-};
-
-exports.Prisma.TicketTagScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.MessageAttachmentScalarFieldEnum = {
-  id: 'id',
-  filename: 'filename',
-  fileSize: 'fileSize',
-  mimeType: 'mimeType',
-  url: 'url',
-  createdAt: 'createdAt',
-  messageId: 'messageId'
-};
-
-exports.Prisma.ClientActivityScalarFieldEnum = {
-  id: 'id',
-  type: 'type',
-  description: 'description',
-  status: 'status',
-  metadata: 'metadata',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-};
-
 exports.Prisma.UserToEmailClientScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   emailClientId: 'emailClientId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VerificationTokenScalarFieldEnum = {
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
 };
 
 exports.Prisma.SortOrder = {
@@ -757,6 +798,12 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.ActivityStatus = exports.$Enums.ActivityStatus = {
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+  PENDING: 'PENDING'
+};
+
 exports.ImportStatus = exports.$Enums.ImportStatus = {
   queued: 'queued',
   ok: 'ok',
@@ -791,14 +838,9 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
   HIGH: 'HIGH'
 };
 
-exports.ActivityStatus = exports.$Enums.ActivityStatus = {
-  SUCCESS: 'SUCCESS',
-  ERROR: 'ERROR',
-  PENDING: 'PENDING'
-};
-
 exports.Prisma.ModelName = {
   Account: 'Account',
+  ClientActivity: 'ClientActivity',
   ClientSatisfaction: 'ClientSatisfaction',
   Company: 'Company',
   Conversation: 'Conversation',
@@ -815,15 +857,16 @@ exports.Prisma.ModelName = {
   GaKpiMonthly: 'GaKpiMonthly',
   GaChannelDaily: 'GaChannelDaily',
   GaSourceDaily: 'GaSourceDaily',
-  Session: 'Session',
-  VerificationToken: 'VerificationToken',
+  Log: 'Log',
   Role: 'Role',
   Message: 'Message',
+  MessageAttachment: 'MessageAttachment',
   Notification: 'Notification',
   ParsedPieGraphData: 'ParsedPieGraphData',
   ParsedQueryData: 'ParsedQueryData',
   ParsedQuerySummary: 'ParsedQuerySummary',
   Query: 'Query',
+  Session: 'Session',
   SproutFacebookAnalytics: 'SproutFacebookAnalytics',
   SproutFacebookPost: 'SproutFacebookPost',
   SproutFacebookPostAnalytics: 'SproutFacebookPostAnalytics',
@@ -833,17 +876,16 @@ exports.Prisma.ModelName = {
   SproutLinkedInAnalytics: 'SproutLinkedInAnalytics',
   SproutPinterestAnalytics: 'SproutPinterestAnalytics',
   SproutSocialAccount: 'SproutSocialAccount',
-  UserToSproutSocialAccount: 'UserToSproutSocialAccount',
-  UserToGaAccount: 'UserToGaAccount',
-  User: 'User',
-  UserSettings: 'UserSettings',
   Ticket: 'Ticket',
   TicketAttachment: 'TicketAttachment',
   TicketComment: 'TicketComment',
   TicketTag: 'TicketTag',
-  MessageAttachment: 'MessageAttachment',
-  ClientActivity: 'ClientActivity',
-  UserToEmailClient: 'UserToEmailClient'
+  UserToSproutSocialAccount: 'UserToSproutSocialAccount',
+  UserToGaAccount: 'UserToGaAccount',
+  User: 'User',
+  UserSettings: 'UserSettings',
+  UserToEmailClient: 'UserToEmailClient',
+  VerificationToken: 'VerificationToken'
 };
 
 /**
