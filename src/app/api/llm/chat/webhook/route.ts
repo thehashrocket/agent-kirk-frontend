@@ -12,7 +12,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { NotificationType, prisma } from '@/lib/prisma';
-import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
 
 /**
  * Represents the expected webhook request payload
