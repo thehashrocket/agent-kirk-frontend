@@ -75,20 +75,17 @@ export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onR
   }, [messages]);
 
   return (
-    <ScrollArea className="h-full">
-      <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
-        {messages.map((message) => (
-          <MessageComponent
-            key={message.id}
-            {...message}
-            onRate={onRateMessage}
-          />
-        ))}
-        {/* {isLoading && (
+    <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
+      {messages.map((message) => (
+        <MessageComponent
+          key={message.id}
+          {...message}
+          onRate={onRateMessage}
+        />
+      ))}
+      {/* {isLoading && (
           <LoadingIndicator message="Loading messages" />
         )} */}
-        <div ref={scrollRef} />
-      </div>
-    </ScrollArea>
+    </div>
   );
 } 
