@@ -667,6 +667,7 @@ export default function ChatPage() {
         id,
         isStarred: !conversation.isStarred,
       });
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
     }
   };
 
