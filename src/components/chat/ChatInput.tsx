@@ -98,7 +98,6 @@ export function ChatInput({
   return (
     <div className="space-y-4">
       {suggestedResponses.length > 0 && (
-        <ScrollArea className="w-full">
           <div className="flex space-x-2 p-1">
             {suggestedResponses.map((response) => (
               <Button
@@ -117,7 +116,6 @@ export function ChatInput({
               </Button>
             ))}
           </div>
-        </ScrollArea>
       )}
       <div className="flex space-x-2">
         <Textarea

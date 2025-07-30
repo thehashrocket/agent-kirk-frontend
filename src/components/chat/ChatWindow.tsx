@@ -66,13 +66,6 @@ interface ChatWindowProps {
  * - Proper ARIA roles
  */
 export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onRateMessage }: ChatWindowProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
 
   return (
     <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
