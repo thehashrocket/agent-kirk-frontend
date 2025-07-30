@@ -11,7 +11,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
-import { prisma } from '@/lib/prisma';
+import { NotificationType, prisma } from '@/lib/prisma';
 import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
 
 /**
@@ -19,8 +19,9 @@ import { parsePieGraphData } from '@/lib/services/parsePieGraphData';
  */
 interface WebhookRequest {
   queryId: string;
-  response?: string;
-  error?: string;
+  output?: string;
+  success?: boolean;
+  status: 'IN_PROGRESS' | 'COMPLETED' | 'FAILED';
   line_graph_data?: Array<{
     name: string;
     body?: unknown;
@@ -44,8 +45,9 @@ interface WebhookRequest {
  */
 const WebhookRequestSchema = z.object({
   queryId: z.string().min(1, "Query ID is required"),
-  response: z.string().optional(),
-  error: z.string().optional(),
+  output: z.string().optional(),
+  success: z.boolean().optional(),
+  status: z.enum(['IN_PROGRESS', 'COMPLETED', 'FAILED']),
   line_graph_data: z.array(z.object({
     name: z.string(),
     body: z.unknown()
@@ -61,8 +63,8 @@ const WebhookRequestSchema = z.object({
     type: z.string(),
     aggregate: z.string()
   })).optional()
-}).refine((data) => data.response || data.error, {
-  message: "Either response or error must be provided"
+}).refine((data) => data.queryId || data.status, {
+  message: "Either queryId or status must be provided"
 });
 
 /**
@@ -104,8 +106,9 @@ export async function POST(request: NextRequest) {
     // Construct and validate the webhook data
     const validatedData = {
       queryId,
-      response: body.response,
-      error: body.error || body.message // Support error from either field
+      output: body.output,
+      success: body.success,
+      status: body.status
     };
 
     const result = WebhookRequestSchema.safeParse(validatedData);
@@ -154,12 +157,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Handle error case: Update query status and create notification
-    if (validatedData.error) {
+    if (!validatedData.success) {
       await prisma.query.update({
         where: { id: validatedData.queryId },
         data: {
           status: 'FAILED',
-          response: validatedData.error,
+          response: validatedData.output,
           metadata: metadata
         },
       });
@@ -174,17 +177,17 @@ export async function POST(request: NextRequest) {
       });
     } 
     // Handle success case: Update query with response and create notification
-    else if (validatedData.response) {
+    else if (validatedData.success) {
       try {
         const parsedData = await parseLLMResponse({
           queryId: validatedData.queryId,
-          response: validatedData.response,
-          error: validatedData.error,
+          output: validatedData.output,
+          success: validatedData.success,
+          status: validatedData.status,
           line_graph_data: metadata.line_graph_data,
           pie_graph_data: metadata.pie_graph_data,
           metric_headers: metadata.metric_headers
         });
-        const parsedPieData = parsePieGraphData(metadata.pie_graph_data || []);
 
         // Use a transaction to ensure data consistency
         await prisma.$transaction(async (tx) => {
@@ -192,60 +195,40 @@ export async function POST(request: NextRequest) {
           const updatedQuery = await tx.query.update({
             where: { id: parsedData.queryId },
             data: {
-              status: 'COMPLETED',
-              response: parsedData.response,
-              metadata: {
-                metricHeaders: parsedData.metric_headers
-              },
-              lineGraphData: parsedData.line_graph_data,
-              pieGraphData: parsedData.pie_graph_data
+              status: parsedData.status,
             },
           });
-
-          if (parsedData.line_graph_data) {
-            try {
-              await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/queries/${query.id}/chart-data`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ lineGraphData: parsedData.line_graph_data }),
-              });
-            } catch (e) {
-            }
-          }
-
-          if (parsedPieData.length > 0) {
-            await tx.parsedPieGraphData.createMany({
-              data: parsedPieData.map(data => ({
-                queryId: updatedQuery.id,
-                channel: data.channel,
-                source: data.source,
-                sessions: data.sessions,
-                conversionRate: data.conversionRate,
-                conversions: data.conversions,
-                bounces: data.bounces,
-                prevSessionsDiff: data.prevSessionsDiff,
-                prevConversionRateDiff: data.prevConversionRateDiff,
-                prevConversionsDiff: data.prevConversionsDiff,
-                prevBouncesDiff: data.prevBouncesDiff,
-                yearSessionsDiff: data.yearSessionsDiff,
-                yearConversionRateDiff: data.yearConversionRateDiff,
-                yearConversionsDiff: data.yearConversionsDiff,
-                yearBouncesDiff: data.yearBouncesDiff
-              }))
+          
+          // Create notification
+          // Notify use if the query is completed or in progress or failed.
+          if (parsedData.status === 'COMPLETED') {
+            await tx.notification.create({
+              data: {
+                type: NotificationType.QUERY_COMPLETE,
+                title: 'Query Complete',
+                content: 'Your query has been processed and is ready to view.',
+                userId: query.userId,
+              },
+            });
+          } else if (parsedData.status === 'IN_PROGRESS') {
+            await tx.notification.create({
+              data: {
+                type: NotificationType.QUERY_IN_PROGRESS,
+                title: 'Query In Progress',
+                content: 'Your query is being processed. Please wait a moment.',
+                userId: query.userId,
+              },
+            });
+          } else if (parsedData.status === 'FAILED') {
+            await tx.notification.create({
+              data: {
+                type: NotificationType.QUERY_FAILED,
+                title: 'Query Processing Failed',
+                content: 'There was an error processing your query data.',
+                userId: query.userId,
+              },
             });
           }
-
-          // Create notification
-          await tx.notification.create({
-            data: {
-              type: 'QUERY_COMPLETE',
-              title: 'Query Complete',
-              content: 'Your query has been processed and is ready to view.',
-              userId: query.userId,
-            },
-          });
         });
 
       } catch (error) {
@@ -299,8 +282,9 @@ export async function POST(request: NextRequest) {
  * Parses the LLM service response
  */
 interface ParsedLLMResponse {
-  response?: string;
-  error?: string;
+  output?: string;
+  success?: boolean;
+  status?: 'IN_PROGRESS' | 'COMPLETED' | 'FAILED';
   queryId?: string;
   line_graph_data?: object[];
   pie_graph_data?: object[];
@@ -309,8 +293,9 @@ interface ParsedLLMResponse {
 
 async function parseLLMResponse(data: WebhookRequest): Promise<ParsedLLMResponse> {
   return {
-    response: data.response,
-    error: data.error,
+    output: data.output,
+    success: data.success,
+    status: data.status,
     queryId: data.queryId,
     line_graph_data: data.line_graph_data,
     pie_graph_data: data.pie_graph_data,
