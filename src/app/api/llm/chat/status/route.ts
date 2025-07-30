@@ -31,6 +31,7 @@ type StatusResponse = {
   status: string;
   response: string | null;
   timeElapsed: number;
+  updatedAt: string;
 };
 
 /**
@@ -80,6 +81,7 @@ export async function GET(request: NextRequest) {
         status: true,
         response: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
 
@@ -99,6 +101,7 @@ export async function GET(request: NextRequest) {
       status: query.status,
       response: query.response,
       timeElapsed: timeElapsedSeconds,
+      updatedAt: query.updatedAt,
     });
   } catch (error) {
     console.error('Status API Error:', error);

@@ -18,7 +18,8 @@ import {
   Message,
   QueryRequest,
   apiStatusToMessageStatus,
-  MESSAGE_STATUS
+  MESSAGE_STATUS,
+  MessageStatus
 } from '@/types/chat';
 import { Button } from '@/components/ui/button';
 import ConversationTitle from '@/components/chat/ConversationTitle';
@@ -27,6 +28,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { QueryStatus } from '@/lib/prisma';
 
 /**
  * @interface Conversation
@@ -489,14 +491,79 @@ export default function ChatPage() {
   });
 
   /**
+   * Updates a message in the conversation with new content and status
+   */
+  const updateMessageInConversation = (
+    conversationId: string, 
+    queryId: string, 
+    content: string, 
+    status: MessageStatus
+  ) => {
+    queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
+      const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
+      if (!foundMessage) {
+        return oldData;
+      }
+
+      return oldData.map(msg => {
+        if (msg.id === `${queryId}-response`) {
+          return {
+            ...msg,
+            content,
+            timestamp: new Date().toLocaleString(),
+            status
+          };
+        }
+        return msg;
+      });
+    });
+
+    // Invalidate queries to ensure UI is up to date
+    queryClient.invalidateQueries({ queryKey: ['conversation-messages', conversationId] });
+  };
+
+  /**
+   * Handles the final state when polling completes or fails
+   */
+  const handlePollingComplete = (
+    conversationId: string,
+    queryId: string,
+    data: { status: string; response: string | null }
+  ) => {
+    const hasResponse = data.response && data.response.trim() !== '';
+    
+    if (hasResponse) {
+      const status = data.status === QueryStatus.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.ERROR;
+      updateMessageInConversation(conversationId, queryId, data.response || '', status);
+    }
+
+    // Handle FAILED status specifically
+    if (data.status === QueryStatus.FAILED) {
+      updateMessageInConversation(
+        conversationId, 
+        queryId, 
+        data.response || 'An error occurred while processing your request.',
+        MESSAGE_STATUS.ERROR
+      );
+    }
+
+    // Invalidate conversations query
+    queryClient.invalidateQueries({ queryKey: ['conversations'] });
+  };
+
+  /**
    * Polls the server for message status updates when handling async responses
    * @param queryId - ID of the query to poll for
    * @param conversationId - ID of the conversation being updated
    */
   const startStatusPolling = async (queryId: string, conversationId: string) => {
+    // Configuration constants
+    const POLL_INTERVAL_MS = 3000;
+    const TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
 
-    // Create a unique identifier for this polling session to prevent interference
-    const pollingSessionId = `${queryId}-${Date.now()}`;
+    // Track the last updated timestamp to detect changes
+    let lastUpdatedAt: string | null = null;
+    let lastResponse: string | null = null;
 
     const pollInterval = setInterval(async () => {
       try {
@@ -509,119 +576,51 @@ export default function ChatPage() {
 
         const data = await response.json();
 
-        // Check if the query is completed (webhook has processed it)
-        if (data.status === 'COMPLETED' && data.response) {
+        // Check if there's a response and it has changed
+        const hasResponse = data.response && data.response.trim() !== '';
+        const responseChanged = hasResponse && (
+          lastResponse !== data.response || 
+          lastUpdatedAt !== data.updatedAt
+        );
 
-          // Update the messages by replacing the processing message with the completed one
-          queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
+        // Update the response if it has changed
+        if (responseChanged) {
+          lastResponse = data.response;
+          lastUpdatedAt = data.updatedAt;
 
-            const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
+          const status = data.status === QueryStatus.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.PROCESSING;
+          updateMessageInConversation(conversationId, queryId, data.response || '', status);
+        }
 
-            // Only update if we find the message and it's still in processing state
-            if (!foundMessage) {
-              return oldData;
-            }
-
-            if (foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
-              return oldData;
-            }
-
-            const updatedMessages = oldData.map(msg => {
-              // Replace the processing message with the completed response
-              if (msg.id === `${queryId}-response`) {
-                return {
-                  id: `${queryId}-response`,
-                  content: data.response,
-                  role: 'assistant' as const,
-                  timestamp: new Date().toLocaleString(),
-                  status: MESSAGE_STATUS.COMPLETED
-                };
-              }
-              return msg;
-            });
-
-            return updatedMessages;
-          });
-
-          // Invalidate queries to ensure UI is up to date
-          queryClient.invalidateQueries({ queryKey: ['conversation-messages', conversationId] });
-          queryClient.invalidateQueries({ queryKey: ['conversations'] });
-
+        // Stop polling if the status is COMPLETED or FAILED
+        if (data.status === QueryStatus.COMPLETED || data.status === QueryStatus.FAILED) {
+          handlePollingComplete(conversationId, queryId, data);
           clearInterval(pollInterval);
-        } else if (data.status === 'FAILED') {
-
-          // Update the processing message to show the error
-          queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
-            const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
-            if (!foundMessage || foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
-              return oldData;
-            }
-
-            return oldData.map(msg => {
-              if (msg.id === `${queryId}-response`) {
-                return {
-                  ...msg,
-                  content: data.response || 'An error occurred while processing your request.',
-                  status: MESSAGE_STATUS.ERROR
-                };
-              }
-              return msg;
-            });
-          });
-
-          clearInterval(pollInterval);
-        } else {
         }
       } catch (error) {
-
         // Update the processing message to show the error
-        queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
-          const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
-          if (!foundMessage || foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
-            return oldData;
-          }
-
-          return oldData.map(msg => {
-            if (msg.id === `${queryId}-response`) {
-              return {
-                ...msg,
-                content: 'Error checking status. Please refresh the page.',
-                status: MESSAGE_STATUS.ERROR
-              };
-            }
-            return msg;
-          });
-        });
-
+        updateMessageInConversation(
+          conversationId, 
+          queryId, 
+          'Error checking status. Please refresh the page.',
+          MESSAGE_STATUS.ERROR
+        );
         clearInterval(pollInterval);
       }
-    }, 3000); // Poll every 3 seconds (reduced frequency)
+    }, POLL_INTERVAL_MS);
 
-    // Clear polling after 5 minutes to prevent infinite polling
+    // Clear polling after timeout to prevent infinite polling
     const timeoutId = setTimeout(() => {
       clearInterval(pollInterval);
+      updateMessageInConversation(
+        conversationId, 
+        queryId, 
+        'Request timed out. Please try again or check notifications.',
+        MESSAGE_STATUS.ERROR
+      );
+    }, TIMEOUT_MS);
 
-      // Update the processing message to show timeout - but only if it's still processing
-      queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
-        const foundMessage = oldData.find(msg => msg.id === `${queryId}-response`);
-        if (!foundMessage || foundMessage.status !== MESSAGE_STATUS.PROCESSING) {
-          return oldData;
-        }
-
-        return oldData.map(msg => {
-          if (msg.id === `${queryId}-response`) {
-            return {
-              ...msg,
-              content: 'Request timed out. Please try again or check notifications.',
-              status: MESSAGE_STATUS.ERROR
-            };
-          }
-          return msg;
-        });
-      });
-    }, 5 * 60 * 1000);
-
-    // Store the timeout ID so we can clear it if polling completes early
+    // Return cleanup function
     return () => {
       clearInterval(pollInterval);
       clearTimeout(timeoutId);
