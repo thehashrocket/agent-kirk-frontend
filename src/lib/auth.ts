@@ -61,7 +61,7 @@ declare module "next-auth/jwt" {
  */
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma as any),
-  debug: true,
+  debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
