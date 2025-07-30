@@ -98,7 +98,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       sproutSocialAccountIds: validatedData.sproutSocialAccountIds,
       emailClientIds: validatedData.emailClientIds,
       dateToday: new Date().toISOString(),
-      website_url: process.env.WEBSITE_URL + '/api/llm/chat/webhook'
+      website_url: process.env.WEBSITE_URL + '/api/llm/chat/webhook',
+      logging: (process.env.NODE_ENV === 'development') ? false : true
     };
 
     console.log('[Send] LLM request payload:', llmRequestPayload);

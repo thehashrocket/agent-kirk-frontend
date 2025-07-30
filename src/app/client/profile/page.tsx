@@ -149,7 +149,7 @@ export default function ProfilePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Profile", href: "/client/profile" }]} />
-      <h1 className="text-3xl font-bold mb-6">My Profile</h1>
+      <h1 className="text-2xl font-bold mb-2 text-primary">My Profile</h1>
 
       <div className="max-w-3xl space-y-6">
         {/* Profile Information */}

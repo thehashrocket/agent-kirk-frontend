@@ -61,7 +61,7 @@ export default async function ClientDashboard() {
       <div className="mb-8 flex justify-between items-start">
         <div>
           <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dashboard", href: "/client/dashboard" }]} />
-          <h1 className="text-2xl font-bold mb-2">
+          <h1 className="text-2xl font-bold mb-2 text-primary">
             Welcome back, {session.user.name || session.user.email}
           </h1>
           <p className="text-gray-600">Here&apos;s an overview of your account activity</p>

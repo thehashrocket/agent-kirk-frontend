@@ -440,20 +440,6 @@ export default function ChatPage() {
             msg.id !== tempMessage.id && msg.id !== tempAssistantMessage.id
           );
 
-          // Add the user message and a processing message
-          return [...filteredMessages, {
-            id: data.queryId,
-            content: message,
-            role: 'user',
-            timestamp: new Date().toISOString(),
-            status: MESSAGE_STATUS.COMPLETED
-          }, {
-            id: `${data.queryId}-response`,
-            content: 'This request is taking longer than expected. You will receive a notification when it\'s complete.',
-            role: 'assistant',
-            timestamp: new Date().toISOString(),
-            status: MESSAGE_STATUS.PROCESSING
-          }];
         });
 
         // Start polling for updates
@@ -931,7 +917,7 @@ export default function ChatPage() {
             <div className="flex-1 overflow-y-auto p-4">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold mb-2">Welcome to Agent Kirk</h2>
+                  <h1 className="text-2xl font-bold mb-2 text-primary">Welcome to Agent Kirk</h1>
                   <p className="text-muted-foreground">
                     Start a new conversation by typing your message below.
                   </p>

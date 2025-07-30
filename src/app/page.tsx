@@ -15,7 +15,7 @@ export default function Home() {
     <div className="flex min-h-[calc(100vh-3.5rem)] flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-4xl space-y-8 text-center">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bliss-bold tracking-tight sm:text-6xl">
+          <h1 className="text-4xl font-bliss-bold tracking-tight sm:text-6xl text-primary">
             Welcome to Agent Kirk
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
