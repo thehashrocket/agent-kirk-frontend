@@ -239,10 +239,10 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
           <Line 
             type="monotone" 
             dataKey="sessions" 
-            stroke="#1a3766" 
+            stroke="#01518e" 
             strokeWidth={2}
             name="Sessions"
-            dot={{ r: 4, fill: '#1a3766', stroke: 'white', strokeWidth: 1 }}
+            dot={{ r: 4, fill: '#01518e', stroke: 'white', strokeWidth: 1 }}
             activeDot={{ r: 6, fill: '#1a3766', stroke: 'white', strokeWidth: 2 }}
             isAnimationActive={true}
             animationDuration={1500}
