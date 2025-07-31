@@ -212,30 +212,66 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       new Date(a.date).getTime() - new Date(b.date).getTime()
     );
 
-    // Get top campaigns by opens
+    // Get campaign stats with all metrics
     const campaignStats = emailCampaignDailyStats.reduce((acc, stat) => {
       const campaignKey = stat.emailCampaign.campaignId;
       if (!acc[campaignKey]) {
         acc[campaignKey] = {
           campaignId: campaignKey,
           campaignName: stat.emailCampaign.campaignName,
+          requests: 0,
+          delivered: 0,
+          uniqueOpens: 0,
+          uniqueClicks: 0,
+          unsubscribes: 0,
           opens: 0,
           clicks: 0,
-          bounces: 0,
-          unsubscribes: 0,
-          delivered: 0,
+          // Track dates to avoid double counting uniques
+          dates: new Set<string>(),
+          dailyUniques: [] as { date: string, uniqueOpens: number, uniqueClicks: number }[],
         };
       }
-      acc[campaignKey].opens += stat.opens;
-      acc[campaignKey].clicks += stat.clicks;
-      acc[campaignKey].bounces += stat.bounces;
-      acc[campaignKey].unsubscribes += stat.unsubscribes;
-      acc[campaignKey].delivered += stat.delivered;
+
+      const dateKey = format(new Date(stat.date), 'yyyy-MM-dd');
+      if (!acc[campaignKey].dates.has(dateKey)) {
+        acc[campaignKey].dates.add(dateKey);
+        acc[campaignKey].dailyUniques.push({
+          date: dateKey,
+          uniqueOpens: stat.uniqueOpens || 0,
+          uniqueClicks: stat.uniqueClicks || 0,
+        });
+      }
+
+      acc[campaignKey].requests += stat.requests || 0;
+      acc[campaignKey].delivered += stat.delivered || 0;
+      acc[campaignKey].unsubscribes += stat.unsubscribes || 0;
+      acc[campaignKey].opens += stat.opens || 0;
+      acc[campaignKey].clicks += stat.clicks || 0;
       return acc;
     }, {} as Record<string, any>);
 
-    const topCampaigns = Object.values(campaignStats)
-      .sort((a, b) => b.opens - a.opens)
+    // Process campaign stats to calculate proper unique metrics
+    const processedCampaignStats = Object.values(campaignStats).map(campaign => {
+      // Take the maximum unique values across days as the campaign total
+      const uniqueOpens = Math.max(...campaign.dailyUniques.map((day: { uniqueOpens: number }) => day.uniqueOpens));
+      const uniqueClicks = Math.max(...campaign.dailyUniques.map((day: { uniqueClicks: number }) => day.uniqueClicks));
+
+      // Clean up temporary tracking fields
+      const { dates, dailyUniques, ...cleanCampaign } = campaign;
+
+      return {
+        ...cleanCampaign,
+        uniqueOpens,
+        uniqueClicks,
+        // Calculate rates based on delivered emails
+        openRate: campaign.delivered > 0 ? (uniqueOpens / campaign.delivered) * 100 : 0,
+        clickRate: campaign.delivered > 0 ? (uniqueClicks / campaign.delivered) * 100 : 0,
+        deliveryRate: campaign.requests > 0 ? (campaign.delivered / campaign.requests) * 100 : 0,
+      };
+    });
+
+    const topCampaigns = processedCampaignStats
+      .sort((a, b) => b.uniqueOpens - a.uniqueOpens)
       .slice(0, 5);
 
     return NextResponse.json({

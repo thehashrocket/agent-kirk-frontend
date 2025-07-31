@@ -61,6 +61,9 @@ export interface EmailMetricsResponse {
     bounces: number;
     unsubscribes: number;
     delivered: number;
+    requests: number;
+    uniqueOpens: number;
+    uniqueClicks: number;
   }>;
   totalCampaigns: number;
 }

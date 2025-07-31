@@ -206,12 +206,27 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       {data.topCampaigns.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Top Performing Campaigns</CardTitle>
+            <CardTitle>Campaign Performance</CardTitle>
           </CardHeader>
           <CardContent className="px-5 py-2">
-            <div className="space-y-4 max-h-96 overflow-y-auto">
+            {/* Table Header */}
+            <div className="grid grid-cols-6 gap-4 py-3 px-4 font-medium text-sm text-muted-foreground border-b">
+              <div>Campaign</div>
+              <div className="text-right">Sent</div>
+              <div className="text-right">Delivered</div>
+              <div className="text-right">Unique Opens</div>
+              <div className="text-right">Unique Clicks</div>
+              <div className="text-right">Unsubscribes</div>
+            </div>
+            
+            {/* Campaigns List */}
+            <div className="space-y-2 max-h-96 overflow-y-auto">
               {data.topCampaigns.map((campaign, index) => (
-                <div key={campaign.campaignId} className="flex items-center justify-between p-3 border rounded-lg bg-white">
+                <div 
+                  key={campaign.campaignId} 
+                  className="grid grid-cols-6 gap-4 items-center p-4 hover:bg-muted/50 rounded-lg"
+                >
+                  {/* Campaign Name */}
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-base font-semibold text-primary">
                       {index + 1}
@@ -226,10 +241,41 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                       </Link>
                     </div>
                   </div>
-                  <div className="text-right min-w-[90px]">
-                    <p className="font-semibold text-gray-900">{formatNumber(campaign.opens)} opens</p>
-                    <p className="text-sm text-muted-foreground">
-                      {campaign.delivered > 0 ? `${((campaign.opens / campaign.delivered) * 100).toFixed(1)}%` : '0%'} open rate
+
+                  {/* Metrics */}
+                  <div className="text-right">
+                    <p className="font-medium">{formatNumber(campaign.requests)}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">{formatNumber(campaign.delivered)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {campaign.requests > 0 
+                        ? `${((campaign.delivered / campaign.requests) * 100).toFixed(1)}%` 
+                        : '0%'}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">{formatNumber(campaign.uniqueOpens)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {campaign.delivered > 0 
+                        ? `${((campaign.uniqueOpens / campaign.delivered) * 100).toFixed(1)}%` 
+                        : '0%'}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">{formatNumber(campaign.uniqueClicks)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {campaign.delivered > 0 
+                        ? `${((campaign.uniqueClicks / campaign.delivered) * 100).toFixed(1)}%` 
+                        : '0%'}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">{formatNumber(campaign.unsubscribes)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {campaign.delivered > 0 
+                        ? `${((campaign.unsubscribes / campaign.delivered) * 100).toFixed(1)}%` 
+                        : '0%'}
                     </p>
                   </div>
                 </div>
