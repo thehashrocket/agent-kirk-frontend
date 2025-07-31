@@ -147,9 +147,9 @@ export const Message = React.memo(function Message({
         )}
 
         <div className="absolute -bottom-5 right-0 text-xs text-muted-foreground">
-          {/* if message status is completed, show the timestampUpdatedAt otherwise show the timestamp */}
-          {status === MESSAGE_STATUS.COMPLETED && timestampUpdatedAt}
-          {status !== MESSAGE_STATUS.COMPLETED && timestamp}
+          {/* if role is user, show the timestamp, if role is assistant, show the timestampUpdatedAt */}
+          {role === 'user' && timestamp}
+          {role === 'assistant' && timestampUpdatedAt}
         </div>
       </div>
     </div>

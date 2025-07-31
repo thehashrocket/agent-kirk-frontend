@@ -85,6 +85,7 @@ export async function GET(
         response: true,
         status: true,
         createdAt: true,
+        updatedAt: true,
         rating: true,
       },
     });
@@ -99,6 +100,7 @@ export async function GET(
         content: query.content,
         role: 'user' as const,
         timestamp: query.createdAt.toLocaleString(),
+        timestampUpdatedAt: query.updatedAt.toLocaleString(),
         status: MESSAGE_STATUS.COMPLETED
       });
 
@@ -109,6 +111,7 @@ export async function GET(
           content: query.response,
           role: 'assistant' as const,
           timestamp: query.createdAt.toLocaleString(),
+          timestampUpdatedAt: query.updatedAt.toLocaleString(),
           rating: query.rating,
           status: query.status === 'COMPLETED' ? MESSAGE_STATUS.COMPLETED :
                  query.status === 'FAILED' ? MESSAGE_STATUS.ERROR :
