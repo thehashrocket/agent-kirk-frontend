@@ -397,6 +397,16 @@ model Role {
   users     User[]
 }
 
+model Memory {
+  id        String   @id @default(cuid())
+  content   String
+  queryId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation("UserToMemory", fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model Message {
   id            String              @id @default(cuid())
   content       String
@@ -849,6 +859,7 @@ model User {
   assignedTickets      Ticket[]                    @relation("AssignedTickets")
   clientTickets        Ticket[]                    @relation("ClientTickets")
   ticketComments       TicketComment[]
+  memories             Memory[]                    @relation("UserToMemory")
   accountRep           User?                       @relation("AccountRepToClient", fields: [accountRepId], references: [id])
   clients              User[]                      @relation("AccountRepToClient")
   company              Company?                    @relation(fields: [companyId], references: [id])

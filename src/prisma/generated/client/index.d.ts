@@ -114,6 +114,11 @@ export type Log = $Result.DefaultSelection<Prisma.$LogPayload>
  */
 export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
 /**
+ * Model Memory
+ * 
+ */
+export type Memory = $Result.DefaultSelection<Prisma.$MemoryPayload>
+/**
  * Model Message
  * 
  */
@@ -660,6 +665,16 @@ export class PrismaClient<
     * ```
     */
   get role(): Prisma.RoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.memory`: Exposes CRUD operations for the **Memory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Memories
+    * const memories = await prisma.memory.findMany()
+    * ```
+    */
+  get memory(): Prisma.MemoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
@@ -1390,6 +1405,7 @@ export namespace Prisma {
     GaSourceDaily: 'GaSourceDaily',
     Log: 'Log',
     Role: 'Role',
+    Memory: 'Memory',
     Message: 'Message',
     MessageAttachment: 'MessageAttachment',
     Notification: 'Notification',
@@ -1435,7 +1451,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "clientActivity" | "clientSatisfaction" | "company" | "conversation" | "emailCampaign" | "emailCampaignContent" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "log" | "role" | "message" | "messageAttachment" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "session" | "sproutFacebookAnalytics" | "sproutFacebookPost" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "userToEmailClient" | "verificationToken"
+      modelProps: "account" | "clientActivity" | "clientSatisfaction" | "company" | "conversation" | "emailCampaign" | "emailCampaignContent" | "emailCampaignDailyStats" | "emailClient" | "emailClientCredentials" | "emailGlobalDailyStats" | "gaAccount" | "gaProperty" | "gaImportRun" | "gaKpiDaily" | "gaKpiMonthly" | "gaChannelDaily" | "gaSourceDaily" | "log" | "role" | "memory" | "message" | "messageAttachment" | "notification" | "parsedPieGraphData" | "parsedQueryData" | "parsedQuerySummary" | "query" | "session" | "sproutFacebookAnalytics" | "sproutFacebookPost" | "sproutFacebookPostAnalytics" | "sproutInstagramAnalytics" | "sproutInstagramFollowersByCity" | "sproutInstagramFollowersByCountry" | "sproutLinkedInAnalytics" | "sproutPinterestAnalytics" | "sproutSocialAccount" | "ticket" | "ticketAttachment" | "ticketComment" | "ticketTag" | "userToSproutSocialAccount" | "userToGaAccount" | "user" | "userSettings" | "userToEmailClient" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2916,6 +2932,80 @@ export namespace Prisma {
           count: {
             args: Prisma.RoleCountArgs<ExtArgs>
             result: $Utils.Optional<RoleCountAggregateOutputType> | number
+          }
+        }
+      }
+      Memory: {
+        payload: Prisma.$MemoryPayload<ExtArgs>
+        fields: Prisma.MemoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MemoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MemoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>
+          }
+          findFirst: {
+            args: Prisma.MemoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MemoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>
+          }
+          findMany: {
+            args: Prisma.MemoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>[]
+          }
+          create: {
+            args: Prisma.MemoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>
+          }
+          createMany: {
+            args: Prisma.MemoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MemoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>[]
+          }
+          delete: {
+            args: Prisma.MemoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>
+          }
+          update: {
+            args: Prisma.MemoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.MemoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MemoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MemoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.MemoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemoryPayload>
+          }
+          aggregate: {
+            args: Prisma.MemoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMemory>
+          }
+          groupBy: {
+            args: Prisma.MemoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MemoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MemoryCountArgs<ExtArgs>
+            result: $Utils.Optional<MemoryCountAggregateOutputType> | number
           }
         }
       }
@@ -5029,6 +5119,7 @@ export namespace Prisma {
     gaSourceDaily?: GaSourceDailyOmit
     log?: LogOmit
     role?: RoleOmit
+    memory?: MemoryOmit
     message?: MessageOmit
     messageAttachment?: MessageAttachmentOmit
     notification?: NotificationOmit
@@ -5789,6 +5880,7 @@ export namespace Prisma {
     assignedTickets: number
     clientTickets: number
     ticketComments: number
+    memories: number
     clients: number
     emailClients: number
     userToGaAccounts: number
@@ -5812,6 +5904,7 @@ export namespace Prisma {
     assignedTickets?: boolean | UserCountOutputTypeCountAssignedTicketsArgs
     clientTickets?: boolean | UserCountOutputTypeCountClientTicketsArgs
     ticketComments?: boolean | UserCountOutputTypeCountTicketCommentsArgs
+    memories?: boolean | UserCountOutputTypeCountMemoriesArgs
     clients?: boolean | UserCountOutputTypeCountClientsArgs
     emailClients?: boolean | UserCountOutputTypeCountEmailClientsArgs
     userToGaAccounts?: boolean | UserCountOutputTypeCountUserToGaAccountsArgs
@@ -5933,6 +6026,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountTicketCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TicketCommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMemoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemoryWhereInput
   }
 
   /**
@@ -29960,6 +30060,1077 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RoleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Memory
+   */
+
+  export type AggregateMemory = {
+    _count: MemoryCountAggregateOutputType | null
+    _min: MemoryMinAggregateOutputType | null
+    _max: MemoryMaxAggregateOutputType | null
+  }
+
+  export type MemoryMinAggregateOutputType = {
+    id: string | null
+    content: string | null
+    queryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type MemoryMaxAggregateOutputType = {
+    id: string | null
+    content: string | null
+    queryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type MemoryCountAggregateOutputType = {
+    id: number
+    content: number
+    queryId: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type MemoryMinAggregateInputType = {
+    id?: true
+    content?: true
+    queryId?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type MemoryMaxAggregateInputType = {
+    id?: true
+    content?: true
+    queryId?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type MemoryCountAggregateInputType = {
+    id?: true
+    content?: true
+    queryId?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type MemoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Memory to aggregate.
+     */
+    where?: MemoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memories to fetch.
+     */
+    orderBy?: MemoryOrderByWithRelationInput | MemoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MemoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Memories
+    **/
+    _count?: true | MemoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MemoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MemoryMaxAggregateInputType
+  }
+
+  export type GetMemoryAggregateType<T extends MemoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateMemory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMemory[P]>
+      : GetScalarType<T[P], AggregateMemory[P]>
+  }
+
+
+
+
+  export type MemoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemoryWhereInput
+    orderBy?: MemoryOrderByWithAggregationInput | MemoryOrderByWithAggregationInput[]
+    by: MemoryScalarFieldEnum[] | MemoryScalarFieldEnum
+    having?: MemoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MemoryCountAggregateInputType | true
+    _min?: MemoryMinAggregateInputType
+    _max?: MemoryMaxAggregateInputType
+  }
+
+  export type MemoryGroupByOutputType = {
+    id: string
+    content: string
+    queryId: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    _count: MemoryCountAggregateOutputType | null
+    _min: MemoryMinAggregateOutputType | null
+    _max: MemoryMaxAggregateOutputType | null
+  }
+
+  type GetMemoryGroupByPayload<T extends MemoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MemoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MemoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MemoryGroupByOutputType[P]>
+            : GetScalarType<T[P], MemoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MemorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    queryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["memory"]>
+
+  export type MemorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    queryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["memory"]>
+
+  export type MemorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    queryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["memory"]>
+
+  export type MemorySelectScalar = {
+    id?: boolean
+    content?: boolean
+    queryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+  }
+
+  export type MemoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "queryId" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["memory"]>
+  export type MemoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MemoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MemoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MemoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Memory"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      content: string
+      queryId: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+    }, ExtArgs["result"]["memory"]>
+    composites: {}
+  }
+
+  type MemoryGetPayload<S extends boolean | null | undefined | MemoryDefaultArgs> = $Result.GetResult<Prisma.$MemoryPayload, S>
+
+  type MemoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MemoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MemoryCountAggregateInputType | true
+    }
+
+  export interface MemoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Memory'], meta: { name: 'Memory' } }
+    /**
+     * Find zero or one Memory that matches the filter.
+     * @param {MemoryFindUniqueArgs} args - Arguments to find a Memory
+     * @example
+     * // Get one Memory
+     * const memory = await prisma.memory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MemoryFindUniqueArgs>(args: SelectSubset<T, MemoryFindUniqueArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Memory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MemoryFindUniqueOrThrowArgs} args - Arguments to find a Memory
+     * @example
+     * // Get one Memory
+     * const memory = await prisma.memory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MemoryFindUniqueOrThrowArgs>(args: SelectSubset<T, MemoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Memory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryFindFirstArgs} args - Arguments to find a Memory
+     * @example
+     * // Get one Memory
+     * const memory = await prisma.memory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MemoryFindFirstArgs>(args?: SelectSubset<T, MemoryFindFirstArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Memory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryFindFirstOrThrowArgs} args - Arguments to find a Memory
+     * @example
+     * // Get one Memory
+     * const memory = await prisma.memory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MemoryFindFirstOrThrowArgs>(args?: SelectSubset<T, MemoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Memories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Memories
+     * const memories = await prisma.memory.findMany()
+     * 
+     * // Get first 10 Memories
+     * const memories = await prisma.memory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const memoryWithIdOnly = await prisma.memory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MemoryFindManyArgs>(args?: SelectSubset<T, MemoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Memory.
+     * @param {MemoryCreateArgs} args - Arguments to create a Memory.
+     * @example
+     * // Create one Memory
+     * const Memory = await prisma.memory.create({
+     *   data: {
+     *     // ... data to create a Memory
+     *   }
+     * })
+     * 
+     */
+    create<T extends MemoryCreateArgs>(args: SelectSubset<T, MemoryCreateArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Memories.
+     * @param {MemoryCreateManyArgs} args - Arguments to create many Memories.
+     * @example
+     * // Create many Memories
+     * const memory = await prisma.memory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MemoryCreateManyArgs>(args?: SelectSubset<T, MemoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Memories and returns the data saved in the database.
+     * @param {MemoryCreateManyAndReturnArgs} args - Arguments to create many Memories.
+     * @example
+     * // Create many Memories
+     * const memory = await prisma.memory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Memories and only return the `id`
+     * const memoryWithIdOnly = await prisma.memory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MemoryCreateManyAndReturnArgs>(args?: SelectSubset<T, MemoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Memory.
+     * @param {MemoryDeleteArgs} args - Arguments to delete one Memory.
+     * @example
+     * // Delete one Memory
+     * const Memory = await prisma.memory.delete({
+     *   where: {
+     *     // ... filter to delete one Memory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MemoryDeleteArgs>(args: SelectSubset<T, MemoryDeleteArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Memory.
+     * @param {MemoryUpdateArgs} args - Arguments to update one Memory.
+     * @example
+     * // Update one Memory
+     * const memory = await prisma.memory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MemoryUpdateArgs>(args: SelectSubset<T, MemoryUpdateArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Memories.
+     * @param {MemoryDeleteManyArgs} args - Arguments to filter Memories to delete.
+     * @example
+     * // Delete a few Memories
+     * const { count } = await prisma.memory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MemoryDeleteManyArgs>(args?: SelectSubset<T, MemoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Memories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Memories
+     * const memory = await prisma.memory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MemoryUpdateManyArgs>(args: SelectSubset<T, MemoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Memories and returns the data updated in the database.
+     * @param {MemoryUpdateManyAndReturnArgs} args - Arguments to update many Memories.
+     * @example
+     * // Update many Memories
+     * const memory = await prisma.memory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Memories and only return the `id`
+     * const memoryWithIdOnly = await prisma.memory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MemoryUpdateManyAndReturnArgs>(args: SelectSubset<T, MemoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Memory.
+     * @param {MemoryUpsertArgs} args - Arguments to update or create a Memory.
+     * @example
+     * // Update or create a Memory
+     * const memory = await prisma.memory.upsert({
+     *   create: {
+     *     // ... data to create a Memory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Memory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MemoryUpsertArgs>(args: SelectSubset<T, MemoryUpsertArgs<ExtArgs>>): Prisma__MemoryClient<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Memories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryCountArgs} args - Arguments to filter Memories to count.
+     * @example
+     * // Count the number of Memories
+     * const count = await prisma.memory.count({
+     *   where: {
+     *     // ... the filter for the Memories we want to count
+     *   }
+     * })
+    **/
+    count<T extends MemoryCountArgs>(
+      args?: Subset<T, MemoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MemoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Memory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MemoryAggregateArgs>(args: Subset<T, MemoryAggregateArgs>): Prisma.PrismaPromise<GetMemoryAggregateType<T>>
+
+    /**
+     * Group by Memory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MemoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MemoryGroupByArgs['orderBy'] }
+        : { orderBy?: MemoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MemoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMemoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Memory model
+   */
+  readonly fields: MemoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Memory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MemoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Memory model
+   */
+  interface MemoryFieldRefs {
+    readonly id: FieldRef<"Memory", 'String'>
+    readonly content: FieldRef<"Memory", 'String'>
+    readonly queryId: FieldRef<"Memory", 'String'>
+    readonly createdAt: FieldRef<"Memory", 'DateTime'>
+    readonly updatedAt: FieldRef<"Memory", 'DateTime'>
+    readonly userId: FieldRef<"Memory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Memory findUnique
+   */
+  export type MemoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Memory to fetch.
+     */
+    where: MemoryWhereUniqueInput
+  }
+
+  /**
+   * Memory findUniqueOrThrow
+   */
+  export type MemoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Memory to fetch.
+     */
+    where: MemoryWhereUniqueInput
+  }
+
+  /**
+   * Memory findFirst
+   */
+  export type MemoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Memory to fetch.
+     */
+    where?: MemoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memories to fetch.
+     */
+    orderBy?: MemoryOrderByWithRelationInput | MemoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Memories.
+     */
+    cursor?: MemoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Memories.
+     */
+    distinct?: MemoryScalarFieldEnum | MemoryScalarFieldEnum[]
+  }
+
+  /**
+   * Memory findFirstOrThrow
+   */
+  export type MemoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Memory to fetch.
+     */
+    where?: MemoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memories to fetch.
+     */
+    orderBy?: MemoryOrderByWithRelationInput | MemoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Memories.
+     */
+    cursor?: MemoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Memories.
+     */
+    distinct?: MemoryScalarFieldEnum | MemoryScalarFieldEnum[]
+  }
+
+  /**
+   * Memory findMany
+   */
+  export type MemoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Memories to fetch.
+     */
+    where?: MemoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memories to fetch.
+     */
+    orderBy?: MemoryOrderByWithRelationInput | MemoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Memories.
+     */
+    cursor?: MemoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memories.
+     */
+    skip?: number
+    distinct?: MemoryScalarFieldEnum | MemoryScalarFieldEnum[]
+  }
+
+  /**
+   * Memory create
+   */
+  export type MemoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Memory.
+     */
+    data: XOR<MemoryCreateInput, MemoryUncheckedCreateInput>
+  }
+
+  /**
+   * Memory createMany
+   */
+  export type MemoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Memories.
+     */
+    data: MemoryCreateManyInput | MemoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Memory createManyAndReturn
+   */
+  export type MemoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Memories.
+     */
+    data: MemoryCreateManyInput | MemoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Memory update
+   */
+  export type MemoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Memory.
+     */
+    data: XOR<MemoryUpdateInput, MemoryUncheckedUpdateInput>
+    /**
+     * Choose, which Memory to update.
+     */
+    where: MemoryWhereUniqueInput
+  }
+
+  /**
+   * Memory updateMany
+   */
+  export type MemoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Memories.
+     */
+    data: XOR<MemoryUpdateManyMutationInput, MemoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Memories to update
+     */
+    where?: MemoryWhereInput
+    /**
+     * Limit how many Memories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Memory updateManyAndReturn
+   */
+  export type MemoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * The data used to update Memories.
+     */
+    data: XOR<MemoryUpdateManyMutationInput, MemoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Memories to update
+     */
+    where?: MemoryWhereInput
+    /**
+     * Limit how many Memories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Memory upsert
+   */
+  export type MemoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Memory to update in case it exists.
+     */
+    where: MemoryWhereUniqueInput
+    /**
+     * In case the Memory found by the `where` argument doesn't exist, create a new Memory with this data.
+     */
+    create: XOR<MemoryCreateInput, MemoryUncheckedCreateInput>
+    /**
+     * In case the Memory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MemoryUpdateInput, MemoryUncheckedUpdateInput>
+  }
+
+  /**
+   * Memory delete
+   */
+  export type MemoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    /**
+     * Filter which Memory to delete.
+     */
+    where: MemoryWhereUniqueInput
+  }
+
+  /**
+   * Memory deleteMany
+   */
+  export type MemoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Memories to delete
+     */
+    where?: MemoryWhereInput
+    /**
+     * Limit how many Memories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Memory without action
+   */
+  export type MemoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
   }
 
 
@@ -57775,6 +58946,7 @@ export namespace Prisma {
     assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
     clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
     ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
+    memories?: boolean | User$memoriesArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
     clients?: boolean | User$clientsArgs<ExtArgs>
     company?: boolean | User$companyArgs<ExtArgs>
@@ -57858,6 +59030,7 @@ export namespace Prisma {
     assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
     clientTickets?: boolean | User$clientTicketsArgs<ExtArgs>
     ticketComments?: boolean | User$ticketCommentsArgs<ExtArgs>
+    memories?: boolean | User$memoriesArgs<ExtArgs>
     accountRep?: boolean | User$accountRepArgs<ExtArgs>
     clients?: boolean | User$clientsArgs<ExtArgs>
     company?: boolean | User$companyArgs<ExtArgs>
@@ -57898,6 +59071,7 @@ export namespace Prisma {
       assignedTickets: Prisma.$TicketPayload<ExtArgs>[]
       clientTickets: Prisma.$TicketPayload<ExtArgs>[]
       ticketComments: Prisma.$TicketCommentPayload<ExtArgs>[]
+      memories: Prisma.$MemoryPayload<ExtArgs>[]
       accountRep: Prisma.$UserPayload<ExtArgs> | null
       clients: Prisma.$UserPayload<ExtArgs>[]
       company: Prisma.$CompanyPayload<ExtArgs> | null
@@ -58331,6 +59505,7 @@ export namespace Prisma {
     assignedTickets<T extends User$assignedTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     clientTickets<T extends User$clientTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ticketComments<T extends User$ticketCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$ticketCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    memories<T extends User$memoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$memoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accountRep<T extends User$accountRepArgs<ExtArgs> = {}>(args?: Subset<T, User$accountRepArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     clients<T extends User$clientsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     company<T extends User$companyArgs<ExtArgs> = {}>(args?: Subset<T, User$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -59135,6 +60310,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TicketCommentScalarFieldEnum | TicketCommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.memories
+   */
+  export type User$memoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Memory
+     */
+    select?: MemorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Memory
+     */
+    omit?: MemoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemoryInclude<ExtArgs> | null
+    where?: MemoryWhereInput
+    orderBy?: MemoryOrderByWithRelationInput | MemoryOrderByWithRelationInput[]
+    cursor?: MemoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MemoryScalarFieldEnum | MemoryScalarFieldEnum[]
   }
 
   /**
@@ -62865,6 +64064,18 @@ export namespace Prisma {
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
+  export const MemoryScalarFieldEnum: {
+    id: 'id',
+    content: 'content',
+    queryId: 'queryId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
+  };
+
+  export type MemoryScalarFieldEnum = (typeof MemoryScalarFieldEnum)[keyof typeof MemoryScalarFieldEnum]
+
+
   export const MessageScalarFieldEnum: {
     id: 'id',
     content: 'content',
@@ -65355,6 +66566,66 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
   }
 
+  export type MemoryWhereInput = {
+    AND?: MemoryWhereInput | MemoryWhereInput[]
+    OR?: MemoryWhereInput[]
+    NOT?: MemoryWhereInput | MemoryWhereInput[]
+    id?: StringFilter<"Memory"> | string
+    content?: StringFilter<"Memory"> | string
+    queryId?: StringFilter<"Memory"> | string
+    createdAt?: DateTimeFilter<"Memory"> | Date | string
+    updatedAt?: DateTimeFilter<"Memory"> | Date | string
+    userId?: StringFilter<"Memory"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MemoryOrderByWithRelationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    queryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MemoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MemoryWhereInput | MemoryWhereInput[]
+    OR?: MemoryWhereInput[]
+    NOT?: MemoryWhereInput | MemoryWhereInput[]
+    content?: StringFilter<"Memory"> | string
+    queryId?: StringFilter<"Memory"> | string
+    createdAt?: DateTimeFilter<"Memory"> | Date | string
+    updatedAt?: DateTimeFilter<"Memory"> | Date | string
+    userId?: StringFilter<"Memory"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type MemoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    queryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    _count?: MemoryCountOrderByAggregateInput
+    _max?: MemoryMaxOrderByAggregateInput
+    _min?: MemoryMinOrderByAggregateInput
+  }
+
+  export type MemoryScalarWhereWithAggregatesInput = {
+    AND?: MemoryScalarWhereWithAggregatesInput | MemoryScalarWhereWithAggregatesInput[]
+    OR?: MemoryScalarWhereWithAggregatesInput[]
+    NOT?: MemoryScalarWhereWithAggregatesInput | MemoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Memory"> | string
+    content?: StringWithAggregatesFilter<"Memory"> | string
+    queryId?: StringWithAggregatesFilter<"Memory"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Memory"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Memory"> | Date | string
+    userId?: StringWithAggregatesFilter<"Memory"> | string
+  }
+
   export type MessageWhereInput = {
     AND?: MessageWhereInput | MessageWhereInput[]
     OR?: MessageWhereInput[]
@@ -67459,6 +68730,7 @@ export namespace Prisma {
     assignedTickets?: TicketListRelationFilter
     clientTickets?: TicketListRelationFilter
     ticketComments?: TicketCommentListRelationFilter
+    memories?: MemoryListRelationFilter
     accountRep?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     clients?: UserListRelationFilter
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
@@ -67499,6 +68771,7 @@ export namespace Prisma {
     assignedTickets?: TicketOrderByRelationAggregateInput
     clientTickets?: TicketOrderByRelationAggregateInput
     ticketComments?: TicketCommentOrderByRelationAggregateInput
+    memories?: MemoryOrderByRelationAggregateInput
     accountRep?: UserOrderByWithRelationInput
     clients?: UserOrderByRelationAggregateInput
     company?: CompanyOrderByWithRelationInput
@@ -67542,6 +68815,7 @@ export namespace Prisma {
     assignedTickets?: TicketListRelationFilter
     clientTickets?: TicketListRelationFilter
     ticketComments?: TicketCommentListRelationFilter
+    memories?: MemoryListRelationFilter
     accountRep?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     clients?: UserListRelationFilter
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
@@ -69832,6 +71106,68 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemoryCreateInput = {
+    id?: string
+    content: string
+    queryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMemoriesInput
+  }
+
+  export type MemoryUncheckedCreateInput = {
+    id?: string
+    content: string
+    queryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+  }
+
+  export type MemoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
+  }
+
+  export type MemoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MemoryCreateManyInput = {
+    id?: string
+    content: string
+    queryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+  }
+
+  export type MemoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateInput = {
@@ -72176,6 +73512,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -72216,6 +73553,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -72250,6 +73588,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -72290,6 +73629,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -74116,6 +75456,33 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type MemoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    queryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MemoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    queryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MemoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    queryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
   export type MessageNullableScalarRelationFilter = {
     is?: MessageWhereInput | null
     isNot?: MessageWhereInput | null
@@ -75755,6 +77122,12 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
+  export type MemoryListRelationFilter = {
+    every?: MemoryWhereInput
+    some?: MemoryWhereInput
+    none?: MemoryWhereInput
+  }
+
   export type CompanyNullableScalarRelationFilter = {
     is?: CompanyWhereInput | null
     isNot?: CompanyWhereInput | null
@@ -75787,6 +77160,10 @@ export namespace Prisma {
   }
 
   export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MemoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -77127,6 +78504,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutMemoriesInput = {
+    create?: XOR<UserCreateWithoutMemoriesInput, UserUncheckedCreateWithoutMemoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMemoriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutMemoriesNestedInput = {
+    create?: XOR<UserCreateWithoutMemoriesInput, UserUncheckedCreateWithoutMemoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMemoriesInput
+    upsert?: UserUpsertWithoutMemoriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMemoriesInput, UserUpdateWithoutMemoriesInput>, UserUncheckedUpdateWithoutMemoriesInput>
+  }
+
   export type MessageCreateNestedOneWithoutRepliesInput = {
     create?: XOR<MessageCreateWithoutRepliesInput, MessageUncheckedCreateWithoutRepliesInput>
     connectOrCreate?: MessageCreateOrConnectWithoutRepliesInput
@@ -78445,6 +79836,13 @@ export namespace Prisma {
     connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
   }
 
+  export type MemoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<MemoryCreateWithoutUserInput, MemoryUncheckedCreateWithoutUserInput> | MemoryCreateWithoutUserInput[] | MemoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemoryCreateOrConnectWithoutUserInput | MemoryCreateOrConnectWithoutUserInput[]
+    createMany?: MemoryCreateManyUserInputEnvelope
+    connect?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutClientsInput = {
     create?: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
     connectOrCreate?: UserCreateOrConnectWithoutClientsInput
@@ -78607,6 +80005,13 @@ export namespace Prisma {
     connectOrCreate?: TicketCommentCreateOrConnectWithoutAuthorInput | TicketCommentCreateOrConnectWithoutAuthorInput[]
     createMany?: TicketCommentCreateManyAuthorInputEnvelope
     connect?: TicketCommentWhereUniqueInput | TicketCommentWhereUniqueInput[]
+  }
+
+  export type MemoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MemoryCreateWithoutUserInput, MemoryUncheckedCreateWithoutUserInput> | MemoryCreateWithoutUserInput[] | MemoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemoryCreateOrConnectWithoutUserInput | MemoryCreateOrConnectWithoutUserInput[]
+    createMany?: MemoryCreateManyUserInputEnvelope
+    connect?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
   }
 
   export type UserUncheckedCreateNestedManyWithoutAccountRepInput = {
@@ -78862,6 +80267,20 @@ export namespace Prisma {
     update?: TicketCommentUpdateWithWhereUniqueWithoutAuthorInput | TicketCommentUpdateWithWhereUniqueWithoutAuthorInput[]
     updateMany?: TicketCommentUpdateManyWithWhereWithoutAuthorInput | TicketCommentUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: TicketCommentScalarWhereInput | TicketCommentScalarWhereInput[]
+  }
+
+  export type MemoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MemoryCreateWithoutUserInput, MemoryUncheckedCreateWithoutUserInput> | MemoryCreateWithoutUserInput[] | MemoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemoryCreateOrConnectWithoutUserInput | MemoryCreateOrConnectWithoutUserInput[]
+    upsert?: MemoryUpsertWithWhereUniqueWithoutUserInput | MemoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MemoryCreateManyUserInputEnvelope
+    set?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    disconnect?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    delete?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    connect?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    update?: MemoryUpdateWithWhereUniqueWithoutUserInput | MemoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MemoryUpdateManyWithWhereWithoutUserInput | MemoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MemoryScalarWhereInput | MemoryScalarWhereInput[]
   }
 
   export type UserUpdateOneWithoutClientsNestedInput = {
@@ -79180,6 +80599,20 @@ export namespace Prisma {
     update?: TicketCommentUpdateWithWhereUniqueWithoutAuthorInput | TicketCommentUpdateWithWhereUniqueWithoutAuthorInput[]
     updateMany?: TicketCommentUpdateManyWithWhereWithoutAuthorInput | TicketCommentUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: TicketCommentScalarWhereInput | TicketCommentScalarWhereInput[]
+  }
+
+  export type MemoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MemoryCreateWithoutUserInput, MemoryUncheckedCreateWithoutUserInput> | MemoryCreateWithoutUserInput[] | MemoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemoryCreateOrConnectWithoutUserInput | MemoryCreateOrConnectWithoutUserInput[]
+    upsert?: MemoryUpsertWithWhereUniqueWithoutUserInput | MemoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MemoryCreateManyUserInputEnvelope
+    set?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    disconnect?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    delete?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    connect?: MemoryWhereUniqueInput | MemoryWhereUniqueInput[]
+    update?: MemoryUpdateWithWhereUniqueWithoutUserInput | MemoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MemoryUpdateManyWithWhereWithoutUserInput | MemoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MemoryScalarWhereInput | MemoryScalarWhereInput[]
   }
 
   export type UserUncheckedUpdateManyWithoutAccountRepNestedInput = {
@@ -79700,6 +81133,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -79739,6 +81173,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -79788,6 +81223,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -79827,6 +81263,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -79860,6 +81297,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -79899,6 +81337,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -79948,6 +81387,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -79987,6 +81427,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -80020,6 +81461,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -80059,6 +81501,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -80097,6 +81540,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -80136,6 +81580,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -80185,6 +81630,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -80224,6 +81670,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -80268,6 +81715,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -80307,6 +81755,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -80341,6 +81790,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     role: RoleCreateNestedOneWithoutUsersInput
@@ -80379,6 +81829,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -80457,6 +81908,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -80496,6 +81948,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -80596,6 +82049,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -80635,6 +82089,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -80730,6 +82185,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -80769,6 +82225,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -80887,6 +82344,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -80926,6 +82384,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -82583,6 +84042,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -82622,6 +84082,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -82712,6 +84173,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -82751,6 +84213,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -83130,6 +84593,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -83169,6 +84633,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -83265,6 +84730,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -83304,6 +84770,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -83337,6 +84804,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -83375,6 +84843,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -83407,6 +84876,170 @@ export namespace Prisma {
   export type UserUpdateManyWithWhereWithoutRoleInput = {
     where: UserScalarWhereInput
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRoleInput>
+  }
+
+  export type UserCreateWithoutMemoriesInput = {
+    id?: string
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    emailVerified?: Date | string | null
+    image?: string | null
+    name?: string | null
+    isActive?: boolean
+    password?: string | null
+    deleted?: boolean
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    activities?: ClientActivityCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionCreateNestedManyWithoutAccountRepInput
+    givenRatings?: ClientSatisfactionCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationCreateNestedManyWithoutClientInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunCreateNestedManyWithoutRequestedByInput
+    receivedMessages?: MessageCreateNestedManyWithoutRecipientInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    queries?: QueryCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    accountRep?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutAccountRepInput
+    company?: CompanyCreateNestedOneWithoutUsersInput
+    role: RoleCreateNestedOneWithoutUsersInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    emailClients?: UserToEmailClientCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountCreateNestedManyWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountCreateNestedManyWithoutUserInput
+    Log?: LogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMemoriesInput = {
+    id?: string
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    roleId: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    name?: string | null
+    accountRepId?: string | null
+    isActive?: boolean
+    password?: string | null
+    deleted?: boolean
+    companyId?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    activities?: ClientActivityUncheckedCreateNestedManyWithoutUserInput
+    receivedRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutAccountRepInput
+    givenRatings?: ClientSatisfactionUncheckedCreateNestedManyWithoutUserInput
+    clientConversations?: ConversationUncheckedCreateNestedManyWithoutClientInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    gaImportRuns?: GaImportRunUncheckedCreateNestedManyWithoutRequestedByInput
+    receivedMessages?: MessageUncheckedCreateNestedManyWithoutRecipientInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    queries?: QueryUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
+    clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
+    userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedCreateNestedManyWithoutUserInput
+    Log?: LogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMemoriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMemoriesInput, UserUncheckedCreateWithoutMemoriesInput>
+  }
+
+  export type UserUpsertWithoutMemoriesInput = {
+    update: XOR<UserUpdateWithoutMemoriesInput, UserUncheckedUpdateWithoutMemoriesInput>
+    create: XOR<UserCreateWithoutMemoriesInput, UserUncheckedCreateWithoutMemoriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMemoriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMemoriesInput, UserUncheckedUpdateWithoutMemoriesInput>
+  }
+
+  export type UserUpdateWithoutMemoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    activities?: ClientActivityUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUpdateManyWithoutAccountRepNestedInput
+    givenRatings?: ClientSatisfactionUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUpdateManyWithoutRequestedByNestedInput
+    receivedMessages?: MessageUpdateManyWithoutRecipientNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    queries?: QueryUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    accountRep?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutAccountRepNestedInput
+    company?: CompanyUpdateOneWithoutUsersNestedInput
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    emailClients?: UserToEmailClientUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUpdateManyWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUpdateManyWithoutUserNestedInput
+    Log?: LogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMemoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    accountRepId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    activities?: ClientActivityUncheckedUpdateManyWithoutUserNestedInput
+    receivedRatings?: ClientSatisfactionUncheckedUpdateManyWithoutAccountRepNestedInput
+    givenRatings?: ClientSatisfactionUncheckedUpdateManyWithoutUserNestedInput
+    clientConversations?: ConversationUncheckedUpdateManyWithoutClientNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    gaImportRuns?: GaImportRunUncheckedUpdateManyWithoutRequestedByNestedInput
+    receivedMessages?: MessageUncheckedUpdateManyWithoutRecipientNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    queries?: QueryUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
+    clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
+    userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
+    sproutSocialAccounts?: UserToSproutSocialAccountUncheckedUpdateManyWithoutUserNestedInput
+    Log?: LogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageCreateWithoutRepliesInput = {
@@ -83509,6 +85142,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -83548,6 +85182,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -83586,6 +85221,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -83625,6 +85261,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -83776,6 +85413,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -83815,6 +85453,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -83859,6 +85498,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -83898,6 +85538,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -84036,6 +85677,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -84075,6 +85717,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -84124,6 +85767,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -84163,6 +85807,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -84611,6 +86256,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -84650,6 +86296,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -84931,6 +86578,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -84970,6 +86618,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -85063,6 +86712,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -85102,6 +86752,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -85151,6 +86802,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -85190,6 +86842,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -86791,6 +88444,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -86830,6 +88484,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -86868,6 +88523,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -86907,6 +88563,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -87023,6 +88680,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -87062,6 +88720,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -87106,6 +88765,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -87145,6 +88805,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -87330,6 +88991,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -87369,6 +89031,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -87451,6 +89114,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -87490,6 +89154,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -87670,6 +89335,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -87709,6 +89375,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -87807,6 +89474,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -87846,6 +89514,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -87906,6 +89575,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -87945,6 +89615,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -88027,6 +89698,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -88066,6 +89738,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -88581,6 +90254,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MemoryCreateWithoutUserInput = {
+    id?: string
+    content: string
+    queryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MemoryUncheckedCreateWithoutUserInput = {
+    id?: string
+    content: string
+    queryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MemoryCreateOrConnectWithoutUserInput = {
+    where: MemoryWhereUniqueInput
+    create: XOR<MemoryCreateWithoutUserInput, MemoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type MemoryCreateManyUserInputEnvelope = {
+    data: MemoryCreateManyUserInput | MemoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutClientsInput = {
     id?: string
     email?: string | null
@@ -88607,6 +90306,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     company?: CompanyCreateNestedOneWithoutUsersInput
     role: RoleCreateNestedOneWithoutUsersInput
@@ -88646,6 +90346,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
@@ -88684,6 +90385,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
     role: RoleCreateNestedOneWithoutUsersInput
@@ -88722,6 +90424,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
@@ -89275,6 +90978,34 @@ export namespace Prisma {
     data: XOR<TicketCommentUpdateManyMutationInput, TicketCommentUncheckedUpdateManyWithoutAuthorInput>
   }
 
+  export type MemoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: MemoryWhereUniqueInput
+    update: XOR<MemoryUpdateWithoutUserInput, MemoryUncheckedUpdateWithoutUserInput>
+    create: XOR<MemoryCreateWithoutUserInput, MemoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type MemoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: MemoryWhereUniqueInput
+    data: XOR<MemoryUpdateWithoutUserInput, MemoryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MemoryUpdateManyWithWhereWithoutUserInput = {
+    where: MemoryScalarWhereInput
+    data: XOR<MemoryUpdateManyMutationInput, MemoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MemoryScalarWhereInput = {
+    AND?: MemoryScalarWhereInput | MemoryScalarWhereInput[]
+    OR?: MemoryScalarWhereInput[]
+    NOT?: MemoryScalarWhereInput | MemoryScalarWhereInput[]
+    id?: StringFilter<"Memory"> | string
+    content?: StringFilter<"Memory"> | string
+    queryId?: StringFilter<"Memory"> | string
+    createdAt?: DateTimeFilter<"Memory"> | Date | string
+    updatedAt?: DateTimeFilter<"Memory"> | Date | string
+    userId?: StringFilter<"Memory"> | string
+  }
+
   export type UserUpsertWithoutClientsInput = {
     update: XOR<UserUpdateWithoutClientsInput, UserUncheckedUpdateWithoutClientsInput>
     create: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
@@ -89312,6 +91043,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -89351,6 +91083,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -89545,6 +91278,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -89584,6 +91318,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     emailClients?: UserToEmailClientUncheckedCreateNestedManyWithoutUserInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
@@ -89633,6 +91368,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -89672,6 +91408,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -89732,6 +91469,7 @@ export namespace Prisma {
     assignedTickets?: TicketCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentCreateNestedManyWithoutAuthorInput
+    memories?: MemoryCreateNestedManyWithoutUserInput
     accountRep?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutAccountRepInput
     company?: CompanyCreateNestedOneWithoutUsersInput
@@ -89771,6 +91509,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAssignedToInput
     clientTickets?: TicketUncheckedCreateNestedManyWithoutClientInput
     ticketComments?: TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+    memories?: MemoryUncheckedCreateNestedManyWithoutUserInput
     clients?: UserUncheckedCreateNestedManyWithoutAccountRepInput
     settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
     userToGaAccounts?: UserToGaAccountUncheckedCreateNestedManyWithoutUserInput
@@ -89853,6 +91592,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -89892,6 +91632,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     userToGaAccounts?: UserToGaAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -89940,6 +91681,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -89978,6 +91720,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -91002,6 +92745,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     accountRep?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
@@ -91040,6 +92784,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput
@@ -92396,6 +94141,14 @@ export namespace Prisma {
     ticketId: string
   }
 
+  export type MemoryCreateManyUserInput = {
+    id?: string
+    content: string
+    queryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserCreateManyAccountRepInput = {
     id?: string
     email?: string | null
@@ -92993,6 +94746,30 @@ export namespace Prisma {
     ticketId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type MemoryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemoryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemoryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    queryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserUpdateWithoutAccountRepInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -93019,6 +94796,7 @@ export namespace Prisma {
     assignedTickets?: TicketUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUpdateManyWithoutUserNestedInput
     clients?: UserUpdateManyWithoutAccountRepNestedInput
     company?: CompanyUpdateOneWithoutUsersNestedInput
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -93057,6 +94835,7 @@ export namespace Prisma {
     assignedTickets?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
     clientTickets?: TicketUncheckedUpdateManyWithoutClientNestedInput
     ticketComments?: TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    memories?: MemoryUncheckedUpdateManyWithoutUserNestedInput
     clients?: UserUncheckedUpdateManyWithoutAccountRepNestedInput
     settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
     emailClients?: UserToEmailClientUncheckedUpdateManyWithoutUserNestedInput

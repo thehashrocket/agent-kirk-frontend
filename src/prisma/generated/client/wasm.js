@@ -408,6 +408,15 @@ exports.Prisma.RoleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MemoryScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  queryId: 'queryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   content: 'content',
@@ -859,6 +868,7 @@ exports.Prisma.ModelName = {
   GaSourceDaily: 'GaSourceDaily',
   Log: 'Log',
   Role: 'Role',
+  Memory: 'Memory',
   Message: 'Message',
   MessageAttachment: 'MessageAttachment',
   Notification: 'Notification',

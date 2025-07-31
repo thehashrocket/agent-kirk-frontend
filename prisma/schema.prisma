@@ -322,7 +322,7 @@ model GaSourceDaily {
 }
 
 model Log {
-  id               String   @id @default(cuid())
+  id               String  @id @default(cuid())
   eventMessage     String?
   eventType        String?
   errorMessage     String?
@@ -332,52 +332,52 @@ model Log {
   nodeName         String?
   payload          Json?
   queryId          String?
-  query            Query?   @relation(fields: [queryId], references: [id])
+  query            Query?  @relation(fields: [queryId], references: [id])
   sourceReferences Json?
   userId           String?
-  user             User?    @relation(fields: [userId], references: [id])
+  user             User?   @relation(fields: [userId], references: [id])
   workflowName     String?
 
   // Environment & Context Fields
-  environment      String?
-  serviceName      String?
-  version          String?
+  environment String?
+  serviceName String?
+  version     String?
 
   // Request/Response Tracking
-  requestId        String?
-  sessionId        String?
-  ipAddress        String?
-  userAgent        String?
+  requestId String?
+  sessionId String?
+  ipAddress String?
+  userAgent String?
 
   // Performance & Monitoring
-  duration         Int?
-  memoryUsage      Int?
-  cpuUsage         Float?
+  duration    Int?
+  memoryUsage Int?
+  cpuUsage    Float?
 
   // Security & Audit
-  severity         String?
-  isAuthenticated  Boolean?
-  permissions      Json?
+  severity        String?
+  isAuthenticated Boolean?
+  permissions     Json?
 
   // LLM-Specific Fields
-  modelName        String?
-  tokenUsage       Json?
-  temperature      Float?
-  maxTokens        Int?
+  modelName   String?
+  tokenUsage  Json?
+  temperature Float?
+  maxTokens   Int?
 
   // Client-Specific Fields
-  clientId         String?
-  pageUrl          String?
-  componentName    String?
+  clientId      String?
+  pageUrl       String?
+  componentName String?
 
   // Enhanced Error Tracking
-  errorCode        String?
-  errorCategory    String?
-  retryCount       Int?
+  errorCode     String?
+  errorCategory String?
+  retryCount    Int?
 
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([userId])
   @@index([queryId])
   @@index([createdAt])
@@ -395,6 +395,16 @@ model Role {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   users     User[]
+}
+
+model Memory {
+  id        String   @id @default(cuid())
+  content   String
+  queryId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation("UserToMemory", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Message {
@@ -849,6 +859,7 @@ model User {
   assignedTickets      Ticket[]                    @relation("AssignedTickets")
   clientTickets        Ticket[]                    @relation("ClientTickets")
   ticketComments       TicketComment[]
+  memories             Memory[]                    @relation("UserToMemory")
   accountRep           User?                       @relation("AccountRepToClient", fields: [accountRepId], references: [id])
   clients              User[]                      @relation("AccountRepToClient")
   company              Company?                    @relation(fields: [companyId], references: [id])
