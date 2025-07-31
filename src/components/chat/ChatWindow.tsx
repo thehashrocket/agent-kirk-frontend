@@ -23,6 +23,7 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Message } from './Message';
 import { Message as MessageType, MessageStatus } from '@/types/chat';
+import { useEffect, useRef } from 'react';
 
 /**
  * Props for the ChatWindow component.
@@ -64,19 +65,29 @@ interface ChatWindowProps {
  * - Proper ARIA roles
  */
 export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onRateMessage }: ChatWindowProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   return (
-    <div className="flex flex-col space-y-4" role="log" aria-live="polite" aria-label="Chat messages">
-      {messages.map((message) => (
-        <Message
-          key={message.id}
-          {...message}
-          onRate={onRateMessage}
-        />
-      ))}
-      {/* {isLoading && (
+    <ScrollArea className="h-full">
+      <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
+        {messages.map((message) => (
+          <Message
+            key={message.id}
+            {...message}
+            onRate={onRateMessage}
+          />
+        ))}
+        {/* {isLoading && (
           <LoadingIndicator message="Loading messages" />
         )} */}
-    </div>
+        <div ref={scrollRef} />
+      </div>
+    </ScrollArea>
   );
-} 
+}
