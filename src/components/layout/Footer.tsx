@@ -13,6 +13,7 @@
 'use client'
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from 'next/navigation';
 
 /**
  * @component Footer
@@ -31,9 +32,13 @@ import Image from "next/image";
  */
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  // Hide footer on chat route
+  if (pathname === '/chat') return null;
 
   return (
-    <footer className="border-t bg-gradient-to-r from-primary/5 via-primary/10 to-background backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
+    <footer className="fixed bottom-0 z-50 w-full border-t bg-gradient-to-r from-primary/5 via-primary/10 to-background backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto py-6 px-4">
         {/* Show items in a row and justify-between space between them. */}
         <div className="flex flex-row justify-between space-x-4">
@@ -64,7 +69,7 @@ export function Footer() {
               className="h-8 w-auto"
             />
           </Link>
-        </div>
+                 </div>
       </div>
     </footer>
   );

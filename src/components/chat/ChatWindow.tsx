@@ -20,10 +20,8 @@
 
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Message as MessageComponent } from './Message';
-import { LoadingIndicator } from './LoadingIndicator';
+import { Message } from './Message';
 import { Message as MessageType, MessageStatus } from '@/types/chat';
 
 /**
@@ -68,9 +66,9 @@ interface ChatWindowProps {
 export function ChatWindow({ messages, isLoading, gaAccountId, gaPropertyId, onRateMessage }: ChatWindowProps) {
 
   return (
-    <div className="flex flex-col space-y-4 p-4" role="log" aria-live="polite" aria-label="Chat messages">
+    <div className="flex flex-col space-y-4" role="log" aria-live="polite" aria-label="Chat messages">
       {messages.map((message) => (
-        <MessageComponent
+        <Message
           key={message.id}
           {...message}
           onRate={onRateMessage}
