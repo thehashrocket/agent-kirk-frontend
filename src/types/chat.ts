@@ -21,6 +21,7 @@ export interface Message {
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
+  timestampUpdatedAt: string;
   status?: MessageStatus;
   rating?: -1 | 0 | 1;
 }

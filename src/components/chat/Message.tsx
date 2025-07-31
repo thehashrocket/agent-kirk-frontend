@@ -66,6 +66,7 @@ interface MessageProps {
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
+  timestampUpdatedAt: string;
   status?: MessageStatus;
   rating?: -1 | 0 | 1;
   onRate?: (messageId: string, rating: -1 | 1) => void;
@@ -76,6 +77,7 @@ export const Message = React.memo(function Message({
   content,
   role,
   timestamp,
+  timestampUpdatedAt,
   status,
   rating = 0,
   onRate
@@ -145,7 +147,9 @@ export const Message = React.memo(function Message({
         )}
 
         <div className="absolute -bottom-5 right-0 text-xs text-muted-foreground">
-          {timestamp}
+          {/* if message status is completed, show the timestampUpdatedAt otherwise show the timestamp */}
+          {status === MESSAGE_STATUS.COMPLETED && timestampUpdatedAt}
+          {status !== MESSAGE_STATUS.COMPLETED && timestamp}
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@
 
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Message } from './Message';
-import { Message as MessageType, MessageStatus } from '@/types/chat';
+import { Message as MessageType } from '@/types/chat';
 import { useEffect, useRef } from 'react';
 
 /**

@@ -392,6 +392,7 @@ export default function ChatPage() {
         content: message,
         role: 'user',
         timestamp: new Date().toISOString(),
+        timestampUpdatedAt: new Date().toISOString(),
         status: MESSAGE_STATUS.COMPLETED
       };
 
@@ -401,6 +402,7 @@ export default function ChatPage() {
         content: '',
         role: 'assistant',
         timestamp: new Date().toISOString(),
+        timestampUpdatedAt: new Date().toISOString(),
         status: MESSAGE_STATUS.PROCESSING
       };
 
@@ -463,12 +465,14 @@ export default function ChatPage() {
           content: data.userQuery.content,
           role: 'user',
           timestamp: data.userQuery.createdAt,
+          timestampUpdatedAt: data.userQuery.updatedAt,
           status: MESSAGE_STATUS.COMPLETED
         }, {
           id: data.assistantResponse.id,
           content: data.assistantResponse.content || 'An error occurred',
           role: 'assistant',
           timestamp: data.assistantResponse.createdAt,
+          timestampUpdatedAt: data.assistantResponse.updatedAt,
           status: apiStatusToMessageStatus(data.assistantResponse.status)
         }];
       });
