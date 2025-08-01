@@ -401,13 +401,6 @@ exports.Prisma.LogScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.RoleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.MemoryScalarFieldEnum = {
   id: 'id',
   content: 'content',
@@ -513,6 +506,13 @@ exports.Prisma.QueryScalarFieldEnum = {
   metadata: 'metadata',
   lineGraphData: 'lineGraphData',
   pieGraphData: 'pieGraphData'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -776,6 +776,62 @@ exports.Prisma.UserToEmailClientScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserToUspsClientScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  uspsClientId: 'uspsClientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UspsCampaignScalarFieldEnum = {
+  id: 'id',
+  campaignName: 'campaignName',
+  order: 'order',
+  reportId: 'reportId',
+  sector: 'sector',
+  sendDate: 'sendDate',
+  type: 'type',
+  uspsClientId: 'uspsClientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UspsCampaignSummaryScalarFieldEnum = {
+  id: 'id',
+  finalScanCount: 'finalScanCount',
+  mailDate: 'mailDate',
+  numberDelivered: 'numberDelivered',
+  percentDelivered: 'percentDelivered',
+  percentFinalScan: 'percentFinalScan',
+  percentOnTime: 'percentOnTime',
+  percentScanned: 'percentScanned',
+  pieces: 'pieces',
+  reportId: 'reportId',
+  scanDate: 'scanDate',
+  totalScanned: 'totalScanned',
+  uspsCampaignId: 'uspsCampaignId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UspsCampaignZipStatsScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  scans: 'scans',
+  uspsCampaignId: 'uspsCampaignId',
+  zipCode: 'zipCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UspsClientScalarFieldEnum = {
+  id: 'id',
+  clientName: 'clientName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
@@ -867,7 +923,6 @@ exports.Prisma.ModelName = {
   GaChannelDaily: 'GaChannelDaily',
   GaSourceDaily: 'GaSourceDaily',
   Log: 'Log',
-  Role: 'Role',
   Memory: 'Memory',
   Message: 'Message',
   MessageAttachment: 'MessageAttachment',
@@ -876,6 +931,7 @@ exports.Prisma.ModelName = {
   ParsedQueryData: 'ParsedQueryData',
   ParsedQuerySummary: 'ParsedQuerySummary',
   Query: 'Query',
+  Role: 'Role',
   Session: 'Session',
   SproutFacebookAnalytics: 'SproutFacebookAnalytics',
   SproutFacebookPost: 'SproutFacebookPost',
@@ -895,6 +951,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   UserSettings: 'UserSettings',
   UserToEmailClient: 'UserToEmailClient',
+  UserToUspsClient: 'UserToUspsClient',
+  UspsCampaign: 'UspsCampaign',
+  UspsCampaignSummary: 'UspsCampaignSummary',
+  UspsCampaignZipStats: 'UspsCampaignZipStats',
+  UspsClient: 'UspsClient',
   VerificationToken: 'VerificationToken'
 };
 

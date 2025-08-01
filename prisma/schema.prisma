@@ -389,14 +389,6 @@ model Log {
   @@index([errorCode])
 }
 
-model Role {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  users     User[]
-}
-
 model Memory {
   id        String   @id @default(cuid())
   content   String
@@ -535,6 +527,14 @@ model Query {
   @@index([userId])
   @@index([status])
   @@index([conversationId])
+}
+
+model Role {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  users     User[]
 }
 
 model Session {
@@ -869,6 +869,7 @@ model User {
   userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
   sproutSocialAccounts UserToSproutSocialAccount[]
   Log                  Log[]
+  UserToUspsClient     UserToUspsClient[]
 }
 
 model UserSettings {
@@ -895,6 +896,81 @@ model UserToEmailClient {
   @@unique([userId, emailClientId])
   @@index([userId])
   @@index([emailClientId])
+}
+
+model UserToUspsClient {
+  id           String     @id @default(cuid())
+  userId       String
+  uspsClientId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  uspsClient   UspsClient @relation(fields: [uspsClientId], references: [id], onDelete: Cascade) // Clients can have multiple users
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade) // Users can be linked to multiple USPS clients
+
+  @@unique([userId, uspsClientId])
+  @@index([userId])
+  @@index([uspsClientId])
+}
+
+model UspsCampaign {
+  id                  String                 @id @default(cuid())
+  campaignName        String
+  order               String
+  reportId            String
+  sector              String
+  sendDate            DateTime               @db.Date
+  type                String
+  uspsClientId        String
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @default(now()) @updatedAt
+  uspsCampaignZips    UspsCampaignZipStats[] @relation("UspsCampaignToZipStats")
+  uspsCampaignSummary UspsCampaignSummary[]  @relation("UspsCampaignToSummary")
+  UspsClient          UspsClient             @relation("UspsClientToCampaigns", fields: [uspsClientId], references: [id]) // Campaigns belong to a USPS client
+
+  @@index([campaignName])
+}
+
+model UspsCampaignSummary {
+  id               String       @id @default(cuid())
+  finalScanCount   Int
+  mailDate         DateTime     @db.Date
+  numberDelivered  Int
+  percentDelivered Float
+  percentFinalScan Float
+  percentOnTime    Float
+  percentScanned   Float
+  pieces           Int
+  reportId         String
+  scanDate         DateTime     @db.Date
+  totalScanned     Int
+  uspsCampaignId   String
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @default(now()) @updatedAt
+  UspsCampaign     UspsCampaign @relation("UspsCampaignToSummary", fields: [uspsCampaignId], references: [id])
+
+  @@index([scanDate, mailDate, uspsCampaignId, reportId])
+}
+
+model UspsCampaignZipStats {
+  id             String       @id @default(cuid())
+  date           DateTime     @db.Date
+  scans          Int
+  uspsCampaignId String
+  zipCode        String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now()) @updatedAt
+  UspsCampaign   UspsCampaign @relation("UspsCampaignToZipStats", fields: [uspsCampaignId], references: [id])
+
+  @@index([uspsCampaignId])
+}
+
+model UspsClient {
+  id               String             @id @default(cuid())
+  clientName       String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  uspsCampaigns    UspsCampaign[]     @relation("UspsClientToCampaigns") // Clients can have multiple campaigns
+  UserToUspsClient UserToUspsClient[] // Users can be linked to multiple USPS clients
 }
 
 model VerificationToken {
