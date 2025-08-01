@@ -13,6 +13,8 @@ import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { LoadingDots } from './LoadingDots';
 import { MessageStatus, MESSAGE_STATUS } from '@/types/chat';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 // Lazy load the chart modal to prevent unnecessary renders
 const ChartPreviewModal = lazy(() => import('./ChartPreviewModal').then(mod => ({ default: mod.ChartPreviewModal })));
@@ -87,6 +89,7 @@ export const Message = React.memo(function Message({
   const shouldShowCharts = !isUser && status === MESSAGE_STATUS.COMPLETED;
   const currentProcessingMessage = useCyclingMessage(FUNNY_PROCESSING_MESSAGES, 2000);
 
+  dayjs.extend(utc);
 
   const containerClasses = cn(
     'flex w-full space-x-2',
@@ -100,9 +103,9 @@ export const Message = React.memo(function Message({
   );
 
 
-  // Format timestamps to local date and time
-  const formattedTimestamp = timestamp ? dayjs(timestamp).format('MMM D, YYYY h:mm A') : '';
-  const formattedTimestampUpdatedAt = timestampUpdatedAt ? dayjs(timestampUpdatedAt).format('MMM D, YYYY h:mm A') : '';
+  // Format timestamps to local date and time, assuming input is UTC
+  const formattedTimestamp = timestamp ? dayjs.utc(timestamp).local().format('MMM D, YYYY h:mm A') : '';
+  const formattedTimestampUpdatedAt = timestampUpdatedAt ? dayjs.utc(timestampUpdatedAt).local().format('MMM D, YYYY h:mm A') : '';
 
   return (
     <div className={containerClasses}>
