@@ -191,6 +191,8 @@ export default function ChatPage() {
       const data = await response.json();
       // Format the conversations and ensure no duplicates by using a Map
       const conversationMap = new Map();
+      // Sort conversations by updatedAt in descending order
+      data.sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
       data.forEach((conv: any) => {
         if (!conversationMap.has(conv.id)) {
           conversationMap.set(conv.id, {
