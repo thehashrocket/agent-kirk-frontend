@@ -2,9 +2,9 @@
  * @fileoverview LLM Chat Webhook Route
  * This route handles incoming webhooks from the LLM service for chat completions.
  * It processes responses and errors, updates the database, and sends notifications.
- * 
+ *
  * @route POST /api/llm/chat/webhook
- * 
+ *
  * File Path: src/app/api/llm/chat/webhook/route.ts
  */
 
@@ -68,25 +68,26 @@ const WebhookRequestSchema = z.object({
 
 /**
  * Handles incoming webhook POST requests from the LLM service
- * 
+ *
  * @param request - The incoming Next.js request object
  * @returns NextResponse with appropriate status and message
- * 
+ *
  * @throws {z.ZodError} When request validation fails
  * @throws {Error} For any other unexpected errors
  */
 export async function POST(request: NextRequest) {
+  let log;
   try {
     // Parse and validate the webhook payload
     const body = await request.json();
 
     // Extract query ID from multiple possible sources for reliability
     let queryId = body.queryId || request.headers.get('x-query-id') || '';
-    
+
     // Return 400 if no query ID is found
     if (!queryId) {
       return NextResponse.json(
-        { 
+        {
           error: 'Invalid request: No query ID found in body or headers',
           receivedBody: body,
           receivedHeaders: Object.fromEntries(request.headers.entries())
@@ -116,8 +117,48 @@ export async function POST(request: NextRequest) {
         error: 'webhook validation error',
         receivedData: validatedData
       });
+      // Log the error with additional context
+      log = await prisma.log.create({
+        data: {
+          eventType: 'webhook_validation_error',
+          eventMessage: 'Webhook validation failed',
+          errorMessage: 'Invalid webhook data',
+          errorStackTrace: JSON.stringify(result.error.errors),
+          payload: {
+            data: JSON.stringify(validatedData),
+            metadata: JSON.stringify(metadata)
+          },
+          queryId: validatedData.queryId,
+          userId: body.userId || 'unknown',
+          serviceName: 'llm-chat',
+          version: process.env.npm_package_version || 'unknown',
+          requestId: validatedData.queryId,
+          ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'unknown',
+          userAgent: request.headers.get('user-agent') || 'unknown',
+          severity: 'error',
+          isAuthenticated: body.isAuthenticated || false,
+          permissions: {
+            canRead: body.permissions?.canRead || false,
+            canWrite: body.permissions?.canWrite || false,
+            canDelete: body.permissions?.canDelete || false,
+            canUpdate: body.permissions?.canUpdate || false,
+          },
+          modelName: body.modelName || 'unknown',
+          tokenUsage: {
+            inputTokens: body.tokenUsage?.inputTokens || 0,
+            outputTokens: body.tokenUsage?.outputTokens || 0,
+          },
+          clientId: body.clientId || 'unknown',
+          pageUrl: body.pageUrl || 'unknown',
+          componentName: body.componentName || 'unknown',
+          errorCode: body.errorCode || 'unknown',
+          errorCategory: body.errorCategory || 'validation',
+          retryCount: body.retryCount || 0,
+        },
+      });
+
       return NextResponse.json(
-        { 
+        {
           error: 'Invalid webhook data',
           details: result.error.errors,
           receivedData: validatedData
@@ -138,7 +179,7 @@ export async function POST(request: NextRequest) {
         receivedData: validatedData
       });
       return NextResponse.json(
-        { 
+        {
           error: 'Query not found',
           queryId: validatedData.queryId,
           receivedData: validatedData
@@ -149,7 +190,7 @@ export async function POST(request: NextRequest) {
 
     // Prevent duplicate processing of completed queries
     if (query.status === 'COMPLETED' || query.status === 'FAILED') {
-      return NextResponse.json({ 
+      return NextResponse.json({
         success: true,
         message: 'Query already processed'
       });
@@ -166,6 +207,44 @@ export async function POST(request: NextRequest) {
         },
       });
 
+      log = await prisma.log.create({
+        data: {
+          eventType: 'webhook_error',
+          eventMessage: 'Webhook processing failed',
+          errorMessage: validatedData.output || 'Unknown error',
+          payload: {
+            data: JSON.stringify(validatedData),
+            metadata: JSON.stringify(metadata)
+          },
+          queryId: validatedData.queryId,
+          userId: query.userId,
+          serviceName: 'llm-chat',
+          version: process.env.npm_package_version || 'unknown',
+          requestId: validatedData.queryId,
+          ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'unknown',
+          userAgent: request.headers.get('user-agent') || 'unknown',
+          severity: 'error',
+          isAuthenticated: body.isAuthenticated || false,
+          permissions: {
+            canRead: body.permissions?.canRead || false,
+            canWrite: body.permissions?.canWrite || false,
+            canDelete: body.permissions?.canDelete || false,
+            canUpdate: body.permissions?.canUpdate || false,
+          },
+          modelName: body.modelName || 'unknown',
+          tokenUsage: {
+            inputTokens: body.tokenUsage?.inputTokens || 0,
+            outputTokens: body.tokenUsage?.outputTokens || 0,
+          },
+          clientId: body.clientId || 'unknown',
+          pageUrl: body.pageUrl || 'unknown',
+          componentName: body.componentName || 'unknown',
+          errorCode: body.errorCode || 'unknown',
+          errorCategory: body.errorCategory || 'processing',
+          retryCount: body.retryCount || 0,
+        },
+      });
+
       await prisma.notification.create({
         data: {
           type: 'QUERY_COMPLETE',
@@ -174,7 +253,7 @@ export async function POST(request: NextRequest) {
           userId: query.userId,
         },
       });
-    } 
+    }
     // Handle success case: Update query with response and create notification
     else if (validatedData.success) {
       try {
@@ -197,7 +276,7 @@ export async function POST(request: NextRequest) {
               status: parsedData.status,
             },
           });
-          
+
           // Create notification
           // Notify use if the query is completed or in progress or failed.
           if (parsedData.status === 'COMPLETED') {
@@ -228,10 +307,71 @@ export async function POST(request: NextRequest) {
               },
             });
           }
+          // Log the successful processing
+
+          // If prasedData.status is 'COMPLETED', log the success
+          // if parsedData.status is "IN_PROGRESS", log the in-progress state
+          // if parsedData.status is "FAILED", log the failure
+          let eventType: string;
+          let eventMessage: string;
+          switch (parsedData.status) {
+            case 'COMPLETED':
+              eventType = 'webhook_success';
+              eventMessage = 'Webhook processed successfully';
+              break;
+            case 'IN_PROGRESS':
+              eventType = 'webhook_in_progress';
+              eventMessage = 'Webhook processing in progress';
+              break;
+            case 'FAILED':
+              eventType = 'webhook_failed';
+              eventMessage = 'Webhook processing failed';
+              break;
+            default:
+              eventType = 'webhook_unknown';
+              eventMessage = 'Webhook status unknown';
+          }
+
+          log = await tx.log.create({
+            data: {
+              eventType: eventType,
+              eventMessage: eventMessage,
+              payload: {
+                data: JSON.stringify(parsedData),
+                metadata: JSON.stringify(metadata)
+              },
+              queryId: parsedData.queryId,
+              userId: query.userId,
+              serviceName: 'llm-chat',
+              version: process.env.npm_package_version || 'unknown',
+              requestId: parsedData.queryId,
+              ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'unknown',
+              userAgent: request.headers.get('user-agent') || 'unknown',
+              severity: 'info',
+              isAuthenticated: body.isAuthenticated || false,
+              permissions: {
+                canRead: body.permissions?.canRead || false,
+                canWrite: body.permissions?.canWrite || false,
+                canDelete: body.permissions?.canDelete || false,
+                canUpdate: body.permissions?.canUpdate || false,
+              },
+              modelName: body.modelName || 'unknown',
+              tokenUsage: {
+                inputTokens: body.tokenUsage?.inputTokens || 0,
+                outputTokens: body.tokenUsage?.outputTokens || 0,
+              },
+              clientId: body.clientId || 'unknown',
+              pageUrl: body.pageUrl || 'unknown',
+              componentName: body.componentName || 'unknown',
+              errorCode: body.errorCode || 'unknown',
+              errorCategory: body.errorCategory || 'processing',
+              retryCount: body.retryCount || 0,
+            },
+          });
         });
 
       } catch (error) {
-        
+
         // Update query status to failed
         await prisma.query.update({
           where: { id: validatedData.queryId },
@@ -251,10 +391,56 @@ export async function POST(request: NextRequest) {
           },
         });
 
+        console.error('[Webhook] Error processing analytics data:', {
+          error: error instanceof Error ? error.message : 'Unknown error',
+          queryId: validatedData.queryId,
+          receivedData: validatedData
+        });
+
+        log = await prisma.log.create({
+          data: {
+            eventType: 'webhook_processing_error',
+            eventMessage: 'Error processing webhook data',
+            payload: {
+              data: JSON.stringify(validatedData),
+              metadata: JSON.stringify(metadata)
+            },
+            queryId: validatedData.queryId,
+            serviceName: 'llm-chat',
+            version: process.env.npm_package_version || 'unknown',
+            requestId: validatedData.queryId,
+            ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('remote-addr') || 'unknown',
+            userAgent: request.headers.get('user-agent') || 'unknown',
+            severity: 'info',
+            isAuthenticated: body.isAuthenticated || false,
+            permissions: {
+              canRead: body.permissions?.canRead || false,
+              canWrite: body.permissions?.canWrite || false,
+              canDelete: body.permissions?.canDelete || false,
+              canUpdate: body.permissions?.canUpdate || false,
+            },
+            modelName: body.modelName || 'unknown',
+            tokenUsage: {
+              inputTokens: body.tokenUsage?.inputTokens || 0,
+              outputTokens: body.tokenUsage?.outputTokens || 0,
+            },
+            temperature: body.temperature || 0.7,
+            maxTokens: body.maxTokens || 1000,  // Default max tokens
+            clientId: body.clientId || 'unknown',
+            pageUrl: body.pageUrl || 'unknown',
+            componentName: body.componentName || 'unknown',
+            errorCode: body.errorCode || 'unknown',
+            errorCategory: body.errorCategory || 'processing',
+            retryCount: body.retryCount || 0,
+          },
+        });
+
         return NextResponse.json(
           { error: 'Failed to process analytics data' },
           { status: 500 }
         );
+
+
       }
     }
 
@@ -275,7 +461,7 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}
 
 /**
  * Parses the LLM service response
