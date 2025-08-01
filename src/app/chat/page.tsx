@@ -498,9 +498,9 @@ export default function ChatPage() {
    * Updates a message in the conversation with new content and status
    */
   const updateMessageInConversation = (
-    conversationId: string, 
-    queryId: string, 
-    content: string, 
+    conversationId: string,
+    queryId: string,
+    content: string,
     status: MessageStatus
   ) => {
     queryClient.setQueryData(['conversation-messages', conversationId], (oldData: Message[] = []) => {
@@ -535,7 +535,7 @@ export default function ChatPage() {
     data: { status: string; response: string | null }
   ) => {
     const hasResponse = data.response && data.response.trim() !== '';
-    
+
     if (hasResponse) {
       const status = data.status === QueryStatus.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.ERROR;
       updateMessageInConversation(conversationId, queryId, data.response || '', status);
@@ -544,8 +544,8 @@ export default function ChatPage() {
     // Handle FAILED status specifically
     if (data.status === QueryStatus.FAILED) {
       updateMessageInConversation(
-        conversationId, 
-        queryId, 
+        conversationId,
+        queryId,
         data.response || 'An error occurred while processing your request.',
         MESSAGE_STATUS.ERROR
       );
@@ -583,7 +583,7 @@ export default function ChatPage() {
         // Check if there's a response and it has changed
         const hasResponse = data.response && data.response.trim() !== '';
         const responseChanged = hasResponse && (
-          lastResponse !== data.response || 
+          lastResponse !== data.response ||
           lastUpdatedAt !== data.updatedAt
         );
 
@@ -604,8 +604,8 @@ export default function ChatPage() {
       } catch (error) {
         // Update the processing message to show the error
         updateMessageInConversation(
-          conversationId, 
-          queryId, 
+          conversationId,
+          queryId,
           'Error checking status. Please refresh the page.',
           MESSAGE_STATUS.ERROR
         );
@@ -617,8 +617,8 @@ export default function ChatPage() {
     const timeoutId = setTimeout(() => {
       clearInterval(pollInterval);
       updateMessageInConversation(
-        conversationId, 
-        queryId, 
+        conversationId,
+        queryId,
         'Request timed out. Please try again or check notifications.',
         MESSAGE_STATUS.ERROR
       );
@@ -911,7 +911,7 @@ export default function ChatPage() {
               />
             </div>
 
-            <div className="border-t p-4">
+            <div className="border-t p-4 sticky bottom-0 bg-background z-10">
               <ChatInput onSend={handleSendMessage} />
             </div>
           </div>
@@ -919,7 +919,7 @@ export default function ChatPage() {
           <div className="flex flex-col flex-1">
             {/* New Chat Interface - Show when no conversation is selected */}
             <div className="flex-1 overflow-y-auto p-4">
-              <div className="max-w-4xl mx-auto">
+              <div className="mx-auto">
                 <div className="text-center mb-8">
                   <h1 className="text-2xl font-bold mb-2 text-primary uppercase">Welcome to Agent Kirk</h1>
                   <p className="text-muted-foreground">
@@ -928,8 +928,7 @@ export default function ChatPage() {
                 </div>
               </div>
             </div>
-
-            <div className="border-t p-4">
+            <div className="border-t p-4 sticky bottom-0 bg-background z-10">
               <ChatInput onSend={handleSendMessage} />
             </div>
           </div>
@@ -937,4 +936,4 @@ export default function ChatPage() {
       </div>
     </div>
   );
-} 
+}

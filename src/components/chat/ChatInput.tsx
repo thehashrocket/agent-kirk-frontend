@@ -2,14 +2,14 @@
  * @file src/components/chat/ChatInput.tsx
  * Chat input component that handles message composition and suggested responses.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Auto-expanding textarea
  * - Suggested response buttons
  * - Loading state handling
  * - Enter to send (with shift+enter for new line)
  * - Responsive design
- * 
+ *
  * Layout:
  * - Horizontally scrollable suggested responses
  * - Expandable input area
@@ -48,18 +48,18 @@ interface ChatInputProps {
 /**
  * @component ChatInput
  * Client Component that renders the chat input area with suggested responses.
- * 
+ *
  * Features:
  * - Dynamic textarea height adjustment
  * - Keyboard shortcuts (Enter to send, Shift+Enter for new line)
  * - Suggested response selection
  * - Loading state handling
- * 
+ *
  * Layout:
  * - Horizontally scrollable suggested responses at top
  * - Expandable textarea with send button
  * - Responsive design for all screen sizes
- * 
+ *
  * Accessibility:
  * - Proper ARIA labels
  * - Keyboard navigation support
@@ -98,24 +98,24 @@ export function ChatInput({
   return (
     <div className="space-y-4">
       {suggestedResponses.length > 0 && (
-          <div className="flex space-x-2 p-1">
-            {suggestedResponses.map((response) => (
-              <Button
-                key={response.id}
-                variant="secondary"
-                className="shrink-0 whitespace-nowrap"
-                onClick={() => {
-                  setMessage(response.text);
-                  if (textareaRef.current) {
-                    textareaRef.current.focus();
-                  }
-                }}
-                aria-label={`Use suggested response: ${response.text}`}
-              >
-                {response.text}
-              </Button>
-            ))}
-          </div>
+        <div className="flex space-x-2 p-1">
+          {suggestedResponses.map((response) => (
+            <Button
+              key={response.id}
+              variant="secondary"
+              className="shrink-0 whitespace-nowrap"
+              onClick={() => {
+                setMessage(response.text);
+                if (textareaRef.current) {
+                  textareaRef.current.focus();
+                }
+              }}
+              aria-label={`Use suggested response: ${response.text}`}
+            >
+              {response.text}
+            </Button>
+          ))}
+        </div>
       )}
       <div className="flex space-x-2">
         <Textarea
@@ -140,4 +140,4 @@ export function ChatInput({
       </div>
     </div>
   );
-} 
+}
