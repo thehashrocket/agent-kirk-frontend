@@ -126,7 +126,8 @@ export async function POST(request: NextRequest) {
           errorStackTrace: JSON.stringify(result.error.errors),
           payload: {
             data: JSON.stringify(validatedData),
-            metadata: JSON.stringify(metadata)
+            metadata: JSON.stringify(metadata),
+            body: JSON.stringify(body)
           },
           queryId: validatedData.queryId,
           userId: body.userId || 'unknown',
@@ -214,7 +215,8 @@ export async function POST(request: NextRequest) {
           errorMessage: validatedData.output || 'Unknown error',
           payload: {
             data: JSON.stringify(validatedData),
-            metadata: JSON.stringify(metadata)
+            metadata: JSON.stringify(metadata),
+            body: JSON.stringify(body)
           },
           queryId: validatedData.queryId,
           userId: query.userId,
@@ -332,13 +334,14 @@ export async function POST(request: NextRequest) {
               eventMessage = 'Webhook status unknown';
           }
 
-          log = await tx.log.create({
+          await tx.log.create({
             data: {
               eventType: eventType,
               eventMessage: eventMessage,
               payload: {
                 data: JSON.stringify(parsedData),
-                metadata: JSON.stringify(metadata)
+                metadata: JSON.stringify(metadata),
+                body: JSON.stringify(body)
               },
               queryId: parsedData.queryId,
               userId: query.userId,
@@ -403,7 +406,8 @@ export async function POST(request: NextRequest) {
             eventMessage: 'Error processing webhook data',
             payload: {
               data: JSON.stringify(validatedData),
-              metadata: JSON.stringify(metadata)
+              metadata: JSON.stringify(metadata),
+              body: JSON.stringify(body)
             },
             queryId: validatedData.queryId,
             serviceName: 'llm-chat',
