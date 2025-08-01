@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus, User, Building2, Database } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import dayjs from 'dayjs';
 
 interface GaProperty {
     id: string;
@@ -56,6 +57,8 @@ export default function ConversationTitle({
         await onToggleStar();
     };
 
+    const formattedTimestamp = dayjs(timestamp).format('MMM D, YYYY h:mm A');
+
     return (
         <div className="w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-3 py-3 flex flex-col gap-y-2 rounded-sm">
             <div
@@ -102,10 +105,10 @@ export default function ConversationTitle({
                 <div className="flex flex-row items-center gap-x-3">
                     <time
                         className="text-xs md:text-sm text-muted-foreground whitespace-nowrap"
-                        dateTime={timestamp}
+                        dateTime={formattedTimestamp}
                         aria-label="Last updated"
                     >
-                        {timestamp}
+                        {formattedTimestamp}
                     </time>
 
                 </div>

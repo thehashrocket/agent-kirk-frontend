@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { LoadingDots } from './LoadingDots';
 import { MessageStatus, MESSAGE_STATUS } from '@/types/chat';
+import dayjs from 'dayjs';
 
 // Lazy load the chart modal to prevent unnecessary renders
 const ChartPreviewModal = lazy(() => import('./ChartPreviewModal').then(mod => ({ default: mod.ChartPreviewModal })));
@@ -85,7 +86,8 @@ export const Message = React.memo(function Message({
   const isUser = role === 'user';
   const shouldShowCharts = !isUser && status === MESSAGE_STATUS.COMPLETED;
   const currentProcessingMessage = useCyclingMessage(FUNNY_PROCESSING_MESSAGES, 2000);
-  
+
+
   const containerClasses = cn(
     'flex w-full space-x-2',
     isUser ? 'justify-end' : 'justify-start'
@@ -97,11 +99,15 @@ export const Message = React.memo(function Message({
     status === MESSAGE_STATUS.ERROR && 'bg-destructive text-destructive-foreground'
   );
 
+
+  // Format timestamps to local date and time
+  const formattedTimestamp = timestamp ? dayjs(timestamp).format('MMM D, YYYY h:mm A') : '';
+  const formattedTimestampUpdatedAt = timestampUpdatedAt ? dayjs(timestampUpdatedAt).format('MMM D, YYYY h:mm A') : '';
+
   return (
     <div className={containerClasses}>
       <div className={messageClasses}>
         <MessageContent content={content} />
-        
         {status === MESSAGE_STATUS.PROCESSING && (
           <div className="flex items-center space-x-2 text-xs opacity-70 mt-2">
             <span className="transition-opacity duration-300">
@@ -110,19 +116,16 @@ export const Message = React.memo(function Message({
             <LoadingDots />
           </div>
         )}
-
         {status === MESSAGE_STATUS.ERROR && (
           <div className="text-xs text-destructive-foreground/70">
             Failed to process response
           </div>
         )}
-
         {shouldShowCharts && (
           <div className="mt-2">
             <LazyChartPreviewModal queryId={id} />
           </div>
         )}
-
         {!isUser && status === MESSAGE_STATUS.COMPLETED && onRate && (
           <div className="mt-2 flex items-center space-x-2">
             <Button
@@ -145,11 +148,10 @@ export const Message = React.memo(function Message({
             </Button>
           </div>
         )}
-
         <div className="absolute -bottom-5 right-0 text-xs text-muted-foreground">
-          {/* if role is user, show the timestamp, if role is assistant, show the timestampUpdatedAt */}
-          {role === 'user' && timestamp}
-          {role === 'assistant' && timestampUpdatedAt}
+          {/* if role is user, show the formatted timestamp, if role is assistant, show the formatted timestampUpdatedAt */}
+          {role === 'user' && formattedTimestamp}
+          {role === 'assistant' && formattedTimestampUpdatedAt}
         </div>
       </div>
     </div>
