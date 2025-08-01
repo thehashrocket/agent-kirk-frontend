@@ -402,7 +402,7 @@ model Memory {
   content   String
   queryId   String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
   userId    String
   user      User     @relation("UserToMemory", fields: [userId], references: [id], onDelete: Cascade)
 }
