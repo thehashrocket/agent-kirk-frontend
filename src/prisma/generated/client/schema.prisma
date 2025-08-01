@@ -927,6 +927,7 @@ model UspsCampaign {
   uspsCampaignSummary UspsCampaignSummary[]  @relation("UspsCampaignToSummary")
   UspsClient          UspsClient             @relation("UspsClientToCampaigns", fields: [uspsClientId], references: [id]) // Campaigns belong to a USPS client
 
+  @@unique([campaignName])
   @@index([campaignName])
 }
 
@@ -948,6 +949,7 @@ model UspsCampaignSummary {
   updatedAt        DateTime     @default(now()) @updatedAt
   UspsCampaign     UspsCampaign @relation("UspsCampaignToSummary", fields: [uspsCampaignId], references: [id])
 
+  @@unique([scanDate, uspsCampaignId])
   @@index([scanDate, mailDate, uspsCampaignId, reportId])
 }
 
