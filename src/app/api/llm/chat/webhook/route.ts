@@ -291,14 +291,7 @@ export async function POST(request: NextRequest) {
               },
             });
           } else if (parsedData.status === 'IN_PROGRESS') {
-            await tx.notification.create({
-              data: {
-                type: NotificationType.QUERY_IN_PROGRESS,
-                title: 'Query In Progress',
-                content: 'Your query is being processed. Please wait a moment.',
-                userId: query.userId,
-              },
-            });
+            // don't both the user with a notification for in-progress status
           } else if (parsedData.status === 'FAILED') {
             await tx.notification.create({
               data: {
