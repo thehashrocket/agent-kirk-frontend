@@ -28772,7 +28772,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Log.
      */
-    data: XOR<LogCreateInput, LogUncheckedCreateInput>
+    data?: XOR<LogCreateInput, LogUncheckedCreateInput>
   }
 
   /**
