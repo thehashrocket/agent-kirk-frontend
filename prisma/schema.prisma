@@ -915,11 +915,11 @@ model UserToUspsClient {
 model UspsCampaign {
   id                  String                 @id @default(cuid())
   campaignName        String
-  order               String
+  order               String?
   reportId            String
-  sector              String
+  sector              String?
   sendDate            DateTime               @db.Date
-  type                String
+  type                String?
   uspsClientId        String
   createdAt           DateTime               @default(now())
   updatedAt           DateTime               @default(now()) @updatedAt

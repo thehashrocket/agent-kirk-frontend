@@ -2,7 +2,7 @@
  * @file src/app/client/profile/page.tsx
  * Client profile management page that allows users to view and update their profile information.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Profile information display
  * - Password change functionality
@@ -59,24 +59,24 @@ interface UserProfile {
  * @component ProfilePage
  * @path src/app/client/profile/page.tsx
  * Client Component that renders the profile management interface.
- * 
+ *
  * Features:
  * - Display of user's name and email
  * - Password change form with validation
  * - Real-time form validation
  * - Toast notifications for action feedback
  * - Loading state handling
- * 
+ *
  * Form Validation:
  * - Passwords must match
  * - Password must be at least 6 characters
  * - All fields are required
- * 
+ *
  * Error Handling:
  * - Displays validation errors with toast notifications
  * - Handles API errors gracefully
  * - Shows loading state during data fetch
- * 
+ *
  * Layout:
  * - Responsive container with max width
  * - Consistent spacing using Tailwind's spacing scale
@@ -102,11 +102,11 @@ export default function ProfilePage() {
    * Handles password change request.
    * Validates passwords and sends update request to the API.
    * Shows success/error feedback via toast notifications.
-   * 
+   *
    * Validation:
    * - Checks if passwords match
    * - Ensures minimum password length
-   * 
+   *
    * @returns {Promise<void>}
    * @throws Will show error toast if API request fails
    */
@@ -196,9 +196,34 @@ export default function ProfilePage() {
               />
             </div>
             <Button onClick={handleChangePassword}>Change Password</Button>
+            {/* Trigger a test email using the mailgun route */}
+            <Button
+              variant="outline"
+              onClick={async () => {
+                try {
+                  const response = await fetch('/api/mailgun', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      to: 'Jason Shultzz <jason@test.com>',
+                      subject: 'Test Email from Profile Page',
+                      text: 'This is a test email sent from the profile page using Mailgun.',
+                    }),
+                  });
+                  if (!response.ok) {
+                    throw new Error('Failed to send test email');
+                  }
+                  toast.success('Test email sent successfully');
+                } catch (error) {
+                  toast.error('Failed to send test email');
+                }
+              }}
+            >Send Test Email</Button>
           </CardContent>
         </Card>
       </div>
     </div>
   );
-} 
+}

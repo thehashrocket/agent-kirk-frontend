@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "public"."UspsCampaign" ALTER COLUMN "order" DROP NOT NULL,
+ALTER COLUMN "sector" DROP NOT NULL,
+ALTER COLUMN "type" DROP NOT NULL;
