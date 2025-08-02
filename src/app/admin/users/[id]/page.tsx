@@ -315,6 +315,38 @@ export default function UserDetailsPage() {
                                 <AvatarFallback>{user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
                             </Avatar>
                         </div>
+                        <div className="flex flex-row items-center justify-end mt-4">
+                            {/* Reset Password Button. When clicked, it sends a request to the mailgun api
+                            using the password_reset template using the variable link to send a password reset link */}
+                            <Button
+                                variant="outline"
+                                onClick={async () => {
+                                    try {
+                                        const response = await fetch('/api/mailgun', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                to: user.email,
+                                                email_template: 'password reset',
+                                                link: `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?userId=${user.id}`
+                                            }),
+                                        });
+
+                                        if (!response.ok) {
+                                            throw new Error('Failed to send password reset email');
+                                        }
+
+                                        toast.success('Password reset email sent successfully');
+                                    } catch (error) {
+                                        toast.error('Failed to send password reset email');
+                                    }
+                                }}
+                            >
+                                Reset Password
+                            </Button>
+                        </div>
                     </CardContent>
                 </Card>
 

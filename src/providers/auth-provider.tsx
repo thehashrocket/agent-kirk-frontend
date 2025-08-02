@@ -18,7 +18,7 @@ const ROLE_DASHBOARDS = {
   CLIENT: '/client/dashboard'
 } as const;
 
-const PUBLIC_PATHS = ['/auth', '/about', '/onboarding'];
+const PUBLIC_PATHS = ['/auth', '/about', '/onboarding', '/reset-password'];
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
@@ -43,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (session?.user) {
       const role = session.user.role;
       const user = session.user;
-      
+
       // Check if client needs to complete onboarding
       if (role === 'CLIENT' && !user.companyId) {
         // Client without company should go to onboarding
@@ -54,9 +54,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // If already on onboarding path, allow access
         return;
       }
-      
+
       const roleDashboard = ROLE_DASHBOARDS[role as keyof typeof ROLE_DASHBOARDS];
-      
+
       // If no valid role dashboard, redirect to home
       if (!roleDashboard) {
         router.push('/');
@@ -101,4 +101,4 @@ export function useAuth() {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-} 
+}

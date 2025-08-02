@@ -142,26 +142,29 @@ export default function ClientsPage() {
    * Displays the new password in a success notification.
    * @param {string} userId - The ID of the client for password reset
    */
-  const handleResetPassword = async (userId: string) => {
+  const handleResetPassword = async (userId: string, email: string) => {
+    {/* Reset Password Button. When clicked, it sends a request to the mailgun api
+      using the password_reset template using the variable link to send a password reset link */}
     try {
-      const newPassword = Math.random().toString(36).slice(-8);
-      const response = await fetch(`/api/users/${userId}`, {
-        method: 'PATCH',
+      const response = await fetch('/api/mailgun', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ password: newPassword }),
+        body: JSON.stringify({
+          to: email,
+          email_template: 'password reset',
+          link: `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?userId=${userId}`
+        }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to reset password');
+        throw new Error('Failed to send password reset email');
       }
 
-      toast.success('Password reset successfully', {
-        description: `New password: ${newPassword}`,
-      });
-    } catch {
-      toast.error('Failed to reset password');
+      toast.success('Password reset email sent successfully');
+    } catch (error) {
+      toast.error('Failed to send password reset email');
     }
   };
   const toggleUserStatus = async (userId: string, isActive: boolean) => {
@@ -362,7 +365,7 @@ export default function ClientsPage() {
                   )}
                   <Button
                     variant="secondary"
-                    onClick={() => handleResetPassword(client.id)}
+                    onClick={() => handleResetPassword(client.id, client.email ?? '')}
                   >
                     Reset Password
                   </Button>
@@ -386,4 +389,4 @@ export default function ClientsPage() {
       </Table>
     </div>
   );
-} 
+}

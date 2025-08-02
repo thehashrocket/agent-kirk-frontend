@@ -4,7 +4,7 @@ import Mailgun from 'mailgun.js';
 
 
 
-const sendSimpleMessage = async (to: string, subject: string, text: string) => {
+const sendSimpleMessage = async (to: string, template: string, link: string) => {
     const mailgun = new Mailgun(FormData);
 
     const mg = mailgun.client({
@@ -16,9 +16,11 @@ const sendSimpleMessage = async (to: string, subject: string, text: string) => {
     try {
         const data = await mg.messages.create("kirk.1905newmedia.com", {
             from: process.env.MAILGUN_FROM,
-            to: ["Jason Shultz <accounts@1905newmedia.com>"],
-            subject: "Hello Jason Shultz",
-            text: "Congratulations Jason Shultz, you just sent an email with Mailgun! You are truly awesome!",
+            to: to,
+            template: template,
+            'h:X-Mailgun-Variables': JSON.stringify({
+                link: link,
+            }),
         });
 
         console.log(data); // logs response data
@@ -30,12 +32,12 @@ const sendSimpleMessage = async (to: string, subject: string, text: string) => {
 
 export async function POST(request: Request) {
     try {
-        const { to, subject, text } = await request.json();
+        const { to, email_template, link } = await request.json();
 
-        if (!to || !subject || !text) {
+        if (!to || !email_template || !link) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
-        await sendSimpleMessage(to, subject, text);
+        await sendSimpleMessage(to, email_template, link);
         return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
     } catch (error) {
         console.error('Error sending email:', error);

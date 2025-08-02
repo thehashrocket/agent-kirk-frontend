@@ -8,20 +8,24 @@
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 /**
- * @component SignIn
- * @path src/app/auth/signin/page.tsx
- * Root component for the sign-in page.
- * Provides a user interface for authentication with multiple sign-in options:
- * - Google OAuth authentication
- * - Magic Link (passwordless) authentication via email
+ * @component SignInContent
+ * Internal component that handles the sign-in logic
  */
-export default function SignIn() {
+function SignInContent() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Check for error or success messages from URL params
+  const urlError = searchParams.get("error");
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   /**
    * Handles Google OAuth sign-in process.
@@ -46,24 +50,33 @@ export default function SignIn() {
   const handleMagicLinkSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
+    setMessage("");
+
     try {
       const result = await signIn("email", {
         email,
         redirect: false,
+        callbackUrl,
       });
 
       if (result?.error) {
+        setError("Failed to send magic link. Please try again.");
         console.error("Error sending magic link:", result.error);
       } else {
-        // Show success message
-        alert("Check your email for the magic link!");
+        setMessage("Check your email for the magic link!");
+        setEmail(""); // Clear the email field
       }
     } catch (error) {
+      setError("An unexpected error occurred. Please try again.");
       console.error("Error sending magic link:", error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Display URL error if present
+  const displayError = error || (urlError === "Verification" ? "The magic link was invalid or has expired." : "");
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -73,6 +86,19 @@ export default function SignIn() {
             Sign in to your account
           </h2>
         </div>
+
+        {/* Display error or success messages */}
+        {displayError && (
+          <div className="rounded-md bg-red-50 p-4">
+            <div className="text-sm text-red-700">{displayError}</div>
+          </div>
+        )}
+        {message && (
+          <div className="rounded-md bg-green-50 p-4">
+            <div className="text-sm text-green-700">{message}</div>
+          </div>
+        )}
+
         <div className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -129,4 +155,27 @@ export default function SignIn() {
       </div>
     </div>
   );
-} 
+}
+
+/**
+ * @component SignIn
+ * @path src/app/auth/signin/page.tsx
+ * Root component for the sign-in page.
+ * Provides a user interface for authentication with multiple sign-in options:
+ * - Google OAuth authentication
+ * - Magic Link (passwordless) authentication via email
+ */
+export default function SignIn() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-2 text-sm text-gray-600">Loading...</p>
+        </div>
+      </div>
+    }>
+      <SignInContent />
+    </Suspense>
+  );
+}

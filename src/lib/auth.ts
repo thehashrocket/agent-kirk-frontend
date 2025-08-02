@@ -2,7 +2,7 @@
  * @file src/lib/auth.ts
  * Authentication configuration and type definitions for NextAuth.js.
  * Implements role-based authentication with Google OAuth provider and Prisma adapter.
- * 
+ *
  * Features:
  * - Google OAuth integration
  * - Role-based access control
@@ -13,6 +13,7 @@
 
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
@@ -76,12 +77,69 @@ export const authOptions: AuthOptions = {
         },
       },
     }),
+    EmailProvider({
+      server: {
+        host: process.env.MAILGUN_SMTP_HOST,
+        port: Number(process.env.MAILGUN_SMTP_PORT),
+        auth: {
+          user: process.env.MAILGUN_SMTP_LOGIN,
+          pass: process.env.MAILGUN_SMTP_PASSWORD,
+        },
+      },
+      from: process.env.MAILGUN_FROM_EMAIL,
+      maxAge: 24 * 60 * 60, // Magic link valid for 24 hours
+      sendVerificationRequest: async ({ identifier: email, url, provider }) => {
+        const { host } = new URL(url);
+        const transport = provider.server;
+        const site = host.replace(/^www\./, "");
+
+        // Create a custom email template
+        const html = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <h1 style="color: #333; margin-bottom: 10px;">Sign in to Kirk</h1>
+              <p style="color: #666; font-size: 16px;">Click the link below to sign in to your account</p>
+            </div>
+
+            <div style="background-color: #f8f9fa; padding: 30px; border-radius: 8px; text-align: center; margin: 30px 0;">
+              <a href="${url}"
+                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500; display: inline-block;">
+                Sign in to Kirk
+              </a>
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+              <p style="color: #666; font-size: 14px; margin: 0;">
+                This link will expire in 24 hours and can only be used once.
+              </p>
+              <p style="color: #666; font-size: 14px; margin: 10px 0 0 0;">
+                If you didn't request this email, you can safely ignore it.
+              </p>
+            </div>
+          </div>
+        `;
+
+        const text = `Sign in to Kirk\n\nClick this link to sign in: ${url}\n\nThis link will expire in 24 hours and can only be used once.\n\nIf you didn't request this email, you can safely ignore it.`;
+
+        // Use nodemailer to send the email
+        const nodemailer = require("nodemailer");
+        const transporter = nodemailer.createTransport(transport);
+
+        await transporter.sendMail({
+          to: email,
+          from: provider.from,
+          subject: `Sign in to ${site}`,
+          text,
+          html,
+        });
+      },
+    }),
   ],
   callbacks: {
     /**
      * Handles the sign-in process and user creation/validation.
      * Verifies user existence and role assignment.
-     * 
+     *
      * @param {object} params - Sign in callback parameters
      * @param {User} params.user - User attempting to sign in
      * @param {Account} params.account - OAuth account information
@@ -89,12 +147,74 @@ export const authOptions: AuthOptions = {
      * @returns {Promise<boolean>} Whether to allow sign in
      */
     async signIn({ user, account, profile }) {
+      // Handle email (magic link) authentication
+      if (account?.provider === "email") {
+        try {
+          // Check if user exists in the database
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email! },
+            include: {
+              role: true,
+              company: true
+            },
+          });
+
+          if (!existingUser) {
+            // Create new user with CLIENT role by default
+            const clientRole = await prisma.role.findUnique({
+              where: { name: "CLIENT" },
+            });
+
+            if (!clientRole) {
+              console.error("Client role not found");
+              return false;
+            }
+
+            const newUser = await prisma.user.create({
+              data: {
+                email: user.email!,
+                name: user.name || null,
+                image: user.image || null,
+                roleId: clientRole.id,
+              },
+              include: {
+                role: true,
+              },
+            });
+
+            // Update the user object to be used by NextAuth
+            Object.assign(user, {
+              id: newUser.id,
+              roleId: newUser.roleId,
+              role: newUser.role,
+              companyId: newUser.companyId,
+              company: null,
+            });
+          } else {
+            // Update the user object with existing user's data
+            Object.assign(user, {
+              id: existingUser.id,
+              roleId: existingUser.roleId,
+              role: existingUser.role,
+              companyId: existingUser.companyId,
+              company: existingUser.company,
+            });
+          }
+
+          return true;
+        } catch (error) {
+          console.error("Error in email signIn callback:", error);
+          return false;
+        }
+      }
+
+      // Handle Google OAuth authentication
       if (account?.provider === "google") {
         try {
           // Check if user exists in the database with any email
           const existingUser = await prisma.user.findUnique({
             where: { email: user.email! },
-            include: { 
+            include: {
               role: true,
               accounts: true,
               company: true
@@ -193,8 +313,8 @@ export const authOptions: AuthOptions = {
           } else {
             // Check if this OAuth account is already linked
             const existingAccount = existingUser.accounts.find(
-              acc => acc.provider === account.provider && 
-                    acc.providerAccountId === account.providerAccountId
+              acc => acc.provider === account.provider &&
+                acc.providerAccountId === account.providerAccountId
             );
 
             if (!existingAccount) {
@@ -245,7 +365,7 @@ export const authOptions: AuthOptions = {
     /**
      * Customizes the JWT token creation.
      * Adds user role, companyId and other custom claims to the token.
-     * 
+     *
      * @param {object} params - JWT callback parameters
      * @param {JWT} params.token - Current JWT token
      * @param {User} params.user - User object (only on sign in)
@@ -253,24 +373,24 @@ export const authOptions: AuthOptions = {
      */
     async jwt({ token, user, trigger }) {
       // console.log("JWT Callback - Input:", { token, user, trigger });
-      
+
       // Always fetch fresh user data on update trigger or if no role/company in token
       if (trigger === 'update' || !token.role || token.companyId === undefined) {
         const userWithRoleAndCompany = await prisma.user.findUnique({
           where: { id: token.sub },
           include: { role: true, company: true },
         });
-        
+
         if (userWithRoleAndCompany?.role) {
           token.role = userWithRoleAndCompany.role.name;
         }
         if (userWithRoleAndCompany?.companyId !== undefined) {
           token.companyId = userWithRoleAndCompany.companyId;
         }
-        
+
         // console.log("Refreshed user data in JWT:", userWithRoleAndCompany);
       }
-      
+
       // On initial sign in, set role and company from user object
       if (user?.roleId) {
         if (user.role) {
@@ -280,14 +400,14 @@ export const authOptions: AuthOptions = {
           token.companyId = user.companyId;
         }
       }
-      
+
       // console.log("JWT Callback - Output token:", token);
       return token;
     },
     /**
      * Customizes the session object available to the client.
      * Adds user role, company data and ID from the JWT token.
-     * 
+     *
      * @param {object} params - Session callback parameters
      * @param {Session} params.session - Current session
      * @param {JWT} params.token - Current JWT token
@@ -295,12 +415,12 @@ export const authOptions: AuthOptions = {
      */
     async session({ session, token }) {
       // console.log("Session Callback - Input:", { session, token });
-      
+
       if (session.user) {
         session.user.id = token.sub;
         session.user.role = token.role || 'CLIENT';
         session.user.companyId = token.companyId ?? null;
-        
+
         // Always fetch fresh company data if companyId exists
         if (session.user.companyId) {
           const company = await prisma.company.findUnique({
@@ -311,7 +431,7 @@ export const authOptions: AuthOptions = {
           session.user.company = null;
         }
       }
-      
+
       // console.log("Session Callback - Output session:", session);
       return session;
     }

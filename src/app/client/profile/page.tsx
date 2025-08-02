@@ -208,8 +208,8 @@ export default function ProfilePage() {
                     },
                     body: JSON.stringify({
                       to: 'Jason Shultzz <jason@test.com>',
-                      subject: 'Test Email from Profile Page',
-                      text: 'This is a test email sent from the profile page using Mailgun.',
+                      email_template: 'welcome email',
+                      link: `${process.env.NEXT_PUBLIC_APP_URL}/client/profile`,
                     }),
                   });
                   if (!response.ok) {
