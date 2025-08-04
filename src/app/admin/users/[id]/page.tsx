@@ -112,8 +112,6 @@ export default function UserDetailsPage() {
     const [user, setUser] = useState<TransformedUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isGaAccountDialogOpen, setIsGaAccountDialogOpen] = useState(false);
-    const [isGaPropertyDialogOpen, setIsGaPropertyDialogOpen] = useState(false);
-    const [selectedGaAccount, setSelectedGaAccount] = useState<GaAccount | null>(null);
     const [availableGaAccounts, setAvailableGaAccounts] = useState<GaAccount[]>([]);
     const [selectedAccounts, setSelectedAccounts] = useState<string[]>([]);
     const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
@@ -215,6 +213,14 @@ export default function UserDetailsPage() {
         return response.json();
     };
 
+    const fetchAvailableUspsClientsApi = async (): Promise<UspsClient[]> => {
+        const response = await fetch('/api/admin/available-usps-clients');
+        if (!response.ok) {
+            throw new Error('Failed to fetch available USPS Clients');
+        }
+        return response.json();
+    };
+
     const associateSproutSocialAccount = async (userId: string, accountId: string): Promise<void> => {
         const response = await fetch(`/api/users/${userId}/associate-sprout-social-account`, {
             method: 'POST',
@@ -227,6 +233,24 @@ export default function UserDetailsPage() {
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.error || 'Failed to associate Social Media account');
+        }
+    };
+
+    const associateUspsClient = async (userId: string, clientId: string): Promise<void> => {
+        console.log('Associating USPS Client:', userId, clientId);
+        console.log('Request body:', { uspsClientId: clientId });
+        console.log('Request URL:', `/api/users/${userId}/associate-usps-client`);
+        const response = await fetch(`/api/users/${userId}/associate-usps-client`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ uspsClientId: clientId }),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to associate USPS Client');
         }
     };
 
@@ -269,6 +293,17 @@ export default function UserDetailsPage() {
         }
     };
 
+    const disassociateUspsClient = async (userId: string, clientId: string): Promise<void> => {
+        const response = await fetch(
+            `/api/users/${userId}/associate-usps-client?uspsClientId=${clientId}`,
+            { method: 'DELETE' }
+        );
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to disassociate USPS Client');
+        }
+    };
 
     if (isLoading) {
         return (
@@ -428,6 +463,43 @@ export default function UserDetailsPage() {
                         disassociate: 'Failed to disassociate Email Client'
                     }}
                 />
+
+                {/* USPS Clients - Using shared component */}
+                <AccountManagementSection
+                    title="USPS Clients"
+                    addButtonText="Add USPS Client"
+                    userAccounts={client.uspsClients}
+                    userId={params.id as string}
+                    fetchAvailableAccounts={fetchAvailableUspsClientsApi}
+                    associateAccount={associateUspsClient}
+                    disassociateAccount={disassociateUspsClient}
+                    renderAccountContent={(uspsClient: UspsClient) => (
+                        <>
+                            <h3 className="font-semibold">{uspsClient.clientName}</h3>
+                            <p className="text-sm text-gray-500">Created: {new Date(uspsClient.createdAt).toLocaleDateString()}</p>
+                            <p className="text-sm text-gray-500">Last Updated: {new Date(uspsClient.updatedAt).toLocaleDateString()}</p>
+                        </>
+                    )}
+                    renderAvailableAccount={(uspsClient: UspsClient) => (
+                        <div>
+                            <p className="font-medium">{uspsClient.clientName}</p>
+                            <p className="text-sm text-gray-500">Created: {new Date(uspsClient.createdAt).toLocaleDateString()}</p>
+                        </div>
+                    )}
+                    getAccountId={(uspsClient: UspsClient) => uspsClient.id}
+                    emptyStateMessage="No USPS Clients associated with this client."
+                    successMessage={{
+                        associate: 'USPS Clients updated successfully',
+                        disassociate: 'USPS Client disassociated successfully'
+                    }}
+                    errorMessage={{
+                        fetch: 'Failed to fetch available USPS Clients',
+                        associate: 'Failed to update USPS Clients',
+                        disassociate: 'Failed to disassociate USPS Client'
+                    }}
+                />
+
+
             </div>
         </div>
     );
