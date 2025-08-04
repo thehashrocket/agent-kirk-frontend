@@ -7,7 +7,6 @@ import { Loader2 } from 'lucide-react';
 import { SproutSocialAccountSelector } from './sprout-social-account-selector';
 import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboard';
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
-import { normalizeNames } from '@/lib/utils/normalize-names';
 
 interface SproutSocialMetricsProps {
   selectedAccountId?: string | null;
@@ -19,7 +18,7 @@ interface SproutSocialMetricsProps {
  * @path src/components/channels/sprout-social/sprout-social-metrics.tsx
  * Main component that fetches and displays SproutSocial metrics for a client dashboard.
  * Handles session/auth and data fetching, and renders SproutSocialDashboard.
- * 
+ *
  * Features:
  * - Account selection interface
  * - Data fetching with date range support
@@ -45,11 +44,11 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
     if (!selectedAccountId) return; // Don't fetch if no account is selected
     setIsLoading(true);
     setError(null);
-    
+
     try {
       // Build URL with date parameters if provided
       let url = '/api/client/sprout-social-metrics';
-      
+
       // Calculate default date range if not provided
       if (!dateRange) {
         // Use a fixed reference date to ensure we don't get future dates
@@ -62,35 +61,35 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
           to: lastDayOfMonth
         };
       }
-      
+
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
-      
+
       // Get the selected date range
       const selectedFrom = dateRange.from;
       const selectedTo = dateRange.to;
-      
+
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
       const extendedFrom = new Date(selectedFrom);
       extendedFrom.setFullYear(extendedFrom.getFullYear() - 1);
-      
+
       // Use the extended date range for the API request
       params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
       params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd')); // Original date range for display
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
       params.append('accountId', selectedAccountId);                      // Add account ID
-      
+
       url = `${url}?${params.toString()}`;
-      
+
       const response = await fetch(url);
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch Social Media analytics data');
       }
-      
+
       const metricsData = await response.json();
 
       setData(metricsData);
@@ -125,7 +124,7 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
         onAccountChange={handleAccountChange}
         onAccountObjectChange={setSelectedAccount}
       />
-      
+
       {/* Metrics area: show error, loading, data, or empty state */}
       {error ? (
         <Card>
@@ -143,8 +142,8 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
           </CardContent>
         </Card>
       ) : data ? (
-        <SproutSocialEnhancedDashboard 
-          data={data} 
+        <SproutSocialEnhancedDashboard
+          data={data}
           onDateRangeChange={fetchSproutSocialMetrics}
         />
       ) : (
@@ -158,4 +157,4 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
       )}
     </div>
   );
-} 
+}
