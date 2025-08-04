@@ -866,10 +866,10 @@ model User {
   role                 Role                        @relation(fields: [roleId], references: [id])
   settings             UserSettings?
   emailClients         UserToEmailClient[]
-  userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
   sproutSocialAccounts UserToSproutSocialAccount[]
+  userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
+  uspsClients          UserToUspsClient[]
   Log                  Log[]
-  UserToUspsClient     UserToUspsClient[]
 }
 
 model UserSettings {

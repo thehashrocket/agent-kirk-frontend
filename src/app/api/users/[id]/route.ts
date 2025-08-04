@@ -1,12 +1,12 @@
 /**
  * @fileoverview User Profile API Route
- * 
+ *
  * This route handles user profile operations with role-based access control (RBAC).
  * It supports fetching user profiles based on the following permissions:
  * - Users can access their own profile
  * - Admins can access any profile
  * - Account representatives can access their clients' profiles
- * 
+ *
  * @route GET /api/users/[id]
  * @requires next-auth - For session management
  * @requires @prisma/client - For database operations
@@ -19,13 +19,13 @@ import { prisma } from '@/lib/prisma';
 
 /**
  * Retrieves a user's profile with role-based access control.
- * 
+ *
  * @param {Request} request - The incoming HTTP request
  * @param {Object} context - The route context containing path parameters
  * @param {string} context.params.id - The ID of the user to retrieve
- * 
+ *
  * @returns {Promise<NextResponse>} JSON response containing user data or error
- * 
+ *
  * @throws {401} - When no valid session exists
  * @throws {403} - When user lacks permission to access the profile
  * @throws {404} - When target user or current user is not found
@@ -37,7 +37,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     const session = await getServerSession(authOptions);
     if (!session?.user) {
       return new NextResponse('Unauthorized', { status: 401 });
@@ -80,6 +80,11 @@ export async function GET(
             emailClient: true,
           },
         },
+        uspsClients: {
+          include: {
+            uspsClient: true,
+          },
+        },
         company: true,
       },
     });
@@ -108,7 +113,7 @@ export async function GET(
   } catch (error) {
     return new NextResponse('Internal Server Error', { status: 500 });
   }
-} 
+}
 
 // DELETE /api/users/[id]
 // Soft delete a user

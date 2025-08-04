@@ -11,12 +11,12 @@ import { redirect } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import Link from "next/link";
-import { 
+import {
   getActiveClientsStats,
   getResponseRateStats,
   getClientSatisfactionStats,
   getRecentActivities,
-  type RecentActivity 
+  type RecentActivity
 } from "@/lib/account-rep";
 import { getTicketStats } from "@/lib/services/ticket-service";
 import { formatDuration } from "@/lib/utils";
@@ -100,20 +100,20 @@ async function AccountRepStats({ accountRepId }: { accountRepId: string }) {
  * @path src/app/account-rep/dashboard/page.tsx
  * Displays a single statistic card with title, value, and change indicator.
  * Shows positive changes in green and negative changes in red.
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.data - Statistics data
  * @param {string} props.data.title - Title of the statistic
  * @param {string|number} props.data.value - Current value
  * @param {number} props.data.change - Percentage change
  */
-function StatsCard({ data }: { 
-  data: { 
-    title: string; 
-    value: string | number; 
-    change: number; 
+function StatsCard({ data }: {
+  data: {
+    title: string;
+    value: string | number;
+    change: number;
     icon: React.ReactNode;
-  } 
+  }
 }) {
   return (
     <Card className="p-6">
@@ -174,7 +174,7 @@ async function RecentActivitiesList({ accountRepId }: { accountRepId: string }) 
   return (
     <div className="space-y-4">
       {activities.map((activity) => (
-        <div 
+        <div
           key={activity.id}
           className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
         >
@@ -203,7 +203,7 @@ async function RecentActivitiesList({ accountRepId }: { accountRepId: string }) 
  * - Key performance metrics
  * - Recent client activities feed
  * - Quick access links to main features
- * 
+ *
  * Requires authentication and account representative role.
  * Redirects to sign-in page if not authenticated or unauthorized.
  */
@@ -251,22 +251,22 @@ export default async function AccountRepDashboard() {
         <Card className="p-6">
           <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
           <div className="space-y-4">
-            <Link 
-              href="/account-rep/clients" 
+            <Link
+              href="/account-rep/clients"
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">Client Management</h3>
               <p className="text-sm text-gray-600">View and manage your client accounts</p>
             </Link>
-            {/* <Link 
-              href="/account-rep/tickets" 
+            {/* <Link
+              href="/account-rep/tickets"
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">Support Tickets</h3>
               <p className="text-sm text-gray-600">Handle open support requests</p>
             </Link> */}
-            <Link 
-              href="/account-rep/messages" 
+            <Link
+              href="/account-rep/messages"
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">Messages</h3>
@@ -283,4 +283,4 @@ export default async function AccountRepDashboard() {
       </div>
     </div>
   );
-} 
+}

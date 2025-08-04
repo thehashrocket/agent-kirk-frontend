@@ -11,19 +11,9 @@ import { useParams } from 'next/navigation';
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { normalizeNames } from '@/lib/utils/normalize-names';
@@ -68,6 +58,18 @@ interface User {
       updatedAt: string;
     };
   }[];
+  uspsClients: {
+    uspsClient: {
+      id: string;
+      clientName: string;
+      createdAt: string;
+      updatedAt: string;
+      uspsCampaigns: {
+        id: string;
+        campaignName: string;
+      }[];
+    };
+  }[];
 }
 
 interface GaAccount {
@@ -101,11 +103,19 @@ interface EmailClient {
   updatedAt: string;
 }
 
+interface UspsClient {
+  id: string;
+  clientName: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Interface for the transformed user data that our component uses
-interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts' | 'emailClients'> {
+interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts' | 'emailClients' | 'uspsClients'> {
   gaAccounts: GaAccount[];
   sproutSocialAccounts: SproutSocialAccount[];
   emailClients: EmailClient[];
+  uspsClients: UspsClient[];
 }
 
 export default function ClientDetailsPage() {
@@ -122,7 +132,6 @@ export default function ClientDetailsPage() {
           throw new Error('Failed to fetch client data');
         }
         const data: User = await response.json();
-        // Transform the data to match our component's structure
         const transformedData: TransformedUser = {
           ...data,
           gaAccounts: data.userToGaAccounts?.map(({ gaAccount }) => ({
@@ -146,6 +155,12 @@ export default function ClientDetailsPage() {
             clientName: emailClient.clientName,
             createdAt: emailClient.createdAt,
             updatedAt: emailClient.updatedAt
+          })) || [],
+          uspsClients: data.uspsClients?.map(({ uspsClient }) => ({
+            id: uspsClient.id,
+            clientName: uspsClient.clientName,
+            createdAt: uspsClient.createdAt,
+            updatedAt: uspsClient.updatedAt,
           })) || []
         };
         setClient(transformedData);
@@ -161,6 +176,15 @@ export default function ClientDetailsPage() {
   }, [params.id]);
 
   // API functions for account management
+
+  const fetchAvailableEmailClientsApi = async (): Promise<EmailClient[]> => {
+    const response = await fetch('/api/admin/available-email-clients');
+    if (!response.ok) {
+      throw new Error('Failed to fetch available Email Clients');
+    }
+    return response.json();
+  };
+
   const fetchAvailableSproutSocialAccountsApi = async (): Promise<SproutSocialAccount[]> => {
     const response = await fetch('/api/admin/available-sprout-social-accounts');
     if (!response.ok) {
@@ -169,10 +193,10 @@ export default function ClientDetailsPage() {
     return response.json();
   };
 
-  const fetchAvailableEmailClientsApi = async (): Promise<EmailClient[]> => {
-    const response = await fetch('/api/admin/available-email-clients');
+  const fetchAvailableUspsClientsApi = async (): Promise<UspsClient[]> => {
+    const response = await fetch('/api/admin/available-usps-clients');
     if (!response.ok) {
-      throw new Error('Failed to fetch available Email Clients');
+      throw new Error('Failed to fetch available USPS Clients');
     }
     return response.json();
   };
@@ -189,6 +213,24 @@ export default function ClientDetailsPage() {
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.error || 'Failed to associate Social Media account');
+    }
+  };
+
+  const associateUspsClient = async (userId: string, clientId: string): Promise<void> => {
+    console.log('Associating USPS Client:', userId, clientId);
+    console.log('Request body:', { uspsClientId: clientId });
+    console.log('Request URL:', `/api/users/${userId}/associate-usps-client`);
+    const response = await fetch(`/api/users/${userId}/associate-usps-client`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ uspsClientId: clientId }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to associate USPS Client');
     }
   };
 
@@ -231,6 +273,17 @@ export default function ClientDetailsPage() {
     }
   };
 
+  const disassociateUspsClient = async (userId: string, clientId: string): Promise<void> => {
+    const response = await fetch(
+      `/api/users/${userId}/associate-usps-client?uspsClientId=${clientId}`,
+      { method: 'DELETE' }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to disassociate USPS Client');
+    }
+  };
 
 
 
@@ -256,7 +309,7 @@ export default function ClientDetailsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 pb-16">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Client Details: {client.name}</h1>
       </div>
@@ -360,7 +413,44 @@ export default function ClientDetailsPage() {
             disassociate: 'Failed to disassociate Email Client'
           }}
         />
+
+        {/* USPS Clients - Using shared component */}
+        <AccountManagementSection
+          title="USPS Clients"
+          addButtonText="Add USPS Client"
+          userAccounts={client.uspsClients}
+          userId={params.id as string}
+          fetchAvailableAccounts={fetchAvailableUspsClientsApi}
+          associateAccount={associateUspsClient}
+          disassociateAccount={disassociateUspsClient}
+          renderAccountContent={(uspsClient: UspsClient) => (
+            <>
+              <h3 className="font-semibold">{uspsClient.clientName}</h3>
+              <p className="text-sm text-gray-500">Created: {new Date(uspsClient.createdAt).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500">Last Updated: {new Date(uspsClient.updatedAt).toLocaleDateString()}</p>
+            </>
+          )}
+          renderAvailableAccount={(uspsClient: UspsClient) => (
+            <div>
+              <p className="font-medium">{uspsClient.clientName}</p>
+              <p className="text-sm text-gray-500">Created: {new Date(uspsClient.createdAt).toLocaleDateString()}</p>
+            </div>
+          )}
+          getAccountId={(uspsClient: UspsClient) => uspsClient.id}
+          emptyStateMessage="No USPS Clients associated with this client."
+          successMessage={{
+            associate: 'USPS Clients updated successfully',
+            disassociate: 'USPS Client disassociated successfully'
+          }}
+          errorMessage={{
+            fetch: 'Failed to fetch available USPS Clients',
+            associate: 'Failed to update USPS Clients',
+            disassociate: 'Failed to disassociate USPS Client'
+          }}
+        />
+
+
       </div>
     </div>
   );
-} 
+}

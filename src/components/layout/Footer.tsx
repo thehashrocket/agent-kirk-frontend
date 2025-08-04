@@ -2,7 +2,7 @@
  * @file src/components/layout/Footer.tsx
  * Main footer component that provides branding and copyright information.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Kirk logo branding
  * - Copyright information
@@ -18,13 +18,13 @@ import { usePathname } from 'next/navigation';
 /**
  * @component Footer
  * Client Component that renders the main footer.
- * 
+ *
  * Features:
  * - Kirk logo branding
  * - Copyright information
  * - Responsive design
  * - Consistent styling with header
- * 
+ *
  * Layout:
  * - Full width with container constraints
  * - Centered content
@@ -69,7 +69,7 @@ export function Footer() {
               className="h-8 w-auto"
             />
           </Link>
-                 </div>
+        </div>
       </div>
     </footer>
   );
