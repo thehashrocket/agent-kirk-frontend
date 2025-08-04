@@ -67,6 +67,18 @@ interface User {
             updatedAt: string;
         };
     }[];
+    uspsClients: {
+        uspsClient: {
+            id: string;
+            clientName: string;
+            createdAt: string;
+            updatedAt: string;
+            uspsCampaigns: {
+                id: string;
+                campaignName: string;
+            }[];
+        };
+    }[];
 }
 
 interface GaAccount {
@@ -100,11 +112,19 @@ interface EmailClient {
     updatedAt: string;
 }
 
+interface UspsClient {
+    id: string;
+    clientName: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
 // Interface for the transformed user data that our component uses
-interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts' | 'emailClients'> {
+interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialAccounts' | 'emailClients' | 'uspsClients'> {
     gaAccounts: GaAccount[];
     sproutSocialAccounts: SproutSocialAccount[];
     emailClients: EmailClient[];
+    uspsClients: UspsClient[];
 }
 
 export default function UserDetailsPage() {
@@ -153,6 +173,12 @@ export default function UserDetailsPage() {
                         clientName: emailClient.clientName,
                         createdAt: emailClient.createdAt,
                         updatedAt: emailClient.updatedAt
+                    })) || [],
+                    uspsClients: data.uspsClients?.map(({ uspsClient }) => ({
+                        id: uspsClient.id,
+                        clientName: uspsClient.clientName,
+                        createdAt: uspsClient.createdAt,
+                        updatedAt: uspsClient.updatedAt
                     })) || []
                 };
                 setUser(transformedData);
@@ -468,7 +494,7 @@ export default function UserDetailsPage() {
                 <AccountManagementSection
                     title="USPS Clients"
                     addButtonText="Add USPS Client"
-                    userAccounts={client.uspsClients}
+                    userAccounts={user.uspsClients}
                     userId={params.id as string}
                     fetchAvailableAccounts={fetchAvailableUspsClientsApi}
                     associateAccount={associateUspsClient}
