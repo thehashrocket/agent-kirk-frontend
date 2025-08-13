@@ -6,7 +6,7 @@
 
 'use client';
 
-import { Bell } from 'lucide-react';
+import { Bell, Trash2 } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import {
   Popover,
@@ -42,7 +42,7 @@ interface Notification {
 
 /**
  * NotificationBell component that provides real-time notification functionality.
- * 
+ *
  * Features:
  * - Real-time notification updates (polls every minute)
  * - Unread count badge
@@ -50,7 +50,7 @@ interface Notification {
  * - Click-through to notification links
  * - Toast notifications for new items
  * - Scrollable notification list
- * 
+ *
  * @component
  * @example
  * ```tsx
@@ -68,8 +68,8 @@ export function NotificationBell() {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to mark notification as read');
-      
-      setNotifications(prev => prev.map(n => 
+
+      setNotifications(prev => prev.map(n =>
         n.id === id ? { ...n, isRead: true } : n
       ));
       setUnreadCount(prev => Math.max(0, prev - 1));
@@ -94,7 +94,7 @@ export function NotificationBell() {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to clear all notifications');
-      
+
       setNotifications([]);
       setUnreadCount(0);
     } catch (error) {
@@ -113,11 +113,11 @@ export function NotificationBell() {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Failed to fetch notifications');
         }
-        
+
         const data = await response.json();
         setNotifications(data);
         const newUnreadCount = data.filter((n: Notification) => !n.isRead).length;
-        
+
         // Show toasts for new notifications
         if (newUnreadCount > unreadCount) {
           const newNotifications = data.filter((n: Notification) => !n.isRead).slice(0, newUnreadCount - unreadCount);
@@ -131,7 +131,7 @@ export function NotificationBell() {
             });
           });
         }
-        
+
         setUnreadCount(newUnreadCount);
       } catch (error) {
         console.error('Failed to fetch notifications:', error);
@@ -167,8 +167,8 @@ export function NotificationBell() {
         <div className="p-4 border-b">
           <h4 className="font-semibold">Notifications</h4>
           {/* Clear all notifications button */}
-          <Button variant="ghost" size="sm" className="w-full mt-2" onClick={handleClearAllNotifications}>
-            Clear all
+          <Button variant="destructive" size="sm" className="w-full mt-2" onClick={handleClearAllNotifications}>
+            <Trash2 />Clear all
           </Button>
         </div>
         <ScrollArea className="h-[400px]">
@@ -180,9 +180,8 @@ export function NotificationBell() {
             notifications.map((notification) => (
               <div
                 key={notification.id}
-                className={`p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${
-                  !notification.isRead ? 'bg-blue-50' : ''
-                }`}
+                className={`p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${!notification.isRead ? 'bg-blue-50' : ''
+                  }`}
                 onClick={() => handleNotificationClick(notification)}
               >
                 <div className="flex justify-between items-start mb-1">
@@ -199,4 +198,4 @@ export function NotificationBell() {
       </PopoverContent>
     </Popover>
   );
-} 
+}
