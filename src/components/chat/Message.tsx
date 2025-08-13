@@ -9,7 +9,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { cn } from '@/lib/utils';
 import { MessageContent } from './MessageContent';
 import { Button } from '@/components/ui/button';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Copy } from 'lucide-react';
 import { LoadingDots } from './LoadingDots';
 import { MessageStatus, MESSAGE_STATUS } from '@/types/chat';
 import dayjs from 'dayjs';
@@ -88,6 +88,9 @@ export const Message = React.memo(function Message({
   const isUser = role === 'user';
   const shouldShowCharts = !isUser && status === MESSAGE_STATUS.COMPLETED;
   const currentProcessingMessage = useCyclingMessage(FUNNY_PROCESSING_MESSAGES, 2000);
+  const [copied, setCopied] = useState(false);
+  const [showLiked, setShowLiked] = useState(false);
+  const [showDisliked, setShowDisliked] = useState(false);
 
   dayjs.extend(utc);
 
@@ -131,24 +134,67 @@ export const Message = React.memo(function Message({
         )}
         {!isUser && status === MESSAGE_STATUS.COMPLETED && onRate && (
           <div className="mt-2 flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onRate(id, 1)}
-              className={cn('hover:bg-primary/10', rating === 1 && 'text-primary')}
-              aria-label="Rate response positively"
-            >
-              <ThumbsUp className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onRate(id, -1)}
-              className={cn('hover:bg-primary/10', rating === -1 && 'text-primary')}
-              aria-label="Rate response negatively"
-            >
-              <ThumbsDown className="h-4 w-4" />
-            </Button>
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  onRate(id, 1);
+                  setShowLiked(true);
+                  setTimeout(() => setShowLiked(false), 1500);
+                }}
+                className={cn('hover:bg-primary/10', rating === 1 && 'text-primary')}
+                aria-label="Rate response positively"
+              >
+                <ThumbsUp className="h-4 w-4" />
+              </Button>
+              {showLiked && (
+                <span className="absolute left-1/2 -translate-x-1/2 top-full mt-1 text-xs text-primary bg-muted px-2 py-1 rounded shadow z-10 whitespace-nowrap">
+                  Liked!
+                </span>
+              )}
+            </div>
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  onRate(id, -1);
+                  setShowDisliked(true);
+                  setTimeout(() => setShowDisliked(false), 1500);
+                }}
+                className={cn('hover:bg-primary/10', rating === -1 && 'text-primary')}
+                aria-label="Rate response negatively"
+              >
+                <ThumbsDown className="h-4 w-4" />
+              </Button>
+              {showDisliked && (
+                <span className="absolute left-1/2 -translate-x-1/2 top-full mt-1 text-xs text-primary bg-muted px-2 py-1 rounded shadow z-10 whitespace-nowrap">
+                  Disliked!
+                </span>
+              )}
+            </div>
+            {/* Copy Message Response to Clipboard */}
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  navigator.clipboard.writeText(content);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                }}
+                className="hover:bg-primary/10"
+                aria-label="Copy response to clipboard"
+              >
+                <Copy className="h-4 w-4" />
+              </Button>
+              {copied && (
+                <span className="absolute left-1/2 -translate-x-1/2 top-full mt-1 text-xs text-primary bg-muted px-2 py-1 rounded shadow z-10 whitespace-nowrap">
+                  Copied!
+                </span>
+              )}
+            </div>
           </div>
         )}
         <div className="absolute -bottom-5 right-0 text-xs text-muted-foreground">
