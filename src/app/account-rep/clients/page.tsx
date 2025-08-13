@@ -25,6 +25,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -69,7 +70,8 @@ interface User {
  * - Monitor client status (active/inactive)
  */
 export default function ClientsPage() {
-  const { users, roles, isLoading, isError, mutate } = useUsers();
+  const [showInactive, setShowInactive] = useState(false);
+  const { users, roles, isLoading, isError, mutate } = useUsers({ showInactive });
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     name: '',
@@ -228,6 +230,69 @@ export default function ClientsPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Client Management</h1>
+          <div className="flex items-center space-x-2">
+            <label className="flex items-center gap-2">
+              <Switch
+                checked={showInactive}
+                onCheckedChange={setShowInactive}
+              />
+              Show Inactive Users
+            </label>
+            <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>Create Client</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create New Client</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <Input
+                    placeholder="Name"
+                    value={newUser.name}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, name: e.target.value })
+                    }
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={newUser.email}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, email: e.target.value })
+                    }
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    value={newUser.password}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, password: e.target.value })
+                    }
+                  />
+                  <Button onClick={handleCreateClient}>Create</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+        <p>No clients found. Create a new client to get started.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8 pb-16">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Client Management</h1>
+        <div className="flex items-center space-x-2">
+          <label className="flex items-center gap-2">
+            <Switch
+              checked={showInactive}
+              onCheckedChange={setShowInactive}
+            />
+            Show Inactive Users
+          </label>
           <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
             <DialogTrigger asChild>
               <Button>Create Client</Button>
@@ -265,51 +330,6 @@ export default function ClientsPage() {
             </DialogContent>
           </Dialog>
         </div>
-        <p>No clients found. Create a new client to get started.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="container mx-auto px-4 py-8 pb-16">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Client Management</h1>
-        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>Create Client</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create New Client</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
-              <Input
-                placeholder="Name"
-                value={newUser.name}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, name: e.target.value })
-                }
-              />
-              <Input
-                type="email"
-                placeholder="Email"
-                value={newUser.email}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, email: e.target.value })
-                }
-              />
-              <Input
-                type="password"
-                placeholder="Password"
-                value={newUser.password}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, password: e.target.value })
-                }
-              />
-              <Button onClick={handleCreateClient}>Create</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
 
       <Table>
@@ -324,7 +344,10 @@ export default function ClientsPage() {
         </TableHeader>
         <TableBody>
           {clients.map((client) => (
-            <TableRow key={client.id}>
+            <TableRow
+              key={client.id}
+              className={client.isActive ? '' : 'bg-gray-100'}
+            >
               <TableCell>
                 <Avatar>
                   <AvatarImage
