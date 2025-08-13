@@ -1,20 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { format, subDays } from 'date-fns';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Calendar, TrendingUp, Package, CheckCircle } from 'lucide-react';
+import { Loader2, Calendar, TrendingUp, Package, CheckCircle, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
+import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
 
 interface DirectMailAccount {
     id: string;
@@ -74,6 +67,13 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
     const [dateRange, setDateRange] = useState({
         from: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
         to: format(new Date(), 'yyyy-MM-dd'),
+    });
+
+    // Filter states
+    const [filters, setFilters] = useState({
+        campaignName: '',
+        sendDate: '',
+        lastScanDate: '',
     });
 
     // Fetch available accounts
@@ -151,6 +151,91 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
 
     // Format number with commas
     const formatNumber = (value: number) => value.toLocaleString();
+
+    // Filter data based on current filters
+    const filteredData = useMemo(() => {
+        if (!data?.tableData) return [];
+
+        return data.tableData.filter((row) => {
+            const matchesCampaignName = !filters.campaignName ||
+                row.campaignName.toLowerCase().includes(filters.campaignName.toLowerCase());
+            const matchesSendDate = !filters.sendDate ||
+                row.sendDate.includes(filters.sendDate);
+            const matchesLastScanDate = !filters.lastScanDate ||
+                row.lastScanDate.includes(filters.lastScanDate);
+
+            return matchesCampaignName && matchesSendDate && matchesLastScanDate;
+        });
+    }, [data?.tableData, filters]);
+
+    // Clear all filters
+    const clearFilters = useCallback(() => {
+        setFilters({
+            campaignName: '',
+            sendDate: '',
+            lastScanDate: '',
+        });
+    }, []);
+
+    // Check if any filters are active
+    const hasActiveFilters = useMemo(() => {
+        return Object.values(filters).some(filter => filter !== '');
+    }, [filters]);
+
+    // Table columns configuration
+    const columns: TableColumn<DirectMailTableRow>[] = useMemo(() => [
+        {
+            header: 'Campaign Name',
+            accessor: 'campaignName',
+            sortable: true,
+            render: (value) => <span className="font-medium">{value}</span>
+        },
+        {
+            header: 'Send Date',
+            accessor: 'sendDate',
+            sortable: true,
+        },
+        {
+            header: 'Last Scan Date',
+            accessor: 'lastScanDate',
+            sortable: true,
+        },
+        {
+            header: 'Total Sent',
+            accessor: 'totalSent',
+            align: 'right',
+            sortable: true,
+            render: (value) => formatNumber(value)
+        },
+        {
+            header: 'Scanned',
+            accessor: 'scanned',
+            align: 'right',
+            sortable: true,
+            render: (value) => formatNumber(value)
+        },
+        {
+            header: 'Delivered',
+            accessor: 'delivered',
+            align: 'right',
+            sortable: true,
+            render: (value) => formatNumber(value)
+        },
+        {
+            header: '% On Time',
+            accessor: 'percentOnTime',
+            align: 'right',
+            sortable: true,
+            render: (value) => formatPercentage(value)
+        },
+        {
+            header: '% Delivered',
+            accessor: 'percentDelivered',
+            align: 'right',
+            sortable: true,
+            render: (value) => formatPercentage(value)
+        }
+    ], []);
 
     return (
         <div className="space-y-6">
@@ -273,39 +358,71 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                     <CardHeader>
                         <CardTitle>Campaign Performance</CardTitle>
                         <p className="text-sm text-muted-foreground">
-                            Showing {data.tableData.length} campaigns from {data.dateRange.from} to {data.dateRange.to}
+                            Showing {filteredData.length} of {data.tableData.length} campaigns from {data.dateRange.from} to {data.dateRange.to}
                         </p>
                     </CardHeader>
                     <CardContent>
+                        {/* Filters */}
+                        <div className="mb-6 space-y-4">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-sm font-medium flex items-center gap-2">
+                                    <Search className="h-4 w-4" />
+                                    Filters
+                                </h3>
+                                {hasActiveFilters && (
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={clearFilters}
+                                        className="h-8 px-2 lg:px-3"
+                                    >
+                                        <X className="h-4 w-4 mr-1" />
+                                        Clear
+                                    </Button>
+                                )}
+                            </div>
+                            <div className="grid gap-4 md:grid-cols-3">
+                                <div>
+                                    <Label htmlFor="filter-campaign-name" className="text-xs">Campaign Name</Label>
+                                    <Input
+                                        id="filter-campaign-name"
+                                        placeholder="Search campaigns..."
+                                        value={filters.campaignName}
+                                        onChange={(e) => setFilters(prev => ({ ...prev, campaignName: e.target.value }))}
+                                        className="h-8"
+                                    />
+                                </div>
+                                <div>
+                                    <Label htmlFor="filter-send-date" className="text-xs">Send Date</Label>
+                                    <Input
+                                        id="filter-send-date"
+                                        placeholder="Search send date..."
+                                        value={filters.sendDate}
+                                        onChange={(e) => setFilters(prev => ({ ...prev, sendDate: e.target.value }))}
+                                        className="h-8"
+                                    />
+                                </div>
+                                <div>
+                                    <Label htmlFor="filter-last-scan-date" className="text-xs">Last Scan Date</Label>
+                                    <Input
+                                        id="filter-last-scan-date"
+                                        placeholder="Search scan date..."
+                                        value={filters.lastScanDate}
+                                        onChange={(e) => setFilters(prev => ({ ...prev, lastScanDate: e.target.value }))}
+                                        className="h-8"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Table */}
                         <div className="overflow-x-auto">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>Campaign Name</TableHead>
-                                        <TableHead>Send Date</TableHead>
-                                        <TableHead>Last Scan Date</TableHead>
-                                        <TableHead className="text-right">Total Sent</TableHead>
-                                        <TableHead className="text-right">Scanned</TableHead>
-                                        <TableHead className="text-right">Delivered</TableHead>
-                                        <TableHead className="text-right">% On Time</TableHead>
-                                        <TableHead className="text-right">% Delivered</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {data.tableData.map((row, index) => (
-                                        <TableRow key={`${row.campaignName}-${index}`}>
-                                            <TableCell className="font-medium">{row.campaignName}</TableCell>
-                                            <TableCell>{row.sendDate}</TableCell>
-                                            <TableCell>{row.lastScanDate}</TableCell>
-                                            <TableCell className="text-right">{formatNumber(row.totalSent)}</TableCell>
-                                            <TableCell className="text-right">{formatNumber(row.scanned)}</TableCell>
-                                            <TableCell className="text-right">{formatNumber(row.delivered)}</TableCell>
-                                            <TableCell className="text-right">{formatPercentage(row.percentOnTime)}</TableCell>
-                                            <TableCell className="text-right">{formatPercentage(row.percentDelivered)}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                            <TableSortable
+                                columns={columns}
+                                data={filteredData}
+                                rowKey={(row) => `${row.campaignName}-${row.reportId}`}
+                                initialSort={{ accessor: 'sendDate', direction: 'desc' }}
+                            />
                         </div>
                     </CardContent>
                 </Card>
@@ -313,8 +430,17 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                 <Card>
                     <CardContent className="py-6">
                         <p className="text-center text-muted-foreground">
-                            No Direct Mail campaigns found for the selected date range.
+                            {data && data.tableData.length > 0 && filteredData.length === 0
+                                ? 'No campaigns match the current filters.'
+                                : 'No Direct Mail campaigns found for the selected date range.'}
                         </p>
+                        {data && data.tableData.length > 0 && filteredData.length === 0 && hasActiveFilters && (
+                            <div className="flex justify-center mt-4">
+                                <Button variant="outline" onClick={clearFilters}>
+                                    Clear Filters
+                                </Button>
+                            </div>
+                        )}
                     </CardContent>
                 </Card>
             ) : (
