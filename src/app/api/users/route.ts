@@ -1,22 +1,22 @@
 /**
  * @fileoverview User Management API Route Handler
- * 
+ *
  * This module implements a RESTful API for user management in the application.
  * It provides endpoints for CRUD operations on users with role-based access control (RBAC).
- * 
+ *
  * Key features:
  * - Role-based access control (Admin, Account Rep, Client)
  * - Secure password hashing with bcryptjs
  * - Input validation using Zod schemas
  * - Soft delete functionality
  * - Hierarchical data access patterns
- * 
+ *
  * Endpoints:
  * - GET    /api/users - List users based on role permissions
  * - POST   /api/users - Create new user (Admin/Account Rep only)
  * - PATCH  /api/users/:id - Update user with role-based restrictions
  * - DELETE /api/users/:id - Soft delete user (Admin/Account Rep only)
- * 
+ *
  * @package @kirk/api
  * @module users
  */
@@ -43,7 +43,7 @@ import bcryptjs from 'bcryptjs';
 /**
  * Zod schema for validating user creation requests.
  * Ensures new users have required fields and proper data types.
- * 
+ *
  * @constant {z.ZodObject}
  */
 const createUserSchema = z.object({
@@ -57,7 +57,7 @@ const createUserSchema = z.object({
 /**
  * Zod schema for validating user update requests.
  * All fields are optional as updates can be partial.
- * 
+ *
  * @constant {z.ZodObject}
  */
 const updateUserSchema = z.object({
@@ -70,12 +70,12 @@ const updateUserSchema = z.object({
 
 /**
  * GET handler for retrieving users based on role permissions.
- * 
+ *
  * Access patterns:
  * - Admins: Can see all users
  * - Account Reps: Can see their assigned clients
  * - Clients: Can only see themselves
- * 
+ *
  * @async
  * @function GET
  * @param {NextRequest} request - The incoming request object
@@ -100,9 +100,14 @@ export async function GET(
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Admin can see all users
+    const showInactive = request.nextUrl.searchParams.get('showInactive') === 'true';
+
+    // Admin can see all users, hide inactive users.
     if (currentUser.role.name === 'ADMIN') {
       const users = await prisma.user.findMany({
+        where: {
+          isActive: showInactive ? undefined : true,
+        },
         include: {
           role: true,
           userToGaAccounts: {
@@ -128,6 +133,7 @@ export async function GET(
       const clients = await prisma.user.findMany({
         where: {
           accountRepId: currentUser.id,
+          isActive: showInactive ? undefined : true,
         },
         include: {
           role: true,
@@ -182,12 +188,12 @@ export async function GET(
 
 /**
  * POST handler for creating new users.
- * 
+ *
  * Access patterns:
  * - Admin: Can create any type of user
  * - Account Rep: Can only create client users assigned to them
  * - Client: Cannot create users
- * 
+ *
  * @async
  * @function POST
  * @param {NextRequest} request - The incoming request object
@@ -262,12 +268,12 @@ export async function POST(
 
 /**
  * PATCH handler for updating users.
- * 
+ *
  * Access patterns:
  * - Admin: Can update any user
  * - Account Rep: Can update their assigned clients (except role)
  * - Client: Can only update their own password
- * 
+ *
  * @async
  * @function PATCH
  * @param {NextRequest} request - The incoming request object
@@ -353,15 +359,15 @@ export async function PATCH(
 
 /**
  * DELETE handler for soft-deleting users.
- * 
+ *
  * Access patterns:
  * - Admin: Can delete any user
  * - Account Rep: Can only delete their assigned clients
  * - Client: Cannot delete users
- * 
+ *
  * Note: This implements soft delete by setting isActive to false
  * rather than removing the record from the database.
- * 
+ *
  * @async
  * @function DELETE
  * @param {NextRequest} request - The incoming request object
@@ -423,4 +429,4 @@ export async function DELETE(
     console.error('Error deleting user:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
-} 
+}

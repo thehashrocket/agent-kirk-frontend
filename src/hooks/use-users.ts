@@ -67,7 +67,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
  * - Automatic caching and revalidation
  * - Loading and error states
  * - Data mutation capabilities
- * 
+ *
  * @returns {Object} Hook return object
  * @property {User[] | undefined} users - Array of user objects if available
  * @property {Role[] | undefined} roles - Array of role objects if available
@@ -75,8 +75,9 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
  * @property {boolean} isError - Error state if either fetch fails
  * @property {Function} mutate - Function to trigger data revalidation
  */
-export function useUsers() {
-  const { data: users, error: usersError, mutate } = useSWR<User[]>('/api/users', async (url: string) => {
+export function useUsers({ showInactive = false }: { showInactive?: boolean } = {}) {
+  const usersUrl = `/api/users?showInactive=${showInactive}`;
+  const { data: users, error: usersError, mutate } = useSWR<User[]>(usersUrl, async (url: string) => {
     const response = await fetch(url);
     if (!response.ok) {
       const error = await response.json();
@@ -97,4 +98,4 @@ export function useUsers() {
     isError: usersError || rolesError,
     mutate,
   };
-} 
+}
