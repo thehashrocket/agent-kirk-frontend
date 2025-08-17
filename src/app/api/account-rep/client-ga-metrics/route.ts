@@ -12,10 +12,10 @@ import type { GaMetricsResponse, GaMetricsError } from '@/lib/types/ga-metrics';
 
 /**
  * GET /api/account-rep/client-ga-metrics
- * 
+ *
  * Fetches Google Analytics metrics for a specific client's property.
  * Account reps can only access metrics for their assigned clients.
- * 
+ *
  * Query Parameters:
  * - clientId: The ID of the client whose metrics to fetch (must be assigned to this account rep)
  * - propertyId: The GA property ID to fetch metrics for
@@ -23,11 +23,11 @@ import type { GaMetricsResponse, GaMetricsError } from '@/lib/types/ga-metrics';
  * - to: End date (YYYY-MM-DD)
  * - selectedFrom: Selected start date for display (YYYY-MM-DD)
  * - selectedTo: Selected end date for display (YYYY-MM-DD)
- * 
+ *
  * Authentication:
  * - Requires valid session with ACCOUNT_REP role
  * - Client must be assigned to the authenticated account rep
- * 
+ *
  * Response:
  * - 200: Returns GA metrics data
  * - 400: Bad request (missing parameters)
@@ -39,7 +39,7 @@ import type { GaMetricsResponse, GaMetricsError } from '@/lib/types/ga-metrics';
 export async function GET(request: Request): Promise<NextResponse<GaMetricsResponse | GaMetricsError>> {
   try {
 
-    
+
     // Get authentication
     const session = await getServerSession(authOptions);
 
@@ -74,11 +74,11 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
 
     // Get the URL query parameters
     const { searchParams } = new URL(request.url);
-    
+
     // Get required parameters
     const clientId = searchParams.get('clientId');
     const requestedPropertyId = searchParams.get('propertyId');
-    
+
     if (!clientId) {
       return NextResponse.json(
         { error: 'Client ID is required', code: 'MISSING_CLIENT_ID' },
@@ -92,19 +92,19 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         { status: 400 }
       );
     }
-    
+
     // Parse date params (extended range)
     const fromParam = searchParams.get('from');
     const toParam = searchParams.get('to');
-    
+
     // Parse selected date range (for display)
     const selectedFromParam = searchParams.get('selectedFrom');
     const selectedToParam = searchParams.get('selectedTo');
-    
+
     // Use the extended date range for data fetching
     const dateFrom = fromParam ? new Date(fromParam) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const dateTo = toParam ? new Date(toParam) : new Date();
-    
+
     // Store selected range for reference (or default to same as full range)
     const displayDateFrom = selectedFromParam ? new Date(selectedFromParam) : dateFrom;
     const displayDateTo = selectedToParam ? new Date(selectedToParam) : dateTo;
@@ -193,7 +193,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       );
     }
 
-    const parentAccount = gaAccounts.find((account: any) => 
+    const parentAccount = gaAccounts.find((account: any) =>
       account.gaProperties.some((prop: any) => prop.id === requestedPropertyId)
     );
 
@@ -215,15 +215,15 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       prisma.gaChannelDaily.count({ where: { gaPropertyId } }),
       prisma.gaSourceDaily.count({ where: { gaPropertyId } })
     ]);
-    
+
     // Determine if we need to fetch historical data
-    const needsHistoricalData = kpiDailyCount === 0 || kpiMonthlyCount === 0 || 
-                               channelDailyCount === 0 || sourceDailyCount === 0;
-    
+    const needsHistoricalData = kpiDailyCount === 0 || kpiMonthlyCount === 0 ||
+      channelDailyCount === 0 || sourceDailyCount === 0;
+
     // Set date ranges based on what we need
     let queryDateFrom: Date;
     let queryDateTo: Date = new Date(); // Always use today as the end date
-    
+
     queryDateFrom = new Date(dateFrom);
     queryDateFrom.setFullYear(queryDateFrom.getFullYear() - 1);
 
@@ -273,8 +273,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         orderBy: { date: 'asc' }
       })
     ]);
-
-    console.log('kpiMonthly', kpiMonthly);
 
     const response: GaMetricsResponse = {
       kpiDaily: kpiDaily.length > 0 ? kpiDaily.map(item => ({
@@ -326,7 +324,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
   } catch (error) {
     console.error('Account Rep GA Metrics API - Error:', error);
     return NextResponse.json(
-      { error: 'Internal server error', code: 'INTERNAL_ERROR' }, 
+      { error: 'Internal server error', code: 'INTERNAL_ERROR' },
       { status: 500 }
     );
   }

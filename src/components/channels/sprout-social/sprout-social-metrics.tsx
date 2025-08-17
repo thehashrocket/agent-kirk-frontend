@@ -7,6 +7,7 @@ import { Loader2 } from 'lucide-react';
 import { SproutSocialAccountSelector } from './sprout-social-account-selector';
 import { SproutSocialEnhancedDashboard } from './sprout-social-enhanced-dashboard';
 import type { SproutSocialAccount, SproutSocialMetricsResponse } from './types';
+import { useSearchParams } from 'next/navigation';
 
 interface SproutSocialMetricsProps {
   selectedAccountId?: string | null;
@@ -31,6 +32,8 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState<SproutSocialAccount | null>(null);
+  const searchParams = useSearchParams();
+  const clientId = searchParams.get('clientId');
 
   // Handle account change - call parent callback if provided
   const handleAccountChange = useCallback((accountId: string | null) => {
@@ -47,7 +50,13 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
 
     try {
       // Build URL with date parameters if provided
-      let url = '/api/client/sprout-social-metrics';
+      let url;
+      if (!clientId) {
+        url = '/api/client/sprout-social-metrics';
+      } else {
+        url = `/api/account-rep/sprout-social-metrics`;
+      }
+
 
       // Calculate default date range if not provided
       if (!dateRange) {
@@ -81,6 +90,10 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
       params.append('accountId', selectedAccountId);                      // Add account ID
 
+      // If clientId is available, add it to the request
+      if (clientId) {
+        params.append('clientId', clientId);
+      }
       url = `${url}?${params.toString()}`;
 
       const response = await fetch(url);

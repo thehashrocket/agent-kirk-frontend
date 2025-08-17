@@ -2,7 +2,7 @@
  * @file src/components/channels/email/email-metrics.tsx
  * Main component that fetches and displays Email metrics for a client dashboard.
  * Handles session/auth and data fetching, and renders EmailEnhancedDashboard.
- * 
+ *
  * Features:
  * - Email Client selection interface
  * - Data fetching with date range support
@@ -20,6 +20,7 @@ import { Loader2 } from 'lucide-react';
 import { EmailClientSelector } from './email-client-selector';
 import { EmailEnhancedDashboard } from './email-enhanced-dashboard';
 import type { EmailClient, EmailMetricsResponse } from './types';
+import { useSearchParams } from 'next/navigation';
 
 interface EmailMetricsProps {
   selectedClientId?: string | null;
@@ -31,7 +32,7 @@ interface EmailMetricsProps {
  * @path src/components/channels/email/email-metrics.tsx
  * Main component that fetches and displays Email metrics for a client dashboard.
  * Handles session/auth and data fetching, and renders EmailEnhancedDashboard.
- * 
+ *
  * Features:
  * - Email Client selection interface
  * - Data fetching with date range support
@@ -44,6 +45,8 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedClient, setSelectedClient] = useState<EmailClient | null>(null);
+  const searchParams = useSearchParams();
+  const clientId = searchParams.get('clientId');
 
   // Handle client change - call parent callback if provided
   const handleClientChange = useCallback((clientId: string | null) => {
@@ -55,14 +58,19 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
   // Fetch Email metrics with optional date range
   const fetchEmailMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
     if (!selectedClientId) return; // Don't fetch if no client is selected
-    
+
     setIsLoading(true);
     setError(null);
-    
+
     try {
       // Build URL with date parameters if provided
-      let url = '/api/client/email-metrics';
-      
+      let url;
+      if (!clientId) {
+        url = '/api/client/email-metrics';
+      } else {
+        url = `/api/account-rep/email-metrics`;
+      }
+
       // Calculate default date range if not provided
       if (!dateRange) {
         // Use a fixed reference date to ensure we don't get future dates
@@ -75,35 +83,40 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
           to: lastDayOfMonth
         };
       }
-      
+
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
-      
+
       // Get the selected date range
       const selectedFrom = dateRange.from;
       const selectedTo = dateRange.to;
-      
+
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
       const extendedFrom = new Date(selectedFrom);
       extendedFrom.setFullYear(extendedFrom.getFullYear() - 1);
-      
+
       // Use the extended date range for the API request
       params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
       params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd'));
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
-      params.append('emailClientId', selectedClientId);                        // Add client ID
-      
+      params.append('emailClientId', selectedClientId);
+
+      // Add client ID if available
+      if (clientId) {
+        params.append('clientId', clientId);
+      }
+
       url = `${url}?${params.toString()}`;
-      
+
       const response = await fetch(url);
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch Email analytics data');
       }
-      
+
       const metricsData = await response.json();
       setData(metricsData);
       return metricsData;
@@ -137,14 +150,14 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
         onClientChange={handleClientChange}
         onClientObjectChange={setSelectedClient}
       />
-      
+
       {/* Dynamic Title */}
       {selectedClient && (
         <h2 className="text-xl font-semibold text-primary-700 mb-2">
           {selectedClient.clientName} – Email Analytics
         </h2>
       )}
-      
+
       {/* Metrics area: show error, loading, data, or empty state */}
       {error ? (
         <Card>
@@ -162,8 +175,8 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
           </CardContent>
         </Card>
       ) : data ? (
-        <EmailEnhancedDashboard 
-          data={data} 
+        <EmailEnhancedDashboard
+          data={data}
           onDateRangeChange={fetchEmailMetrics}
         />
       ) : (
@@ -177,4 +190,4 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
       )}
     </div>
   );
-} 
+}

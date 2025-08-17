@@ -9,6 +9,9 @@
 import { useState, useEffect } from 'react';
 import DirectMailMetrics from './direct-mail-metrics';
 import { DirectMailPrintButton } from './DirectMailPrintButton';
+// load user session
+import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * @component DirectMailDashboardContent
@@ -25,12 +28,40 @@ import { DirectMailPrintButton } from './DirectMailPrintButton';
 export function DirectMailDashboardContent() {
     const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
     const [isInitialized, setIsInitialized] = useState(false);
+    const { data: session } = useSession();
+    // Ensure we have a user session to work with
+    const user = session?.user;
+    // Get url parameters if needed
+    const searchParams = useSearchParams();
+    const clientId = searchParams.get('clientId');
 
     // Fetch user's Direct Mail accounts and auto-select the first one
     useEffect(() => {
+        // Check if we have a user session, if not, we can't fetch accounts
+        if (!user) {
+            console.warn('No user session found, skipping account fetch');
+            return;
+        }
         const fetchAndSelectFirstAccount = async () => {
             try {
-                const response = await fetch('/api/client/direct-mail-accounts');
+                // If signed in user is an account rep, fetch their Direct Mail accounts
+                // Otherwise, if signed in user is a client, fetch their Direct Mail accounts
+                let response;
+                if (!user) {
+                    throw new Error('User not authenticated');
+                } else if (user.role === 'ADMIN') {
+                    // Admin user fetching all Direct Mail accounts
+                    // Pass the clientId if available
+                    response = await fetch(`/api/admin/direct-mail-accounts?clientId=${encodeURIComponent(clientId || '')}`);
+                } else if (user.role === 'CLIENT') {
+                    // Client user fetching their Direct Mail accounts
+                    response = await fetch('/api/client/direct-mail-accounts');
+                } else if (user.role === 'ACCOUNT_REP') {
+                    // Account Rep user fetching their Direct Mail accounts
+                    response = await fetch(`/api/account-rep/direct-mail-accounts?clientId=${encodeURIComponent(clientId || '')}`);
+                } else {
+                    throw new Error('Unauthorized user role');
+                }
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.error || 'Failed to fetch Direct Mail Accounts');
@@ -50,7 +81,7 @@ export function DirectMailDashboardContent() {
         if (!isInitialized) {
             fetchAndSelectFirstAccount();
         }
-    }, [selectedAccountId, isInitialized]);
+    }, [selectedAccountId, isInitialized, user]);
 
 
     return (

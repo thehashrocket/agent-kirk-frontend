@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 interface GaChannelSessionsTableProps {
   channelDaily: GaMetricsResponse['channelDaily'];
   dateRange?: { from: Date; to: Date } | null;
+  clientId?: string; // Optional clientId for routing
 }
 
 // Helper to extract YYYYMM from a date string (YYYY-MM-DD)
@@ -22,7 +23,7 @@ type ChannelDailyItem = {
   [key: string]: any;
 };
 
-export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSessionsTableProps) {
+export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: GaChannelSessionsTableProps) {
 
   // Move hooks to top-level
   const [sort, setSort] = React.useState<{ accessor: string; direction: 'asc' | 'desc' }>({ accessor: 'sessions', direction: 'desc' });
@@ -197,7 +198,14 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
     // format the channel name to lowercase and replace spaces with dashes
     const formattedChannel = row.channel.toLowerCase().replace(/\s+/g, '-');
     const encoded = encodeURIComponent(formattedChannel);
-    router.push(`/analytics/channel/${encoded}`);
+    // If clientId is provided, append it to the URL
+    const url = clientId ? `/analytics/channel/${encoded}?clientId=${encodeURIComponent(clientId)}` : `/analytics/channel/${encoded}`;
+    // Use router to navigate
+    if (!router) {
+      console.error('Router is not available for navigation');
+      return;
+    }
+    router.push(url);
   };
 
   // Styling for clickable rows
@@ -230,7 +238,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
       <div className="flex mt-4">
         <div className="font-bold w-2/3">Grand total</div>
         <div className="flex items-center gap-5 ml-auto w-1/3">
-          <div className="font-bold flex justify-end w-1/2">{totals.current.toLocaleString()} sessions</div> 
+          <div className="font-bold flex justify-end w-1/2">{totals.current.toLocaleString()} sessions</div>
           <div className={`font-bold flex justify-end w-1/2 ${totals.percent === null ? 'text-gray-400' : totals.percent > 0 ? 'text-green-600' : totals.percent < 0 ? 'text-red-500' : ''}`}>
             {totals.percent === null ? '—' : (
               <span className="inline-flex items-center gap-1">
@@ -244,4 +252,4 @@ export function GaChannelSessionsTable({ channelDaily, dateRange }: GaChannelSes
       </div>
     </div>
   );
-} 
+}

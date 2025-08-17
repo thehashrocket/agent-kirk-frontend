@@ -21,13 +21,13 @@ interface AccountRepGaMetricsProps {
 /**
  * @component AccountRepGaMetrics
  * Account Rep version of GA metrics component for viewing assigned client analytics data.
- * 
+ *
  * Features:
  * - Client-specific GA account and property selection
  * - Same analytics display as admin dashboard
  * - Account rep-level access to assigned clients' data only
  * - Date range selection and filtering
- * 
+ *
  * @param {AccountRepGaMetricsProps} props - Component props
  */
 export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
@@ -42,14 +42,14 @@ export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
   // Fetch GA metrics with optional date range for the selected client
   const fetchGaMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
     if (!selectedPropertyId || !clientId) return;
-    
+
     setIsLoading(true);
     setError(null);
-    
+
     try {
       // Build URL with date parameters if provided
       let url = '/api/account-rep/client-ga-metrics';
-      
+
       // If no date range is provided, use previous full month as default
       if (!dateRange) {
         const today = new Date();
@@ -60,26 +60,26 @@ export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
         lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
         // First day of previous month
         const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
-        
+
         // Use previous month as default range
         dateRange = {
           from: firstDayOfPreviousMonth,
           to: lastDayOfPreviousMonth
         };
       }
-      
+
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
-      
+
       // Get the selected date range
       const selectedFrom = dateRange.from;
       const selectedTo = dateRange.to;
-      
+
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
       const extendedFrom = new Date(selectedFrom);
       extendedFrom.setFullYear(extendedFrom.getFullYear() - 1);
-      
+
       // Use the extended date range for the API request
       params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
@@ -87,16 +87,16 @@ export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));
       params.append('propertyId', selectedPropertyId);
       params.append('clientId', clientId); // Add client ID for account rep access
-      
+
       url = `${url}?${params.toString()}`;
-      
+
       const response = await fetch(url);
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch analytics data');
       }
-      
+
       const metricsData = await response.json();
       setData(metricsData);
       return metricsData;
@@ -150,14 +150,14 @@ export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
         onAccountObjectChange={setSelectedAccount}
         onPropertyObjectChange={setSelectedProperty}
       />
-      
+
       {/* Dynamic Title */}
       {selectedAccount && selectedProperty && (
         <h2 className="text-xl font-semibold text-primary-700 mb-2">
           {selectedAccount.gaAccountName} – {selectedProperty.gaPropertyName}
         </h2>
       )}
-      
+
       {isLoading ? (
         <Card>
           <CardContent className="py-6">
@@ -168,9 +168,10 @@ export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
           </CardContent>
         </Card>
       ) : data ? (
-        <GaMetricsGrid 
-          data={data} 
+        <GaMetricsGrid
+          data={data}
           onDateRangeChange={fetchGaMetrics}
+          clientId={clientId}
         />
       ) : (
         <Card>
@@ -183,4 +184,4 @@ export function AccountRepGaMetrics({ clientId }: AccountRepGaMetricsProps) {
       )}
     </div>
   );
-} 
+}

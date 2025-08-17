@@ -6,19 +6,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
 import type { SproutSocialAccount, SproutSocialAccountSelectorProps } from './types';
 import { normalizeNames } from '@/lib/utils/normalize-names';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * @component SproutSocialAccountSelector
  * @path src/components/channels/sprout-social/sprout-social-account-selector.tsx
  * Account selector for Social Media accounts associated with the current user.
- * 
+ *
  * Features:
  * - Fetches user's Social Media accounts from API
  * - Dropdown selection interface
  * - Loading and error states
  * - Platform type display
  * - Callback handlers for selection changes
- * 
+ *
  * @param onAccountChange - Callback when account ID changes
  * @param onAccountObjectChange - Callback when account object changes
  */
@@ -31,6 +32,10 @@ export function SproutSocialAccountSelector({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Get url parameters if needed
+  const searchParams = useSearchParams();
+  const clientId = searchParams.get('clientId');
+
   // Fetch user's Social Media accounts
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -38,8 +43,14 @@ export function SproutSocialAccountSelector({
       setError(null);
 
       try {
-        const response = await fetch('/api/client/sprout-social-accounts');
-        
+        let response;
+        if (!clientId) {
+          response = await fetch('/api/client/sprout-social-accounts');
+        } else {
+          response = await fetch(`/api/account-rep/sprout-social-accounts?clientId=${encodeURIComponent(clientId)}`);
+        }
+
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Failed to fetch Social Media accounts');
@@ -145,4 +156,4 @@ export function SproutSocialAccountSelector({
       </div>
     </div>
   );
-} 
+}

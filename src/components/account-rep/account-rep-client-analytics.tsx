@@ -2,7 +2,7 @@
  * @file src/components/account-rep/account-rep-client-analytics.tsx
  * Account Rep client analytics component that allows account reps to select and view their assigned clients' analytics.
  * Provides the same analytics view as the admin dashboard but restricted to the account rep's clients.
- * 
+ *
  * Features:
  * - Client selection dropdown (only account rep's clients)
  * - Google Analytics account and property selection for the chosen client
@@ -65,14 +65,14 @@ interface AccountRepClientAnalyticsProps {
  * @component AccountRepClientAnalytics
  * @path src/components/account-rep/account-rep-client-analytics.tsx
  * Client analytics component for account representatives.
- * 
+ *
  * Features:
  * - Client selection dropdown (filtered to account rep's clients only)
  * - Google Analytics account and property selection for the chosen client
  * - Analytics data display matching the admin dashboard experience
  * - Print functionality for reports
  * - URL state management for selected client
- * 
+ *
  * @param {AccountRepClientAnalyticsProps} props - Component props
  * @param {ClientWithGaData[]} props.clientsWithGaData - Array of clients with their GA data
  * @param {string} [props.selectedClientId] - Optional pre-selected client ID
@@ -192,32 +192,6 @@ export function AccountRepClientAnalytics({
             </div>
             <AccountRepGaMetrics clientId={selectedClient.id} />
           </div>
-
-          {/* SproutSocial Analytics Section */}
-          <div>
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold mb-2">
-                Social Media Analytics - {selectedClient.name || selectedClient.email}
-              </h2>
-              <p className="text-gray-600">
-                Social Media analytics data and insights for this client
-              </p>
-            </div>
-            <AccountRepSproutSocialMetrics clientId={selectedClient.id} />
-          </div>
-
-          {/* Email Analytics Section */}
-          <div>
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold mb-2">
-                Email Analytics - {selectedClient.name || selectedClient.email}
-              </h2>
-              <p className="text-gray-600">
-                Email campaign analytics data and insights for this client
-              </p>
-            </div>
-            <AccountRepEmailMetrics clientId={selectedClient.id} />
-          </div>
         </div>
       ) : (
         <Card>
@@ -240,4 +214,4 @@ export function AccountRepClientAnalytics({
       )}
     </div>
   );
-} 
+}

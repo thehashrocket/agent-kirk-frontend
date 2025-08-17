@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
+import { useSearchParams } from 'next/navigation';
 
 interface DirectMailAccount {
     id: string;
@@ -69,6 +70,9 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         to: format(new Date(), 'yyyy-MM-dd'),
     });
 
+    const searchParams = useSearchParams();
+    const clientId = searchParams.get('clientId');
+
     // Filter states
     const [filters, setFilters] = useState({
         campaignName: '',
@@ -79,7 +83,13 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
     // Fetch available accounts
     const fetchAccounts = useCallback(async () => {
         try {
-            const response = await fetch('/api/client/direct-mail-accounts');
+            let response;
+            // console.log('Fetching Direct Mail accounts for user:', clientId);
+            if (!clientId) {
+                response = await fetch('/api/client/direct-mail-accounts');
+            } else {
+                response = await fetch(`/api/account-rep/direct-mail-accounts?clientId=${encodeURIComponent(clientId)}`);
+            }
             if (!response.ok) {
                 throw new Error('Failed to fetch Direct Mail accounts');
             }
@@ -105,7 +115,14 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                 to: range.to,
             });
 
-            const response = await fetch(`/api/client/direct-mail-metrics?${params.toString()}`);
+            let response;
+            if (!clientId) {
+                response = await fetch(`/api/client/direct-mail-metrics?${params.toString()}`);
+            } else {
+                // Add clientId to the request if available
+                params.append('clientId', clientId);
+                response = await fetch(`/api/account-rep/direct-mail-metrics?${params.toString()}`);
+            }
 
             if (!response.ok) {
                 const errorData = await response.json();

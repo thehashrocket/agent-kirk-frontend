@@ -8,6 +8,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useSearchParams } from 'next/navigation';
 
 export interface EmailClient {
   id: string;
@@ -29,6 +30,8 @@ export function EmailClientSelector({
   const [selectedClientId, setSelectedClientId] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const clientId = searchParams.get('clientId');
 
   // Fetch user's Email Clients
   useEffect(() => {
@@ -37,8 +40,13 @@ export function EmailClientSelector({
       setError(null);
 
       try {
-        const response = await fetch('/api/client/email-clients');
-        
+        let response;
+        if (!clientId) {
+          response = await fetch('/api/client/email-clients');
+        } else {
+          response = await fetch(`/api/account-rep/email-clients?clientId=${encodeURIComponent(clientId)}`);
+        }
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Failed to fetch Email Clients');
@@ -134,4 +142,4 @@ export function EmailClientSelector({
       </CardContent>
     </Card>
   );
-} 
+}

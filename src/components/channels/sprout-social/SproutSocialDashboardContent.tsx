@@ -9,11 +9,12 @@
 import { useState, useEffect } from 'react';
 import SproutSocialMetrics from './sprout-social-metrics';
 import { SproutSocialPrintButton } from './SproutSocialPrintButton';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * @component SproutSocialDashboardContent
  * Manages shared state between the social analytics display and print functionality.
- * 
+ *
  * Features:
  * - Manages selected SproutSocial account state
  * - Auto-selects first available account on mount
@@ -24,24 +25,33 @@ import { SproutSocialPrintButton } from './SproutSocialPrintButton';
 export function SproutSocialDashboardContent() {
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
+  // Get url parameters if needed
+  const searchParams = useSearchParams();
+  const clientId = searchParams.get('clientId');
 
   // Fetch user's SproutSocial accounts and auto-select the first one
   useEffect(() => {
     const fetchAndSelectFirstAccount = async () => {
       try {
-        const response = await fetch('/api/client/sprout-social-accounts');
+        let response;
+        if (!clientId) {
+          response = await fetch('/api/client/sprout-social-accounts');
+        } else {
+          response = await fetch(`/api/account-rep/sprout-social-accounts?clientId=${encodeURIComponent(clientId)}`);
+        }
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Failed to fetch SproutSocial Accounts');
         }
-        
+
         const accounts = await response.json();
-        
+
         // Auto-select the first account if available and none is currently selected
         if (accounts.length > 0 && !selectedAccountId) {
           setSelectedAccountId(accounts[0].id);
         }
-        
+
         setIsInitialized(true);
       } catch (error) {
         console.error('Error fetching SproutSocial accounts:', error);
@@ -60,12 +70,12 @@ export function SproutSocialDashboardContent() {
       <div className="flex justify-end">
         <SproutSocialPrintButton selectedAccountId={selectedAccountId} />
       </div>
-      
+
       {/* Social Analytics Content */}
-      <SproutSocialMetrics 
+      <SproutSocialMetrics
         selectedAccountId={selectedAccountId}
         onAccountChange={setSelectedAccountId}
       />
     </div>
   );
-} 
+}
