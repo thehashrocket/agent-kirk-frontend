@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 
 /**
  * Print Layout Component
- * 
+ *
  * Provides a minimal layout for print pages without header, sidebar,
  * or other navigation elements. Optimized for printing and PDF generation.
  * This layout completely replaces the root layout for print pages.
- * 
+ *
  * @param children - Child components to render
  */
 export default function PrintLayout({
@@ -29,11 +29,11 @@ export default function PrintLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-bliss">
+      <body className="font-bliss" data-print-page="true">
         <Providers>
-          <div className="min-h-screen w-full bg-white print:bg-white">
-            {/* Print-specific: No header, sidebar, or navigation elements */}
-            <main className="w-full">
+          <div className="min-h-screen w-full bg-white print:bg-white relative">
+            {/* Main content - watermark is now handled by CSS body::before pseudo-element */}
+            <main className="w-full relative z-10 print-content">
               {children}
             </main>
           </div>
@@ -41,4 +41,4 @@ export default function PrintLayout({
       </body>
     </html>
   );
-} 
+}

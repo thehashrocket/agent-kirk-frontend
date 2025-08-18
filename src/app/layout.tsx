@@ -18,10 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Script
-        src="https://www.bugherd.com/sidebarv2.js?apikey=hvzbbkqgumxrgii49nojqq"
-        strategy="afterInteractive"
-      />
+
+      {/* Only load the Script when in the staging environment */}
+
+      {process.env.APP_ENV === 'staging' && (
+        <Script
+          id="bugherd-script"
+          src="https://www.bugherd.com/sidebarv2.js?apikey=hvzbbkqgumxrgii49nojqq"
+          strategy="afterInteractive"
+        />
+      )}
       <body className="font-bliss">
         <Providers>
           <div className="min-h-screen flex flex-col">
