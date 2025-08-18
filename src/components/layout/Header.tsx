@@ -2,7 +2,7 @@
  * @file src/components/layout/Header.tsx
  * Main header component that provides navigation and user session management.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Role-based navigation links
  * - Session management with NextAuth
@@ -22,23 +22,24 @@ import { Button } from "@/components/ui/button";
 import { NotificationBell } from "@/components/NotificationBell";
 import { cn } from "@/lib/utils";
 import { UserProfileBadge } from "./UserProfileBadge";
+import Weather from "../Weather";
 /**
  * @component Header
  * Client Component that renders the main navigation header.
- * 
+ *
  * Features:
  * - Responsive navigation with mobile menu
  * - Role-based dashboard links
  * - Session status display
  * - Logout functionality
  * - Sticky positioning with gradient background
- * 
+ *
  * Layout:
  * - Fixed position at top of viewport
  * - Full width with container constraints
  * - Flexible spacing for navigation items
  * - Right-aligned user session info
- * 
+ *
  * Authentication:
  * - Requires active session
  * - Displays user email and role
@@ -104,9 +105,10 @@ export function Header() {
               <span>Chat with Agent Kirk</span>
             </Link>
           )}
-          
+
         </nav>
         <div className="flex items-center space-x-4">
+          <Weather />
           <NotificationBell />
           <UserProfileBadge />
           <Button
@@ -125,4 +127,4 @@ export function Header() {
       </div>
     </header>
   );
-} 
+}

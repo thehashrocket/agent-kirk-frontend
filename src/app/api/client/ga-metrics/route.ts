@@ -99,7 +99,7 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
         return;
       }
 
-      switch(tableName) {
+      switch (tableName) {
         case 'daily_metrics':
         case 'kpi_daily':
         case 'daily':
@@ -175,7 +175,7 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
 
 export async function GET(request: Request): Promise<NextResponse<GaMetricsResponse | GaMetricsError>> {
   try {
-    
+
     // Get user from session or auth header
     const session = await getServerSession(authOptions);
     let userEmail = session?.user?.email;
@@ -219,22 +219,22 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
 
     // Get the URL query parameters
     const { searchParams } = new URL(request.url);
-    
+
     // Parse date params (extended range)
     const fromParam = searchParams.get('from');
     const toParam = searchParams.get('to');
-    
+
     // Parse selected date range (for display)
     const selectedFromParam = searchParams.get('selectedFrom');
     const selectedToParam = searchParams.get('selectedTo');
-    
+
     // Get the property ID from the request
     const requestedPropertyId = searchParams.get('propertyId');
-    
+
     // Use the extended date range for data fetching
     const dateFrom = fromParam ? new Date(fromParam) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const dateTo = toParam ? new Date(toParam) : new Date();
-    
+
     // Store selected range for reference (or default to same as full range)
     const displayDateFrom = selectedFromParam ? new Date(selectedFromParam) : dateFrom;
     const displayDateTo = selectedToParam ? new Date(selectedToParam) : dateTo;
@@ -263,7 +263,7 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         .find((property: any) => property.id === requestedPropertyId);
 
       if (requestedProperty) {
-        const parentAccount = gaAccounts.find((account: any) => 
+        const parentAccount = gaAccounts.find((account: any) =>
           account.gaProperties.some((prop: any) => prop.id === requestedPropertyId)
         );
         if (parentAccount) {
@@ -339,18 +339,18 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     ]);
 
     // Ensure we have the selected period for display
-    
+
     // Get current month in YYYYMM format for monthly data
     const currentMonth = parseInt(
-      new Date().getFullYear().toString() + 
+      new Date().getFullYear().toString() +
       (new Date().getMonth() + 1).toString().padStart(2, '0')
     );
-    
+
     // Calculate the month from at least 2 years ago for proper comparison
     const twoYearsAgo = new Date();
     twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
     const oldestMonth = parseInt(
-      twoYearsAgo.getFullYear().toString() + 
+      twoYearsAgo.getFullYear().toString() +
       (twoYearsAgo.getMonth() + 1).toString().padStart(2, '0')
     );
 
@@ -426,52 +426,49 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       })
     ]);
 
-    console.log('kpiMonthly', kpiMonthly);
-
     // Debug: Check if ANY monthly data exists for this property
     const allMonthlyData = await prisma.gaKpiMonthly.findMany({
       where: { gaPropertyId },
       select: { month: true, sessions: true }
     });
-    console.log('All monthly data for this property:', allMonthlyData);
 
     // Return the GA metrics data from database with metadata about the date ranges
     return NextResponse.json({
       kpiDaily: kpiDaily
         ? (Array.isArray(kpiDaily) ? kpiDaily : [kpiDaily]).map((entry: any) => {
-            const { date, ...rest } = entry;
-            return {
-              ...rest,
-              date: typeof date === 'string' ? date : date?.toISOString(),
-            };
-          })
+          const { date, ...rest } = entry;
+          return {
+            ...rest,
+            date: typeof date === 'string' ? date : date?.toISOString(),
+          };
+        })
         : null,
       kpiMonthly: kpiMonthly
         ? (Array.isArray(kpiMonthly) ? kpiMonthly : [kpiMonthly]).map((entry: any) => {
-            const { month, ...rest } = entry;
-            return {
-              ...rest,
-              month,
-            };
-          })
+          const { month, ...rest } = entry;
+          return {
+            ...rest,
+            month,
+          };
+        })
         : null,
       channelDaily: channelDaily
         ? (Array.isArray(channelDaily) ? channelDaily : [channelDaily]).map((entry: any) => {
-            const { date, ...rest } = entry;
-            return {
-              ...rest,
-              date: typeof date === 'string' ? date : date?.toISOString(),
-            };
-          })
+          const { date, ...rest } = entry;
+          return {
+            ...rest,
+            date: typeof date === 'string' ? date : date?.toISOString(),
+          };
+        })
         : null,
       sourceDaily: sourceDaily
         ? (Array.isArray(sourceDaily) ? sourceDaily : [sourceDaily]).map((entry: any) => {
-            const { date, ...rest } = entry;
-            return {
-              ...rest,
-              date: typeof date === 'string' ? date : date?.toISOString(),
-            };
-          })
+          const { date, ...rest } = entry;
+          return {
+            ...rest,
+            date: typeof date === 'string' ? date : date?.toISOString(),
+          };
+        })
         : null,
       // Add metadata about the date ranges for UI components
       metadata: {
@@ -492,4 +489,4 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       { status: 500 }
     );
   }
-} 
+}
