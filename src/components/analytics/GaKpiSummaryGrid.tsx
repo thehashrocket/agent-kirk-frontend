@@ -23,23 +23,23 @@ const metrics: Array<{
   tooltip: string;
   format?: (v: number) => string;
 }> = [
-  {
-    key: 'sessions',
-    label: 'Sessions',
-    tooltip: 'Total number of sessions for the month.'
-  },
-  {
-    key: 'goalCompletions',
-    label: 'Goal Completions',
-    tooltip: 'Number of goal completions.'
-  },
-  {
-    key: 'goalCompletionRate',
-    label: 'Goal Completion Rate',
-    tooltip: 'Goal completions per session.',
-    format: (v: number) => `${(v * 100).toFixed(2)}%`
-  }
-];
+    {
+      key: 'sessions',
+      label: 'Sessions',
+      tooltip: 'Total number of sessions for the entire month.'
+    },
+    {
+      key: 'goalCompletions',
+      label: 'Goal Completions',
+      tooltip: 'Number of goal completions for the entire month.'
+    },
+    {
+      key: 'goalCompletionRate',
+      label: 'Goal Completion Rate',
+      tooltip: 'Goal completions per session for the entire month.',
+      format: (v: number) => `${(v * 100).toFixed(2)}%`
+    }
+  ];
 
 function ensureNumber(value: any): number {
   if (typeof value === 'number') return value;
@@ -124,19 +124,19 @@ export function GaKpiSummaryGrid({ current, prevYear }: GaKpiSummaryGridProps) {
                     metric.key === 'avgSessionDurationSec' ? (
                       // Special handling for duration
                       <>
-                        <CountUp 
-                          end={Math.floor(value / 60)} 
-                          duration={2} 
-                          separator="," 
+                        <CountUp
+                          end={Math.floor(value / 60)}
+                          duration={2}
+                          separator=","
                           decimals={0}
                           decimal="."
                           preserveValue={true}
                           suffix=":"
                         />
-                        <CountUp 
-                          end={value % 60} 
-                          duration={2} 
-                          separator="," 
+                        <CountUp
+                          end={value % 60}
+                          duration={2}
+                          separator=","
                           decimals={0}
                           decimal="."
                           preserveValue={true}
@@ -145,10 +145,10 @@ export function GaKpiSummaryGrid({ current, prevYear }: GaKpiSummaryGridProps) {
                       </>
                     ) : metric.key === 'engagementRate' || metric.key === 'goalCompletionRate' ? (
                       // Percentage format
-                      <CountUp 
-                        end={value * 100} 
-                        duration={2} 
-                        separator="," 
+                      <CountUp
+                        end={value * 100}
+                        duration={2}
+                        separator=","
                         decimals={2}
                         decimal="."
                         preserveValue={true}
@@ -156,10 +156,10 @@ export function GaKpiSummaryGrid({ current, prevYear }: GaKpiSummaryGridProps) {
                       />
                     ) : (
                       // Other formatted values
-                      <CountUp 
-                        end={value} 
-                        duration={2} 
-                        separator="," 
+                      <CountUp
+                        end={value}
+                        duration={2}
+                        separator=","
                         decimals={0}
                         decimal="."
                         preserveValue={true}
@@ -167,10 +167,10 @@ export function GaKpiSummaryGrid({ current, prevYear }: GaKpiSummaryGridProps) {
                     )
                   ) : (
                     // Regular number
-                    <CountUp 
-                      end={value} 
-                      duration={2} 
-                      separator="," 
+                    <CountUp
+                      end={value}
+                      duration={2}
+                      separator=","
                       decimals={0}
                       decimal="."
                       preserveValue={true}
@@ -191,4 +191,4 @@ export function GaKpiSummaryGrid({ current, prevYear }: GaKpiSummaryGridProps) {
       })}
     </div>
   );
-} 
+}
