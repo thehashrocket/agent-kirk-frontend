@@ -10,6 +10,7 @@ import { MonthRangePicker } from './MonthRangePicker';
 import React from 'react';
 import { format } from 'date-fns';
 import { GaKpiSummaryGrid } from './GaKpiSummaryGrid';
+import { DatePickerWithRange } from '../ui/date-range-picker';
 
 /**
  * GaMetricsGrid Component
@@ -52,16 +53,19 @@ interface GaMetricsGridProps {
 function getFullMonthRange(date: Date | string) {
   let year, month;
   if (typeof date === 'string') {
-    // Parse as local date, not UTC, to avoid timezone issues
-    const parts = date.split('-');
-    year = parseInt(parts[0], 10);
-    month = parseInt(parts[1], 10) - 1; // JS months are 0-based
+    // Always parse UTC strings to UTC dates
+    const utcDate = new Date(date);
+    year = utcDate.getUTCFullYear();
+    month = utcDate.getUTCMonth();
   } else {
-    year = date.getFullYear();
-    month = date.getMonth();
+    // If it's already a Date object, get UTC components
+    year = date.getUTCFullYear();
+    month = date.getUTCMonth();
   }
-  const from = new Date(year, month, 1);
-  const to = new Date(year, month + 1, 0);
+
+  // Create dates in UTC
+  const from = new Date(Date.UTC(year, month, 1));
+  const to = new Date(Date.UTC(year, month + 1, 0));
   return { from, to };
 }
 
@@ -86,12 +90,28 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
 
   const { kpiMonthly, channelDaily, kpiDaily, sourceDaily, metadata } = data;
 
-  // Update setupDefaultDateRange to always return a full month
+  // Update setupDefaultDateRange to always return local-midnight dates
   const setupDefaultDateRange = React.useCallback(() => {
     // If we have metadata with display date range, use it
     if (metadata?.displayDateRange) {
-      // Snap to full month
-      return getFullMonthRange(metadata.displayDateRange.from);
+
+      if (metadata.displayDateRange.from && metadata.displayDateRange.to) {
+        // Parse UTC ISO strings and convert to local-midnight so UI/calendar shows the intended days
+        const fromLocal = toLocalMidnight(metadata.displayDateRange.from);
+        const toLocal = toLocalMidnight(metadata.displayDateRange.to);
+
+        const returnValue = {
+          from: fromLocal,
+          to: toLocal
+        };
+        return returnValue;
+      }
+
+      const full = getFullMonthRange(metadata.displayDateRange.from);
+      return {
+        from: toLocalMidnight(full.from),
+        to: toLocalMidnight(full.to)
+      };
     }
 
     // If we have kpiDaily data, find the most recent month with data
@@ -101,27 +121,38 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
         new Date(b.date).getTime() - new Date(a.date).getTime()
       );
       const mostRecentDate = new Date(sortedData[0].date);
-      return getFullMonthRange(mostRecentDate);
+
+      const full = getFullMonthRange(mostRecentDate);
+      return {
+        from: toLocalMidnight(full.from),
+        to: toLocalMidnight(full.to)
+      };
     }
 
     // Fallback to full previous month logic
     const today = new Date();
-    // Get the first day of the current month
     const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-
-    // Go back one day to get the last day of the previous month
     const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
-
     lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
 
-    // Snap to full previous month
-    return getFullMonthRange(lastDayOfPreviousMonth);
+    const full = getFullMonthRange(lastDayOfPreviousMonth);
+    return {
+      from: toLocalMidnight(full.from),
+      to: toLocalMidnight(full.to)
+    };
   }, [metadata, kpiDaily]);
 
-  // Helper function to format date ranges consistently for display
+  // Helper function to format date ranges consistently for display (local dates)
   const formatDateRange = React.useCallback((from: Date, to: Date) => {
+    // from/to here are local-midnight dates (after normalization), so format directly
     return `${format(from, "MMM d, yyyy")} - ${format(to, "MMM d, yyyy")}`;
   }, []);
+
+  // Helper: convert a UTC-based Date (or ISO string) to a local-midnight Date
+  const toLocalMidnight = (d: Date | string) => {
+    const dt = typeof d === 'string' ? new Date(d) : d;
+    return new Date(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate());
+  };
 
   // State for selected date range, default to most recent full month
   const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date } | null>(null);
@@ -146,7 +177,11 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
 
   // Update handleDateRangeChange to always snap to full month
   const handleDateRangeChange = async (range: { from: Date; to: Date }) => {
-    const snapped = getFullMonthRange(range.from);
+    // Normalize incoming range to local-midnight so charts and header align
+    const snapped = {
+      from: toLocalMidnight(range.from),
+      to: toLocalMidnight(range.to)
+    };
     setDateRange(snapped);
     if (onDateRangeChange) {
       try {
@@ -155,37 +190,39 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
         setData(newData);
       } catch (error) {
         console.error('Error fetching data for date range:', error);
-        // Could show an error message here
       } finally {
         setIsLoading(false);
       }
     }
   };
 
-  // Helper to check if a date string is within the selected range
+  // Helper to check if a date string is within the selected range (normalize item dates to local-midnight)
   const isDateInRange = React.useCallback((dateStr: string) => {
-    if (!dateRange) return true; // If no date range is selected, include all data
+    if (!dateRange) return true;
 
-    // Use full data range from metadata if available
+    // Determine filter bounds (use metadata full range if present), normalize to local-midnight
     const filterFrom = metadata?.fullDateRange?.from
-      ? new Date(metadata.fullDateRange.from)
+      ? toLocalMidnight(metadata.fullDateRange.from)
       : dateRange.from;
     const filterTo = metadata?.fullDateRange?.to
-      ? new Date(metadata.fullDateRange.to)
+      ? toLocalMidnight(metadata.fullDateRange.to)
       : dateRange.to;
 
-    const date = new Date(dateStr);
-    return date >= filterFrom && date <= filterTo;
+    const itemLocal = toLocalMidnight(dateStr);
+    return itemLocal >= filterFrom && itemLocal <= filterTo;
   }, [dateRange, metadata]);
 
   // Helper to check if we have any data for the selected date range
-  const hasDataForDateRange = React.useCallback((data: any[], dateRange: { from: Date; to: Date } | null) => {
+  const hasDataForDateRange = React.useCallback((data: any[], dateRangeArg: { from: Date; to: Date } | null) => {
     if (!data || data.length === 0) return false;
-    if (!dateRange) return true; // If no date range, we have data
+    if (!dateRangeArg) return true;
+
+    const fromLocal = dateRangeArg.from;
+    const toLocal = dateRangeArg.to;
 
     return data.some(item => {
-      const date = new Date(item.date);
-      return date >= dateRange.from && date <= dateRange.to;
+      const itemLocal = toLocalMidnight(item.date);
+      return itemLocal >= fromLocal && itemLocal <= toLocal;
     });
   }, []);
 
@@ -321,9 +358,18 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
           <h1 className="text-2xl font-bold text-primary uppercase">Traffic and Usability</h1>
         </div>
         {dateRange && (
-          <MonthRangePicker
-            onChange={handleDateRangeChange}
-            value={dateRange}
+          // <MonthRangePicker
+          //   onChange={handleDateRangeChange}
+          //   value={dateRange}
+          // />
+          <DatePickerWithRange
+            onDateChange={(date) => {
+              if (date && date.from && date.to) {
+                handleDateRangeChange({ from: date.from, to: date.to });
+              }
+            }}
+            date={dateRange}
+            className="w-full md:w-auto"
           />
         )}
       </div>

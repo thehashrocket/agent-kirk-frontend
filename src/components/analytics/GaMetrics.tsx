@@ -44,14 +44,13 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
   // Fetch GA metrics with optional date range
   const fetchGaMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
     if (!selectedPropertyId) return; // Don't fetch if no property is selected
-    
     setIsLoading(true);
     setError(null);
-    
+
     try {
       // Build URL with date parameters if provided
       let url = '/api/client/ga-metrics';
-      
+
       // If no date range is provided, use previous full month as default
       if (!dateRange) {
         const today = new Date();
@@ -62,42 +61,41 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
         lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
         // First day of previous month
         const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
-        
+
         // Use previous month as default range
         dateRange = {
           from: firstDayOfPreviousMonth,
           to: lastDayOfPreviousMonth
         };
       }
-      
+
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
-      
+
       // Get the selected date range
       const selectedFrom = dateRange.from;
       const selectedTo = dateRange.to;
-      
+
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
       const extendedFrom = new Date(selectedFrom);
       extendedFrom.setFullYear(extendedFrom.getFullYear() - 1);
-      
+
       // Use the extended date range for the API request
       params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
       params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd'));
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
       params.append('propertyId', selectedPropertyId);                   // Add property ID
-      
       url = `${url}?${params.toString()}`;
-      
+
       const response = await fetch(url);
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch analytics data');
       }
-      
+
       const metricsData = await response.json();
       setData(metricsData);
       return metricsData;
@@ -133,7 +131,7 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
         onAccountObjectChange={setSelectedAccount}
         onPropertyObjectChange={setSelectedProperty}
       />
-      
+
       {/* Metrics area: show error, loading, data, or empty state */}
       {error ? (
         <Card>
@@ -151,8 +149,8 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
           </CardContent>
         </Card>
       ) : data ? (
-        <GaMetricsGrid 
-          data={data} 
+        <GaMetricsGrid
+          data={data}
           onDateRangeChange={fetchGaMetrics}
         />
       ) : (
@@ -166,4 +164,4 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
       )}
     </div>
   );
-} 
+}

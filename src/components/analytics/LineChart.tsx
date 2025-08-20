@@ -95,131 +95,113 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
   const instanceId = useId();
   // Store accumulated data to handle multiple renders
   const [accumulatedData, setAccumulatedData] = useState<DataPoint[]>([]);
-  
+
   // Accumulate unique data points across renders
   useEffect(() => {
     if (!data || data.length === 0) return;
-    
+
     // Create a Set of keys for existing data to check for duplicates
     const existingKeys = new Set(
       accumulatedData.map(item => getDataPointKey(item))
     );
-    
+
     // Filter to only include new unique items
     const newItems = data.filter(item => {
       const key = getDataPointKey(item);
       return !existingKeys.has(key);
     });
-    
+
     if (newItems.length > 0) {
       // Add new items to accumulated data
       setAccumulatedData(prevData => [...prevData, ...newItems]);
     }
-    
+
     return () => {
       // Cleanup
     };
   }, [data, instanceId, accumulatedData]); // Include accumulatedData in dependencies to properly track
-  
+
   // Process all available data
   const processedData = React.useMemo(() => {
-    // Use accumulated data if available, otherwise use the current data
     const dataToProcess = accumulatedData.length > 0 ? accumulatedData : data;
+    if (!dataToProcess || dataToProcess.length === 0) return [];
 
-    // If there's no data, return an empty array
-    if (!dataToProcess || dataToProcess.length === 0) {
-      return [];
-    }
+    // Helpers that produce a local YYYY-MM-DD key (no UTC conversion)
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const localDateKeyFromDate = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const localDateKeyFromString = (s: string) => {
+      const d = new Date(s);
+      if (isNaN(d.getTime())) return s;
+      return localDateKeyFromDate(d);
+    };
 
-    // 1. Determine the date range for filtering
+    // 1. Determine the date range for filtering (use local dates)
     let startDate: Date;
     let endDate: Date;
     if (dateRange && dateRange.from && dateRange.to) {
-      // Use the provided date range if available
-      startDate = new Date(dateRange.from);
+      startDate = new Date(dateRange.from); // expect local-midnight
       endDate = new Date(dateRange.to);
     } else {
-      // If no date range is provided, use the data's own date range
-      const dates = dataToProcess.map(item => new Date(item.date)).sort((a, b) => a.getTime() - b.getTime());
+      const dates = dataToProcess
+        .map(item => new Date(item.date))
+        .filter(d => !isNaN(d.getTime()))
+        .sort((a, b) => a.getTime() - b.getTime());
       startDate = dates[0];
       endDate = dates[dates.length - 1];
     }
 
-    // 2. Deduplicate data points (keep the highest sessions if duplicates)
+    // 2. Deduplicate (use local keys)
     const uniqueDataMap = new Map<string, DataPoint>();
     dataToProcess.forEach(item => {
-      const dateStr = item.date;
+      const key = localDateKeyFromString(item.date);
       try {
-        const date = new Date(dateStr);
-        // Skip invalid dates
-        if (isNaN(date.getTime())) return;
-        
-        // If we have a dateRange, only include data within that range
-        // Otherwise, include all data
-        if (useFallbackData || !dateRange || (date >= startDate && date <= endDate)) {
-          // If multiple entries for the same date, keep the one with the highest sessions
-          if (!uniqueDataMap.has(dateStr) || uniqueDataMap.get(dateStr)!.sessions < item.sessions) {
-            uniqueDataMap.set(dateStr, item);
+        const d = new Date(item.date);
+        if (isNaN(d.getTime())) return;
+        if (useFallbackData || !dateRange || (d >= startDate && d <= endDate)) {
+          if (!uniqueDataMap.has(key) || uniqueDataMap.get(key)!.sessions < item.sessions) {
+            // store with date normalized to local YYYY-MM-DD
+            uniqueDataMap.set(key, { date: key, sessions: item.sessions });
           }
         }
       } catch (error) {
-        console.error(`LineChart: Error processing date: ${dateStr}`, error);
+        console.error(`LineChart: Error processing date: ${item.date}`, error);
       }
     });
 
-    // 3. Convert the map to an array and sort by date ascending
-    const filteredData = Array.from(uniqueDataMap.values())
-      .sort((a, b) => {
-        try {
-          return new Date(a.date).getTime() - new Date(b.date).getTime();
-        } catch (error) {
-          console.error('LineChart: Error sorting dates', error);
-          return 0;
-        }
-      });
+    const filteredData = Array.from(uniqueDataMap.values()).sort((a, b) => {
+      return a.date.localeCompare(b.date);
+    });
 
-    // 4. Fill in missing dates with zero sessions to create a continuous line
+    // 4. Fill missing dates (iterate in local time)
     const result: DataPoint[] = [];
     if (filteredData.length > 0) {
-      try {
-        // Create a map of existing data points by date string (YYYY-MM-DD)
-        const dataByDate = new Map<string, DataPoint>();
-        filteredData.forEach(item => {
-          const dateStr = new Date(item.date).toISOString().split('T')[0];
-          dataByDate.set(dateStr, item);
-        });
+      const dataByDate = new Map<string, DataPoint>();
+      filteredData.forEach(item => dataByDate.set(item.date, item));
 
-        // Iterate through each day in the range, filling missing days with zero sessions
-        for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-          const dateStr = d.toISOString().split('T')[0];
-          if (dataByDate.has(dateStr)) {
-            result.push(dataByDate.get(dateStr)!);
-          } else {
-            // Add zero data for missing dates
-            result.push({
-              date: dateStr,
-              sessions: 0
-            });
-          }
+      for (let d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+        d <= new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+        d.setDate(d.getDate() + 1)) {
+        const key = localDateKeyFromDate(new Date(d));
+        if (dataByDate.has(key)) {
+          result.push(dataByDate.get(key)!);
+        } else {
+          result.push({ date: key, sessions: 0 });
         }
-      } catch (error) {
-        console.error('LineChart: Error filling in missing dates', error);
-        // If there's an error, return filtered data without filling
-        return filteredData;
       }
     }
 
-    // 5. Return the processed, continuous data array
     return result;
   }, [data, accumulatedData, dateRange, useFallbackData]);
+
 
   // Format date for axis label (e.g., "April 1" instead of "Apr 1")
   const formatDate = (dateStr: string) => {
     try {
-      const date = new Date(dateStr);
-      const month = date.toLocaleString('en-US', { month: 'long' });
-      const day = date.getDate();
-      return `${month} ${day}`;
+      // Parse the local YYYY-MM-DD key into components to avoid Date parsing inconsistencies
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const dt = new Date(y, m - 1, d);
+      const month = dt.toLocaleString('en-US', { month: 'long' });
+      return `${month} ${dt.getDate()}`;
     } catch (error) {
       console.error(`LineChart: Error formatting date: ${dateStr}`, error);
       return dateStr;
@@ -249,19 +231,19 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
         </div>
       </div>
       <ResponsiveContainer width="100%" height={height}>
-        <RechartsLineChart 
-          data={processedData} 
+        <RechartsLineChart
+          data={processedData}
           margin={{ top: 10, right: 30, left: 0, bottom: 10 }}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
-          <XAxis 
-            dataKey="date" 
-            tickFormatter={formatDate} 
+          <XAxis
+            dataKey="date"
+            tickFormatter={formatDate}
             tick={{ fontSize: 12 }}
             axisLine={{ stroke: '#E0E0E0' }}
             tickLine={false}
           />
-          <YAxis 
+          <YAxis
             tickFormatter={formatYAxis}
             axisLine={false}
             tickLine={false}
@@ -271,17 +253,17 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
           <Tooltip
             formatter={(value: any) => [value.toLocaleString(), 'Sessions']}
             labelFormatter={(label) => formatDate(label)}
-            contentStyle={{ 
-              borderRadius: '4px', 
+            contentStyle={{
+              borderRadius: '4px',
               boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
               border: 'none',
               padding: '8px 12px'
             }}
           />
-          <Line 
-            type="monotone" 
-            dataKey="sessions" 
-            stroke="#e69832" 
+          <Line
+            type="monotone"
+            dataKey="sessions"
+            stroke="#e69832"
             strokeWidth={2}
             dot={false}
             activeDot={{ r: 6, fill: '#e69832', stroke: '#fff', strokeWidth: 2 }}
@@ -294,4 +276,4 @@ export const LineChart: React.FC<LineChartProps> = ({ data, height = 400, dateRa
       </ResponsiveContainer>
     </div>
   );
-}; 
+};
