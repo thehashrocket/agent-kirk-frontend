@@ -36,7 +36,6 @@ export function DatePickerWithRange({
 
   React.useEffect(() => {
     if (date && 'from' in date && 'to' in date) {
-      console.log('Setting date range:', date);
       setDateRange({
         from: date.from,
         to: date.to,

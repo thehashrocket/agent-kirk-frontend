@@ -20,6 +20,8 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -73,6 +75,8 @@ export default function ClientsPage() {
   const [showInactive, setShowInactive] = useState(false);
   const { users, roles, isLoading, isError, mutate } = useUsers({ showInactive });
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -331,6 +335,32 @@ export default function ClientsPage() {
           </Dialog>
         </div>
       </div>
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this user?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            {userToDelete && (
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  handleDeleteClient(userToDelete.id);
+                  setIsDeleteDialogOpen(false);
+                }}
+              >
+                Delete
+              </Button>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Table>
         <TableHeader>
@@ -370,6 +400,12 @@ export default function ClientsPage() {
               </TableCell>
               <TableCell className="space-x-2">
                 <div className="flex gap-2 justify-end">
+                  <Button
+                    variant="outline"
+                    onClick={() => window.location.href = `/account-rep/clients/${client.id}`}
+                  >
+                    View Details
+                  </Button>
                   {/* If User is active, show Mark as Inactive, if User is inactive, show Mark as Active */}
                   {client.isActive ? (
                     <Button
@@ -392,18 +428,17 @@ export default function ClientsPage() {
                   >
                     Reset Password
                   </Button>
+
                   <Button
                     variant="destructive"
-                    onClick={() => handleDeleteClient(client.id)}
+                    onClick={() => {
+                      setUserToDelete(client);
+                      setIsDeleteDialogOpen(true);
+                    }}
                   >
                     Delete
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => window.location.href = `/account-rep/clients/${client.id}`}
-                  >
-                    View Details
-                  </Button>
+
                 </div>
               </TableCell>
             </TableRow>

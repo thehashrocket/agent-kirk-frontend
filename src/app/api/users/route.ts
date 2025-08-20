@@ -107,6 +107,7 @@ export async function GET(
       const users = await prisma.user.findMany({
         where: {
           isActive: showInactive ? undefined : true,
+          deleted: false, // Assuming 'deleted' is a field for soft delete
         },
         include: {
           role: true,
@@ -134,6 +135,7 @@ export async function GET(
         where: {
           accountRepId: currentUser.id,
           isActive: showInactive ? undefined : true,
+          deleted: false, // Assuming 'deleted' is a field for soft delete
         },
         include: {
           role: true,

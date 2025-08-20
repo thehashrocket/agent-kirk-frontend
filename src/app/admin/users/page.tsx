@@ -20,6 +20,8 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -98,7 +100,9 @@ interface Role {
  */
 export default function UsersPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [showInactive, setShowInactive] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const { users, roles, isLoading, mutate } = useUsers({ showInactive });
   const [newUser, setNewUser] = useState({
     name: '',
@@ -224,107 +228,58 @@ export default function UsersPage() {
   }
 
   return (
-    <div className="container mx-auto py-10 px-4">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">User Management</h1>
-        <div className="flex items-center gap-4">
-          <label className="flex items-center gap-2">
-            <Switch
-              checked={showInactive}
-              onCheckedChange={setShowInactive}
-            />
-            Show Inactive Users
-          </label>
-          <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-            <DialogTrigger asChild>
-              <Button>Create User</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Create New User</DialogTitle>
-              </DialogHeader>
-              <div className="space-y-4">
-                <Input
-                  placeholder="Name"
-                  value={newUser.name}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, name: e.target.value })
-                  }
-                />
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={newUser.email}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, email: e.target.value })
-                  }
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={newUser.password}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, password: e.target.value })
-                  }
-                />
-                <Select
-                  value={newUser.roleId}
-                  onValueChange={(value: string) =>
-                    setNewUser({ ...newUser, roleId: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {roles?.map((role: Role) => (
-                      <SelectItem key={role.id} value={role.id}>
-                        {role.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Button onClick={handleCreateUser}>Create</Button>
-              </div>
-            </DialogContent>
-          </Dialog>
-        </div>
-      </div>
-
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>ProfileImage</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {/* If the user is inActive, then we want to style the row differently so the Admin knows. */}
-          {users?.map((user: User) => {
-            return (
-              <TableRow
-                key={user.id}
-                className={user.isActive ? '' : 'bg-gray-100'}
-              >
-                <TableCell>
-                  <Avatar>
-                    <AvatarImage src={user.image ?? ''} />
-                    <AvatarFallback>{user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
-                  </Avatar>
-                </TableCell>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>
+    <>
+      <div className="container mx-auto py-10 px-4">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">User Management</h1>
+          <div className="flex items-center gap-4">
+            <label className="flex items-center gap-2">
+              <Switch
+                checked={showInactive}
+                onCheckedChange={setShowInactive}
+              />
+              Show Inactive Users
+            </label>
+            <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>Create User</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create New User</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <Input
+                    placeholder="Name"
+                    value={newUser.name}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, name: e.target.value })
+                    }
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={newUser.email}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, email: e.target.value })
+                    }
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    value={newUser.password}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, password: e.target.value })
+                    }
+                  />
                   <Select
-                    value={user.role.id}
-                    onValueChange={(value: string) => handleUpdateRole(user.id, value)}
+                    value={newUser.roleId}
+                    onValueChange={(value: string) =>
+                      setNewUser({ ...newUser, roleId: value })
+                    }
                   >
                     <SelectTrigger>
-                      <SelectValue>{user.role.name}</SelectValue>
+                      <SelectValue placeholder="Select role" />
                     </SelectTrigger>
                     <SelectContent>
                       {roles?.map((role: Role) => (
@@ -334,49 +289,129 @@ export default function UsersPage() {
                       ))}
                     </SelectContent>
                   </Select>
-                </TableCell>
-                <TableCell>
-                  {user.isActive ? (
-                    <span className="text-green-600">Active</span>
-                  ) : (
-                    <span className="text-red-600">Inactive</span>
-                  )}
-                </TableCell>
-                <TableCell>
-                  <div className="flex gap-2 justify-end">
-                    <Link href={`/admin/users/${user.id}`}>
-                      <Button variant="outline">
-                        View Details
-                      </Button>
-                    </Link>
-                    {user.isActive ? (
-                      <Button
-                        variant="secondary"
-                        onClick={() => toggleUserStatus(user.id, false)}
-                      >
-                        Mark as Inactive
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="secondary"
-                        onClick={() => toggleUserStatus(user.id, true)}
-                      >
-                        Mark as Active
-                      </Button>
-                    )}
-                    <Button
-                      variant="destructive"
-                      onClick={() => handleDeleteUser(user.id)}
+                  <Button onClick={handleCreateUser}>Create</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Confirm Deletion</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete this user?
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+                Cancel
+              </Button>
+              {userToDelete && (
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    handleDeleteUser(userToDelete.id);
+                    setIsDeleteDialogOpen(false);
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>ProfileImage</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {/* If the user is inActive, then we want to style the row differently so the Admin knows. */}
+            {users?.map((user: User) => {
+              return (
+                <TableRow
+                  key={user.id}
+                  className={user.isActive ? '' : 'bg-gray-100'}
+                >
+                  <TableCell>
+                    <Avatar>
+                      <AvatarImage src={user.image ?? ''} />
+                      <AvatarFallback>{user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
+                    </Avatar>
+                  </TableCell>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    <Select
+                      value={user.role.id}
+                      onValueChange={(value: string) => handleUpdateRole(user.id, value)}
                     >
-                      Delete
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
+                      <SelectTrigger>
+                        <SelectValue>{user.role.name}</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {roles?.map((role: Role) => (
+                          <SelectItem key={role.id} value={role.id}>
+                            {role.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                  <TableCell>
+                    {user.isActive ? (
+                      <span className="text-green-600">Active</span>
+                    ) : (
+                      <span className="text-red-600">Inactive</span>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex gap-2 justify-end">
+                      <Link href={`/admin/users/${user.id}`}>
+                        <Button variant="outline">
+                          View Details
+                        </Button>
+                      </Link>
+                      {user.isActive ? (
+                        <Button
+                          variant="secondary"
+                          onClick={() => toggleUserStatus(user.id, false)}
+                        >
+                          Mark as Inactive
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="secondary"
+                          onClick={() => toggleUserStatus(user.id, true)}
+                        >
+                          Mark as Active
+                        </Button>
+                      )}
+                      <Button
+                        variant="destructive"
+                        onClick={() => {
+                          setUserToDelete(user);
+                          setIsDeleteDialogOpen(true);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    </>
   );
 }
