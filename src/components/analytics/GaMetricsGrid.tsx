@@ -200,12 +200,16 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
     if (!dateRange) return true;
 
     // Determine filter bounds (use metadata full range if present), normalize to local-midnight
-    const filterFrom = metadata?.fullDateRange?.from
-      ? toLocalMidnight(metadata.fullDateRange.from)
-      : dateRange.from;
-    const filterTo = metadata?.fullDateRange?.to
-      ? toLocalMidnight(metadata.fullDateRange.to)
-      : dateRange.to;
+    const filterFrom = dateRange?.from
+      ? toLocalMidnight(dateRange.from)
+      : metadata?.displayDateRange?.from
+        ? toLocalMidnight(metadata.displayDateRange.from)
+        : new Date(0); // fallback to epoch if undefined
+    const filterTo = dateRange?.to
+      ? toLocalMidnight(dateRange.to)
+      : metadata?.displayDateRange?.to
+        ? toLocalMidnight(metadata.displayDateRange.to)
+        : new Date(8640000000000000); // fallback to max date if undefined
 
     const itemLocal = toLocalMidnight(dateStr);
     return itemLocal >= filterFrom && itemLocal <= filterTo;
@@ -226,24 +230,22 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
   }, []);
 
   // Filter daily data based on selected date range, with fallback to all data if no data in range
+  // ...existing code...
   const filteredDailyData = React.useMemo(() => {
-    if (!kpiDaily) return null;
+    if (!kpiDaily) return []; // return empty array for consistent type
 
-    // If no date range is selected, return all data
     if (!dateRange) return kpiDaily;
 
-    // Check if we have data for the selected date range
     const hasDataInRange = hasDataForDateRange(kpiDaily, dateRange);
 
-    // If no data in range, return all data instead of empty array
     if (!hasDataInRange) {
-      console.log('No data available for selected date range, showing all available data');
+      console.warn('No data available for selected date range, showing all available data');
       return kpiDaily;
     }
 
-    // Otherwise, filter by date range
     return kpiDaily.filter(day => isDateInRange(day.date));
   }, [kpiDaily, dateRange, isDateInRange, hasDataForDateRange]);
+  //
 
   // Filter channel data based on selected date range, with fallback to all data if no data in range
   const filteredChannelData = React.useMemo(() => {
@@ -369,7 +371,7 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
         )}
       </div>
 
-      <h2 className="text-xl font-bold mb-2">Monthly Website Traffic Overview</h2>
+      <h2 className="text-xl font-bold mb-2">Website Traffic Overview</h2>
       <p className="text-gray-500 mb-2">
         {displayRange}
       </p>
