@@ -22,10 +22,10 @@ import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
 /**
  * @component SproutSocialEnhancedDashboard
  * @path src/components/channels/sprout-social/sprout-social-enhanced-dashboard.tsx
- * 
+ *
  * Dependency Inversion Principle: Depends on abstractions (interfaces) not concretions
  * Single Responsibility: Orchestrates the display of comprehensive social media analytics
- * 
+ *
  * Features:
  * - Comprehensive analytics matching Instagram performance report format
  * - Modular component composition
@@ -56,9 +56,15 @@ function getFullMonthRange(date: Date | string) {
   return { from, to };
 }
 
-export function SproutSocialEnhancedDashboard({ 
-  data, 
-  onDateRangeChange 
+// Helper: convert a UTC-based Date (or ISO string) to a local-midnight Date
+const toLocalMidnight = (d: Date | string) => {
+  const dt = typeof d === 'string' ? new Date(d) : d;
+  return new Date(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate());
+};
+
+export function SproutSocialEnhancedDashboard({
+  data,
+  onDateRangeChange
 }: SproutSocialEnhancedDashboardProps) {
   // Add local state for date range
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
@@ -66,14 +72,17 @@ export function SproutSocialEnhancedDashboard({
   // Set dateRange from data on mount, using getFullMonthRange for consistent parsing
   useEffect(() => {
     if (data?.dateRange?.from) {
-      setDateRange(getFullMonthRange(data.dateRange.from));
+      setDateRange({
+        from: toLocalMidnight(data.dateRange.from),
+        to: toLocalMidnight(data.dateRange.to),
+      });
     }
   }, [data?.dateRange?.from, data?.dateRange?.to]);
 
   // Handler that updates local state immediately, like EmailEnhancedDashboard
   const handleDateRangeChange = (range: { from: Date; to: Date }) => {
     setDateRange(range); // Update local state immediately
-    onDateRangeChange(range); 
+    onDateRangeChange(range);
   };
 
   if (!data) {
@@ -93,7 +102,7 @@ export function SproutSocialEnhancedDashboard({
 
   // Compute metrics using our helper function
   const { current: currentMetrics, comparison: comparisonMetrics } = computeMetrics(
-    data.metrics, 
+    data.metrics,
     data.comparisonMetrics
   );
 
@@ -114,7 +123,7 @@ export function SproutSocialEnhancedDashboard({
         <div>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">
-              {dateRange 
+              {dateRange
                 ? `${dayjs(dateRange.from).format('MMM D, YYYY')} - ${dayjs(dateRange.to).format('MMM D, YYYY')}`
                 : `${dayjs(data.dateRange.from).format('MMM D, YYYY')} - ${dayjs(data.dateRange.to).format('MMM D, YYYY')}`
               }
@@ -122,9 +131,14 @@ export function SproutSocialEnhancedDashboard({
           </div>
         </div>
         {dateRange && (
-          <MonthRangePicker
-            onChange={handleDateRangeChange}
-            value={dateRange}
+          <DatePickerWithRange
+            onDateChange={(date) => {
+              if (date && date.from && date.to) {
+                handleDateRangeChange({ from: date.from, to: date.to });
+              }
+            }}
+            date={dateRange}
+            className="w-full md:w-auto"
           />
         )}
       </div>
@@ -191,4 +205,4 @@ export function SproutSocialEnhancedDashboard({
       </div>
     </div>
   );
-} 
+}
