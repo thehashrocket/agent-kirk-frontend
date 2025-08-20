@@ -31,6 +31,7 @@ import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { CircleAlert, Trash2 } from 'lucide-react';
 
 /**
  * Interface representing a user in the system.
@@ -338,7 +339,11 @@ export default function ClientsPage() {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>
+              <div className="flex items-center">
+                <CircleAlert className='mr-2' /> Confirm Deletion
+              </div>
+            </DialogTitle>
             <DialogDescription>
               Are you sure you want to delete this user?
             </DialogDescription>
@@ -355,6 +360,7 @@ export default function ClientsPage() {
                   setIsDeleteDialogOpen(false);
                 }}
               >
+                <Trash2 className="h-4 w-4" />
                 Delete
               </Button>
             )}
@@ -436,6 +442,7 @@ export default function ClientsPage() {
                       setIsDeleteDialogOpen(true);
                     }}
                   >
+                    <Trash2 className="h-4 w-4" />
                     Delete
                   </Button>
 
