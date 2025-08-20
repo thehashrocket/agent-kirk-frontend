@@ -6,7 +6,6 @@ import { GaChannelSessionsTable } from './GaChannelSessionsTable';
 import { PieChart, PieChartData } from './PieChart';
 import { LineChart } from './LineChart';
 import { MonthlyComparisonChart } from './MonthlyComparisonChart';
-import { MonthRangePicker } from './MonthRangePicker';
 import React from 'react';
 import { format } from 'date-fns';
 import { GaKpiSummaryGrid } from './GaKpiSummaryGrid';
@@ -358,10 +357,6 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
           <h1 className="text-2xl font-bold text-primary uppercase">Traffic and Usability</h1>
         </div>
         {dateRange && (
-          // <MonthRangePicker
-          //   onChange={handleDateRangeChange}
-          //   value={dateRange}
-          // />
           <DatePickerWithRange
             onDateChange={(date) => {
               if (date && date.from && date.to) {

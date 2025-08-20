@@ -11,9 +11,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
+import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { setDate } from 'date-fns';
 
 interface EmailEnhancedDashboardProps {
   data: EmailMetricsResponse;
@@ -37,6 +39,12 @@ function getFullMonthRange(date: Date | string) {
   return { from, to };
 }
 
+// Helper: convert a UTC-based Date (or ISO string) to a local-midnight Date
+const toLocalMidnight = (d: Date | string) => {
+  const dt = typeof d === 'string' ? new Date(d) : d;
+  return new Date(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate());
+};
+
 export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhancedDashboardProps) {
   // State for selected date range, starts as null like GaMetricsGrid
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
@@ -44,7 +52,10 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
   // Set dateRange from data on mount, using getFullMonthRange for consistent parsing
   useEffect(() => {
     if (data?.selectedRange?.from) {
-      setDateRange(getFullMonthRange(data.selectedRange.from));
+      setDateRange({
+        from: toLocalMidnight(data.selectedRange.from),
+        to: toLocalMidnight(data.selectedRange.to),
+      })
     }
   }, [data?.selectedRange?.from, data?.selectedRange?.to]);
 
@@ -56,25 +67,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
-  };
-
-  const formatPercentage = (num: number) => {
-    return `${num > 0 ? '+' : ''}${num.toFixed(1)}%`;
-  };
-
-  const getTrendIcon = (value: number) => {
-    if (value > 0) {
-      return <TrendingUp className="h-4 w-4 text-green-500" />;
-    } else if (value < 0) {
-      return <TrendingDown className="h-4 w-4 text-red-500" />;
-    }
-    return null;
-  };
-
-  const getTrendColor = (value: number) => {
-    if (value > 0) return 'text-green-600';
-    if (value < 0) return 'text-red-600';
-    return 'text-gray-600';
   };
 
   const metrics = [
@@ -132,9 +124,14 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
           </p>
         </div>
         {dateRange && (
-          <MonthRangePicker
-            onChange={handleDateRangeChange}
-            value={dateRange}
+          <DatePickerWithRange
+            onDateChange={(date) => {
+              if (date && date.from && date.to) {
+                handleDateRangeChange({ from: date.from, to: date.to });
+              }
+            }}
+            date={dateRange}
+            className="w-full md:w-auto"
           />
         )}
       </div>
@@ -218,12 +215,12 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
               <div className="text-right">Unique Clicks</div>
               <div className="text-right">Unsubscribes</div>
             </div>
-            
+
             {/* Campaigns List */}
             <div className="space-y-2 max-h-96 overflow-y-auto">
               {data.topCampaigns.map((campaign, index) => (
-                <div 
-                  key={campaign.campaignId} 
+                <div
+                  key={campaign.campaignId}
                   className="grid grid-cols-6 gap-4 items-center p-4 hover:bg-muted/50 rounded-lg"
                 >
                   {/* Campaign Name */}
@@ -249,32 +246,32 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                   <div className="text-right">
                     <p className="font-medium">{formatNumber(campaign.delivered)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {campaign.requests > 0 
-                        ? `${((campaign.delivered / campaign.requests) * 100).toFixed(1)}%` 
+                      {campaign.requests > 0
+                        ? `${((campaign.delivered / campaign.requests) * 100).toFixed(1)}%`
                         : '0%'}
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="font-medium">{formatNumber(campaign.uniqueOpens)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {campaign.delivered > 0 
-                        ? `${((campaign.uniqueOpens / campaign.delivered) * 100).toFixed(1)}%` 
+                      {campaign.delivered > 0
+                        ? `${((campaign.uniqueOpens / campaign.delivered) * 100).toFixed(1)}%`
                         : '0%'}
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="font-medium">{formatNumber(campaign.uniqueClicks)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {campaign.delivered > 0 
-                        ? `${((campaign.uniqueClicks / campaign.delivered) * 100).toFixed(1)}%` 
+                      {campaign.delivered > 0
+                        ? `${((campaign.uniqueClicks / campaign.delivered) * 100).toFixed(1)}%`
                         : '0%'}
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="font-medium">{formatNumber(campaign.unsubscribes)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {campaign.delivered > 0 
-                        ? `${((campaign.unsubscribes / campaign.delivered) * 100).toFixed(1)}%` 
+                      {campaign.delivered > 0
+                        ? `${((campaign.unsubscribes / campaign.delivered) * 100).toFixed(1)}%`
                         : '0%'}
                     </p>
                   </div>
@@ -328,4 +325,4 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       )}
     </div>
   );
-} 
+}
