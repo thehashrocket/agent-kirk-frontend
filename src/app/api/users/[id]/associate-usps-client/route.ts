@@ -73,7 +73,7 @@ export async function POST(
         const validatedData = associateUspsClientSchema.safeParse(body);
 
         if (!validatedData.success) {
-            return NextResponse.json({ error: validatedData.error.errors }, { status: 400 });
+            return NextResponse.json({ error: validatedData.error.issues }, { status: 400 });
         }
 
         // Get the target user ID from params
@@ -130,7 +130,7 @@ export async function POST(
         console.error('Error associating USPS Client:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json(
-                { error: 'Validation failed', details: error.errors },
+                { error: 'Validation failed', details: error.issues },
                 { status: 400 }
             );
         }
@@ -239,7 +239,7 @@ export async function DELETE(
         console.error('Error unassociating USPS Client:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json(
-                { error: 'Validation failed', details: error.errors },
+                { error: 'Validation failed', details: error.issues },
                 { status: 400 }
             );
         }

@@ -297,7 +297,7 @@ async function handleUnexpectedError(error: unknown, queryId?: string): Promise<
     return NextResponse.json(
       {
         error: CHAT_CONSTANTS.ERROR_MESSAGES.INVALID_REQUEST,
-        details: error.errors
+        details: error.issues
       } as ErrorResponse,
       { status: 400 }
     );

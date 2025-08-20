@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
           eventType: 'webhook_validation_error',
           eventMessage: 'Webhook validation failed',
           errorMessage: 'Invalid webhook data',
-          errorStackTrace: JSON.stringify(result.error.errors),
+          errorStackTrace: JSON.stringify(result.error),
           payload: {
             data: JSON.stringify(validatedData),
             metadata: JSON.stringify(metadata),
@@ -161,7 +161,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Invalid webhook data',
-          details: result.error.errors,
+          details: result.error.issues,
           receivedData: validatedData
         },
         { status: 400 }
@@ -447,7 +447,7 @@ export async function POST(request: NextRequest) {
     // Handle Zod validation errors
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid webhook data', details: error.errors },
+        { error: 'Invalid webhook data', details: error.issues },
         { status: 400 }
       );
     }

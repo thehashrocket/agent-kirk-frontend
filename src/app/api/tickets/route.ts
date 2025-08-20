@@ -135,7 +135,7 @@ export async function POST(request: Request) {
     return NextResponse.json(ticket);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new NextResponse(JSON.stringify(error.errors), { status: 400 });
+      return new NextResponse(JSON.stringify(error.flatten()), { status: 400 });
     }
 
     console.error("[TICKETS_POST]", error);

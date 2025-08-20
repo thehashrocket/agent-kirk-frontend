@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid query ID', details: error.errors },
+        { error: 'Invalid query ID', details: error.issues },
         { status: 400 }
       );
     }

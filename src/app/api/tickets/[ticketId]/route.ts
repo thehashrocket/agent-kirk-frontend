@@ -256,7 +256,7 @@ export async function PATCH(
       return new NextResponse(
         JSON.stringify({
           error: "Bad Request",
-          errors: error.errors
+          issues: error.issues
         }),
         { 
           status: 400,
