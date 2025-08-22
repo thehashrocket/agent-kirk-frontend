@@ -258,6 +258,9 @@ export async function POST(
       },
     });
 
+    // Send a welcome email to the new user
+    await sendWelcomeEmail(user.email);
+
     return NextResponse.json(user);
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -434,5 +437,30 @@ export async function DELETE(
   } catch (error) {
     console.error('Error deleting user:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
+/**
+ * Sends a welcome email to the newly created user.
+ * Uses Mailgun API for sending emails.
+ *
+ * @param {string | null} email - Recipient's email address
+ * @returns {Promise<void>}
+ */
+async function sendWelcomeEmail(email: string | null): Promise<void> {
+  if (!email) return;
+
+  try {
+    await fetch(`${process.env.NEXTAUTH_URL}/api/mailgun`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        to: email,
+        email_template: 'welcome email',
+        link: `${process.env.NEXTAUTH_URL}`, // or any relevant link
+      }),
+    });
+  } catch (mailError) {
+    console.error('Failed to send welcome email:', mailError);
+    // Optionally, you can handle email failure here
   }
 }

@@ -56,6 +56,22 @@ declare module "next-auth/jwt" {
   }
 }
 
+async function sendWelcomeEmail(to: string) {
+  try {
+    await fetch(`${process.env.NEXTAUTH_URL}/api/mailgun`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        to,
+        email_template: 'welcome email',
+        link: `${process.env.NEXTAUTH_URL}/login`, // or any relevant link
+      }),
+    });
+  } catch (error) {
+    console.error('Failed to send welcome email:', error);
+  }
+}
+
 /**
  * NextAuth.js configuration options.
  * Sets up authentication with Google provider and custom callbacks.
@@ -182,6 +198,13 @@ export const authOptions: AuthOptions = {
               },
             });
 
+            // Send welcome email
+            // We don't need to do this because they are created automatically when
+            // sending a magic link.
+            // if (newUser.email) {
+            //   await sendWelcomeEmail(newUser.email);
+            // }
+
             // Update the user object to be used by NextAuth
             Object.assign(user, {
               id: newUser.id,
@@ -229,6 +252,13 @@ export const authOptions: AuthOptions = {
               where: { email: user.email },
               include: { role: true },
             });
+
+            // Send welcome email
+            // We don't need to do this because they are automatically signed in
+            // via google.
+            // if (manualUser?.email) {
+            //   await sendWelcomeEmail(manualUser.email);
+            // }
 
             // If there's a manually created user, use their role
             const roleToUse = manualUser?.roleId;
