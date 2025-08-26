@@ -20,9 +20,11 @@ interface DirectMailAccount {
 interface DirectMailTableRow {
     campaignName: string;
     sendDate: string;
+    finalScanCount: number;
     lastScanDate: string;
     totalSent: number;
     scanned: number;
+    pieces: number;
     delivered: number;
     percentOnTime: number;
     percentDelivered: number;
@@ -233,7 +235,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         },
         {
             header: 'Delivered',
-            accessor: 'delivered',
+            accessor: 'finalScanCount',
             align: 'right',
             sortable: true,
             render: (value) => formatNumber(value)
@@ -245,12 +247,13 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
             sortable: true,
             render: (value) => formatPercentage(value)
         },
+        // Calculate % Delivered using the number of pieces scanned by the total pieces
         {
             header: '% Delivered',
             accessor: 'percentDelivered',
             align: 'right',
             sortable: true,
-            render: (value) => formatPercentage(value)
+            render: (_value, row) => formatPercentage(row.finalScanCount / row.pieces * 100)
         }
     ], []);
 
@@ -406,26 +409,6 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                                         placeholder="Search campaigns..."
                                         value={filters.campaignName}
                                         onChange={(e) => setFilters(prev => ({ ...prev, campaignName: e.target.value }))}
-                                        className="h-8"
-                                    />
-                                </div>
-                                <div>
-                                    <Label htmlFor="filter-send-date" className="text-xs">Send Date</Label>
-                                    <Input
-                                        id="filter-send-date"
-                                        placeholder="Search send date..."
-                                        value={filters.sendDate}
-                                        onChange={(e) => setFilters(prev => ({ ...prev, sendDate: e.target.value }))}
-                                        className="h-8"
-                                    />
-                                </div>
-                                <div>
-                                    <Label htmlFor="filter-last-scan-date" className="text-xs">Last Scan Date</Label>
-                                    <Input
-                                        id="filter-last-scan-date"
-                                        placeholder="Search scan date..."
-                                        value={filters.lastScanDate}
-                                        onChange={(e) => setFilters(prev => ({ ...prev, lastScanDate: e.target.value }))}
                                         className="h-8"
                                     />
                                 </div>

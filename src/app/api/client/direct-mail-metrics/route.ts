@@ -101,10 +101,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
             return {
                 campaignName: campaign.campaignName,
+                finalScanCount: latestSummary?.finalScanCount || 0,
                 sendDate: format(campaign.sendDate, 'yyyy-MM-dd'),
                 lastScanDate: latestSummary ? format(latestSummary.scanDate, 'yyyy-MM-dd') : 'N/A',
                 totalSent: latestSummary?.pieces || 0,
                 scanned: latestSummary?.totalScanned || 0,
+                pieces: latestSummary?.pieces || 0,
                 delivered: latestSummary?.numberDelivered || 0,
                 percentOnTime: latestSummary?.percentOnTime || 0,
                 percentDelivered: latestSummary?.percentDelivered || 0,
