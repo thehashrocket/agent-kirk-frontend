@@ -22,12 +22,16 @@ export interface GaMetricsResponse {
   channelDaily: Array<{
     id: string;
     date: string;
+    users: number;
+    newUsers: number;
     channelGroup: string;
     sessions: number;
   }> | null;
   sourceDaily: Array<{
     id: string;
     date: string;
+    users: number;
+    newUsers: number;
     trafficSource: string;
     sessions: number;
   }> | null;
@@ -46,4 +50,4 @@ export interface GaMetricsResponse {
 export interface GaMetricsError {
   error: string;
   code: string;
-} 
+}

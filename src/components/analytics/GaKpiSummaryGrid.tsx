@@ -6,7 +6,7 @@ import CountUp from 'react-countup';
 /**
  * GaKpiSummaryGrid
  *
- * Renders the six KPI summary cards for the analytics dashboard.
+ * Renders the three KPI summary cards for the analytics dashboard.
  * Props:
  *   - current: the selected month object from kpiMonthly
  *   - prevYear: the previous year month object from kpiMonthly
@@ -26,17 +26,17 @@ const metrics: Array<{
     {
       key: 'sessions',
       label: 'Sessions',
-      tooltip: 'Total number of sessions for the entire month.'
+      tooltip: 'Total number of sessions.'
     },
     {
       key: 'goalCompletions',
       label: 'Goal Completions',
-      tooltip: 'Number of goal completions for the entire month.'
+      tooltip: 'Number of goal completions.'
     },
     {
       key: 'goalCompletionRate',
       label: 'Goal Completion Rate',
-      tooltip: 'Goal completions per session for the entire month.',
+      tooltip: 'Goal completions per session.',
       format: (v: number) => `${(v * 100).toFixed(2)}%`
     }
   ];

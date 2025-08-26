@@ -139,6 +139,8 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
           channelDaily = rows.map(row => ({
             date: row.date,
             channelGroup: row.channel || row.channelGroup || 'direct',
+            users: Number(row.users) || 0,
+            newUsers: Number(row.newUsers) || 0,
             sessions: Number(row.sessions) || 0,
             screenPageViewsPerSession: Number(row.pageviews_per_session || row.screenPageViewsPerSession) || 0,
             engagementRate: Number(row.engagement_rate || row.engagementRate) || 0,
@@ -155,6 +157,8 @@ function transformLLMDashboardData(llmResponse: LLMDashboardResponse | LLMDashbo
           sourceDaily = rows.map(row => ({
             date: row.date,
             trafficSource: row.source || row.trafficSource || 'direct',
+            users: Number(row.users) || 0,
+            newUsers: Number(row.newUsers) || 0,
             sessions: Number(row.sessions) || 0,
             screenPageViewsPerSession: Number(row.pageviews_per_session || row.screenPageViewsPerSession) || 0,
             engagementRate: Number(row.engagement_rate || row.engagementRate) || 0,

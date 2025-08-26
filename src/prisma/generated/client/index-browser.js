@@ -335,6 +335,8 @@ exports.Prisma.GaChannelDailyScalarFieldEnum = {
   gaPropertyId: 'gaPropertyId',
   date: 'date',
   channelGroup: 'channelGroup',
+  users: 'users',
+  newUsers: 'newUsers',
   sessions: 'sessions',
   screenPageViewsPerSession: 'screenPageViewsPerSession',
   engagementRate: 'engagementRate',

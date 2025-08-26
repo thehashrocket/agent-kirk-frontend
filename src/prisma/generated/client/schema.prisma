@@ -286,6 +286,8 @@ model GaChannelDaily {
   gaPropertyId              String
   date                      DateTime   @db.Date
   channelGroup              String     @db.VarChar(64)
+  users                     Int        @default(0)
+  newUsers                  Int        @default(0)
   sessions                  Int
   screenPageViewsPerSession Float
   engagementRate            Float

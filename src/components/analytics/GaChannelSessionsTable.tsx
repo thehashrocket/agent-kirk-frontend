@@ -19,6 +19,8 @@ function getYearMonth(date: string) {
 type ChannelDailyItem = {
   channelGroup: string;
   sessions: number;
+  users: number;
+  newUsers: number;
   date?: string | Date;
   [key: string]: any;
 };
@@ -34,21 +36,23 @@ export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: Ga
     if (!channelDaily || channelDaily.length === 0) return [];
 
     // --- New logic for true year-over-year comparison ---
-    // 1. Group sessions by channel and yearMonth
-    const sessionsByChannelMonth: Record<string, Record<string, number>> = {};
+    // 1. Group sessions, users, newUsers by channel and yearMonth
+    const metricsByChannelMonth: Record<string, Record<string, { sessions: number; users: number; newUsers: number }>> = {};
     channelDaily.forEach((row: ChannelDailyItem) => {
       if (!row.date) return;
       const date = typeof row.date === 'string' ? row.date : row.date.toString();
       const yearMonth = getYearMonth(date);
       const channel = row.channelGroup || 'Unknown';
-      if (!sessionsByChannelMonth[channel]) sessionsByChannelMonth[channel] = {};
-      sessionsByChannelMonth[channel][yearMonth] = (sessionsByChannelMonth[channel][yearMonth] || 0) + row.sessions;
+      if (!metricsByChannelMonth[channel]) metricsByChannelMonth[channel] = {};
+      if (!metricsByChannelMonth[channel][yearMonth]) metricsByChannelMonth[channel][yearMonth] = { sessions: 0, users: 0, newUsers: 0 };
+      metricsByChannelMonth[channel][yearMonth].sessions += row.sessions || 0;
+      metricsByChannelMonth[channel][yearMonth].users += row.users || 0;
+      metricsByChannelMonth[channel][yearMonth].newUsers += row.newUsers || 0;
     });
 
     // 2. Determine which months are in the selected range
     let monthsInRange: string[] = [];
     if (dateRange) {
-      // Build a list of yearMonth strings between from and to
       const from = new Date(dateRange.from);
       const to = new Date(dateRange.to);
       const months: string[] = [];
@@ -60,28 +64,47 @@ export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: Ga
       }
       monthsInRange = months;
     } else {
-      // If no range, use all months present in the data
       const allMonths = new Set<string>();
-      Object.values(sessionsByChannelMonth).forEach(channelData => {
+      Object.values(metricsByChannelMonth).forEach(channelData => {
         Object.keys(channelData).forEach(ym => allMonths.add(ym));
       });
       monthsInRange = Array.from(allMonths);
     }
 
-    // 3. For each channel, sum sessions for months in range (current) and same months previous year (prev)
-    const result: Array<{ channel: string; sessions: number; prev: number; diff: number; percent: number | null }> = [];
-    Object.entries(sessionsByChannelMonth).forEach(([channel, monthData]) => {
-      let currentTotal = 0;
-      let prevTotal = 0;
+    // 3. For each channel, sum metrics for months in range (current) and same months previous year (prev)
+    const result: Array<{
+      channel: string;
+      sessions: number;
+      users: number;
+      newUsers: number;
+      prev: number;
+      diff: number;
+      percent: number | null;
+    }> = [];
+    Object.entries(metricsByChannelMonth).forEach(([channel, monthData]) => {
+      let currentSessions = 0, prevSessions = 0;
+      let currentUsers = 0, prevUsers = 0;
+      let currentNewUsers = 0, prevNewUsers = 0;
       monthsInRange.forEach(ym => {
-        currentTotal += monthData[ym] || 0;
-        // Previous year month string
+        currentSessions += monthData[ym]?.sessions || 0;
+        currentUsers += monthData[ym]?.users || 0;
+        currentNewUsers += monthData[ym]?.newUsers || 0;
         const prevYm = (parseInt(ym) - 100).toString();
-        prevTotal += monthData[prevYm] || 0;
+        prevSessions += monthData[prevYm]?.sessions || 0;
+        prevUsers += monthData[prevYm]?.users || 0;
+        prevNewUsers += monthData[prevYm]?.newUsers || 0;
       });
-      const diff = currentTotal - prevTotal;
-      const percent = prevTotal > 0 ? (diff / prevTotal) * 100 : null;
-      result.push({ channel, sessions: currentTotal, prev: prevTotal, diff, percent });
+      const diff = currentSessions - prevSessions;
+      const percent = prevSessions > 0 ? (diff / prevSessions) * 100 : null;
+      result.push({
+        channel,
+        sessions: currentSessions,
+        users: currentUsers,
+        newUsers: currentNewUsers,
+        prev: prevSessions,
+        diff,
+        percent,
+      });
     });
 
     return result;
@@ -141,6 +164,20 @@ export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: Ga
           </div>
         );
       },
+    },
+    {
+      header: 'Users',
+      accessor: 'users',
+      align: 'right',
+      sortable: true,
+      render: (value: number) => value.toLocaleString(),
+    },
+    {
+      header: 'New Users',
+      accessor: 'newUsers',
+      align: 'right',
+      sortable: true,
+      render: (value: number) => value.toLocaleString(),
     },
     {
       header: 'Sessions',
