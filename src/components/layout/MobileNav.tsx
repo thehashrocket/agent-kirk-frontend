@@ -2,7 +2,7 @@
  * @file src/components/layout/MobileNav.tsx
  * Mobile navigation component that provides a responsive slide-out menu.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Role-based navigation items
  * - Slide-out sheet interface
@@ -27,10 +27,7 @@ import {
   Users,
   Settings,
   BarChart,
-  Ticket,
   MessageSquare,
-  History,
-  HelpCircle,
   FileText,
 } from "lucide-react"
 
@@ -56,7 +53,7 @@ const adminNavItems: NavItem[] = [
   { title: "System Settings", href: "/admin/settings", icon: <Settings /> },
   { title: "Client Analytics", href: "/admin/client-analytics", icon: <BarChart /> },
   { title: "Reports", href: "/admin/reports", icon: <FileText /> },
-  { title: "Messages", href: "/admin/messages", icon: <MessageSquare /> },
+  // { title: "Messages", href: "/admin/messages", icon: <MessageSquare /> },
 ]
 
 /**
@@ -67,7 +64,7 @@ const accountRepNavItems: NavItem[] = [
   { title: "Dashboard", href: "/account-rep/dashboard", icon: <LayoutDashboard /> },
   { title: "Client Management", href: "/account-rep/clients", icon: <Users /> },
   { title: "Client Analytics", href: "/account-rep/client-analytics", icon: <BarChart /> },
-  { title: "Messages", href: "/account-rep/messages", icon: <MessageSquare /> },
+  // { title: "Messages", href: "/account-rep/messages", icon: <MessageSquare /> },
   { title: "Reports", href: "/account-rep/reports", icon: <FileText /> },
   { title: "Chat", href: "/chat", icon: <MessageSquare /> },
 ]
@@ -78,7 +75,7 @@ const accountRepNavItems: NavItem[] = [
  */
 const clientNavItems: NavItem[] = [
   { title: "Dashboard", href: "/client/dashboard", icon: <LayoutDashboard /> },
-  { title: "Messages", href: "/client/messages", icon: <MessageSquare /> },
+  // { title: "Messages", href: "/client/messages", icon: <MessageSquare /> },
   // { title: "Settings", href: "/client/settings", icon: <Settings /> },
   // { title: "Support", href: "/client/support", icon: <HelpCircle /> },
   { title: "Chat", href: "/chat", icon: <MessageSquare /> },
@@ -87,25 +84,25 @@ const clientNavItems: NavItem[] = [
 /**
  * @component MobileNav
  * Client Component that renders a mobile-friendly navigation menu.
- * 
+ *
  * Features:
  * - Slide-out sheet interface using shadcn/ui
  * - Role-based navigation items
  * - Active route highlighting
  * - Session information display
  * - Scrollable navigation area
- * 
+ *
  * Layout:
  * - Hidden on desktop (lg:hidden)
  * - Full-height sheet with scroll area
  * - Consistent spacing and typography
  * - Icon + text navigation items
- * 
+ *
  * Authentication:
  * - Requires active session
  * - Displays user email and role
  * - Returns null if no session
- * 
+ *
  * Accessibility:
  * - Proper ARIA labels
  * - Keyboard navigation support
@@ -177,4 +174,4 @@ export function MobileNav() {
       </SheetContent>
     </Sheet>
   )
-} 
+}

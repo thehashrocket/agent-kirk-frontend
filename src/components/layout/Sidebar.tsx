@@ -2,7 +2,7 @@
  * @file src/components/layout/Sidebar.tsx
  * Desktop sidebar navigation component that provides role-based navigation.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Role-based navigation items
  * - Active route highlighting
@@ -17,15 +17,10 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { 
-  LayoutDashboard, 
-  Users, 
-  Settings, 
-  BarChart, 
-  Ticket, 
-  MessageSquare, 
-  History,
-  HelpCircle,
+import {
+  LayoutDashboard,
+  Users,
+  BarChart,
   FileText,
   User
 } from "lucide-react";
@@ -50,15 +45,15 @@ interface NavItem {
  * Includes system management and analytics links.
  */
 const adminNavItems: NavItem[] = [
-  { 
-    title: "Dashboard", 
-    href: "/admin/dashboard", 
+  {
+    title: "Dashboard",
+    href: "/admin/dashboard",
     icon: <LayoutDashboard />,
     description: "Overview and key metrics"
   },
-  { 
-    title: "User Management", 
-    href: "/admin/users", 
+  {
+    title: "User Management",
+    href: "/admin/users",
     icon: <Users />,
     description: "Manage user accounts"
   },
@@ -74,18 +69,18 @@ const adminNavItems: NavItem[] = [
     icon: <FileText />,
     description: "Generate client reports"
   },
-  { 
-    title: "Reports", 
-    href: "/admin/reports", 
+  {
+    title: "Reports",
+    href: "/admin/reports",
     icon: <FileText />,
     description: "Generate system reports"
   },
-  { 
-    title: "Message with 1905", 
-    href: "/admin/messages", 
-    icon: <MessageSquare />,
-    description: "System-wide communications"
-  },
+  // {
+  //   title: "Message with 1905",
+  //   href: "/admin/messages",
+  //   icon: <MessageSquare />,
+  //   description: "System-wide communications"
+  // },
 ];
 
 /**
@@ -93,15 +88,15 @@ const adminNavItems: NavItem[] = [
  * Includes client management and support features.
  */
 const accountRepNavItems: NavItem[] = [
-  { 
-    title: "Dashboard", 
-    href: "/account-rep/dashboard", 
+  {
+    title: "Dashboard",
+    href: "/account-rep/dashboard",
     icon: <LayoutDashboard />,
     description: "Client overview"
   },
-  { 
-    title: "Client Management", 
-    href: "/account-rep/clients", 
+  {
+    title: "Client Management",
+    href: "/account-rep/clients",
     icon: <Users />,
     description: "Manage client accounts"
   },
@@ -111,12 +106,12 @@ const accountRepNavItems: NavItem[] = [
     icon: <BarChart />,
     description: "View client analytics"
   },
-  { 
-    title: "Message with 1905", 
-    href: "/account-rep/messages", 
-    icon: <MessageSquare />,
-    description: "Client communications"
-  },
+  // {
+  //   title: "Message with 1905",
+  //   href: "/account-rep/messages",
+  //   icon: <MessageSquare />,
+  //   description: "Client communications"
+  // },
   {
     title: "Profile",
     href: "/account-rep/profile",
@@ -130,27 +125,27 @@ const accountRepNavItems: NavItem[] = [
  * Includes basic account management and support access.
  */
 const clientNavItems: NavItem[] = [
-  { 
-    title: "Dashboard", 
-    href: "/client/dashboard", 
+  {
+    title: "Dashboard",
+    href: "/client/dashboard",
     icon: <LayoutDashboard />,
     description: "Your overview"
   },
-  { 
-    title: "Message with 1905", 
-    href: "/client/messages", 
-    icon: <MessageSquare />,
-    description: "Your conversations"
-  },
-  // { 
-  //   title: "Settings", 
-  //   href: "/client/settings", 
+  // {
+  //   title: "Message with 1905",
+  //   href: "/client/messages",
+  //   icon: <MessageSquare />,
+  //   description: "Your conversations"
+  // },
+  // {
+  //   title: "Settings",
+  //   href: "/client/settings",
   //   icon: <Settings />,
   //   description: "Account preferences"
   // },
-  // { 
-  //   title: "Support", 
-  //   href: "/client/support", 
+  // {
+  //   title: "Support",
+  //   href: "/client/support",
   //   icon: <HelpCircle />,
   //   description: "Get assistance"
   // },
@@ -165,24 +160,24 @@ const clientNavItems: NavItem[] = [
 /**
  * @component Sidebar
  * Client Component that renders the desktop navigation sidebar.
- * 
+ *
  * Features:
  * - Fixed position sidebar with scroll area
  * - Role-based navigation items
  * - Active route highlighting
  * - Icon + text navigation items
  * - Desktop-only display (hidden on mobile)
- * 
+ *
  * Layout:
  * - Fixed position on left side
  * - Full height with top offset for header
  * - Consistent width (16rem/64px)
  * - Scrollable navigation area
- * 
+ *
  * Authentication:
  * - Requires active session
  * - Returns null if no session
- * 
+ *
  * Accessibility:
  * - Semantic navigation structure
  * - Clear visual hierarchy
@@ -228,8 +223,8 @@ export function Sidebar() {
                 className={cn(
                   "group flex flex-col gap-1 rounded-lg px-3 py-2 text-sm transition-colors",
                   "hover:bg-primary/10",
-                  pathname === item.href ? 
-                    "bg-primary/15 text-primary" : 
+                  pathname === item.href ?
+                    "bg-primary/15 text-primary" :
                     "text-muted-foreground hover:text-primary"
                 )}
                 aria-current={pathname === item.href ? "page" : undefined}
@@ -237,8 +232,8 @@ export function Sidebar() {
                 <div className="flex items-center gap-3">
                   <div className={cn(
                     "h-4 w-4 transition-colors",
-                    pathname === item.href ? 
-                      "text-primary" : 
+                    pathname === item.href ?
+                      "text-primary" :
                       "text-muted-foreground group-hover:text-primary"
                   )}>
                     {item.icon}
@@ -257,4 +252,4 @@ export function Sidebar() {
       </ScrollArea>
     </aside>
   );
-} 
+}
