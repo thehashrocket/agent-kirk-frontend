@@ -347,15 +347,17 @@ exports.Prisma.GaChannelDailyScalarFieldEnum = {
 
 exports.Prisma.GaSourceDailyScalarFieldEnum = {
   id: 'id',
-  gaPropertyId: 'gaPropertyId',
-  date: 'date',
-  trafficSource: 'trafficSource',
-  sessions: 'sessions',
-  screenPageViewsPerSession: 'screenPageViewsPerSession',
-  engagementRate: 'engagementRate',
   avgSessionDurationSec: 'avgSessionDurationSec',
-  goalCompletions: 'goalCompletions',
+  date: 'date',
+  engagementRate: 'engagementRate',
+  gaPropertyId: 'gaPropertyId',
   goalCompletionRate: 'goalCompletionRate',
+  goalCompletions: 'goalCompletions',
+  newUsers: 'newUsers',
+  screenPageViewsPerSession: 'screenPageViewsPerSession',
+  sessions: 'sessions',
+  trafficSource: 'trafficSource',
+  users: 'users',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

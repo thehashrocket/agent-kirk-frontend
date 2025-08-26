@@ -303,15 +303,17 @@ model GaChannelDaily {
 
 model GaSourceDaily {
   id                        String     @id @default(cuid())
-  gaPropertyId              String
-  date                      DateTime   @db.Date
-  trafficSource             String     @db.VarChar(64)
-  sessions                  Int
-  screenPageViewsPerSession Float
-  engagementRate            Float
   avgSessionDurationSec     Int
-  goalCompletions           Int
+  date                      DateTime   @db.Date
+  engagementRate            Float
+  gaPropertyId              String
   goalCompletionRate        Float
+  goalCompletions           Int
+  newUsers                  Int        @default(0)
+  screenPageViewsPerSession Float
+  sessions                  Int
+  trafficSource             String     @db.VarChar(64)
+  users                     Int        @default(0)
   createdAt                 DateTime   @default(now())
   updatedAt                 DateTime   @default(now()) @updatedAt
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
