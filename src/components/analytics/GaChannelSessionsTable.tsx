@@ -230,7 +230,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: Ga
   const topRowsWithNumbers: RowWithNumber[] = topRows.map((row: typeof topRows[0], idx: number) => ({ ...row, rowNumber: idx + 1 }));
 
   // Handler for row click
-  const handleRowClick = (row: typeof allRows[0]) => {
+  const handleRowClick = (row: RowWithNumber) => {
     if (!row.channel || !isClickableChannel(row.channel)) return;
     // format the channel name to lowercase and replace spaces with dashes
     const formattedChannel = row.channel.toLowerCase().replace(/\s+/g, '-');
@@ -246,7 +246,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: Ga
   };
 
   // Styling for clickable rows
-  const rowClassName = (row: typeof allRows[0]) => {
+  const rowClassName = (row: RowWithNumber) => {
     return isClickableChannel(row.channel) ? 'group cursor-pointer hover:bg-muted/50' : 'hover:bg-muted/50';
   };
 

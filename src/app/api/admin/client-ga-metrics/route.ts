@@ -437,6 +437,8 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       channelDaily: channelDaily.length > 0 ? channelDaily.map(item => ({
         id: item.id,
         date: item.date.toISOString().split('T')[0],
+        users: 0, // Defaulting to 0 as it's not available in gaChannelDaily
+        newUsers: 0, // Defaulting to 0 as it's not available in gaChannelDaily
         channelGroup: item.channelGroup,
         sessions: item.sessions
       })) : null,
@@ -444,7 +446,9 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         id: item.id,
         date: item.date.toISOString().split('T')[0],
         trafficSource: item.trafficSource,
-        sessions: item.sessions
+        sessions: item.sessions,
+        users: 0, // Defaulting to 0 as it's not available in gaSourceDaily
+        newUsers: 0 // Defaulting to 0 as it's not available in gaSourceDaily
       })) : null,
       metadata: {
         displayDateRange: {

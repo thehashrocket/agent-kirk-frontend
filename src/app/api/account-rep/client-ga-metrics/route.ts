@@ -299,13 +299,17 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
         id: item.id,
         date: item.date.toISOString().split('T')[0],
         channelGroup: item.channelGroup,
-        sessions: item.sessions
+        sessions: item.sessions,
+        users: item.users,
+        newUsers: item.newUsers
       })) : null,
       sourceDaily: sourceDaily.length > 0 ? sourceDaily.map(item => ({
         id: item.id,
         date: item.date.toISOString().split('T')[0],
         trafficSource: item.trafficSource,
-        sessions: item.sessions
+        sessions: item.sessions,
+        users: item.users,
+        newUsers: item.newUsers
       })) : null,
       metadata: {
         displayDateRange: {
