@@ -215,7 +215,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
             sortable: true,
         },
         {
-            header: 'Last Scan Date',
+            header: 'Last Scan/Delivery Date',
             accessor: 'lastScanDate',
             sortable: true,
         },
