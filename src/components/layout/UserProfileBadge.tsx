@@ -35,7 +35,6 @@ export function UserProfileBadge() {
 
             const userData = await res.json();
             setUserData(userData);
-            console.log("User data fetched:", userData);
         };
 
         fetchUserData();
