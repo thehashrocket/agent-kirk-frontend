@@ -37,7 +37,6 @@ export function UserProfileBadge() {
             setUserData(userData);
             console.log("User data fetched:", userData);
         };
-        console.log("Fetching user data for UserProfileBadge");
 
         fetchUserData();
     }, [session]);
