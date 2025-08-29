@@ -1,9 +1,9 @@
 /**
  * @fileoverview Current User Profile API Route
- * 
+ *
  * This route handles fetching and updating the current authenticated user's profile.
  * It includes basic profile information and associated Google Analytics accounts.
- * 
+ *
  * @route GET /api/users/me
  * @route PATCH /api/users/me
  * @security Requires authentication via NextAuth session
@@ -22,9 +22,9 @@ const updateUserSchema = z.object({
 
 /**
  * GET handler for retrieving the current user's profile
- * 
+ *
  * @returns {Promise<NextResponse>} JSON response containing user data or error
- * 
+ *
  * @throws {401} If user is not authenticated
  * @throws {404} If user is not found in database
  * @throws {500} If there's an internal server error
@@ -40,6 +40,7 @@ export async function GET() {
       where: { email: session.user.email },
       include: {
         role: true,
+        accountRep: true,
         userToGaAccounts: {
           where: {
             gaAccount: {
@@ -75,10 +76,10 @@ export async function GET() {
 
 /**
  * PATCH handler for updating the current user's profile
- * 
+ *
  * @param request - Request object containing update data
  * @returns {Promise<NextResponse>} JSON response containing updated user data
- * 
+ *
  * @body {string} [companyId] - Company ID to assign to user
  * @body {string} [name] - User's name
  * @throws {401} If user is not authenticated
@@ -133,7 +134,7 @@ export async function PATCH(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-{ error: 'Invalid request data', details: error.flatten().fieldErrors },
+        { error: 'Invalid request data', details: error.flatten().fieldErrors },
         { status: 400 }
       );
     }
@@ -141,4 +142,4 @@ export async function PATCH(request: NextRequest) {
     console.error('Error updating user:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
-} 
+}
