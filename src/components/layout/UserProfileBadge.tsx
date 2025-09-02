@@ -16,15 +16,7 @@ import { normalizeNames } from "@/lib/utils/normalize-names";
 export function UserProfileBadge() {
     const { data: session } = useSession() as { data: Session | null };
 
-    if (!session?.user) return null;
-
-    // Get initials from name or email, with proper null checks
-    const initials = session.user.name?.trim()
-        ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase()
-        : session.user.email?.[0].toUpperCase() ?? '?';
-
     // Fetch user-specific data from the database using useEffect and useState
-
     const [userData, setUserData] = useState<any>(null);
 
     useEffect(() => {
@@ -39,6 +31,13 @@ export function UserProfileBadge() {
 
         fetchUserData();
     }, [session]);
+
+    if (!session?.user) return null;
+
+    // Get initials from name or email, with proper null checks
+    const initials = session.user.name?.trim()
+        ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase()
+        : session.user.email?.[0].toUpperCase() ?? '?';
 
     return (
         <div className="flex items-center gap-3" role="status" aria-label="User profile">

@@ -75,7 +75,7 @@ export default async function ClientDashboard() {
     return (
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-xl font-bold mb-4">No Google Analytics Accounts Found</h2>
-        <p className="text-gray-600">It seems you don't have any Google Analytics accounts linked to your profile.</p>
+<p className="text-gray-600">It seems you don&apos;t have any Google Analytics accounts linked to your profile.</p>
         <p className="text-gray-600">Please contact support or your Account Representative for assistance.</p>
       </div>
     );
