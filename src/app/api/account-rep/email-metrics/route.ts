@@ -1,33 +1,34 @@
 /**
- * @file src/app/api/client/email-metrics/route.ts
- * API endpoint for fetching email analytics metrics for the current client user.
+ * @file src/app/api/account-rep/email-metrics/route.ts
+ * API endpoint for fetching email analytics metrics for account representatives.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
-import { format, parseISO, startOfDay, endOfDay } from 'date-fns';
+import { getEmailMetrics } from '@/lib/services/email-metrics';
 
 /**
- * GET /api/client/email-metrics
+ * GET /api/account-rep/email-metrics
  *
- * Fetches email analytics metrics for the current client user.
+ * Fetches email analytics metrics for account representatives.
  *
  * Query Parameters:
  * - emailClientId: The Email Client ID
+ * - clientId: The Client ID to fetch metrics for
  * - from: Start date (YYYY-MM-DD format)
  * - to: End date (YYYY-MM-DD format)
  * - selectedFrom: Original selected start date for display
  * - selectedTo: Original selected end date for display
  *
  * Authentication:
- * - Requires valid session with CLIENT role
+ * - Requires valid session with ACCOUNT_REP role
  *
  * Response:
  * - 200: Returns email analytics metrics
  * - 401: Unauthorized (not logged in)
- * - 403: Forbidden (not client role)
+ * - 403: Forbidden (not account rep role)
+ * - 400: Missing required parameters
  * - 404: Email Client not found or not associated with user
  * - 500: Server error
  */
@@ -40,18 +41,18 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check client role
+    // Check account rep role
     if (session.user.role !== 'ACCOUNT_REP') {
-      return NextResponse.json({ error: 'Forbidden: Client access required' }, { status: 403 });
+      return NextResponse.json({ error: 'Forbidden: Account rep access required' }, { status: 403 });
     }
 
     const { searchParams } = new URL(request.url);
     const emailClientId = searchParams.get('emailClientId');
+    const clientId = searchParams.get('clientId');
     const fromDate = searchParams.get('from');
     const toDate = searchParams.get('to');
     const selectedFrom = searchParams.get('selectedFrom');
     const selectedTo = searchParams.get('selectedTo');
-    const clientId = searchParams.get('clientId');
 
     if (!emailClientId) {
       return NextResponse.json({ error: 'Email Client ID is required' }, { status: 400 });
@@ -60,244 +61,24 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Client ID is required' }, { status: 400 });
     }
 
-    // Verify user has access to this Email Client
-    const userEmailClientAssociation = await prisma.userToEmailClient.findFirst({
-      where: {
-        userId: clientId,
-        emailClientId: emailClientId,
-      },
-      include: {
-        emailClient: true,
-      },
+    // Use shared service to get email metrics
+    const result = await getEmailMetrics({
+      emailClientId,
+      userId: clientId,
+      fromDate,
+      toDate,
+      selectedFrom,
+      selectedTo,
     });
 
-    if (!userEmailClientAssociation) {
-      return NextResponse.json({ error: 'Email Client not found or not accessible' }, { status: 404 });
-    }
-
-    const emailClient = userEmailClientAssociation.emailClient;
-
-    // Parse date parameters
-    const from = fromDate ? parseISO(fromDate) : new Date();
-    const to = toDate ? parseISO(toDate) : new Date();
-    const selectedFromDate = selectedFrom ? parseISO(selectedFrom) : from;
-    const selectedToDate = selectedTo ? parseISO(selectedTo) : to;
-
-    // Fetch email campaign daily stats for the date range
-    const emailCampaignDailyStats = await prisma.emailCampaignDailyStats.findMany({
-      where: {
-        emailClientId: emailClientId,
-        date: {
-          gte: from,
-          lte: to,
-        },
-      },
-      include: {
-        emailCampaign: {
-          select: {
-            campaignName: true,
-            campaignId: true,
-          },
-        },
-      },
-      orderBy: {
-        date: 'asc',
-      },
-    });
-
-    // Fetch email global daily stats for the date range
-    const emailGlobalDailyStats = await prisma.emailGlobalDailyStats.findMany({
-      where: {
-        emailClientId: emailClientId,
-        date: {
-          gte: from,
-          lte: to,
-        },
-      },
-      orderBy: {
-        date: 'asc',
-      },
-    });
-
-    // Aggregate data for the selected date range
-    const selectedRangeStats = emailCampaignDailyStats.filter(stat =>
-      stat.date >= selectedFromDate && stat.date <= selectedToDate
-    );
-
-    const previousYearStats = emailCampaignDailyStats.filter(stat => {
-      const statDate = new Date(stat.date);
-      const previousYearDate = new Date(selectedFromDate);
-      previousYearDate.setFullYear(previousYearDate.getFullYear() - 1);
-      const previousYearEndDate = new Date(selectedToDate);
-      previousYearEndDate.setFullYear(previousYearEndDate.getFullYear() - 1);
-
-      return statDate >= previousYearDate && statDate <= previousYearEndDate;
-    });
-
-    // Calculate metrics for selected range
-    const selectedRangeMetrics = {
-      totalOpens: selectedRangeStats.reduce((sum, stat) => sum + stat.opens, 0),
-      totalClicks: selectedRangeStats.reduce((sum, stat) => sum + stat.clicks, 0),
-      totalBounces: selectedRangeStats.reduce((sum, stat) => sum + stat.bounces, 0),
-      totalUnsubscribes: selectedRangeStats.reduce((sum, stat) => sum + stat.unsubscribes, 0),
-      totalDelivered: selectedRangeStats.reduce((sum, stat) => sum + stat.delivered, 0),
-      totalRequests: selectedRangeStats.reduce((sum, stat) => sum + stat.requests, 0),
-      averageOpenRate: selectedRangeStats.length > 0
-        ? selectedRangeStats.reduce((sum, stat) => sum + (stat.dailyTotalOpenRate || 0), 0) / selectedRangeStats.length / 100
-        : 0,
-      averageClickRate: selectedRangeStats.length > 0
-        ? selectedRangeStats.reduce((sum, stat) => sum + (stat.dailyTotalClickRate || 0), 0) / selectedRangeStats.length / 100
-        : 0,
-    };
-
-    // Calculate metrics for previous year
-    const previousYearMetrics = {
-      totalOpens: previousYearStats.reduce((sum, stat) => sum + stat.opens, 0),
-      totalClicks: previousYearStats.reduce((sum, stat) => sum + stat.clicks, 0),
-      totalBounces: previousYearStats.reduce((sum, stat) => sum + stat.bounces, 0),
-      totalUnsubscribes: previousYearStats.reduce((sum, stat) => sum + stat.unsubscribes, 0),
-      totalDelivered: previousYearStats.reduce((sum, stat) => sum + stat.delivered, 0),
-      totalRequests: previousYearStats.reduce((sum, stat) => sum + stat.requests, 0),
-      averageOpenRate: previousYearStats.length > 0
-        ? previousYearStats.reduce((sum, stat) => sum + (stat.dailyTotalOpenRate || 0), 0) / previousYearStats.length / 100
-        : 0,
-      averageClickRate: previousYearStats.length > 0
-        ? previousYearStats.reduce((sum, stat) => sum + (stat.dailyTotalClickRate || 0), 0) / previousYearStats.length / 100
-        : 0,
-    };
-
-    // Calculate year-over-year changes
-    const yearOverYearChanges = {
-      opens: previousYearMetrics.totalOpens > 0
-        ? ((selectedRangeMetrics.totalOpens - previousYearMetrics.totalOpens) / previousYearMetrics.totalOpens) * 100
-        : 0,
-      clicks: previousYearMetrics.totalClicks > 0
-        ? ((selectedRangeMetrics.totalClicks - previousYearMetrics.totalClicks) / previousYearMetrics.totalClicks) * 100
-        : 0,
-      bounces: previousYearMetrics.totalBounces > 0
-        ? ((selectedRangeMetrics.totalBounces - previousYearMetrics.totalBounces) / previousYearMetrics.totalBounces) * 100
-        : 0,
-      unsubscribes: previousYearMetrics.totalUnsubscribes > 0
-        ? ((selectedRangeMetrics.totalUnsubscribes - previousYearMetrics.totalUnsubscribes) / previousYearMetrics.totalUnsubscribes) * 100
-        : 0,
-      openRate: previousYearMetrics.averageOpenRate > 0
-        ? ((selectedRangeMetrics.averageOpenRate - previousYearMetrics.averageOpenRate) / previousYearMetrics.averageOpenRate) * 100
-        : 0,
-      clickRate: previousYearMetrics.averageClickRate > 0
-        ? ((selectedRangeMetrics.averageClickRate - previousYearMetrics.averageClickRate) / previousYearMetrics.averageClickRate) * 100
-        : 0,
-    };
-
-    // Group data by date for time series
-    const dailyData = emailCampaignDailyStats.reduce((acc, stat) => {
-      const dateKey = format(new Date(stat.date), 'yyyy-MM-dd');
-      if (!acc[dateKey]) {
-        acc[dateKey] = {
-          date: dateKey,
-          opens: 0,
-          clicks: 0,
-          bounces: 0,
-          unsubscribes: 0,
-          delivered: 0,
-          requests: 0,
-        };
-      }
-      acc[dateKey].opens += stat.opens;
-      acc[dateKey].clicks += stat.clicks;
-      acc[dateKey].bounces += stat.bounces;
-      acc[dateKey].unsubscribes += stat.unsubscribes;
-      acc[dateKey].delivered += stat.delivered;
-      acc[dateKey].requests += stat.requests;
-      return acc;
-    }, {} as Record<string, any>);
-
-    // Convert to array and sort by date
-    const timeSeriesData = Object.values(dailyData).sort((a, b) =>
-      new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-
-    // Get campaign stats with all metrics
-    const campaignStats = emailCampaignDailyStats.reduce((acc, stat) => {
-      const campaignKey = stat.emailCampaign.campaignId;
-      if (!acc[campaignKey]) {
-        acc[campaignKey] = {
-          campaignId: campaignKey,
-          campaignName: stat.emailCampaign.campaignName,
-          requests: 0,
-          delivered: 0,
-          uniqueOpens: 0,
-          uniqueClicks: 0,
-          unsubscribes: 0,
-          opens: 0,
-          clicks: 0,
-          // Track dates to avoid double counting uniques
-          dates: new Set<string>(),
-          dailyUniques: [] as { date: string, uniqueOpens: number, uniqueClicks: number }[],
-        };
-      }
-
-      const dateKey = format(new Date(stat.date), 'yyyy-MM-dd');
-      if (!acc[campaignKey].dates.has(dateKey)) {
-        acc[campaignKey].dates.add(dateKey);
-        acc[campaignKey].dailyUniques.push({
-          date: dateKey,
-          uniqueOpens: stat.uniqueOpens || 0,
-          uniqueClicks: stat.uniqueClicks || 0,
-        });
-      }
-
-      acc[campaignKey].requests += stat.requests || 0;
-      acc[campaignKey].delivered += stat.delivered || 0;
-      acc[campaignKey].unsubscribes += stat.unsubscribes || 0;
-      acc[campaignKey].opens += stat.opens || 0;
-      acc[campaignKey].clicks += stat.clicks || 0;
-      return acc;
-    }, {} as Record<string, any>);
-
-    // Process campaign stats to calculate proper unique metrics
-    const processedCampaignStats = Object.values(campaignStats).map(campaign => {
-      // Take the maximum unique values across days as the campaign total
-      const uniqueOpens = Math.max(...campaign.dailyUniques.map((day: { uniqueOpens: number }) => day.uniqueOpens));
-      const uniqueClicks = Math.max(...campaign.dailyUniques.map((day: { uniqueClicks: number }) => day.uniqueClicks));
-
-      // Clean up temporary tracking fields
-      const { dates, dailyUniques, ...cleanCampaign } = campaign;
-
-      return {
-        ...cleanCampaign,
-        uniqueOpens,
-        uniqueClicks,
-        // Calculate rates based on delivered emails
-        openRate: campaign.delivered > 0 ? (uniqueOpens / campaign.delivered) * 100 : 0,
-        clickRate: campaign.delivered > 0 ? (uniqueClicks / campaign.delivered) * 100 : 0,
-        deliveryRate: campaign.requests > 0 ? (campaign.delivered / campaign.requests) * 100 : 0,
-      };
-    });
-
-    const topCampaigns = processedCampaignStats
-      .sort((a, b) => b.uniqueOpens - a.uniqueOpens)
-      .slice(0, 5);
-
-    return NextResponse.json({
-      emailClient: {
-        id: emailClient.id,
-        clientName: emailClient.clientName,
-      },
-      selectedRange: {
-        from: format(selectedFromDate, 'yyyy-MM-dd'),
-        to: format(selectedToDate, 'yyyy-MM-dd'),
-      },
-      metrics: {
-        current: selectedRangeMetrics,
-        previousYear: previousYearMetrics,
-        yearOverYear: yearOverYearChanges,
-      },
-      timeSeriesData,
-      topCampaigns,
-      totalCampaigns: Object.keys(campaignStats).length,
-    });
+    return NextResponse.json(result);
   } catch (error) {
     console.error('Error fetching email metrics:', error);
+
+    if (error instanceof Error && error.message === 'Email Client not found or not accessible') {
+      return NextResponse.json({ error: error.message }, { status: 404 });
+    }
+
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

@@ -205,8 +205,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
     }
 
     const gaPropertyId = requestedProperty.id;
-    const accountGA4 = parentAccount.gaAccountId;
-    const propertyGA4 = requestedProperty.gaPropertyId;
 
     // Check if data exists in tables
     const [kpiDailyCount, kpiMonthlyCount, channelDailyCount, sourceDailyCount] = await Promise.all([
@@ -215,10 +213,6 @@ export async function GET(request: Request): Promise<NextResponse<GaMetricsRespo
       prisma.gaChannelDaily.count({ where: { gaPropertyId } }),
       prisma.gaSourceDaily.count({ where: { gaPropertyId } })
     ]);
-
-    // Determine if we need to fetch historical data
-    const needsHistoricalData = kpiDailyCount === 0 || kpiMonthlyCount === 0 ||
-      channelDailyCount === 0 || sourceDailyCount === 0;
 
     // Set date ranges based on what we need
     let queryDateFrom: Date;

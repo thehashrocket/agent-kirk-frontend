@@ -240,8 +240,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<GaMetricsR
           ]
         }
       }).then(result => {
-        console.log(`kpiMonthly query - gaPropertyId: ${gaPropertyId}, month range: ${oldestMonth} to ${currentMonth}, found ${result.length} records`);
-        console.log('Found monthly records:', result.map(r => ({ month: r.month, sessions: r.sessions })));
+
         return result;
       }),
       prisma.gaChannelDaily.findMany({
