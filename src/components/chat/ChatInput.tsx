@@ -21,7 +21,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 /**
  * Interface for suggested response data.

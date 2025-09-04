@@ -2,7 +2,7 @@
  * @file src/components/channels/email/AccountRepEmailClientSelector.tsx
  * Account Rep version of Email client selector for selecting assigned client's email clients.
  * Based on the client Email client selector but uses the account-rep API endpoint.
- * 
+ *
  * SOLID Principles:
  * - Single Responsibility: Handles account rep email client selection
  * - Open/Closed: Extensible for different client types
@@ -21,7 +21,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import { Loader2 } from 'lucide-react';
 import type { EmailClient } from './types';
 
@@ -34,13 +33,13 @@ interface AccountRepEmailClientSelectorProps {
 /**
  * @component AccountRepEmailClientSelector
  * Account Rep version of Email client selector for selecting assigned client's email clients.
- * 
+ *
  * Features:
  * - Fetches email clients for assigned clients only
  * - Email client selection with client name display
  * - Auto-selects first available email client
  * - Provides callbacks for selection changes
- * 
+ *
  * @param {AccountRepEmailClientSelectorProps} props - Component props
  */
 export function AccountRepEmailClientSelector({
@@ -172,4 +171,4 @@ export function AccountRepEmailClientSelector({
       )}
     </div>
   );
-} 
+}

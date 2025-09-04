@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Ticket, TicketStatus, TicketPriority } from "@/types/tickets";
+import type { TicketStatus, TicketPriority } from "@/types/tickets";
 
 interface UseTicketsProps {
   status?: TicketStatus;

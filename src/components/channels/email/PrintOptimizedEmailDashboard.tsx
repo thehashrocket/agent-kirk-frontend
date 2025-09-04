@@ -7,11 +7,10 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, TrendingDown, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink } from 'lucide-react';
+import { TrendingUp, TrendingDown, Mail, MousePointer, AlertTriangle, UserMinus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
-import Link from 'next/link';
 
 interface PrintOptimizedEmailDashboardProps {
   data: EmailMetricsResponse;
@@ -100,7 +99,7 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
 
   return (
     <div className="bg-white rounded-lg shadow p-6 print:shadow-none print:p-0">
-      
+
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-blue-800 mb-4">Email Marketing Performance</h1>
         <h2 className="text-xl font-bold mb-2">Email Campaign Overview</h2>
@@ -111,7 +110,7 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
           Showing email metrics with year-over-year comparison
         </p>
       </div>
-      
+
       {/* Metrics summary card grid */}
       <div className="avoid-break mb-8">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -165,7 +164,7 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
             </tbody>
           </table>
         </div>
-        
+
         {data.totalCampaigns > 10 && (
           <p className="text-sm text-gray-500 mt-2">
             Showing top 10 campaigns out of {data.totalCampaigns} total campaigns
@@ -198,7 +197,7 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
               </div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
               <CardTitle className="text-base">Previous Year</CardTitle>
@@ -224,4 +223,4 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
       </div>
     </div>
   );
-} 
+}

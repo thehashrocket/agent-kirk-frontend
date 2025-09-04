@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { ArrowUpRight, ArrowDownRight, ExternalLink } from 'lucide-react';
 import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
-import React, { useEffect, useId, useRef, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 
 interface GaChannelSessionsTableProps {

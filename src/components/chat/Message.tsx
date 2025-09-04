@@ -14,7 +14,6 @@ import { LoadingDots } from './LoadingDots';
 import { MessageStatus, MESSAGE_STATUS } from '@/types/chat';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 
 // Lazy load the chart modal to prevent unnecessary renders
 const ChartPreviewModal = lazy(() => import('./ChartPreviewModal').then(mod => ({ default: mod.ChartPreviewModal })));

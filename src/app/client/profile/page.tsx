@@ -25,12 +25,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/utils';
 import BreadCrumbs from '@/components/layout/BreadCrumbs';

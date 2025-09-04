@@ -4,7 +4,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
-import type { Ticket, TicketStatus, TicketPriority } from "@/types/tickets";
+import type { TicketStatus, TicketPriority } from "@/types/tickets";
 import { Prisma } from "@/prisma/generated/client";
 
 interface CreateTicketData {
@@ -217,7 +217,7 @@ export async function getTicketStats(accountRepId?: string) {
     prisma.ticket.count({
       where: {
         ...baseFilter,
-        createdAt: { 
+        createdAt: {
           lt: twentyFourHoursAgo
         }
       }
@@ -226,7 +226,7 @@ export async function getTicketStats(accountRepId?: string) {
       where: {
         ...baseFilter,
         status: 'OPEN',
-        createdAt: { 
+        createdAt: {
           lt: twentyFourHoursAgo
         }
       }
@@ -235,7 +235,7 @@ export async function getTicketStats(accountRepId?: string) {
       where: {
         ...baseFilter,
         status: 'IN_PROGRESS',
-        createdAt: { 
+        createdAt: {
           lt: twentyFourHoursAgo
         }
       }
@@ -244,7 +244,7 @@ export async function getTicketStats(accountRepId?: string) {
       where: {
         ...baseFilter,
         status: 'RESOLVED',
-        createdAt: { 
+        createdAt: {
           lt: twentyFourHoursAgo
         }
       }
@@ -253,7 +253,7 @@ export async function getTicketStats(accountRepId?: string) {
       where: {
         ...baseFilter,
         status: { not: 'OPEN' },
-        updatedAt: { 
+        updatedAt: {
           gte: fortyEightHoursAgo,
           lt: twentyFourHoursAgo
         }
@@ -305,4 +305,4 @@ export async function getTicketStats(accountRepId?: string) {
       averageResponseTime: calculatePercentageChange(currentAverageResponseTime, previousAverageResponseTime),
     }
   };
-} 
+}

@@ -4,11 +4,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useDebounce } from '@/hooks/use-debounce';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { Building2, Plus, Users, Loader2, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Company, CompanySelectorProps } from '@/types/company';
@@ -39,9 +37,9 @@ export function CompanySelector({ onCompanySelected, className }: CompanySelecto
       if (response.ok) {
         const data = await response.json();
         setCompanies(data);
-        
+
         // Show create option if no exact match found
-        const exactMatch = data.some((company: Company) => 
+        const exactMatch = data.some((company: Company) =>
           company.name.toLowerCase() === query.toLowerCase()
         );
         setShowCreateOption(!exactMatch);
@@ -112,24 +110,24 @@ export function CompanySelector({ onCompanySelected, className }: CompanySelecto
 
   const handleCompanySelect = async (company: Company) => {
     setSelectedCompany(company);
-    
+
     const success = await updateUserCompany(company.id);
     if (success) {
       // Force session update to refresh user data
       await update();
-      
+
       onCompanySelected?.(company);
-      
+
       // Navigate to role-specific dashboard based on user role
       const role = session?.user?.role;
       let dashboardPath = '/client/dashboard'; // Default for CLIENT
-      
+
       if (role === 'ADMIN') {
         dashboardPath = '/admin/dashboard';
       } else if (role === 'ACCOUNT_REP') {
         dashboardPath = '/account-rep/dashboard';
       }
-      
+
       // Use window.location to ensure full page refresh and session reload
       // This will trigger a fresh session fetch from the server
       window.location.href = dashboardPath;
@@ -245,4 +243,4 @@ export function CompanySelector({ onCompanySelected, className }: CompanySelecto
       )}
     </div>
   );
-} 
+}

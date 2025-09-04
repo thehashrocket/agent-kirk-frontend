@@ -17,7 +17,7 @@ import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
-import { Company, prisma, Role } from "./prisma";
+import { Company, prisma } from "./prisma";
 
 /**
  * Extended types for NextAuth.js session.

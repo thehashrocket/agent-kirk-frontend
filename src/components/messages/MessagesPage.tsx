@@ -6,13 +6,12 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MessageList } from './MessageList';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import type { Session } from 'next-auth';
 
 /**
@@ -83,7 +82,7 @@ interface MessagesPageProps {
  * - Mark messages as read
  * - Display message attachments
  * - Error handling and loading states
- * 
+ *
  * @param {MessagesPageProps} props - Component props
  */
 export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProps) {
@@ -122,7 +121,7 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
         </Card>
       )}
 
-      <MessageList 
+      <MessageList
         recipientId={view === 'inbox' ? (session as Session).user.id : undefined}
         threadId={threadId || undefined}
         currentUserId={(session as Session).user.id}
@@ -130,4 +129,4 @@ export default function MessagesPage({ initialView = 'inbox' }: MessagesPageProp
       />
     </div>
   );
-} 
+}

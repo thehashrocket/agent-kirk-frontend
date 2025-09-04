@@ -1,4 +1,4 @@
-import { PrismaClient } from '@/lib/prisma';
+// Service to save Google Analytics metrics into the database using Prisma ORM
 import { GaMetricsResponse } from '../types/ga-metrics';
 
 // Import the generated Prisma client
@@ -13,7 +13,7 @@ export async function saveGaMetrics(
     // Get current month in YYYYMM format
     const today = new Date();
     const currentMonth = parseInt(
-      today.getFullYear().toString() + 
+      today.getFullYear().toString() +
       (today.getMonth() + 1).toString().padStart(2, '0')
     );
 
@@ -151,4 +151,4 @@ export async function saveGaMetrics(
   } catch (error) {
     throw error;
   }
-} 
+}

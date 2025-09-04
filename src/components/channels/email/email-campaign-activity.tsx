@@ -9,12 +9,11 @@ import {
 } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ExternalLink } from 'lucide-react';
 import type { EmailCampaignActivityProps } from './types';
 
 export function EmailCampaignActivity({ campaigns, isLoading = false }: EmailCampaignActivityProps) {
   const formatPercentage = (value: number) => `${value.toFixed(2)}%`;
-  
+
   if (isLoading) {
     return (
       <Card>
@@ -82,7 +81,7 @@ export function EmailCampaignActivity({ campaigns, isLoading = false }: EmailCam
             </TableBody>
           </Table>
         </div>
-        
+
         {campaigns.length > 0 && (
           <div className="flex items-center justify-between text-sm text-muted-foreground mt-4 pt-4 border-t">
             <span>1 - 10 / {campaigns.length}</span>
@@ -99,4 +98,4 @@ export function EmailCampaignActivity({ campaigns, isLoading = false }: EmailCam
       </CardContent>
     </Card>
   );
-} 
+}

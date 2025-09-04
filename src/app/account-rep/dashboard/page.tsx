@@ -22,7 +22,7 @@ import { getTicketStats } from "@/lib/services/ticket-service";
 import { formatDuration } from "@/lib/utils";
 import { formatDistanceToNow } from 'date-fns';
 import { Badge } from "@/components/ui/badge";
-import { Inbox, Users, Clock, Star } from "lucide-react";
+import { Users, Clock, Star } from "lucide-react";
 import { SatisfactionMetrics } from "@/components/account-rep/satisfaction-metrics";
 
 /**

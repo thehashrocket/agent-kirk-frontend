@@ -1,7 +1,7 @@
 /**
  * @file src/lib/services/email-analytics.ts
  * Email analytics service module for fetching and aggregating email campaign data.
- * 
+ *
  * This service implements SOLID principles:
  * - Single Responsibility: Each function has one clear purpose
  * - Open/Closed: Extensible for new metric types and filters
@@ -10,7 +10,6 @@
  */
 
 import { prisma } from '@/lib/prisma';
-import type { EmailCampaignDailyStats, EmailCampaign, EmailCampaignContent } from '@/prisma/generated/client';
 
 // Types for the service layer
 export interface EmailMetricsAggregated {
@@ -137,13 +136,13 @@ export class EmailAnalyticsService {
 
       const content = campaign.emailCampaignContents;
       const sendDate = content?.sendTime || campaign.createdAt;
-      
+
       return {
         id: campaign.id,
-        delivered: sendDate.toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric' 
+        delivered: sendDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
         }),
         weekDay: sendDate.toLocaleDateString('en-US', { weekday: 'long' }),
         subject: content?.subject || campaign.campaignName,
@@ -166,7 +165,7 @@ export class EmailAnalyticsService {
     const end = new Date();
     const start = new Date();
     start.setDate(start.getDate() - 30);
-    
+
     return { start, end };
   }
 
@@ -187,4 +186,4 @@ export class EmailAnalyticsService {
 
     return { start, end };
   }
-} 
+}

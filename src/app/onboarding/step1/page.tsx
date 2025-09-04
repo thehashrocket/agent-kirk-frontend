@@ -1,9 +1,9 @@
 /**
  * @fileoverview Onboarding Step 1: Company Selection
- * 
+ *
  * First step of the onboarding process where users select or create their company.
  * This step is essential for connecting the user profile to their organization.
- * 
+ *
  * @route /onboarding/step1
  * @access Authenticated users only
  */
@@ -11,11 +11,11 @@
 import { Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CompanySelector } from '@/components/onboarding/company-selector';
-import { Building2, ArrowRight } from 'lucide-react';
+import { Building2 } from 'lucide-react';
 
 /**
  * Onboarding Step 1 Page Component
- * 
+ *
  * Allows users to search for and select their company during onboarding.
  * Users can either select from existing companies or create a new one.
  */
@@ -23,7 +23,7 @@ export default function OnboardingStep1Page() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl space-y-8">
-        
+
         {/* Header Section */}
         <div className="text-center space-y-4">
           <div className="flex justify-center">
@@ -64,7 +64,7 @@ export default function OnboardingStep1Page() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <Suspense 
+            <Suspense
               fallback={
                 <div className="space-y-4">
                   <div className="h-10 bg-muted animate-pulse rounded-md" />
@@ -80,7 +80,7 @@ export default function OnboardingStep1Page() {
         {/* Help Text */}
         <div className="text-center text-sm text-muted-foreground">
           <p>
-            Can&rsquo;t find your company? Don&rsquo;t worry! You can create it and we&rsquo;ll 
+            Can&rsquo;t find your company? Don&rsquo;t worry! You can create it and we&rsquo;ll
             help you get everything set up.
           </p>
         </div>

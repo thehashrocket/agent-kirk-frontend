@@ -9,7 +9,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
   LabelList
 } from 'recharts';
 
@@ -45,43 +44,43 @@ const CustomLabel = (props: any) => {
   );
 };
 
-export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({ 
-  data, 
-  height = 400 
+export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
+  data,
+  height = 400
 }) => {
   const instanceId = useId();
   // Track accumulated data to handle multiple renders
   const [accumulatedData, setAccumulatedData] = useState<MonthlySessionData[]>([]);
-  
+
   // Accumulate data across renders
   useEffect(() => {
     if (!data || data.length === 0) return;
-    
+
     // Add new data to accumulated state
     setAccumulatedData(prevData => {
       // If no previous data, just use current data
       if (prevData.length === 0) return data;
-      
+
       // Create a set of existing month values to avoid duplicates
       const existingMonths = new Set(prevData.map(item => item.month));
-      
+
       // Get only new items
       const newItems = data.filter(item => !existingMonths.has(item.month));
-      
+
       // Return combined array if we have new items
       return newItems.length > 0 ? [...prevData, ...newItems] : prevData;
     });
-    
+
     return () => {
       // Cleanup
     };
   }, [data]);
-  
+
   // Process data to create chart-friendly format with current and previous year
   const processedData = React.useMemo(() => {
     // Use accumulated data if available, otherwise use the current data
     const dataToProcess = accumulatedData.length > 0 ? accumulatedData : data;
-    
+
     if (!dataToProcess || dataToProcess.length === 0) return [];
 
     // Log the raw data to understand what we're working with
@@ -91,17 +90,17 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     //   monthDigit: d.month % 100,
     //   sessions: d.sessions
     // })));
-    
+
     // Create a lookup map for sessions by month
     const sessionsByMonth = new Map<number, number>();
     dataToProcess.forEach(item => {
       sessionsByMonth.set(item.month, item.sessions);
     });
-    
+
     // Get all available months sorted in descending order (most recent first)
     const allDataMonths = [...dataToProcess.map(item => item.month)].sort((a, b) => b - a);
     // console.log("MonthlyComparisonChart - Available months in data:", allDataMonths);
-    
+
     // Get a list of all unique years in the data
     const years = new Set<number>();
     dataToProcess.forEach(item => {
@@ -110,26 +109,26 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
     });
     const availableYears = Array.from(years).sort((a, b) => b - a); // Descending order
     // console.log("MonthlyComparisonChart - Available years:", availableYears);
-    
+
     // Extract the most recent year that has data
     const mostRecentYear = availableYears[0];
-    
+
     // Get months from the most recent year for reference
     const recentYearMonths = allDataMonths
       .filter(month => Math.floor(month / 100) === mostRecentYear)
       .sort((a, b) => a - b);
-    
+
     // console.log("MonthlyComparisonChart - Months for most recent year:", recentYearMonths);
-    
+
     // Get the 12 most recent months regardless of year
     // This ensures we show the last 12 calendar months
     const last12Months = allDataMonths.slice(0, 12).sort((a, b) => a - b);
-    
+
     // If we have fewer than 12 months, use what we have
     const monthsToShow = last12Months.length > 0 ? last12Months : allDataMonths;
-    
+
     // console.log("MonthlyComparisonChart - Last 12 months to show:", monthsToShow);
-    
+
     // Prepare chart data with proper typing
     const result: Array<{
       monthNum: number;
@@ -137,24 +136,24 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
       sessions: number;
       prevYearSessions: number;
     }> = [];
-    
+
     // Process each month that we want to show
     monthsToShow.forEach(yearMonth => {
       const year = Math.floor(yearMonth / 100);
       const month = yearMonth % 100;
-      
+
       // Get sessions for current year/month
       const sessions = sessionsByMonth.get(yearMonth) || 0;
-      
+
       // Calculate previous year's equivalent month
       const prevYearMonth = (year - 1) * 100 + month;
       const prevYearSessions = sessionsByMonth.get(prevYearMonth) || 0;
-      
+
       // Format month for display
       // Need to subtract 1 from month because JavaScript months are 0-indexed
       const date = new Date(year, month - 1, 1);
       const displayMonth = date.toLocaleString('en-US', { month: 'long' });
-      
+
       // Add to chart data
       result.push({
         monthNum: yearMonth,
@@ -163,13 +162,13 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
         prevYearSessions: prevYearSessions
       });
     });
-    
+
     // Sort result by month number to ensure chronological order
     result.sort((a, b) => a.monthNum - b.monthNum);
-    
+
     // Log the final chart data
     // console.log("MonthlyComparisonChart - Final chart data:", result);
-    
+
     return result;
   }, [accumulatedData, data]);
 
@@ -208,38 +207,38 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
         </div>
       </div>
       <ResponsiveContainer width="100%" height={height}>
-        <RechartsLineChart 
-          data={processedData} 
+        <RechartsLineChart
+          data={processedData}
           margin={{ top: 50, right: 30, left: 20, bottom: 10 }}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
-          <XAxis 
-            dataKey="month" 
+          <XAxis
+            dataKey="month"
             tick={{ fontSize: 12 }}
             axisLine={{ stroke: '#E0E0E0' }}
             tickLine={false}
           />
-          <YAxis 
+          <YAxis
             tickFormatter={(value) => formatValue(value)}
             axisLine={false}
             tickLine={false}
             tick={{ fontSize: 12 }}
             domain={[0, 'auto']}
           />
-          <Tooltip 
+          <Tooltip
             formatter={valueFormatter}
             labelFormatter={() => ''}
-            contentStyle={{ 
-              borderRadius: '4px', 
+            contentStyle={{
+              borderRadius: '4px',
               boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
               border: 'none',
               padding: '8px 12px'
             }}
           />
-          <Line 
-            type="monotone" 
-            dataKey="sessions" 
-            stroke="#01518e" 
+          <Line
+            type="monotone"
+            dataKey="sessions"
+            stroke="#01518e"
             strokeWidth={2}
             name="Sessions"
             dot={{ r: 4, fill: '#01518e', stroke: 'white', strokeWidth: 1 }}
@@ -249,10 +248,10 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
           >
             <LabelList content={CustomLabel} />
           </Line>
-          <Line 
-            type="monotone" 
-            dataKey="prevYearSessions" 
-            stroke="#a6c8ff" 
+          <Line
+            type="monotone"
+            dataKey="prevYearSessions"
+            stroke="#a6c8ff"
             strokeWidth={2}
             name="Sessions (previous year)"
             dot={{ r: 4, fill: '#a6c8ff', stroke: 'white', strokeWidth: 1 }}
@@ -267,4 +266,4 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
       </ResponsiveContainer>
     </div>
   );
-}; 
+};

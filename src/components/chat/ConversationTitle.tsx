@@ -6,7 +6,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus, User, Building2, Database } from 'lucide-react';
+import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
 

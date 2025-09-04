@@ -11,19 +11,19 @@ import { redirect } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import Link from "next/link";
-import { 
+import {
   getAllClientsStats,
   getSystemResponseRateStats,
   getSystemClientSatisfactionStats,
   getSystemRecentActivities,
   getAllClientsWithGaData,
-  type SystemRecentActivity 
+  type SystemRecentActivity
 } from "@/lib/admin-client-reports";
 import { getTicketStats } from "@/lib/services/ticket-service";
 import { formatDuration } from "@/lib/utils";
 import { formatDistanceToNow } from 'date-fns';
 import { Badge } from "@/components/ui/badge";
-import { Inbox, Users, Clock, Star, Settings } from "lucide-react";
+import { Users, Clock, Star } from "lucide-react";
 import { AdminSatisfactionMetrics } from "@/components/admin/admin-satisfaction-metrics";
 import { ClientSelector } from "@/components/admin/client-selector";
 import { GaAccountsOverview } from "@/components/admin/ga-accounts-overview";
@@ -97,20 +97,20 @@ async function AdminClientStats({ selectedClientId }: { selectedClientId?: strin
  * @path src/app/admin/client-reports/page.tsx
  * Displays a single statistic card with title, value, and change indicator.
  * Shows positive changes in green and negative changes in red.
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.data - Statistics data
  * @param {string} props.data.title - Title of the statistic
  * @param {string|number} props.data.value - Current value
  * @param {number} props.data.change - Percentage change
  */
-function StatsCard({ data }: { 
-  data: { 
-    title: string; 
-    value: string | number; 
-    change: number; 
+function StatsCard({ data }: {
+  data: {
+    title: string;
+    value: string | number;
+    change: number;
     icon: React.ReactNode;
-  } 
+  }
 }) {
   return (
     <Card className="p-6">
@@ -173,7 +173,7 @@ async function SystemRecentActivitiesList({ selectedClientId }: { selectedClient
   return (
     <div className="space-y-4">
       {activities.map((activity: SystemRecentActivity) => (
-        <div 
+        <div
           key={activity.id}
           className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
         >
@@ -206,7 +206,7 @@ async function SystemRecentActivitiesList({ selectedClientId }: { selectedClient
  * - Recent activities across all clients
  * - Google Analytics accounts and properties overview
  * - Quick access links to admin features
- * 
+ *
  * Requires authentication and admin role.
  * Redirects to sign-in page if not authenticated or unauthorized.
  */
@@ -234,15 +234,15 @@ export default async function AdminClientReports({
           Client Reports Dashboard
         </h1>
         <p className="text-gray-600">
-          {selectedClientId 
-            ? `Viewing reports for selected client` 
+          {selectedClientId
+            ? `Viewing reports for selected client`
             : `System-wide dashboard reports for all clients`}
         </p>
       </div>
 
       {/* Client Selection */}
       <div className="mb-6">
-        <ClientSelector 
+        <ClientSelector
           clients={clientsWithGaData}
           selectedClientId={selectedClientId}
         />
@@ -260,7 +260,7 @@ export default async function AdminClientReports({
       {/* Google Analytics Overview */}
       <div className="mt-8">
         <Suspense fallback={<StatsCardSkeleton />}>
-          <GaAccountsOverview 
+          <GaAccountsOverview
             clientId={selectedClientId}
             clientsWithGaData={clientsWithGaData}
           />
@@ -286,22 +286,22 @@ export default async function AdminClientReports({
         <Card className="p-6">
           <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
           <div className="space-y-4">
-            <Link 
-              href="/admin/users" 
+            <Link
+              href="/admin/users"
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">User Management</h3>
               <p className="text-sm text-gray-600">Manage all users and their roles</p>
             </Link>
-            <Link 
-              href="/admin/messages" 
+            <Link
+              href="/admin/messages"
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">System Messages</h3>
               <p className="text-sm text-gray-600">View all messages in the system</p>
             </Link>
-            <Link 
-              href="/admin/dashboard" 
+            <Link
+              href="/admin/dashboard"
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <h3 className="font-medium">System Overview</h3>
@@ -318,5 +318,5 @@ export default async function AdminClientReports({
       </div>
     </div>
   );
-} 
+}
 

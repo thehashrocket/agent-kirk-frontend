@@ -1,7 +1,6 @@
 import { CampaignReport } from '@/components/channels/email/CampaignReport';
 import BreadCrumbs from '@/components/layout/BreadCrumbs';
 import { Card, CardContent } from '@/components/ui/card';
-import { Suspense } from 'react';
 
 interface CampaignReportPageProps {
   params: Promise<{
@@ -59,10 +58,10 @@ export default async function CampaignReportPage({ params }: CampaignReportPageP
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex justify-between items-start">
-        <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dashboard", href: "/client/dashboard" },{ label: "Channel: Email", href:"/analytics/channel/email" }, { label: "Campaign Report", href: `/client/dashboard/email/${emailClientId}/campaign/${emailCampaignId}` }]} />
+        <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dashboard", href: "/client/dashboard" }, { label: "Channel: Email", href: "/analytics/channel/email" }, { label: "Campaign Report", href: `/client/dashboard/email/${emailClientId}/campaign/${emailCampaignId}` }]} />
         <h1 className="text-2xl font-bold">Campaign Report</h1>
       </div>
       <CampaignReport campaign={campaign} />
     </div>
   );
-} 
+}

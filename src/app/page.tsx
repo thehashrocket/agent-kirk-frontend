@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

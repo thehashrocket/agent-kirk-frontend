@@ -15,8 +15,6 @@ import {
   SproutSocialPlatformCharts,
   SproutSocialDemographicsChart,
   createDemographicsConfig,
-  transformDemographicData,
-  type DemographicData,
 } from './components';
 import { normalizeNames } from '@/lib/utils/normalize-names';
 
@@ -77,14 +75,14 @@ export function PrintOptimizedSproutSocialDashboard({ data }: PrintOptimizedSpro
 
   return (
     <div className="bg-white rounded-lg shadow p-6 print:shadow-none print:p-0 social-metrics">
-      
+
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-blue-800 mb-4">Social Media Performance</h1>
         <h2 className="text-xl font-bold mb-2">
           {normalizeNames(data.platformType)} Analytics Overview
         </h2>
         <p className="text-gray-500 mb-2">
-          {dateRange 
+          {dateRange
             ? `${dayjs(dateRange.from).format('MMM D, YYYY')} - ${dayjs(dateRange.to).format('MMM D, YYYY')}`
             : `${dayjs(data.dateRange.from).format('MMM D, YYYY')} - ${dayjs(data.dateRange.to).format('MMM D, YYYY')}`
           }
@@ -93,7 +91,7 @@ export function PrintOptimizedSproutSocialDashboard({ data }: PrintOptimizedSpro
           Showing social media metrics with period comparison
         </p>
       </div>
-      
+
       {/* Page Activity Overview */}
       <div className="avoid-break mb-8">
         <h2 className="text-xl font-semibold mb-1">Page Activity Overview</h2>
@@ -147,7 +145,7 @@ export function PrintOptimizedSproutSocialDashboard({ data }: PrintOptimizedSpro
             <h3 className="font-medium mb-2">Platform</h3>
             <p className="text-sm text-gray-600">{normalizeNames(data.platformType)}</p>
           </div>
-          
+
           <div className="p-4 bg-gray-50 rounded-lg">
             <h3 className="font-medium mb-2">Data Period</h3>
             <p className="text-sm text-gray-600">
@@ -158,4 +156,4 @@ export function PrintOptimizedSproutSocialDashboard({ data }: PrintOptimizedSpro
       </div>
     </div>
   );
-} 
+}

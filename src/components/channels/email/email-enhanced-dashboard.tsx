@@ -8,14 +8,11 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, TrendingDown, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
+import { TrendingUp, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink } from 'lucide-react';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { setDate } from 'date-fns';
 
 interface EmailEnhancedDashboardProps {
   data: EmailMetricsResponse;

@@ -3,7 +3,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import type { GaMetricsResponse } from '@/lib/types/ga-metrics';
 import { GaChannelSessionsTable } from './GaChannelSessionsTable';
-import { PieChart, PieChartData } from './PieChart';
+import { PieChart } from './PieChart';
 import { LineChart } from './LineChart';
 import { MonthlyComparisonChart } from './MonthlyComparisonChart';
 import React from 'react';

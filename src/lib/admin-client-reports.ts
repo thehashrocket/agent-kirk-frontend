@@ -4,7 +4,7 @@
  * Similar to account-rep.ts but provides admin-level access to all clients and their data
  */
 
-import { prisma, type Prisma, type ClientSatisfaction } from './prisma';
+import { prisma, type ClientSatisfaction } from './prisma';
 import { cache } from 'react';
 import { subDays } from 'date-fns';
 
@@ -254,7 +254,7 @@ export const getSystemResponseRateStats = cache(async (clientId?: string): Promi
 export const getSystemClientSatisfactionStats = cache(async (clientId?: string): Promise<HistoricalStats> => {
   try {
     const thirtyDaysAgo = subDays(new Date(), 30);
-    
+
     const whereClause: any = {};
     if (clientId) {
       whereClause.userId = clientId;
@@ -370,18 +370,18 @@ export const getSystemRecentActivities = cache(async (clientId?: string): Promis
       activities.push({
         id: `message-${message.id}`,
         client: clientUser.name || clientUser.email || 'Unknown Client',
-                 action: `${isClientSender ? 'Sent' : 'Received'} message`,
+        action: `${isClientSender ? 'Sent' : 'Received'} message`,
         time: message.createdAt,
         status: message.isRead ? 'completed' : 'pending',
         type: 'message',
-        accountRep: accountRepUser.role.name === 'ACCOUNT_REP' 
+        accountRep: accountRepUser.role.name === 'ACCOUNT_REP'
           ? (accountRepUser.name || accountRepUser.email || 'Unknown Rep')
           : undefined,
       });
     });
 
-         // Note: GaAccount model doesn't have createdAt field, 
-     // so we'll skip GA account activities for now
+    // Note: GaAccount model doesn't have createdAt field,
+    // so we'll skip GA account activities for now
 
     // Sort all activities by time and return top 15
     return activities
@@ -431,7 +431,7 @@ type FeedbackWithUser = ClientSatisfaction & {
 export const getSystemDetailedSatisfactionMetrics = cache(async (clientId?: string): Promise<SystemSatisfactionMetrics> => {
   try {
     const thirtyDaysAgo = subDays(new Date(), 30);
-    
+
     const whereClause: any = {};
     if (clientId) {
       whereClause.userId = clientId;
@@ -507,7 +507,7 @@ export const getSystemDetailedSatisfactionMetrics = cache(async (clientId?: stri
       4: 0,
       5: 0
     };
-    
+
     // Update distribution with actual counts
     ratingDistribution.forEach((item) => {
       const rating = Math.round(Number(item.rating));
@@ -596,4 +596,4 @@ export const getAccountRepClientsWithGaData = cache(async (accountRepId: string)
     console.error('Error fetching account rep clients with GA data:', error);
     throw new Error('Failed to fetch account rep clients with GA data');
   }
-}); 
+});

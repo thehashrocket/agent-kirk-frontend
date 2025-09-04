@@ -1,5 +1,3 @@
-import { Card } from "@/components/ui/card";
-import { TrendChart } from "@/components/ui/trend-chart";
 import { getDetailedSatisfactionMetrics } from "@/lib/account-rep";
 import { SatisfactionMetricsClient } from "./satisfaction-metrics-client";
 
@@ -25,10 +23,10 @@ export async function SatisfactionMetrics({ accountRepId }: SatisfactionMetricsP
   }));
 
   return (
-    <SatisfactionMetricsClient 
+    <SatisfactionMetricsClient
       metrics={metrics}
       distributionData={distributionData}
       formattedTrendData={formattedTrendData}
     />
   );
-} 
+}

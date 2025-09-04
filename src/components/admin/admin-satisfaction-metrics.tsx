@@ -4,8 +4,6 @@
  * Similar to the account-rep satisfaction metrics but with admin-level access.
  */
 
-import { Card } from "@/components/ui/card";
-import { TrendChart } from "@/components/ui/trend-chart";
 import { getSystemDetailedSatisfactionMetrics } from "@/lib/admin-client-reports";
 import { AdminSatisfactionMetricsClient } from "./admin-satisfaction-metrics-client";
 
@@ -31,11 +29,11 @@ export async function AdminSatisfactionMetrics({ selectedClientId }: AdminSatisf
   }));
 
   return (
-    <AdminSatisfactionMetricsClient 
+    <AdminSatisfactionMetricsClient
       metrics={metrics}
       distributionData={distributionData}
       formattedTrendData={formattedTrendData}
       selectedClientId={selectedClientId}
     />
   );
-} 
+}

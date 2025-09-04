@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import dayjs from 'dayjs';
 import type { SproutSocialMetricsResponse } from './types';
 import { computeMetrics } from './types';
@@ -11,11 +11,9 @@ import {
   SproutSocialDemographicsChart,
   createDemographicsConfig,
   transformDemographicData,
-  type DemographicData,
 } from './components';
 import { normalizeNames } from '@/lib/utils/normalize-names';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
-import { MonthRangePicker } from '@/components/analytics/MonthRangePicker';
 
 
 

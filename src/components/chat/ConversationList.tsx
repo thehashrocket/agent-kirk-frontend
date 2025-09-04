@@ -2,14 +2,14 @@
  * @file src/components/chat/ConversationList.tsx
  * Conversation list component that provides searchable and interactive chat history.
  * Built as a Client Component using Next.js App Router and shadcn/ui components.
- * 
+ *
  * Features:
  * - Real-time search filtering
  * - Star/unstar conversations
  * - Scrollable conversation list
  * - Active conversation highlighting
  * - Responsive design
- * 
+ *
  * Layout:
  * - Search input at the top
  * - Scrollable list of conversations
@@ -20,12 +20,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus, PencilLine } from 'lucide-react';
 import ConversationTitle from './ConversationTitle';
-import { Button } from '@/components/ui/button';
 
 /**
  * Interface for conversation data.
@@ -126,14 +123,14 @@ interface ConversationListProps {
 /**
  * @component ConversationList
  * Client Component that renders a searchable list of chat conversations.
- * 
+ *
  * Features:
  * - Real-time search filtering of conversations
  * - Star/unstar functionality for bookmarking
  * - Active conversation highlighting
  * - Scrollable conversation list
  * - Responsive design
- * 
+ *
  * Layout:
  * - Fixed search input at top
  * - Scrollable list below
@@ -142,7 +139,7 @@ interface ConversationListProps {
  *   - Last message preview
  *   - Timestamp
  *   - Star button
- * 
+ *
  * Accessibility:
  * - Proper ARIA labels for interactive elements
  * - Keyboard navigation support
@@ -209,4 +206,4 @@ export function ConversationList({
       </ScrollArea>
     </div>
   );
-} 
+}

@@ -6,7 +6,6 @@
 
 'use client';
 
-import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -22,7 +21,7 @@ import { PrintButton } from '@/components/dashboard/PrintButton';
 
 interface GaProperty {
   id: string;
-  gaPropertyId: string;  
+  gaPropertyId: string;
   gaPropertyName: string;
 }
 
@@ -54,36 +53,36 @@ interface AdminClientAnalyticsProps {
 /**
  * @component AdminClientAnalytics
  * Main component for admin client analytics functionality.
- * 
+ *
  * Features:
  * - Client selection dropdown with GA account information
  * - Display selected client information
  * - Google Analytics data visualization for selected client
  * - Print functionality for reports
  * - Similar UI to client dashboard but with admin-level access
- * 
+ *
  * @param {AdminClientAnalyticsProps} props - Component props
  */
-export function AdminClientAnalytics({ 
-  clientsWithGaData, 
-  selectedClientId 
+export function AdminClientAnalytics({
+  clientsWithGaData,
+  selectedClientId
 }: AdminClientAnalyticsProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const handleClientChange = (clientId: string) => {
     const params = new URLSearchParams(searchParams);
-    
+
     if (clientId === 'none') {
       params.delete('clientId');
     } else {
       params.set('clientId', clientId);
     }
-    
+
     router.push(`/admin/client-analytics?${params.toString()}`);
   };
 
-  const selectedClient = selectedClientId 
+  const selectedClient = selectedClientId
     ? clientsWithGaData.find(client => client.id === selectedClientId)
     : null;
 
@@ -98,8 +97,8 @@ export function AdminClientAnalytics({
           <CardTitle className="text-sm font-medium">Select Client</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Select 
-            value={selectedClientId || 'none'} 
+          <Select
+            value={selectedClientId || 'none'}
             onValueChange={handleClientChange}
           >
             <SelectTrigger>
@@ -195,4 +194,4 @@ export function AdminClientAnalytics({
       )}
     </div>
   );
-} 
+}

@@ -16,7 +16,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { MobileNav } from "./MobileNav";
-import { Home, MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
+import { MessageSquare, LogOut, LayoutDashboard } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { NotificationBell } from "@/components/NotificationBell";

@@ -27,8 +27,6 @@ import {
 } from '@/components/ui/select';
 import { PrintButton } from '@/components/dashboard/PrintButton';
 import { AccountRepGaMetrics } from '@/components/account-rep/account-rep-ga-metrics';
-import { AccountRepSproutSocialMetrics } from '@/components/channels/sprout-social/AccountRepSproutSocialMetrics';
-import { AccountRepEmailMetrics } from '@/components/channels/email/AccountRepEmailMetrics';
 
 interface GaProperty {
   id: string;

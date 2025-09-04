@@ -3,10 +3,9 @@
  * Account Representative utility functions for fetching dashboard statistics
  */
 
-import { prisma, type Prisma, type ClientSatisfaction } from './prisma';
+import { prisma, type ClientSatisfaction } from './prisma';
 import { cache } from 'react';
 import { subDays } from 'date-fns';
-import type { Decimal } from '@prisma/client/runtime/library';
 
 interface HistoricalStats {
   current: number;
@@ -66,7 +65,7 @@ export const getUnreadMessages = cache(async (accountRepId: string) => {
 export const getResponseRate = cache(async (accountRepId: string) => {
   try {
     const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    
+
     // Get all messages received in last 24 hours
     const totalMessages = await prisma.message.count({
       where: {
@@ -138,7 +137,7 @@ export const getActiveClientsStats = cache(async (accountRepId: string): Promise
 export const getUnreadMessagesStats = cache(async (accountRepId: string): Promise<HistoricalStats> => {
   try {
     const thirtyDaysAgo = subDays(new Date(), 30);
-    
+
     const [currentCount, previousCount] = await Promise.all([
       // Current unread messages
       prisma.message.count({
@@ -244,7 +243,7 @@ export const getResponseRateStats = cache(async (accountRepId: string): Promise<
 export const getClientSatisfactionStats = cache(async (accountRepId: string): Promise<HistoricalStats> => {
   try {
     const thirtyDaysAgo = subDays(new Date(), 30);
-    
+
     // Get current average rating (last 30 days)
     const currentRatings = await prisma.clientSatisfaction.aggregate({
       where: {
@@ -389,7 +388,7 @@ export const getDetailedSatisfactionMetrics = cache(async (accountRepId: string)
       4: 0,
       5: 0
     };
-    
+
     // Update distribution with actual counts
     ratingDistribution.forEach((item) => {
       const rating = Math.round(Number(item.rating));
@@ -480,4 +479,4 @@ export const getRecentActivities = cache(async (accountRepId: string): Promise<R
     console.error('Error fetching recent activities:', error);
     throw new Error('Failed to fetch recent activities');
   }
-}); 
+});

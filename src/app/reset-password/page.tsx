@@ -3,7 +3,7 @@
 // URL : /reset-password/userId=[ID]
 // This page allows users to reset their password by providing a new password.
 
-import { use, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
