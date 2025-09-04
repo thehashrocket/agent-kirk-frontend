@@ -224,7 +224,7 @@ export function GaChannelSessionsTable({ channelDaily, dateRange, clientId }: Ga
     });
   }, [allRows, sort, columns]);
 
-  const topRows: Array<{ channel: string; sessions: number; prev: number; diff: number; percent: number | null }> = sortedRows.slice(0, 6);
+  const topRows: Array<{ channel: string; sessions: number; prev: number; diff: number; percent: number | null }> = sortedRows;
 
   // Add row numbers to the rows for display
   const topRowsWithNumbers: RowWithNumber[] = topRows.map((row: typeof topRows[0], idx: number) => ({ ...row, rowNumber: idx + 1 }));
