@@ -98,6 +98,10 @@ export function DatePickerWithRange({
       // Reset temp range to the current normalized date if popover is closed
       setTempRange(normalizedDate);
     }
+    // If opening, reset temp range to undefined to start fresh
+    else {
+      setTempRange(undefined);
+    }
   };
 
   const presets = [
