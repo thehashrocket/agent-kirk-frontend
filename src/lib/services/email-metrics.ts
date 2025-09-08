@@ -104,8 +104,13 @@ export async function validateEmailClientAccess(userId: string, emailClientId: s
  * Parses and validates date parameters
  */
 export function parseDateParams(params: EmailMetricsParams) {
+    // console.log('Parsing date params:', params);
     const from = params.fromDate ? parseISO(params.fromDate) : new Date();
     const to = params.toDate ? parseISO(params.toDate) : new Date();
+
+    // Optionally, set 'to' to end of day for inclusivity
+    // to.setHours(23, 59, 59, 999);
+
     const selectedFromDate = params.selectedFrom ? parseISO(params.selectedFrom) : from;
     const selectedToDate = params.selectedTo ? parseISO(params.selectedTo) : to;
 
@@ -121,6 +126,7 @@ export function parseDateParams(params: EmailMetricsParams) {
  * Fetches email campaign daily stats from database
  */
 export async function fetchEmailCampaignStats(emailClientId: string, from: Date, to: Date) {
+    // console.log('Fetching email campaign stats for:', emailClientId, from, to);
     return await prisma.emailCampaignDailyStats.findMany({
         where: {
             emailClientId: emailClientId,
@@ -337,7 +343,8 @@ export function processCampaignStats(stats: EmailCampaignDailyStat[]): Processed
 
     return processedCampaignStats
         .sort((a, b) => b.uniqueOpens - a.uniqueOpens)
-        .slice(0, 5);
+    // No longer limiting to top 5 campaigns
+    // .slice(0, 5);
 }
 
 /**

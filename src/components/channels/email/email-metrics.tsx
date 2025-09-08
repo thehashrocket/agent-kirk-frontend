@@ -97,7 +97,7 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
       extendedFrom.setFullYear(extendedFrom.getFullYear() - 1);
 
       // Use the extended date range for the API request
-      params.append('from', format(extendedFrom, 'yyyy-MM-dd'));
+      params.append('from', format(selectedFrom, 'yyyy-MM-dd'));
       params.append('to', format(selectedTo, 'yyyy-MM-dd'));
       params.append('selectedFrom', format(selectedFrom, 'yyyy-MM-dd'));
       params.append('selectedTo', format(selectedTo, 'yyyy-MM-dd'));     // Original date range for display
