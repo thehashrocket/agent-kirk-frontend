@@ -193,19 +193,22 @@ export function filterStatsForPreviousYear(stats: EmailCampaignDailyStat[], sele
  * Calculates aggregated metrics from stats array
  */
 export function calculateMetrics(stats: EmailCampaignDailyStat[]): EmailMetrics {
+    const totalOpens = stats.reduce((sum, stat) => sum + stat.opens, 0);
+    const totalClicks = stats.reduce((sum, stat) => sum + stat.clicks, 0);
+    const totalBounces = stats.reduce((sum, stat) => sum + stat.bounces, 0);
+    const totalUnsubscribes = stats.reduce((sum, stat) => sum + stat.unsubscribes, 0);
+    const totalDelivered = stats.reduce((sum, stat) => sum + stat.delivered, 0);
+    const totalRequests = stats.reduce((sum, stat) => sum + stat.requests, 0);
+
     return {
-        totalOpens: stats.reduce((sum, stat) => sum + stat.opens, 0),
-        totalClicks: stats.reduce((sum, stat) => sum + stat.clicks, 0),
-        totalBounces: stats.reduce((sum, stat) => sum + stat.bounces, 0),
-        totalUnsubscribes: stats.reduce((sum, stat) => sum + stat.unsubscribes, 0),
-        totalDelivered: stats.reduce((sum, stat) => sum + stat.delivered, 0),
-        totalRequests: stats.reduce((sum, stat) => sum + stat.requests, 0),
-        averageOpenRate: stats.length > 0
-            ? stats.reduce((sum, stat) => sum + (stat.dailyTotalOpenRate || 0), 0) / stats.length / 100
-            : 0,
-        averageClickRate: stats.length > 0
-            ? stats.reduce((sum, stat) => sum + (stat.dailyTotalClickRate || 0), 0) / stats.length / 100
-            : 0,
+        totalOpens,
+        totalClicks,
+        totalBounces,
+        totalUnsubscribes,
+        totalDelivered,
+        totalRequests,
+        averageOpenRate: totalDelivered > 0 ? totalOpens / totalDelivered : 0,
+        averageClickRate: totalDelivered > 0 ? totalClicks / totalDelivered : 0,
     };
 }
 
