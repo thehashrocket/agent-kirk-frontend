@@ -6,8 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
-import { format, subDays, startOfMonth, endOfMonth, subMonths, parseISO } from 'date-fns';
+import { getDirectMailMetrics } from '@/lib/services/direct-mail-metrics';
 
 /**
  * GET /api/client/direct-mail-metrics
@@ -52,108 +51,23 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ error: 'Account ID is required' }, { status: 400 });
         }
 
-        // Verify user has access to this USPS client
-        const userAccountAssociation = await prisma.userToUspsClient.findFirst({
-            where: {
-                userId: session.user.id,
-                uspsClientId: accountId,
-            },
-            include: {
-                uspsClient: true,
-            },
+        // Use shared service to get metrics
+        const response = await getDirectMailMetrics({
+            accountId,
+            userId: session.user.id,
+            fromDate: fromDate || undefined,
+            toDate: toDate || undefined,
         });
-
-        if (!userAccountAssociation) {
-            return NextResponse.json({ error: 'Direct Mail account not found or not accessible' }, { status: 404 });
-        }
-
-        const uspsClient = userAccountAssociation.uspsClient;
-
-        // Parse date parameters for filtering
-        const from = fromDate ? parseISO(fromDate) : subDays(new Date(), 30);
-        const to = toDate ? parseISO(toDate) : new Date();
-
-        // Fetch campaigns with their summary data
-        const campaigns = await prisma.uspsCampaign.findMany({
-            where: {
-                uspsClientId: accountId,
-                sendDate: {
-                    gte: from,
-                    lte: to,
-                },
-            },
-            include: {
-                uspsCampaignSummary: {
-                    orderBy: {
-                        scanDate: 'desc',
-                    },
-                    take: 1, // Get the latest summary for each campaign
-                },
-            },
-            orderBy: {
-                sendDate: 'desc',
-            },
-        });
-
-        // Transform data into tabular format
-        const tableData = campaigns.map(campaign => {
-            const latestSummary = campaign.uspsCampaignSummary[0];
-
-            return {
-                campaignName: campaign.campaignName,
-                delivered: latestSummary?.numberDelivered || 0,
-                finalScanCount: latestSummary?.finalScanCount || 0,
-                lastScanDate: latestSummary ? format(latestSummary.scanDate, 'yyyy-MM-dd') : 'N/A',
-                order: campaign.order,
-                percentDelivered: latestSummary?.percentDelivered || 0,
-                percentFinalScan: latestSummary?.percentFinalScan || 0,
-                percentOnTime: latestSummary?.percentOnTime || 0,
-                percentScanned: latestSummary?.percentScanned || 0,
-                pieces: latestSummary?.pieces || 0,
-                reportId: campaign.reportId,
-                scanned: latestSummary?.totalScanned || 0,
-                sector: campaign.sector,
-                sendDate: format(campaign.sendDate, 'yyyy-MM-dd'),
-                totalSent: latestSummary?.pieces || 0,
-                type: campaign.type,
-            };
-        });
-
-        // Calculate summary statistics
-        const totalCampaigns = tableData.length;
-        const totalSent = tableData.reduce((sum, row) => sum + row.totalSent, 0);
-        const totalScanned = tableData.reduce((sum, row) => sum + row.scanned, 0);
-        const totalDelivered = tableData.reduce((sum, row) => sum + row.delivered, 0);
-        const avgPercentOnTime = totalCampaigns > 0
-            ? tableData.reduce((sum, row) => sum + row.percentOnTime, 0) / totalCampaigns
-            : 0;
-        const avgPercentDelivered = totalCampaigns > 0
-            ? tableData.reduce((sum, row) => sum + row.percentDelivered, 0) / totalCampaigns
-            : 0;
-
-        const response = {
-            account: uspsClient,
-            dateRange: {
-                from: format(from, 'yyyy-MM-dd'),
-                to: format(to, 'yyyy-MM-dd'),
-            },
-            tableData,
-            summary: {
-                totalCampaigns,
-                totalSent,
-                totalScanned,
-                totalDelivered,
-                avgPercentOnTime: Math.round(avgPercentOnTime * 100) / 100,
-                avgPercentDelivered: Math.round(avgPercentDelivered * 100) / 100,
-                scanRate: totalSent > 0 ? Math.round((totalScanned / totalSent) * 10000) / 100 : 0,
-                // Calculate deliveryRate as percentage of the number sccanned that were sent
-                deliveryRate: totalScanned > 0 ? Math.round((totalScanned / totalSent) * 10000) / 100 : 0,
-            },
-        };
 
         return NextResponse.json(response);
     } catch (error) {
         console.error('Error fetching Direct Mail metrics:', error);
+
+        // Handle specific error from service
+        if (error instanceof Error && error.message === 'Direct Mail account not found or not accessible') {
+            return NextResponse.json({ error: error.message }, { status: 404 });
+        }
+
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }
