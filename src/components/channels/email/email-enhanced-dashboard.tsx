@@ -275,48 +275,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
           </CardContent>
         </Card>
       )}
-
-      {/* Time Series Data Preview */}
-      {data.timeSeriesData.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Performance Over Time</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Showing {data.timeSeriesData.length} days of data
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-blue-600">
-                    {formatNumber(data.timeSeriesData.reduce((sum, day) => sum + day.opens, 0))}
-                  </p>
-                  <p className="text-sm text-muted-foreground">Total Opens</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-green-600">
-                    {formatNumber(data.timeSeriesData.reduce((sum, day) => sum + day.clicks, 0))}
-                  </p>
-                  <p className="text-sm text-muted-foreground">Total Clicks</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-red-600">
-                    {formatNumber(data.timeSeriesData.reduce((sum, day) => sum + day.bounces, 0))}
-                  </p>
-                  <p className="text-sm text-muted-foreground">Total Bounces</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-orange-600">
-                    {formatNumber(data.timeSeriesData.reduce((sum, day) => sum + day.unsubscribes, 0))}
-                  </p>
-                  <p className="text-sm text-muted-foreground">Total Unsubscribes</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

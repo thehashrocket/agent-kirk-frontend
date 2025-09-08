@@ -26,10 +26,7 @@ export interface EmailMetricsResponse {
     };
     metrics: {
         current: EmailMetrics;
-        previousYear: EmailMetrics;
-        yearOverYear: YearOverYearChanges;
     };
-    timeSeriesData: TimeSeriesDataPoint[];
     topCampaigns: ProcessedCampaignStat[];
     totalCampaigns: number;
 }
@@ -238,37 +235,6 @@ export function calculateYearOverYearChanges(current: EmailMetrics, previous: Em
     };
 }
 
-/**
- * Processes stats into time series data
- */
-export function processTimeSeriesData(stats: EmailCampaignDailyStat[]): TimeSeriesDataPoint[] {
-    const dailyData = stats.reduce((acc, stat) => {
-        const dateKey = format(new Date(stat.date), 'yyyy-MM-dd');
-        if (!acc[dateKey]) {
-            acc[dateKey] = {
-                date: dateKey,
-                opens: 0,
-                clicks: 0,
-                bounces: 0,
-                unsubscribes: 0,
-                delivered: 0,
-                requests: 0,
-            };
-        }
-        acc[dateKey].opens += stat.opens;
-        acc[dateKey].clicks += stat.clicks;
-        acc[dateKey].bounces += stat.bounces;
-        acc[dateKey].unsubscribes += stat.unsubscribes;
-        acc[dateKey].delivered += stat.delivered;
-        acc[dateKey].requests += stat.requests;
-        return acc;
-    }, {} as Record<string, TimeSeriesDataPoint>);
-
-    return Object.values(dailyData).sort((a, b) =>
-        new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-}
-
 interface CampaignStatsAccumulator {
     campaignId: string;
     campaignName: string;
@@ -366,17 +332,11 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
     // Fetch email campaign daily stats
     const emailCampaignDailyStats = await fetchEmailCampaignStats(params.emailClientId, from, to);
 
-    // Filter stats for different time periods
+    // Filter stats for time period
     const selectedRangeStats = filterStatsForDateRange(emailCampaignDailyStats, selectedFromDate, selectedToDate);
-    const previousYearStats = filterStatsForPreviousYear(emailCampaignDailyStats, selectedFromDate, selectedToDate);
-
     // Calculate metrics
     const selectedRangeMetrics = calculateMetrics(selectedRangeStats);
-    const previousYearMetrics = calculateMetrics(previousYearStats);
-    const yearOverYearChanges = calculateYearOverYearChanges(selectedRangeMetrics, previousYearMetrics);
-
-    // Process time series and campaign data
-    const timeSeriesData = processTimeSeriesData(emailCampaignDailyStats);
+    // Process campaign data
     const topCampaigns = processCampaignStats(emailCampaignDailyStats);
 
     return {
@@ -389,11 +349,8 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
             to: format(selectedToDate, 'yyyy-MM-dd'),
         },
         metrics: {
-            current: selectedRangeMetrics,
-            previousYear: previousYearMetrics,
-            yearOverYear: yearOverYearChanges,
+            current: selectedRangeMetrics
         },
-        timeSeriesData,
         topCampaigns,
         totalCampaigns: new Set(emailCampaignDailyStats.map(stat => stat.emailCampaign.campaignId)).size,
     };

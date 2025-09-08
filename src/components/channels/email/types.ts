@@ -25,34 +25,7 @@ export interface EmailMetricsResponse {
       averageOpenRate: number;
       averageClickRate: number;
     };
-    previousYear: {
-      totalOpens: number;
-      totalClicks: number;
-      totalBounces: number;
-      totalUnsubscribes: number;
-      totalDelivered: number;
-      totalRequests: number;
-      averageOpenRate: number;
-      averageClickRate: number;
-    };
-    yearOverYear: {
-      opens: number;
-      clicks: number;
-      bounces: number;
-      unsubscribes: number;
-      openRate: number;
-      clickRate: number;
-    };
   };
-  timeSeriesData: Array<{
-    date: string;
-    opens: number;
-    clicks: number;
-    bounces: number;
-    unsubscribes: number;
-    delivered: number;
-    requests: number;
-  }>;
   topCampaigns: Array<{
     campaignId: string;
     campaignName: string;
@@ -98,4 +71,4 @@ export interface EmailWebsiteActivityProps {
     avgSessionDuration: string;
   }>;
   isLoading?: boolean;
-} 
+}
