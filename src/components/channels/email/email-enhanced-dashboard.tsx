@@ -19,23 +19,6 @@ interface EmailEnhancedDashboardProps {
   onDateRangeChange: (dateRange: { from: Date; to: Date }) => void;
 }
 
-// Utility to get first and last day of a month from any date
-function getFullMonthRange(date: Date | string) {
-  let year, month;
-  if (typeof date === 'string') {
-    // Parse as local date, not UTC, to avoid timezone issues
-    const parts = date.split('-');
-    year = parseInt(parts[0], 10);
-    month = parseInt(parts[1], 10) - 1; // JS months are 0-based
-  } else {
-    year = date.getFullYear();
-    month = date.getMonth();
-  }
-  const from = new Date(year, month, 1);
-  const to = new Date(year, month + 1, 0);
-  return { from, to };
-}
-
 // Helper: convert a UTC-based Date (or ISO string) to a local-midnight Date
 const toLocalMidnight = (d: Date | string) => {
   const dt = typeof d === 'string' ? new Date(d) : d;
@@ -46,7 +29,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
   // State for selected date range, starts as null like GaMetricsGrid
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
 
-  // Set dateRange from data on mount, using getFullMonthRange for consistent parsing
+  // Set dateRange from data on mount and when data.selectedRange changes
   useEffect(() => {
     if (data?.selectedRange?.from) {
       setDateRange({
@@ -68,6 +51,27 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
 
   const metrics = [
     {
+      title: 'Total Requests',
+      value: formatNumber(data.metrics.current.totalRequests),
+      // change: data.metrics.yearOverYear.requests,
+      icon: Mail,
+      description: 'Total email requests',
+    },
+    {
+      title: 'Bounces',
+      value: formatNumber(data.metrics.current.totalBounces),
+      // change: data.metrics.yearOverYear.bounces,
+      icon: AlertTriangle,
+      description: 'Total bounces',
+    },
+    {
+      title: 'Total Delivered',
+      value: formatNumber(data.metrics.current.totalDelivered),
+      // change: data.metrics.yearOverYear.delivered,
+      icon: Mail,
+      description: 'Total emails delivered',
+    },
+    {
       title: 'Total Opens',
       value: formatNumber(data.metrics.current.totalOpens),
       // change: data.metrics.yearOverYear.opens,
@@ -79,7 +83,14 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       value: formatNumber(data.metrics.current.totalClicks),
       // change: data.metrics.yearOverYear.clicks,
       icon: MousePointer,
-      description: 'Total email clicks',
+      description: 'Total email clicks after Opens',
+    },
+    {
+      title: 'Total Unsubscribes',
+      value: formatNumber(data.metrics.current.totalUnsubscribes),
+      // change: data.metrics.yearOverYear.unsubscribes,
+      icon: UserMinus,
+      description: 'Total unsubscribes',
     },
     {
       title: 'Open Rate',
@@ -89,26 +100,12 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       description: 'Average open rate',
     },
     {
-      title: 'Click Rate',
+      title: 'CTR After Opens',
       value: `${(data.metrics.current.averageClickRate * 100).toFixed(1)}%`,
       // change: data.metrics.yearOverYear.clickRate,
       icon: TrendingUp,
-      description: 'Average click rate',
-    },
-    {
-      title: 'Bounces',
-      value: formatNumber(data.metrics.current.totalBounces),
-      // change: data.metrics.yearOverYear.bounces,
-      icon: AlertTriangle,
-      description: 'Total bounces',
-    },
-    {
-      title: 'Unsubscribes',
-      value: formatNumber(data.metrics.current.totalUnsubscribes),
-      // change: data.metrics.yearOverYear.unsubscribes,
-      icon: UserMinus,
-      description: 'Total unsubscribes',
-    },
+      description: 'Average click rate after Opens',
+    }
   ];
 
   return (
