@@ -56,42 +56,42 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
     {
       title: 'Total Opens',
       value: formatNumber(data.metrics.current.totalOpens),
-      change: data.metrics.yearOverYear.opens,
+      // change: data.metrics.yearOverYear.opens,
       icon: Mail,
       description: 'Total email opens',
     },
     {
       title: 'Total Clicks',
       value: formatNumber(data.metrics.current.totalClicks),
-      change: data.metrics.yearOverYear.clicks,
+      // change: data.metrics.yearOverYear.clicks,
       icon: MousePointer,
       description: 'Total email clicks',
     },
     {
       title: 'Open Rate',
       value: `${(data.metrics.current.averageOpenRate * 100).toFixed(1)}%`,
-      change: data.metrics.yearOverYear.openRate,
+      // change: data.metrics.yearOverYear.openRate,
       icon: TrendingUp,
       description: 'Average open rate',
     },
     {
       title: 'Click Rate',
       value: `${(data.metrics.current.averageClickRate * 100).toFixed(1)}%`,
-      change: data.metrics.yearOverYear.clickRate,
+      // change: data.metrics.yearOverYear.clickRate,
       icon: MousePointer,
       description: 'Average click rate',
     },
     {
       title: 'Total Bounces',
       value: formatNumber(data.metrics.current.totalBounces),
-      change: data.metrics.yearOverYear.bounces,
+      // change: data.metrics.yearOverYear.bounces,
       icon: AlertTriangle,
       description: 'Total bounced emails',
     },
     {
       title: 'Total Unsubscribes',
       value: formatNumber(data.metrics.current.totalUnsubscribes),
-      change: data.metrics.yearOverYear.unsubscribes,
+      // change: data.metrics.yearOverYear.unsubscribes,
       icon: UserMinus,
       description: 'Total unsubscribes',
     },
@@ -122,12 +122,7 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{metric.value}</div>
-                <div className="flex items-center text-xs mt-1">
-                  {getTrendIcon(metric.change)}
-                  <span className={cn("ml-1", getTrendColor(metric.change))}>
-                    {formatPercentage(metric.change)} from last year
-                  </span>
-                </div>
+
                 <p className="text-xs text-muted-foreground mt-1">{metric.description}</p>
               </CardContent>
             </Card>
@@ -193,28 +188,6 @@ export function PrintOptimizedEmailDashboard({ data }: PrintOptimizedEmailDashbo
                 <span className="text-sm text-gray-600">Delivery Rate:</span>
                 <span className="text-sm font-medium">
                   {((data.metrics.current.totalDelivered / data.metrics.current.totalRequests) * 100).toFixed(1)}%
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Previous Year</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Total Requests:</span>
-                <span className="text-sm font-medium">{formatNumber(data.metrics.previousYear.totalRequests)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Total Delivered:</span>
-                <span className="text-sm font-medium">{formatNumber(data.metrics.previousYear.totalDelivered)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Delivery Rate:</span>
-                <span className="text-sm font-medium">
-                  {((data.metrics.previousYear.totalDelivered / data.metrics.previousYear.totalRequests) * 100).toFixed(1)}%
                 </span>
               </div>
             </CardContent>
