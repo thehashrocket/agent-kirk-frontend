@@ -74,9 +74,10 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
       // Calculate default date range if not provided
       if (!dateRange) {
         // Use a fixed reference date to ensure we don't get future dates
-        const referenceDate = new Date(2025, 5, 30); // June 30, 2025
+        const now = new Date();
+        const referenceDate = new Date(now.getFullYear(), now.getMonth(), 0); // Last day of previous month
         const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
-        const lastDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth() + 1, 0);
+        const lastDayOfMonth = referenceDate;
 
         dateRange = {
           from: firstDayOfMonth,
