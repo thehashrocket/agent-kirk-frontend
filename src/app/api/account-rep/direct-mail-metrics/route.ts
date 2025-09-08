@@ -150,7 +150,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 avgPercentOnTime: Math.round(avgPercentOnTime * 100) / 100,
                 avgPercentDelivered: Math.round(avgPercentDelivered * 100) / 100,
                 scanRate: totalSent > 0 ? Math.round((totalScanned / totalSent) * 10000) / 100 : 0,
-                deliveryRate: totalSent > 0 ? Math.round((totalDelivered / totalSent) * 10000) / 100 : 0,
+                // Calculate deliveryRate as percentage of the number sccanned that were sent
+                deliveryRate: totalScanned > 0 ? Math.round((totalScanned / totalSent) * 10000) / 100 : 0,
             },
         };
 
