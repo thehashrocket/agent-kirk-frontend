@@ -13,6 +13,7 @@ import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 interface EmailEnhancedDashboardProps {
   data: EmailMetricsResponse;
@@ -28,6 +29,8 @@ const toLocalMidnight = (d: Date | string) => {
 export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhancedDashboardProps) {
   // State for selected date range, starts as null like GaMetricsGrid
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
+  // State for campaign name filter
+  const [campaignFilter, setCampaignFilter] = useState<string>('');
 
   // Set dateRange from data on mount and when data.selectedRange changes
   useEffect(() => {
@@ -44,6 +47,22 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
     setDateRange(range); // Update local state immediately
     onDateRangeChange(range); // Then call the callback
   };
+
+  // Filtered campaigns based on campaignFilter state
+  const filteredCampaigns = data.topCampaigns.filter(campaign =>
+    campaign.campaignName.toLowerCase().includes(campaignFilter.toLowerCase())
+  );
+
+  // Handler for campaign filter input change
+  const handleFilterChange = (value: string) => {
+    setCampaignFilter(value);
+  };
+
+  if (!data) {
+    return <div>No data available.</div>;
+  }
+
+  // Format numbers with commas
 
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat().format(num);
@@ -198,7 +217,26 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
         <Card>
           <CardHeader>
             <CardTitle>Campaign Performance</CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Showing {filteredCampaigns.length} of {data.topCampaigns.length} campaigns
+            </p>
           </CardHeader>
+          {/* We need to be able to filter results by campaign name */}
+          <div className="flex flex-row items-center px-4 py-2">
+            <input
+              type="text"
+              placeholder="Filter by campaign name"
+              className="border border-gray-300 rounded-md p-2 w-full md:w-1/3"
+              onChange={(e) => handleFilterChange(e.target.value)}
+            />
+            <Button
+              variant='outline'
+              className="ml-2"
+              onClick={() => setCampaignFilter('')}
+            >
+              Clear Filter
+            </Button>
+          </div>
           <CardContent className="px-5 py-2">
             {/* Table Header */}
             <div className="grid grid-cols-6 gap-4 py-3 px-4 font-medium text-sm text-muted-foreground border-b">
@@ -212,7 +250,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
 
             {/* Campaigns List */}
             <div className="space-y-2 max-h-96 overflow-y-auto">
-              {data.topCampaigns.map((campaign, index) => (
+              {filteredCampaigns.map((campaign, index) => (
                 <div
                   key={campaign.campaignId}
                   className="grid grid-cols-6 gap-4 items-center p-4 hover:bg-muted/50 rounded-lg"
