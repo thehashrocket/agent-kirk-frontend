@@ -13,6 +13,7 @@ export interface EmailMetricsParams {
     toDate?: string | null;
     selectedFrom?: string | null;
     selectedTo?: string | null;
+    campaignNameFilter?: string | null; // <-- Add this line
 }
 
 export interface EmailMetricsResponse {
@@ -137,8 +138,11 @@ export async function fetchEmailCampaignStats(emailClientId: string, from: Date,
                 select: {
                     campaignName: true,
                     campaignId: true,
-                },
-            },
+                    emailCampaignContents: {
+                        select: { subject: true }
+                    }
+                }
+            }
         },
         orderBy: {
             date: 'asc',
@@ -161,6 +165,7 @@ interface EmailCampaignDailyStat {
     emailCampaign: {
         campaignName: string;
         campaignId: string;
+        emailCampaignContents: { subject: string }[];
     };
 }
 
@@ -238,15 +243,16 @@ export function calculateYearOverYearChanges(current: EmailMetrics, previous: Em
 interface CampaignStatsAccumulator {
     campaignId: string;
     campaignName: string;
-    requests: number;
-    delivered: number;
-    uniqueOpens: number;
-    uniqueClicks: number;
-    unsubscribes: number;
-    opens: number;
     clicks: number;
-    dates: Set<string>;
     dailyUniques: { date: string; uniqueOpens: number; uniqueClicks: number }[];
+    dates: Set<string>;
+    delivered: number;
+    opens: number;
+    requests: number;
+    subject?: string | null;
+    uniqueClicks: number;
+    uniqueOpens: number;
+    unsubscribes: number;
 }
 
 /**
@@ -287,6 +293,9 @@ export function processCampaignStats(stats: EmailCampaignDailyStat[]): Processed
         acc[campaignKey].unsubscribes += stat.unsubscribes || 0;
         acc[campaignKey].opens += stat.opens || 0;
         acc[campaignKey].clicks += stat.clicks || 0;
+        acc[campaignKey].subject = Array.isArray(stat.emailCampaign.emailCampaignContents) && stat.emailCampaign.emailCampaignContents.length > 0
+            ? stat.emailCampaign.emailCampaignContents[0].subject
+            : undefined;
         return acc;
     }, {} as Record<string, CampaignStatsAccumulator>);
 
@@ -332,12 +341,33 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
     // Fetch email campaign daily stats
     const emailCampaignDailyStats = await fetchEmailCampaignStats(params.emailClientId, from, to);
 
+    // Ensure emailCampaignContents is always an array
+    const normalizedStats = emailCampaignDailyStats.map(stat => ({
+        ...stat,
+        emailCampaign: {
+            ...stat.emailCampaign,
+            emailCampaignContents: Array.isArray(stat.emailCampaign.emailCampaignContents)
+                ? stat.emailCampaign.emailCampaignContents
+                : stat.emailCampaign.emailCampaignContents
+                    ? [stat.emailCampaign.emailCampaignContents]
+                    : [],
+        }
+    }));
+
     // Filter stats for time period
-    const selectedRangeStats = filterStatsForDateRange(emailCampaignDailyStats, selectedFromDate, selectedToDate);
+    const selectedRangeStats = filterStatsForDateRange(normalizedStats, selectedFromDate, selectedToDate);
     // Calculate metrics
     const selectedRangeMetrics = calculateMetrics(selectedRangeStats);
     // Process campaign data
-    const topCampaigns = processCampaignStats(emailCampaignDailyStats);
+    let topCampaigns = processCampaignStats(normalizedStats);
+
+    // Filter campaigns by campaignName if filter is provided
+    if (params.campaignNameFilter && params.campaignNameFilter.trim() !== '') {
+        const filterValue = params.campaignNameFilter.trim().toLowerCase();
+        topCampaigns = topCampaigns.filter(campaign =>
+            campaign.campaignName.toLowerCase().includes(filterValue)
+        );
+    }
 
     return {
         emailClient: {

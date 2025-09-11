@@ -16,27 +16,28 @@ export interface EmailMetricsResponse {
   };
   metrics: {
     current: {
-      totalOpens: number;
-      totalClicks: number;
-      totalBounces: number;
-      totalUnsubscribes: number;
-      totalDelivered: number;
-      totalRequests: number;
-      averageOpenRate: number;
       averageClickRate: number;
+      averageOpenRate: number;
+      totalBounces: number;
+      totalClicks: number;
+      totalDelivered: number;
+      totalOpens: number;
+      totalRequests: number;
+      totalUnsubscribes: number;
     };
   };
   topCampaigns: Array<{
+    bounces: number;
     campaignId: string;
     campaignName: string;
-    opens: number;
     clicks: number;
-    bounces: number;
-    unsubscribes: number;
     delivered: number;
+    opens: number;
     requests: number;
-    uniqueOpens: number;
+    subject: string | null;
     uniqueClicks: number;
+    uniqueOpens: number;
+    unsubscribes: number;
   }>;
   totalCampaigns: number;
 }

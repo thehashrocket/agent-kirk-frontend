@@ -236,81 +236,102 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
             >
               Clear Filter
             </Button>
-          </div>
-          <CardContent className="px-5 py-2">
-            {/* Table Header */}
-            <div className="grid grid-cols-6 gap-4 py-3 px-4 font-medium text-sm text-muted-foreground border-b">
-              <div>Campaign</div>
-              <div className="text-right">Sent</div>
-              <div className="text-right">Delivered</div>
-              <div className="text-right">Unique Opens</div>
-              <div className="text-right">Unique Clicks</div>
-              <div className="text-right">Unsubscribes</div>
-            </div>
+          </div>.
 
-            {/* Campaigns List */}
-            <div className="space-y-2 max-h-96 overflow-y-auto">
-              {filteredCampaigns.map((campaign, index) => (
-                <div
-                  key={campaign.campaignId}
-                  className="grid grid-cols-6 gap-4 items-center p-4 hover:bg-muted/50 rounded-lg"
-                >
-                  {/* Campaign Name */}
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-base font-semibold text-primary">
-                      {index + 1}
+          // ...existing code...
+          <CardContent className="px-5 py-2">
+            <div className="overflow-x-auto w-full">
+              <div
+                className="py-3 px-4 font-medium text-sm text-muted-foreground border-b gap-4"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '50px 280px 220px 80px 80px 80px 80px 80px',
+                  minWidth: '1080px'
+                }}
+              >
+                <div>#</div>
+                <div>Campaign</div>
+                <div>Subject</div>
+                <div className="text-right whitespace-nowrap">Sent</div>
+                <div className="text-right whitespace-nowrap">Delivered</div>
+                <div className="text-right whitespace-nowrap">Unique Opens</div>
+                <div className="text-right whitespace-nowrap">Unique Clicks</div>
+                <div className="text-right whitespace-nowrap">Unsubscribes</div>
+              </div>
+              <div
+                className="space-y-2 max-h-96 overflow-y-auto"
+                style={{
+                  minWidth: '1080px'
+                }}
+              >
+                {filteredCampaigns.map((campaign, index) => (
+                  <div
+                    key={campaign.campaignId}
+                    className="items-center p-4 hover:bg-muted/50 rounded-lg text-sm gap-4"
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '50px 280px 220px 80px 80px 80px 80px 80px'
+                    }}
+                  >
+                    <div className="flex items-center justify-center">
+                      <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-base font-semibold text-primary">
+                        {index + 1}
+                      </span>
                     </div>
                     <div>
                       <Link
                         href={`/client/dashboard/email/${data.emailClient.id}/campaign/${campaign.campaignId}`}
-                        className="inline-flex items-center font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        className="inline-flex font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50"
                       >
                         {campaign.campaignName}
                         <ExternalLink className="ml-1 h-4 w-4 text-muted-foreground" aria-label="View campaign report" />
                       </Link>
                     </div>
+                    <div>
+                      <p className="font-medium">{campaign.subject || <span className="text-muted-foreground italic">No Subject</span>}</p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="font-medium">{formatNumber(campaign.requests)}</p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="font-medium">{formatNumber(campaign.delivered)}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {campaign.requests > 0
+                          ? `${((campaign.delivered / campaign.requests) * 100).toFixed(1)}%`
+                          : '0%'}
+                      </p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="font-medium">{formatNumber(campaign.uniqueOpens)}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {campaign.delivered > 0
+                          ? `${((campaign.uniqueOpens / campaign.delivered) * 100).toFixed(1)}%`
+                          : '0%'}
+                      </p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="font-medium">{formatNumber(campaign.uniqueClicks)}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {campaign.delivered > 0
+                          ? `${((campaign.uniqueClicks / campaign.delivered) * 100).toFixed(1)}%`
+                          : '0%'}
+                      </p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="font-medium">{formatNumber(campaign.unsubscribes)}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {campaign.delivered > 0
+                          ? `${((campaign.unsubscribes / campaign.delivered) * 100).toFixed(1)}%`
+                          : '0%'}
+                      </p>
+                    </div>
                   </div>
-
-                  {/* Metrics */}
-                  <div className="text-right">
-                    <p className="font-medium">{formatNumber(campaign.requests)}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatNumber(campaign.delivered)}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {campaign.requests > 0
-                        ? `${((campaign.delivered / campaign.requests) * 100).toFixed(1)}%`
-                        : '0%'}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatNumber(campaign.uniqueOpens)}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {campaign.delivered > 0
-                        ? `${((campaign.uniqueOpens / campaign.delivered) * 100).toFixed(1)}%`
-                        : '0%'}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatNumber(campaign.uniqueClicks)}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {campaign.delivered > 0
-                        ? `${((campaign.uniqueClicks / campaign.delivered) * 100).toFixed(1)}%`
-                        : '0%'}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatNumber(campaign.unsubscribes)}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {campaign.delivered > 0
-                        ? `${((campaign.unsubscribes / campaign.delivered) * 100).toFixed(1)}%`
-                        : '0%'}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </CardContent>
+          // ...existing code...
+
         </Card>
       )}
     </div>
