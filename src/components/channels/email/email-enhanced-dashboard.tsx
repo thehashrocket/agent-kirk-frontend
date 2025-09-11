@@ -238,7 +238,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
             </Button>
           </div>.
 
-          // ...existing code...
           <CardContent className="px-5 py-2">
             <div className="overflow-x-auto w-full">
               <div
@@ -330,7 +329,6 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
               </div>
             </div>
           </CardContent>
-          // ...existing code...
 
         </Card>
       )}
