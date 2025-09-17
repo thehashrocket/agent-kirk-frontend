@@ -63,7 +63,7 @@ export function EmailDashboardContent() {
     if (!isInitialized) {
       fetchAndSelectFirstClient();
     }
-  }, [selectedClientId, isInitialized]);
+  }, [selectedClientId, isInitialized, clientId]);
 
   return (
     <div className="space-y-6">

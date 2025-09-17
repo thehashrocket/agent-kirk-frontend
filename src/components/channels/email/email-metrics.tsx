@@ -128,7 +128,7 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
     } finally {
       setIsLoading(false);
     }
-  }, [selectedClientId]);
+  }, [selectedClientId, clientId]);
 
   // Fetch data when client changes
   useEffect(() => {

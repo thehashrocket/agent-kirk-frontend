@@ -100,7 +100,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         } catch (error) {
             console.error('Error fetching Direct Mail accounts:', error);
         }
-    }, []);
+    }, [clientId]);
 
     // Fetch Direct Mail metrics
     const fetchDirectMailMetrics = useCallback(async (customDateRange?: { from: string; to: string }) => {
@@ -139,7 +139,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         } finally {
             setIsLoading(false);
         }
-    }, [selectedAccountId, dateRange]);
+    }, [selectedAccountId, dateRange, clientId]);
 
     // Handle account selection
     const handleAccountChange = useCallback((accountId: string) => {

@@ -80,7 +80,7 @@ export function SproutSocialAccountSelector({
     };
 
     fetchAccounts();
-  }, [onAccountChange, onAccountObjectChange]);
+  }, [onAccountChange, onAccountObjectChange, clientId]);
 
   const handleAccountChange = (accountId: string) => {
     setSelectedAccountId(accountId);

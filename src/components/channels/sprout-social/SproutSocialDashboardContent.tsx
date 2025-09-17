@@ -62,7 +62,7 @@ export function SproutSocialDashboardContent() {
     if (!isInitialized) {
       fetchAndSelectFirstAccount();
     }
-  }, [selectedAccountId, isInitialized]);
+  }, [selectedAccountId, isInitialized, clientId]);
 
   return (
     <div className="space-y-6">

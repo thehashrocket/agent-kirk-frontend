@@ -114,7 +114,7 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
     } finally {
       setIsLoading(false);
     }
-  }, [selectedAccountId]);
+  }, [selectedAccountId, clientId]);
 
   // Fetch data when account changes
   useEffect(() => {

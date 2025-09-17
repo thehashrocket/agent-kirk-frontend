@@ -76,7 +76,7 @@ export function EmailClientSelector({
     };
 
     fetchClients();
-  }, [onClientChange, onClientObjectChange]);
+  }, [onClientChange, onClientObjectChange, clientId]);
 
   const handleClientChange = (clientId: string) => {
     setSelectedClientId(clientId);

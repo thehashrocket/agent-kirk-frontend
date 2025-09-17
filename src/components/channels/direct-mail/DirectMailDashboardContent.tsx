@@ -81,7 +81,7 @@ export function DirectMailDashboardContent() {
         if (!isInitialized) {
             fetchAndSelectFirstAccount();
         }
-    }, [selectedAccountId, isInitialized, user]);
+    }, [selectedAccountId, isInitialized, user, clientId]);
 
 
     return (
