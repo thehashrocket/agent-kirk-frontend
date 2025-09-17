@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { format, subDays } from 'date-fns';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Calendar, TrendingUp, Package, CheckCircle, Search, X } from 'lucide-react';
+import { Loader2, Calendar, TrendingUp, Package, CheckCircle, Search, X, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -201,6 +201,71 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         return Object.values(filters).some(filter => filter !== '');
     }, [filters]);
 
+    const handleDownloadCsv = () => {
+        if (!data) return;
+
+        const escapeCsvValue = (value: string | number | null | undefined) => {
+            if (value === null || value === undefined) {
+                return '""';
+            }
+
+            const stringValue = typeof value === 'number' ? value.toString() : value;
+            const escapedValue = stringValue.replace(/"/g, '""');
+            return `"${escapedValue}"`;
+        };
+
+        const header = [
+            'Campaign Name',
+            'Report ID',
+            'Send Date',
+            'Last Scan/Delivery Date',
+            'Total Sent',
+            'Scanned',
+            'Delivered',
+            'Pieces',
+            '% On Time',
+            '% Delivered',
+            '% Scanned',
+            '% Final Scan',
+            'Order',
+            'Sector',
+            'Type',
+        ];
+
+        const rows = filteredData.map((row) => {
+            const percentDeliveredCalc = row.pieces > 0 ? (row.finalScanCount / row.pieces) * 100 : 0;
+
+            return [
+                row.campaignName,
+                row.reportId,
+                row.sendDate,
+                row.lastScanDate,
+                row.totalSent,
+                row.scanned,
+                row.finalScanCount,
+                row.pieces,
+                `${row.percentOnTime.toFixed(2)}%`,
+                `${percentDeliveredCalc.toFixed(2)}%`,
+                `${row.percentScanned.toFixed(2)}%`,
+                `${row.percentFinalScan.toFixed(2)}%`,
+                row.order ?? '',
+                row.sector ?? '',
+                row.type ?? '',
+            ]
+                .map(escapeCsvValue)
+                .join(',');
+        });
+
+        const csvContent = [header.map(escapeCsvValue).join(','), ...rows].join('\r\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `direct-mail-campaigns-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+        link.click();
+        URL.revokeObjectURL(url);
+    };
+
     // Table columns configuration
     const columns: TableColumn<DirectMailTableRow>[] = useMemo(() => [
         {
@@ -384,22 +449,28 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                     <CardContent>
                         {/* Filters */}
                         <div className="mb-6 space-y-4">
-                            <div className="flex items-center justify-between">
-                                <h3 className="text-sm font-medium flex items-center gap-2">
-                                    <Search className="h-4 w-4" />
-                                    Filters
-                                </h3>
-                                {hasActiveFilters && (
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={clearFilters}
-                                        className="h-8 px-2 lg:px-3"
-                                    >
-                                        <X className="h-4 w-4 mr-1" />
-                                        Clear
-                                    </Button>
-                                )}
+                            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                                <div className="flex items-center justify-between gap-4 md:justify-start">
+                                    <h3 className="flex items-center gap-2 text-sm font-medium">
+                                        <Search className="h-4 w-4" />
+                                        Filters
+                                    </h3>
+                                    {hasActiveFilters && (
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={clearFilters}
+                                            className="h-8 px-2 lg:px-3"
+                                        >
+                                            <X className="mr-1 h-4 w-4" />
+                                            Clear
+                                        </Button>
+                                    )}
+                                </div>
+                                <Button onClick={handleDownloadCsv} className="md:w-auto">
+                                    <Download className="mr-2 h-4 w-4" />
+                                    Download CSV
+                                </Button>
                             </div>
                             <div className="grid gap-4 md:grid-cols-3">
                                 <div>
