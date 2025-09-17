@@ -8,7 +8,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink } from 'lucide-react';
+import { TrendingUp, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink, Download } from 'lucide-react';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
@@ -56,6 +56,67 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
   // Handler for campaign filter input change
   const handleFilterChange = (value: string) => {
     setCampaignFilter(value);
+  };
+
+  const handleDownloadCsv = () => {
+    const escapeCsvValue = (value: string | number | null | undefined) => {
+      if (value === null || value === undefined) {
+        return '""';
+      }
+
+      const stringValue = typeof value === 'number' ? value.toString() : value;
+      const escapedValue = stringValue.replace(/"/g, '""');
+      return `"${escapedValue}"`;
+    };
+
+    const campaigns = filteredCampaigns;
+    const header = [
+      'Campaign ID',
+      'Campaign Name',
+      'Subject',
+      'Sent',
+      'Delivered',
+      'Delivery Rate',
+      'Unique Opens',
+      'Open Rate',
+      'Unique Clicks',
+      'Click Rate',
+      'Unsubscribes',
+      'Unsubscribe Rate',
+    ];
+
+    const rows = campaigns.map((campaign) => {
+      const deliveryRate = campaign.requests > 0 ? (campaign.delivered / campaign.requests) * 100 : 0;
+      const openRate = campaign.delivered > 0 ? (campaign.uniqueOpens / campaign.delivered) * 100 : 0;
+      const clickRate = campaign.delivered > 0 ? (campaign.uniqueClicks / campaign.delivered) * 100 : 0;
+      const unsubscribeRate = campaign.delivered > 0 ? (campaign.unsubscribes / campaign.delivered) * 100 : 0;
+
+      return [
+        campaign.campaignId,
+        campaign.campaignName,
+        campaign.subject || 'No Subject',
+        campaign.requests,
+        campaign.delivered,
+        `${deliveryRate.toFixed(2)}%`,
+        campaign.uniqueOpens,
+        `${openRate.toFixed(2)}%`,
+        campaign.uniqueClicks,
+        `${clickRate.toFixed(2)}%`,
+        campaign.unsubscribes,
+        `${unsubscribeRate.toFixed(2)}%`,
+      ]
+        .map(escapeCsvValue)
+        .join(',');
+    });
+
+    const csvContent = [header.map(escapeCsvValue).join(','), ...rows].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `email-campaigns-${dayjs().format('YYYY-MM-DD')}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   if (!data) {
@@ -222,21 +283,28 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
             </p>
           </CardHeader>
           {/* We need to be able to filter results by campaign name */}
-          <div className="flex flex-row items-center px-4 py-2">
-            <input
-              type="text"
-              placeholder="Filter by campaign name"
-              className="border border-gray-300 rounded-md p-2 w-full md:w-1/3"
-              onChange={(e) => handleFilterChange(e.target.value)}
-            />
-            <Button
-              variant='outline'
-              className="ml-2"
-              onClick={() => setCampaignFilter('')}
-            >
-              Clear Filter
+          <div className="flex flex-col gap-2 px-4 py-2 md:flex-row md:items-center md:justify-between">
+            <div className="flex w-full flex-col gap-2 md:flex-row md:items-center">
+              <input
+                type="text"
+                placeholder="Filter by campaign name"
+                className="w-full rounded-md border border-gray-300 p-2 md:w-96"
+                onChange={(e) => handleFilterChange(e.target.value)}
+                value={campaignFilter}
+              />
+              <Button
+                variant="outline"
+                className="md:w-auto"
+                onClick={() => setCampaignFilter('')}
+              >
+                Clear Filter
+              </Button>
+            </div>
+            <Button onClick={handleDownloadCsv} className="md:w-auto">
+              <Download className="mr-2 h-4 w-4" />
+              Download CSV
             </Button>
-          </div>.
+          </div>
 
           <CardContent className="px-5 py-2">
             <div className="overflow-x-auto w-full">
