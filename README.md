@@ -33,6 +33,18 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Environment Variables
+
+Configure OAuth credentials in your `.env` file before starting the app:
+
+- `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`
+- `AZURE_AD_CLIENT_ID` and `AZURE_AD_CLIENT_SECRET`
+- `AZURE_AD_TENANT_ID` (optional, defaults to `common` when unset)
+
+## Authentication
+
+The application uses NextAuth with Google and Microsoft (Azure AD) providers. Email-based magic links are no longer supported.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

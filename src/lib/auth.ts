@@ -1,10 +1,11 @@
 /**
  * @file src/lib/auth.ts
  * Authentication configuration and type definitions for NextAuth.js.
- * Implements role-based authentication with Google OAuth provider and Prisma adapter.
+ * Implements role-based authentication with Google and Microsoft OAuth providers and Prisma adapter.
  *
  * Features:
  * - Google OAuth integration
+ * - Microsoft (Azure AD) OAuth integration
  * - Role-based access control
  * - JWT session handling
  * - Custom session and user types
@@ -13,7 +14,7 @@
 
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
+import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
@@ -56,25 +57,9 @@ declare module "next-auth/jwt" {
   }
 }
 
-async function sendWelcomeEmail(to: string) {
-  try {
-    await fetch(`${process.env.NEXTAUTH_URL}/api/mailgun`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        to,
-        email_template: 'welcome email',
-        link: `${process.env.NEXTAUTH_URL}/login`, // or any relevant link
-      }),
-    });
-  } catch (error) {
-    console.error('Failed to send welcome email:', error);
-  }
-}
-
 /**
  * NextAuth.js configuration options.
- * Sets up authentication with Google provider and custom callbacks.
+ * Sets up authentication with Google and Microsoft providers plus custom callbacks.
  */
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma as any),
@@ -93,146 +78,30 @@ export const authOptions: AuthOptions = {
         },
       },
     }),
-    EmailProvider({
-      server: {
-        host: process.env.MAILGUN_SMTP_HOST,
-        port: Number(process.env.MAILGUN_SMTP_PORT),
-        auth: {
-          user: process.env.MAILGUN_SMTP_LOGIN,
-          pass: process.env.MAILGUN_SMTP_PASSWORD,
+    AzureADProvider({
+      clientId: process.env.AZURE_AD_CLIENT_ID!,
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
+      tenantId: process.env.AZURE_AD_TENANT_ID,
+      authorization: {
+        params: {
+          prompt: "select_account",
         },
-      },
-      from: process.env.MAILGUN_FROM_EMAIL,
-      maxAge: 24 * 60 * 60, // Magic link valid for 24 hours
-      sendVerificationRequest: async ({ identifier: email, url, provider }) => {
-        const { host } = new URL(url);
-        const transport = provider.server;
-        const site = host.replace(/^www\./, "");
-
-        // Create a custom email template
-        const html = `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #333; margin-bottom: 10px;">Sign in to Kirk</h1>
-              <p style="color: #666; font-size: 16px;">Click the link below to sign in to your account</p>
-            </div>
-
-            <div style="background-color: #f8f9fa; padding: 30px; border-radius: 8px; text-align: center; margin: 30px 0;">
-              <a href="${url}"
-                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500; display: inline-block;">
-                Sign in to Kirk
-              </a>
-            </div>
-
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-              <p style="color: #666; font-size: 14px; margin: 0;">
-                This link will expire in 24 hours and can only be used once.
-              </p>
-              <p style="color: #666; font-size: 14px; margin: 10px 0 0 0;">
-                If you didn't request this email, you can safely ignore it.
-              </p>
-            </div>
-          </div>
-        `;
-
-        const text = `Sign in to Kirk\n\nClick this link to sign in: ${url}\n\nThis link will expire in 24 hours and can only be used once.\n\nIf you didn't request this email, you can safely ignore it.`;
-
-        // Use nodemailer to send the email
-        const nodemailer = require("nodemailer");
-        const transporter = nodemailer.createTransport(transport);
-
-        await transporter.sendMail({
-          to: email,
-          from: provider.from,
-          subject: `Sign in to ${site}`,
-          text,
-          html,
-        });
       },
     }),
   ],
   callbacks: {
     /**
      * Handles the sign-in process and user creation/validation.
-     * Verifies user existence and role assignment.
+     * Verifies user existence and role assignment for OAuth providers.
      *
      * @param {object} params - Sign in callback parameters
      * @param {User} params.user - User attempting to sign in
      * @param {Account} params.account - OAuth account information
-     * @param {any} params.profile - OAuth profile data
      * @returns {Promise<boolean>} Whether to allow sign in
      */
-    async signIn({ user, account, profile }) {
-      // Handle email (magic link) authentication
-      if (account?.provider === "email") {
-        try {
-          // Check if user exists in the database
-          const existingUser = await prisma.user.findUnique({
-            where: { email: user.email! },
-            include: {
-              role: true,
-              company: true
-            },
-          });
-
-          if (!existingUser) {
-            // Create new user with CLIENT role by default
-            const clientRole = await prisma.role.findUnique({
-              where: { name: "CLIENT" },
-            });
-
-            if (!clientRole) {
-              console.error("Client role not found");
-              return false;
-            }
-
-            const newUser = await prisma.user.create({
-              data: {
-                email: user.email!,
-                name: user.name || null,
-                image: user.image || null,
-                roleId: clientRole.id,
-              },
-              include: {
-                role: true,
-              },
-            });
-
-            // Send welcome email
-            // We don't need to do this because they are created automatically when
-            // sending a magic link.
-            // if (newUser.email) {
-            //   await sendWelcomeEmail(newUser.email);
-            // }
-
-            // Update the user object to be used by NextAuth
-            Object.assign(user, {
-              id: newUser.id,
-              roleId: newUser.roleId,
-              role: newUser.role,
-              companyId: newUser.companyId,
-              company: null,
-            });
-          } else {
-            // Update the user object with existing user's data
-            Object.assign(user, {
-              id: existingUser.id,
-              roleId: existingUser.roleId,
-              role: existingUser.role,
-              companyId: existingUser.companyId,
-              company: existingUser.company,
-            });
-          }
-
-          return true;
-        } catch (error) {
-          console.error("Error in email signIn callback:", error);
-          return false;
-        }
-      }
-
-      // Handle Google OAuth authentication
-      if (account?.provider === "google") {
+    async signIn({ user, account }) {
+      // Handle OAuth authentication (Google and Microsoft)
+      if (account?.provider === "google" || account?.provider === "azure-ad") {
         try {
           // Check if user exists in the database with any email
           const existingUser = await prisma.user.findUnique({
@@ -252,13 +121,6 @@ export const authOptions: AuthOptions = {
               where: { email: user.email },
               include: { role: true },
             });
-
-            // Send welcome email
-            // We don't need to do this because they are automatically signed in
-            // via google.
-            // if (manualUser?.email) {
-            //   await sendWelcomeEmail(manualUser.email);
-            // }
 
             // If there's a manually created user, use their role
             const roleToUse = manualUser?.roleId;
