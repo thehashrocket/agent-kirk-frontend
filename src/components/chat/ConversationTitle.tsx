@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { Bookmark, BookmarkCheck, BookmarkPlus, BookmarkMinus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
 
 interface GaProperty {
     id: string;
@@ -57,7 +59,8 @@ export default function ConversationTitle({
         await onToggleStar();
     };
 
-    const formattedTimestamp = dayjs(timestamp).format('MMM D, YYYY h:mm A');
+    dayjs.extend(utc);
+    const formattedTimestamp = dayjs.utc(timestamp).local().format('MMM D, YYYY h:mm A');
 
     return (
         <div className="w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-3 py-3 flex flex-col gap-y-2 rounded-sm">
