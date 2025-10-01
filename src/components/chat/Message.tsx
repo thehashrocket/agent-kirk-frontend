@@ -94,7 +94,7 @@ export const Message = React.memo(function Message({
   dayjs.extend(utc);
 
   const containerClasses = cn(
-    'flex w-full space-x-2',
+    'flex w-full space-x-2 mb-5',
     isUser ? 'justify-end' : 'justify-start'
   );
 
