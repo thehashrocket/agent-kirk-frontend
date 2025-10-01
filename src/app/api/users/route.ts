@@ -52,7 +52,10 @@ const createUserSchema = z.object({
   password: z.string().min(6),
   roleId: z.string(),
   accountRepId: z.string().optional(),
+  companyId: z.string().optional(),
 });
+
+type CreateUserInput = z.infer<typeof createUserSchema>;
 
 /**
  * Zod schema for validating user update requests.
@@ -225,7 +228,9 @@ export async function POST(
     }
 
     const json = await request.json();
-    const body = createUserSchema.parse(json);
+    const parsedBody = createUserSchema.parse(json);
+    const { password, ...rest } = parsedBody;
+    const body: Omit<CreateUserInput, 'password'> = { ...rest };
 
     // Only Admin and Account Rep can create users
     if (!['ADMIN', 'ACCOUNT_REP'].includes(currentUser.role.name)) {
@@ -249,7 +254,7 @@ export async function POST(
     }
 
     const salt = await bcryptjs.genSalt(12);
-    const hashedPassword = await bcryptjs.hash(body.password, salt);
+    const hashedPassword = await bcryptjs.hash(password, salt);
 
     const user = await prisma.user.create({
       data: {

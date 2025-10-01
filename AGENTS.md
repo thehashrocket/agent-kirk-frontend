@@ -14,3 +14,16 @@ Automated tests are not yet part of the toolchain. Until a framework is adopted,
 
 ## Commit & Pull Request Guidelines
 Commit messages in this repo use concise, sentence-style summaries (see `git log` for examples such as “resolve build error”). Keep subjects under ~72 characters and focus on the observable change. Each PR should include: overview of the change, testing notes (manual steps or scripts run), linked Linear/Jira issue if applicable, and screenshots for UI updates. Request review whenever behavior changes or schema migrations are involved.
+
+## Domain Overview
+- The product serves three roles: `ADMIN`, `ACCOUNT_REP`, and `CLIENT`. Each role has a dedicated dashboard plus shared chat, analytics, reports, and ticketing surfaces.
+- Companies are first-class records; onboarding (`/onboarding/step1`) and user creation flows now use a reusable company selector that can search or create records via `/api/companies` and store the resulting `companyId` on the user.
+- Conversations and reports are LLM-backed. `/api/llm/*` routes proxy an external LLM service (`LLM_SERVICE_URL`) and rely on Upstash rate limiting to protect the upstream.
+- Analytics data is sourced from Google Analytics, Sprout Social, email clients, and USPS direct mail integrations mapped in the Prisma schema. Seed data in `prisma/seed.ts` helps local development.
+- Ticketing, messaging, and notifications are shared modules accessed through role-specific route groups inside `src/app`.
+
+## Environment & Tooling Notes
+- Local development assumes PostgreSQL. Run `./start-database.sh` to provision Docker-based Postgres using credentials from `.env`; the script can rotate the password automatically.
+- Required secrets include OAuth keys (Google/Azure), `DATABASE_URL`, `LLM_SERVICE_URL`, `MAILGUN_API_KEY`, `SENDGRID_API_KEY`, and `OPENWEATHERMAP_API_KEY`. Public URLs (`NEXT_PUBLIC_BASE_URL`, `NEXT_PUBLIC_APP_URL`) are used when generating links in emails.
+- The dev server runs on port `3005` with Turbopack (`pnpm dev`). Use `pnpm prisma migrate deploy` followed by `pnpm db:seed` after pulling new migrations.
+- Email notifications use SendGrid (`src/lib/email.ts`) while password reset flows use Mailgun (`/api/mailgun`). Keep both providers configured in non-production environments if you rely on those flows.

@@ -28,10 +28,12 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CircleAlert, Trash2 } from 'lucide-react';
+import { CompanySearchSelect } from '@/components/users/company-search-select';
 
 /**
  * Interface representing a user in the system.
@@ -78,12 +80,14 @@ export default function ClientsPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
-  const [newUser, setNewUser] = useState({
+  const initialNewUser = {
     name: '',
     email: '',
     password: '',
     image: '',
-  });
+    companyId: undefined as string | undefined,
+  };
+  const [newUser, setNewUser] = useState(initialNewUser);
 
   /**
    * Handles the creation of a new client account.
@@ -97,15 +101,27 @@ export default function ClientsPage() {
         throw new Error('Client role not found');
       }
 
+      const payload: Record<string, unknown> = {
+        name: newUser.name,
+        email: newUser.email,
+        password: newUser.password,
+        roleId: clientRole.id,
+      };
+
+      if (newUser.image) {
+        payload.image = newUser.image;
+      }
+
+      if (newUser.companyId) {
+        payload.companyId = newUser.companyId;
+      }
+
       const response = await fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...newUser,
-          roleId: clientRole.id,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -114,7 +130,7 @@ export default function ClientsPage() {
 
       toast.success('Client created successfully');
       setIsCreateDialogOpen(false);
-      setNewUser({ name: '', email: '', password: '', image: '' });
+      setNewUser(initialNewUser);
       mutate();
     } catch {
       toast.error('Failed to create client');
@@ -275,6 +291,18 @@ export default function ClientsPage() {
                       setNewUser({ ...newUser, password: e.target.value })
                     }
                   />
+                  <div className="space-y-2">
+                    <Label>Company</Label>
+                    <CompanySearchSelect
+                      value={newUser.companyId}
+                      onChange={(companyId) =>
+                        setNewUser({ ...newUser, companyId })
+                      }
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Optional: Link the client to an existing company or create one.
+                    </p>
+                  </div>
                   <Button onClick={handleCreateClient}>Create</Button>
                 </div>
               </DialogContent>
@@ -330,6 +358,18 @@ export default function ClientsPage() {
                     setNewUser({ ...newUser, password: e.target.value })
                   }
                 />
+                <div className="space-y-2">
+                  <Label>Company</Label>
+                  <CompanySearchSelect
+                    value={newUser.companyId}
+                    onChange={(companyId) =>
+                      setNewUser({ ...newUser, companyId })
+                    }
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Optional: Link the client to an existing company or create one.
+                  </p>
+                </div>
                 <Button onClick={handleCreateClient}>Create</Button>
               </div>
             </DialogContent>

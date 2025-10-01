@@ -15,6 +15,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AccountManagementSection } from '@/components/admin/AccountManagementSection';
@@ -31,6 +32,14 @@ interface User {
     };
     isActive: boolean;
     image?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    company: {
+        id: string;
+        name: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
     userToGaAccounts: {
         gaAccount: {
             id: string;
@@ -118,6 +127,16 @@ interface TransformedUser extends Omit<User, 'userToGaAccounts' | 'sproutSocialA
     emailClients: EmailClient[];
     uspsClients: UspsClient[];
 }
+
+const formatDate = (value?: string | null) => {
+    if (!value) return '—';
+    const date = new Date(value);
+    return date.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+};
 
 export default function UserDetailsPage() {
     const params = useParams();
@@ -356,19 +375,50 @@ export default function UserDetailsPage() {
                         <CardTitle>User Information</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex flex-row items-center justify-between">
-                            <div className="space-y-2">
-                                <p><strong>Name:</strong> {user.name}</p>
-                                <p><strong>Email:</strong> {user.email}</p>
-                                <p><strong>Role:</strong> {user.role.name}</p>
-                                <p><strong>Status:</strong> {user.isActive ? 'Active' : 'Inactive'}</p>
+                        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+                            <div className="flex items-start gap-4">
+                                <Avatar className="h-20 w-20 md:h-24 md:w-24">
+                                    <AvatarImage src={user.image ?? ''} />
+                                    <AvatarFallback>{user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
+                                </Avatar>
+                                <div className="space-y-2">
+                                    <div>
+                                        <h2 className="text-2xl font-semibold leading-tight">{user.name ?? 'Unnamed user'}</h2>
+                                        <p className="text-sm text-muted-foreground break-all">{user.email}</p>
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <Badge variant="secondary">{normalizeNames(user.role.name)}</Badge>
+                                        <Badge variant={user.isActive ? 'default' : 'outline'}>
+                                            {user.isActive ? 'Active' : 'Inactive'}
+                                        </Badge>
+                                        <Badge variant={user.company ? 'outline' : 'secondary'}>
+                                            {user.company?.name ?? 'No company assigned'}
+                                        </Badge>
+                                    </div>
+                                </div>
                             </div>
-                            <Avatar className="w-40 h-40">
-                                <AvatarImage className="w-40 h-40" src={user.image ?? ''} />
-                                <AvatarFallback>{user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || '??'}</AvatarFallback>
-                            </Avatar>
+                            <dl className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                                <div>
+                                    <dt className="text-xs uppercase tracking-wide text-muted-foreground">User ID</dt>
+                                    <dd className="text-sm font-medium break-all">{user.id}</dd>
+                                </div>
+                                <div>
+                                    <dt className="text-xs uppercase tracking-wide text-muted-foreground">Created</dt>
+                                    <dd className="text-sm font-medium">{formatDate(user.createdAt)}</dd>
+                                </div>
+                                <div>
+                                    <dt className="text-xs uppercase tracking-wide text-muted-foreground">Last updated</dt>
+                                    <dd className="text-sm font-medium">{formatDate(user.updatedAt)}</dd>
+                                </div>
+                                {user.company?.createdAt && (
+                                    <div>
+                                        <dt className="text-xs uppercase tracking-wide text-muted-foreground">Company since</dt>
+                                        <dd className="text-sm font-medium">{formatDate(user.company.createdAt)}</dd>
+                                    </div>
+                                )}
+                            </dl>
                         </div>
-                        <div className="flex flex-row items-center justify-end mt-4">
+                        <div className="mt-6 flex flex-wrap justify-end gap-3">
                             {/* Reset Password Button. When clicked, it sends a request to the mailgun api
                             using the password_reset template using the variable link to send a password reset link */}
                             <Button
@@ -400,13 +450,39 @@ export default function UserDetailsPage() {
                                 Reset Password
                             </Button>
                         </div>
+                </CardContent>
+            </Card>
+
+            {user.company && (
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Company</CardTitle>
+                    </CardHeader>
+                    <CardContent className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <p className="text-sm text-muted-foreground">Name</p>
+                            <p className="font-medium">{user.company.name}</p>
+                        </div>
+                        <div>
+                            <p className="text-sm text-muted-foreground">Joined</p>
+                            <p className="font-medium">{formatDate(user.company.createdAt)}</p>
+                        </div>
+                        <div>
+                            <p className="text-sm text-muted-foreground">Last updated</p>
+                            <p className="font-medium">{formatDate(user.company.updatedAt)}</p>
+                        </div>
+                        <div>
+                            <p className="text-sm text-muted-foreground">Company ID</p>
+                            <p className="font-mono text-sm break-all">{user.company.id}</p>
+                        </div>
                     </CardContent>
                 </Card>
+            )}
 
-                {/* Google Analytics Accounts - Using shared component */}
-                <GoogleAnalyticsManagementSection
-                    userGaAccounts={user.gaAccounts}
-                    userId={params.id as string}
+            {/* Google Analytics Accounts - Using shared component */}
+            <GoogleAnalyticsManagementSection
+                userGaAccounts={user.gaAccounts}
+                userId={params.id as string}
                 />
 
                 {/* Social Media Accounts - Using shared component */}

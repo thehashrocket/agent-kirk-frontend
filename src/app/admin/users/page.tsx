@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -39,6 +40,7 @@ import { toast } from 'sonner';
 import { useUsers } from '@/hooks/use-users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CircleAlert, Trash2 } from 'lucide-react';
+import { CompanySearchSelect } from '@/components/users/company-search-select';
 
 /**
  * Interface representing a user in the system.
@@ -85,6 +87,15 @@ interface Role {
   name: string;
 }
 
+interface NewUserFormData {
+  name: string;
+  email: string;
+  image: string;
+  password: string;
+  roleId: string;
+  companyId?: string;
+}
+
 /**
  * @component UsersPage
  * @path src/app/admin/users/page.tsx
@@ -105,13 +116,15 @@ export default function UsersPage() {
   const [showInactive, setShowInactive] = useState(false);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const { users, roles, isLoading, mutate } = useUsers({ showInactive });
-  const [newUser, setNewUser] = useState({
+  const initialNewUser: NewUserFormData = {
     name: '',
     email: '',
     image: '',
     password: '',
     roleId: '',
-  });
+    companyId: undefined,
+  };
+  const [newUser, setNewUser] = useState<NewUserFormData>(initialNewUser);
 
   /**
    * Handles user creation.
@@ -120,12 +133,27 @@ export default function UsersPage() {
    */
   const handleCreateUser = async () => {
     try {
+      const payload: Record<string, unknown> = {
+        name: newUser.name,
+        email: newUser.email,
+        password: newUser.password,
+        roleId: newUser.roleId,
+      };
+
+      if (newUser.image) {
+        payload.image = newUser.image;
+      }
+
+      if (newUser.companyId) {
+        payload.companyId = newUser.companyId;
+      }
+
       const response = await fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -134,7 +162,7 @@ export default function UsersPage() {
 
       toast.success('User created successfully');
       setIsCreateDialogOpen(false);
-      setNewUser({ name: '', email: '', image: '', password: '', roleId: '' });
+      setNewUser(initialNewUser);
       mutate();
     } catch {
       toast.error('Failed to create user');
@@ -290,6 +318,18 @@ export default function UsersPage() {
                       ))}
                     </SelectContent>
                   </Select>
+                  <div className="space-y-2">
+                    <Label>Company</Label>
+                    <CompanySearchSelect
+                      value={newUser.companyId}
+                      onChange={(companyId) =>
+                        setNewUser({ ...newUser, companyId })
+                      }
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Optional: Assign a company so the new user inherits its data context.
+                    </p>
+                  </div>
                   <Button onClick={handleCreateUser}>Create</Button>
                 </div>
               </DialogContent>
