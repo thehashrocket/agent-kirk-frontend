@@ -19,8 +19,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import type { DateRange } from 'react-day-picker';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 
 /**
  * Interface for suggested response data.
@@ -39,7 +41,7 @@ interface SuggestedResponse {
  * @property {boolean} isLoading - Whether a response is currently being processed
  */
 interface ChatInputProps {
-  onSend: (message: string) => void;
+  onSend: (message: string, options?: { dateRange?: DateRange }) => void;
   suggestedResponses?: SuggestedResponse[];
   isLoading?: boolean;
 }
@@ -71,6 +73,7 @@ export function ChatInput({
   isLoading,
 }: ChatInputProps) {
   const [message, setMessage] = useState('');
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -82,7 +85,7 @@ export function ChatInput({
 
   const handleSubmit = () => {
     if (message.trim() && !isLoading) {
-      onSend(message.trim());
+      onSend(message.trim(), { dateRange });
       setMessage('');
     }
   };
@@ -96,6 +99,11 @@ export function ChatInput({
 
   return (
     <div className="space-y-4">
+      <DatePickerWithRange
+        date={dateRange}
+        onDateChange={(range) => setDateRange(range)}
+        className="w-full"
+      />
       {suggestedResponses.length > 0 && (
         <div className="flex space-x-2 p-1">
           {suggestedResponses.map((response) => (

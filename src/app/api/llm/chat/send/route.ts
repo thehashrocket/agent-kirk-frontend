@@ -43,6 +43,12 @@ const ChatRequestSchema = z.object({
   gaPropertyIds: z.array(z.string()).optional(),
   sproutSocialAccountIds: z.array(z.string()).optional(),
   emailClientIds: z.array(z.string()).optional(),
+  dateRange: z
+    .object({
+      from: z.string(),
+      to: z.string(),
+    })
+    .optional(),
 });
 
 /**
@@ -119,6 +125,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       gaPropertyIds: validatedData.gaPropertyIds,
       sproutSocialAccountIds: validatedData.sproutSocialAccountIds,
       emailClientIds: validatedData.emailClientIds,
+      dateRange: validatedData.dateRange,
       dateToday: new Date().toISOString(),
       responseUrl: process.env.WEBSITE_URL + '/api/llm/chat/webhook',
       webhookUrl: process.env.WEBSITE_URL + '/api/llm/chat/webhook',
@@ -142,6 +149,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
             gaPropertyIds: validatedData.gaPropertyIds,
             sproutSocialAccountIds: validatedData.sproutSocialAccountIds,
             emailClientIds: validatedData.emailClientIds,
+            dateRange: validatedData.dateRange,
           }),
         },
         severity: 'INFO',

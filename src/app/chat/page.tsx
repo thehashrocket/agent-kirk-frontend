@@ -29,6 +29,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { QueryStatus } from '@/lib/prisma';
+import type { DateRange } from 'react-day-picker';
 
 /**
  * @interface Conversation
@@ -367,7 +368,8 @@ export default function ChatPage() {
       gaPropertyId,
       gaPropertyIds,
       sproutSocialAccountIds,
-      emailClientIds
+      emailClientIds,
+      dateRange
     }: {
       conversationId: string;
       message: string;
@@ -376,6 +378,7 @@ export default function ChatPage() {
       gaPropertyIds?: string[];
       sproutSocialAccountIds?: string[];
       emailClientIds?: string[];
+      dateRange?: DateRange;
     }) => {
 
       // Get GA details from the selected conversation if not provided directly
@@ -415,6 +418,13 @@ export default function ChatPage() {
       });
 
       // Send the actual request with all user associations
+      const formattedDateRange = dateRange?.from && dateRange?.to
+        ? {
+            from: dateRange.from.toISOString(),
+            to: dateRange.to.toISOString(),
+          }
+        : undefined;
+
       const response = await fetch('/api/llm/chat/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -426,6 +436,7 @@ export default function ChatPage() {
           gaPropertyIds: gaPropertyIds || userAssociations.gaPropertyIds,
           sproutSocialAccountIds: sproutSocialAccountIds || userAssociations.sproutSocialAccountIds,
           emailClientIds: emailClientIds || userAssociations.emailClientIds,
+          ...(formattedDateRange && { dateRange: formattedDateRange }),
         } as QueryRequest)
       });
 
@@ -689,7 +700,7 @@ export default function ChatPage() {
    * Handles sending a message to the selected conversation
    * @param message - The message content to send
    */
-  const handleSendMessage = async (message: string) => {
+  const handleSendMessage = async (message: string, options?: { dateRange?: DateRange }) => {
     // If no conversation is selected, create a new one first
     if (!selectedConversation) {
       const defaultSettings = getDefaultGaSettings();
@@ -709,6 +720,7 @@ export default function ChatPage() {
           gaPropertyIds: defaultSettings.gaPropertyIds,
           sproutSocialAccountIds: defaultSettings.sproutSocialAccountIds,
           emailClientIds: defaultSettings.emailClientIds,
+          dateRange: options?.dateRange,
         });
       } catch (error) {
         console.error('Failed to create conversation or send message:', error);
@@ -718,6 +730,7 @@ export default function ChatPage() {
       await sendMessageMutation.mutateAsync({
         conversationId: selectedConversation,
         message,
+        dateRange: options?.dateRange,
       });
     }
   };

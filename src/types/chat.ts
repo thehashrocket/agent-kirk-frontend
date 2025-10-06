@@ -34,6 +34,10 @@ export interface QueryRequest {
   gaPropertyIds?: string[];
   sproutSocialAccountIds?: string[];
   emailClientIds?: string[];
+  dateRange?: {
+    from: string;
+    to: string;
+  };
 }
 
 export interface QueryResponse {
