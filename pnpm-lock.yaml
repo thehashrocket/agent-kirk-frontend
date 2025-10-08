@@ -16,7 +16,11 @@ importers:
         version: 2.10.0(@prisma/client@6.16.3(prisma@6.16.3(typescript@5.9.3))(typescript@5.9.3))(nodemailer@7.0.9)
       '@hookform/resolvers':
         specifier: ^5.2.2
+<<<<<<< HEAD
         version: 5.2.2(react-hook-form@7.64.0(react@19.2.0))
+=======
+        version: 5.2.2(react-hook-form@7.64.0(react@19.1.1))
+>>>>>>> ff332ec (Bump react-hook-form from 7.63.0 to 7.64.0)
       '@next-auth/prisma-adapter':
         specifier: ^1.0.7
         version: 1.0.7(@prisma/client@6.16.3(prisma@6.16.3(typescript@5.9.3))(typescript@5.9.3))(next-auth@4.24.11(@auth/core@0.40.0(nodemailer@7.0.9))(next@15.5.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(nodemailer@7.0.9)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
@@ -136,7 +140,11 @@ importers:
         version: 19.2.0(react@19.2.0)
       react-hook-form:
         specifier: ^7.64.0
+<<<<<<< HEAD
         version: 7.64.0(react@19.2.0)
+=======
+        version: 7.64.0(react@19.1.1)
+>>>>>>> ff332ec (Bump react-hook-form from 7.63.0 to 7.64.0)
       react-intersection-observer:
         specifier: ^9.16.0
         version: 9.16.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -3822,10 +3830,17 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
+<<<<<<< HEAD
   '@hookform/resolvers@5.2.2(react-hook-form@7.64.0(react@19.2.0))':
     dependencies:
       '@standard-schema/utils': 0.3.0
       react-hook-form: 7.64.0(react@19.2.0)
+=======
+  '@hookform/resolvers@5.2.2(react-hook-form@7.64.0(react@19.1.1))':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.64.0(react@19.1.1)
+>>>>>>> ff332ec (Bump react-hook-form from 7.63.0 to 7.64.0)
 
   '@humanfs/core@0.19.1': {}
 
@@ -6623,7 +6638,11 @@ snapshots:
       react: 19.2.0
       scheduler: 0.27.0
 
+<<<<<<< HEAD
   react-hook-form@7.64.0(react@19.2.0):
+=======
+  react-hook-form@7.64.0(react@19.1.1):
+>>>>>>> ff332ec (Bump react-hook-form from 7.63.0 to 7.64.0)
     dependencies:
       react: 19.2.0
 
