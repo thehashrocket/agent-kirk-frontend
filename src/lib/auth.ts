@@ -82,9 +82,11 @@ export const authOptions: AuthOptions = {
       clientId: process.env.AZURE_AD_CLIENT_ID!,
       clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
       tenantId: process.env.AZURE_AD_TENANT_ID,
+      issuer: "https://login.microsoftonline.com/common/v2.0",
       authorization: {
         params: {
           prompt: "select_account",
+          scope: "openid profile email"
         },
       },
     }),
