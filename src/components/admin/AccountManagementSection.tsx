@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -32,6 +32,7 @@ interface AccountManagementSectionProps<T extends Account> {
   renderAccountContent: (account: T) => React.ReactNode;
   renderAvailableAccount: (account: T) => React.ReactNode;
   getAccountId: (account: T) => string;
+  getAccountLabel: (account: T) => string;
   emptyStateMessage: string;
   successMessage: {
     associate: string;
@@ -55,6 +56,7 @@ export function AccountManagementSection<T extends Account>({
   renderAccountContent,
   renderAvailableAccount,
   getAccountId,
+  getAccountLabel,
   emptyStateMessage,
   successMessage,
   errorMessage,
@@ -141,6 +143,14 @@ export function AccountManagementSection<T extends Account>({
     }
   };
 
+  const sortedUserAccounts = useMemo(
+    () =>
+      [...userAccounts].sort((a, b) =>
+        getAccountLabel(a).localeCompare(getAccountLabel(b), undefined, { sensitivity: 'base' })
+      ),
+    [userAccounts, getAccountLabel]
+  );
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -154,18 +164,19 @@ export function AccountManagementSection<T extends Account>({
           onConfirm={handleAssociateAccounts}
           isLoading={isLoading}
           renderAccount={renderAvailableAccount}
+          getAccountLabel={getAccountLabel}
           isOpen={isDialogOpen}
           onOpenChange={setIsDialogOpen}
         />
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {userAccounts.length === 0 ? (
+          {sortedUserAccounts.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
               {emptyStateMessage}
             </div>
           ) : (
-            userAccounts.map((account) => (
+            sortedUserAccounts.map((account) => (
               <AccountCard
                 key={getAccountId(account)}
                 actions={

@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -55,6 +55,7 @@ export function GoogleAnalyticsManagementSection({
     gaPropertyId: '',
     gaPropertyName: '',
   });
+  const [accountSearchTerm, setAccountSearchTerm] = useState('');
 
   // Fetch available GA accounts when dialog opens
   useEffect(() => {
@@ -82,6 +83,27 @@ export function GoogleAnalyticsManagementSection({
 
     fetchAvailableAccounts();
   }, [isGaAccountDialogOpen, userGaAccounts]);
+
+  useEffect(() => {
+    if (!isGaAccountDialogOpen) {
+      setAccountSearchTerm('');
+    }
+  }, [isGaAccountDialogOpen]);
+
+  const filteredGaAccounts = useMemo(() => {
+    const normalizedSearch = accountSearchTerm.trim().toLowerCase();
+
+    return [...availableGaAccounts]
+      .sort((a, b) =>
+        a.gaAccountName.localeCompare(b.gaAccountName, undefined, { sensitivity: 'base' })
+      )
+      .filter((account) => {
+        if (!normalizedSearch) return true;
+        const name = account.gaAccountName.toLowerCase();
+        const id = account.gaAccountId.toLowerCase();
+        return name.includes(normalizedSearch) || id.includes(normalizedSearch);
+      });
+  }, [accountSearchTerm, availableGaAccounts]);
 
   const handleAddGaAccounts = async () => {
     if (selectedAccounts.length === 0) {
@@ -229,38 +251,51 @@ export function GoogleAnalyticsManagementSection({
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
                 </div>
               ) : (
-                <div className="max-h-[400px] overflow-y-auto space-y-2">
-                  {availableGaAccounts.map((account) => (
-                    <div
-                      key={account.id}
-                      className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
-                        selectedAccounts.includes(account.id)
-                          ? 'bg-primary-50 border-primary-200'
-                          : 'hover:bg-gray-50'
-                      }`}
-                      onClick={() => {
-                        setSelectedAccounts((prev) =>
-                          prev.includes(account.id)
-                            ? prev.filter((id) => id !== account.id)
-                            : [...prev, account.id]
-                        );
-                      }}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedAccounts.includes(account.id)}
-                        onChange={() => {}}
-                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                      />
-                      <div>
-                        <p className="font-medium">{account.gaAccountName}</p>
-                        <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
-                        <p className="text-sm text-gray-500">
-                          {account.gaProperties.length} properties
-                        </p>
+                <div className="space-y-3">
+                  <Input
+                    value={accountSearchTerm}
+                    onChange={(event) => setAccountSearchTerm(event.target.value)}
+                    placeholder="Search Google Analytics accounts"
+                  />
+                  <div className="max-h-[400px] overflow-y-auto space-y-2">
+                    {filteredGaAccounts.length === 0 ? (
+                      <div className="py-6 text-center text-sm text-gray-500">
+                        No accounts match your search.
                       </div>
-                    </div>
-                  ))}
+                    ) : (
+                      filteredGaAccounts.map((account) => (
+                        <div
+                          key={account.id}
+                          className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                            selectedAccounts.includes(account.id)
+                              ? 'bg-primary-50 border-primary-200'
+                              : 'hover:bg-gray-50'
+                          }`}
+                          onClick={() => {
+                            setSelectedAccounts((prev) =>
+                              prev.includes(account.id)
+                                ? prev.filter((id) => id !== account.id)
+                                : [...prev, account.id]
+                            );
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedAccounts.includes(account.id)}
+                            onChange={() => {}}
+                            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                          />
+                          <div>
+                            <p className="font-medium">{account.gaAccountName}</p>
+                            <p className="text-sm text-gray-500">ID: {account.gaAccountId}</p>
+                            <p className="text-sm text-gray-500">
+                              {account.gaProperties.length} properties
+                            </p>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
               )}
               <div className="flex justify-end space-x-2">
@@ -269,6 +304,7 @@ export function GoogleAnalyticsManagementSection({
                   onClick={() => {
                     setIsGaAccountDialogOpen(false);
                     setSelectedAccounts([]);
+                    setAccountSearchTerm('');
                   }}
                 >
                   Cancel

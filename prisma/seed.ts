@@ -1,5 +1,13 @@
-const { PrismaClient, Prisma } = require('@/prisma/generated/client');
-const { hash } = require('bcryptjs');
+import type {
+  Prisma,
+  TicketPriority as TicketPriorityEnum,
+  TicketStatus as TicketStatusEnum,
+} from "../src/prisma/generated/client";
+
+const prismaClientModule =
+  require("../src/prisma/generated/client") as typeof import("../src/prisma/generated/client");
+const { PrismaClient, ActivityStatus, TicketPriority, TicketStatus } =
+  prismaClientModule;
 
 const prisma = new PrismaClient();
 
@@ -58,7 +66,7 @@ async function main() {
   });
 
   // Create test clients for Jason
-  const testClients = [];
+  const testClients: typeof clientUser[] = [];
   const clientNames = [
     { name: 'Sarah Johnson', email: 'sarah@techstartup.com' },
     { name: 'Michael Chen', email: 'michael@innovatedesign.co' },
@@ -81,6 +89,149 @@ async function main() {
       },
     });
     testClients.push(client);
+  }
+
+  const clientUsers = [clientUser, ...testClients];
+
+  // Create Google Analytics accounts for each seeded client user
+  for (const [index, user] of clientUsers.entries()) {
+    const gaAccountId = `GA-ACC-${(index + 1).toString().padStart(2, '0')}`;
+    const gaAccountName = `${user.name ?? 'Client'} Analytics`;
+
+    const gaAccount = await prisma.gaAccount.upsert({
+      where: { gaAccountId },
+      update: {
+        gaAccountName,
+        deleted: false,
+      },
+      create: {
+        gaAccountId,
+        gaAccountName,
+      },
+    });
+
+    await prisma.userToGaAccount.upsert({
+      where: {
+        userId_gaAccountId: {
+          userId: user.id,
+          gaAccountId: gaAccount.id,
+        },
+      },
+      update: {},
+      create: {
+        userId: user.id,
+        gaAccountId: gaAccount.id,
+      },
+    });
+
+    await prisma.gaProperty.upsert({
+      where: {
+        gaPropertyId: `GA-PROP-${(index + 1).toString().padStart(2, '0')}`,
+      },
+      update: {
+        gaPropertyName: `${gaAccount.gaAccountName} Property`,
+        gaAccountId: gaAccount.id,
+      },
+      create: {
+        gaPropertyId: `GA-PROP-${(index + 1).toString().padStart(2, '0')}`,
+        gaPropertyName: `${gaAccount.gaAccountName} Property`,
+        gaAccountId: gaAccount.id,
+      },
+    });
+  }
+
+  // Create email clients and associate them with users
+  for (const [index, user] of clientUsers.entries()) {
+    const emailClientId = `email-client-${index + 1}`;
+    const clientName = `${user.name ?? 'Client'} Campaigns`;
+
+    const emailClient = await prisma.emailClient.upsert({
+      where: { id: emailClientId },
+      update: { clientName },
+      create: {
+        id: emailClientId,
+        clientName,
+      },
+    });
+
+    await prisma.userToEmailClient.upsert({
+      where: {
+        userId_emailClientId: {
+          userId: user.id,
+          emailClientId: emailClient.id,
+        },
+      },
+      update: {},
+      create: {
+        userId: user.id,
+        emailClientId: emailClient.id,
+      },
+    });
+
+    await prisma.emailClientCredentials.upsert({
+      where: {
+        emailClientId_platformName: {
+          emailClientId: emailClient.id,
+          platformName: 'SendGrid',
+        },
+      },
+      update: {
+        apiKey: `sendgrid-key-${index + 1}`,
+      },
+      create: {
+        emailClientId: emailClient.id,
+        platformName: 'SendGrid',
+        apiKey: `sendgrid-key-${index + 1}`,
+      },
+    });
+  }
+
+  // Create Sprout Social accounts and assign them to users
+  for (const [index, user] of clientUsers.entries()) {
+    const customerProfileId = 1000 + index;
+    const networkType = index % 2 === 0 ? 'facebook' : 'instagram';
+    const name = `${user.name ?? 'Client'} Social`;
+    const nativeName = `${user.name ?? 'Client'} Official`;
+    const link = `https://social.example.com/${customerProfileId}`;
+    const nativeId = `SPR-${customerProfileId}`;
+    const groups = [index + 1, index + 101];
+
+    const sproutSocialAccount = await prisma.sproutSocialAccount.upsert({
+      where: { customerProfileId },
+      update: {
+        name,
+        nativeName,
+        link,
+        nativeId,
+        networkType,
+        groups: {
+          set: groups,
+        },
+      },
+      create: {
+        customerProfileId,
+        networkType,
+        name,
+        nativeName,
+        link,
+        nativeId,
+        groups,
+      },
+    });
+
+    await prisma.userToSproutSocialAccount.upsert({
+      where: {
+        userId_sproutSocialAccountId: {
+          userId: user.id,
+          sproutSocialAccountId: sproutSocialAccount.id,
+        },
+      },
+      update: {},
+      create: {
+        userId: user.id,
+        sproutSocialAccountId: sproutSocialAccount.id,
+      },
+    });
   }
 
   // Create sample conversations for each client
@@ -289,6 +440,17 @@ async function main() {
       }
     ];
 
+    const ticketStatuses: TicketStatusEnum[] = [
+      TicketStatus.OPEN,
+      TicketStatus.IN_PROGRESS,
+      TicketStatus.RESOLVED,
+    ];
+    const ticketPriorities: TicketPriorityEnum[] = [
+      TicketPriority.LOW,
+      TicketPriority.MEDIUM,
+      TicketPriority.HIGH,
+    ];
+
     const numTickets = Math.floor(Math.random() * 3) + 3; // 3-5 tickets per client
     const selectedTickets = [...ticketTemplates]
       .sort(() => Math.random() - 0.5)
@@ -298,8 +460,10 @@ async function main() {
       const ticketDate = new Date();
       ticketDate.setDate(ticketDate.getDate() - Math.floor(Math.random() * 30)); // Last 30 days
 
-      const status = ['OPEN', 'IN_PROGRESS', 'RESOLVED'][Math.floor(Math.random() * 3)];
-      const priority = ['LOW', 'MEDIUM', 'HIGH'][Math.floor(Math.random() * 3)];
+      const status =
+        ticketStatuses[Math.floor(Math.random() * ticketStatuses.length)];
+      const priority =
+        ticketPriorities[Math.floor(Math.random() * ticketPriorities.length)];
       const isAssigned = Math.random() > 0.3; // 70% chance of being assigned
 
       await prisma.ticket.create({
@@ -327,7 +491,7 @@ async function main() {
   ] as const;
 
   const now = new Date();
-  const activities = [];
+  const activities: Prisma.ClientActivityCreateManyInput[] = [];
 
   // Generate activities for all clients
   const allClients = [...testClients];
@@ -339,35 +503,48 @@ async function main() {
     for (let i = 0; i < numActivities; i++) {
       const type = activityTypes[Math.floor(Math.random() * activityTypes.length)];
       const date = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000);
-      const status = Math.random() > 0.1 ? 'SUCCESS' : 'ERROR';
+      const status =
+        Math.random() > 0.1 ? ActivityStatus.SUCCESS : ActivityStatus.ERROR;
 
       let description = '';
-      let metadata = {};
+      let metadata: Prisma.InputJsonValue = {};
 
       switch (type) {
         case 'login':
           description = 'User logged in to the system';
-          metadata = { device: 'web', browser: 'Chrome' };
+          metadata = { device: 'web', browser: 'Chrome' } as Prisma.InputJsonValue;
           break;
         case 'query':
           description = 'Executed a query';
-          metadata = { queryType: 'analysis', duration: Math.random() * 5 };
+          metadata = {
+            queryType: 'analysis',
+            duration: Math.random() * 5,
+          } as Prisma.InputJsonValue;
           break;
         case 'settings_update':
           description = 'Updated user settings';
-          metadata = { setting: 'notifications', value: 'enabled' };
+          metadata = {
+            setting: 'notifications',
+            value: 'enabled',
+          } as Prisma.InputJsonValue;
           break;
         case 'export_data':
           description = 'Exported report data';
-          metadata = { format: 'csv', rows: Math.floor(Math.random() * 1000) };
+          metadata = {
+            format: 'csv',
+            rows: Math.floor(Math.random() * 1000),
+          } as Prisma.InputJsonValue;
           break;
         case 'view_report':
           description = 'Viewed activity report';
-          metadata = { reportType: 'monthly', period: 'last-30-days' };
+          metadata = {
+            reportType: 'monthly',
+            period: 'last-30-days',
+          } as Prisma.InputJsonValue;
           break;
         default:
           description = 'Unknown activity';
-          metadata = {};
+          metadata = {} as Prisma.InputJsonValue;
       }
 
       activities.push({
@@ -385,13 +562,14 @@ async function main() {
     const todayActivities = Math.floor(Math.random() * 3) + 1; // 1-3 activities today
     for (let i = 0; i < todayActivities; i++) {
       const type = activityTypes[Math.floor(Math.random() * activityTypes.length)];
-      const status = Math.random() > 0.1 ? 'SUCCESS' : 'ERROR';
+      const status =
+        Math.random() > 0.1 ? ActivityStatus.SUCCESS : ActivityStatus.ERROR;
 
       activities.push({
         type,
         description: `Today's ${type} activity`,
         status,
-        metadata: {},
+        metadata: {} as Prisma.InputJsonValue,
         createdAt: new Date(),
         updatedAt: new Date(),
         userId: client.id,

@@ -442,6 +442,7 @@ export default function ClientDetailsPage() {
               <p className="text-sm text-gray-500">Profile ID: {account.customerProfileId}</p>
             </div>
           )}
+          getAccountLabel={(account: SproutSocialAccount) => account.name || account.nativeName || ''}
           getAccountId={(account: SproutSocialAccount) => account.id}
           emptyStateMessage="No Social Media accounts associated with this client."
           successMessage={{
@@ -477,6 +478,7 @@ export default function ClientDetailsPage() {
               <p className="text-sm text-gray-500">Created: {new Date(emailClient.createdAt).toLocaleDateString()}</p>
             </div>
           )}
+          getAccountLabel={(emailClient: EmailClient) => emailClient.clientName}
           getAccountId={(emailClient: EmailClient) => emailClient.id}
           emptyStateMessage="No Email Clients associated with this client."
           successMessage={{
@@ -512,6 +514,7 @@ export default function ClientDetailsPage() {
               <p className="text-sm text-gray-500">Created: {new Date(uspsClient.createdAt).toLocaleDateString()}</p>
             </div>
           )}
+          getAccountLabel={(uspsClient: UspsClient) => uspsClient.clientName}
           getAccountId={(uspsClient: UspsClient) => uspsClient.id}
           emptyStateMessage="No USPS Clients associated with this client."
           successMessage={{
