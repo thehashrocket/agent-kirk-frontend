@@ -10,55 +10,50 @@ import { useCallback } from 'react';
 
 interface DirectMailPrintButtonProps {
     selectedAccountId?: string | null;
+    clientId?: string | null;
 }
 
-interface DirectMailPrintButtonProps {
-    selectedAccountId?: string | null;
-}
-
-export function DirectMailPrintButton({ selectedAccountId }: DirectMailPrintButtonProps) {
+export function DirectMailPrintButton({ selectedAccountId, clientId }: DirectMailPrintButtonProps) {
     const handlePrint = useCallback(() => {
-        // Build the print URL with the selected account ID
-        const printUrl = selectedAccountId
-            ? `/analytics/channel/direct/print?accountId=${selectedAccountId}`
-            : '/analytics/channel/direct/print';
+        if (!selectedAccountId) {
+            return;
+        }
 
-        // Open the print-optimized social analytics dashboard in a new window
+        const params = new URLSearchParams({
+            accountId: selectedAccountId,
+        });
+
+        if (clientId) {
+            params.append('clientId', clientId);
+        }
+
+        const printUrl = `/analytics/channel/direct/print?${params.toString()}`;
+
         const printWindow = window.open(printUrl, '_blank', 'width=1200,height=800');
 
         if (printWindow) {
-            // Wait for the content to load and data to be ready
             const checkAndPrint = () => {
-                // Check if the document is fully loaded and content is ready
                 if (printWindow.document.readyState === 'complete') {
-                    // Look for a loading indicator or data container to ensure content is ready
                     const loadingIndicator = printWindow.document.querySelector('[data-testid="loading"]');
-                    const hasContent = printWindow.document.querySelector('[data-testid="social-content"]');
+                    const hasContent = printWindow.document.querySelector('[data-testid="direct-mail-content"]');
 
-                    // Also check for actual chart content to ensure data has loaded
-                    const hasCharts = printWindow.document.querySelector('.recharts-wrapper, canvas, svg, .social-metrics');
-
-                    if (!loadingIndicator && hasContent && hasCharts) {
-                        // Content is ready, trigger print after a longer delay
+                    if (!loadingIndicator && hasContent) {
                         setTimeout(() => {
                             printWindow.print();
-                        }, 2000); // Increased delay for charts to fully render
+                        }, 1500);
                     } else {
-                        // Content not ready yet, check again with longer interval
-                        setTimeout(checkAndPrint, 1000); // Increased check interval
+                        setTimeout(checkAndPrint, 800);
                     }
                 } else {
-                    // Document not ready, check again
-                    setTimeout(checkAndPrint, 500);
+                    setTimeout(checkAndPrint, 400);
                 }
             };
 
-            // Start checking after initial load with longer initial delay
             printWindow.addEventListener('load', () => {
-                setTimeout(checkAndPrint, 3000); // Increased initial delay
+                setTimeout(checkAndPrint, 1500);
             });
         }
-    }, [selectedAccountId]);
+    }, [selectedAccountId, clientId]);
 
     return (
         <Button

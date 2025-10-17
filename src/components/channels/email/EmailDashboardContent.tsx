@@ -69,7 +69,7 @@ export function EmailDashboardContent() {
     <div className="space-y-6">
       {/* Header with Print Button */}
       <div className="flex justify-end">
-        <EmailPrintButton selectedClientId={selectedClientId} />
+        {/* <EmailPrintButton selectedClientId={selectedClientId} /> */}
       </div>
 
       {/* Email Analytics Content */}

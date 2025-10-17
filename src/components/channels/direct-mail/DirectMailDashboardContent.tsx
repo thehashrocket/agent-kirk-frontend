@@ -88,7 +88,7 @@ export function DirectMailDashboardContent() {
         <div className="space-y-6">
             {/* Header with Print Button */}
             <div className="flex justify-end">
-                <DirectMailPrintButton selectedAccountId={selectedAccountId} />
+                {/* <DirectMailPrintButton selectedAccountId={selectedAccountId} clientId={clientId} /> */}
             </div>
 
             {/* Direct Mail Analytics Content */}
