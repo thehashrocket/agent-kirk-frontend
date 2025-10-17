@@ -75,6 +75,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       'Campaign Name',
       'Subject',
       'Sent',
+      'Send Time',
       'Delivered',
       'Delivery Rate',
       'Unique Opens',
@@ -90,12 +91,16 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       const openRate = campaign.delivered > 0 ? (campaign.uniqueOpens / campaign.delivered) * 100 : 0;
       const clickRate = campaign.delivered > 0 ? (campaign.uniqueClicks / campaign.delivered) * 100 : 0;
       const unsubscribeRate = campaign.delivered > 0 ? (campaign.unsubscribes / campaign.delivered) * 100 : 0;
+      const formattedSendTime = campaign.sendTime
+        ? dayjs(campaign.sendTime).format('MMM D, YYYY h:mm A')
+        : 'N/A';
 
       return [
         campaign.campaignId,
         campaign.campaignName,
         campaign.subject || 'No Subject',
         campaign.requests,
+        formattedSendTime,
         campaign.delivered,
         `${deliveryRate.toFixed(2)}%`,
         campaign.uniqueOpens,
@@ -187,6 +192,17 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       description: 'Average click rate after Opens',
     }
   ];
+
+  const campaignGridTemplate = '50px 280px 220px 90px 160px 110px 110px 110px 110px';
+
+  const formatSendTime = (sendTime?: string | null) => {
+    if (!sendTime) {
+      return '—';
+    }
+
+    const parsed = dayjs(sendTime);
+    return parsed.isValid() ? parsed.format('MMM D, YYYY h:mm A') : '—';
+  };
 
   return (
     <div className="space-y-6 pb-16">
@@ -312,14 +328,15 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                 className="py-3 px-4 font-medium text-sm text-muted-foreground border-b gap-4"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '50px 280px 220px 80px 80px 80px 80px 80px',
-                  minWidth: '1080px'
+                  gridTemplateColumns: campaignGridTemplate,
+                  minWidth: '1200px'
                 }}
               >
                 <div>#</div>
                 <div>Campaign</div>
                 <div>Subject</div>
                 <div className="text-right whitespace-nowrap">Sent</div>
+                <div className='text-right whitespace-nowrap'>Sent Date</div>
                 <div className="text-right whitespace-nowrap">Delivered</div>
                 <div className="text-right whitespace-nowrap">Unique Opens</div>
                 <div className="text-right whitespace-nowrap">Unique Clicks</div>
@@ -328,7 +345,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
               <div
                 className="space-y-2 max-h-96 overflow-y-auto"
                 style={{
-                  minWidth: '1080px'
+                  minWidth: '1200px'
                 }}
               >
                 {filteredCampaigns.map((campaign, index) => (
@@ -337,7 +354,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                     className="items-center p-4 hover:bg-muted/50 rounded-lg text-sm gap-4"
                     style={{
                       display: 'grid',
-                      gridTemplateColumns: '50px 280px 220px 80px 80px 80px 80px 80px'
+                      gridTemplateColumns: campaignGridTemplate
                     }}
                   >
                     <div className="flex items-center justify-center">
@@ -359,6 +376,9 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                     </div>
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.requests)}</p>
+                    </div>
+                    <div className="text-right whitespace-nowrap">
+                      <p className='font-medium'>{formatSendTime(campaign.sendTime)}</p>
                     </div>
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.delivered)}</p>

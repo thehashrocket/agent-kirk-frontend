@@ -75,6 +75,7 @@ interface ProcessedCampaignStat {
     openRate: number;
     clickRate: number;
     deliveryRate: number;
+    sendTime?: string | null;
 }
 
 /**
@@ -139,7 +140,7 @@ export async function fetchEmailCampaignStats(emailClientId: string, from: Date,
                     campaignName: true,
                     campaignId: true,
                     emailCampaignContents: {
-                        select: { subject: true }
+                        select: { subject: true, sendTime: true }
                     }
                 }
             }
@@ -165,7 +166,7 @@ interface EmailCampaignDailyStat {
     emailCampaign: {
         campaignName: string;
         campaignId: string;
-        emailCampaignContents: { subject: string }[];
+        emailCampaignContents: { subject: string; sendTime: Date | string | null }[];
     };
 }
 
@@ -253,6 +254,7 @@ interface CampaignStatsAccumulator {
     uniqueClicks: number;
     uniqueOpens: number;
     unsubscribes: number;
+    sendTime?: string | null;
 }
 
 /**
@@ -275,6 +277,7 @@ export function processCampaignStats(stats: EmailCampaignDailyStat[]): Processed
                 // Track dates to avoid double counting uniques
                 dates: new Set<string>(),
                 dailyUniques: [] as { date: string; uniqueOpens: number; uniqueClicks: number }[],
+                sendTime: null,
             };
         }
 
@@ -293,9 +296,23 @@ export function processCampaignStats(stats: EmailCampaignDailyStat[]): Processed
         acc[campaignKey].unsubscribes += stat.unsubscribes || 0;
         acc[campaignKey].opens += stat.opens || 0;
         acc[campaignKey].clicks += stat.clicks || 0;
-        acc[campaignKey].subject = Array.isArray(stat.emailCampaign.emailCampaignContents) && stat.emailCampaign.emailCampaignContents.length > 0
-            ? stat.emailCampaign.emailCampaignContents[0].subject
-            : undefined;
+        const hasContentArray = Array.isArray(stat.emailCampaign.emailCampaignContents) && stat.emailCampaign.emailCampaignContents.length > 0;
+        const primaryContent = hasContentArray ? stat.emailCampaign.emailCampaignContents[0] : undefined;
+        acc[campaignKey].subject = primaryContent?.subject ?? acc[campaignKey].subject;
+
+        const candidateSendDate = primaryContent?.sendTime
+            ? new Date(primaryContent.sendTime)
+            : stat.date
+                ? new Date(stat.date)
+                : undefined;
+
+        if (candidateSendDate) {
+            const existingSendTime = acc[campaignKey].sendTime ? new Date(acc[campaignKey].sendTime) : null;
+            if (!existingSendTime || candidateSendDate < existingSendTime) {
+                acc[campaignKey].sendTime = candidateSendDate.toISOString();
+            }
+        }
+
         return acc;
     }, {} as Record<string, CampaignStatsAccumulator>);
 

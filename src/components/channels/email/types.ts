@@ -38,6 +38,7 @@ export interface EmailMetricsResponse {
     uniqueClicks: number;
     uniqueOpens: number;
     unsubscribes: number;
+    sendTime?: string | null;
   }>;
   totalCampaigns: number;
 }
