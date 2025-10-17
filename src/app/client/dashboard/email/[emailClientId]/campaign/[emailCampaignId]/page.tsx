@@ -1,38 +1,42 @@
 import { CampaignReport } from '@/components/channels/email/CampaignReport';
 import BreadCrumbs from '@/components/layout/BreadCrumbs';
 import { Card, CardContent } from '@/components/ui/card';
+import { getEmailCampaignDetail } from '@/lib/services/email-metrics';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 interface CampaignReportPageProps {
-  params: Promise<{
+  params: {
     emailClientId: string;
     emailCampaignId: string;
-  }>;
-}
-
-async function fetchCampaignData(emailClientId: string, emailCampaignId: string) {
-  // TODO: Replace with real API call
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  // Mock data
-  return {
-    campaignId: emailCampaignId,
-    campaignName: `Sample Campaign ${emailCampaignId}`,
-    delivered: 10000,
-    opens: 6500,
-    clicks: 1200,
-    bounces: 300,
-    unsubscribes: 75,
   };
 }
 
 export default async function CampaignReportPage({ params }: CampaignReportPageProps) {
-  const { emailClientId, emailCampaignId } = await params;
+  const { emailClientId, emailCampaignId } = params;
 
-  let campaign = null;
-  let error = null;
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.id) {
+    return (
+      <Card className="mt-8">
+        <CardContent>
+          <p className="text-center text-muted-foreground">You must be signed in to view this campaign.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  let campaign: Awaited<ReturnType<typeof getEmailCampaignDetail>> | null = null;
+  let error: string | null = null;
   try {
-    campaign = await fetchCampaignData(emailClientId, emailCampaignId);
+    campaign = await getEmailCampaignDetail({
+      userId: session.user.id,
+      emailClientId,
+      campaignId: emailCampaignId,
+    });
   } catch (e) {
-    error = 'Failed to load campaign data.';
+    error = e instanceof Error ? e.message : 'Failed to load campaign data.';
   }
 
   if (error) {

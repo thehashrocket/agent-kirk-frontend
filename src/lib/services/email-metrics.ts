@@ -78,6 +78,24 @@ interface ProcessedCampaignStat {
     sendTime?: string | null;
 }
 
+export interface EmailCampaignDetail {
+    campaignId: string;
+    campaignName: string;
+    subject: string | null;
+    sendTime: string | null;
+    requests: number;
+    delivered: number;
+    uniqueOpens: number;
+    uniqueClicks: number;
+    opens: number;
+    clicks: number;
+    unsubscribes: number;
+    bounces: number;
+    openRate: number;
+    clickRate: number;
+    deliveryRate: number;
+}
+
 /**
  * Validates user access to an email client
  */
@@ -400,5 +418,99 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
         },
         topCampaigns,
         totalCampaigns: new Set(emailCampaignDailyStats.map(stat => stat.emailCampaign.campaignId)).size,
+    };
+}
+
+interface EmailCampaignDetailParams {
+    userId: string;
+    emailClientId: string;
+    campaignId: string;
+}
+
+export async function getEmailCampaignDetail(params: EmailCampaignDetailParams): Promise<EmailCampaignDetail> {
+    const { userId, emailClientId, campaignId } = params;
+
+    const emailClient = await validateEmailClientAccess(userId, emailClientId);
+    if (!emailClient) {
+        throw new Error('Email Client not found or not accessible');
+    }
+
+    const campaign = await prisma.emailCampaign.findFirst({
+        where: {
+            campaignId,
+            emailClientId,
+        },
+        include: {
+            emailCampaignContents: {
+                select: {
+                    subject: true,
+                    sendTime: true,
+                }
+            },
+            emailCampaignDailyStats: true,
+        },
+    });
+
+    if (!campaign) {
+        throw new Error('Campaign not found');
+    }
+
+    const aggregates = campaign.emailCampaignDailyStats.reduce(
+        (acc, stat) => {
+            acc.requests += stat.requests || 0;
+            acc.delivered += stat.delivered || 0;
+            acc.opens += stat.opens || 0;
+            acc.clicks += stat.clicks || 0;
+            acc.unsubscribes += stat.unsubscribes || 0;
+            acc.bounces += stat.bounces || 0;
+            acc.uniqueOpens.push(stat.uniqueOpens || 0);
+            acc.uniqueClicks.push(stat.uniqueClicks || 0);
+            return acc;
+        },
+        {
+            requests: 0,
+            delivered: 0,
+            opens: 0,
+            clicks: 0,
+            unsubscribes: 0,
+            bounces: 0,
+            uniqueOpens: [] as number[],
+            uniqueClicks: [] as number[],
+        }
+    );
+
+    const uniqueOpens =
+        aggregates.uniqueOpens.length > 0
+            ? Math.max(...aggregates.uniqueOpens)
+            : 0;
+    const uniqueClicks =
+        aggregates.uniqueClicks.length > 0
+            ? Math.max(...aggregates.uniqueClicks)
+            : 0;
+
+    const deliveryRate = aggregates.requests > 0 ? (aggregates.delivered / aggregates.requests) * 100 : 0;
+    const openRate = aggregates.delivered > 0 ? (uniqueOpens / aggregates.delivered) * 100 : 0;
+    const clickRate = aggregates.delivered > 0 ? (uniqueClicks / aggregates.delivered) * 100 : 0;
+
+    const sendTime = campaign.emailCampaignContents?.sendTime
+        ? campaign.emailCampaignContents.sendTime.toISOString()
+        : null;
+
+    return {
+        campaignId: campaign.campaignId,
+        campaignName: campaign.campaignName,
+        subject: campaign.emailCampaignContents?.subject || campaign.campaignName,
+        sendTime,
+        requests: aggregates.requests,
+        delivered: aggregates.delivered,
+        opens: aggregates.opens,
+        clicks: aggregates.clicks,
+        uniqueOpens,
+        uniqueClicks,
+        unsubscribes: aggregates.unsubscribes,
+        bounces: aggregates.bounces,
+        deliveryRate,
+        openRate,
+        clickRate,
     };
 }

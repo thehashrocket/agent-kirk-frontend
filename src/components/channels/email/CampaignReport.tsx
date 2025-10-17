@@ -1,11 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, MousePointer, AlertTriangle, UserMinus } from 'lucide-react';
+import dayjs from 'dayjs';
 import React from 'react';
 
 export interface CampaignReportProps {
   campaign: {
     campaignId: string;
     campaignName: string;
+    subject?: string | null;
+    sendTime?: string | null;
     delivered: number;
     opens: number;
     clicks: number;
@@ -27,12 +30,19 @@ export function CampaignReport({ campaign }: CampaignReportProps) {
 
   const openRate = campaign.delivered > 0 ? (campaign.opens / campaign.delivered) * 100 : 0;
   const clickRate = campaign.delivered > 0 ? (campaign.clicks / campaign.delivered) * 100 : 0;
+  const formattedSendTime = campaign.sendTime
+    ? dayjs(campaign.sendTime).format('MMM D, YYYY h:mm A')
+    : '—';
 
   return (
     <Card className="mt-8">
       <CardHeader>
         <CardTitle>{campaign.campaignName}</CardTitle>
         <p className="text-sm text-muted-foreground">Campaign ID: {campaign.campaignId}</p>
+        <p className="text-sm text-muted-foreground">Send Time: {formattedSendTime}</p>
+        {campaign.subject && (
+          <p className="text-sm text-muted-foreground">Subject: {campaign.subject}</p>
+        )}
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
