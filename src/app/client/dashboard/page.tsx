@@ -1,24 +1,19 @@
 /**
  * @file src/app/client/dashboard/page.tsx
- * Client dashboard page that provides a comprehensive overview of client activity and services.
- * Built using Next.js App Router and Server Components for optimal performance.
+ * Client dashboard landing page for CLIENT users.
  *
  * Features:
- * - Real-time usage statistics
- * - Google Analytics metrics
- * - LLM query interface
- * - Recent query history
- * - Quick action links
- * - Usage monitoring
+ * - Authentication guard with role enforcement
+ * - Personalized welcome message and breadcrumbs
+ * - Channel picker linking to detailed analytics dashboards
  */
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 import BreadCrumbs from "@/components/layout/BreadCrumbs";
-import { ClientDashboardContent } from "@/components/dashboard/ClientDashboardContent";
 import { prisma } from "@/lib/prisma";
+import { ClientDashboardPicker } from "@/components/dashboard/ClientDashboardPicker";
 /**
  * @component ClientDashboard
  * @path src/app/client/dashboard/page.tsx
@@ -26,18 +21,12 @@ import { prisma } from "@/lib/prisma";
  *
  * Features:
  * - Authentication and role-based access control
- * - Real-time usage statistics with Suspense
- * - Google Analytics metrics with Suspense
- * - LLM query interface for making new queries
- * - Recent query history with status indicators
- * - Quick action links for common tasks
- * - Usage summary with plan details and API usage
+ * - Personalized greeting with breadcrumb context
+ * - Channel picker entry point to analytics dashboards
  *
  * Layout:
- * - Responsive grid layout using Tailwind CSS
- * - Main content area (2/3 width) with query interface
- * - Sidebar (1/3 width) with quick actions and usage summary
- * - Mobile-first design with proper stacking
+ * - Container layout with responsive spacing
+ * - Channel picker grid adapts to screen size
  *
  * Authentication:
  * - Requires valid session with user ID
@@ -94,11 +83,8 @@ export default async function ClientDashboard() {
       </div>
 
       <div className="mt-8">
-        <Suspense fallback={<div>Loading analytics...</div>}>
-          <ClientDashboardContent />
-        </Suspense>
+        <ClientDashboardPicker />
       </div>
-
     </div>
   );
 }

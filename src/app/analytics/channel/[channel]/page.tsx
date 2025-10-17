@@ -11,6 +11,7 @@ import PaidSocial from '@/components/channels/paid_social';
 import VisitorBehavior from '@/components/channels/visitor_behavior';
 import AudienceData from '@/components/channels/audience_data';
 import BreadCrumbs from '@/components/layout/BreadCrumbs';
+import GoogleAnalytics from '@/components/channels/google_analytics';
 
 interface ChannelPageProps {
   params: Promise<{
@@ -34,6 +35,7 @@ export default async function ChannelPage({ params, searchParams }: ChannelPageP
       {channel === 'audience-data' && <AudienceData />}
       {channel === 'direct' && <Direct />}
       {channel === 'email' && <Email />}
+      {channel === 'google-analytics' && <GoogleAnalytics />}
       {channel === 'organic-search' && <OrganicSearch />}
       {channel === 'organic-social' && <OrganicSocial />}
       {channel === 'paid-search' && <PaidSearch />}
