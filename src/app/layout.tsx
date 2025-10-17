@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from "@/app/providers";
 import Script from "next/script";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Agent Kirk - AI Analytics Assistant",
@@ -16,30 +17,43 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headerList = headers();
+  const requestPath =
+    headerList.get("x-invoke-path") ??
+    headerList.get("x-matched-path") ??
+    headerList.get("next-url") ??
+    "";
+  const isPrintPage = /(?:^|\/)print(?:\/|$)/.test(requestPath);
+
   return (
     <html lang="en">
-
       {/* Only load the Script when in the staging environment */}
-
-      {process.env.APP_ENV === 'staging' && (
+      {process.env.APP_ENV === "staging" && (
         <Script
           id="bugherd-script"
           src="https://www.bugherd.com/sidebarv2.js?apikey=hvzbbkqgumxrgii49nojqq"
           strategy="afterInteractive"
         />
       )}
-      <body className="font-bliss">
+      <body
+        className="font-bliss"
+        data-print-page={isPrintPage ? "true" : undefined}
+      >
         <Providers>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <div className="flex flex-1">
-              <Sidebar />
-              <main className="flex-1 pb-16">
-                {children}
-              </main>
+          {isPrintPage ? (
+            <div className="min-h-screen flex flex-col">
+              <main className="flex-1">{children}</main>
             </div>
-            <Footer />
-          </div>
+          ) : (
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <div className="flex flex-1">
+                <Sidebar />
+                <main className="flex-1 pb-16">{children}</main>
+              </div>
+              <Footer />
+            </div>
+          )}
         </Providers>
       </body>
     </html>

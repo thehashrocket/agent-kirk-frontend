@@ -5,8 +5,6 @@
  */
 
 import type { Metadata } from "next";
-import { Providers } from "@/app/providers";
-import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Dashboard Report - Agent Kirk",
@@ -17,8 +15,8 @@ export const metadata: Metadata = {
  * Print Layout Component
  *
  * Provides a minimal layout for print pages without header, sidebar,
- * or other navigation elements. Optimized for printing and PDF generation.
- * This layout completely replaces the root layout for print pages.
+ * or other navigation elements. Optimized for printing and PDF generation
+ * while reusing the shared root layout shell.
  *
  * @param children - Child components to render
  */
@@ -28,17 +26,9 @@ export default function PrintLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="font-bliss" data-print-page="true">
-        <Providers>
-          <div className="min-h-screen w-full bg-white print:bg-white relative">
-            {/* Main content - watermark is now handled by CSS body::before pseudo-element */}
-            <main className="w-full relative z-10 print-content">
-              {children}
-            </main>
-          </div>
-        </Providers>
-      </body>
-    </html>
+    <div className="min-h-screen w-full bg-white print:bg-white relative">
+      {/* Main content - watermark is now handled by CSS body::before pseudo-element */}
+      <main className="w-full relative z-10 print-content">{children}</main>
+    </div>
   );
 }
