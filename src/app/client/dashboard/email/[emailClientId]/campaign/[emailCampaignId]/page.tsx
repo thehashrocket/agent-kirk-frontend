@@ -6,14 +6,14 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
 interface CampaignReportPageProps {
-  params: {
+  params: Promise<{
     emailClientId: string;
     emailCampaignId: string;
-  };
+  }>;
 }
 
 export default async function CampaignReportPage({ params }: CampaignReportPageProps) {
-  const { emailClientId, emailCampaignId } = params;
+  const { emailClientId, emailCampaignId } = await params;
 
   const session = await getServerSession(authOptions);
 

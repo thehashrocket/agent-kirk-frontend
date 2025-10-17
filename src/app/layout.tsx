@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   description: "Your AI-powered analytics assistant",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const headerList = headers();
+  const headerList = await headers();
   const requestPath =
     headerList.get("x-invoke-path") ??
     headerList.get("x-matched-path") ??
