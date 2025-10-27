@@ -204,6 +204,14 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
     return parsed.isValid() ? parsed.format('MMM D, YYYY h:mm A') : '—';
   };
 
+  const truncateCampaignName = (name: string, maxLength = 50) => {
+    if (name.length <= maxLength) {
+      return name;
+    }
+
+    return `${name.slice(0, maxLength - 3)}...`;
+  };
+
   return (
     <div className="space-y-6 pb-16">
       {/* Date Range Selector */}
@@ -366,8 +374,9 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                       <Link
                         href={`/client/dashboard/email/${data.emailClient.id}/campaign/${campaign.campaignId}`}
                         className="inline-flex font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        title={campaign.campaignName}
                       >
-                        {campaign.campaignName}
+                        {truncateCampaignName(campaign.campaignName)}
                         <ExternalLink className="ml-1 h-4 w-4 text-muted-foreground" aria-label="View campaign report" />
                       </Link>
                     </div>
