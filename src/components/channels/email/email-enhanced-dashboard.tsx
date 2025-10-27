@@ -365,11 +365,13 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                       gridTemplateColumns: campaignGridTemplate
                     }}
                   >
+                    {/* Row Number */}
                     <div className="flex items-center justify-center">
                       <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-base font-semibold text-primary">
                         {index + 1}
                       </span>
                     </div>
+                    {/* Campaign Name */}
                     <div>
                       <Link
                         href={`/client/dashboard/email/${data.emailClient.id}/campaign/${campaign.campaignId}`}
@@ -380,15 +382,19 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                         <ExternalLink className="ml-1 h-4 w-4 text-muted-foreground" aria-label="View campaign report" />
                       </Link>
                     </div>
+                    {/* Subject */}
                     <div>
                       <p className="font-medium">{campaign.subject || <span className="text-muted-foreground italic">No Subject</span>}</p>
                     </div>
+                    {/* Requests */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.requests)}</p>
                     </div>
+                    {/* Send Time */}
                     <div className="text-right whitespace-nowrap">
                       <p className='font-medium'>{formatSendTime(campaign.sendTime)}</p>
                     </div>
+                    {/* Delivered */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.delivered)}</p>
                       <p className="text-[10px] text-muted-foreground">
@@ -397,6 +403,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                           : '0%'}
                       </p>
                     </div>
+                    {/* Unique Opens */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.uniqueOpens)}</p>
                       <p className="text-[10px] text-muted-foreground">
@@ -405,14 +412,16 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                           : '0%'}
                       </p>
                     </div>
+                    {/* Unique Clicks */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.uniqueClicks)}</p>
                       <p className="text-[10px] text-muted-foreground">
                         {campaign.delivered > 0
-                          ? `${((campaign.uniqueClicks / campaign.delivered) * 100).toFixed(1)}%`
+                          ? `${((campaign.uniqueClicks / campaign.uniqueOpens) * 100).toFixed(1)}%`
                           : '0%'}
                       </p>
                     </div>
+                    {/* Unsubscribes */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.unsubscribes)}</p>
                       <p className="text-[10px] text-muted-foreground">
