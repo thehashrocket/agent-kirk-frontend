@@ -223,12 +223,9 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
             'Scanned',
             'Delivered',
             'Pieces',
-            '% On Time',
             '% Delivered',
             '% Scanned',
             '% Final Scan',
-            'Order',
-            'Sector',
             'Type',
         ];
 
@@ -244,12 +241,9 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                 row.scanned,
                 row.finalScanCount,
                 row.pieces,
-                `${row.percentOnTime.toFixed(2)}%`,
                 `${percentDeliveredCalc.toFixed(2)}%`,
                 `${row.percentScanned.toFixed(2)}%`,
                 `${row.percentFinalScan.toFixed(2)}%`,
-                row.order ?? '',
-                row.sector ?? '',
                 row.type ?? '',
             ]
                 .map(escapeCsvValue)
@@ -304,13 +298,6 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
             align: 'right',
             sortable: true,
             render: (value) => formatNumber(value)
-        },
-        {
-            header: '% On Time',
-            accessor: 'percentOnTime',
-            align: 'right',
-            sortable: true,
-            render: (value) => formatPercentage(value)
         },
         // Calculate % Delivered using the number of pieces scanned by the total pieces
         {
