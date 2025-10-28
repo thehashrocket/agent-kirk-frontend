@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Notification } from '@/lib/prisma';
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from 'next/navigation';
@@ -30,15 +31,6 @@ import { toast } from 'sonner';
  * @property {Date} createdAt - Timestamp when the notification was created
  * @property {'MESSAGE_RECEIVED' | 'REPORT_GENERATED'} type - Type of notification
  */
-interface Notification {
-  id: string;
-  title: string;
-  content: string;
-  isRead: boolean;
-  link?: string;
-  createdAt: Date;
-  type: 'MESSAGE_RECEIVED' | 'REPORT_GENERATED';
-}
 
 /**
  * NotificationBell component that provides real-time notification functionality.

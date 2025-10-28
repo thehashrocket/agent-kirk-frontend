@@ -253,6 +253,7 @@ export async function POST(request: NextRequest) {
           title: 'Query Failed',
           content: 'Your query could not be processed. Please try again.',
           userId: query.userId,
+          link: `/chat`,
         },
       });
     }
@@ -288,6 +289,7 @@ export async function POST(request: NextRequest) {
                 title: 'Query Complete',
                 content: 'Your query has been processed and is ready to view.',
                 userId: query.userId,
+                link: `/chat`,
               },
             });
           } else if (parsedData.status === 'IN_PROGRESS') {
@@ -299,6 +301,7 @@ export async function POST(request: NextRequest) {
                 title: 'Query Processing Failed',
                 content: 'There was an error processing your query data.',
                 userId: query.userId,
+                link: `/chat`,
               },
             });
           }
@@ -384,6 +387,7 @@ export async function POST(request: NextRequest) {
             title: 'Query Processing Failed',
             content: 'There was an error processing your query data.',
             userId: query.userId,
+            link: `/chat`,
           },
         });
 
