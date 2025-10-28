@@ -183,6 +183,14 @@ export function NotificationBell() {
                   </span>
                 </div>
                 <p className="text-sm text-gray-600">{notification.content}</p>
+                {/* if link is present, show it */}
+                {notification.link && (
+                  <p className="text-sm text-blue-600">
+                    <a href={notification.link} target="_blank" rel="noopener noreferrer">
+                      View Details
+                    </a>
+                  </p>
+                )}
               </div>
             ))
           )}
