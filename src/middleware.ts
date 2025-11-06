@@ -14,6 +14,8 @@
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
+const privilegedCompanyName = "1905 New Media";
+
 /**
  * Authentication and authorization middleware.
  * Protects routes based on user roles and authentication status.
@@ -33,9 +35,16 @@ export default withAuth(
     const token = req.nextauth.token;
     // console.log("Middleware - Token:", token);
     
-    const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
+    const pathname = req.nextUrl.pathname;
+    const isAdminRoute = pathname.startsWith("/admin");
     const isAccountRepRoute = req.nextUrl.pathname.startsWith("/account-rep");
     const isClientRoute = req.nextUrl.pathname.startsWith("/client");
+    const isManualEntryRoute =
+      pathname === "/admin/direct-mail/manual-entry" ||
+      pathname.startsWith("/admin/direct-mail/manual-entry/");
+
+    const hasPrivilegedCompany =
+      token?.companyName?.toLowerCase() === privilegedCompanyName.toLowerCase();
 
     // console.log("Middleware - Route check:", {
     //   path: req.nextUrl.pathname,
@@ -45,8 +54,10 @@ export default withAuth(
     // });
 
     if (isAdminRoute && token?.role !== "ADMIN") {
-      console.log("Access denied to admin route. User role:", token?.role);
-      return NextResponse.redirect(new URL("/auth/signin", req.url));
+      if (!isManualEntryRoute || !hasPrivilegedCompany) {
+        console.log("Access denied to admin route. User role:", token?.role);
+        return NextResponse.redirect(new URL("/auth/signin", req.url));
+      }
     }
 
     if (isAccountRepRoute && token?.role !== "ACCOUNT_REP") {

@@ -53,6 +53,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     role?: string;
     companyId?: string | null;
+    companyName?: string | null;
     sub: string;
   }
 }
@@ -281,6 +282,7 @@ export const authOptions: AuthOptions = {
         if (userWithRoleAndCompany?.companyId !== undefined) {
           token.companyId = userWithRoleAndCompany.companyId;
         }
+        token.companyName = userWithRoleAndCompany?.company?.name ?? null;
 
         // console.log("Refreshed user data in JWT:", userWithRoleAndCompany);
       }
@@ -292,6 +294,10 @@ export const authOptions: AuthOptions = {
         }
         if (user.companyId !== undefined) {
           token.companyId = user.companyId;
+        }
+        // user.company may not be populated, but if present capture name
+        if ((user as any).company?.name) {
+          token.companyName = (user as any).company.name;
         }
       }
 

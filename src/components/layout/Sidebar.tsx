@@ -21,6 +21,7 @@ import {
   LayoutDashboard,
   Users,
   BarChart,
+  FilePlus,
   FileText,
   User
 } from "lucide-react";
@@ -82,6 +83,16 @@ const adminNavItems: NavItem[] = [
   //   description: "System-wide communications"
   // },
 ];
+
+const manualEntryNavItem: NavItem = {
+  title: "USPS Manual Entry",
+  href: "/admin/direct-mail/manual-entry",
+  icon: <FilePlus />,
+  description: "Add a USPS campaign and first summary row",
+};
+
+const privilegedCompanyName = "1905 New Media";
+const privilegedCompanyNameLower = privilegedCompanyName.toLowerCase();
 
 /**
  * Navigation items for account representatives.
@@ -194,13 +205,20 @@ export function Sidebar() {
    * @returns {NavItem[]} Array of navigation items for the user's role
    */
   const getNavItems = () => {
+    const canAccessManualEntry =
+      session.user.role === "ADMIN" ||
+      session.user.company?.name?.toLowerCase() === privilegedCompanyNameLower;
+
+    const withManualEntry = (items: NavItem[]) =>
+      canAccessManualEntry ? [...items, manualEntryNavItem] : items;
+
     switch (session.user.role) {
       case "ADMIN":
-        return adminNavItems;
+        return withManualEntry(adminNavItems);
       case "ACCOUNT_REP":
-        return accountRepNavItems;
+        return withManualEntry(accountRepNavItems);
       case "CLIENT":
-        return clientNavItems;
+        return withManualEntry(clientNavItems);
       default:
         return [];
     }
