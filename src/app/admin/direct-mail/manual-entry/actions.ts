@@ -21,13 +21,13 @@ export async function createManualCampaign(input: ManualEntryInput) {
     return { error: 'Unauthorized' };
   }
 
-  let companyName = session.user.company?.name;
+  let companyName = session.user.company?.name ?? undefined;
   if (!companyName && session.user.companyId) {
     const company = await prisma.company.findUnique({
       where: { id: session.user.companyId },
       select: { name: true },
     });
-    companyName = company?.name ?? null;
+    companyName = company?.name ?? undefined;
   }
 
   const canAccess =
