@@ -42,14 +42,18 @@ export default async function RootLayout({
         <Providers>
           {isPrintPage ? (
             <div className="min-h-screen flex flex-col">
-              <main className="flex-1">{children}</main>
+              <div role="main" className="flex-1">
+                {children}
+              </div>
             </div>
           ) : (
             <div className="min-h-screen flex flex-col">
               <Header />
               <div className="flex flex-1">
                 <Sidebar />
-                <main className="flex-1 pb-16">{children}</main>
+                <div role="main" className="flex-1 pb-16">
+                  {children}
+                </div>
               </div>
               <Footer />
             </div>

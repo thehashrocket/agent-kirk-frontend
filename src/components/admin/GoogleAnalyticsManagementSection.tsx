@@ -39,11 +39,13 @@ interface GaAccount {
 interface GoogleAnalyticsManagementSectionProps {
   userGaAccounts: GaAccount[];
   userId: string;
+  onUserUpdated?: () => Promise<void> | void;
 }
 
 export function GoogleAnalyticsManagementSection({ 
   userGaAccounts, 
-  userId 
+  userId,
+  onUserUpdated,
 }: GoogleAnalyticsManagementSectionProps) {
   const [isGaAccountDialogOpen, setIsGaAccountDialogOpen] = useState(false);
   const [isGaPropertyDialogOpen, setIsGaPropertyDialogOpen] = useState(false);
@@ -156,8 +158,9 @@ export function GoogleAnalyticsManagementSection({
       toast.success('Google Analytics accounts updated successfully');
       setIsGaAccountDialogOpen(false);
       setSelectedAccounts([]);
-      // Refresh user data
-      window.location.reload();
+      if (onUserUpdated) {
+        await onUserUpdated();
+      }
     } catch (error) {
       console.error('Error updating GA accounts:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to update Google Analytics accounts');
@@ -184,8 +187,9 @@ export function GoogleAnalyticsManagementSection({
       setIsGaPropertyDialogOpen(false);
       setNewGaProperty({ gaPropertyId: '', gaPropertyName: '' });
       setSelectedGaAccount(null);
-      // Refresh user data
-      window.location.reload();
+      if (onUserUpdated) {
+        await onUserUpdated();
+      }
     } catch {
       toast.error('Failed to add Google Analytics property');
     }
@@ -202,8 +206,9 @@ export function GoogleAnalyticsManagementSection({
       }
 
       toast.success('Google Analytics property deleted successfully');
-      // Refresh user data
-      window.location.reload();
+      if (onUserUpdated) {
+        await onUserUpdated();
+      }
     } catch {
       toast.error('Failed to delete Google Analytics property');
     }
@@ -224,8 +229,9 @@ export function GoogleAnalyticsManagementSection({
       }
 
       toast.success('Google Analytics account disassociated successfully');
-      // Refresh user data
-      window.location.reload();
+      if (onUserUpdated) {
+        await onUserUpdated();
+      }
     } catch (error) {
       console.error('Error disassociating GA account:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to disassociate Google Analytics account');

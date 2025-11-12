@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import {
     Card,
@@ -140,98 +140,63 @@ const formatDate = (value?: string | null) => {
 
 export default function UserDetailsPage() {
     const params = useParams();
+    const userId = params.id as string;
     const [user, setUser] = useState<TransformedUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [isGaAccountDialogOpen, setIsGaAccountDialogOpen] = useState(false);
-    const [availableGaAccounts, setAvailableGaAccounts] = useState<GaAccount[]>([]);
-    const [selectedAccounts, setSelectedAccounts] = useState<string[]>([]);
-    const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
-    const [newGaProperty, setNewGaProperty] = useState({
-        gaPropertyId: '',
-        gaPropertyName: '',
-    });
+
+    const fetchUser = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetch(`/api/users/${userId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+            const data: User = await response.json();
+            // Transform the data to match our component's structure
+            const transformedData: TransformedUser = {
+                ...data,
+                gaAccounts: data.userToGaAccounts?.map(({ gaAccount }) => ({
+                    id: gaAccount.id,
+                    gaAccountId: gaAccount.gaAccountId,
+                    gaAccountName: gaAccount.gaAccountName,
+                    gaProperties: gaAccount.gaProperties
+                })) || [],
+                sproutSocialAccounts: data.sproutSocialAccounts?.map(({ sproutSocialAccount }) => ({
+                    id: sproutSocialAccount.id,
+                    customerProfileId: sproutSocialAccount.customerProfileId,
+                    networkType: sproutSocialAccount.networkType,
+                    name: sproutSocialAccount.name,
+                    nativeName: sproutSocialAccount.nativeName,
+                    link: sproutSocialAccount.link,
+                    nativeId: sproutSocialAccount.nativeId,
+                    groups: sproutSocialAccount.groups
+                })) || [],
+                emailClients: data.emailClients?.map(({ emailClient }) => ({
+                    id: emailClient.id,
+                    clientName: emailClient.clientName,
+                    createdAt: emailClient.createdAt,
+                    updatedAt: emailClient.updatedAt
+                })) || [],
+                uspsClients: data.uspsClients?.map(({ uspsClient }) => ({
+                    id: uspsClient.id,
+                    clientName: uspsClient.clientName,
+                    createdAt: uspsClient.createdAt,
+                    updatedAt: uspsClient.updatedAt
+                })) || []
+            };
+            setUser(transformedData);
+        } catch (error) {
+            toast.error('Failed to fetch user data');
+            console.error('Error fetching user:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [userId]);
 
     // Fetch user data when the component mounts or the id changes
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await fetch(`/api/users/${params.id}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
-                }
-                const data: User = await response.json();
-                // Transform the data to match our component's structure
-                const transformedData: TransformedUser = {
-                    ...data,
-                    gaAccounts: data.userToGaAccounts?.map(({ gaAccount }) => ({
-                        id: gaAccount.id,
-                        gaAccountId: gaAccount.gaAccountId,
-                        gaAccountName: gaAccount.gaAccountName,
-                        gaProperties: gaAccount.gaProperties
-                    })) || [],
-                    sproutSocialAccounts: data.sproutSocialAccounts?.map(({ sproutSocialAccount }) => ({
-                        id: sproutSocialAccount.id,
-                        customerProfileId: sproutSocialAccount.customerProfileId,
-                        networkType: sproutSocialAccount.networkType,
-                        name: sproutSocialAccount.name,
-                        nativeName: sproutSocialAccount.nativeName,
-                        link: sproutSocialAccount.link,
-                        nativeId: sproutSocialAccount.nativeId,
-                        groups: sproutSocialAccount.groups
-                    })) || [],
-                    emailClients: data.emailClients?.map(({ emailClient }) => ({
-                        id: emailClient.id,
-                        clientName: emailClient.clientName,
-                        createdAt: emailClient.createdAt,
-                        updatedAt: emailClient.updatedAt
-                    })) || [],
-                    uspsClients: data.uspsClients?.map(({ uspsClient }) => ({
-                        id: uspsClient.id,
-                        clientName: uspsClient.clientName,
-                        createdAt: uspsClient.createdAt,
-                        updatedAt: uspsClient.updatedAt
-                    })) || []
-                };
-                setUser(transformedData);
-            } catch (error) {
-                toast.error('Failed to fetch user data');
-                console.error('Error fetching user:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         fetchUser();
-    }, [params]);
-
-    // Fetch available GA accounts when dialog opens
-    useEffect(() => {
-        const fetchAvailableAccounts = async () => {
-            if (!isGaAccountDialogOpen) return;
-
-            setIsLoadingAccounts(true);
-            try {
-                const response = await fetch('/api/admin/available-ga-accounts');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch available GA accounts');
-                }
-                const data = await response.json();
-                setAvailableGaAccounts(data);
-
-                // Pre-select accounts that the user already has access to
-                if (user) {
-                    const existingAccountIds = user.gaAccounts.map(account => account.id);
-                    setSelectedAccounts(existingAccountIds);
-                }
-            } catch (error) {
-                toast.error('Failed to fetch available GA accounts');
-            } finally {
-                setIsLoadingAccounts(false);
-            }
-        };
-
-        fetchAvailableAccounts();
-    }, [isGaAccountDialogOpen, user]);
+    }, [fetchUser]);
 
     // API functions for account management
     const fetchAvailableSproutSocialAccounts = async (): Promise<SproutSocialAccount[]> => {
@@ -482,7 +447,8 @@ export default function UserDetailsPage() {
             {/* Google Analytics Accounts - Using shared component */}
             <GoogleAnalyticsManagementSection
                 userGaAccounts={user.gaAccounts}
-                userId={params.id as string}
+                userId={userId}
+                onUserUpdated={fetchUser}
                 />
 
                 {/* Social Media Accounts - Using shared component */}
@@ -490,10 +456,11 @@ export default function UserDetailsPage() {
                     title="Social Media Accounts"
                     addButtonText="Add Social Media Account"
                     userAccounts={user.sproutSocialAccounts}
-                    userId={params.id as string}
+                    userId={userId}
                     fetchAvailableAccounts={fetchAvailableSproutSocialAccounts}
                     associateAccount={associateSproutSocialAccount}
                     disassociateAccount={disassociateSproutSocialAccount}
+                    onAccountsUpdated={fetchUser}
                     renderAccountContent={(account: SproutSocialAccount) => (
                         <>
                             <h3 className="font-semibold">{account.name}</h3>
@@ -531,10 +498,11 @@ export default function UserDetailsPage() {
                     title="Email Clients"
                     addButtonText="Add Email Client"
                     userAccounts={user.emailClients}
-                    userId={params.id as string}
+                    userId={userId}
                     fetchAvailableAccounts={fetchAvailableEmailClients}
                     associateAccount={associateEmailClient}
                     disassociateAccount={disassociateEmailClient}
+                    onAccountsUpdated={fetchUser}
                     renderAccountContent={(emailClient: EmailClient) => (
                         <>
                             <h3 className="font-semibold">{emailClient.clientName}</h3>
@@ -567,10 +535,11 @@ export default function UserDetailsPage() {
                     title="USPS Clients"
                     addButtonText="Add USPS Client"
                     userAccounts={user.uspsClients}
-                    userId={params.id as string}
+                    userId={userId}
                     fetchAvailableAccounts={fetchAvailableUspsClientsApi}
                     associateAccount={associateUspsClient}
                     disassociateAccount={disassociateUspsClient}
+                    onAccountsUpdated={fetchUser}
                     renderAccountContent={(uspsClient: UspsClient) => (
                         <>
                             <h3 className="font-semibold">{uspsClient.clientName}</h3>

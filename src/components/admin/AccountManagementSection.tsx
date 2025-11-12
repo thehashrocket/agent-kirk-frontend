@@ -43,6 +43,7 @@ interface AccountManagementSectionProps<T extends Account> {
     associate: string;
     disassociate: string;
   };
+  onAccountsUpdated?: () => Promise<void> | void;
 }
 
 export function AccountManagementSection<T extends Account>({
@@ -60,6 +61,7 @@ export function AccountManagementSection<T extends Account>({
   emptyStateMessage,
   successMessage,
   errorMessage,
+  onAccountsUpdated,
 }: AccountManagementSectionProps<T>) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [availableAccounts, setAvailableAccounts] = useState<T[]>([]);
@@ -123,8 +125,9 @@ export function AccountManagementSection<T extends Account>({
       toast.success(successMessage.associate);
       setIsDialogOpen(false);
       setSelectedAccountIds([]);
-      // Refresh page
-      window.location.reload();
+      if (onAccountsUpdated) {
+        await onAccountsUpdated();
+      }
     } catch (error) {
       console.error('Error updating accounts:', error);
       toast.error(error instanceof Error ? error.message : errorMessage.associate);
@@ -135,8 +138,9 @@ export function AccountManagementSection<T extends Account>({
     try {
       await disassociateAccount(userId, accountId);
       toast.success(successMessage.disassociate);
-      // Refresh page
-      window.location.reload();
+      if (onAccountsUpdated) {
+        await onAccountsUpdated();
+      }
     } catch (error) {
       console.error('Error disassociating account:', error);
       toast.error(error instanceof Error ? error.message : errorMessage.disassociate);

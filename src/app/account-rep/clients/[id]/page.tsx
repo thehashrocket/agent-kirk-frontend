@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import {
   Card,
@@ -139,60 +139,62 @@ const formatDate = (value?: string | null) => {
 
 export default function ClientDetailsPage() {
   const params = useParams();
+  const clientId = params.id as string;
   const [client, setClient] = useState<TransformedUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchClient = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/users/${clientId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch client data');
+      }
+      const data: User = await response.json();
+      const transformedData: TransformedUser = {
+        ...data,
+        gaAccounts: data.userToGaAccounts?.map(({ gaAccount }) => ({
+          id: gaAccount.id,
+          gaAccountId: gaAccount.gaAccountId,
+          gaAccountName: gaAccount.gaAccountName,
+          gaProperties: gaAccount.gaProperties
+        })) || [],
+        sproutSocialAccounts: data.sproutSocialAccounts?.map(({ sproutSocialAccount }) => ({
+          id: sproutSocialAccount.id,
+          customerProfileId: sproutSocialAccount.customerProfileId,
+          networkType: sproutSocialAccount.networkType,
+          name: sproutSocialAccount.name,
+          nativeName: sproutSocialAccount.nativeName,
+          link: sproutSocialAccount.link,
+          nativeId: sproutSocialAccount.nativeId,
+          groups: sproutSocialAccount.groups
+        })) || [],
+        emailClients: data.emailClients?.map(({ emailClient }) => ({
+          id: emailClient.id,
+          clientName: emailClient.clientName,
+          createdAt: emailClient.createdAt,
+          updatedAt: emailClient.updatedAt
+        })) || [],
+        uspsClients: data.uspsClients?.map(({ uspsClient }) => ({
+          id: uspsClient.id,
+          clientName: uspsClient.clientName,
+          createdAt: uspsClient.createdAt,
+          updatedAt: uspsClient.updatedAt,
+        })) || []
+      };
+      setClient(transformedData);
+    } catch (error) {
+      toast.error('Failed to fetch client data');
+      console.error('Error fetching client:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [clientId]);
+
   // Fetch client data when the component mounts or the id changes
   useEffect(() => {
-    const fetchClient = async () => {
-      try {
-        const response = await fetch(`/api/users/${params.id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch client data');
-        }
-        const data: User = await response.json();
-        const transformedData: TransformedUser = {
-          ...data,
-          gaAccounts: data.userToGaAccounts?.map(({ gaAccount }) => ({
-            id: gaAccount.id,
-            gaAccountId: gaAccount.gaAccountId,
-            gaAccountName: gaAccount.gaAccountName,
-            gaProperties: gaAccount.gaProperties
-          })) || [],
-          sproutSocialAccounts: data.sproutSocialAccounts?.map(({ sproutSocialAccount }) => ({
-            id: sproutSocialAccount.id,
-            customerProfileId: sproutSocialAccount.customerProfileId,
-            networkType: sproutSocialAccount.networkType,
-            name: sproutSocialAccount.name,
-            nativeName: sproutSocialAccount.nativeName,
-            link: sproutSocialAccount.link,
-            nativeId: sproutSocialAccount.nativeId,
-            groups: sproutSocialAccount.groups
-          })) || [],
-          emailClients: data.emailClients?.map(({ emailClient }) => ({
-            id: emailClient.id,
-            clientName: emailClient.clientName,
-            createdAt: emailClient.createdAt,
-            updatedAt: emailClient.updatedAt
-          })) || [],
-          uspsClients: data.uspsClients?.map(({ uspsClient }) => ({
-            id: uspsClient.id,
-            clientName: uspsClient.clientName,
-            createdAt: uspsClient.createdAt,
-            updatedAt: uspsClient.updatedAt,
-          })) || []
-        };
-        setClient(transformedData);
-      } catch (error) {
-        toast.error('Failed to fetch client data');
-        console.error('Error fetching client:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchClient();
-  }, [params.id]);
+  }, [fetchClient]);
 
   // API functions for account management
 
@@ -414,7 +416,8 @@ export default function ClientDetailsPage() {
         {/* Google Analytics Accounts - Using shared component */}
         <GoogleAnalyticsManagementSection
           userGaAccounts={client.gaAccounts}
-          userId={params.id as string}
+          userId={clientId}
+          onUserUpdated={fetchClient}
         />
 
         {/* Social Media Accounts - Using shared component */}
@@ -422,10 +425,11 @@ export default function ClientDetailsPage() {
           title="Social Media Accounts"
           addButtonText="Add Social Media Account"
           userAccounts={client.sproutSocialAccounts}
-          userId={params.id as string}
+          userId={clientId}
           fetchAvailableAccounts={fetchAvailableSproutSocialAccountsApi}
           associateAccount={associateSproutSocialAccount}
           disassociateAccount={disassociateSproutSocialAccount}
+          onAccountsUpdated={fetchClient}
           renderAccountContent={(account: SproutSocialAccount) => (
             <>
               <h3 className="font-semibold">{account.name}</h3>
@@ -461,10 +465,11 @@ export default function ClientDetailsPage() {
           title="Email Clients"
           addButtonText="Add Email Client"
           userAccounts={client.emailClients}
-          userId={params.id as string}
+          userId={clientId}
           fetchAvailableAccounts={fetchAvailableEmailClientsApi}
           associateAccount={associateEmailClient}
           disassociateAccount={disassociateEmailClient}
+          onAccountsUpdated={fetchClient}
           renderAccountContent={(emailClient: EmailClient) => (
             <>
               <h3 className="font-semibold">{emailClient.clientName}</h3>
@@ -497,10 +502,11 @@ export default function ClientDetailsPage() {
           title="USPS Clients"
           addButtonText="Add USPS Client"
           userAccounts={client.uspsClients}
-          userId={params.id as string}
+          userId={clientId}
           fetchAvailableAccounts={fetchAvailableUspsClientsApi}
           associateAccount={associateUspsClient}
           disassociateAccount={disassociateUspsClient}
+          onAccountsUpdated={fetchClient}
           renderAccountContent={(uspsClient: UspsClient) => (
             <>
               <h3 className="font-semibold">{uspsClient.clientName}</h3>
