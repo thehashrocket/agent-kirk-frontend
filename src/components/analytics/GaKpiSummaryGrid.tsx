@@ -61,7 +61,7 @@ export function GaKpiSummaryGrid({ current, prevYear }: GaKpiSummaryGridProps) {
   if (!current) return null;
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-      <h2 className="col-span-full text-xl font-bold mb-4">Key Performance Indicators For Whole Month </h2>
+      <h2 className="col-span-full text-xl font-bold mb-4">Key Performance Indicators</h2>
       {metrics.map(metric => {
         let value: number = 0;
         let prev: number | undefined = undefined;

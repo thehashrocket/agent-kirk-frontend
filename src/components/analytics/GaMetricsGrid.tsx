@@ -287,23 +287,108 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
     return sourceDaily.filter((day: any) => isDateInRange(day.date));
   }, [sourceDaily, dateRange, isDateInRange, hasDataForDateRange]);
 
-  // Helper to get the current and previous year month objects from kpiMonthly
-  // based on the selected date range. Returns { current, prevYear }.
-  function getSelectedAndPrevYearMonth(kpiMonthly: any[], dateRange: { from: Date; to: Date } | null) {
-    if (!kpiMonthly || kpiMonthly.length === 0) return { current: null, prevYear: null };
-    const selectedRange = dateRange || {
-      from: new Date(),
-      to: new Date()
+  // Helper: get array of YYYYMM numeric keys covering the provided date range (inclusive)
+  function getMonthKeysInRange(from: Date, to: Date) {
+    if (!from || !to) return [];
+
+    const start = new Date(from.getFullYear(), from.getMonth(), 1);
+    const end = new Date(to.getFullYear(), to.getMonth(), 1);
+    const keys: number[] = [];
+
+    // Ensure iteration works even if from > to by swapping
+    if (start > end) {
+      return getMonthKeysInRange(to, from);
+    }
+
+    const cursor = new Date(start.getTime());
+    while (cursor <= end) {
+      keys.push(cursor.getFullYear() * 100 + (cursor.getMonth() + 1));
+      cursor.setMonth(cursor.getMonth() + 1);
+    }
+
+    return keys;
+  }
+
+  // Helper: aggregate an array of monthly entries into a single totals object
+  function aggregateMonthlyMetrics(entries: any[]) {
+    if (!entries || entries.length === 0) return null;
+
+    const totals = entries.reduce(
+      (acc, entry) => {
+        const sessions = Number(entry.sessions) || 0;
+        const goalCompletions = Number(entry.goalCompletions) || 0;
+        const screenPageViewsPerSession = Number(entry.screenPageViewsPerSession) || 0;
+        const avgSessionDurationSec = Number(entry.avgSessionDurationSec) || 0;
+        const engagementRate = Number(entry.engagementRate) || 0;
+
+        acc.sessions += sessions;
+        acc.goalCompletions += goalCompletions;
+        acc.weightedScreenPageViews += screenPageViewsPerSession * sessions;
+        acc.weightedSessionDuration += avgSessionDurationSec * sessions;
+        acc.weightedEngagementRate += engagementRate * sessions;
+
+        return acc;
+      },
+      {
+        sessions: 0,
+        goalCompletions: 0,
+        weightedScreenPageViews: 0,
+        weightedSessionDuration: 0,
+        weightedEngagementRate: 0
+      }
+    );
+
+    const { sessions, goalCompletions, weightedScreenPageViews, weightedSessionDuration, weightedEngagementRate } = totals;
+    const safeSessions = sessions > 0 ? sessions : 0;
+
+    return {
+      sessions,
+      goalCompletions,
+      goalCompletionRate: safeSessions > 0 ? goalCompletions / safeSessions : 0,
+      screenPageViewsPerSession: safeSessions > 0 ? weightedScreenPageViews / safeSessions : 0,
+      avgSessionDurationSec: safeSessions > 0 ? weightedSessionDuration / safeSessions : 0,
+      engagementRate: safeSessions > 0 ? weightedEngagementRate / safeSessions : 0
     };
-    const selectedMonth = selectedRange.from.getFullYear() * 100 + (selectedRange.from.getMonth() + 1);
-    const current = kpiMonthly.find(m => m.month === selectedMonth) || null;
-    const prevYearMonth = selectedMonth - 100;
-    const prevYear = kpiMonthly.find(m => m.month === prevYearMonth) || null;
+  }
+
+  // Helper: get aggregated metrics for the selected range and the same range previous year
+  function getAggregatedMetrics(kpiMonthlyData: any[], selectedRange: { from: Date; to: Date } | null) {
+    if (!kpiMonthlyData || kpiMonthlyData.length === 0) {
+      return { current: null, prevYear: null };
+    }
+
+    if (!selectedRange) {
+      const sorted = [...kpiMonthlyData].sort((a, b) => b.month - a.month);
+      const currentMonth = sorted[0] || null;
+      const prevYearMonth = currentMonth ? currentMonth.month - 100 : null;
+      const prevYear = prevYearMonth ? kpiMonthlyData.find(m => m.month === prevYearMonth) || null : null;
+      return { current: currentMonth, prevYear };
+    }
+
+    const monthKeys = getMonthKeysInRange(selectedRange.from, selectedRange.to);
+    if (monthKeys.length === 0) {
+      return { current: null, prevYear: null };
+    }
+
+    const monthKeySet = new Set(monthKeys);
+    const currentEntries = kpiMonthlyData.filter(entry => monthKeySet.has(entry.month));
+    const current = aggregateMonthlyMetrics(currentEntries);
+
+    const prevYearKeySet = new Set(
+      monthKeys.map(monthKey => {
+        const year = Math.floor(monthKey / 100);
+        const month = monthKey % 100;
+        return (year - 1) * 100 + month;
+      })
+    );
+    const prevYearEntries = kpiMonthlyData.filter(entry => prevYearKeySet.has(entry.month));
+    const prevYear = aggregateMonthlyMetrics(prevYearEntries);
+
     return { current, prevYear };
   }
 
-  // --- Calculate current and prevYear month objects ---
-  const { current, prevYear } = getSelectedAndPrevYearMonth(kpiMonthly || [], dateRange);
+  // --- Calculate current and prevYear aggregated objects ---
+  const { current, prevYear } = getAggregatedMetrics(kpiMonthly || [], dateRange);
 
   // Calculate the min and max months from the last 12 months in kpiMonthly for the YoY chart label
   let yoyLabel = '';
