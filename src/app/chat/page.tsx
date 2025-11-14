@@ -839,7 +839,10 @@ export default function ChatPage() {
         </div>
 
         {/* Desktop Header with Sidebar Toggle */}
-        <div className="hidden md:flex justify-between items-center border-b p-4">
+        <div
+          id="desktop-header"
+          className="hidden md:flex sticky top-14 z-40 justify-between items-center border-b bg-background p-4"
+        >
           <div className="flex items-center space-x-2">
             <Tooltip>
               <TooltipTrigger asChild>
