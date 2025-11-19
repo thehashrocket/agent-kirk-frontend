@@ -303,7 +303,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
           <CardHeader>
             <CardTitle>Campaign Performance</CardTitle>
             <p className="text-sm text-muted-foreground">
-              Showing {filteredCampaigns.length} of {data.topCampaigns.length} campaigns
+              Showing {filteredCampaigns.length} of {data.topCampaigns.length} campaigns sent within the selected date range.
             </p>
           </CardHeader>
           {/* We need to be able to filter results by campaign name */}
