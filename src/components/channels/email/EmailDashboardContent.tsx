@@ -8,7 +8,6 @@
 
 import { useState, useEffect } from 'react';
 import EmailMetrics from './email-metrics';
-import { EmailPrintButton } from './EmailPrintButton';
 import { useSearchParams } from 'next/navigation';
 
 /**
