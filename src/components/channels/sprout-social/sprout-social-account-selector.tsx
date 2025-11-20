@@ -7,6 +7,13 @@ import { Loader2, Users } from 'lucide-react';
 import type { SproutSocialAccount, SproutSocialAccountSelectorProps } from './types';
 import { normalizeNames } from '@/lib/utils/normalize-names';
 import { useSearchParams } from 'next/navigation';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import {
+  clearDefaultSproutSocialAccountId,
+  getDefaultSproutSocialAccountId,
+  setDefaultSproutSocialAccountId,
+} from '@/lib/preferences/sprout-social-account-preference';
 
 interface AccountGroupOption {
   key: string;
@@ -40,6 +47,7 @@ export function SproutSocialAccountSelector({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const hasInitialized = useRef(false);
+  const [storedDefaultAccountId, setStoredDefaultAccountId] = useState<string | null>(null);
 
   // Get url parameters if needed
   const searchParams = useSearchParams();
@@ -65,14 +73,28 @@ export function SproutSocialAccountSelector({
           throw new Error(errorData.error || 'Failed to fetch Social Media accounts');
         }
 
-        const accountsData = await response.json();
+        const accountsData: SproutSocialAccount[] = await response.json();
         setAccounts(accountsData);
+
+        const savedDefaultAccountId = getDefaultSproutSocialAccountId();
+        setStoredDefaultAccountId(savedDefaultAccountId);
 
         if (accountsData.length === 0) {
           setSelectedGroupKey(null);
           setSelectedAccountId(null);
           onAccountChange(null);
           onAccountObjectChange(null);
+        } else if (savedDefaultAccountId) {
+          const defaultAccount = accountsData.find((account) => account.id === savedDefaultAccountId);
+          if (defaultAccount) {
+            const defaultGroupKey = `${defaultAccount.name}__${defaultAccount.networkType}`;
+            setSelectedGroupKey(defaultGroupKey);
+            setSelectedAccountId(defaultAccount.id);
+            hasInitialized.current = false;
+          } else {
+            clearDefaultSproutSocialAccountId();
+            setStoredDefaultAccountId(null);
+          }
         }
       } catch (error) {
         console.error('Error fetching Social Media accounts:', error);
@@ -210,11 +232,35 @@ export function SproutSocialAccountSelector({
     onAccountObjectChange(selectedAccount);
   };
 
+  const toggleDefaultAccount = (checked: boolean) => {
+    if (!selectedAccountId) {
+      return;
+    }
+
+    if (checked) {
+      setDefaultSproutSocialAccountId(selectedAccountId);
+      setStoredDefaultAccountId(selectedAccountId);
+    } else {
+      clearDefaultSproutSocialAccountId();
+      setStoredDefaultAccountId(null);
+    }
+  };
+
   // Get selected account for display (must be before early returns)
   const selectedAccount = useMemo(() => {
     if (!selectedAccountId) return null;
     return accounts.find((account) => account.id === selectedAccountId) || null;
   }, [accounts, selectedAccountId]);
+
+  const isDefaultSelection =
+    Boolean(selectedAccountId) && selectedAccountId === storedDefaultAccountId;
+
+  const defaultAccountName = useMemo(() => {
+    if (!storedDefaultAccountId) return null;
+    const account = accounts.find((acc) => acc.id === storedDefaultAccountId);
+    if (!account) return null;
+    return account.nativeName && account.nativeName !== account.name ? account.nativeName : account.name;
+  }, [accounts, storedDefaultAccountId]);
 
   // Get selected group for display (must be before early returns)
   const selectedGroup = useMemo(() => {
@@ -361,6 +407,27 @@ export function SproutSocialAccountSelector({
                   })}
                 </SelectContent>
               </Select>
+              <div className="flex items-start justify-between rounded-md border border-dashed bg-muted/40 px-3 py-2">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Default account</p>
+                  <p className="text-xs text-muted-foreground">
+                    {isDefaultSelection && defaultAccountName
+                      ? `${defaultAccountName} loads automatically`
+                      : 'Toggle to load this account by default'}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Switch
+                    id="sprout-default-account"
+                    checked={isDefaultSelection}
+                    onCheckedChange={toggleDefaultAccount}
+                    disabled={!selectedAccountId}
+                  />
+                  <Label htmlFor="sprout-default-account" className="text-sm">
+                    Make default
+                  </Label>
+                </div>
+              </div>
             </div>
           )}
 

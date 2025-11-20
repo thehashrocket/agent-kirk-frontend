@@ -9,6 +9,13 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useSearchParams } from 'next/navigation';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import {
+  clearDefaultEmailClientId,
+  getDefaultEmailClientId,
+  setDefaultEmailClientId,
+} from '@/lib/preferences/email-client-preference';
 
 export interface EmailClient {
   id: string;
@@ -30,6 +37,7 @@ export function EmailClientSelector({
   const [selectedClientId, setSelectedClientId] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [storedDefaultClientId, setStoredDefaultClientId] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const clientId = searchParams.get('clientId');
 
@@ -52,15 +60,36 @@ export function EmailClientSelector({
           throw new Error(errorData.error || 'Failed to fetch Email Clients');
         }
 
-        const clientsData = await response.json();
+        const clientsData: EmailClient[] = await response.json();
         setClients(clientsData);
 
-        // Auto-select first client if available
         if (clientsData.length > 0) {
-          const firstClient = clientsData[0];
-          setSelectedClientId(firstClient.id);
-          onClientChange(firstClient.id);
-          onClientObjectChange(firstClient);
+          const savedDefaultClientId = getDefaultEmailClientId();
+          setStoredDefaultClientId(savedDefaultClientId);
+          let nextClient: EmailClient | null = null;
+          let matchedSavedDefault = false;
+
+          if (clientId) {
+            nextClient = clientsData.find(client => client.id === clientId) ?? clientsData[0];
+          } else if (savedDefaultClientId) {
+            nextClient = clientsData.find(client => client.id === savedDefaultClientId) ?? null;
+            matchedSavedDefault = Boolean(nextClient);
+          }
+
+          if (!nextClient) {
+            nextClient = clientsData[0];
+          }
+
+          if (!clientId && savedDefaultClientId && !matchedSavedDefault) {
+            clearDefaultEmailClientId();
+            setStoredDefaultClientId(null);
+          }
+
+          if (nextClient) {
+            setSelectedClientId(nextClient.id);
+            onClientChange(nextClient.id);
+            onClientObjectChange(nextClient);
+          }
         } else {
           onClientChange(null);
           onClientObjectChange(null);
@@ -84,6 +113,27 @@ export function EmailClientSelector({
     onClientChange(clientId);
     onClientObjectChange(selectedClient);
   };
+
+  const toggleDefaultClient = (checked: boolean) => {
+    if (!selectedClientId) {
+      return;
+    }
+
+    if (checked) {
+      setDefaultEmailClientId(selectedClientId);
+      setStoredDefaultClientId(selectedClientId);
+    } else {
+      clearDefaultEmailClientId();
+      setStoredDefaultClientId(null);
+    }
+  };
+
+  const isDefaultSelection =
+    Boolean(selectedClientId) && selectedClientId === storedDefaultClientId;
+
+  const defaultClientName = storedDefaultClientId
+    ? clients.find(client => client.id === storedDefaultClientId)?.clientName
+    : null;
 
   if (error) {
     return (
@@ -118,8 +168,8 @@ export function EmailClientSelector({
   }
 
   if (clients.length === 1) {
-    return null
-  };
+    return null;
+  }
 
   return (
     <Card>
@@ -138,6 +188,28 @@ export function EmailClientSelector({
               ))}
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="mt-4 flex items-start justify-between rounded-md border border-dashed bg-muted/50 px-3 py-2">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">Default client</p>
+            <p className="text-xs text-muted-foreground">
+              {isDefaultSelection && defaultClientName
+                ? `${defaultClientName} loads by default`
+                : 'Toggle to load the current client by default'}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch
+              id="email-default-client"
+              checked={isDefaultSelection}
+              onCheckedChange={toggleDefaultClient}
+              disabled={!selectedClientId}
+            />
+            <Label htmlFor="email-default-client" className="text-sm">
+              Make default
+            </Label>
+          </div>
         </div>
       </CardContent>
     </Card>

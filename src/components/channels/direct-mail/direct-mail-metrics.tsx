@@ -9,13 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { TableSortable, TableColumn } from '@/components/ui/TableSortable';
 import { useSearchParams } from 'next/navigation';
-
-interface DirectMailAccount {
-    id: string;
-    clientName: string;
-    createdAt: string;
-    updatedAt: string;
-}
+import { DirectMailAccountSelector } from './direct-mail-account-selector';
+import type { DirectMailAccount } from './types';
 
 interface DirectMailTableRow {
     campaignName: string;
@@ -66,11 +61,13 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
     const [data, setData] = useState<DirectMailMetricsResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [accounts, setAccounts] = useState<DirectMailAccount[]>([]);
+    const [internalAccountId, setInternalAccountId] = useState<string | null>(selectedAccountId ?? null);
     const [dateRange, setDateRange] = useState({
         from: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
         to: format(new Date(), 'yyyy-MM-dd'),
     });
+    const isControlled = selectedAccountId !== undefined;
+    const activeAccountId = isControlled ? selectedAccountId : internalAccountId;
 
     const searchParams = useSearchParams();
     const clientId = searchParams.get('clientId');
@@ -82,29 +79,9 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         lastScanDate: '',
     });
 
-    // Fetch available accounts
-    const fetchAccounts = useCallback(async () => {
-        try {
-            let response;
-            // console.log('Fetching Direct Mail accounts for user:', clientId);
-            if (!clientId) {
-                response = await fetch('/api/client/direct-mail-accounts');
-            } else {
-                response = await fetch(`/api/account-rep/direct-mail-accounts?clientId=${encodeURIComponent(clientId)}`);
-            }
-            if (!response.ok) {
-                throw new Error('Failed to fetch Direct Mail accounts');
-            }
-            const accountsData = await response.json();
-            setAccounts(accountsData);
-        } catch (error) {
-            console.error('Error fetching Direct Mail accounts:', error);
-        }
-    }, [clientId]);
-
     // Fetch Direct Mail metrics
     const fetchDirectMailMetrics = useCallback(async (customDateRange?: { from: string; to: string }) => {
-        if (!selectedAccountId) return;
+        if (!activeAccountId) return;
 
         setIsLoading(true);
         setError(null);
@@ -112,7 +89,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         try {
             const range = customDateRange || dateRange;
             const params = new URLSearchParams({
-                accountId: selectedAccountId,
+                accountId: activeAccountId,
                 from: range.from,
                 to: range.to,
             });
@@ -139,31 +116,29 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         } finally {
             setIsLoading(false);
         }
-    }, [selectedAccountId, dateRange, clientId]);
+    }, [activeAccountId, dateRange, clientId]);
 
     // Handle account selection
-    const handleAccountChange = useCallback((accountId: string) => {
+    const handleAccountChange = useCallback((accountId: string | null) => {
         if (onAccountChange) {
             onAccountChange(accountId);
         }
-    }, [onAccountChange]);
+        if (!isControlled) {
+            setInternalAccountId(accountId);
+        }
+    }, [onAccountChange, isControlled]);
 
     // Handle date range change
     const handleDateRangeChange = useCallback(() => {
         fetchDirectMailMetrics();
     }, [fetchDirectMailMetrics]);
 
-    // Fetch accounts on mount
-    useEffect(() => {
-        fetchAccounts();
-    }, [fetchAccounts]);
-
     // Fetch data when account or date range changes
     useEffect(() => {
-        if (selectedAccountId) {
+        if (activeAccountId) {
             fetchDirectMailMetrics();
         }
-    }, [selectedAccountId, fetchDirectMailMetrics]);
+    }, [activeAccountId, fetchDirectMailMetrics]);
 
     // Format percentage for display
     const formatPercentage = (value: number) => `${value.toFixed(1)}%`;
@@ -311,57 +286,43 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
 
     return (
         <div className="space-y-6">
-            {/* Account Selector */}
+            <DirectMailAccountSelector
+                selectedAccountId={activeAccountId ?? null}
+                onAccountChange={handleAccountChange}
+            />
+
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                        <Package className="h-5 w-5" />
-                        Direct Mail Account
+                        <Calendar className="h-5 w-5" />
+                        Date Range
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-                        <div className="flex-1">
-                            <Label htmlFor="account-select">Select Account</Label>
-                            <select
-                                id="account-select"
-                                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                                value={selectedAccountId || ''}
-                                onChange={(e) => handleAccountChange(e.target.value)}
-                            >
-                                <option value="">Select an account...</option>
-                                {accounts.map((account) => (
-                                    <option key={account.id} value={account.id}>
-                                        {account.clientName}
-                                    </option>
-                                ))}
-                            </select>
+                        <div>
+                            <Label htmlFor="from-date">From</Label>
+                            <Input
+                                id="from-date"
+                                type="date"
+                                value={dateRange.from}
+                                onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))}
+                            />
                         </div>
-                        <div className="flex gap-2">
-                            <div>
-                                <Label htmlFor="from-date">From</Label>
-                                <Input
-                                    id="from-date"
-                                    type="date"
-                                    value={dateRange.from}
-                                    onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))}
-                                />
-                            </div>
-                            <div>
-                                <Label htmlFor="to-date">To</Label>
-                                <Input
-                                    id="to-date"
-                                    type="date"
-                                    value={dateRange.to}
-                                    onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))}
-                                />
-                            </div>
-                            <div className="flex items-end">
-                                <Button onClick={handleDateRangeChange} disabled={isLoading}>
-                                    <Calendar className="h-4 w-4 mr-2" />
-                                    Update
-                                </Button>
-                            </div>
+                        <div>
+                            <Label htmlFor="to-date">To</Label>
+                            <Input
+                                id="to-date"
+                                type="date"
+                                value={dateRange.to}
+                                onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))}
+                            />
+                        </div>
+                        <div className="flex items-end">
+                            <Button onClick={handleDateRangeChange} disabled={isLoading || !activeAccountId}>
+                                <Calendar className="h-4 w-4 mr-2" />
+                                Update
+                            </Button>
                         </div>
                     </div>
                 </CardContent>

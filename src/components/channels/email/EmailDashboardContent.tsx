@@ -6,9 +6,8 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import EmailMetrics from './email-metrics';
-import { useSearchParams } from 'next/navigation';
 
 /**
  * @component EmailDashboardContent
@@ -23,46 +22,6 @@ import { useSearchParams } from 'next/navigation';
  */
 export function EmailDashboardContent() {
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
-  // Get url parameters if needed
-  const searchParams = useSearchParams();
-  const clientId = searchParams.get('clientId');
-
-  // Fetch user's email clients and auto-select the first one
-  useEffect(() => {
-    const fetchAndSelectFirstClient = async () => {
-      try {
-        let response;
-        if (!clientId) {
-          // If no clientId is provided, fetch all email clients
-          response = await fetch('/api/client/email-clients');
-        } else {
-          // If clientId is provided, fetch specific email client
-          response = await fetch(`/api/account-rep/email-clients?clientId=${encodeURIComponent(clientId)}`);
-        }
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to fetch Email Clients');
-        }
-
-        const emailClients = await response.json();
-
-        // Auto-select the first email client if available and none is currently selected
-        if (emailClients.length > 0 && !selectedClientId) {
-          setSelectedClientId(emailClients[0].id);
-        }
-
-        setIsInitialized(true);
-      } catch (error) {
-        console.error('Error fetching email clients:', error);
-        setIsInitialized(true);
-      }
-    };
-
-    if (!isInitialized) {
-      fetchAndSelectFirstClient();
-    }
-  }, [selectedClientId, isInitialized, clientId]);
 
   return (
     <div className="space-y-6">

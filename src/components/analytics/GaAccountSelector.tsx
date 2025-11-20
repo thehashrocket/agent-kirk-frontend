@@ -14,6 +14,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import {
+  clearDefaultGaPropertyId,
+  getDefaultGaPropertyId,
+  setDefaultGaPropertyId,
+} from '@/lib/preferences/ga-property-preference';
 
 interface GaProperty {
   id: string;
@@ -46,6 +53,7 @@ export function GaAccountSelector({
   const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [storedDefaultPropertyId, setStoredDefaultPropertyId] = useState<string | null>(null);
 
   // Fetch accounts on component mount
   useEffect(() => {
@@ -58,7 +66,7 @@ export function GaAccountSelector({
         const data = await response.json();
         
         // Transform the nested userToGaAccounts data into the expected format
-        const fetchedAccounts = data.userToGaAccounts?.map((userToGaAccount: any) => ({
+        const fetchedAccounts: GaAccount[] = data.userToGaAccounts?.map((userToGaAccount: any) => ({
           id: userToGaAccount.gaAccount.id,
           gaAccountId: userToGaAccount.gaAccount.gaAccountId,
           gaAccountName: userToGaAccount.gaAccount.gaAccountName,
@@ -71,19 +79,54 @@ export function GaAccountSelector({
 
         setAccounts(fetchedAccounts);
 
-        // Auto-select first account and property if available
         if (fetchedAccounts.length > 0) {
-          const firstAccount = fetchedAccounts[0];
-          setSelectedAccountId(firstAccount.id);
-          onAccountChange?.(firstAccount.id);
-          onAccountObjectChange?.(firstAccount);
+          const savedPropertyId = getDefaultGaPropertyId();
+          setStoredDefaultPropertyId(savedPropertyId);
 
-          if (firstAccount.gaProperties.length > 0) {
-            const firstProperty = firstAccount.gaProperties[0];
-            setSelectedPropertyId(firstProperty.id);
-            onPropertyChange?.(firstProperty.id);
-            onPropertyObjectChange?.(firstProperty);
+          let matchedSavedDefault = false;
+          let nextAccount: GaAccount | null = fetchedAccounts[0] ?? null;
+          let nextProperty: GaProperty | null =
+            nextAccount?.gaProperties.length ? nextAccount.gaProperties[0] : null;
+
+          if (savedPropertyId) {
+            for (const account of fetchedAccounts) {
+              const propertyMatch = account.gaProperties.find(
+                (property) => property.id === savedPropertyId
+              );
+
+              if (propertyMatch) {
+                matchedSavedDefault = true;
+                nextAccount = account;
+                nextProperty = propertyMatch;
+                break;
+              }
+            }
           }
+
+          if (savedPropertyId && !matchedSavedDefault) {
+            clearDefaultGaPropertyId();
+            setStoredDefaultPropertyId(null);
+          }
+
+          if (nextAccount) {
+            setSelectedAccountId(nextAccount.id);
+            onAccountChange?.(nextAccount.id);
+            onAccountObjectChange?.(nextAccount);
+
+            if (nextProperty) {
+              setSelectedPropertyId(nextProperty.id);
+              onPropertyChange?.(nextProperty.id);
+              onPropertyObjectChange?.(nextProperty);
+            } else {
+              onPropertyChange?.(null);
+              onPropertyObjectChange?.(null);
+            }
+          }
+        } else {
+          onAccountChange?.(null);
+          onPropertyChange?.(null);
+          onAccountObjectChange?.(null);
+          onPropertyObjectChange?.(null);
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch accounts');
@@ -125,6 +168,29 @@ export function GaAccountSelector({
     onPropertyObjectChange?.(selectedProperty);
   };
 
+  const toggleDefaultProperty = (checked: boolean) => {
+    if (!selectedPropertyId) {
+      return;
+    }
+
+    if (checked) {
+      setDefaultGaPropertyId(selectedPropertyId);
+      setStoredDefaultPropertyId(selectedPropertyId);
+    } else {
+      clearDefaultGaPropertyId();
+      setStoredDefaultPropertyId(null);
+    }
+  };
+
+  const isDefaultSelection =
+    Boolean(selectedPropertyId) && selectedPropertyId === storedDefaultPropertyId;
+
+  const defaultPropertyName =
+    storedDefaultPropertyId &&
+    accounts
+      .flatMap((account) => account.gaProperties)
+      .find((property) => property.id === storedDefaultPropertyId)?.gaPropertyName;
+
   if (isLoading) {
     return (
       <Card>
@@ -156,6 +222,7 @@ export function GaAccountSelector({
   }
 
   const selectedAccount = accounts.find(acc => acc.id === selectedAccountId);
+  const hasProperties = Boolean(selectedAccount && selectedAccount.gaProperties.length);
 
   return (
     <div className="space-y-4">
@@ -168,30 +235,54 @@ export function GaAccountSelector({
         <Select value={selectedAccountId || ''} onValueChange={handleAccountChange}>
           <SelectTrigger>
             <SelectValue placeholder="Select Google Analytics Account" />
-        </SelectTrigger>
-        <SelectContent>
-          {accounts.map((account) => (
-            <SelectItem key={account.id} value={account.id}>
-              {account.gaAccountName}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      )}
-      {selectedAccount && (
-        <Select value={selectedPropertyId || ''} onValueChange={handlePropertyChange}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select Google Analytics Property" />
           </SelectTrigger>
           <SelectContent>
-            {selectedAccount.gaProperties.map((property) => (
-              <SelectItem key={property.id} value={property.id}>
-                {property.gaPropertyName}
+            {accounts.map((account) => (
+              <SelectItem key={account.id} value={account.id}>
+                {account.gaAccountName}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       )}
+      {hasProperties && selectedAccount && (
+        <div className="space-y-3 rounded-md border border-border p-3">
+          <Select value={selectedPropertyId || ''} onValueChange={handlePropertyChange}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select Google Analytics Property" />
+            </SelectTrigger>
+            <SelectContent>
+              {selectedAccount.gaProperties.map((property) => (
+                <SelectItem key={property.id} value={property.id}>
+                  {property.gaPropertyName}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <div className="flex items-start justify-between rounded-md border border-dashed bg-muted/50 px-3 py-2">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">Default property</p>
+              <p className="text-xs text-muted-foreground">
+                {isDefaultSelection && defaultPropertyName
+                  ? `${defaultPropertyName} loads by default`
+                  : 'Toggle to load this property automatically next time'}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Switch
+                id="ga-default-property"
+                checked={isDefaultSelection}
+                onCheckedChange={toggleDefaultProperty}
+                disabled={!selectedPropertyId}
+              />
+              <Label htmlFor="ga-default-property" className="text-sm">
+                Make default
+              </Label>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-} 
+}
