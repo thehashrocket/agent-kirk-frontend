@@ -6,7 +6,7 @@
     "dev": "next dev --port 3005 --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src/**/*.{ts,tsx}",
     "db:seed": "ts-node --project prisma/tsconfig.json prisma/seed.ts"
   },
   "dependencies": {

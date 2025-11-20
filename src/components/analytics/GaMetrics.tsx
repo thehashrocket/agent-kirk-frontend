@@ -33,6 +33,7 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
   const [selectedAccount, setSelectedAccount] = useState<any | null>(null);
   const [selectedProperty, setSelectedProperty] = useState<any | null>(null);
+  const [currentDateRange, setCurrentDateRange] = useState<{ from: Date; to: Date } | null>(null);
 
   // Handle property change - call parent callback if provided, otherwise manage locally
   const handlePropertyChange = useCallback((propertyId: string | null) => {
@@ -40,6 +41,22 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
       onPropertyChange(propertyId);
     }
   }, [onPropertyChange]);
+
+  const getDefaultDateRange = () => {
+    const today = new Date();
+    // Get first day of current month
+    const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    // Last day of previous month is one day before first day of current month
+    const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
+    lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
+    // First day of previous month
+    const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
+
+    return {
+      from: firstDayOfPreviousMonth,
+      to: lastDayOfPreviousMonth
+    };
+  };
 
   // Fetch GA metrics with optional date range
   const fetchGaMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
@@ -51,30 +68,15 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
       // Build URL with date parameters if provided
       let url = '/api/client/ga-metrics';
 
-      // If no date range is provided, use previous full month as default
-      if (!dateRange) {
-        const today = new Date();
-        // Get first day of current month
-        const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        // Last day of previous month is one day before first day of current month
-        const lastDayOfPreviousMonth = new Date(firstDayOfCurrentMonth);
-        lastDayOfPreviousMonth.setDate(lastDayOfPreviousMonth.getDate() - 1);
-        // First day of previous month
-        const firstDayOfPreviousMonth = new Date(lastDayOfPreviousMonth.getFullYear(), lastDayOfPreviousMonth.getMonth(), 1);
-
-        // Use previous month as default range
-        dateRange = {
-          from: firstDayOfPreviousMonth,
-          to: lastDayOfPreviousMonth
-        };
-      }
+      const effectiveRange = dateRange || currentDateRange || getDefaultDateRange();
+      setCurrentDateRange(effectiveRange);
 
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
 
       // Get the selected date range
-      const selectedFrom = dateRange.from;
-      const selectedTo = dateRange.to;
+      const selectedFrom = effectiveRange.from;
+      const selectedTo = effectiveRange.to;
 
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
@@ -106,7 +108,7 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
     } finally {
       setIsLoading(false);
     }
-  }, [selectedPropertyId]);
+  }, [selectedPropertyId, currentDateRange]);
 
   // Fetch data when property changes
   useEffect(() => {
@@ -152,6 +154,7 @@ export default function GaMetrics({ selectedPropertyId, onPropertyChange }: GaMe
         <GaMetricsGrid
           data={data}
           onDateRangeChange={fetchGaMetrics}
+          currentDateRange={currentDateRange}
         />
       ) : (
         <Card>

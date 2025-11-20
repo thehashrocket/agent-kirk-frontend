@@ -46,6 +46,7 @@ interface GaMetricsGridProps {
   data: GaMetricsResponse;
   onDateRangeChange?: (range: { from: Date; to: Date }) => Promise<GaMetricsResponse>;
   clientId?: string; // Optional client ID for context, if needed
+  currentDateRange?: { from: Date; to: Date } | null;
 }
 
 // Utility to get first and last day of a month from any date
@@ -82,7 +83,7 @@ function getFullMonthRange(date: Date | string) {
  *
  * @param {GaMetricsGridProps} props - Component props
  */
-export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }: GaMetricsGridProps) {
+export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId, currentDateRange }: GaMetricsGridProps) {
   // State to store the current data (updates when date range changes)
   const [data, setData] = React.useState<GaMetricsResponse>(initialData);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -159,20 +160,32 @@ export function GaMetricsGrid({ data: initialData, onDateRangeChange, clientId }
   // Use a ref to track if we've already set the initial date range
   const hasSetInitialDateRange = React.useRef(false);
 
-  // Set default date range on mount only, and only when metadata.displayDateRange.from is available
+  // Set default date range on mount based on provided currentDateRange or metadata
   React.useEffect(() => {
-    // Only set the initial date range once
-    if (hasSetInitialDateRange.current) return;
+    if (hasSetInitialDateRange.current) {
+      if (currentDateRange) {
+        setDateRange({
+          from: toLocalMidnight(currentDateRange.from),
+          to: toLocalMidnight(currentDateRange.to),
+        });
+      }
+      return;
+    }
 
-    if (metadata?.displayDateRange?.from) {
-      setDateRange(setupDefaultDateRange());
+    if (currentDateRange) {
+      setDateRange({
+        from: toLocalMidnight(currentDateRange.from),
+        to: toLocalMidnight(currentDateRange.to),
+      });
       hasSetInitialDateRange.current = true;
-    } else if (kpiDaily && kpiDaily.length > 0) {
-      // If no metadata but we have data, set date range based on available data
+      return;
+    }
+
+    if (metadata?.displayDateRange?.from || (kpiDaily && kpiDaily.length > 0)) {
       setDateRange(setupDefaultDateRange());
       hasSetInitialDateRange.current = true;
     }
-  }, [metadata?.displayDateRange?.from, kpiDaily, setupDefaultDateRange]);
+  }, [metadata?.displayDateRange?.from, kpiDaily, setupDefaultDateRange, currentDateRange]);
 
   // Update handleDateRangeChange to always snap to full month
   const handleDateRangeChange = async (range: { from: Date; to: Date }) => {

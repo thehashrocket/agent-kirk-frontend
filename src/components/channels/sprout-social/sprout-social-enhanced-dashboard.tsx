@@ -35,6 +35,7 @@ import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 interface SproutSocialEnhancedDashboardProps {
   data?: SproutSocialMetricsResponse;
   onDateRangeChange: (dateRange: { from: Date; to: Date }) => void;
+  currentDateRange?: { from: Date; to: Date } | null;
 }
 
 // Utility to get first and last day of a month from any date
@@ -62,25 +63,47 @@ const toLocalMidnight = (d: Date | string) => {
 
 export function SproutSocialEnhancedDashboard({
   data,
-  onDateRangeChange
+  onDateRangeChange,
+  currentDateRange,
 }: SproutSocialEnhancedDashboardProps) {
   // Add local state for date range
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
 
-  // Set dateRange from data on mount, using getFullMonthRange for consistent parsing
+  const currentRangeFrom = currentDateRange?.from ?? null;
+  const currentRangeTo = currentDateRange?.to ?? null;
+  const dataRangeFrom = data?.dateRange?.from ?? null;
+  const dataRangeTo = data?.dateRange?.to ?? null;
+
+  // Set dateRange from provided currentDateRange override when available
   useEffect(() => {
-    if (data?.dateRange?.from) {
+    if (currentRangeFrom && currentRangeTo) {
       setDateRange({
-        from: toLocalMidnight(data.dateRange.from),
-        to: toLocalMidnight(data.dateRange.to),
+        from: toLocalMidnight(currentRangeFrom),
+        to: toLocalMidnight(currentRangeTo),
       });
     }
-  }, [data?.dateRange?.from, data?.dateRange?.to]);
+  }, [currentRangeFrom, currentRangeTo]);
+
+  // Fallback to data-provided range if no currentRange override
+  useEffect(() => {
+    if (currentRangeFrom || !dataRangeFrom || !dataRangeTo) {
+      return;
+    }
+
+    setDateRange({
+      from: toLocalMidnight(dataRangeFrom),
+      to: toLocalMidnight(dataRangeTo),
+    });
+  }, [currentRangeFrom, dataRangeFrom, dataRangeTo]);
 
   // Handler that updates local state immediately, like EmailEnhancedDashboard
   const handleDateRangeChange = (range: { from: Date; to: Date }) => {
-    setDateRange(range); // Update local state immediately
-    onDateRangeChange(range);
+    const normalized = {
+      from: toLocalMidnight(range.from),
+      to: toLocalMidnight(range.to),
+    };
+    setDateRange(normalized); // Update local state immediately
+    onDateRangeChange(normalized);
   };
 
   if (!data) {

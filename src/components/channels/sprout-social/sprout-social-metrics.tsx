@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { format } from 'date-fns';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
@@ -32,6 +32,8 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState<SproutSocialAccount | null>(null);
+  const [currentDateRange, setCurrentDateRange] = useState<{ from: Date; to: Date } | null>(null);
+  const currentDateRangeRef = useRef<{ from: Date; to: Date } | null>(null);
   const searchParams = useSearchParams();
   const clientId = searchParams.get('clientId');
 
@@ -41,6 +43,22 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
       onAccountChange(accountId);
     }
   }, [onAccountChange]);
+
+  const getDefaultDateRange = () => {
+    const referenceDate = new Date(2025, 5, 30); // June 30, 2025
+    const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
+    const lastDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth() + 1, 0);
+
+    return {
+      from: firstDayOfMonth,
+      to: lastDayOfMonth
+    };
+  };
+
+  const updateCurrentDateRange = (range: { from: Date; to: Date }) => {
+    setCurrentDateRange(range);
+    currentDateRangeRef.current = range;
+  };
 
   // Fetch SproutSocial metrics with optional date range
   const fetchSproutSocialMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
@@ -58,25 +76,15 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
       }
 
 
-      // Calculate default date range if not provided
-      if (!dateRange) {
-        // Use a fixed reference date to ensure we don't get future dates
-        const referenceDate = new Date(2025, 5, 30); // June 30, 2025
-        const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
-        const lastDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth() + 1, 0);
-
-        dateRange = {
-          from: firstDayOfMonth,
-          to: lastDayOfMonth
-        };
-      }
+      const effectiveRange = dateRange || currentDateRangeRef.current || getDefaultDateRange();
+      updateCurrentDateRange(effectiveRange);
 
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
 
       // Get the selected date range
-      const selectedFrom = dateRange.from;
-      const selectedTo = dateRange.to;
+      const selectedFrom = effectiveRange.from;
+      const selectedTo = effectiveRange.to;
 
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
@@ -104,7 +112,6 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
       }
 
       const metricsData = await response.json();
-
       setData(metricsData);
       return metricsData;
     } catch (error) {
@@ -158,6 +165,7 @@ export default function SproutSocialMetrics({ selectedAccountId, onAccountChange
         <SproutSocialEnhancedDashboard
           data={data}
           onDateRangeChange={fetchSproutSocialMetrics}
+          currentDateRange={currentDateRange}
         />
       ) : (
         <Card>

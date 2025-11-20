@@ -22,6 +22,18 @@ import { EmailEnhancedDashboard } from './email-enhanced-dashboard';
 import type { EmailClient, EmailMetricsResponse } from './types';
 import { useSearchParams } from 'next/navigation';
 
+const getPreviousMonthRange = () => {
+  const now = new Date();
+  const referenceDate = new Date(now.getFullYear(), now.getMonth(), 0); // Last day of previous month
+  const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
+  const lastDayOfMonth = referenceDate;
+
+  return {
+    from: firstDayOfMonth,
+    to: lastDayOfMonth
+  };
+};
+
 interface EmailMetricsProps {
   selectedClientId?: string | null;
   onClientChange?: (clientId: string | null) => void;
@@ -45,6 +57,7 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedClient, setSelectedClient] = useState<EmailClient | null>(null);
+  const [currentDateRange, setCurrentDateRange] = useState<{ from: Date; to: Date } | null>(null);
   const searchParams = useSearchParams();
   const clientId = searchParams.get('clientId');
 
@@ -55,7 +68,6 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
     }
   }, [onClientChange]);
 
-  // Fetch Email metrics with optional date range
   const fetchEmailMetrics = useCallback(async (dateRange?: { from: Date; to: Date }) => {
     if (!selectedClientId) return; // Don't fetch if no client is selected
 
@@ -63,6 +75,9 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
     setError(null);
 
     try {
+      const effectiveRange = dateRange || currentDateRange || getPreviousMonthRange();
+      setCurrentDateRange(effectiveRange);
+
       // Build URL with date parameters if provided
       let url;
       if (!clientId) {
@@ -71,26 +86,12 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
         url = `/api/account-rep/email-metrics`;
       }
 
-      // Calculate default date range if not provided
-      if (!dateRange) {
-        // Use a fixed reference date to ensure we don't get future dates
-        const now = new Date();
-        const referenceDate = new Date(now.getFullYear(), now.getMonth(), 0); // Last day of previous month
-        const firstDayOfMonth = new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 1);
-        const lastDayOfMonth = referenceDate;
-
-        dateRange = {
-          from: firstDayOfMonth,
-          to: lastDayOfMonth
-        };
-      }
-
       // Always set up parameters now that we have a date range
       const params = new URLSearchParams();
 
       // Get the selected date range
-      const selectedFrom = dateRange.from;
-      const selectedTo = dateRange.to;
+      const selectedFrom = effectiveRange.from;
+      const selectedTo = effectiveRange.to;
 
       // Always fetch two years of data for proper comparison
       // Get a date 1 year before the selected start date
@@ -128,7 +129,7 @@ export default function EmailMetrics({ selectedClientId, onClientChange }: Email
     } finally {
       setIsLoading(false);
     }
-  }, [selectedClientId, clientId]);
+  }, [selectedClientId, clientId, currentDateRange]);
 
   // Fetch data when client changes
   useEffect(() => {

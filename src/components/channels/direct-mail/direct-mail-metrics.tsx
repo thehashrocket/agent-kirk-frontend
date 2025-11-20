@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { format, subDays } from 'date-fns';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Calendar, TrendingUp, Package, CheckCircle, Search, X, Download } from 'lucide-react';
@@ -57,15 +57,28 @@ interface DirectMailMetricsProps {
     onAccountChange?: (accountId: string | null) => void;
 }
 
+const createDefaultDateRange = () => ({
+    from: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
+    to: format(new Date(), 'yyyy-MM-dd'),
+});
+
 export default function DirectMailMetrics({ selectedAccountId, onAccountChange }: DirectMailMetricsProps) {
     const [data, setData] = useState<DirectMailMetricsResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [internalAccountId, setInternalAccountId] = useState<string | null>(selectedAccountId ?? null);
-    const [dateRange, setDateRange] = useState({
-        from: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
-        to: format(new Date(), 'yyyy-MM-dd'),
-    });
+    const [dateRange, setDateRange] = useState(createDefaultDateRange);
+    const currentDateRangeRef = useRef<{ from: string; to: string } | null>(null);
+
+    if (!currentDateRangeRef.current) {
+        currentDateRangeRef.current = dateRange;
+    }
+
+    const applyDateRange = useCallback((range: { from: string; to: string }) => {
+        const normalized = { ...range };
+        currentDateRangeRef.current = normalized;
+        setDateRange(normalized);
+    }, []);
     const isControlled = selectedAccountId !== undefined;
     const activeAccountId = isControlled ? selectedAccountId : internalAccountId;
 
@@ -87,7 +100,13 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         setError(null);
 
         try {
-            const range = customDateRange || dateRange;
+            const range = customDateRange
+                ? { ...customDateRange }
+                : currentDateRangeRef.current
+                    ? { ...currentDateRangeRef.current }
+                    : createDefaultDateRange();
+
+            applyDateRange(range);
             const params = new URLSearchParams({
                 accountId: activeAccountId,
                 from: range.from,
@@ -116,7 +135,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         } finally {
             setIsLoading(false);
         }
-    }, [activeAccountId, dateRange, clientId]);
+    }, [activeAccountId, clientId, applyDateRange]);
 
     // Handle account selection
     const handleAccountChange = useCallback((accountId: string | null) => {
@@ -130,8 +149,8 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
 
     // Handle date range change
     const handleDateRangeChange = useCallback(() => {
-        fetchDirectMailMetrics();
-    }, [fetchDirectMailMetrics]);
+        fetchDirectMailMetrics(dateRange);
+    }, [dateRange, fetchDirectMailMetrics]);
 
     // Fetch data when account or date range changes
     useEffect(() => {
