@@ -389,92 +389,6 @@ interface CampaignStatsAccumulator {
     sendTime?: string | null;
 }
 
-/**
- * Processes campaign statistics
- * This code is deprecated and will be removed in the future.
- */
-// export function processCampaignStats(stats: EmailCampaignDailyStat[]): ProcessedCampaignStat[] {
-//     const campaignStats = stats.reduce((acc, stat) => {
-//         const campaignKey = stat.emailCampaign.campaignId;
-//         if (!acc[campaignKey]) {
-//             acc[campaignKey] = {
-//                 campaignId: campaignKey,
-//                 campaignName: stat.emailCampaign.campaignName,
-//                 requests: 0,
-//                 delivered: 0,
-//                 uniqueOpens: 0,
-//                 uniqueClicks: 0,
-//                 unsubscribes: 0,
-//                 opens: 0,
-//                 clicks: 0,
-//                 // Track dates to avoid double counting uniques
-//                 dates: new Set<string>(),
-//                 dailyUniques: [] as { date: string; uniqueOpens: number; uniqueClicks: number }[],
-//                 sendTime: null,
-//             };
-//         }
-
-//         const dateKey = format(new Date(stat.date), 'yyyy-MM-dd');
-//         if (!acc[campaignKey].dates.has(dateKey)) {
-//             acc[campaignKey].dates.add(dateKey);
-//             acc[campaignKey].dailyUniques.push({
-//                 date: dateKey,
-//                 uniqueOpens: stat.uniqueOpens || 0,
-//                 uniqueClicks: stat.uniqueClicks || 0,
-//             });
-//         }
-
-//         acc[campaignKey].requests += stat.requests || 0;
-//         acc[campaignKey].delivered += stat.delivered || 0;
-//         acc[campaignKey].unsubscribes += stat.unsubscribes || 0;
-//         acc[campaignKey].opens += stat.opens || 0;
-//         acc[campaignKey].clicks += stat.clicks || 0;
-//         const hasContentArray = Array.isArray(stat.emailCampaign.emailCampaignContents) && stat.emailCampaign.emailCampaignContents.length > 0;
-//         const primaryContent = hasContentArray ? stat.emailCampaign.emailCampaignContents[0] : undefined;
-//         acc[campaignKey].subject = primaryContent?.subject ?? acc[campaignKey].subject;
-
-//         const candidateSendDate = primaryContent?.sendTime
-//             ? new Date(primaryContent.sendTime)
-//             : stat.date
-//                 ? new Date(stat.date)
-//                 : undefined;
-
-//         if (candidateSendDate) {
-//             const existingSendTime = acc[campaignKey].sendTime ? new Date(acc[campaignKey].sendTime) : null;
-//             if (!existingSendTime || candidateSendDate < existingSendTime) {
-//                 acc[campaignKey].sendTime = candidateSendDate.toISOString();
-//             }
-//         }
-
-//         return acc;
-//     }, {} as Record<string, CampaignStatsAccumulator>);
-
-//     // Process campaign stats to calculate proper unique metrics
-//     const processedCampaignStats = Object.values(campaignStats).map(campaign => {
-//         // Take the maximum unique values across days as the campaign total
-//         const uniqueOpens = Math.max(...campaign.dailyUniques.map(day => day.uniqueOpens));
-//         const uniqueClicks = Math.max(...campaign.dailyUniques.map(day => day.uniqueClicks));
-
-//         // Clean up temporary tracking fields
-//         const { dates, dailyUniques, ...cleanCampaign } = campaign;
-
-//         return {
-//             ...cleanCampaign,
-//             sent: cleanCampaign.requests,
-//             uniqueOpens,
-//             uniqueClicks,
-//             // Calculate rates based on delivered emails
-//             openRate: campaign.delivered > 0 ? (uniqueOpens / campaign.delivered) * 100 : 0,
-//             clickRate: campaign.delivered > 0 ? (uniqueClicks / campaign.delivered) * 100 : 0,
-//             deliveryRate: campaign.requests > 0 ? (campaign.delivered / campaign.requests) * 100 : 0,
-//         };
-//     });
-
-//     return processedCampaignStats
-//         .sort((a, b) => b.uniqueOpens - a.uniqueOpens)
-//     // No longer limiting to top 5 campaigns
-//     // .slice(0, 5);
-// }
 
 /**
  * Main function to get email metrics
@@ -549,7 +463,11 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
             deliveryRate: row.sent > 0 ? (row.delivered / row.sent) * 100 : 0,
             sendTime: row.sendTime ? row.sendTime.toISOString() : null,
         }))
-        .sort((a, b) => b.uniqueOpens - a.uniqueOpens);
+        .sort((a, b) => {
+            const timeA = a.sendTime ? new Date(a.sendTime).getTime() : 0;
+            const timeB = b.sendTime ? new Date(b.sendTime).getTime() : 0;
+            return timeA - timeB;
+        });
 
     return {
         emailClient: {
