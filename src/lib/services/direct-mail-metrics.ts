@@ -4,7 +4,7 @@
  */
 
 import { prisma } from '@/lib/prisma';
-import { format, subDays, parseISO } from 'date-fns';
+import { format, subDays, parseISO, startOfDay, endOfDay } from 'date-fns';
 
 export interface DirectMailMetricsParams {
     accountId: string;
@@ -77,8 +77,8 @@ export async function getDirectMailMetrics(params: DirectMailMetricsParams): Pro
     const uspsClient = userAccountAssociation.uspsClient;
 
     // Parse date parameters for filtering
-    const from = fromDate ? parseISO(fromDate) : subDays(new Date(), 30);
-    const to = toDate ? parseISO(toDate) : new Date();
+    const from = fromDate ? startOfDay(parseISO(fromDate)) : startOfDay(subDays(new Date(), 30));
+    const to = toDate ? endOfDay(parseISO(toDate)) : endOfDay(new Date());
 
     // Fetch campaigns with their summary data
     const campaigns = await prisma.uspsCampaign.findMany({
@@ -108,11 +108,11 @@ export async function getDirectMailMetrics(params: DirectMailMetricsParams): Pro
 
         return {
             campaignName: campaign.campaignName,
-            delivered: latestSummary?.numberDelivered || 0,
+            delivered: latestSummary?.finalScanCount || 0,
             finalScanCount: latestSummary?.finalScanCount || 0,
             lastScanDate: latestSummary ? format(latestSummary.scanDate, 'yyyy-MM-dd') : 'N/A',
             order: campaign.order || '',
-            percentDelivered: latestSummary?.percentDelivered || 0,
+            percentDelivered: latestSummary?.percentFinalScan || 0,
             percentFinalScan: latestSummary?.percentFinalScan || 0,
             percentOnTime: latestSummary?.percentOnTime || 0,
             percentScanned: latestSummary?.percentScanned || 0,
@@ -153,8 +153,8 @@ export async function getDirectMailMetrics(params: DirectMailMetricsParams): Pro
             avgPercentOnTime: Math.round(avgPercentOnTime * 100) / 100,
             avgPercentDelivered: Math.round(avgPercentDelivered * 100) / 100,
             scanRate: totalSent > 0 ? Math.round((totalScanned / totalSent) * 10000) / 100 : 0,
-            // Calculate deliveryRate as percentage of the number scanned that were sent
-            deliveryRate: totalScanned > 0 ? Math.round((totalScanned / totalSent) * 10000) / 100 : 0,
+            // Calculate deliveryRate as percentage of the number delivered that were sent
+            deliveryRate: totalSent > 0 ? Math.round((totalDelivered / totalSent) * 10000) / 100 : 0,
         },
     };
 }

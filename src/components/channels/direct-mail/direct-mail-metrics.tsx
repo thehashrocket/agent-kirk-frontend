@@ -224,8 +224,6 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
         ];
 
         const rows = filteredData.map((row) => {
-            const percentDeliveredCalc = row.pieces > 0 ? (row.finalScanCount / row.pieces) * 100 : 0;
-
             return [
                 row.campaignName,
                 row.reportId,
@@ -235,7 +233,7 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
                 row.scanned,
                 row.finalScanCount,
                 row.pieces,
-                `${percentDeliveredCalc.toFixed(2)}%`,
+                `${row.percentDelivered.toFixed(2)}%`,
                 `${row.percentScanned.toFixed(2)}%`,
                 `${row.percentFinalScan.toFixed(2)}%`,
                 row.type ?? '',
@@ -293,13 +291,12 @@ export default function DirectMailMetrics({ selectedAccountId, onAccountChange }
             sortable: true,
             render: (value) => formatNumber(value)
         },
-        // Calculate % Delivered using the number of pieces scanned by the total pieces
         {
             header: '% Delivered',
             accessor: 'percentDelivered',
             align: 'right',
             sortable: true,
-            render: (_value, row) => formatPercentage(row.finalScanCount / row.pieces * 100)
+            render: (value) => formatPercentage(value)
         }
     ], []);
 
