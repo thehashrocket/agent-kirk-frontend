@@ -478,6 +478,13 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
 
     let campaignMetricRows = Array.from(campaignStatsMap.values());
 
+    // Filter campaigns to only show those sent within the selected date range
+    campaignMetricRows = campaignMetricRows.filter(row => {
+        if (!row.sendTime) return false;
+        const sendTime = new Date(row.sendTime);
+        return sendTime >= from && sendTime <= to;
+    });
+
     if (params.campaignNameFilter && params.campaignNameFilter.trim() !== '') {
         const filterValue = params.campaignNameFilter.trim().toLowerCase();
         campaignMetricRows = campaignMetricRows.filter(row =>

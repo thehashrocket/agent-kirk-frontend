@@ -8,7 +8,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink, Download } from 'lucide-react';
+import { TrendingUp, Mail, MousePointer, AlertTriangle, UserMinus, ExternalLink, Download, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import type { EmailMetricsResponse } from './types';
 import dayjs from 'dayjs';
@@ -31,6 +31,9 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null);
   // State for campaign name filter
   const [campaignFilter, setCampaignFilter] = useState<string>('');
+
+  // State for sorting
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
 
   // Set dateRange from data on mount and when data.selectedRange changes
   useEffect(() => {
@@ -58,6 +61,45 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
     setCampaignFilter(value);
   };
 
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedCampaigns = [...filteredCampaigns].sort((a, b) => {
+    if (!sortConfig) return 0;
+
+    const { key, direction } = sortConfig;
+    let aValue: any = a[key as keyof typeof a];
+    let bValue: any = b[key as keyof typeof b];
+
+    // Handle specific cases or derived values if necessary
+    if (key === 'sendTime') {
+      aValue = a.sendTime ? new Date(a.sendTime).getTime() : 0;
+      bValue = b.sendTime ? new Date(b.sendTime).getTime() : 0;
+    } else if (key === 'openRate') {
+      aValue = a.openRate;
+      bValue = b.openRate;
+    } else if (key === 'clickRate') {
+      aValue = a.clickRate;
+      bValue = b.clickRate;
+    } else if (key === 'deliveryRate') {
+      aValue = a.deliveryRate;
+      bValue = b.deliveryRate;
+    }
+
+    if (aValue < bValue) {
+      return direction === 'asc' ? -1 : 1;
+    }
+    if (aValue > bValue) {
+      return direction === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
+
   const handleDownloadCsv = () => {
     const escapeCsvValue = (value: string | number | null | undefined) => {
       if (value === null || value === undefined) {
@@ -69,7 +111,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
       return `"${escapedValue}"`;
     };
 
-    const campaigns = filteredCampaigns;
+    const campaigns = sortedCampaigns;
     const header = [
       'Campaign ID',
       'Campaign Name',
@@ -334,14 +376,70 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                 }}
               >
                 <div>#</div>
-                <div>Campaign</div>
-                <div>Subject</div>
-                <div className="text-right whitespace-nowrap">Sent</div>
-                <div className='text-right whitespace-nowrap'>Sent Date</div>
-                <div className="text-right whitespace-nowrap">Delivered</div>
-                <div className="text-right whitespace-nowrap">Unique Opens</div>
-                <div className="text-right whitespace-nowrap">Unique Clicks</div>
-                <div className="text-right whitespace-nowrap">Unsubscribes</div>
+                <div className="flex items-center cursor-pointer hover:text-foreground" onClick={() => handleSort('campaignName')}>
+                  Campaign
+                  {sortConfig?.key === 'campaignName' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className="flex items-center cursor-pointer hover:text-foreground" onClick={() => handleSort('subject')}>
+                  Subject
+                  {sortConfig?.key === 'subject' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className="text-right whitespace-nowrap flex items-center justify-end cursor-pointer hover:text-foreground" onClick={() => handleSort('requests')}>
+                  Sent
+                  {sortConfig?.key === 'requests' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className='text-right whitespace-nowrap flex items-center justify-end cursor-pointer hover:text-foreground' onClick={() => handleSort('sendTime')}>
+                  Sent Date
+                  {sortConfig?.key === 'sendTime' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className="text-right whitespace-nowrap flex items-center justify-end cursor-pointer hover:text-foreground" onClick={() => handleSort('delivered')}>
+                  Delivered
+                  {sortConfig?.key === 'delivered' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className="text-right whitespace-nowrap flex items-center justify-end cursor-pointer hover:text-foreground" onClick={() => handleSort('uniqueOpens')}>
+                  Unique Opens
+                  {sortConfig?.key === 'uniqueOpens' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className="text-right whitespace-nowrap flex items-center justify-end cursor-pointer hover:text-foreground" onClick={() => handleSort('uniqueClicks')}>
+                  Unique Clicks
+                  {sortConfig?.key === 'uniqueClicks' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
+                <div className="text-right whitespace-nowrap flex items-center justify-end cursor-pointer hover:text-foreground" onClick={() => handleSort('unsubscribes')}>
+                  Unsubscribes
+                  {sortConfig?.key === 'unsubscribes' ? (
+                    sortConfig.direction === 'asc' ? <ArrowUp className="ml-1 h-4 w-4" /> : <ArrowDown className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ArrowUpDown className="ml-1 h-4 w-4 opacity-50" />
+                  )}
+                </div>
               </div>
               <div
                 className="space-y-2 max-h-96 overflow-y-auto"
@@ -349,7 +447,7 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                   minWidth: '1200px'
                 }}
               >
-                {filteredCampaigns.map((campaign, index) => (
+                {sortedCampaigns.map((campaign, index) => (
                   <div
                     key={campaign.campaignId}
                     className="items-center p-4 hover:bg-muted/50 rounded-lg text-sm gap-4"
