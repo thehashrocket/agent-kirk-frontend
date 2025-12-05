@@ -13,7 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Notification } from '@/lib/prisma';
+import type { Notification } from '@/prisma/generated/client';
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from 'next/navigation';

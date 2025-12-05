@@ -17,13 +17,22 @@ export interface EmailMetricsResponse {
   metrics: {
     current: {
       averageClickRate: number;
+      averageUniqueClickRate: number;
       averageOpenRate: number;
+      averageUniqueOpenRate: number;
+      averageDeliveryRate: number;
+      averageBounceRate: number;
+      averageUnsubscribeRate: number;
+      averageSpamReportRate: number;
       totalBounces: number;
       totalClicks: number;
+      totalUniqueClicks: number;
       totalDelivered: number;
       totalOpens: number;
+      totalUniqueOpens: number;
       totalRequests: number;
       totalUnsubscribes: number;
+      totalSpamReports: number;
     };
   };
   topCampaigns: Array<{
@@ -39,6 +48,9 @@ export interface EmailMetricsResponse {
     uniqueOpens: number;
     unsubscribes: number;
     sendTime?: string | null;
+    openRate: number;
+    clickRate: number;
+    deliveryRate: number;
   }>;
   totalCampaigns: number;
 }

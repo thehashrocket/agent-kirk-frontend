@@ -19,7 +19,8 @@ import {
   QueryRequest,
   apiStatusToMessageStatus,
   MESSAGE_STATUS,
-  MessageStatus
+  MessageStatus,
+  API_STATUS,
 } from '@/types/chat';
 import { Button } from '@/components/ui/button';
 import ConversationTitle from '@/components/chat/ConversationTitle';
@@ -28,7 +29,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { QueryStatus } from '@/lib/prisma';
 import type { DateRange } from 'react-day-picker';
 
 /**
@@ -550,12 +550,12 @@ export default function ChatPage() {
     const hasResponse = data.response && data.response.trim() !== '';
 
     if (hasResponse) {
-      const status = data.status === QueryStatus.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.ERROR;
+      const status = data.status === API_STATUS.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.ERROR;
       updateMessageInConversation(conversationId, queryId, data.response || '', status);
     }
 
     // Handle FAILED status specifically
-    if (data.status === QueryStatus.FAILED) {
+    if (data.status === API_STATUS.FAILED) {
       updateMessageInConversation(
         conversationId,
         queryId,
@@ -605,12 +605,12 @@ export default function ChatPage() {
           lastResponse = data.response;
           lastUpdatedAt = data.updatedAt;
 
-          const status = data.status === QueryStatus.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.PROCESSING;
+          const status = data.status === API_STATUS.COMPLETED ? MESSAGE_STATUS.COMPLETED : MESSAGE_STATUS.PROCESSING;
           updateMessageInConversation(conversationId, queryId, data.response || '', status);
         }
 
         // Stop polling if the status is COMPLETED or FAILED
-        if (data.status === QueryStatus.COMPLETED || data.status === QueryStatus.FAILED) {
+        if (data.status === API_STATUS.COMPLETED || data.status === API_STATUS.FAILED) {
           handlePollingComplete(conversationId, queryId, data);
           clearInterval(pollInterval);
         }

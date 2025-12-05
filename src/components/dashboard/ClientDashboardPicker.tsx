@@ -1,6 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import Link from "next/link";
-import { ArrowUpRight, BarChart3, Mail, Package, Share2 } from "lucide-react";
+import { ArrowUpRight, BarChart3, Layers, Mail, Package, Share2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 type DashboardChannel = {
@@ -34,7 +34,7 @@ const channels: DashboardChannel[] = [
     icon: Share2,
     name: "Organic Social",
     description: "Monitor reach, engagement, and community growth."
-  }
+  },
 ];
 
 export function ClientDashboardPicker() {

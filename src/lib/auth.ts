@@ -18,7 +18,8 @@ import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { DefaultSession } from "next-auth";
 import type { AuthOptions } from "next-auth";
-import { Company, prisma } from "./prisma";
+import { prisma } from "./prisma";
+import type { Company } from "@/prisma/generated/client";
 
 /**
  * Extended types for NextAuth.js session.

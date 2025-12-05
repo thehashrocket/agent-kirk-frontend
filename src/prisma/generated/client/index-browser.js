@@ -7,7 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
   Decimal,
-  objectEnumValues,
+  DbNull,
+  JsonNull,
+  AnyNull,
+  NullTypes,
   makeStrictEnum,
   Public,
   getRuntime,
@@ -21,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.19.0
- * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
+ * Prisma Client JS version: 7.1.0
+ * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
  */
 Prisma.prismaVersion = {
-  client: "6.19.0",
-  engine: "2ba551f319ab1df4bc874a89965d8b3641056773"
+  client: "7.1.0",
+  engine: "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -98,15 +101,11 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
 /**
  * Shorthand utilities for JSON filtering
  */
-Prisma.DbNull = objectEnumValues.instances.DbNull
-Prisma.JsonNull = objectEnumValues.instances.JsonNull
-Prisma.AnyNull = objectEnumValues.instances.AnyNull
+Prisma.DbNull = DbNull
+Prisma.JsonNull = JsonNull
+Prisma.AnyNull = AnyNull
 
-Prisma.NullTypes = {
-  DbNull: objectEnumValues.classes.DbNull,
-  JsonNull: objectEnumValues.classes.JsonNull,
-  AnyNull: objectEnumValues.classes.AnyNull
-}
+Prisma.NullTypes = NullTypes
 
 
 
@@ -134,6 +133,25 @@ exports.Prisma.AccountScalarFieldEnum = {
   scope: 'scope',
   id_token: 'id_token',
   session_state: 'session_state',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CampaignRecipientsScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  address_1: 'address_1',
+  address_2: 'address_2',
+  city: 'city',
+  state: 'state',
+  zip: 'zip',
+  sector: 'sector',
+  market: 'market',
+  addressId: 'addressId',
+  coreSegment: 'coreSegment',
+  subSegment: 'subSegment',
+  emailCampaignId: 'emailCampaignId',
+  uspsCampaignId: 'uspsCampaignId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -336,8 +354,6 @@ exports.Prisma.GaChannelDailyScalarFieldEnum = {
   gaPropertyId: 'gaPropertyId',
   date: 'date',
   channelGroup: 'channelGroup',
-  users: 'users',
-  newUsers: 'newUsers',
   sessions: 'sessions',
   screenPageViewsPerSession: 'screenPageViewsPerSession',
   engagementRate: 'engagementRate',
@@ -345,24 +361,26 @@ exports.Prisma.GaChannelDailyScalarFieldEnum = {
   goalCompletions: 'goalCompletions',
   goalCompletionRate: 'goalCompletionRate',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  newUsers: 'newUsers',
+  users: 'users'
 };
 
 exports.Prisma.GaSourceDailyScalarFieldEnum = {
   id: 'id',
-  avgSessionDurationSec: 'avgSessionDurationSec',
-  date: 'date',
-  engagementRate: 'engagementRate',
   gaPropertyId: 'gaPropertyId',
-  goalCompletionRate: 'goalCompletionRate',
-  goalCompletions: 'goalCompletions',
-  newUsers: 'newUsers',
-  screenPageViewsPerSession: 'screenPageViewsPerSession',
-  sessions: 'sessions',
+  date: 'date',
   trafficSource: 'trafficSource',
-  users: 'users',
+  sessions: 'sessions',
+  screenPageViewsPerSession: 'screenPageViewsPerSession',
+  engagementRate: 'engagementRate',
+  avgSessionDurationSec: 'avgSessionDurationSec',
+  goalCompletions: 'goalCompletions',
+  goalCompletionRate: 'goalCompletionRate',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  newUsers: 'newUsers',
+  users: 'users'
 };
 
 exports.Prisma.LogScalarFieldEnum = {
@@ -445,10 +463,10 @@ exports.Prisma.NotificationScalarFieldEnum = {
   type: 'type',
   title: 'title',
   content: 'content',
-  link: 'link',
   isRead: 'isRead',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  link: 'link'
 };
 
 exports.Prisma.ParsedPieGraphDataScalarFieldEnum = {
@@ -885,9 +903,9 @@ exports.NotificationType = exports.$Enums.NotificationType = {
   SYSTEM: 'SYSTEM',
   MESSAGE: 'MESSAGE',
   QUERY_COMPLETE: 'QUERY_COMPLETE',
+  REPORT_GENERATED: 'REPORT_GENERATED',
   QUERY_IN_PROGRESS: 'QUERY_IN_PROGRESS',
-  QUERY_FAILED: 'QUERY_FAILED',
-  REPORT_GENERATED: 'REPORT_GENERATED'
+  QUERY_FAILED: 'QUERY_FAILED'
 };
 
 exports.QueryStatus = exports.$Enums.QueryStatus = {
@@ -911,6 +929,7 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
 
 exports.Prisma.ModelName = {
   Account: 'Account',
+  CampaignRecipients: 'CampaignRecipients',
   ClientActivity: 'ClientActivity',
   ClientSatisfaction: 'ClientSatisfaction',
   Company: 'Company',

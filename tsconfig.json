@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2024",
     "lib": [
       "dom",
       "dom.iterable",
@@ -11,12 +11,13 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
@@ -25,6 +26,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "next/*": [
+        "./node_modules/next/*"
       ]
     }
   },

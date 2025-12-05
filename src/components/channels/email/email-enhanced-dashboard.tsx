@@ -87,9 +87,9 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
     ];
 
     const rows = campaigns.map((campaign) => {
-      const deliveryRate = campaign.requests > 0 ? (campaign.delivered / campaign.requests) * 100 : 0;
-      const openRate = campaign.delivered > 0 ? (campaign.uniqueOpens / campaign.delivered) * 100 : 0;
-      const clickRate = campaign.delivered > 0 ? (campaign.uniqueClicks / campaign.delivered) * 100 : 0;
+      const deliveryRate = campaign.deliveryRate;
+      const openRate = campaign.openRate;
+      const clickRate = campaign.clickRate;
       const unsubscribeRate = campaign.delivered > 0 ? (campaign.unsubscribes / campaign.delivered) * 100 : 0;
       const formattedSendTime = campaign.sendTime
         ? dayjs(campaign.sendTime).format('MMM D, YYYY h:mm A')
@@ -136,60 +136,53 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
 
   const metrics = [
     {
-      title: 'Total Requests',
+      title: 'Requests',
       value: formatNumber(data.metrics.current.totalRequests),
       // change: data.metrics.yearOverYear.requests,
       icon: Mail,
       description: 'Total email requests',
     },
     {
-      title: 'Bounces',
-      value: formatNumber(data.metrics.current.totalBounces),
-      // change: data.metrics.yearOverYear.bounces,
-      icon: AlertTriangle,
-      description: 'Total bounces',
+      title: 'Unique Opens',
+      value: `${(data.metrics.current.averageUniqueOpenRate * 100).toFixed(2)}%`,
+      // change: data.metrics.yearOverYear.opens,
+      icon: Mail,
+      description: formatNumber(data.metrics.current.totalUniqueOpens),
     },
     {
-      title: 'Total Delivered',
-      value: formatNumber(data.metrics.current.totalDelivered),
+      title: 'Unique Clicks',
+      value: `${(data.metrics.current.averageUniqueClickRate * 100).toFixed(2)}%`,
+      // change: data.metrics.yearOverYear.clicks,
+      icon: MousePointer,
+      description: formatNumber(data.metrics.current.totalUniqueClicks),
+    },
+    {
+      title: 'Delivered',
+      value: `${(data.metrics.current.averageDeliveryRate * 100).toFixed(2)}%`,
       // change: data.metrics.yearOverYear.delivered,
       icon: Mail,
       description: 'Total emails delivered',
     },
     {
-      title: 'Total Opens',
-      value: formatNumber(data.metrics.current.totalOpens),
-      // change: data.metrics.yearOverYear.opens,
-      icon: Mail,
-      description: 'Total email opens',
+      title: 'Bounces',
+      value: `${(data.metrics.current.averageBounceRate * 100).toFixed(2)}%`,
+      // change: data.metrics.yearOverYear.bounces,
+      icon: AlertTriangle,
+      description: 'Total bounces',
     },
     {
-      title: 'Total Clicks',
-      value: formatNumber(data.metrics.current.totalClicks),
-      // change: data.metrics.yearOverYear.clicks,
-      icon: MousePointer,
-      description: 'Total email clicks after Opens',
-    },
-    {
-      title: 'Total Unsubscribes',
-      value: formatNumber(data.metrics.current.totalUnsubscribes),
+      title: 'Unsubscribes',
+      value: `${(data.metrics.current.averageUnsubscribeRate * 100).toFixed(2)}%`,
       // change: data.metrics.yearOverYear.unsubscribes,
       icon: UserMinus,
       description: 'Total unsubscribes',
     },
     {
-      title: 'Open Rate',
-      value: `${(data.metrics.current.averageOpenRate * 100).toFixed(1)}%`,
-      // change: data.metrics.yearOverYear.openRate,
-      icon: TrendingUp,
-      description: 'Average open rate',
-    },
-    {
-      title: 'CTR After Opens',
-      value: `${(data.metrics.current.averageClickRate * 100).toFixed(1)}%`,
-      // change: data.metrics.yearOverYear.clickRate,
-      icon: TrendingUp,
-      description: 'Average click rate after Opens',
+      title: 'Spam Reports',
+      value: `${(data.metrics.current.averageSpamReportRate * 100).toFixed(2)}%`,
+      // change: data.metrics.yearOverYear.spamReports,
+      icon: AlertTriangle,
+      description: 'Total spam reports',
     }
   ];
 
@@ -398,27 +391,21 @@ export function EmailEnhancedDashboard({ data, onDateRangeChange }: EmailEnhance
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.delivered)}</p>
                       <p className="text-[10px] text-muted-foreground">
-                        {campaign.requests > 0
-                          ? `${((campaign.delivered / campaign.requests) * 100).toFixed(1)}%`
-                          : '0%'}
+                        {`${campaign.deliveryRate.toFixed(1)}%`}
                       </p>
                     </div>
                     {/* Unique Opens */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.uniqueOpens)}</p>
                       <p className="text-[10px] text-muted-foreground">
-                        {campaign.delivered > 0
-                          ? `${((campaign.uniqueOpens / campaign.delivered) * 100).toFixed(1)}%`
-                          : '0%'}
+                        {`${campaign.openRate.toFixed(1)}%`}
                       </p>
                     </div>
                     {/* Unique Clicks */}
                     <div className="text-right whitespace-nowrap">
                       <p className="font-medium">{formatNumber(campaign.uniqueClicks)}</p>
                       <p className="text-[10px] text-muted-foreground">
-                        {campaign.delivered > 0
-                          ? `${((campaign.uniqueClicks / campaign.uniqueOpens) * 100).toFixed(1)}%`
-                          : '0%'}
+                        {`${campaign.clickRate.toFixed(1)}%`}
                       </p>
                     </div>
                     {/* Unsubscribes */}

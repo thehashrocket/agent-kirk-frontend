@@ -34,13 +34,22 @@ export interface EmailMetricsResponse {
 
 interface EmailMetrics {
     totalOpens: number;
+    totalUniqueOpens: number;
     totalClicks: number;
+    totalUniqueClicks: number;
     totalBounces: number;
     totalUnsubscribes: number;
+    totalSpamReports: number;
     totalDelivered: number;
     totalRequests: number;
     averageOpenRate: number;
+    averageUniqueOpenRate: number;
     averageClickRate: number;
+    averageUniqueClickRate: number;
+    averageDeliveryRate: number;
+    averageBounceRate: number;
+    averageUnsubscribeRate: number;
+    averageSpamReportRate: number;
 }
 
 interface YearOverYearChanges {
@@ -111,6 +120,7 @@ export type EmailMetricRow = {
     uniqueClicks: number;
     unsubscribes: number;
     bounces: number;
+    spamReports: number;
 };
 
 export async function fetchCampaignMetricsWithinSendWindow(emailClientId: string, from: Date, to: Date): Promise<EmailMetricRow[]> {
@@ -118,7 +128,7 @@ export async function fetchCampaignMetricsWithinSendWindow(emailClientId: string
     const campaigns = await prisma.emailCampaign.findMany({
         where: {
             emailClientId,
-            emailCampaignContents: {
+            emailCampaignContent: {
                 sendTime: {
                     gte: from,
                     lte: to,
@@ -128,7 +138,7 @@ export async function fetchCampaignMetricsWithinSendWindow(emailClientId: string
         select: {
             campaignId: true,
             campaignName: true,
-            emailCampaignContents: {
+            emailCampaignContent: {
                 select: {
                     subject: true,
                     sendTime: true,
@@ -161,6 +171,7 @@ export async function fetchCampaignMetricsWithinSendWindow(emailClientId: string
             uniqueClicks: true,
             unsubscribes: true,
             bounces: true,
+            spamReports: true,
         },
     });
 
@@ -174,6 +185,7 @@ export async function fetchCampaignMetricsWithinSendWindow(emailClientId: string
             uniqueClicks: stat._sum.uniqueClicks ?? 0,
             unsubscribes: stat._sum.unsubscribes ?? 0,
             bounces: stat._sum.bounces ?? 0,
+            spamReports: stat._sum.spamReports ?? 0,
         };
         return acc;
     }, {});
@@ -190,10 +202,11 @@ export async function fetchCampaignMetricsWithinSendWindow(emailClientId: string
                 uniqueClicks: 0,
                 unsubscribes: 0,
                 bounces: 0,
+                spamReports: 0,
             };
 
-            const subject = campaign.emailCampaignContents?.subject ?? null;
-            const sendTime = campaign.emailCampaignContents?.sendTime ?? null;
+            const subject = campaign.emailCampaignContent?.subject ?? null;
+            const sendTime = campaign.emailCampaignContent?.sendTime ?? null;
 
             if (!sendTime) {
                 // Skip campaigns that do not have a recorded send time.
@@ -240,7 +253,7 @@ export function parseDateParams(params: EmailMetricsParams) {
     const to = params.toDate ? parseISO(params.toDate) : new Date();
 
     // Optionally, set 'to' to end of day for inclusivity
-    // to.setHours(23, 59, 59, 999);
+    to.setHours(23, 59, 59, 999);
 
     const selectedFromDate = params.selectedFrom ? parseISO(params.selectedFrom) : from;
     const selectedToDate = params.selectedTo ? parseISO(params.selectedTo) : to;
@@ -258,7 +271,7 @@ export function parseDateParams(params: EmailMetricsParams) {
  */
 export async function fetchEmailCampaignStats(emailClientId: string, from: Date, to: Date) {
     // console.log('Fetching email campaign stats for:', emailClientId, from, to);
-    return await prisma.emailCampaignDailyStats.findMany({
+    const stats = await prisma.emailCampaignDailyStats.findMany({
         where: {
             emailClientId: emailClientId,
             date: {
@@ -267,11 +280,11 @@ export async function fetchEmailCampaignStats(emailClientId: string, from: Date,
             },
         },
         include: {
-            emailCampaign: {
+            EmailCampaign: {
                 select: {
                     campaignName: true,
                     campaignId: true,
-                    emailCampaignContents: {
+                    emailCampaignContent: {
                         select: { subject: true, sendTime: true }
                     }
                 }
@@ -281,6 +294,11 @@ export async function fetchEmailCampaignStats(emailClientId: string, from: Date,
             date: 'asc',
         },
     });
+
+    return stats.map(stat => ({
+        ...stat,
+        emailCampaign: stat.EmailCampaign
+    }));
 }
 
 interface EmailCampaignDailyStat {
@@ -289,6 +307,7 @@ interface EmailCampaignDailyStat {
     clicks: number;
     bounces: number;
     unsubscribes: number;
+    spamReports?: number;
     delivered: number;
     requests: number;
     dailyTotalOpenRate?: number;
@@ -298,7 +317,7 @@ interface EmailCampaignDailyStat {
     emailCampaign: {
         campaignName: string;
         campaignId: string;
-        emailCampaignContents: { subject: string; sendTime: Date | string | null }[];
+        emailCampaignContent: { subject: string; sendTime: Date | string | null } | null;
     };
 }
 
@@ -329,21 +348,33 @@ export function filterStatsForPreviousYear(stats: EmailCampaignDailyStat[], sele
  */
 export function calculateMetrics(stats: EmailCampaignDailyStat[]): EmailMetrics {
     const totalOpens = stats.reduce((sum, stat) => sum + stat.opens, 0);
+    const totalUniqueOpens = stats.reduce((sum, stat) => sum + (stat.uniqueOpens || 0), 0);
     const totalClicks = stats.reduce((sum, stat) => sum + stat.clicks, 0);
+    const totalUniqueClicks = stats.reduce((sum, stat) => sum + (stat.uniqueClicks || 0), 0);
     const totalBounces = stats.reduce((sum, stat) => sum + stat.bounces, 0);
     const totalUnsubscribes = stats.reduce((sum, stat) => sum + stat.unsubscribes, 0);
+    const totalSpamReports = stats.reduce((sum, stat) => sum + (stat.spamReports || 0), 0);
     const totalDelivered = stats.reduce((sum, stat) => sum + stat.delivered, 0);
     const totalRequests = stats.reduce((sum, stat) => sum + stat.requests, 0);
 
     return {
         totalOpens,
+        totalUniqueOpens,
         totalClicks,
+        totalUniqueClicks,
         totalBounces,
         totalUnsubscribes,
+        totalSpamReports,
         totalDelivered,
         totalRequests,
         averageOpenRate: totalDelivered > 0 ? totalOpens / totalDelivered : 0,
+        averageUniqueOpenRate: totalDelivered > 0 ? totalUniqueOpens / totalDelivered : 0,
         averageClickRate: totalDelivered > 0 ? totalClicks / totalDelivered : 0,
+        averageUniqueClickRate: totalDelivered > 0 ? totalUniqueClicks / totalDelivered : 0,
+        averageDeliveryRate: totalRequests > 0 ? totalDelivered / totalRequests : 0,
+        averageBounceRate: totalDelivered > 0 ? totalBounces / totalDelivered : 0,
+        averageUnsubscribeRate: totalDelivered > 0 ? totalUnsubscribes / totalDelivered : 0,
+        averageSpamReportRate: totalDelivered > 0 ? totalSpamReports / totalDelivered : 0,
     };
 }
 
@@ -403,49 +434,59 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
     // Parse date parameters
     const { from, to, selectedFromDate, selectedToDate } = parseDateParams(params);
 
-    const campaignMetricRows = await fetchCampaignMetricsWithinSendWindow(params.emailClientId, from, to);
+    // Fetch daily stats for the selected period (Activity-based)
+    const dailyStats = await fetchEmailCampaignStats(params.emailClientId, from, to);
 
-    const totals = campaignMetricRows.reduce(
-        (acc, row) => {
-            acc.opens += row.opens;
-            acc.clicks += row.clicks;
-            acc.bounces += row.bounces;
-            acc.unsubscribes += row.unsubscribes;
-            acc.delivered += row.delivered;
-            acc.sent += row.sent;
-            return acc;
-        },
-        {
-            opens: 0,
-            clicks: 0,
-            bounces: 0,
-            unsubscribes: 0,
-            delivered: 0,
-            sent: 0,
+    // Calculate total metrics for the period
+    const selectedRangeMetrics = calculateMetrics(dailyStats);
+
+    // Aggregate daily stats by campaign for the "Top Campaigns" list
+    const campaignStatsMap = new Map<string, EmailMetricRow>();
+
+    for (const stat of dailyStats) {
+        const campaignId = stat.emailCampaign.campaignId;
+
+        if (!campaignStatsMap.has(campaignId)) {
+            campaignStatsMap.set(campaignId, {
+                campaignId: campaignId,
+                campaignName: stat.emailCampaign.campaignName,
+                subject: stat.emailCampaign.emailCampaignContent?.subject ?? null,
+                sendTime: stat.emailCampaign.emailCampaignContent?.sendTime ? new Date(stat.emailCampaign.emailCampaignContent.sendTime) : null,
+                sent: 0,
+                delivered: 0,
+                opens: 0,
+                uniqueOpens: 0,
+                clicks: 0,
+                uniqueClicks: 0,
+                unsubscribes: 0,
+                bounces: 0,
+                spamReports: 0,
+            });
         }
-    );
 
-    const selectedRangeMetrics: EmailMetrics = {
-        totalOpens: totals.opens,
-        totalClicks: totals.clicks,
-        totalBounces: totals.bounces,
-        totalUnsubscribes: totals.unsubscribes,
-        totalDelivered: totals.delivered,
-        totalRequests: totals.sent,
-        averageOpenRate: totals.delivered > 0 ? totals.opens / totals.delivered : 0,
-        averageClickRate: totals.delivered > 0 ? totals.clicks / totals.delivered : 0,
-    };
+        const row = campaignStatsMap.get(campaignId)!;
+        row.sent += stat.requests;
+        row.delivered += stat.delivered;
+        row.opens += stat.opens;
+        row.uniqueOpens += (stat.uniqueOpens || 0);
+        row.clicks += stat.clicks;
+        row.uniqueClicks += (stat.uniqueClicks || 0);
+        row.unsubscribes += stat.unsubscribes;
+        row.bounces += stat.bounces;
+        row.spamReports += (stat.spamReports || 0);
+    }
 
-    let filteredCampaignRows = campaignMetricRows;
+    let campaignMetricRows = Array.from(campaignStatsMap.values());
+
     if (params.campaignNameFilter && params.campaignNameFilter.trim() !== '') {
         const filterValue = params.campaignNameFilter.trim().toLowerCase();
-        filteredCampaignRows = campaignMetricRows.filter(row =>
+        campaignMetricRows = campaignMetricRows.filter(row =>
             row.campaignName.toLowerCase().includes(filterValue)
         );
     }
 
     // Step 4: convert the aggregated rows into the response shape expected by the UI.
-    const topCampaigns: ProcessedCampaignStat[] = filteredCampaignRows
+    const topCampaigns: ProcessedCampaignStat[] = campaignMetricRows
         .map(row => ({
             campaignId: row.campaignId,
             campaignName: row.campaignName,
@@ -464,9 +505,14 @@ export async function getEmailMetrics(params: EmailMetricsParams): Promise<Email
             sendTime: row.sendTime ? row.sendTime.toISOString() : null,
         }))
         .sort((a, b) => {
+            // Primary sort: Requests (descending)
+            if (b.requests !== a.requests) {
+                return b.requests - a.requests;
+            }
+            // Secondary sort: Send Time (descending)
             const timeA = a.sendTime ? new Date(a.sendTime).getTime() : 0;
             const timeB = b.sendTime ? new Date(b.sendTime).getTime() : 0;
-            return timeA - timeB;
+            return timeB - timeA;
         });
 
     return {
@@ -506,7 +552,7 @@ export async function getEmailCampaignDetail(params: EmailCampaignDetailParams):
             emailClientId,
         },
         include: {
-            emailCampaignContents: {
+            emailCampaignContent: {
                 select: {
                     subject: true,
                     sendTime: true,
@@ -557,14 +603,14 @@ export async function getEmailCampaignDetail(params: EmailCampaignDetailParams):
     const openRate = aggregates.delivered > 0 ? (uniqueOpens / aggregates.delivered) * 100 : 0;
     const clickRate = aggregates.delivered > 0 ? (uniqueClicks / aggregates.delivered) * 100 : 0;
 
-    const sendTime = campaign.emailCampaignContents?.sendTime
-        ? campaign.emailCampaignContents.sendTime.toISOString()
+    const sendTime = campaign.emailCampaignContent?.sendTime
+        ? campaign.emailCampaignContent.sendTime.toISOString()
         : null;
 
     return {
         campaignId: campaign.campaignId,
         campaignName: campaign.campaignName,
-        subject: campaign.emailCampaignContents?.subject || campaign.campaignName,
+        subject: campaign.emailCampaignContent?.subject || campaign.campaignName,
         sendTime,
         requests: aggregates.requests,
         delivered: aggregates.delivered,

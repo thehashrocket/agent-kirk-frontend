@@ -106,7 +106,7 @@ export class EmailAnalyticsService {
     const campaigns = await prisma.emailCampaign.findMany({
       where: whereClause,
       include: {
-        emailCampaignContents: true,
+        emailCampaignContent: true,
         emailCampaignDailyStats: {
           where: dateRange ? {
             date: {
@@ -134,7 +134,7 @@ export class EmailAnalyticsService {
         { delivered: 0, opens: 0, clicks: 0, unsubscribes: 0, bounces: 0 }
       );
 
-      const content = campaign.emailCampaignContents;
+      const content = campaign.emailCampaignContent;
       const sendDate = content?.sendTime || campaign.createdAt;
 
       return {

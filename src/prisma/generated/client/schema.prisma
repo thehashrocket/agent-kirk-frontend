@@ -6,7 +6,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -27,6 +26,32 @@ model Account {
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model CampaignRecipients {
+  id              String         @id @default(cuid())
+  email           String?
+  address_1       String?
+  address_2       String?
+  city            String?
+  state           String?
+  zip             String?
+  sector          String?
+  market          String?
+  addressId       String?
+  coreSegment     String?
+  subSegment      String?
+  emailCampaignId String?
+  uspsCampaignId  String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  emailCampaign   EmailCampaign? @relation(fields: [emailCampaignId], references: [id])
+  uspsCampaign    UspsCampaign?  @relation(fields: [uspsCampaignId], references: [id])
+
+  @@unique([uspsCampaignId, addressId], name: "uniq_usps_campaign_address")
+  @@unique([emailCampaignId, email], name: "uniq_email_campaign_email")
+  @@index([emailCampaignId])
+  @@index([uspsCampaignId])
 }
 
 model ClientActivity {
@@ -96,8 +121,9 @@ model EmailCampaign {
   campaignId              String                    @unique
   campaignName            String
   emailClientId           String
+  campaignRecipients      CampaignRecipients[]
   emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
-  emailCampaignContents   EmailCampaignContent?
+  emailCampaignContent    EmailCampaignContent?
   emailCampaignDailyStats EmailCampaignDailyStats[]
 }
 
@@ -115,7 +141,7 @@ model EmailCampaignContent {
   plainContent    String
   sendTime        DateTime
   webId           String
-  emailCampaign   EmailCampaign @relation(fields: [emailCampaignId], references: [id])
+  EmailCampaign   EmailCampaign @relation(fields: [emailCampaignId], references: [id])
 }
 
 model EmailCampaignDailyStats {
@@ -157,7 +183,7 @@ model EmailCampaignDailyStats {
   totalOpens                 Int           @default(0)
   uniqueClicks               Int           @default(0)
   uniqueOpens                Int           @default(0)
-  emailCampaign              EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
+  EmailCampaign              EmailCampaign @relation(fields: [emailCampaignId], references: [campaignId])
   emailClient                EmailClient   @relation(fields: [emailClientId], references: [id])
 
   @@unique([emailCampaignId, date])
@@ -286,8 +312,6 @@ model GaChannelDaily {
   gaPropertyId              String
   date                      DateTime   @db.Date
   channelGroup              String     @db.VarChar(64)
-  users                     Int        @default(0)
-  newUsers                  Int        @default(0)
   sessions                  Int
   screenPageViewsPerSession Float
   engagementRate            Float
@@ -296,6 +320,8 @@ model GaChannelDaily {
   goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
   updatedAt                 DateTime   @default(now()) @updatedAt
+  newUsers                  Int        @default(0)
+  users                     Int        @default(0)
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date, channelGroup])
@@ -305,19 +331,19 @@ model GaChannelDaily {
 
 model GaSourceDaily {
   id                        String     @id @default(cuid())
-  avgSessionDurationSec     Int
-  date                      DateTime   @db.Date
-  engagementRate            Float
   gaPropertyId              String
-  goalCompletionRate        Float
-  goalCompletions           Int
-  newUsers                  Int        @default(0)
-  screenPageViewsPerSession Float
-  sessions                  Int
+  date                      DateTime   @db.Date
   trafficSource             String     @db.VarChar(64)
-  users                     Int        @default(0)
+  sessions                  Int
+  screenPageViewsPerSession Float
+  engagementRate            Float
+  avgSessionDurationSec     Int
+  goalCompletions           Int
+  goalCompletionRate        Float
   createdAt                 DateTime   @default(now())
   updatedAt                 DateTime   @default(now()) @updatedAt
+  newUsers                  Int        @default(0)
+  users                     Int        @default(0)
   gaProperty                GaProperty @relation(fields: [gaPropertyId], references: [id], onDelete: Cascade)
 
   @@unique([gaPropertyId, date, trafficSource])
@@ -326,7 +352,7 @@ model GaSourceDaily {
 }
 
 model Log {
-  id               String  @id @default(cuid())
+  id               String   @id @default(cuid())
   eventMessage     String?
   eventType        String?
   errorMessage     String?
@@ -336,51 +362,36 @@ model Log {
   nodeName         String?
   payload          Json?
   queryId          String?
-  query            Query?  @relation(fields: [queryId], references: [id])
   sourceReferences Json?
   userId           String?
-  user             User?   @relation(fields: [userId], references: [id])
   workflowName     String?
-
-  // Environment & Context Fields
-  environment String?
-  serviceName String?
-  version     String?
-
-  // Request/Response Tracking
-  requestId String?
-  sessionId String?
-  ipAddress String?
-  userAgent String?
-
-  // Performance & Monitoring
-  duration    Int?
-  memoryUsage Int?
-  cpuUsage    Float?
-
-  // Security & Audit
-  severity        String?
-  isAuthenticated Boolean?
-  permissions     Json?
-
-  // LLM-Specific Fields
-  modelName   String?
-  tokenUsage  Json?
-  temperature Float?
-  maxTokens   Int?
-
-  // Client-Specific Fields
-  clientId      String?
-  pageUrl       String?
-  componentName String?
-
-  // Enhanced Error Tracking
-  errorCode     String?
-  errorCategory String?
-  retryCount    Int?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  environment      String?
+  serviceName      String?
+  version          String?
+  requestId        String?
+  sessionId        String?
+  ipAddress        String?
+  userAgent        String?
+  duration         Int?
+  memoryUsage      Int?
+  cpuUsage         Float?
+  severity         String?
+  isAuthenticated  Boolean?
+  permissions      Json?
+  modelName        String?
+  tokenUsage       Json?
+  temperature      Float?
+  maxTokens        Int?
+  clientId         String?
+  pageUrl          String?
+  componentName    String?
+  errorCode        String?
+  errorCategory    String?
+  retryCount       Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
+  query            Query?   @relation(fields: [queryId], references: [id])
+  user             User?    @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([queryId])
@@ -446,10 +457,10 @@ model Notification {
   type      NotificationType
   title     String
   content   String
-  link      String?
   isRead    Boolean          @default(false)
   createdAt DateTime         @default(now())
   updatedAt DateTime         @default(now()) @updatedAt
+  link      String?
   user      User             @relation(fields: [userId], references: [id])
 
   @@index([userId])
@@ -522,12 +533,12 @@ model Query {
   metadata       Json?
   lineGraphData  Json?
   pieGraphData   Json?
+  Log            Log[]
   parsedPieData  ParsedPieGraphData[]
   parsedData     ParsedQueryData[]
   parsedSummary  ParsedQuerySummary[]
   conversation   Conversation?        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   user           User                 @relation(fields: [userId], references: [id])
-  Log            Log[]
 
   @@index([userId])
   @@index([status])
@@ -856,6 +867,8 @@ model User {
   clientConversations  Conversation[]              @relation("ClientConversations")
   conversations        Conversation[]
   gaImportRuns         GaImportRun[]               @relation("UserToGaImportRuns")
+  Log                  Log[]
+  memories             Memory[]                    @relation("UserToMemory")
   receivedMessages     Message[]                   @relation("ReceivedMessages")
   sentMessages         Message[]                   @relation("SentMessages")
   notifications        Notification[]
@@ -864,17 +877,15 @@ model User {
   assignedTickets      Ticket[]                    @relation("AssignedTickets")
   clientTickets        Ticket[]                    @relation("ClientTickets")
   ticketComments       TicketComment[]
-  memories             Memory[]                    @relation("UserToMemory")
   accountRep           User?                       @relation("AccountRepToClient", fields: [accountRepId], references: [id])
   clients              User[]                      @relation("AccountRepToClient")
   company              Company?                    @relation(fields: [companyId], references: [id])
   role                 Role                        @relation(fields: [roleId], references: [id])
   settings             UserSettings?
   emailClients         UserToEmailClient[]
-  sproutSocialAccounts UserToSproutSocialAccount[]
   userToGaAccounts     UserToGaAccount[]           @relation("UserToGaAccounts")
+  sproutSocialAccounts UserToSproutSocialAccount[]
   uspsClients          UserToUspsClient[]
-  Log                  Log[]
 }
 
 model UserSettings {
@@ -909,8 +920,8 @@ model UserToUspsClient {
   uspsClientId String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  uspsClient   UspsClient @relation(fields: [uspsClientId], references: [id], onDelete: Cascade) // Clients can have multiple users
-  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade) // Users can be linked to multiple USPS clients
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  uspsClient   UspsClient @relation(fields: [uspsClientId], references: [id], onDelete: Cascade)
 
   @@unique([userId, uspsClientId])
   @@index([userId])
@@ -919,7 +930,7 @@ model UserToUspsClient {
 
 model UspsCampaign {
   id                  String                 @id @default(cuid())
-  campaignName        String
+  campaignName        String                 @unique
   order               String?
   reportId            String
   sector              String?
@@ -928,11 +939,11 @@ model UspsCampaign {
   uspsClientId        String
   createdAt           DateTime               @default(now())
   updatedAt           DateTime               @default(now()) @updatedAt
+  campaignRecipients  CampaignRecipients[]
+  UspsClient          UspsClient             @relation("UspsClientToCampaigns", fields: [uspsClientId], references: [id])
+  uspsCampaignSummary UspsCampaignSummary[]
   uspsCampaignZips    UspsCampaignZipStats[] @relation("UspsCampaignToZipStats")
-  uspsCampaignSummary UspsCampaignSummary[]  @relation("UspsCampaignToSummary")
-  UspsClient          UspsClient             @relation("UspsClientToCampaigns", fields: [uspsClientId], references: [id]) // Campaigns belong to a USPS client
 
-  @@unique([campaignName])
   @@index([campaignName])
 }
 
@@ -952,7 +963,7 @@ model UspsCampaignSummary {
   uspsCampaignId   String
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @default(now()) @updatedAt
-  UspsCampaign     UspsCampaign @relation("UspsCampaignToSummary", fields: [uspsCampaignId], references: [id])
+  UspsCampaign     UspsCampaign @relation(fields: [uspsCampaignId], references: [id])
 
   @@unique([scanDate, uspsCampaignId])
   @@index([scanDate, mailDate, uspsCampaignId, reportId])
@@ -976,8 +987,8 @@ model UspsClient {
   clientName       String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
-  uspsCampaigns    UspsCampaign[]     @relation("UspsClientToCampaigns") // Clients can have multiple campaigns
-  UserToUspsClient UserToUspsClient[] // Users can be linked to multiple USPS clients
+  UserToUspsClient UserToUspsClient[]
+  uspsCampaigns    UspsCampaign[]     @relation("UspsClientToCampaigns")
 }
 
 model VerificationToken {
@@ -1023,7 +1034,7 @@ enum NotificationType {
   SYSTEM
   MESSAGE
   QUERY_COMPLETE
+  REPORT_GENERATED
   QUERY_IN_PROGRESS
   QUERY_FAILED
-  REPORT_GENERATED
 }

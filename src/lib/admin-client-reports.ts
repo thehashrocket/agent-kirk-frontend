@@ -4,7 +4,8 @@
  * Similar to account-rep.ts but provides admin-level access to all clients and their data
  */
 
-import { prisma, type ClientSatisfaction } from './prisma';
+import { prisma } from './prisma';
+import type { ClientSatisfaction } from '@/prisma/generated/client';
 import { cache } from 'react';
 import { subDays } from 'date-fns';
 

@@ -11,7 +11,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
-import { NotificationType, prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
+import { NotificationType } from '@/prisma/generated/client';
 
 /**
  * Represents the expected webhook request payload

@@ -3,7 +3,8 @@
  * Account Representative utility functions for fetching dashboard statistics
  */
 
-import { prisma, type ClientSatisfaction } from './prisma';
+import { prisma } from './prisma';
+import type { ClientSatisfaction } from '@/prisma/generated/client';
 import { cache } from 'react';
 import { subDays } from 'date-fns';
 

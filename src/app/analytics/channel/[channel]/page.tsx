@@ -12,6 +12,7 @@ import VisitorBehavior from '@/components/channels/visitor_behavior';
 import AudienceData from '@/components/channels/audience_data';
 import BreadCrumbs from '@/components/layout/BreadCrumbs';
 import GoogleAnalytics from '@/components/channels/google_analytics';
+import AggregateReports from '@/components/channels/aggregate_reports';
 
 interface ChannelPageProps {
   params: Promise<{
@@ -33,6 +34,7 @@ export default async function ChannelPage({ params, searchParams }: ChannelPageP
       <BreadCrumbs breadcrumbs={[{ label: "Home", href: "/" }, { label: "Dashboard", href: "/client/dashboard" }, { label: "Channel: " + formattedChannel, href: `/analytics/channel/${channel}` }]} />
       <h1 className="text-2xl font-bold mb-2 text-primary uppercase">Channel: <span className="text-primary-600">{formattedChannel}</span></h1>
       {channel === 'audience-data' && <AudienceData />}
+      {channel === 'aggregate-reports' && <AggregateReports />}
       {channel === 'direct' && <Direct />}
       {channel === 'email' && <Email />}
       {channel === 'google-analytics' && <GoogleAnalytics />}
