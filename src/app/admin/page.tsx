@@ -36,7 +36,11 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-semibold mb-4">Analytics</h2>
           <p className="text-gray-600">View system usage and performance metrics</p>
         </div>
+        <a href="/admin/campaign-recipient-sync" className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+          <h2 className="text-xl font-semibold mb-4">Campaign Recipient Sync</h2>
+          <p className="text-gray-600">Pull scheduled email recipients from Google Drive</p>
+        </a>
       </div>
     </div>
   );
-} 
+}

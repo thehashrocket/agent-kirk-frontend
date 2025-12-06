@@ -177,6 +177,13 @@ export default async function AdminDashboard() {
                 <p className="text-sm text-gray-600">Add, remove, or modify user accounts</p>
               </Link>
               <Link 
+                href="/admin/campaign-recipient-sync" 
+                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <h3 className="font-medium">Campaign Recipient Sync</h3>
+                <p className="text-sm text-gray-600">Pull scheduled email recipients from Google Drive</p>
+              </Link>
+              <Link 
                 href="/admin/settings" 
                 className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
               >

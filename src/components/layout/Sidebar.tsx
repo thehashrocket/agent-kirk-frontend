@@ -23,7 +23,8 @@ import {
   BarChart,
   FilePlus,
   FileText,
-  User
+  User,
+  RefreshCw
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -75,6 +76,12 @@ const adminNavItems: NavItem[] = [
     href: "/admin/reports",
     icon: <FileText />,
     description: "Generate system reports"
+  },
+  {
+    title: "Campaign Recipient Sync",
+    href: "/admin/campaign-recipient-sync",
+    icon: <RefreshCw />,
+    description: "Pull scheduled email recipients from Drive"
   },
   // {
   //   title: "Message with 1905",
