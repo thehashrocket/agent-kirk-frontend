@@ -427,12 +427,21 @@ async function persistRecipientsForCampaign(
     })
     .filter((row): row is NonNullable<typeof row> => Boolean(row));
 
-  const result = await prisma.campaignRecipients.createMany({
-    data,
-    skipDuplicates: true,
-  });
+  const BATCH_SIZE = 1000;
+  let inserted = 0;
 
-  return result.count;
+  for (let i = 0; i < data.length; i += BATCH_SIZE) {
+    const batch = data.slice(i, i + BATCH_SIZE);
+    if (batch.length === 0) continue;
+
+    const result = await prisma.campaignRecipients.createMany({
+      data: batch,
+      skipDuplicates: true,
+    });
+    inserted += result.count;
+  }
+
+  return inserted;
 }
 
 function buildAddressKey(recipient: CampaignRecipient): string {

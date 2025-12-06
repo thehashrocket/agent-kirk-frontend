@@ -41,7 +41,7 @@ export function RecipientSyncPanel() {
           setStatusTrail([]);
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Unexpected error during sync.";
+        const message = buildFriendlyError(err);
         setResult(null);
         setError(message);
         setStatusMessage(null);
@@ -171,9 +171,26 @@ export function RecipientSyncPanel() {
       {error && (
         <Alert variant="destructive">
           <AlertTitle>Sync failed</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
+          <AlertDescription>
+            {error}
+            {error.toLowerCase().includes("timeout") && (
+              <span className="block">
+                The sync may be heavy; please retry in a moment or run during off-peak times.
+              </span>
+            )}
+          </AlertDescription>
         </Alert>
       )}
     </Card>
   );
+}
+
+function buildFriendlyError(err: unknown): string {
+  if (err instanceof Error) {
+    if (/504|timeout/i.test(err.message)) {
+      return "Gateway timeout while syncing. The sync likely took too long; please retry. Partial progress may have completed.";
+    }
+    return err.message;
+  }
+  return "Unexpected error during sync.";
 }
