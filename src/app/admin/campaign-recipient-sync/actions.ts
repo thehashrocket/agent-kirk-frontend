@@ -10,6 +10,9 @@ import {
 export interface CampaignRecipientSyncResult {
   success: true;
   summary: CampaignRecipientSyncSummary;
+  startedAt: string;
+  completedAt: string;
+  durationMs: number;
 }
 
 export interface CampaignRecipientSyncError {
@@ -25,11 +28,16 @@ export async function triggerCampaignRecipientSync(): Promise<CampaignRecipientS
   }
 
   try {
+    const startedAt = new Date();
     const summary = await syncScheduledEmailRecipients();
+    const completedAt = new Date();
 
     return {
       success: true,
       summary,
+      startedAt: startedAt.toISOString(),
+      completedAt: completedAt.toISOString(),
+      durationMs: completedAt.getTime() - startedAt.getTime(),
     };
   } catch (error) {
     const message =

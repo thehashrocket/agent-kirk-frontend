@@ -41,6 +41,7 @@ export interface CampaignRecipientSyncSummary {
   recipientsParsed: number;
   recipientsInserted: number;
   unmatchedFiles: string[];
+  failedDownloads: Array<{ fileName: string; reason: string }>;
 }
 
 interface DriveClient {
@@ -294,10 +295,19 @@ export class CampaignRecipientSyncService {
       recipientsParsed: 0,
       recipientsInserted: 0,
       unmatchedFiles: [],
+      failedDownloads: [],
     };
 
     for (const file of files) {
-      const content = await this.driveClient.downloadFile(file);
+      let content: string;
+      try {
+        content = await this.driveClient.downloadFile(file);
+      } catch (error) {
+        const reason = error instanceof Error ? error.message : "Unknown download error";
+        summary.failedDownloads.push({ fileName: file.name, reason });
+        continue;
+      }
+
       const recipients = this.parser.parse(content);
       summary.recipientsParsed += recipients.length;
 
