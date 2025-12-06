@@ -354,12 +354,10 @@ export async function fetchScheduledEmailRecipients(): Promise<CampaignRecipient
   return buildService().fetchScheduledEmailRecipients();
 }
 
-export async function syncScheduledEmailRecipients(): Promise<CampaignRecipientSyncSummary> {
-  return buildService().syncAndPersistRecipients();
-}
-
-export async function syncScheduledEmailRecipientsBatch(startIndex = 0, batchSize = 5): Promise<CampaignRecipientSyncSummary> {
-  return buildService().syncAndPersistRecipients({ startIndex, batchSize });
+export async function syncScheduledEmailRecipients(
+  options?: { startIndex?: number; batchSize?: number },
+): Promise<CampaignRecipientSyncSummary> {
+  return buildService().syncAndPersistRecipients(options);
 }
 
 function stripExtension(fileName: string): string {
