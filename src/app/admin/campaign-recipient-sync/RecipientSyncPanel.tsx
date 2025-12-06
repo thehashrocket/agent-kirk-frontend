@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
-import { triggerCampaignRecipientSync, type CampaignRecipientSyncResult } from "./actions";
+import { useMemo, useState, useTransition } from "react";
+import {
+  triggerCampaignRecipientSync,
+  type CampaignRecipientSyncResult,
+} from "./actions";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -13,32 +16,65 @@ export function RecipientSyncPanel() {
   const [error, setError] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [statusTrail, setStatusTrail] = useState<string[]>([]);
-  const [progressStep, setProgressStep] = useState<number>(0);
+  const [aggregateSummary, setAggregateSummary] = useState<CampaignRecipientSyncResult | null>(null);
 
   const handleSync = () => {
     setError(null);
-    setProgressStep(0);
-    setStatusTrail(["Listing files in Google Drive..."]);
-    setStatusMessage("Listing files in Google Drive...");
+    setStatusTrail([]);
+    setStatusMessage("Starting sync...");
+    setAggregateSummary(null);
+    const clientStart = Date.now();
+    const batchSize = 3;
+
     startTransition(async () => {
+      let cursor: number | null = 0;
+      let aggregatedSummary: CampaignRecipientSyncResult["summary"] | null = null;
+
       try {
-        const response = await triggerCampaignRecipientSync();
-        if (response.success) {
-          setResult(response);
+        while (cursor !== null) {
+          const response = await triggerCampaignRecipientSync({ cursor, batchSize });
           setStatusMessage(
-            `Parsed ${response.summary.filesFound} file${response.summary.filesFound === 1 ? "" : "s"} from Drive.`,
+            `Processing files ${cursor + 1}-${Math.min(cursor + batchSize, response.summary.totalFiles)} of ${response.summary.totalFiles}...`,
           );
+
+          if (!response.success) {
+            setResult(null);
+            setError(response.error);
+            setStatusMessage(null);
+            setStatusTrail([]);
+            return;
+          }
+
+          aggregatedSummary = mergeSummaries(aggregatedSummary, response.summary);
+          setAggregateSummary({
+            ...response,
+            summary: aggregatedSummary,
+            startedAt: new Date(clientStart).toISOString(),
+            completedAt: response.completedAt,
+            durationMs: response.durationMs,
+          });
+
+          cursor = response.nextCursor;
+        }
+
+        if (aggregatedSummary) {
+          const clientEnd = Date.now();
+          setResult({
+            success: true,
+            summary: aggregatedSummary,
+            startedAt: new Date(clientStart).toISOString(),
+            completedAt: new Date(clientEnd).toISOString(),
+            durationMs: clientEnd - clientStart,
+            nextCursor: null,
+            batchSize,
+          });
+          setStatusMessage("Sync completed.");
           setStatusTrail((trail) => [
             ...trail,
             "Matching filenames to email campaigns...",
             "Writing recipients to database...",
             "Sync completed.",
           ]);
-        } else {
-          setResult(null);
-          setError(response.error);
-          setStatusMessage(null);
-          setStatusTrail([]);
         }
       } catch (err) {
         const message = buildFriendlyError(err);
@@ -49,31 +85,6 @@ export function RecipientSyncPanel() {
       }
     });
   };
-
-  useEffect(() => {
-    if (!isPending) {
-      return undefined;
-    }
-
-    const steps = [
-      "Listing files in Google Drive...",
-      "Matching filenames to email campaigns...",
-      "Writing recipients to database...",
-    ];
-
-    setStatusMessage(steps[0]);
-    setProgressStep(0);
-
-    const timer = setInterval(() => {
-      setProgressStep((prev) => {
-        const next = (prev + 1) % steps.length;
-        setStatusMessage(steps[next]);
-        return next;
-      });
-    }, 1200);
-
-    return () => clearInterval(timer);
-  }, [isPending]);
 
   const durationDisplay = useMemo(() => {
     if (!result) return null;
@@ -108,11 +119,26 @@ export function RecipientSyncPanel() {
             </>
           )}
         </Button>
+        {!result && aggregateSummary && (
+          <div className="text-sm text-muted-foreground space-y-1">
+            <p>
+              Processing {aggregateSummary.summary.processedFiles} of {aggregateSummary.summary.totalFiles} files so far; matched{" "}
+              {aggregateSummary.summary.filesMatched}.
+            </p>
+            <p>
+              Parsed {aggregateSummary.summary.recipientsParsed.toLocaleString()} recipient
+              {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
+              {aggregateSummary.summary.recipientsInserted.toLocaleString()} unique record
+              {aggregateSummary.summary.recipientsInserted === 1 ? "" : "s"}.
+            </p>
+          </div>
+        )}
+
         {result && (
           <div className="text-sm text-muted-foreground space-y-1">
             <p>
-              Processed {result.summary.filesFound} file{result.summary.filesFound === 1 ? "" : "s"}; matched{" "}
-              {result.summary.filesMatched} to campaigns.
+              Processed {result.summary.processedFiles} file{result.summary.processedFiles === 1 ? "" : "s"} of{" "}
+              {result.summary.totalFiles}; matched {result.summary.filesMatched} to campaigns.
             </p>
             <p>
               Parsed {result.summary.recipientsParsed.toLocaleString()} recipient
@@ -193,4 +219,34 @@ function buildFriendlyError(err: unknown): string {
     return err.message;
   }
   return "Unexpected error during sync.";
+}
+
+function mergeSummaries(
+  current: CampaignRecipientSyncResult["summary"] | null,
+  next: CampaignRecipientSyncResult["summary"],
+): CampaignRecipientSyncResult["summary"] {
+  if (!current) {
+    return {
+      ...next,
+      unmatchedFiles: [...next.unmatchedFiles],
+      failedDownloads: [...next.failedDownloads],
+      processedRange: next.processedRange,
+    };
+  }
+
+  const processedFiles = current.processedFiles + next.processedFiles;
+
+  return {
+    totalFiles: next.totalFiles || current.totalFiles,
+    processedFiles,
+    filesMatched: current.filesMatched + next.filesMatched,
+    recipientsParsed: current.recipientsParsed + next.recipientsParsed,
+    recipientsInserted: current.recipientsInserted + next.recipientsInserted,
+    unmatchedFiles: [...current.unmatchedFiles, ...next.unmatchedFiles],
+    failedDownloads: [...current.failedDownloads, ...next.failedDownloads],
+    processedRange: {
+      start: 0,
+      end: processedFiles > 0 ? processedFiles - 1 : 0,
+    },
+  };
 }

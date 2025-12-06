@@ -36,12 +36,14 @@ export interface CampaignRecipient {
 }
 
 export interface CampaignRecipientSyncSummary {
-  filesFound: number;
+  totalFiles: number;
+  processedFiles: number;
   filesMatched: number;
   recipientsParsed: number;
   recipientsInserted: number;
   unmatchedFiles: string[];
   failedDownloads: Array<{ fileName: string; reason: string }>;
+  processedRange: { start: number; end: number };
 }
 
 interface DriveClient {
@@ -287,18 +289,27 @@ export class CampaignRecipientSyncService {
     return recipients;
   }
 
-  async syncAndPersistRecipients(): Promise<CampaignRecipientSyncSummary> {
+  async syncAndPersistRecipients(options?: { startIndex?: number; batchSize?: number }): Promise<CampaignRecipientSyncSummary> {
     const files = await this.listScheduledEmailFiles();
+    const startIndex = Math.max(options?.startIndex ?? 0, 0);
+    const batchSize = options?.batchSize ?? files.length;
+    const slice = files.slice(startIndex, startIndex + batchSize);
+
     const summary: CampaignRecipientSyncSummary = {
-      filesFound: files.length,
+      totalFiles: files.length,
+      processedFiles: slice.length,
       filesMatched: 0,
       recipientsParsed: 0,
       recipientsInserted: 0,
       unmatchedFiles: [],
       failedDownloads: [],
+      processedRange: {
+        start: startIndex,
+        end: startIndex + (slice.length > 0 ? slice.length - 1 : 0),
+      },
     };
 
-    for (const file of files) {
+    for (const file of slice) {
       let content: string;
       try {
         content = await this.driveClient.downloadFile(file);
@@ -345,6 +356,10 @@ export async function fetchScheduledEmailRecipients(): Promise<CampaignRecipient
 
 export async function syncScheduledEmailRecipients(): Promise<CampaignRecipientSyncSummary> {
   return buildService().syncAndPersistRecipients();
+}
+
+export async function syncScheduledEmailRecipientsBatch(startIndex = 0, batchSize = 5): Promise<CampaignRecipientSyncSummary> {
+  return buildService().syncAndPersistRecipients({ startIndex, batchSize });
 }
 
 function stripExtension(fileName: string): string {

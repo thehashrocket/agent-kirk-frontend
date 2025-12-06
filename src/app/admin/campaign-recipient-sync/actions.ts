@@ -13,6 +13,8 @@ export interface CampaignRecipientSyncResult {
   startedAt: string;
   completedAt: string;
   durationMs: number;
+  nextCursor: number | null;
+  batchSize: number;
 }
 
 export interface CampaignRecipientSyncError {
@@ -20,7 +22,14 @@ export interface CampaignRecipientSyncError {
   error: string;
 }
 
-export async function triggerCampaignRecipientSync(): Promise<CampaignRecipientSyncResult | CampaignRecipientSyncError> {
+export interface TriggerCampaignRecipientSyncParams {
+  cursor?: number;
+  batchSize?: number;
+}
+
+export async function triggerCampaignRecipientSync(
+  params?: TriggerCampaignRecipientSyncParams,
+): Promise<CampaignRecipientSyncResult | CampaignRecipientSyncError> {
   const session = await getServerSession(authOptions);
 
   if (!session?.user || session.user.role !== 'ADMIN') {
@@ -29,8 +38,13 @@ export async function triggerCampaignRecipientSync(): Promise<CampaignRecipientS
 
   try {
     const startedAt = new Date();
-    const summary = await syncScheduledEmailRecipients();
+    const summary = await syncScheduledEmailRecipients({
+      startIndex: params?.cursor ?? 0,
+      batchSize: params?.batchSize,
+    });
     const completedAt = new Date();
+    const nextCursor =
+      summary.processedRange.end + 1 < summary.totalFiles ? summary.processedRange.end + 1 : null;
 
     return {
       success: true,
@@ -38,6 +52,8 @@ export async function triggerCampaignRecipientSync(): Promise<CampaignRecipientS
       startedAt: startedAt.toISOString(),
       completedAt: completedAt.toISOString(),
       durationMs: completedAt.getTime() - startedAt.getTime(),
+      nextCursor,
+      batchSize: params?.batchSize ?? summary.processedFiles,
     };
   } catch (error) {
     const message =
