@@ -33,9 +33,6 @@ export function RecipientSyncPanel() {
       try {
         while (cursor !== null) {
           const response = await triggerCampaignRecipientSync({ cursor, batchSize });
-          setStatusMessage(
-            `Processing files ${cursor + 1}-${Math.min(cursor + batchSize, response.summary.totalFiles)} of ${response.summary.totalFiles}...`,
-          );
 
           if (!response.success) {
             setResult(null);
@@ -44,6 +41,13 @@ export function RecipientSyncPanel() {
             setStatusTrail([]);
             return;
           }
+
+          setStatusMessage(
+            `Processing files ${cursor + 1}-${Math.min(
+              cursor + batchSize,
+              response.summary.totalFiles,
+            )} of ${response.summary.totalFiles}...`,
+          );
 
           aggregatedSummary = mergeSummaries(aggregatedSummary, response.summary);
           setAggregateSummary({
