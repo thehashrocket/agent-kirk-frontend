@@ -21,21 +21,29 @@ export function RecipientSyncPanel() {
     setStatusTrail(["Listing files in Google Drive..."]);
     setStatusMessage("Listing files in Google Drive...");
     startTransition(async () => {
-      const response = await triggerCampaignRecipientSync();
-      if (response.success) {
-        setResult(response);
-        setStatusMessage(
-          `Parsed ${response.summary.filesFound} file${response.summary.filesFound === 1 ? "" : "s"} from Drive.`,
-        );
-        setStatusTrail((trail) => [
-          ...trail,
-          "Matching filenames to email campaigns...",
-          "Writing recipients to database...",
-          "Sync completed.",
-        ]);
-      } else {
+      try {
+        const response = await triggerCampaignRecipientSync();
+        if (response.success) {
+          setResult(response);
+          setStatusMessage(
+            `Parsed ${response.summary.filesFound} file${response.summary.filesFound === 1 ? "" : "s"} from Drive.`,
+          );
+          setStatusTrail((trail) => [
+            ...trail,
+            "Matching filenames to email campaigns...",
+            "Writing recipients to database...",
+            "Sync completed.",
+          ]);
+        } else {
+          setResult(null);
+          setError(response.error);
+          setStatusMessage(null);
+          setStatusTrail([]);
+        }
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Unexpected error during sync.";
         setResult(null);
-        setError(response.error);
+        setError(message);
         setStatusMessage(null);
         setStatusTrail([]);
       }
