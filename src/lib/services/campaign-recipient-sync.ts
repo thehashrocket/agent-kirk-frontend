@@ -41,6 +41,7 @@ export interface CampaignRecipientSyncSummary {
   filesMatched: number;
   recipientsParsed: number;
   recipientsInserted: number;
+  recipientsExisting: number;
   unmatchedFiles: string[];
   failedDownloads: Array<{ fileName: string; reason: string }>;
   processedRange: { start: number; end: number };
@@ -73,11 +74,11 @@ class GoogleDriveClient implements DriveClient {
       corpora?: string;
       label: string;
     }> = [
-      { includeAllDrives: true, label: "supportsAllDrives" },
-      { includeAllDrives: true, corpora: "drive", label: "supportsAllDrives+drive" },
-      { includeAllDrives: true, corpora: "allDrives", label: "supportsAllDrives+allDrives" },
-      { includeAllDrives: false, label: "standard" },
-    ];
+        { includeAllDrives: true, label: "supportsAllDrives" },
+        { includeAllDrives: true, corpora: "drive", label: "supportsAllDrives+drive" },
+        { includeAllDrives: true, corpora: "allDrives", label: "supportsAllDrives+allDrives" },
+        { includeAllDrives: false, label: "standard" },
+      ];
 
     let lastError: unknown;
 
@@ -271,7 +272,7 @@ export class CampaignRecipientSyncService {
   constructor(
     private readonly driveClient: DriveClient,
     private readonly parser: CampaignRecipientParser,
-  ) {}
+  ) { }
 
   async listScheduledEmailFiles(): Promise<DriveFile[]> {
     return this.driveClient.listFilesInFolder(SCHEDULED_EMAIL_FOLDER.id);
@@ -301,6 +302,7 @@ export class CampaignRecipientSyncService {
       filesMatched: 0,
       recipientsParsed: 0,
       recipientsInserted: 0,
+      recipientsExisting: 0,
       unmatchedFiles: [],
       failedDownloads: [],
       processedRange: {
@@ -330,8 +332,9 @@ export class CampaignRecipientSyncService {
       }
 
       summary.filesMatched += 1;
-      const created = await persistRecipientsForCampaign(campaign.id, recipients);
-      summary.recipientsInserted += created;
+      const result = await persistRecipientsForCampaign(campaign.id, recipients);
+      summary.recipientsInserted += result.inserted;
+      summary.recipientsExisting += result.existing;
     }
 
     return summary;
@@ -395,9 +398,9 @@ async function findEmailCampaignByFileName(fileName: string) {
 async function persistRecipientsForCampaign(
   emailCampaignId: string,
   recipients: CampaignRecipient[],
-): Promise<number> {
+): Promise<{ inserted: number; existing: number }> {
   if (recipients.length === 0) {
-    return 0;
+    return { inserted: 0, existing: 0 };
   }
 
   const seenEmails = new Set<string>();
@@ -442,6 +445,7 @@ async function persistRecipientsForCampaign(
 
   const BATCH_SIZE = 1000;
   let inserted = 0;
+  let existing = 0;
 
   for (let i = 0; i < data.length; i += BATCH_SIZE) {
     const batch = data.slice(i, i + BATCH_SIZE);
@@ -452,9 +456,10 @@ async function persistRecipientsForCampaign(
       skipDuplicates: true,
     });
     inserted += result.count;
+    existing += batch.length - result.count;
   }
 
-  return inserted;
+  return { inserted, existing };
 }
 
 function buildAddressKey(recipient: CampaignRecipient): string {

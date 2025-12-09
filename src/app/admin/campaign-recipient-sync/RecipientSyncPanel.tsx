@@ -132,8 +132,12 @@ export function RecipientSyncPanel() {
             <p>
               Parsed {aggregateSummary.summary.recipientsParsed.toLocaleString()} recipient
               {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
-              {aggregateSummary.summary.recipientsInserted.toLocaleString()} unique record
-              {aggregateSummary.summary.recipientsInserted === 1 ? "" : "s"}.
+              {aggregateSummary.summary.recipientsInserted.toLocaleString()} new,{" "}
+              {aggregateSummary.summary.recipientsExisting.toLocaleString()} existing unique record
+              {aggregateSummary.summary.recipientsInserted + aggregateSummary.summary.recipientsExisting === 1
+                ? ""
+                : "s"}
+              .
             </p>
           </div>
         )}
@@ -146,8 +150,9 @@ export function RecipientSyncPanel() {
             </p>
             <p>
               Parsed {result.summary.recipientsParsed.toLocaleString()} recipient
-              {result.summary.recipientsParsed === 1 ? "" : "s"}; inserted {result.summary.recipientsInserted.toLocaleString()}{" "}
-              unique record{result.summary.recipientsInserted === 1 ? "" : "s"}.
+              {result.summary.recipientsParsed === 1 ? "" : "s"}; inserted {result.summary.recipientsInserted.toLocaleString()} new,{" "}
+              {result.summary.recipientsExisting.toLocaleString()} existing unique record
+              {result.summary.recipientsInserted + result.summary.recipientsExisting === 1 ? "" : "s"}.
             </p>
             <p className="text-xs text-muted-foreground">
               Completed at {new Date(result.completedAt).toLocaleString()} ({durationDisplay ?? "n/a"}).
@@ -246,6 +251,7 @@ function mergeSummaries(
     filesMatched: current.filesMatched + next.filesMatched,
     recipientsParsed: current.recipientsParsed + next.recipientsParsed,
     recipientsInserted: current.recipientsInserted + next.recipientsInserted,
+    recipientsExisting: current.recipientsExisting + next.recipientsExisting,
     unmatchedFiles: [...current.unmatchedFiles, ...next.unmatchedFiles],
     failedDownloads: [...current.failedDownloads, ...next.failedDownloads],
     processedRange: {
