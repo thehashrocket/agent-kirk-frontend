@@ -11,6 +11,7 @@ import { prisma } from "@/lib/prisma";
 const DRIVE_FILES_ENDPOINT = "https://www.googleapis.com/drive/v3/files";
 const GOOGLE_SHEETS_MIME_TYPE = "application/vnd.google-apps.spreadsheet";
 const CSV_EXPORT_MIME_TYPE = "text/csv";
+const GOOGLE_DRIVE_SHORTCUT_MIME_TYPE = "application/vnd.google-apps.shortcut";
 const SCHEDULED_EMAIL_FOLDER = {
   id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
   name: "Scheduled Email",
@@ -20,6 +21,10 @@ export interface DriveFile {
   id: string;
   name: string;
   mimeType: string;
+  shortcutDetails?: {
+    targetId: string;
+    targetMimeType?: string;
+  };
 }
 
 export interface CampaignRecipient {
@@ -90,7 +95,7 @@ class GoogleDriveClient implements DriveClient {
         do {
           const params = new URLSearchParams({
             q: `'${folderId}' in parents and trashed = false`,
-            fields: "files(id,name,mimeType),nextPageToken",
+            fields: "files(id,name,mimeType,shortcutDetails(targetId,targetMimeType)),nextPageToken",
             key: this.apiKey,
           });
 
@@ -133,29 +138,108 @@ class GoogleDriveClient implements DriveClient {
   }
 
   async downloadFile(file: DriveFile): Promise<string> {
-    const params = new URLSearchParams({
-      key: this.apiKey,
+    const resolvedFile = await this.resolveShortcutIfNeeded(file);
+    const isSpreadsheet = resolvedFile.mimeType === GOOGLE_SHEETS_MIME_TYPE;
+    const attempts = this.buildDownloadAttempts(resolvedFile, isSpreadsheet);
+    const errors: string[] = [];
+
+    for (const attempt of attempts) {
+      const response = await fetch(attempt.url);
+
+      if (response.ok) {
+        return response.text();
+      }
+
+      const body = await response.text().catch(() => "");
+      errors.push(
+        `${attempt.label}: ${response.status} ${response.statusText}${body ? ` - ${body}` : ""}`,
+      );
+    }
+
+    throw new Error(`Failed to download file ${file.name}: ${errors.join("; ")}`);
+  }
+
+  private buildDownloadAttempts(file: DriveFile, isSpreadsheet: boolean) {
+    const baseParams = new URLSearchParams({
       supportsAllDrives: "true",
     });
-    const isSpreadsheet = file.mimeType === GOOGLE_SHEETS_MIME_TYPE;
+
+    if (this.apiKey) {
+      baseParams.set("key", this.apiKey);
+    }
+
+    const attempts: Array<{ label: string; url: string }> = [];
 
     if (isSpreadsheet) {
-      params.set("mimeType", CSV_EXPORT_MIME_TYPE);
+      const exportParams = new URLSearchParams(baseParams);
+      exportParams.set("mimeType", CSV_EXPORT_MIME_TYPE);
+      attempts.push({
+        label: "drive-export",
+        url: `${DRIVE_FILES_ENDPOINT}/${file.id}/export?${exportParams.toString()}`,
+      });
+      attempts.push({
+        label: "public-sheet-export",
+        url: `https://docs.google.com/spreadsheets/d/${file.id}/export?format=csv`,
+      });
     } else {
-      params.set("alt", "media");
+      const downloadParams = new URLSearchParams(baseParams);
+      downloadParams.set("alt", "media");
+      downloadParams.set("acknowledgeAbuse", "true");
+      attempts.push({
+        label: "drive-download",
+        url: `${DRIVE_FILES_ENDPOINT}/${file.id}?${downloadParams.toString()}`,
+      });
     }
 
-    const url = isSpreadsheet
-      ? `${DRIVE_FILES_ENDPOINT}/${file.id}/export?${params.toString()}`
-      : `${DRIVE_FILES_ENDPOINT}/${file.id}?${params.toString()}`;
+    attempts.push({
+      label: "public-direct",
+      url: `https://drive.google.com/uc?export=download&id=${file.id}`,
+    });
 
-    const response = await fetch(url);
+    return attempts;
+  }
+
+  private async resolveShortcutIfNeeded(file: DriveFile): Promise<DriveFile> {
+    if (file.mimeType !== GOOGLE_DRIVE_SHORTCUT_MIME_TYPE) {
+      return file;
+    }
+
+    const shortcut =
+      file.shortcutDetails ?? (await this.fetchFileMetadata(file.id)).shortcutDetails;
+
+    if (!shortcut?.targetId) {
+      throw new Error(`Shortcut ${file.name} does not include target details.`);
+    }
+
+    if (!shortcut.targetMimeType) {
+      const targetMetadata = await this.fetchFileMetadata(shortcut.targetId);
+      return { id: shortcut.targetId, name: file.name, mimeType: targetMetadata.mimeType };
+    }
+
+    return {
+      id: shortcut.targetId,
+      name: file.name,
+      mimeType: shortcut.targetMimeType,
+    };
+  }
+
+  private async fetchFileMetadata(fileId: string): Promise<DriveFile> {
+    const params = new URLSearchParams({
+      supportsAllDrives: "true",
+      fields: "id,name,mimeType,shortcutDetails(targetId,targetMimeType)",
+    });
+
+    if (this.apiKey) {
+      params.set("key", this.apiKey);
+    }
+
+    const response = await fetch(`${DRIVE_FILES_ENDPOINT}/${fileId}?${params.toString()}`);
 
     if (!response.ok) {
-      throw new Error(`Failed to download file ${file.name}: ${response.statusText}`);
+      throw new Error(`Failed to fetch metadata for file ${fileId}: ${response.statusText}`);
     }
 
-    return response.text();
+    return response.json() as Promise<DriveFile>;
   }
 }
 
