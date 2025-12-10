@@ -5,7 +5,6 @@ console.info("SendGrid webhook: handler reached")
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
-    console.log("Received SendGrid webhook payload:", payload);
 
     if (!Array.isArray(payload)) {
       return NextResponse.json({ error: "Expected an array of webhook events" }, { status: 400 });
