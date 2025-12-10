@@ -53,12 +53,7 @@ export async function triggerCampaignRecipientSync(
         error: `No files found in folder "${summary.folderName}" (${summary.folderId}). Ensure the folder contains CSVs and your Google API key has access.`,
       };
     }
-    if (summary.filesMatched === 0) {
-      return {
-        success: false,
-        error: `No email campaigns matched the file names in folder "${summary.folderName}". Unmatched files: ${summary.unmatchedFiles.slice(0, 3).join(", ")}${summary.unmatchedFiles.length > 3 ? ` (+${summary.unmatchedFiles.length - 3} more)` : ""}`,
-      };
-    }
+
     const completedAt = new Date();
     const nextCursor =
       summary.processedRange.end + 1 < summary.totalFiles ? summary.processedRange.end + 1 : null;
