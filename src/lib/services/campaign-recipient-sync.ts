@@ -397,7 +397,7 @@ export class CampaignRecipientSyncService {
     private readonly driveClient: DriveClient,
     private readonly parser: CampaignRecipientParser,
     private readonly folder: DriveFolder,
-  ) {}
+  ) { }
 
   async listFolderFiles(): Promise<DriveFile[]> {
     return this.driveClient.listFilesInFolder(this.folder.id);
@@ -459,11 +459,20 @@ export class CampaignRecipientSyncService {
       const elapsed = Date.now() - startedAt;
       if (elapsed >= maxRuntimeMs) {
         console.warn(
-          `[CampaignRecipientSync] Runtime budget reached (${elapsed}ms >= ${maxRuntimeMs}ms). Halting early at file index ${
-            startIndex + processedCount
+          `[CampaignRecipientSync] Runtime budget reached (${elapsed}ms >= ${maxRuntimeMs}ms). Halting early at file index ${startIndex + processedCount
           }.`,
         );
         break;
+      }
+
+      const campaign = await findEmailCampaignByFileName(file.name);
+
+      if (!campaign) {
+        console.warn(
+          `[CampaignRecipientSync] No email campaign match for file "${file.name}". Skipping download and parse.`,
+        );
+        summary.unmatchedFiles.push(file.name);
+        continue;
       }
 
       let content: string;
@@ -477,15 +486,6 @@ export class CampaignRecipientSyncService {
       }
 
       const recipients = this.parser.parse(content);
-      const campaign = await findEmailCampaignByFileName(file.name);
-
-      if (!campaign) {
-        console.warn(
-          `[CampaignRecipientSync] No email campaign match for file "${file.name}". Parsed ${recipients.length} recipients; skipping.`,
-        );
-        summary.unmatchedFiles.push(file.name);
-        continue;
-      }
 
       summary.filesMatched += 1;
       const result = await persistRecipientsForCampaign(campaign.id, recipients);
