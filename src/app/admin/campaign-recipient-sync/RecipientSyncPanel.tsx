@@ -206,7 +206,8 @@ export function RecipientSyncPanel() {
               Parsed {aggregateSummary.summary.recipientsParsed.toLocaleString()} recipient
               {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
               {aggregateSummary.summary.recipientsInserted.toLocaleString()} new, updated{" "}
-              {aggregateSummary.summary.recipientsUpdated?.toLocaleString() ?? "0"}, and left{" "}
+              {aggregateSummary.summary.recipientsUpdated?.toLocaleString() ?? "0"}, skipped{" "}
+              {aggregateSummary.summary.recipientsDuplicate?.toLocaleString() ?? "0"} duplicates, and left{" "}
               {(aggregateSummary.summary.recipientsExisting - (aggregateSummary.summary.recipientsUpdated ?? 0)).toLocaleString()} unchanged unique record
               {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}.
             </p>
@@ -226,7 +227,8 @@ export function RecipientSyncPanel() {
               Parsed {result.summary.recipientsParsed.toLocaleString()} recipient
               {result.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
               {result.summary.recipientsInserted.toLocaleString()} new, updated{" "}
-              {result.summary.recipientsUpdated?.toLocaleString() ?? "0"}, and left{" "}
+              {result.summary.recipientsUpdated?.toLocaleString() ?? "0"}, skipped{" "}
+              {result.summary.recipientsDuplicate?.toLocaleString() ?? "0"} duplicates, and left{" "}
               {(result.summary.recipientsExisting - (result.summary.recipientsUpdated ?? 0)).toLocaleString()} unchanged unique record
               {result.summary.recipientsInserted + result.summary.recipientsExisting === 1 ? "" : "s"}.
             </p>
@@ -336,6 +338,7 @@ function mergeSummaries(
     recipientsInserted: current.recipientsInserted + next.recipientsInserted,
     recipientsExisting: current.recipientsExisting + next.recipientsExisting,
     recipientsUpdated,
+    recipientsDuplicate: (current.recipientsDuplicate ?? 0) + (next.recipientsDuplicate ?? 0),
     unmatchedFiles: [...current.unmatchedFiles, ...next.unmatchedFiles],
     failedDownloads: [...current.failedDownloads, ...next.failedDownloads],
     processedRange: {

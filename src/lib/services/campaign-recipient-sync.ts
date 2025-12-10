@@ -75,6 +75,7 @@ export interface CampaignRecipientSyncSummary {
   recipientsParsed: number;
   recipientsInserted: number;
   recipientsUpdated?: number;
+  recipientsDuplicate?: number;
   recipientsExisting: number;
   folderId: string;
   folderName: string;
@@ -437,6 +438,7 @@ export class CampaignRecipientSyncService {
       recipientsParsed: 0,
       recipientsInserted: 0,
       recipientsUpdated: 0,
+      recipientsDuplicate: 0,
       recipientsExisting: 0,
       folderId: this.folder.id,
       folderName: this.folder.name,
@@ -494,8 +496,9 @@ export class CampaignRecipientSyncService {
       summary.recipientsInserted += result.inserted;
       summary.recipientsExisting += result.existing;
       summary.recipientsUpdated = (summary.recipientsUpdated ?? 0) + result.updated;
+      summary.recipientsDuplicate = (summary.recipientsDuplicate ?? 0) + result.duplicates;
       console.info(
-        `[CampaignRecipientSync] Processed file "${file.name}" -> campaign "${campaign.campaignName}" (${campaign.id}). Parsed ${recipients.length}; inserted ${result.inserted}; updated ${result.updated}; existing (unchanged) ${result.existing - result.updated}.`,
+        `[CampaignRecipientSync] Processed file "${file.name}" -> campaign "${campaign.campaignName}" (${campaign.id}). Parsed ${recipients.length}; inserted ${result.inserted}; updated ${result.updated}; duplicates (skipped) ${result.duplicates}; existing (unchanged) ${result.existing - result.updated}.`,
       );
       processedCount += 1;
     }
@@ -558,9 +561,9 @@ async function findEmailCampaignByFileName(fileName: string) {
 async function persistRecipientsForCampaign(
   emailCampaignId: string,
   recipients: CampaignRecipient[],
-): Promise<{ inserted: number; existing: number; updated: number }> {
+): Promise<{ inserted: number; existing: number; updated: number; duplicates: number }> {
   if (recipients.length === 0) {
-    return { inserted: 0, existing: 0, updated: 0 };
+    return { inserted: 0, existing: 0, updated: 0, duplicates: 0 };
   }
 
   const seenEmails = new Set<string>();
@@ -603,6 +606,7 @@ async function persistRecipientsForCampaign(
     })
     .filter((row): row is NonNullable<typeof row> => Boolean(row));
 
+  const duplicates = recipients.length - data.length;
   let inserted = 0;
   let existing = 0;
   let updated = 0;
@@ -662,7 +666,7 @@ async function persistRecipientsForCampaign(
     }
   }
 
-  return { inserted, existing, updated };
+  return { inserted, existing, updated, duplicates };
 }
 
 function buildAddressKey(recipient: CampaignRecipient): string {
