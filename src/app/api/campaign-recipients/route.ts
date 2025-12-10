@@ -20,8 +20,9 @@ type Payload = {
     emailCampaignId?: string | null;
     recipients: RecipientInput[];
 };
-
+console.info('recipient route hit')
 export async function POST(req: Request) {
+    console.info('hitting recipient route')
     const body = (await req.json()) as Payload;
 
     const { uspsCampaignId, emailCampaignId, recipients } = body;
