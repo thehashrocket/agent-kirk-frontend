@@ -52,12 +52,29 @@ export function RecipientSyncPanel() {
 
       try {
         while (cursor !== null) {
-          const response = await triggerCampaignRecipientSync({
-            cursor,
-            batchSize,
-            folder,
-            maxRuntimeMs,
-          });
+          let response: CampaignRecipientSyncResult | { success: false; error: string };
+
+          try {
+            response = await triggerCampaignRecipientSync({
+              cursor,
+              batchSize,
+              folder,
+              maxRuntimeMs,
+            });
+          } catch (err: unknown) {
+            const isTimeout =
+              err instanceof Error && /504|timeout/i.test(err.message);
+            if (isTimeout) {
+              for (let i = 60; i > 0; i--) {
+                setStatusMessage(
+                  `Gateway timeout (504). Retrying current file in ${i}s...`,
+                );
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+              }
+              continue;
+            }
+            throw err;
+          }
 
           if (!response.success) {
             setResult(null);
@@ -104,7 +121,7 @@ export function RecipientSyncPanel() {
           cursor = response.nextCursor;
 
           if (cursor !== null) {
-            for (let i = 30; i > 0; i--) {
+            for (let i = 60; i > 0; i--) {
               setStatusMessage(`Waiting ${i}s before processing next file...`);
               await new Promise((resolve) => setTimeout(resolve, 1000));
             }
