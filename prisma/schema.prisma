@@ -31,6 +31,13 @@ model Account {
 model CampaignRecipients {
   id              String         @id @default(cuid())
   email           String?
+  delivered       Int            @default(0)
+  opens           Int            @default(0)
+  uniqueOpens     Int            @default(0)
+  clicks          Int            @default(0)
+  bounces         Int            @default(0)
+  spamReports     Int            @default(0)
+  unsubscribes    Int            @default(0)
   address_1       String?
   address_2       String?
   city            String?
@@ -43,6 +50,8 @@ model CampaignRecipients {
   subSegment      String?
   emailCampaignId String?
   uspsCampaignId  String?
+  sendgridMessageId String?
+  lastEventAt     DateTime?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   emailCampaign   EmailCampaign? @relation(fields: [emailCampaignId], references: [id])
@@ -52,6 +61,7 @@ model CampaignRecipients {
   @@unique([emailCampaignId, email], name: "uniq_email_campaign_email")
   @@index([emailCampaignId])
   @@index([uspsCampaignId])
+  @@index([sendgridMessageId])
 }
 
 model ClientActivity {

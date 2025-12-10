@@ -140,6 +140,13 @@ exports.Prisma.AccountScalarFieldEnum = {
 exports.Prisma.CampaignRecipientsScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  delivered: 'delivered',
+  opens: 'opens',
+  uniqueOpens: 'uniqueOpens',
+  clicks: 'clicks',
+  bounces: 'bounces',
+  spamReports: 'spamReports',
+  unsubscribes: 'unsubscribes',
   address_1: 'address_1',
   address_2: 'address_2',
   city: 'city',
@@ -152,6 +159,7 @@ exports.Prisma.CampaignRecipientsScalarFieldEnum = {
   subSegment: 'subSegment',
   emailCampaignId: 'emailCampaignId',
   uspsCampaignId: 'uspsCampaignId',
+  lastEventAt: 'lastEventAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
