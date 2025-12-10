@@ -19,6 +19,10 @@ export interface SendGridWebhookEvent {
   category?: string | string[];
   sg_message_id?: string;
   sgMessageId?: string;
+  singlesend_id?: string;
+  singlesendId?: string;
+  singlesend_name?: string;
+  singlesendName?: string;
   [key: string]: unknown;
 }
 
@@ -46,7 +50,12 @@ const eventTypeMap: Record<string, SendGridEventType> = {
 
 const normalizeCampaignId = (event: SendGridWebhookEvent) => {
   const explicitCampaignId =
-    event.campaign_id ?? event.campaignId ?? event.marketing_campaign_id ?? undefined;
+    event.campaign_id ??
+    event.campaignId ??
+    event.marketing_campaign_id ??
+    event.singlesend_id ??
+    event.singlesendId ??
+    undefined;
 
   if (explicitCampaignId) {
     return explicitCampaignId;
@@ -68,6 +77,24 @@ const normalizeCampaignId = (event: SendGridWebhookEvent) => {
 const normalizeMessageId = (event: SendGridWebhookEvent) =>
   event.sg_message_id ?? event.sgMessageId ?? undefined;
 
+const normalizeCampaignName = (event: SendGridWebhookEvent) => {
+  if (event.singlesend_name || event.singlesendName) {
+    return (event.singlesend_name ?? event.singlesendName) as string;
+  }
+
+  if (event.category) {
+    if (Array.isArray(event.category)) {
+      return event.category.find((value) => typeof value === "string");
+    }
+
+    if (typeof event.category === "string") {
+      return event.category;
+    }
+  }
+
+  return undefined;
+};
+
 const normalizeEventType = (event?: string): SendGridEventType | null => {
   if (!event) return null;
   const normalized = event.toLowerCase();
@@ -83,6 +110,15 @@ const updateLastEventAt = (existingDate: Date | null, incomingDate: Date) => {
 };
 
 type RecipientUpdateContext = { id: string; uniqueOpens: number; lastEventAt: Date | null };
+type RecipientCounters = {
+  delivered: number;
+  opens: number;
+  uniqueOpens: number;
+  clicks: number;
+  bounces: number;
+  spamReports: number;
+  unsubscribes: number;
+};
 
 const buildUpdateInput = (
   eventType: SendGridEventType,
@@ -117,6 +153,10 @@ const buildUpdateInput = (
       break;
   }
 
+  if (!currentRecipient.lastEventAt) {
+    data.lastEventAt = eventTimestamp;
+  }
+
   return data as Prisma.CampaignRecipientsUpdateInput;
 };
 
@@ -127,6 +167,7 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
     const eventType = normalizeEventType(event.event);
     const email = event.email;
     const campaignId = normalizeCampaignId(event);
+    const campaignName = normalizeCampaignName(event);
     const messageId = normalizeMessageId(event);
 
     if (!eventType) {
@@ -149,6 +190,22 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
 
       if (!emailCampaign) {
         result.skipped.push({ email, campaignId, event: event.event, reason: "campaign not found" });
+        continue;
+      }
+
+      emailCampaignId = emailCampaign.id;
+    } else if (campaignName) {
+      const emailCampaign = await prisma.emailCampaign.findFirst({
+        where: { campaignName },
+        select: { id: true, campaignId: true },
+      });
+
+      if (!emailCampaign) {
+        result.skipped.push({
+          email,
+          event: event.event,
+          reason: "campaign not found for name",
+        });
         continue;
       }
 
@@ -183,18 +240,59 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
       });
     }
 
+    const eventTimestamp = resolveEventTimestamp(event);
+
     if (!recipient) {
-      result.skipped.push({
-        email,
-        campaignId,
-        event: event.event,
-        reason: messageId ? "recipient not found for message id" : "recipient not found",
-      });
+      if (!emailCampaignId) {
+        result.skipped.push({
+          email,
+          campaignId,
+          event: event.event,
+          reason: messageId ? "recipient not found for message id" : "recipient not found",
+        });
+        continue;
+      }
+
+      const counters: RecipientCounters = {
+        delivered: eventType === "delivered" ? 1 : 0,
+        opens: eventType === "open" ? 1 : 0,
+        uniqueOpens: eventType === "open" ? 1 : 0,
+        clicks: eventType === "click" ? 1 : 0,
+        bounces: eventType === "bounce" ? 1 : 0,
+        spamReports: eventType === "spamreport" ? 1 : 0,
+        unsubscribes: eventType === "unsubscribe" ? 1 : 0,
+      };
+
+      try {
+        await prisma.campaignRecipients.create({
+          data: {
+            email: email ?? null,
+            emailCampaign: { connect: { id: emailCampaignId } },
+            sendgridMessageId: messageId,
+            lastEventAt: eventTimestamp,
+            ...counters,
+          },
+        });
+
+        result.processed += 1;
+      } catch (error) {
+        console.error("Failed to create CampaignRecipient from webhook", error);
+        result.skipped.push({
+          email,
+          campaignId,
+          event: event.event,
+          reason: "failed to create recipient",
+        });
+      }
+
       continue;
     }
 
-    const eventTimestamp = resolveEventTimestamp(event);
     const updateInput = buildUpdateInput(eventType, recipient, eventTimestamp);
+
+    if (messageId && !("sendgridMessageId" in updateInput)) {
+      updateInput.sendgridMessageId = messageId;
+    }
 
     await prisma.campaignRecipients.update({
       where: { id: recipient.id },
