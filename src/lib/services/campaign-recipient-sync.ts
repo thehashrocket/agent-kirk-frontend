@@ -477,20 +477,25 @@ export class CampaignRecipientSyncService {
       }
 
       const recipients = this.parser.parse(content);
-      summary.recipientsParsed += recipients.length;
-
       const campaign = await findEmailCampaignByFileName(file.name);
 
       if (!campaign) {
+        console.warn(
+          `[CampaignRecipientSync] No email campaign match for file "${file.name}". Parsed ${recipients.length} recipients; skipping.`,
+        );
         summary.unmatchedFiles.push(file.name);
         continue;
       }
 
       summary.filesMatched += 1;
       const result = await persistRecipientsForCampaign(campaign.id, recipients);
+      summary.recipientsParsed += recipients.length;
       summary.recipientsInserted += result.inserted;
       summary.recipientsExisting += result.existing;
       summary.recipientsUpdated = (summary.recipientsUpdated ?? 0) + result.updated;
+      console.info(
+        `[CampaignRecipientSync] Processed file "${file.name}" -> campaign "${campaign.campaignName}" (${campaign.id}). Parsed ${recipients.length}; inserted ${result.inserted}; updated ${result.updated}; existing (unchanged) ${result.existing - result.updated}.`,
+      );
       processedCount += 1;
     }
 
@@ -647,7 +652,7 @@ async function persistRecipientsForCampaign(
           }),
         ),
       );
-      existing += updateRows.length;
+      existing += existingRows.length;
       updated += updateRows.length;
     }
 
