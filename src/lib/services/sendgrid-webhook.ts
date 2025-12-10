@@ -252,16 +252,16 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
     let recipient =
       emailCampaignId && email
         ? await prisma.campaignRecipients.findFirst({
-            where: {
-              emailCampaignId,
-              email,
-            },
-            select: {
-              id: true,
-              uniqueOpens: true,
-              lastEventAt: true,
-            },
-          })
+          where: {
+            emailCampaignId,
+            email,
+          },
+          select: {
+            id: true,
+            uniqueOpens: true,
+            lastEventAt: true,
+          },
+        })
         : null;
 
     if (!recipient && messageId && sendgridMessageIdSupported) {
@@ -332,13 +332,6 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
           data: createData,
         });
 
-        console.info("SendGrid webhook: created campaign recipient", {
-          email,
-          campaignId,
-          messageId,
-          event: event.event,
-        });
-
         result.processed += 1;
       } catch (error) {
         if (sendgridMessageIdSupported && isSendgridMessageIdValidationError(error)) {
@@ -388,18 +381,18 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
             const includeMessageId = sendgridMessageIdSupported && messageId;
             const updateData = includeMessageId
               ? (attachMessageId(
-                  {
-                    ...updateInput,
-                    lastEventType: eventType,
-                    lastEventDetail: extractEventDetail(event),
-                  } as Record<string, unknown>,
-                  messageId,
-                ) as Prisma.CampaignRecipientsUpdateInput)
-              : ({
+                {
                   ...updateInput,
                   lastEventType: eventType,
                   lastEventDetail: extractEventDetail(event),
-                } as Prisma.CampaignRecipientsUpdateInput);
+                } as Record<string, unknown>,
+                messageId,
+              ) as Prisma.CampaignRecipientsUpdateInput)
+              : ({
+                ...updateInput,
+                lastEventType: eventType,
+                lastEventDetail: extractEventDetail(event),
+              } as Prisma.CampaignRecipientsUpdateInput);
 
             try {
               await prisma.campaignRecipients.update({
@@ -436,30 +429,23 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
     const includeMessageId = sendgridMessageIdSupported && messageId;
     const updateData = includeMessageId
       ? (attachMessageId(
-          {
-            ...updateInput,
-            lastEventType: eventType,
-            lastEventDetail: extractEventDetail(event),
-          } as Record<string, unknown>,
-          messageId,
-        ) as Prisma.CampaignRecipientsUpdateInput)
-      : ({
+        {
           ...updateInput,
           lastEventType: eventType,
           lastEventDetail: extractEventDetail(event),
-        } as Prisma.CampaignRecipientsUpdateInput);
+        } as Record<string, unknown>,
+        messageId,
+      ) as Prisma.CampaignRecipientsUpdateInput)
+      : ({
+        ...updateInput,
+        lastEventType: eventType,
+        lastEventDetail: extractEventDetail(event),
+      } as Prisma.CampaignRecipientsUpdateInput);
 
     try {
       await prisma.campaignRecipients.update({
         where: { id: recipient.id },
         data: updateData,
-      });
-      console.info("SendGrid webhook: updated campaign recipient", {
-        recipientId: recipient.id,
-        campaignId,
-        email,
-        messageId: includeMessageId ? messageId : undefined,
-        event: event.event,
       });
     } catch (error) {
       if (includeMessageId && isSendgridMessageIdValidationError(error)) {
