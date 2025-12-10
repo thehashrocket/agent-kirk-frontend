@@ -13,6 +13,11 @@ const DRIVE_FILES_ENDPOINT = "https://www.googleapis.com/drive/v3/files";
 const GOOGLE_SHEETS_MIME_TYPE = "application/vnd.google-apps.spreadsheet";
 const CSV_EXPORT_MIME_TYPE = "text/csv";
 const GOOGLE_DRIVE_SHORTCUT_MIME_TYPE = "application/vnd.google-apps.shortcut";
+const MAX_FETCH_RETRIES = 3;
+const BASE_BACKOFF_MS = 400;
+const MAX_BACKOFF_MS = 4000;
+const BACKOFF_JITTER_MS = 200;
+const INTER_FILE_DELAY_MS = 200;
 const DRIVE_FOLDERS = {
   scheduledEmail: {
     id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
@@ -132,7 +137,10 @@ class GoogleDriveClient implements DriveClient {
             params.set("pageToken", pageToken);
           }
 
-          const response = await fetch(`${DRIVE_FILES_ENDPOINT}?${params.toString()}`);
+          const response = await fetchWithBackoff(
+            () => fetch(`${DRIVE_FILES_ENDPOINT}?${params.toString()}`),
+            `list files strategy ${strategy.label}`,
+          );
 
           if (!response.ok) {
             const details = await response.text().catch(() => response.statusText);
@@ -164,16 +172,24 @@ class GoogleDriveClient implements DriveClient {
     const errors: string[] = [];
 
     for (const attempt of attempts) {
-      const response = await fetch(attempt.url);
+      try {
+        const response = await fetchWithBackoff(
+          () => fetch(attempt.url),
+          `download ${attempt.label} for file ${file.name}`,
+        );
 
-      if (response.ok) {
-        return response.text();
+        if (response.ok) {
+          return response.text();
+        }
+
+        const body = await response.text().catch(() => "");
+        errors.push(
+          `${attempt.label}: ${response.status} ${response.statusText}${body ? ` - ${body}` : ""}`,
+        );
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push(`${attempt.label}: ${message}`);
       }
-
-      const body = await response.text().catch(() => "");
-      errors.push(
-        `${attempt.label}: ${response.status} ${response.statusText}${body ? ` - ${body}` : ""}`,
-      );
     }
 
     throw new Error(`Failed to download file ${file.name}: ${errors.join("; ")}`);
@@ -435,6 +451,7 @@ export class CampaignRecipientSyncService {
     for (const file of slice) {
       let content: string;
       try {
+        await delay(INTER_FILE_DELAY_MS);
         content = await this.driveClient.downloadFile(file);
       } catch (error) {
         const reason = error instanceof Error ? error.message : "Unknown download error";
@@ -658,4 +675,47 @@ function buildServiceWithFolder(folder?: SyncFolderInput): CampaignRecipientSync
   const resolvedFolder = resolveFolder(folder);
 
   return new CampaignRecipientSyncService(driveClient, parser, resolvedFolder);
+}
+
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function calculateBackoffMs(attempt: number): number {
+  const base = Math.min(MAX_BACKOFF_MS, BASE_BACKOFF_MS * 2 ** attempt);
+  const jitter = Math.floor(Math.random() * BACKOFF_JITTER_MS);
+  return base + jitter;
+}
+
+async function fetchWithBackoff(request: () => Promise<Response>, label: string): Promise<Response> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= MAX_FETCH_RETRIES; attempt += 1) {
+    try {
+      const response = await request();
+      if (response.ok) {
+        return response;
+      }
+
+      lastError = new Error(
+        `${label} attempt ${attempt + 1} failed: ${response.status} ${response.statusText}`,
+      );
+
+      if (attempt < MAX_FETCH_RETRIES) {
+        await delay(calculateBackoffMs(attempt));
+        continue;
+      }
+
+      throw lastError;
+    } catch (error) {
+      lastError = error;
+      if (attempt < MAX_FETCH_RETRIES) {
+        await delay(calculateBackoffMs(attempt));
+        continue;
+      }
+      throw error;
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
 }
