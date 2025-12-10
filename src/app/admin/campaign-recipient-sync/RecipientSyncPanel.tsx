@@ -104,7 +104,7 @@ export function RecipientSyncPanel() {
           cursor = response.nextCursor;
 
           if (cursor !== null) {
-            for (let i = 120; i > 0; i--) {
+            for (let i = 30; i > 0; i--) {
               setStatusMessage(`Waiting ${i}s before processing next file...`);
               await new Promise((resolve) => setTimeout(resolve, 1000));
             }
