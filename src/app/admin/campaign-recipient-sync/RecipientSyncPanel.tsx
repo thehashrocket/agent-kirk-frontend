@@ -293,6 +293,8 @@ function mergeSummaries(
     (current.recipientsUpdated ?? 0) + (next.recipientsUpdated ?? 0);
 
   return {
+    folderId: next.folderId || current.folderId,
+    folderName: next.folderName || current.folderName,
     totalFiles: next.totalFiles || current.totalFiles,
     processedFiles,
     filesMatched: current.filesMatched + next.filesMatched,
