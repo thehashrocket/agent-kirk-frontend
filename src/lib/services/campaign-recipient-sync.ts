@@ -472,6 +472,7 @@ export class CampaignRecipientSyncService {
           `[CampaignRecipientSync] No email campaign match for file "${file.name}". Skipping download and parse.`,
         );
         summary.unmatchedFiles.push(file.name);
+        processedCount += 1;
         continue;
       }
 

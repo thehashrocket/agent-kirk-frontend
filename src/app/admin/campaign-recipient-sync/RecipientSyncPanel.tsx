@@ -83,6 +83,24 @@ export function RecipientSyncPanel() {
             durationMs: response.durationMs,
           });
 
+          // Update status trail with specific skip/failure messages for this batch
+          if (response.summary.unmatchedFiles.length > 0) {
+            setStatusTrail((prev) => [
+              ...prev,
+              ...response.summary.unmatchedFiles.map(
+                (f) => `Skipped "${f}": No matching campaign found.`,
+              ),
+            ]);
+          }
+          if (response.summary.failedDownloads.length > 0) {
+            setStatusTrail((prev) => [
+              ...prev,
+              ...response.summary.failedDownloads.map(
+                (f) => `Failed "${f.fileName}": ${f.reason}`,
+              ),
+            ]);
+          }
+
           cursor = response.nextCursor;
 
           if (cursor !== null) {
