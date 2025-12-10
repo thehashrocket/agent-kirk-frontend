@@ -27,6 +27,10 @@ export async function POST(req: Request) {
 
     const { uspsCampaignId, emailCampaignId, recipients } = body;
 
+    console.info('uspsCampaignId', uspsCampaignId)
+    console.info('emailCampaignId', emailCampaignId)
+    console.info('recipients', recipients)
+
     // if (!uspsCampaignId && !emailCampaignId) {
     //     return new NextResponse(
     //         JSON.stringify({ error: "Either uspsCampaignId or emailCampaignId is required" }),
