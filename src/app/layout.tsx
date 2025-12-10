@@ -28,13 +28,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       {/* Only load the Script when in the staging environment */}
-      {process.env.APP_ENV === "staging" && (
+      {/* {process.env.APP_ENV === "staging" && (
         <Script
           id="bugherd-script"
           src="https://www.bugherd.com/sidebarv2.js?apikey=hvzbbkqgumxrgii49nojqq"
           strategy="afterInteractive"
         />
-      )}
+      )} */}
       <body
         className="font-bliss"
         data-print-page={isPrintPage ? "true" : undefined}
