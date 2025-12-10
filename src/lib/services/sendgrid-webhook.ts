@@ -120,6 +120,11 @@ type RecipientCounters = {
   unsubscribes: number;
 };
 
+let sendgridMessageIdSupported = true;
+
+const isSendgridMessageIdValidationError = (error: unknown) =>
+  error instanceof Error && error.message.includes("sendgridMessageId");
+
 const buildUpdateInput = (
   eventType: SendGridEventType,
   currentRecipient: RecipientUpdateContext,
@@ -228,16 +233,27 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
         : null;
 
     if (!recipient && messageId) {
-      recipient = await prisma.campaignRecipients.findFirst({
-        where: {
-          sendgridMessageId: messageId,
-        },
-        select: {
-          id: true,
-          uniqueOpens: true,
-          lastEventAt: true,
-        },
-      });
+      if (sendgridMessageIdSupported) {
+        try {
+          recipient = await prisma.campaignRecipients.findFirst({
+            where: {
+              sendgridMessageId: messageId,
+            },
+            select: {
+              id: true,
+              uniqueOpens: true,
+              lastEventAt: true,
+            },
+          });
+        } catch (error) {
+          if (isSendgridMessageIdValidationError(error)) {
+            sendgridMessageIdSupported = false;
+            console.warn("sendgridMessageId not supported by current Prisma client/schema; disabling messageId lookup.");
+          } else {
+            throw error;
+          }
+        }
+      }
     }
 
     const eventTimestamp = resolveEventTimestamp(event);
@@ -268,14 +284,44 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
           data: {
             email: email ?? null,
             emailCampaign: { connect: { id: emailCampaignId } },
-            sendgridMessageId: messageId,
+            ...(sendgridMessageIdSupported && messageId ? { sendgridMessageId: messageId } : {}),
             lastEventAt: eventTimestamp,
             ...counters,
           },
         });
 
+        console.info("SendGrid webhook: created campaign recipient", {
+          email,
+          campaignId,
+          messageId,
+          event: event.event,
+        });
+
         result.processed += 1;
       } catch (error) {
+        if (sendgridMessageIdSupported && isSendgridMessageIdValidationError(error)) {
+          sendgridMessageIdSupported = false;
+          console.warn("sendgridMessageId not supported by current Prisma client/schema; retrying create without it.");
+          try {
+            await prisma.campaignRecipients.create({
+              data: {
+                email: email ?? null,
+                emailCampaign: { connect: { id: emailCampaignId } },
+                lastEventAt: eventTimestamp,
+                ...counters,
+              },
+            });
+            console.info("SendGrid webhook: created campaign recipient (without messageId)", {
+              email,
+              campaignId,
+              event: event.event,
+            });
+            result.processed += 1;
+            continue;
+          } catch (innerError) {
+            console.error("Failed to create CampaignRecipient after disabling sendgridMessageId", innerError);
+          }
+        }
         console.error("Failed to create CampaignRecipient from webhook", error);
         result.skipped.push({
           email,
@@ -290,14 +336,39 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
 
     const updateInput = buildUpdateInput(eventType, recipient, eventTimestamp);
 
-    if (messageId && !("sendgridMessageId" in updateInput)) {
-      updateInput.sendgridMessageId = messageId;
-    }
+    const includeMessageId = sendgridMessageIdSupported && messageId;
+    const updateData = includeMessageId ? { ...updateInput, sendgridMessageId: messageId } : updateInput;
 
-    await prisma.campaignRecipients.update({
-      where: { id: recipient.id },
-      data: updateInput,
-    });
+    try {
+      await prisma.campaignRecipients.update({
+        where: { id: recipient.id },
+        data: updateData,
+      });
+      console.info("SendGrid webhook: updated campaign recipient", {
+        recipientId: recipient.id,
+        campaignId,
+        email,
+        messageId: includeMessageId ? messageId : undefined,
+        event: event.event,
+      });
+    } catch (error) {
+      if (includeMessageId && isSendgridMessageIdValidationError(error)) {
+        sendgridMessageIdSupported = false;
+        console.warn("sendgridMessageId not supported by current Prisma client/schema; retrying update without it.");
+        await prisma.campaignRecipients.update({
+          where: { id: recipient.id },
+          data: updateInput,
+        });
+        console.info("SendGrid webhook: updated campaign recipient (without messageId)", {
+          recipientId: recipient.id,
+          campaignId,
+          email,
+          event: event.event,
+        });
+      } else {
+        throw error;
+      }
+    }
 
     result.processed += 1;
   }
