@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { handleSendGridEvents, type SendGridWebhookEvent } from "@/lib/services/sendgrid-webhook";
-
+console.info("SendGrid webhook: handler reached")
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
