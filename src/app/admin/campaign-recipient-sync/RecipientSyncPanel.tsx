@@ -84,6 +84,13 @@ export function RecipientSyncPanel() {
           });
 
           cursor = response.nextCursor;
+
+          if (cursor !== null) {
+            for (let i = 120; i > 0; i--) {
+              setStatusMessage(`Waiting ${i}s before processing next file...`);
+              await new Promise((resolve) => setTimeout(resolve, 1000));
+            }
+          }
         }
 
         if (aggregatedSummary) {
@@ -274,10 +281,13 @@ export function RecipientSyncPanel() {
 function buildFriendlyError(err: unknown): string {
   if (err instanceof Error) {
     if (/504|timeout/i.test(err.message)) {
+      console.error(err);
       return "Gateway timeout while syncing. The sync likely took too long; please retry. Partial progress may have completed.";
     }
+    console.error(err);
     return err.message;
   }
+  console.error(err);
   return "Unexpected error during sync.";
 }
 
