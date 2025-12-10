@@ -21,7 +21,7 @@ export default async function CampaignRecipientSyncPage() {
         <header>
           <h1 className="text-2xl font-semibold text-gray-900">Campaign Recipient Sync</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Trigger a pull from the Google Drive "Scheduled Email" folder to aggregate scheduled email recipients.
+            Trigger a pull from a Google Drive folder (Scheduled Email or [00] Processed Lists) to aggregate scheduled email recipients.
           </p>
         </header>
 

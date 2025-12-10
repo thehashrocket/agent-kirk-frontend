@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import {
   syncScheduledEmailRecipients,
+  type SyncFolderInput,
   type CampaignRecipientSyncSummary,
 } from '@/lib/services/campaign-recipient-sync';
 
@@ -25,6 +26,7 @@ export interface CampaignRecipientSyncError {
 export interface TriggerCampaignRecipientSyncParams {
   cursor?: number;
   batchSize?: number;
+  folder?: SyncFolderInput;
 }
 
 export async function triggerCampaignRecipientSync(
@@ -41,6 +43,7 @@ export async function triggerCampaignRecipientSync(
     const summary = await syncScheduledEmailRecipients({
       startIndex: params?.cursor ?? 0,
       batchSize: params?.batchSize,
+      folder: params?.folder,
     });
     const completedAt = new Date();
     const nextCursor =

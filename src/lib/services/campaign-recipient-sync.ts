@@ -1,9 +1,10 @@
 /**
  * @file Campaign recipient sync service for pulling scheduled email recipients from Google Drive.
  *
- * The service lists files in the "Scheduled Email" Drive folder and parses CSV rows into typed
- * recipient records. Responsibilities are split across a Drive client, CSV parser, and the
- * coordinating sync service to keep concerns isolated and testable.
+ * The service lists files in a configured Drive folder (default is "Scheduled Email", also supports
+ * "[00] Processed Lists") and parses CSV rows into typed recipient records. Responsibilities are
+ * split across a Drive client, CSV parser, and the coordinating sync service to keep concerns
+ * isolated and testable.
  */
 
 import { prisma } from "@/lib/prisma";
@@ -12,10 +13,20 @@ const DRIVE_FILES_ENDPOINT = "https://www.googleapis.com/drive/v3/files";
 const GOOGLE_SHEETS_MIME_TYPE = "application/vnd.google-apps.spreadsheet";
 const CSV_EXPORT_MIME_TYPE = "text/csv";
 const GOOGLE_DRIVE_SHORTCUT_MIME_TYPE = "application/vnd.google-apps.shortcut";
-const SCHEDULED_EMAIL_FOLDER = {
-  id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
-  name: "Scheduled Email",
+const DRIVE_FOLDERS = {
+  scheduledEmail: {
+    id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
+    name: "Scheduled Email",
+  },
+  processedLists: {
+    id: "1cFUWnQDpdLWs47ZMSHiZ8SgF3cX6i5A1",
+    name: "[00] Processed Lists",
+  },
 };
+
+type DriveFolderKey = keyof typeof DRIVE_FOLDERS;
+type DriveFolder = (typeof DRIVE_FOLDERS)[DriveFolderKey];
+export type SyncFolderInput = DriveFolderKey | DriveFolder;
 
 export interface DriveFile {
   id: string;
@@ -66,9 +77,7 @@ class GoogleDriveClient implements DriveClient {
 
   constructor(apiKey: string) {
     if (!apiKey) {
-      throw new Error(
-        `GOOGLE_API_KEY is required to access the ${SCHEDULED_EMAIL_FOLDER.name} folder in Google Drive.`,
-      );
+      throw new Error("GOOGLE_API_KEY is required to access Google Drive folders.");
     }
     this.apiKey = apiKey;
   }
@@ -356,14 +365,15 @@ export class CampaignRecipientSyncService {
   constructor(
     private readonly driveClient: DriveClient,
     private readonly parser: CampaignRecipientParser,
-  ) { }
+    private readonly folder: DriveFolder,
+  ) {}
 
-  async listScheduledEmailFiles(): Promise<DriveFile[]> {
-    return this.driveClient.listFilesInFolder(SCHEDULED_EMAIL_FOLDER.id);
+  async listFolderFiles(): Promise<DriveFile[]> {
+    return this.driveClient.listFilesInFolder(this.folder.id);
   }
 
   async fetchScheduledEmailRecipients(): Promise<CampaignRecipient[]> {
-    const files = await this.listScheduledEmailFiles();
+    const files = await this.listFolderFiles();
     const recipients: CampaignRecipient[] = [];
 
     for (const file of files) {
@@ -375,7 +385,7 @@ export class CampaignRecipientSyncService {
   }
 
   async syncAndPersistRecipients(options?: { startIndex?: number; batchSize?: number }): Promise<CampaignRecipientSyncSummary> {
-    const files = await this.listScheduledEmailFiles();
+    const files = await this.listFolderFiles();
     const startIndex = Math.max(options?.startIndex ?? 0, 0);
     const batchSize = options?.batchSize ?? files.length;
     const slice = files.slice(startIndex, startIndex + batchSize);
@@ -425,26 +435,20 @@ export class CampaignRecipientSyncService {
   }
 }
 
-function buildService(): CampaignRecipientSyncService {
-  const apiKey = process.env.GOOGLE_API_KEY;
-  const driveClient = new GoogleDriveClient(apiKey ?? "");
-  const parser = new CsvCampaignRecipientParser();
-
-  return new CampaignRecipientSyncService(driveClient, parser);
+export async function listScheduledEmailFiles(folder?: SyncFolderInput): Promise<DriveFile[]> {
+  return buildServiceWithFolder(folder).listFolderFiles();
 }
 
-export async function listScheduledEmailFiles(): Promise<DriveFile[]> {
-  return buildService().listScheduledEmailFiles();
-}
-
-export async function fetchScheduledEmailRecipients(): Promise<CampaignRecipient[]> {
-  return buildService().fetchScheduledEmailRecipients();
+export async function fetchScheduledEmailRecipients(
+  folder?: SyncFolderInput,
+): Promise<CampaignRecipient[]> {
+  return buildServiceWithFolder(folder).fetchScheduledEmailRecipients();
 }
 
 export async function syncScheduledEmailRecipients(
-  options?: { startIndex?: number; batchSize?: number },
+  options?: { startIndex?: number; batchSize?: number; folder?: SyncFolderInput },
 ): Promise<CampaignRecipientSyncSummary> {
-  return buildService().syncAndPersistRecipients(options);
+  return buildServiceWithFolder(options?.folder).syncAndPersistRecipients(options);
 }
 
 function stripExtension(fileName: string): string {
@@ -535,12 +539,50 @@ async function persistRecipientsForCampaign(
     const batch = data.slice(i, i + BATCH_SIZE);
     if (batch.length === 0) continue;
 
-    const result = await prisma.campaignRecipients.createMany({
-      data: batch,
-      skipDuplicates: true,
+    const existingRows = await prisma.campaignRecipients.findMany({
+      where: {
+        emailCampaignId,
+        email: { in: batch.map((item) => item.email).filter(Boolean) },
+      },
+      select: { id: true, email: true },
     });
-    inserted += result.count;
-    existing += batch.length - result.count;
+
+    const existingByEmail = new Map(
+      existingRows.map((row) => [row.email?.toLowerCase() ?? "", row.id]),
+    );
+
+    const createRows: typeof batch = [];
+    const updateRows: Array<{ id: string; data: typeof batch[number] }> = [];
+
+    for (const row of batch) {
+      const key = row.email.toLowerCase();
+      const existingId = existingByEmail.get(key);
+      if (existingId) {
+        updateRows.push({ id: existingId, data: row });
+      } else {
+        createRows.push(row);
+      }
+    }
+
+    if (createRows.length > 0) {
+      const createResult = await prisma.campaignRecipients.createMany({
+        data: createRows,
+        skipDuplicates: true,
+      });
+      inserted += createResult.count;
+    }
+
+    if (updateRows.length > 0) {
+      await prisma.$transaction(
+        updateRows.map((row) =>
+          prisma.campaignRecipients.update({
+            where: { id: row.id },
+            data: row.data,
+          }),
+        ),
+      );
+      existing += updateRows.length;
+    }
   }
 
   return { inserted, existing };
@@ -561,4 +603,29 @@ function buildAddressKey(recipient: CampaignRecipient): string {
     .filter((part) => part.length > 0);
 
   return parts.length > 0 ? `addr:${parts.join("|")}` : "";
+}
+
+function resolveFolder(folder: SyncFolderInput | undefined): DriveFolder {
+  if (!folder) {
+    return DRIVE_FOLDERS.scheduledEmail;
+  }
+
+  if (typeof folder === "string") {
+    const resolved = DRIVE_FOLDERS[folder];
+    if (!resolved) {
+      throw new Error(`Unknown campaign recipient folder: ${folder}`);
+    }
+    return resolved;
+  }
+
+  return folder;
+}
+
+function buildServiceWithFolder(folder?: SyncFolderInput): CampaignRecipientSyncService {
+  const apiKey = process.env.GOOGLE_API_KEY;
+  const driveClient = new GoogleDriveClient(apiKey ?? "");
+  const parser = new CsvCampaignRecipientParser();
+  const resolvedFolder = resolveFolder(folder);
+
+  return new CampaignRecipientSyncService(driveClient, parser, resolvedFolder);
 }

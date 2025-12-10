@@ -8,7 +8,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, RefreshCw } from "lucide-react";
+import type { SyncFolderInput } from "@/lib/services/campaign-recipient-sync";
 
 export function RecipientSyncPanel() {
   const [isPending, startTransition] = useTransition();
@@ -17,6 +19,12 @@ export function RecipientSyncPanel() {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [statusTrail, setStatusTrail] = useState<string[]>([]);
   const [aggregateSummary, setAggregateSummary] = useState<CampaignRecipientSyncResult | null>(null);
+  // default to Scheduled Email folder
+  const [folder, setFolder] = useState<SyncFolderInput>("scheduledEmail");
+  const folderLabel = useMemo(
+    () => (folder === "processedLists" ? "[00] Processed Lists" : "Scheduled Email"),
+    [folder],
+  );
 
   const handleSync = () => {
     setError(null);
@@ -32,7 +40,7 @@ export function RecipientSyncPanel() {
 
       try {
         while (cursor !== null) {
-          const response = await triggerCampaignRecipientSync({ cursor, batchSize });
+          const response = await triggerCampaignRecipientSync({ cursor, batchSize, folder });
 
           if (!response.success) {
             setResult(null);
@@ -104,12 +112,29 @@ export function RecipientSyncPanel() {
       <div className="space-y-1">
         <h2 className="text-lg font-semibold">Campaign Recipient Sync</h2>
         <p className="text-sm text-muted-foreground">
-          Reads the "Scheduled Email" folder in Google Drive and parses CSV rows into normalized recipients.
-          Requires a valid <code>GOOGLE_API_KEY</code> with read access to the folder.
+          Reads a selected Google Drive folder and parses CSV rows into normalized recipients. Requires a valid{" "}
+          <code>GOOGLE_API_KEY</code> with read access to the folder.
         </p>
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-muted-foreground">Folder</span>
+          <Select
+            value={typeof folder === "string" ? folder : "scheduledEmail"}
+            onValueChange={(value) => setFolder(value as SyncFolderInput)}
+            disabled={isPending}
+          >
+            <SelectTrigger className="min-w-[220px]" size="sm">
+              <SelectValue placeholder="Select folder" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="scheduledEmail">Scheduled Email</SelectItem>
+              <SelectItem value="processedLists">[00] Processed Lists</SelectItem>
+            </SelectContent>
+          </Select>
+          <span className="text-xs text-muted-foreground">Syncing from: {folderLabel}</span>
+        </div>
         <Button onClick={handleSync} disabled={isPending}>
           {isPending ? (
             <>
