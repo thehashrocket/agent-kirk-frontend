@@ -52,6 +52,8 @@ model CampaignRecipients {
   uspsCampaignId  String?
   sendgridMessageId String?
   lastEventAt     DateTime?
+  lastEventType   String?
+  lastEventDetail String?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   emailCampaign   EmailCampaign? @relation(fields: [emailCampaignId], references: [id])

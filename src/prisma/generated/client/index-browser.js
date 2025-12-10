@@ -161,6 +161,8 @@ exports.Prisma.CampaignRecipientsScalarFieldEnum = {
   uspsCampaignId: 'uspsCampaignId',
   sendgridMessageId: 'sendgridMessageId',
   lastEventAt: 'lastEventAt',
+  lastEventType: 'lastEventType',
+  lastEventDetail: 'lastEventDetail',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
