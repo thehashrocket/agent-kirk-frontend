@@ -22,7 +22,18 @@ export function RecipientSyncPanel() {
   // default to Scheduled Email folder
   const [folder, setFolder] = useState<SyncFolderInput>("scheduledEmail");
   const folderLabel = useMemo(
-    () => (folder === "processedLists" ? "[00] Processed Lists" : "Scheduled Email"),
+    () => {
+      switch (folder) {
+        case "processedLists":
+          return "[00] Processed Lists";
+        case "cleanedLists":
+          return "[02] Cleaned Lists";
+        case "sendgridUploads":
+          return "[04] List Uploaded to sendgrind";
+        default:
+          return "Scheduled Email";
+      }
+    },
     [folder],
   );
 
@@ -131,6 +142,8 @@ export function RecipientSyncPanel() {
             <SelectContent>
               <SelectItem value="scheduledEmail">Scheduled Email</SelectItem>
               <SelectItem value="processedLists">[00] Processed Lists</SelectItem>
+              <SelectItem value="cleanedLists">[02] Cleaned Lists</SelectItem>
+              <SelectItem value="sendgridUploads">[04] List Uploaded to sendgrind</SelectItem>
             </SelectContent>
           </Select>
           <span className="text-xs text-muted-foreground">Syncing from: {folderLabel}</span>
@@ -157,12 +170,10 @@ export function RecipientSyncPanel() {
             <p>
               Parsed {aggregateSummary.summary.recipientsParsed.toLocaleString()} recipient
               {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
-              {aggregateSummary.summary.recipientsInserted.toLocaleString()} new,{" "}
-              {aggregateSummary.summary.recipientsExisting.toLocaleString()} existing unique record
-              {aggregateSummary.summary.recipientsInserted + aggregateSummary.summary.recipientsExisting === 1
-                ? ""
-                : "s"}
-              .
+              {aggregateSummary.summary.recipientsInserted.toLocaleString()} new, updated{" "}
+              {aggregateSummary.summary.recipientsUpdated?.toLocaleString() ?? "0"}, and left{" "}
+              {(aggregateSummary.summary.recipientsExisting - (aggregateSummary.summary.recipientsUpdated ?? 0)).toLocaleString()} unchanged unique record
+              {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}.
             </p>
           </div>
         )}
@@ -175,8 +186,10 @@ export function RecipientSyncPanel() {
             </p>
             <p>
               Parsed {result.summary.recipientsParsed.toLocaleString()} recipient
-              {result.summary.recipientsParsed === 1 ? "" : "s"}; inserted {result.summary.recipientsInserted.toLocaleString()} new,{" "}
-              {result.summary.recipientsExisting.toLocaleString()} existing unique record
+              {result.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
+              {result.summary.recipientsInserted.toLocaleString()} new, updated{" "}
+              {result.summary.recipientsUpdated?.toLocaleString() ?? "0"}, and left{" "}
+              {(result.summary.recipientsExisting - (result.summary.recipientsUpdated ?? 0)).toLocaleString()} unchanged unique record
               {result.summary.recipientsInserted + result.summary.recipientsExisting === 1 ? "" : "s"}.
             </p>
             <p className="text-xs text-muted-foreground">
@@ -269,6 +282,8 @@ function mergeSummaries(
   }
 
   const processedFiles = current.processedFiles + next.processedFiles;
+  const recipientsUpdated =
+    (current.recipientsUpdated ?? 0) + (next.recipientsUpdated ?? 0);
 
   return {
     totalFiles: next.totalFiles || current.totalFiles,
@@ -277,6 +292,7 @@ function mergeSummaries(
     recipientsParsed: current.recipientsParsed + next.recipientsParsed,
     recipientsInserted: current.recipientsInserted + next.recipientsInserted,
     recipientsExisting: current.recipientsExisting + next.recipientsExisting,
+    recipientsUpdated,
     unmatchedFiles: [...current.unmatchedFiles, ...next.unmatchedFiles],
     failedDownloads: [...current.failedDownloads, ...next.failedDownloads],
     processedRange: {

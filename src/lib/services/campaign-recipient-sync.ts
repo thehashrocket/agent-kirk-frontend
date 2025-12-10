@@ -22,6 +22,14 @@ const DRIVE_FOLDERS = {
     id: "1cFUWnQDpdLWs47ZMSHiZ8SgF3cX6i5A1",
     name: "[00] Processed Lists",
   },
+  cleanedLists: {
+    id: "18UKhKRQP6_mO82dngD3BtlHqhLJYX67o",
+    name: "[02] Cleaned Lists",
+  },
+  sendgridUploads: {
+    id: "1ZP8ff8Xz0dOyAfhLxSMgl17IaKreOHJX",
+    name: "[04] List Uploaded to sendgrind",
+  },
 };
 
 type DriveFolderKey = keyof typeof DRIVE_FOLDERS;
@@ -57,6 +65,7 @@ export interface CampaignRecipientSyncSummary {
   filesMatched: number;
   recipientsParsed: number;
   recipientsInserted: number;
+  recipientsUpdated?: number;
   recipientsExisting: number;
   unmatchedFiles: string[];
   failedDownloads: Array<{ fileName: string; reason: string }>;
@@ -396,6 +405,7 @@ export class CampaignRecipientSyncService {
       filesMatched: 0,
       recipientsParsed: 0,
       recipientsInserted: 0,
+      recipientsUpdated: 0,
       recipientsExisting: 0,
       unmatchedFiles: [],
       failedDownloads: [],
@@ -429,6 +439,7 @@ export class CampaignRecipientSyncService {
       const result = await persistRecipientsForCampaign(campaign.id, recipients);
       summary.recipientsInserted += result.inserted;
       summary.recipientsExisting += result.existing;
+      summary.recipientsUpdated = (summary.recipientsUpdated ?? 0) + result.updated;
     }
 
     return summary;
@@ -486,9 +497,9 @@ async function findEmailCampaignByFileName(fileName: string) {
 async function persistRecipientsForCampaign(
   emailCampaignId: string,
   recipients: CampaignRecipient[],
-): Promise<{ inserted: number; existing: number }> {
+): Promise<{ inserted: number; existing: number; updated: number }> {
   if (recipients.length === 0) {
-    return { inserted: 0, existing: 0 };
+    return { inserted: 0, existing: 0, updated: 0 };
   }
 
   const seenEmails = new Set<string>();
@@ -534,6 +545,7 @@ async function persistRecipientsForCampaign(
   const BATCH_SIZE = 1000;
   let inserted = 0;
   let existing = 0;
+  let updated = 0;
 
   for (let i = 0; i < data.length; i += BATCH_SIZE) {
     const batch = data.slice(i, i + BATCH_SIZE);
@@ -582,10 +594,11 @@ async function persistRecipientsForCampaign(
         ),
       );
       existing += updateRows.length;
+      updated += updateRows.length;
     }
   }
 
-  return { inserted, existing };
+  return { inserted, existing, updated };
 }
 
 function buildAddressKey(recipient: CampaignRecipient): string {
