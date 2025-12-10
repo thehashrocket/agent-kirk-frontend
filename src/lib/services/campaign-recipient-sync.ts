@@ -13,14 +13,15 @@ const DRIVE_FILES_ENDPOINT = "https://www.googleapis.com/drive/v3/files";
 const GOOGLE_SHEETS_MIME_TYPE = "application/vnd.google-apps.spreadsheet";
 const CSV_EXPORT_MIME_TYPE = "text/csv";
 const GOOGLE_DRIVE_SHORTCUT_MIME_TYPE = "application/vnd.google-apps.shortcut";
-const MAX_FETCH_RETRIES = 3;
-const BASE_BACKOFF_MS = 400;
-const MAX_BACKOFF_MS = 4000;
+const MAX_FETCH_RETRIES = 2;
+const BASE_BACKOFF_MS = 250;
+const MAX_BACKOFF_MS = 2000;
 const BACKOFF_JITTER_MS = 200;
 const INTER_FILE_DELAY_MS = 200;
-const FETCH_TIMEOUT_MS = 10_000;
+const FETCH_TIMEOUT_MS = 5000;
 const RECIPIENT_DB_BATCH_SIZE = 250;
 const INTER_RECIPIENT_BATCH_DELAY_MS = 50;
+const DEFAULT_SYNC_RUNTIME_MS = 9000;
 const DRIVE_FOLDERS = {
   scheduledEmail: {
     id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
@@ -414,7 +415,7 @@ export class CampaignRecipientSyncService {
     return recipients;
   }
 
-  async syncAndPersistRecipients(options?: { startIndex?: number; batchSize?: number }): Promise<CampaignRecipientSyncSummary> {
+  async syncAndPersistRecipients(options?: { startIndex?: number; batchSize?: number; maxRuntimeMs?: number }): Promise<CampaignRecipientSyncSummary> {
     console.info(
       `[CampaignRecipientSync] Listing files in folder "${this.folder.name}" (${this.folder.id})`,
     );
@@ -425,10 +426,13 @@ export class CampaignRecipientSyncService {
     const startIndex = Math.max(options?.startIndex ?? 0, 0);
     const batchSize = options?.batchSize ?? files.length;
     const slice = files.slice(startIndex, startIndex + batchSize);
+    const maxRuntimeMs = options?.maxRuntimeMs ?? DEFAULT_SYNC_RUNTIME_MS;
+    const startedAt = Date.now();
+    let processedCount = 0;
 
     const summary: CampaignRecipientSyncSummary = {
       totalFiles: files.length,
-      processedFiles: slice.length,
+      processedFiles: 0,
       filesMatched: 0,
       recipientsParsed: 0,
       recipientsInserted: 0,
@@ -440,7 +444,7 @@ export class CampaignRecipientSyncService {
       failedDownloads: [],
       processedRange: {
         start: startIndex,
-        end: startIndex + (slice.length > 0 ? slice.length - 1 : 0),
+        end: startIndex - 1,
       },
     };
 
@@ -452,6 +456,16 @@ export class CampaignRecipientSyncService {
     }
 
     for (const file of slice) {
+      const elapsed = Date.now() - startedAt;
+      if (elapsed >= maxRuntimeMs) {
+        console.warn(
+          `[CampaignRecipientSync] Runtime budget reached (${elapsed}ms >= ${maxRuntimeMs}ms). Halting early at file index ${
+            startIndex + processedCount
+          }.`,
+        );
+        break;
+      }
+
       let content: string;
       try {
         await delay(INTER_FILE_DELAY_MS);
@@ -477,7 +491,11 @@ export class CampaignRecipientSyncService {
       summary.recipientsInserted += result.inserted;
       summary.recipientsExisting += result.existing;
       summary.recipientsUpdated = (summary.recipientsUpdated ?? 0) + result.updated;
+      processedCount += 1;
     }
+
+    summary.processedFiles = processedCount;
+    summary.processedRange.end = processedCount > 0 ? startIndex + processedCount - 1 : startIndex - 1;
 
     return summary;
   }
@@ -494,7 +512,7 @@ export async function fetchScheduledEmailRecipients(
 }
 
 export async function syncScheduledEmailRecipients(
-  options?: { startIndex?: number; batchSize?: number; folder?: SyncFolderInput },
+  options?: { startIndex?: number; batchSize?: number; folder?: SyncFolderInput; maxRuntimeMs?: number },
 ): Promise<CampaignRecipientSyncSummary> {
   return buildServiceWithFolder(options?.folder).syncAndPersistRecipients(options);
 }

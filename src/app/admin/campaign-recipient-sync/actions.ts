@@ -27,6 +27,7 @@ export interface TriggerCampaignRecipientSyncParams {
   cursor?: number;
   batchSize?: number;
   folder?: SyncFolderInput;
+  maxRuntimeMs?: number;
 }
 
 export async function triggerCampaignRecipientSync(
@@ -44,6 +45,7 @@ export async function triggerCampaignRecipientSync(
       startIndex: params?.cursor ?? 0,
       batchSize: params?.batchSize,
       folder: params?.folder,
+      maxRuntimeMs: params?.maxRuntimeMs,
     });
     if (summary.totalFiles === 0) {
       return {

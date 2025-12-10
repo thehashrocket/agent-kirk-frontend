@@ -21,6 +21,7 @@ export function RecipientSyncPanel() {
   const [aggregateSummary, setAggregateSummary] = useState<CampaignRecipientSyncResult | null>(null);
   // default to Scheduled Email folder
   const [folder, setFolder] = useState<SyncFolderInput>("scheduledEmail");
+  const [maxRuntimeMs] = useState<number>(9000);
   const folderLabel = useMemo(
     () => {
       switch (folder) {
@@ -51,7 +52,12 @@ export function RecipientSyncPanel() {
 
       try {
         while (cursor !== null) {
-          const response = await triggerCampaignRecipientSync({ cursor, batchSize, folder });
+          const response = await triggerCampaignRecipientSync({
+            cursor,
+            batchSize,
+            folder,
+            maxRuntimeMs,
+          });
 
           if (!response.success) {
             setResult(null);
