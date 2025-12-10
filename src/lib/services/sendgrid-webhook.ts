@@ -7,6 +7,7 @@ export type SendGridEventType =
   | "deferred"
   | "delivered"
   | "open"
+  | "processed"
   | "spamreport"
   | "unsubscribe";
 
@@ -43,11 +44,13 @@ const eventTypeMap: Record<string, SendGridEventType> = {
   deferred: "deferred",
   delivered: "delivered",
   open: "open",
+  processed: "processed",
   spamreport: "spamreport",
   spam_report: "spamreport",
   dropped: "bounce",
   unsubscribe: "unsubscribe",
   group_unsubscribe: "unsubscribe",
+  group_resubscribe: "processed",
 };
 
 const normalizeCampaignId = (event: SendGridWebhookEvent) => {
@@ -151,6 +154,9 @@ const buildUpdateInput = (
       data.delivered = { increment: 1 };
       break;
     case "deferred":
+      // No counter increment; we still update lastEventAt/create recipients.
+      break;
+    case "processed":
       // No counter increment; we still update lastEventAt/create recipients.
       break;
     case "open":
