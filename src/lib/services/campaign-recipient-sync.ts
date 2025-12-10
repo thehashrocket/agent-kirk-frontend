@@ -19,6 +19,8 @@ const MAX_BACKOFF_MS = 4000;
 const BACKOFF_JITTER_MS = 200;
 const INTER_FILE_DELAY_MS = 200;
 const FETCH_TIMEOUT_MS = 10_000;
+const RECIPIENT_DB_BATCH_SIZE = 250;
+const INTER_RECIPIENT_BATCH_DELAY_MS = 50;
 const DRIVE_FOLDERS = {
   scheduledEmail: {
     id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
@@ -577,13 +579,12 @@ async function persistRecipientsForCampaign(
     })
     .filter((row): row is NonNullable<typeof row> => Boolean(row));
 
-  const BATCH_SIZE = 1000;
   let inserted = 0;
   let existing = 0;
   let updated = 0;
 
-  for (let i = 0; i < data.length; i += BATCH_SIZE) {
-    const batch = data.slice(i, i + BATCH_SIZE);
+  for (let i = 0; i < data.length; i += RECIPIENT_DB_BATCH_SIZE) {
+    const batch = data.slice(i, i + RECIPIENT_DB_BATCH_SIZE);
     if (batch.length === 0) continue;
 
     const existingRows = await prisma.campaignRecipients.findMany({
@@ -630,6 +631,10 @@ async function persistRecipientsForCampaign(
       );
       existing += updateRows.length;
       updated += updateRows.length;
+    }
+
+    if (data.length > RECIPIENT_DB_BATCH_SIZE) {
+      await delay(INTER_RECIPIENT_BATCH_DELAY_MS);
     }
   }
 
