@@ -124,7 +124,8 @@ export function RecipientSyncPanel() {
         <h2 className="text-lg font-semibold">Campaign Recipient Sync</h2>
         <p className="text-sm text-muted-foreground">
           Reads a selected Google Drive folder and parses CSV rows into normalized recipients. Requires a valid{" "}
-          <code>GOOGLE_API_KEY</code> with read access to the folder.
+          <code>GOOGLE_API_KEY</code> with read access to the folder. If you see zero files processed, the selected
+          folder may be empty or inaccessible.
         </p>
       </div>
 
@@ -167,6 +168,9 @@ export function RecipientSyncPanel() {
               Processing {aggregateSummary.summary.processedFiles} of {aggregateSummary.summary.totalFiles} files so far; matched{" "}
               {aggregateSummary.summary.filesMatched}.
             </p>
+            <p className="text-xs text-muted-foreground">
+              Folder: {aggregateSummary.summary.folderName} ({aggregateSummary.summary.folderId})
+            </p>
             <p>
               Parsed {aggregateSummary.summary.recipientsParsed.toLocaleString()} recipient
               {aggregateSummary.summary.recipientsParsed === 1 ? "" : "s"}; inserted{" "}
@@ -183,6 +187,9 @@ export function RecipientSyncPanel() {
             <p>
               Processed {result.summary.processedFiles} file{result.summary.processedFiles === 1 ? "" : "s"} of{" "}
               {result.summary.totalFiles}; matched {result.summary.filesMatched} to campaigns.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Folder: {result.summary.folderName} ({result.summary.folderId})
             </p>
             <p>
               Parsed {result.summary.recipientsParsed.toLocaleString()} recipient

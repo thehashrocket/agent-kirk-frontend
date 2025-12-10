@@ -45,6 +45,12 @@ export async function triggerCampaignRecipientSync(
       batchSize: params?.batchSize,
       folder: params?.folder,
     });
+    if (summary.totalFiles === 0) {
+      return {
+        success: false,
+        error: `No files found in folder "${summary.folderName}" (${summary.folderId}). Ensure the folder contains CSVs and your Google API key has access.`,
+      };
+    }
     const completedAt = new Date();
     const nextCursor =
       summary.processedRange.end + 1 < summary.totalFiles ? summary.processedRange.end + 1 : null;

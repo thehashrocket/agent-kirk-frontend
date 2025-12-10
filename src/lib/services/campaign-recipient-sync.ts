@@ -67,6 +67,8 @@ export interface CampaignRecipientSyncSummary {
   recipientsInserted: number;
   recipientsUpdated?: number;
   recipientsExisting: number;
+  folderId: string;
+  folderName: string;
   unmatchedFiles: string[];
   failedDownloads: Array<{ fileName: string; reason: string }>;
   processedRange: { start: number; end: number };
@@ -394,7 +396,13 @@ export class CampaignRecipientSyncService {
   }
 
   async syncAndPersistRecipients(options?: { startIndex?: number; batchSize?: number }): Promise<CampaignRecipientSyncSummary> {
+    console.info(
+      `[CampaignRecipientSync] Listing files in folder "${this.folder.name}" (${this.folder.id})`,
+    );
     const files = await this.listFolderFiles();
+    console.info(
+      `[CampaignRecipientSync] Found ${files.length} file(s) in "${this.folder.name}" (${this.folder.id})`,
+    );
     const startIndex = Math.max(options?.startIndex ?? 0, 0);
     const batchSize = options?.batchSize ?? files.length;
     const slice = files.slice(startIndex, startIndex + batchSize);
@@ -407,6 +415,8 @@ export class CampaignRecipientSyncService {
       recipientsInserted: 0,
       recipientsUpdated: 0,
       recipientsExisting: 0,
+      folderId: this.folder.id,
+      folderName: this.folder.name,
       unmatchedFiles: [],
       failedDownloads: [],
       processedRange: {
@@ -414,6 +424,13 @@ export class CampaignRecipientSyncService {
         end: startIndex + (slice.length > 0 ? slice.length - 1 : 0),
       },
     };
+
+    if (files.length === 0) {
+      console.warn(
+        `[CampaignRecipientSync] No files found in folder "${this.folder.name}" (${this.folder.id}). Nothing to sync.`,
+      );
+      return summary;
+    }
 
     for (const file of slice) {
       let content: string;
