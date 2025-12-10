@@ -70,6 +70,7 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3.3.3",
     "@prisma/config": "^7.1.0",
     "@tailwindcss/postcss": "^4.1.17",

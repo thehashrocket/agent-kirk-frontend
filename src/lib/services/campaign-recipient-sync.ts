@@ -620,11 +620,23 @@ async function persistRecipientsForCampaign(
         emailCampaignId,
         email: { in: batch.map((item) => item.email).filter(Boolean) },
       },
-      select: { id: true, email: true },
+      select: {
+        id: true,
+        email: true,
+        addressId: true,
+        address_1: true,
+        city: true,
+        state: true,
+        zip: true,
+        sector: true,
+        market: true,
+        coreSegment: true,
+        subSegment: true,
+      },
     });
 
     const existingByEmail = new Map(
-      existingRows.map((row) => [row.email?.toLowerCase() ?? "", row.id]),
+      existingRows.map((row) => [row.email?.toLowerCase() ?? "", row]),
     );
 
     const createRows: typeof batch = [];
@@ -632,9 +644,24 @@ async function persistRecipientsForCampaign(
 
     for (const row of batch) {
       const key = row.email.toLowerCase();
-      const existingId = existingByEmail.get(key);
-      if (existingId) {
-        updateRows.push({ id: existingId, data: row });
+      const existingRow = existingByEmail.get(key);
+
+      if (existingRow) {
+        // Check if update is actually needed
+        const needsUpdate =
+          (row.addressId ?? "") !== (existingRow.addressId ?? "") ||
+          (row.address_1 ?? "") !== (existingRow.address_1 ?? "") ||
+          (row.city ?? "") !== (existingRow.city ?? "") ||
+          (row.state ?? "") !== (existingRow.state ?? "") ||
+          (row.zip ?? "") !== (existingRow.zip ?? "") ||
+          (row.sector ?? "") !== (existingRow.sector ?? "") ||
+          (row.market ?? "") !== (existingRow.market ?? "") ||
+          (row.coreSegment ?? "") !== (existingRow.coreSegment ?? "") ||
+          (row.subSegment ?? "") !== (existingRow.subSegment ?? "");
+
+        if (needsUpdate) {
+          updateRows.push({ id: existingRow.id, data: row });
+        }
       } else {
         createRows.push(row);
       }
@@ -657,9 +684,11 @@ async function persistRecipientsForCampaign(
           }),
         ),
       );
-      existing += existingRows.length;
       updated += updateRows.length;
     }
+
+    // existing count tracks all matches found in DB (whether updated or not)
+    existing += existingRows.length;
 
     if (data.length > RECIPIENT_DB_BATCH_SIZE) {
       await delay(INTER_RECIPIENT_BATCH_DELAY_MS);
