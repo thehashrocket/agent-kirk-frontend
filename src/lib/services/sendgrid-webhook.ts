@@ -125,6 +125,9 @@ let sendgridMessageIdSupported = true;
 const isSendgridMessageIdValidationError = (error: unknown) =>
   error instanceof Error && error.message.includes("sendgridMessageId");
 
+const isUniqueConstraintError = (error: unknown) =>
+  typeof error === "object" && error !== null && "code" in error && (error as { code?: string }).code === "P2002";
+
 const buildUpdateInput = (
   eventType: SendGridEventType,
   currentRecipient: RecipientUpdateContext,
@@ -176,6 +179,7 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
     const messageId = normalizeMessageId(event);
 
     if (!eventType) {
+      console.info("SendGrid webhook: skipping unsupported event type", { event: event.event, email });
       result.skipped.push({ email, campaignId, event: event.event, reason: "unsupported event type" });
       continue;
     }
@@ -194,6 +198,7 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
       });
 
       if (!emailCampaign) {
+        console.warn("SendGrid webhook: campaign not found for campaignId", { campaignId, email });
         result.skipped.push({ email, campaignId, event: event.event, reason: "campaign not found" });
         continue;
       }
@@ -206,6 +211,7 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
       });
 
       if (!emailCampaign) {
+        console.warn("SendGrid webhook: campaign not found for campaignName", { campaignName, email });
         result.skipped.push({
           email,
           event: event.event,
@@ -260,6 +266,13 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
 
     if (!recipient) {
       if (!emailCampaignId) {
+        console.warn("SendGrid webhook: unable to resolve campaign for event", {
+          email,
+          campaignId,
+          campaignName,
+          messageId,
+          event: event.event,
+        });
         result.skipped.push({
           email,
           campaignId,
@@ -320,6 +333,46 @@ export async function handleSendGridEvents(events: SendGridWebhookEvent[]): Prom
             continue;
           } catch (innerError) {
             console.error("Failed to create CampaignRecipient after disabling sendgridMessageId", innerError);
+          }
+        }
+        if (isUniqueConstraintError(error) && email) {
+          console.warn("SendGrid webhook: recipient exists, retrying update instead of create", {
+            email,
+            campaignId,
+            event: event.event,
+          });
+          const existing = await prisma.campaignRecipients.findFirst({
+            where: { emailCampaignId, email },
+            select: {
+              id: true,
+              uniqueOpens: true,
+              lastEventAt: true,
+            },
+          });
+
+          if (existing) {
+            const updateInput = buildUpdateInput(eventType, existing, eventTimestamp);
+            const includeMessageId = sendgridMessageIdSupported && messageId;
+            const updateData = includeMessageId
+              ? { ...updateInput, sendgridMessageId: messageId }
+              : updateInput;
+
+            try {
+              await prisma.campaignRecipients.update({
+                where: { id: existing.id },
+                data: updateData,
+              });
+              console.info("SendGrid webhook: updated existing campaign recipient after unique conflict", {
+                recipientId: existing.id,
+                campaignId,
+                email,
+                event: event.event,
+              });
+              result.processed += 1;
+              continue;
+            } catch (updateError) {
+              console.error("Failed to update CampaignRecipient after unique conflict", updateError);
+            }
           }
         }
         console.error("Failed to create CampaignRecipient from webhook", error);
