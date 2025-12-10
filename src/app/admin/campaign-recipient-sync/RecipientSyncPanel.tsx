@@ -43,7 +43,7 @@ export function RecipientSyncPanel() {
     setStatusMessage("Starting sync...");
     setAggregateSummary(null);
     const clientStart = Date.now();
-    const batchSize = 3;
+    const batchSize = 1; // smaller batch to keep each server action quick and avoid timeouts
 
     startTransition(async () => {
       let cursor: number | null = 0;

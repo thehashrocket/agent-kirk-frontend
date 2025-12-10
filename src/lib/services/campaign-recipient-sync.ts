@@ -18,6 +18,7 @@ const BASE_BACKOFF_MS = 400;
 const MAX_BACKOFF_MS = 4000;
 const BACKOFF_JITTER_MS = 200;
 const INTER_FILE_DELAY_MS = 200;
+const FETCH_TIMEOUT_MS = 10_000;
 const DRIVE_FOLDERS = {
   scheduledEmail: {
     id: "1jgYwsup7Pd6OaxsQVbrEWbLFRePHKRo9",
@@ -138,7 +139,7 @@ class GoogleDriveClient implements DriveClient {
           }
 
           const response = await fetchWithBackoff(
-            () => fetch(`${DRIVE_FILES_ENDPOINT}?${params.toString()}`),
+            (signal) => fetch(`${DRIVE_FILES_ENDPOINT}?${params.toString()}`, { signal }),
             `list files strategy ${strategy.label}`,
           );
 
@@ -174,7 +175,7 @@ class GoogleDriveClient implements DriveClient {
     for (const attempt of attempts) {
       try {
         const response = await fetchWithBackoff(
-          () => fetch(attempt.url),
+          (signal) => fetch(attempt.url, { signal }),
           `download ${attempt.label} for file ${file.name}`,
         );
 
@@ -687,12 +688,20 @@ function calculateBackoffMs(attempt: number): number {
   return base + jitter;
 }
 
-async function fetchWithBackoff(request: () => Promise<Response>, label: string): Promise<Response> {
+async function fetchWithBackoff(
+  request: (signal: AbortSignal) => Promise<Response>,
+  label: string,
+): Promise<Response> {
   let lastError: unknown;
 
   for (let attempt = 0; attempt <= MAX_FETCH_RETRIES; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(`timeout after ${FETCH_TIMEOUT_MS}ms`), FETCH_TIMEOUT_MS);
+
     try {
-      const response = await request();
+      const response = await request(controller.signal);
+      clearTimeout(timeout);
+
       if (response.ok) {
         return response;
       }
@@ -708,6 +717,7 @@ async function fetchWithBackoff(request: () => Promise<Response>, label: string)
 
       throw lastError;
     } catch (error) {
+      clearTimeout(timeout);
       lastError = error;
       if (attempt < MAX_FETCH_RETRIES) {
         await delay(calculateBackoffMs(attempt));
