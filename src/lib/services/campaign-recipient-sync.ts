@@ -31,6 +31,10 @@ const DRIVE_FOLDERS = {
     id: "1cFUWnQDpdLWs47ZMSHiZ8SgF3cX6i5A1",
     name: "[00] Processed Lists",
   },
+  backupLists: {
+    id: "1oOBd0kDTUdgOi9CvpdV0CMaqYG_16ZeD",
+    name: "[00] Backups",
+  },
   cleanedLists: {
     id: "18UKhKRQP6_mO82dngD3BtlHqhLJYX67o",
     name: "[02] Cleaned Lists",

@@ -213,6 +213,13 @@ exports.Prisma.EmailCampaignScalarFieldEnum = {
   updatedAt: 'updatedAt',
   campaignId: 'campaignId',
   campaignName: 'campaignName',
+  status: 'status',
+  categories: 'categories',
+  sendAt: 'sendAt',
+  singleSendCreatedAt: 'singleSendCreatedAt',
+  singleSendUpdatedAt: 'singleSendUpdatedAt',
+  isAbTest: 'isAbTest',
+  abTest: 'abTest',
   emailClientId: 'emailClientId'
 };
 

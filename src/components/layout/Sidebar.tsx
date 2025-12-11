@@ -83,6 +83,12 @@ const adminNavItems: NavItem[] = [
     icon: <RefreshCw />,
     description: "Pull scheduled email recipients from Drive"
   },
+  {
+    title: "SendGrid Single Sends Sync",
+    href: "/admin/sendgrid-single-sends",
+    icon: <RefreshCw />,
+    description: "Pull single sends from SendGrid"
+  },
   // {
   //   title: "Message with 1905",
   //   href: "/admin/messages",

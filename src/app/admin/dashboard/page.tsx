@@ -184,6 +184,13 @@ export default async function AdminDashboard() {
                 <p className="text-sm text-gray-600">Pull scheduled email recipients from Google Drive</p>
               </Link>
               <Link 
+                href="/admin/sendgrid-single-sends" 
+                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <h3 className="font-medium">SendGrid Single Sends</h3>
+                <p className="text-sm text-gray-600">Fetch and upsert SendGrid campaigns</p>
+              </Link>
+              <Link 
                 href="/admin/settings" 
                 className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
               >

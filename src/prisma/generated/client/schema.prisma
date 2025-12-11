@@ -132,6 +132,13 @@ model EmailCampaign {
   updatedAt               DateTime                  @updatedAt
   campaignId              String                    @unique
   campaignName            String
+  status                  String?
+  categories              String[]                  @default([])
+  sendAt                  DateTime?
+  singleSendCreatedAt     DateTime?
+  singleSendUpdatedAt     DateTime?
+  isAbTest                Boolean?                  @default(false)
+  abTest                  Json?
   emailClientId           String
   campaignRecipients      CampaignRecipients[]
   emailClient             EmailClient               @relation(fields: [emailClientId], references: [id])
