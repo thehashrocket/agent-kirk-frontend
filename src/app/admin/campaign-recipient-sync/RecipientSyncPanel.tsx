@@ -192,6 +192,7 @@ export function RecipientSyncPanel() {
               <SelectItem value="scheduledEmail">Scheduled Email</SelectItem>
               <SelectItem value="processedLists">[00] Processed Lists</SelectItem>
               <SelectItem value="cleanedLists">[02] Cleaned Lists</SelectItem>
+              <SelectItem value="backupLists">[00] Backups</SelectItem>
               <SelectItem value="sendgridUploads">[04] List Uploaded to sendgrind</SelectItem>
             </SelectContent>
           </Select>
