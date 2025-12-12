@@ -16,10 +16,26 @@ interface SyncResult {
   completedAt: string;
 }
 
+type StreamMessage =
+  | { type: "start"; startedAt: string }
+  | { type: "progress"; fetched: number; upserted: number; skipped: number; page: number; pageSize: number }
+  | { type: "complete"; fetched: number; upserted: number; skipped: number; startedAt: string; completedAt: string }
+  | { type: "error"; message: string };
+
+type SyncProgress = {
+  fetched: number;
+  upserted: number;
+  skipped: number;
+  page: number;
+  pageSize: number;
+  startedAt: string;
+};
+
 export function SingleSendsSyncPanel() {
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<SyncResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [progress, setProgress] = useState<SyncProgress | null>(null);
 
   const duration = useMemo(() => {
     if (!result) return null;
@@ -31,24 +47,76 @@ export function SingleSendsSyncPanel() {
   const handleSync = () => {
     setError(null);
     setResult(null);
+    setProgress(null);
 
     startTransition(async () => {
-      const startedAt = new Date().toISOString();
       try {
         const response = await fetch("/api/sendgrid/single-sends", { method: "GET" });
-        const payload = await response.json();
 
-        if (!response.ok) {
-          throw new Error(payload?.error || "Failed to sync SendGrid single sends.");
+        if (!response.body) {
+          throw new Error("No response stream from server.");
         }
 
-        setResult({
-          fetched: payload.fetched ?? 0,
-          upserted: payload.upserted ?? 0,
-          skipped: payload.skipped ?? 0,
-          startedAt,
-          completedAt: new Date().toISOString(),
-        });
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let completed = false;
+        let startedAt: string | null = null;
+
+        const processMessage = (raw: string) => {
+          if (!raw.trim()) return;
+          const message: StreamMessage = JSON.parse(raw);
+
+          if (message.type === "start") {
+            startedAt = message.startedAt;
+            setProgress({
+              fetched: 0,
+              upserted: 0,
+              skipped: 0,
+              page: 0,
+              pageSize: 0,
+              startedAt,
+            });
+          } else if (message.type === "progress") {
+            setProgress((current) => ({
+              ...message,
+              startedAt: current?.startedAt ?? startedAt ?? new Date().toISOString(),
+            }));
+          } else if (message.type === "complete") {
+            completed = true;
+            setResult({
+              fetched: message.fetched,
+              upserted: message.upserted,
+              skipped: message.skipped,
+              startedAt: message.startedAt,
+              completedAt: message.completedAt,
+            });
+            setProgress(null);
+          } else if (message.type === "error") {
+            throw new Error(message.message);
+          }
+        };
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+
+          for (const line of lines) {
+            processMessage(line);
+          }
+        }
+
+        if (buffer.trim()) {
+          processMessage(buffer);
+        }
+
+        if (!completed) {
+          throw new Error("Sync ended before completion.");
+        }
       } catch (err) {
         const message = err instanceof Error ? err.message : "Unexpected error during sync.";
         setError(message);
@@ -90,6 +158,21 @@ export function SingleSendsSyncPanel() {
           </div>
         )}
       </div>
+
+      {progress ? (
+        <Alert variant="default">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <AlertTitle>Sync in progress</AlertTitle>
+          <AlertDescription className="space-y-1">
+            <p>
+              Page {progress.page} · fetched {progress.fetched} · upserted {progress.upserted} · skipped {progress.skipped}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Started at <span className="font-mono">{progress.startedAt}</span>
+            </p>
+          </AlertDescription>
+        </Alert>
+      ) : null}
 
       {result ? (
         <Alert variant="default">
