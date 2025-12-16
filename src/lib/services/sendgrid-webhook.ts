@@ -89,16 +89,6 @@ const normalizeCampaignName = (event: SendGridWebhookEvent) => {
     return (event.singlesend_name ?? event.singlesendName) as string;
   }
 
-  if (event.category) {
-    if (Array.isArray(event.category)) {
-      return event.category.find((value) => typeof value === "string");
-    }
-
-    if (typeof event.category === "string") {
-      return event.category;
-    }
-  }
-
   return undefined;
 };
 

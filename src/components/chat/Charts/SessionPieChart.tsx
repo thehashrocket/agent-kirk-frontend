@@ -61,9 +61,9 @@ export function SessionsPieChart({ data }: Props) {
                         ))}
                     </Pie>
                     <Tooltip
-                        formatter={(value: number, name: string) => [
-                            `${value.toLocaleString()} sessions`,
-                            name,
+                        formatter={(value: number | undefined, name: string | undefined) => [
+                            `${(value || 0).toLocaleString()} sessions`,
+                            name || '',
                         ]}
                     />
                     <Legend layout="horizontal" verticalAlign="bottom" align="center" />

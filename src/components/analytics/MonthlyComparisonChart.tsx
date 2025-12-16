@@ -181,8 +181,10 @@ export const MonthlyComparisonChart: React.FC<MonthlyComparisonChartProps> = ({
   };
 
   // Custom formatter for the tooltip values - simplified to show only values
-  const valueFormatter = (value: number, name: string) => {
-    const prefix = name.includes('previous') ? 'Previous: ' : 'Current: ';
+  const valueFormatter = (value: number | undefined, name: string | undefined) => {
+    if (value === undefined) return ['', ''];
+    const safeName = name || '';
+    const prefix = safeName.includes('previous') ? 'Previous: ' : 'Current: ';
     return [value.toLocaleString(), prefix];
   };
 
