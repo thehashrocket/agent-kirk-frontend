@@ -7,6 +7,7 @@ Kirk is a role-driven marketing operations dashboard built with Next.js. The fro
 - [User Roles & Core Features](#user-roles--core-features)
 - [Architecture Overview](#architecture-overview)
 - [Key Directories](#key-directories)
+- [Prisma Schema Diagram](#prisma-schema-diagram)
 - [API Surface](#api-surface)
 - [Data & Background Jobs](#data--background-jobs)
 - [External Integrations](#external-integrations)
@@ -64,6 +65,14 @@ Additional capabilities:
 | `prisma` | Prisma schema, migrations, seed script, sample data. Generated client is emitted to `src/prisma/generated`. |
 | `scripts` | Maintenance scripts (duplicate cleanup for GA accounts/conversations). |
 | `public` | Static assets and favicons. |
+
+## Prisma Schema Diagram
+See `docs/prisma-schema-diagram.md` for a Mermaid ER diagram generated from `prisma/schema.prisma`.
+
+Regenerate with:
+```bash
+pnpm prisma:diagram
+```
 
 ## API Surface
 The table below summarizes the most active API route groups. Review the source under `src/app/api` for request/response contracts.

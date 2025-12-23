@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "db:seed": "ts-node --project prisma/tsconfig.json prisma/seed.ts"
+    "db:seed": "ts-node --project prisma/tsconfig.json prisma/seed.ts",
+    "prisma:diagram": "node scripts/generate-prisma-schema-diagram.js"
   },
   "dependencies": {
     "@auth/core": "^0.41.1",
