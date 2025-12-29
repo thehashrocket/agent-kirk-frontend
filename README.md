@@ -3,6 +3,7 @@
 Kirk is a role-driven marketing operations dashboard built with Next.js. The frontend bundles admin, account representative, and client experiences into a single App Router application. It surfaces cross-channel analytics, LLM-assisted insights, ticketing, messaging, and company management on top of a Prisma/PostgreSQL data layer.
 
 ## Table of Contents
+
 - [Tech Stack](#tech-stack)
 - [User Roles & Core Features](#user-roles--core-features)
 - [Architecture Overview](#architecture-overview)
@@ -18,7 +19,8 @@ Kirk is a role-driven marketing operations dashboard built with Next.js. The fro
 - [Additional Resources](#additional-resources)
 
 ## Tech Stack
-- **Framework**: Next.js 15 (App Router, React 19, Server Components)
+
+- **Framework**: Next.js 16 (App Router, React 19, Server Components)
 - **Language**: TypeScript throughout the repo
 - **Styling**: Tailwind CSS with shadcn/ui primitives and lucide-react icons
 - **State/Data**: React Query, SWR, Jotai, Zustand (providers only), custom hooks in `src/hooks`
@@ -27,7 +29,12 @@ Kirk is a role-driven marketing operations dashboard built with Next.js. The fro
 - **Async/LLM**: Custom `/api/llm` routes proxying an external LLM service
 - **Notifications**: SendGrid (email), Sonner toasts, Mailgun webhook helper
 
+## NextJS 16 Documentation
+
+[NextJS 16 Documentation](https://nextjs.org/docs/llms.txt)
+
 ## User Roles & Core Features
+
 | Role | Core Destinations | Highlights |
 | ---- | ----------------- | ---------- |
 | **Admin** | `/admin/dashboard`, `/admin/users`, `/admin/client-analytics`, `/admin/tickets`, `/admin/messages` | System health KPIs, user lifecycle management (including company assignment), GA account provisioning, cross-channel analytics, ticket triage, broadcast messaging. |
@@ -36,12 +43,14 @@ Kirk is a role-driven marketing operations dashboard built with Next.js. The fro
 | **Shared** | `/chat`, `/reports`, `/analytics` | Conversation workspace with GA/property context, printable analytics views, saved reports, notifications, weather widget. |
 
 Additional capabilities:
+
 - **Onboarding**: `/onboarding/step1` lets new users search or create companies and attaches the selection to their profile.
 - **Ticketing**: `/tickets` namespace (per role) for issue tracking with comments and status updates.
 - **LLM Insights**: Conversations, report generation, and analytics questions route through `/api/llm` endpoints backed by a remote LLM microservice.
 - **Notifications**: `/api/notifications` supports unread/read states, bulk clear, and email follow-ups via SendGrid.
 
 ## Architecture Overview
+
 - **App Router**: Route groups under `src/app` segment the experience by role and feature. Client components handle dashboards and interactive tables; server components fetch heavier analytics payloads.
 - **Providers**: `src/providers` houses context wrappers (Auth, React Query, sidebar state). They are composed in `src/app/layout.tsx`.
 - **State & Hooks**: SWR hooks (`src/hooks/use-users`, etc.) back list views. React Query handles chat, analytics, and association fetches. Debounced search, chart helpers, and ticket utilities live here as well.
@@ -52,6 +61,7 @@ Additional capabilities:
 - **Companies**: `/api/companies` exposes search/create. The new `CompanySearchSelect` component (in `src/components/users`) is used across user creation flows to attach a `companyId` when applicable.
 
 ## Key Directories
+
 | Path | Purpose |
 | ---- | ------- |
 | `src/app` | Next.js route segments, layouts, and server actions. Role-specific areas live under `admin`, `account-rep`, `client`, etc. |
@@ -67,14 +77,17 @@ Additional capabilities:
 | `public` | Static assets and favicons. |
 
 ## Prisma Schema Diagram
+
 See `docs/prisma-schema-diagram.md` for a Mermaid ER diagram generated from `prisma/schema.prisma`.
 
 Regenerate with:
+
 ```bash
 pnpm prisma:diagram
 ```
 
 ## API Surface
+
 The table below summarizes the most active API route groups. Review the source under `src/app/api` for request/response contracts.
 
 | Route Group | Description |
@@ -95,12 +108,14 @@ The table below summarizes the most active API route groups. Review the source u
 | `/api/roles` | Lists available roles; used by creation dialogs. |
 
 ## Data & Background Jobs
+
 - **Database**: PostgreSQL with Prisma as the ORM (`DATABASE_URL` controls the connection). Run `start-database.sh` to spin up a local Docker container configured from `.env`.
 - **Migrations**: Stored in `prisma/migrations`. Apply with `pnpm prisma migrate deploy` (or `pnpm prisma migrate dev --name <migration>` during development).
 - **Seed Data**: `pnpm db:seed` executes `prisma/seed.ts` via `ts-node` to populate baseline roles, demo accounts, and analytics fixtures.
 - **Maintenance Scripts**: Scripts in `scripts/` remove duplicate GA accounts or conversations; execute with `pnpm tsx scripts/<script>.ts`.
 
 ## External Integrations
+
 | Integration | Usage | Notes |
 | ----------- | ----- | ----- |
 | **NextAuth (Google & Azure AD)** | Primary sign-in. Roles and company data are loaded post-login. | Configure OAuth credentials in `.env`. |
@@ -112,6 +127,7 @@ The table below summarizes the most active API route groups. Review the source u
 | **Google Analytics / Sprout Social / USPS** | Data sources represented in Prisma schema; ingestion happens via associated background services not included here. |
 
 ## Environment Variables
+
 | Variable | Description |
 | -------- | ----------- |
 | `DATABASE_URL` | Postgres connection string used by Prisma and the database start script. |
@@ -130,41 +146,51 @@ The table below summarizes the most active API route groups. Review the source u
 > Tip: Use `.env.local` or `.env` to store secrets. The included `start-database.sh` script can generate a secure Postgres password and update `DATABASE_URL` automatically.
 
 ## Local Development
+
 1. **Prerequisites**
-   - Node.js 20+
-   - pnpm 9+
+   - Node.js 24+
+   - pnpm 10+
    - Docker (for local Postgres)
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
+
 3. **Configure environment**
    - Copy `.env` or `.env.example` (if present) and populate required variables.
    - Run `./start-database.sh` to provision the Postgres container.
 4. **Database setup**
+
    ```bash
    pnpm prisma migrate deploy
    pnpm db:seed
    ```
+
 5. **Run the app**
+
    ```bash
    pnpm dev
    ```
+
    The app runs on [http://localhost:3005](http://localhost:3005) with Turbopack enabled.
 
 ## Quality & Tooling
+
 - **Linting**: `pnpm lint`
 - **Formatting**: Prettier 3 with Tailwind plugin (auto-sorted classes). Prettier config lives in `.prettierrc`.
 - **Type Safety**: TypeScript strict mode; generated Prisma types in `src/prisma/generated`.
 - **Testing**: Automated tests are not yet configured. Follow manual QA guidelines (lint + feature verification) documented in `AGENTS.md`.
 
 ## Deployment Notes
+
 - Builds with `pnpm build` and serves via `pnpm start`.
 - Ensure production `DATABASE_URL` and OAuth credentials point to live services.
 - Configure `NEXTAUTH_URL` to the deployed origin before enabling OAuth providers.
 - Long-running analytics ingestion and third-party sync jobs are handled outside this repo; confirm they are connected before promoting to production.
 
 ## Additional Resources
+
 - `AGENTS.md` — contributor guidelines and workflow expectations.
 - `email-channel-api-spec.md`, `paid-search-channel-api-spec.md`, `paid-social-channel-api-spec.md` — API contracts for marketing integrations.
 - `prisma/sample_data/` — example payloads useful while developing analytics views.
