@@ -73,7 +73,7 @@
   "devDependencies": {
     "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3.3.3",
-    "@prisma/config": "^7.1.0",
+    "@prisma/config": "^7.2.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
     "@types/bcrypt": "^6.0.0",
